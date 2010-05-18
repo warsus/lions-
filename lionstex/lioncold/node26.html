@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Page Description Register</TITLE>
+<META NAME="description" CONTENT="Page Description Register">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node27.html">
+<LINK REL="previous" HREF="node25.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node27.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1003"
+  HREF="node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html999"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html993"
+  HREF="node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1001"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1004"
+  HREF="node27.html">Memory Allocation</A>
+<B> Up:</B> <A NAME="tex2html1000"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html994"
+  HREF="node25.html">Segmentation Registers.</A>
+ &nbsp; <B>  <A NAME="tex2html1002"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00059000000000000000">
+Page Description Register</A>
+</H2>
+
+<P>
+The page description register defines:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>the size of the lower part of
+the page. (The number stored is
+actually the number of 32 word
+blocks less one);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>a bit which is set when the
+upper part is the valid part.
+(Also known as the ``expansion
+direction'' bit);
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>access mode bits defining ``no
+access'' or ``read only access'' or
+``read/write access''.
+</DD>
+</DL>
+
+<P>
+Note that if the valid part is null,
+this fact must be shown by setting the
+access bits to ``no access''.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: iinit (6922)</title>
+
+<link href="sect0251.html" title="Mounting" rel="next" />
+<link href="sect0249.html" title="The ’mount’ table (0272)" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0249.html" title="The ’mount’ table (0272)"><img alt="Previous: The ’mount’ table (0272)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0251.html" title="Mounting"><img alt="Next: Mounting" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">iinit (6922)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000251">20.3 iinit (6922)</h2>
+<p>This routine is called by “main” (1615) to initialise the “mount” table entry for the root device. </p><dl class="description">
+
+    <dt>6926:</dt>
+    <dd><p>Call the “open” routine for the root device. Note that “rootdev” is defined in “conf.c” (4695); </p></dd>
+
+    <dt>6931:</dt>
+    <dd><p>Copy the contents of the root device “super block” into a buffer area not associated with any particular device; </p></dd>
+
+    <dt>6933:</dt>
+    <dd><p>The zeroeth entry in the “mount” table is assigned to the root device. Only two of the three elements are explicitly initialised. The third, the “inode” pointer, will never be referenced; </p></dd>
+
+    <dt>6936:</dt>
+    <dd><p>The “locks” stored in the “super block” are explicitly reset. (These locks may have been set when the “super block” was last written onto the file system volume); </p></dd>
+
+    <dt>6938:</dt>
+    <dd><p>The root device is mounted in a “writable” state; </p></dd>
+
+    <dt>6939:</dt>
+    <dd><p>The system sets its idea of the current time and date from the time recorded in the “super block”. (If the system has been stopped for an appreciable period, the computer operator will need to reset the contents of “time”.) </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0249.html" title="The ’mount’ table (0272)"><img alt="Previous: The ’mount’ table (0272)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0251.html" title="Mounting"><img alt="Next: Mounting" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,800 @@
+%
+% The Lion's Commentary, file ch20.tex, version 1.3, 15 May 1994
+%
+\se{File  Systems}
+
+In most computer systems more than  one
+peripheral  storage  device is used for
+the storage of files. It is now  necessary  to  discuss  a  number of matters
+pertaining to the management by UNIX of
+the whole set of files and file storage
+devices. First, some definitions:
+
+\bd
+\item[file system:] an integrated collection  of files with a hierarchical
+system of directories recorded  on
+a  single  block  oriented storage
+device;
+
+\item[storage device:] a device which can
+store information (especially disk
+pack or DECtape, etc.);
+
+\item[access  device:]  a  mechanism  for
+transferring   information  to  or
+from a storage device;
+
+\item[a  storage   device]    is    only
+{\bf accessible} if it is inserted in an
+access device.  In this situation
+reference to the storage device is
+made via a reference to the access
+devce;
+
+\item[a storage device] is acceptable  as
+a {\bf file system volume} if:
+
+\bd
+\item[(a)]  information   is   recorded   as
+     addressable  blocks of 512 characters  each,   which   can   be
+     independently read or written.
+
+(Note  IBM  compatible  magnetic
+tape  does not satisfy this condition.);
+
+\item[(b)] the information recorded  on  the
+     device  satisfies  certain  consistency criteria:
+
+block \#1 is formatted as a ``super block'' (see below);
+
+blocks \#2 to \#(n+1)  (where n  is
+recorded  in  the ``super block'')
+contain an ``inode''  table  which
+references all files recorded on
+the storage device, and does not
+reference any other files;
+
+directory files recorded on  the
+storage  device  reference  all,
+and  only,  files  on  the  same
+storage device, i.e. a file system volume
+constitutes  a  self-contained  set  of files,
+directories and ``inode'' table;
+\ed
+
+\item[a file system volume] is mounted if
+the presence of the storage device
+in an access device has been  formally  recognised by the operating
+system.
+\ed
+
+
+\sbs{The `Super Block'  (5561)}
+
+The ``super block'' is always recorded as
+block  \#l on the storage device. (Block
+\#0 is always ignored and  is  available
+for  miscellaneous uses not necessarily
+concerned with UNIX.)
+
+The ``super block'' contains  information
+used  in allocating resources, viz. the
+storage blocks and the entries  in  the
+``inode'' table recorded on the file system. While the file  system  volume  is
+mounted  a copy of the ``super block'' is
+maintained in core and  updated  there.
+To  prevent  the  storage  device  copy
+becoming too far out of date, its  contents are written out at regular intervals.
+
+
+\sbs{The 'mount' table (0272)}
+
+The ``mount'' table  contained  an  entry
+for  each  mounted  file system volume.
+Each entry defines the device on  which
+the  file  system  volume is mounted, a
+pointer to the buffer which stores  the
+``super  block''  for  the device, and an
+``inode'' pointer.  The table  is  referenced as follows:
+
+\bd
+\item[iinit (6922)] which  is  called  by
+``main''  (1615), makes an entry for
+the root device;
+
+\item[smount (6086)]  is  a  system  call
+which makes entries for additional
+devices;
+
+\item[iget (7276)] searches  the  ``mount''
+table  if it encounters an ``inode''
+with the `IMOUNT' flag set;
+
+\item[getfs (7167)] searches the  ``mount''
+table to find and return a pointer
+to the ``super block'' for a particular device;
+
+\item[update (7201)] is  called  periodically  and  searches  the  ``mount''
+table to locate information  which
+should be written from core tables
+into the tables maintained on  the
+file system volumes;
+
+\item[sumount (6144)] is  a  system  call
+which  deletes  entries  from  the
+table.
+\ed
+
+\sbs{iinit (6922)}
+
+This routine is called by ``main'' (1615)
+to initialise the ``mount'' table entry
+for the root device.
+
+\bd
+\item[6926:] Call the ``open'' routine for the
+      root device. Note that ``rootdev''
+      is defined in ``conf.c'' (4695);
+
+\item[6931:] Copy the contents of the root
+      device ``super block'' into a
+      buffer area not associated with
+      any particular device;
+
+\item[6933:] The zeroeth entry in the ``mount''
+      table is assigned to the root
+      device. Only two of the three
+      elements are explicitly initialised. The third, the ``inode''
+      pointer, will never be referenced;
+
+\item[6936:] The ``locks'' stored in the ``super
+      block'' are explicitly reset.
+      (These locks may have been set
+      when the ``super block'' was last
+      written onto the file system
+      volume);
+
+\item[6938:] The root device is mounted
+      in a ``writable'' state;
+
+\item[6939:] The system sets its idea of the
+      current time and date from the
+      time recorded in the ``super
+      block''. (If the system has been
+      stopped for an appreciable
+      period, the computer operator
+      will need to reset the contents
+      of ``time''.)
+\ed
+
+\sbs{Mounting}
+
+From an operational view point, ``mounting''  a  file  system  volume  involves
+placing it in a suitable access device,
+readying  the device, and then entering
+a command such as
+parameters.
+
+\begin{verbatim}
+    ``/etc/mount /dev/rk2 /rk2''
+\end{verbatim}
+
+\noindent to the ``shell'', which forks  a  program
+to perform a ``mount'' system call, passing pointers to the two file  names  as
+parameters.
+
+
+\sbs{smount (6086)}
+
+\bd
+\item[6093:] ``getmdev'' decodes the first argument  to  locate a block oriented
+      access device;
+
+\item[6096:] ``u.u\_dirp'' is  reset  preparatory
+to  calling ``namei'' to decode the
+second  file  name.   (Note   that
+``u.u\_dirp''  is  set  by ``trap'' to
+``u.u\_arg[0]'' (2770);
+
+\item[6100:] Check that the file named by  the
+      second  parameter  is in a satisfactory condition,  i.e.  no  one
+      else  is  currently accessing the
+      file, and that the file is not  a
+      special  file  (block  or character);
+
+\item[6103:] Search the ``mount'' table  looking
+  for      an      empty      entry
+  (``mp-$>$m bufp==NULL'') or an  entry
+  already   made  for  the  device.
+  (The ``mount''  data  structure  is
+  defined at line 0272);
+
+
+\item[6111:] ``smp'' should point to a  suitable
+entry in the ``mount'' table;
+
+\item[6113:] Perform  the  appropriate  ``open''
+routine, with the device name and
+a read/write flag  as  arguments.
+(As  was  seen  earlier,  for the
+RK05 disk the ``open'' routine is a
+``no-op'');
+
+
+\item[6116:] Read block \#1 from the device.
+This block is the ``super block'';
+
+\item[6124:] Copy the ``super block'' into a
+buffer associated with ``NODEV'',
+from the buffer associated with
+``d''. The second buffer will not
+ be released again until the device is unmounted;
+
+\item[6130:] ``ip'' points to  the  ``inode''  for
+the   second  named  file.   This
+``inode''   is   now   flagged   as
+``IMOUNT''.  The  effect of this is
+to force ``iget'' (7292) to  ignore
+the  normal contents of the file,
+while the file system  volume  is
+mounted. (In practice, the second
+file is  an  empty  file  created
+especially for this purpose.)
+\ed
+
+
+\sbs{Notes}
+
+\bd
+\item[1.] The ``read/write'' status of a mounted
+device  depends  only on the parameters
+provided to ``smount''.   No  attempt  is
+made to sense the hardware ``read/write''
+status. Thus if a disk is readied  with
+``write  protect'' on, but is not mounted
+``read only'', then the system will  complain vigorously.
+
+\item[2.] The ``mount'' procedure does not carry
+out  any  kind of label checking on the
+``mounted'' file system volume.  This  is
+reasonable  in  a  situation where file
+system volumes are  rarely  rearranged.
+However in situations where volumes are
+mounted and remounted frequently,  some
+means  of  verifying  that  the correct
+volume  has  been  mounted  would  seem
+desirable.   (Further,  if a file system
+volume contains sensitive  information,
+it  may  be  desirable  to include some
+form of password  protection  as  well.
+There  is  room  in  the  ``super block''
+(5575) for the storage of a name and an
+encrypted password.)
+\ed
+
+\sbs{iget (7276)}
+
+This  procedure  is  called  by  ``main''
+(1616,1618),  ``unlink'' (3519), ``ialloc''
+(7078) and ``namei''  (7534,  7664)  with
+two  parameters which together uniquely
+identify a  file:  a  device,  and  the
+``inode'' number of a file on the device.
+``iget'' returns a reference to an  entry
+in the core ``inode'' table.
+
+
+When ``iget'' is called, the core ``inode''
+table  is  searched  first to see if an
+entry already exists for  the  file  in
+the  core  ``inode''  table. If not, then
+``iget'' creates one.
+
+\bd
+\item[7285:] Search the core ``inode'' table ...
+
+\item[7286:] If an entry  for  the  designated
+file already exists ...
+
+\item[7287:] Then if it is locked go to sleep;
+
+
+\item[7290:] Try again. (Note the whole  table
+  needs  to  be searched again from
+  the beginning, because the  entry
+  may have vanished!);
+
+\item[7292:] If the IMOUNT flag  is  on  ...
+this  is an important possibility
+for which we will delay the  discussion;
+
+\item[7302:] If the ``IMOUNT'' flag is not  set,
+increase  the  ``inode''  reference
+count, set the ``ILOCK''  flag  and
+return a pointer to the ``inode'';
+
+
+\item[7306:] Make a note of  the  first  empty
+      slot in the ``inode'' table;
+
+\item[7309:] If the  ``inode''  table  is  full,
+      send  a  message to the operator,
+      and take an error exit;
+
+\item[7314:] At this point, a new entry is  to
+      be made in the ``inode'' table;
+
+\item[7319:] Read the block which contains the
+      file  system volume ``inode''. Note
+      the use  of  ``bread''  instead  of
+      ``readi'',   the   assumption  that
+      ``inode''  information  begins   in
+      block \#2  and the convention that
+      valid ``inode''  numbers  begin  at
+      one (not zero);
+
+\item[7326:] A read error at this point isn't
+      very well reported to the rest of       
+      the system; 
+
+\item[7328:] Copy the relevant ``inode'' 
+information.  This code makes implicit
+      use of the contents of  the  file
+      ``ino.h''  (Sheet  56), which isn't
+      referenced explicitly anywhere.
+\ed
+
+\noindent Let us now return to  unfinished  business:
+
+\bd
+\item[7292:] The ``IMOUNT'' flag is found to  be
+      set.   This   flag   was  set  by
+``smount'',  when  a  file   system
+volume was mounted;
+
+\item[7293:] Search the ``mount'' table to  find
+      the  entry  which  points  to the
+      curent    ``inode''.     (Although
+      searching  this  table  is  not a
+      horrendous overhead, it does seem
+      possible  that  a  ``back pointer''
+      could be conveniently  stored  in
+      in   the   ``inode''  e.g.  in  the
+      ``i\_lastr'' field. This would  save
+      both time and code space.;
+
+\item[7396:] Reset  ``dev''  and  ``ino''  to  the
+      mounted  device  number  and  the
+      ``inode'' number of the root directory  on  the mounted file system
+      volume.  Start again.
+\ed
+
+
+Clearly,  since  ``iget''  is  called  by
+``namei''  (7534,  7664),  this technique
+allows the whole directory structure on
+the  mounted  file  system volume to be
+integrated into the pre-existing directory   structure.   If  we  momentarily
+ignore  the  possible   deviations   of
+directory  structures  away  from  tree
+structures, we have the situation where
+a  leaf  of  the existing tree is being
+replaced by an entire subtree.
+
+
+\sbs{getfs (7167)}
+
+There is little that needs to be said
+ about this procedure in addition to the
+author's comment. This procedure is called by
+
+\begin{verbatim}
+   access   (6754)     ialloc   (7072)
+   alloc    (6961)     ifree    (7138)
+   free     (7004)     iupdat   (7383)
+\end{verbatim}
+
+
+Note the  cunning  use  of  ``n1'',  ``n2''
+which   are   declared   as   character
+pointers  i.e.  as  unsigned  integers.
+This allows only one sided tests on the
+two variables at line 7177.
+
+\sbs{update (7201)}
+
+The function of this procedure, in  its
+broadest   terms,  is  to  ensure  that
+information on the file system  volumes
+is  kept  up  to date.  The comment for
+this procedure (beginning on line 7190)
+describes the three main sub-functions,
+(in the reverse order!).
+
+``update'' is the whole business  of  the
+``sync''  system call (3486). This may be
+invoked via the ``sync''  shell  command.
+Alternatively  there is a standard system program
+which runs continuously and
+whose  only  function is to call ``sync''
+every 30 seconds.  (See  ``UPDATE(VIII)''
+in the UPM.)
+
+
+``update'' is called by ``sumount''  (6150)
+before   a   file   system   volume  is
+unmounted, and by ``panic'' (2420) as the
+last   action   of  the  system  before
+activity ceases.
+
+\bd
+\item[7207:] If another execution of  ``update''
+      is under way, then just return;
+
+\item[7210:] Search the ``mount'' table;
+
+\item[7211:] For each mounted volume, ...
+
+\item[7213:] Unless the file  system  has  not
+      been  recently  modified  or  the
+      ``super block'' is  locked  or  the
+      volume  has  been  mounted  ``read
+      only'' ...
+
+\item[7217:] Update the ``super block'', copy it
+      into   a  buffer  and  write  the
+      buffer out onto the volume;
+
+\item[7223:] Search the ``inode'' table, and for
+      each  non-null  entry,  lock  the
+      entry and call ``iupdat'' to update
+      the  ``inode''  entry on the volume
+      if appropriate;
+
+\item[7229:] Allow  additional  executions  of
+      ``update'' to commence;
+
+\item[7230:] ``bflush'' (5229)  forces  out  any
+      ``delayed write'' blocks.
+\ed
+
+\sbs{sumount (6144)}
+
+This system call deletes an entry for a
+mounted  device from the ``mount'' table.
+The purpose of this call is  to  ensure
+that  traffic to and from the device is
+terminated properly, before the storage
+device  is  physically removed from the
+access device.
+
+\bd
+\item[6154:] Search the ``mount'' table for  the
+      appropriate entry;
+
+\item[6161:] Search the ``inode'' table for  any
+      outstanding  entries for files on
+      the device. If  any  such  exist,
+      take  an  error  exit, and do not
+      change the ``mount'' table entry;
+
+\item[6168:] Clear the ``IMOUNT'' flag.
+\ed
+
+
+\sbs{Resource Allocation}
+
+Our attention now turns to the  management  of the resources of an individual
+FSV (file system volume).
+
+
+Storage blocks are allocated  from  the
+free  list by ``alloc'' at the request of
+``bmap''.  Storage blocks are returned to
+the  free  list by ``free'' at the behest
+of ``itrunc'' (which is called by ``core'',
+``openl'' and ``iput'').
+
+
+Entries in the FSV ``inode''  tables  are
+made  by  ``ialloc'',  which is called by
+``maknode'' and ``pipe''. Entries  in  this
+table  are  cancelled by ``ifree'', which
+is called by ``iput''.
+
+
+The ``super block'' for the FSV  is  central  to  the  resource management procedures.  The ``super block'' (5561) contains:
+
+\bi
+\item size  information (total resources available);
+
+\item list of up to 100  available  storage blocks;
+
+\item list of up to 100  available  ``inode'' entries;
+
+\item locks to control manipulation of  the above lists;
+
+\item flags;
+
+\item current date of last update.
+\ei
+
+
+If the list in core of available
+``inode'' entries for the file system
+volume ever becomes exhausted, then the
+entire table on the FSV is read and
+searched to rebuild the list. Conversely if the available ``inode'' table
+overflows, additional entries are simply forgotten to be rediscovered later.
+
+
+A different strategy is used for the
+list of available storage blocks.
+These blocks are arranged in groups of
+up to one hundred blocks. The first
+block in each group (except the very
+first) is used to store the addresses
+of the blocks belonging to the previous
+group. Addresses of blocks in the last
+incomplete group are stored in the
+``super block''.
+
+The first entry in the first list of
+block numbers is zero, which acts as a
+sentinel. Since the whole list is subject to a LIFO discipline, discovery of
+a block number of zero in the list signifies that the list is in fact empty.
+
+
+\sbs{alloc (6965)}
+
+This is called by ``bmap'' (6435, 6448,
+6468, 6480, 6497) whenever a new
+storage block is needed to store part
+of a file.
+
+\bd
+\item[6961:] Convert knowledge of the device
+      name into a pointer to the ``super
+      block'';
+
+\item[6962:] If ``s\_flock'' is set, the list of
+      available blocks is currently
+      being updated by another process;
+
+\item[6967:] Obtain the block  number  of  the
+      next available storage block;
+
+\item[6968:] If the last block number  on  the
+      list  is zero, the entire list is
+      now empty;
+
+\item[6970:] ``badblock''  (7040)  is  used   to
+      check   that   the  block  number
+      obtained from the list seems reasonable;
+
+\item[6971:] If the list of  available  blocks
+      in   the  ``super  block''  is  now
+      empty,  then   the   block   just
+      located    will    contain    the
+      addresses of the  next  group  of
+
+\item[6972:] Set ``s\_flock'' to delay any  other
+  process from getting a ``no space''
+  indication  before  the  list  of
+  available  blocks  in  the ``super
+  block'' can be replenished;
+
+\item[6975:] Determine  the  number  of  valid
+entries in the list to be copied;
+
+\item[6978:] Reset  ``s\_flock'',  and   ``wakeup''
+      anyone waiting;
+
+\item[6982:] Clear  the  buffer  so  that  any
+      information  recorded in the file
+      by default will be all zeros;
+
+\item[6983:] Set the ``modified'' flag to ensure
+      that  the  ``super  block'' will be
+      written out by ``update'' (7213).
+\ed
+
+\sbs{itrunc (7414)}
+
+This  procedure  is  called  by  ``core''
+(4112),   ``openl''   (5825)  and  ``iput''
+(7353). In the  first  two  cases,  the
+contents  of the ``file'' are about to be
+replaced.  In the third case, the  file
+is about to be abandoned.
+
+\bd
+\item[7421:] If the file  is  a  character  or
+      block  special file then there is
+      nothing to do;
+
+\item[7423:] Search  backwards  the  list   of
+      block   numbers   stored  in  the
+      ``inode'';
+
+\item[7425:] If the file is large,  then  an
+indirect fetch is needed. (A double indirect fetch is needed  for
+blocks    numbered    seven   and
+higher.);
+
+
+\item[7427:] Reference all {\bf 257} elements of the
+  buffer  in  reverse  order. (Note
+  this seems to be the  only  place
+  where  characters  \#512,  \#513 of
+  the buffer area  are  referenced.
+  Since  they  will presumably contain zero, they  will  contribute
+  nothing to the calculation. Hence
+  if  ``510''  were  substituted  for
+  ``512''  here,  and  again  on line
+  7432, a general  improvement  all
+  round would result (?));
+
+
+\item[7438:] ``free''  returns   an   individual
+      block to the available list;
+
+
+\item[7439:] This is  the  end  of  the  ``for''
+      statement   commencing   on  line
+      7427.   (Likewise  the  statement
+      which  begins  at  7432  ends  at
+      7435.);
+
+
+\item[7443:] Clear the entry in ``i\_addr[ ]'';
+
+
+\item[7445:] Reset size information, and  flag
+      the ``inode'' as ``updated''.
+\ed
+
+
+
+\sbs{free (7000)}
+
+
+This procedure is  called  by  ``itrunc''
+(7435, 7438, 7442) to reinsert a simple
+storage block into the  available  list
+for a device.
+
+\bd
+\item[7005:] It is not clear why the ``s\_fmod'' flag
+is set here as well as at the end of  the  procedure  (line
+7026). Any suggestions?
+
+\item[7006:] Observe the locking protocol;
+
+
+\item[7010:] If  no  free  blocks   previously
+      existed  for  the device, restore
+      the situation by setting up a one
+      element  list containing an entry
+      for block \#0.   This  value  will
+      subsequently be interpreted as an
+      ``end of list'' sentinel;
+
+\item[7014:] If  the  available  list  in  the
+      ``super block'' is already full, it
+      is time to write it out onto  the
+      FSV. Set ``s\_flock'';
+
+
+\item[7016:] Get a buffer, associated with the
+      block  now  being  entered in the
+	free list;
+
+\item[7019:] Copy the contents  of  the  super
+      block  list,  preceded by a count
+      of the number  of  valid  blocks,
+      into   the   buffer;   write  the
+      buffer;  unset   the   lock   and
+      ``wakeup'' anybody waiting,
+
+
+\item[7025:] Add the  returned  block  to  the
+      available list.
+\ed
+
+
+\sbs{iput (7344)}
+
+
+This procedure is one of the most popular  in UNIX (called from nearly thirty
+different places) and its use will have
+already been frequently observed.
+
+
+In essence  it  simply  decrements  the
+reference  count for the ``inode'' passed
+as a parameter, and then calls  ``prele''
+(7882) to reset the ``inode'' lock and to
+perform any necessary ``wakeup''s.
+
+
+``iput'' has an important side effect. If
+the  reference  count  is  going  to be
+reduced to  zero,  then  a  release  of
+resources  is  indicated.  This  may be
+simply the core ``inode'', or  both  that
+and  the  file itself, if the number of
+links is also zero.
+
+
+
+\sbs{ifree (7134)}
+
+
+This  procedure  is  called  by  ``iput''
+(7355)  to  return a FSV ``inode'' to the
+available list maintained in the ``super
+block''.  If  this  list is already full
+(as noted above)  or  if  the  list  is
+locked  (using  ``s\_ilock'') the information is simply discarded.
+
+\sbs{iupdat (7374)}
+
+
+This procedure  is  called  by ``statl''
+(6050),   ``update''  (7226)  and  ``iput''
+(7357) to revise a  particular  ``inode''
+entry  on a FSV. It does nothing if the
+corresponding  core  ``inode''   is   not
+flagged (``IUPD'' or ``IACC'');
+
+
+The ``IUPD'' flag may be set by one of
+
+\begin{verbatim}
+  unlink (3530)        bmap (6452,6467)
+  chmod  (3570)        itrunc  (7448)
+  chown  (3583)        maknode (7462)
+  link   (5942)        namei   (7609)
+  writei (6285,6318)   pipe    (7751)
+\end{verbatim}
+
+\noindent The ``IACC'' flag may be set by one of
+
+\begin{verbatim}
+  readi  (6232)       maknode (7462)
+  writei (6285)       pipe    (7751)
+\end{verbatim}
+
+
+The flags are reset by ``iput'' (7359).
+
+\bd
+\item[7383:] Forget it, if the  FSV  has  been
+mounted as ``read only'';
+
+
+\item[7386:] Read the appropriate  block  containing  the  FSV  ``inode'' entry.
+      As observed earlier with  respect
+      to  ``iget'',  note  the the use of
+      ``bread'' instead of  ``readi'',  the
+      assumption that the ``inode'' table
+      begins at block \#2 and  the  convention    that   valid   ``inode''
+      numbers begin at one;
+
+
+\item[7389:] Copy  the  relevant   information
+      from the core ``inode'';
+
+
+\item[7391:] If appropriate, update  the  time
+      of last access;
+
+
+\item[7396:] If appropriate, update  the  time
+      of last modification;
+
+
+\item[7400:] Write the updated block  back  to
+      the FSV.
+\ed

@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>start (0612)</TITLE>
+<META NAME="description" CONTENT="start (0612)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node80.html">
+<LINK REL="previous" HREF="node78.html">
+<LINK REL="up" HREF="node77.html">
+<LINK REL="next" HREF="node80.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1682"
+  HREF="node80.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1678"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1672"
+  HREF="node78.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1680"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1683"
+  HREF="node80.html">main (1550)</A>
+<B> Up:</B> <A NAME="tex2html1679"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1673"
+  HREF="node78.html">Operator Actions</A>
+ &nbsp; <B>  <A NAME="tex2html1681"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000102000000000000000">
+start (0612)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>0613:</STRONG></DT>
+<DD>The ``enabled'' bit of the memory
+ management status register, SR0,
+ is tested. If this set, the processor will dwell forever in a
+ two instruction loop. This register will normally be cleared when
+ the operator activates the
+ ``clear'' button on the console
+ before starting the system.
+
+<P>
+A number of reasons have been
+suggested for the necessity for
+this loop. The most likely is
+that in the case of a double bus
+timeout error, the processor will
+branch to location zero, and in
+this situation it should not be
+allowed to go further.
+
+<P>
+</DD>
+<DT><STRONG>0615:</STRONG></DT>
+<DD>``reset'' clears and initialises
+ all the peripheral device control
+ and status registers
+
+<P>
+<I>The system will now be running in
+kernel mode with memory management
+disabled.</I>
+
+<P>
+</DD>
+<DT><STRONG>0619:</STRONG></DT>
+<DD>KISA0 and KISD0 are the high core
+ addresses of the first pair of
+ kernel mode segmentation registers. The first six kernel
+ descriptor registers are initialised to 077406, which is the
+ description of a full size, 4K
+ word, read/write segment.
+
+<P>
+The first six kernel address
+registers are initialised to 0,
+0200, 0400, 0600, 01000 and 01200
+respectively.
+
+<P>
+As a result the first six kernel
+segments are initialised (without
+any reference to the actual size
+of UNIX) to point to the first
+six 4K word segments of physical
+memory. Thus the ``kernel to physical address'' translation is
+trivial for kernel addresses in
+the range 0 to 0137777;
+
+<P>
+</DD>
+<DT><STRONG>0632:</STRONG></DT>
+<DD>``_end'' is a loader pseudo variable which defines the extent of
+ the program code and data area.
+ This value is rounded up to the
+ next multiple of 64 bytes and is
+ stored in the address register
+ for the seventh segment (segment
+ #6).
+
+<P>
+Note that the address of this
+register is stored in ``ka6'', so
+that the content of this register
+is accessible as ``*ka6'';
+
+<P>
+</DD>
+<DT><STRONG>0634:</STRONG></DT>
+<DD>The corresponding descriptor
+ register is loaded with a value
+ which (since ``USIZE'' is equal to
+ 16) is the description of a
+ read/write segment which is 16 x
+ 32 = 512 words long.
+
+<P>
+The value 007406 is obtained by
+shifting the octal value 017
+eight places to the left and then
+``or''ing in the value 6;
+
+<P>
+</DD>
+<DT><STRONG>0641:</STRONG></DT>
+<DD>The eighth segment is mapped into
+ the highest 4K word segment of
+ the physical address space.
+
+<P>
+It should be noted that with
+memory management disabled, the
+same translation is already in
+force i.e. addresses in the
+highest 4K word segment of the
+32K program address space are
+automatically mapped into the
+highest 4K word segment of the
+physical address space.
+</DD>
+</DL>
+
+<P>
+We may note that from this point on,
+all the kernel mode segmentation registers will remain unchanged with the
+single exception of the <B>seventh kernel
+segmentation address register</B>.
+
+<P>
+This register is explicitly manipulated
+by UNIX to point to a variety of
+locations in physical memory. Each such
+location is the beginning of an area
+512 words long, known as a ``per process
+data area''.
+
+<P>
+The seventh kernel address register is
+now set to point to the segment which
+will become the per process data area
+for process #0.
+
+<P>
+<DL>
+<DT><STRONG>0646:</STRONG></DT>
+<DD>The stack pointer is set to point
+ to the highest word of the per
+ process data area;
+
+<P>
+</DD>
+<DT><STRONG>0647:</STRONG></DT>
+<DD>By incrementing the value of SR0
+ from zero to one, the ``memory
+ management enabled'' bit is conveniently set.
+</DD>
+</DL>
+
+<P>
+<I>From this point, all program addresses
+are translated to physical addresses
+the memory management hardware.</I>
+
+<P>
+<DL>
+<DT><STRONG>0649:</STRONG></DT>
+<DD>``bss'' refers to the second part
+ of the program data area, which
+ is not initialised by the loader
+ (see ``A.OUT(V)'' in the PM). The
+ lower and upper limits of this
+ area are defined by the loader
+ pseudo variables, ``_edata'' and
+ ``_end'' respectively;
+
+<P>
+</DD>
+<DT><STRONG>0668:</STRONG></DT>
+<DD>The processor status word (PS) is
+ changed to indicate that the
+ ``previous mode'' was ``user mode''.
+
+<P>
+This prepares the way for the
+investigation and initialisation
+of the areas of physical memory
+which are not part of the kernel
+address space. (This involves use
+of the special instructions
+``mtpi'' and ``mfpi'' (Move To/From
+Previous Instruction space)
+together with some manipulation
+of the user mode segmentation
+registers.);
+
+<P>
+</DD>
+<DT><STRONG>0669:</STRONG></DT>
+<DD>A call is then made to the procedure ``main'' (1550).
+</DD>
+</DL>
+
+<P>
+It will be seen later that ``main'' calls
+``sched'' which never terminates. The
+need for or use of the last three
+instructions of ``start'' (lines 0670,
+0671 and 0672) is therefore somewhat
+enigmatic. The reason will come later.
+In the meantime you might like to
+ponder ``why?''. What do these lines do
+anyway?
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1682"
+  HREF="node80.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1678"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1672"
+  HREF="node78.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1680"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1683"
+  HREF="node80.html">main (1550)</A>
+<B> Up:</B> <A NAME="tex2html1679"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1673"
+  HREF="node78.html">Operator Actions</A>
+ &nbsp; <B>  <A NAME="tex2html1681"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

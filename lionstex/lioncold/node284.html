@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>lpcanon (8879)</TITLE>
+<META NAME="description" CONTENT="lpcanon (8879)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node285.html">
+<LINK REL="previous" HREF="node283.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node285.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4292"
+  HREF="node285.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4288"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4282"
+  HREF="node283.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4290"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4293"
+  HREF="node285.html">For idle readers: A</A>
+<B> Up:</B> <A NAME="tex2html4289"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4283"
+  HREF="node283.html">Discussion</A>
+ &nbsp; <B>  <A NAME="tex2html4291"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000279000000000000000">
+lpcanon (8879)</A>
+</H2>
+
+<P>
+This procedure interprets characters
+being sent to the line printer and make
+various modifications, insertions and
+deletions. It thus functions as a
+filter.
+
+<P>
+<DL>
+<DT><STRONG>8884:</STRONG></DT>
+<DD>The section of code from here to
+line 8913 is concerned with character translation when the full
+96 character set is not available, and a 64 character set is
+in use.
+
+<P>
+Since the capabilities of a
+printer do not usually change
+with time, the defined variable
+``CAP'' (8840) must be set once and
+for all (at a particular installation).
+
+<P>
+The run-time test on (lp11.flag &amp; CAP)
+could be replaced by a compile-time test on
+(CAP) and if the compiler has its
+``druthers'', if CAP turns out to
+be zero, the whole section of
+code to line 8913 could be compiled down to nothing.
+
+<P>
+The present code could be said
+to plan ahead for a situation
+where an installation may have
+two or more printers of different
+types. Even so there is a basic
+inconsistency here in the use of
+``CAP'', ``IND'' and ``EJECT'' on the
+one hand, and ``EJLINE'' and ``MAXCOL'' on the other. In fact since
+forms of different sizes are not
+uncommonly used on a single
+printer, the last two should not
+be constants at all, but should
+be dynamically settable.
+
+<P>
+</DD>
+<DT><STRONG>8885:</STRONG></DT>
+<DD>Lower case alphabetics are
+translated by the addition of a
+constant, which is conveniently
+defined as ``'A' - 'a''';
+
+<P>
+</DD>
+<DT><STRONG>8887:</STRONG></DT>
+<DD>Certain of the remaining characters are special characters which
+are printed as a similar character with an overprinted minus
+sign, e.g. ``{'' (8889) is printed as ``{-'';
+
+<P>
+</DD>
+<DT><STRONG>8909:</STRONG></DT>
+<DD>The ``similiar'' character is output
+via a recursive call on
+``lpcanon'', which will increment
+``lp11.ccc'' by one as a side
+effect;
+
+<P>
+</DD>
+<DT><STRONG>8910:</STRONG></DT>
+<DD>Decrement the current character
+count (for the same effect as a
+``back space'' character) and ...
+
+<P>
+</DD>
+<DT><STRONG>8911:</STRONG></DT>
+<DD>Prepare to output a minus sign;
+
+<P>
+</DD>
+<DT><STRONG>8915:</STRONG></DT>
+<DD>The ``switch'' statement beginning here
+extends to line 8963. Certain characters involved in vertical
+and horizontal spacing are given special interpretations
+with delayed actions;
+
+<P>
+</DD>
+<DT><STRONG>8917:</STRONG></DT>
+<DD>For a horizontal tab character, round the current character
+count up to the next multiple of eight. Do not output
+any blank characters immediately;
+
+<P>
+</DD>
+<DT><STRONG>8921:</STRONG></DT>
+<DD>For a ``form feed'' or ``new line'' character, if:
+
+<P>
+(a) the printer does not have a ``page
+restore'' capability; or
+
+<P>
+(b) the current line is not empty; or
+
+<P>
+(c) some lines have been completed
+since the last ``form feed'' character, then ...
+
+<P>
+</DD>
+<DT><STRONG>8925:</STRONG></DT>
+<DD>reset ``lp11.mcc'' to zero;
+
+<P>
+</DD>
+<DT><STRONG>8926:</STRONG></DT>
+<DD>Increment the completed line
+count;
+
+<P>
+</DD>
+<DT><STRONG>8927:</STRONG></DT>
+<DD>Convert a ``new line'' character to
+a ``form feed'' if sufficient lines
+have been completed on the
+current page, and the printer has
+a ``form feed'' capability;
+
+<P>
+</DD>
+<DT><STRONG>8929:</STRONG></DT>
+<DD>Output the character, and if
+was a ``form feed'', reset
+number of completed lines
+zero;
+</DD>
+</DL>
+
+<P>
+Examination of this code will show
+that:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>Any string of ``form feed''s or
+``new line''s which begins with a
+``form feed'', will, if sent to a
+printer with ``form feed'' capability, be reduced to a single
+``form feed'';
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>A ``form feed'' character sent to
+a printer without the ``form
+feed'' capability, will cause a
+new line to be started but will
+be passed on otherwise without
+comment.
+</DD>
+</DL>
+
+<P>
+<DL>
+<DT><STRONG>8934:</STRONG></DT>
+<DD>For ``carriage return''s, <B>and</B>,
+note, ``form feed''s and ``new
+line''s, reset the current character count to zero or eight,
+depending on ``IND'', and return;
+
+<P>
+</DD>
+<DT><STRONG>8949:</STRONG></DT>
+<DD>For all other characters ...
+
+<P>
+</DD>
+<DT><STRONG>8950:</STRONG></DT>
+<DD>If a string of ``backspace''s (real
+or contrived) and/or ``carriage
+returns'' has been received, output
+a single ``carriage return''
+and reset the maximum character
+count to zero;
+
+<P>
+</DD>
+<DT><STRONG>8954:</STRONG></DT>
+<DD>Provided the
+count does not exceed the maximum
+line length, output blank characters to
+bring the maximum character count to the
+current character count. (Perhaps these two
+variables would be more accurately called the
+``actual character count'' and the ``logical character count''.);
+
+<P>
+</DD>
+<DT><STRONG>8959:</STRONG></DT>
+<DD>Output the actual character.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4292"
+  HREF="node285.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4288"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4282"
+  HREF="node283.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4290"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4293"
+  HREF="node285.html">For idle readers: A</A>
+<B> Up:</B> <A NAME="tex2html4289"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4283"
+  HREF="node283.html">Discussion</A>
+ &nbsp; <B>  <A NAME="tex2html4291"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

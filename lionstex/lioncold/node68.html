@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>mfree (2556)</TITLE>
+<META NAME="description" CONTENT="mfree (2556)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node69.html">
+<LINK REL="previous" HREF="node67.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node69.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1542"
+  HREF="node69.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1538"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1532"
+  HREF="node67.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1540"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1543"
+  HREF="node69.html">In conclusion ...</A>
+<B> Up:</B> <A NAME="tex2html1539"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1533"
+  HREF="node67.html">malloc (2528)</A>
+ &nbsp; <B>  <A NAME="tex2html1541"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00094000000000000000">
+mfree (2556)</A>
+</H2>
+
+<P>
+This procedure returns the area of size
+``size'' at address ``aa'' to the ``resource map''
+designated by ``mp''. The body of
+the procedure consists of a one line
+``for'' statement, followed by a multiline ``if'' statement.
+
+<P>
+<DL>
+<DT><STRONG>2564:</STRONG></DT>
+<DD>The semicolon at the end of this
+ line is extremely significant,
+ terminating as it does the empty
+ statement. (It would aid legibility if this character were moved
+ to a line on its own, as is done
+ on line 2394.)
+
+<P>
+Depending on your point of view,
+this statement demonstrates
+either the power or the obscurity
+of the ``C'' language. Try writing
+equivalent code to this statement
+in another language such as Pascal or PL/1.
+
+<P>
+Step ``bp'' through the list until
+an element is encountered either
+with an address greater than the
+address of the area being
+returned.
+
+<P>
+i.e. not ``bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_addr <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$\le$"> a''
+
+<P>
+or which indicates the end of the list
+
+<P>
+i.e. not ``bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size != 0'';
+
+<P>
+</DD>
+<DT><STRONG>2565:</STRONG></DT>
+<DD>We have now located the element
+ in front of which we should
+ insert the new list element. The
+ question is: Will the list grow
+ larger by one element or will
+ amalgamation keep the number of
+ elements the same or even reduce
+ it by one?
+
+<P>
+If ``bp <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$"> mp'' we are not trying to
+insert at the beginning of the
+list. If
+<BR>(bp-l)-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_addr+(bp-l)-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size==a
+
+<P>
+then the area being return abuts
+the previous element in the list;
+
+<P>
+</DD>
+<DT><STRONG>2566:</STRONG></DT>
+<DD>Increase the size of the previous
+list element by the size of the
+area being returned;
+
+<P>
+</DD>
+<DT><STRONG>2567:</STRONG></DT>
+<DD>Does the area being returned also
+ abut the next element of the
+ list? If so
+
+<P>
+</DD>
+<DT><STRONG>2568:</STRONG></DT>
+<DD>Add the size of the next element
+ of the list to the size of the
+ previous element;
+
+<P>
+</DD>
+<DT><STRONG>2569:</STRONG></DT>
+<DD>Move all the remaining list elements (up to the one containing
+ the final zero size) down one
+ place.
+
+<P>
+Note that if the test on line
+ 2567 fortuitously gives a true
+ result when ``bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size'' is zero
+ no harm is done;
+
+<P>
+</DD>
+<DT><STRONG>2576:</STRONG></DT>
+<DD>This statement is reached if the
+ test on line 2565 failed i.e. the
+ area being returned cannot be
+ amalgamated with the previous
+ element on the list.
+
+<P>
+Can it be amalgamated with the
+ next element? Note the check that
+ the next element is not null;
+
+<P>
+</DD>
+<DT><STRONG>2579:</STRONG></DT>
+<DD>Provided the area being returned
+ is genuinely non-null (perhaps
+ this test should have been made
+ sooner?) add a new element to the
+ list and push all the remaining
+ elements up one place.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1542"
+  HREF="node69.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1538"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1532"
+  HREF="node67.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1540"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1543"
+  HREF="node69.html">In conclusion ...</A>
+<B> Up:</B> <A NAME="tex2html1539"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1533"
+  HREF="node67.html">malloc (2528)</A>
+ &nbsp; <B>  <A NAME="tex2html1541"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

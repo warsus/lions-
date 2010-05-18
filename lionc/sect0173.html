@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: procxmt (4204)</title>
+
+<link href="sect0174.html" title="Program Swapping" rel="next" />
+<link href="sect0172.html" title="ptrace (4164)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0172.html" title="ptrace (4164)"><img alt="Previous: ptrace (4164)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Next: Program Swapping" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">procxmt (4204)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000174">13.25 procxmt (4204)</h2>
+<p>This procedure is executed by the child process under the influence of data left by the parent in the ipc structure. </p><dl class="description">
+
+    <a href="../all.html#line4209" target="source" <dt>4209:</dt></a>
+    <dd><p>If “ipc.ip_lock” is set wrongly for the current process, then certainly the rest of “ipc” should be ignored. </p></dd>
+
+</dl><p>After “stop” (4027) calls “swtch”, the chide process is restarted by one of three calls on “setrun” which leave the “STRC” and “SWTED” flags in the state indicated: </p><center> <table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> STRC </p></td>
+
+    
+    <td style="text-align:left"><p> SWTED </p></td>
+
+    
+    <td style="text-align:left"><p> ipc.ipc_lock</p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>exit </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> (3254) </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> set </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> set </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> arbitrary</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>wait </p></td>
+
+    
+    <td style="text-align:left"><p> (3310) </p></td>
+
+    
+    <td style="text-align:left"><p> reset </p></td>
+
+    
+    <td style="text-align:left"><p> reset </p></td>
+
+    
+    <td style="text-align:left"><p> arbitrary</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>ptrace </p></td>
+
+    
+    <td style="text-align:left"><p> (4188) </p></td>
+
+    
+    <td style="text-align:left"><p> set </p></td>
+
+    
+    <td style="text-align:left"><p> reset </p></td>
+
+    
+    <td style="text-align:left"><p> properly set</p></td>
+
+</tr>
+</table> </center><p>In the third case “ptrace” will always set “ipc.ip_lock” properly, before the child is restarted, so that there is then no chance of the test on 4209 into “ipc” failing. </p><p>In the second case, where the parent has ignored the child, “procxmt” will never in fact be called. </p><p>By executing the statement “return(0)”; on line 4210, “procxmt” forces “stop” to loop back to line 4020. In the case where the parent has already died, the test on line 4022 will then fail, and a call on “exit” (4032) will result. </p><dl class="description">
+
+    <a href="../all.html#line4211" target="source" <dt>4211:</dt></a>
+    <dd><p>Store the value of “ipc.ip_req” before resetting the latter, “wake up” the parent, and select the next action as indicated. </p></dd>
+
+</dl><p>The various actions are adequately explained in Section “PTRACE (II)” of the UPM, with the one qualification that cases 1, 2 and 4, 5 are documented the wrong way around (i.e. “I” and “D” spaces respectively, not “D” and “I”!).  <big class="xlarge"><b class="bf">Section Three</b></big> </p><p><p>Section Three is concerned with basic input/output operations between the main memory and disk storage. </p><p>These operations are fundamental to the activities of program swapping and the creation and referencing of disk files. </p><p>This section also introduces procedures for the use and manipulation of the large (512 byte) buffers. </p> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0172.html" title="ptrace (4164)"><img alt="Previous: ptrace (4164)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Next: Program Swapping" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

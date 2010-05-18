@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Software Interrupts</TITLE>
+<META NAME="description" CONTENT="Software Interrupts">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node178.html">
+<LINK REL="previous" HREF="node140.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node153.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2601"
+  HREF="node153.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2597"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2591"
+  HREF="node151.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2599"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2602"
+  HREF="node153.html">Anticipation</A>
+<B> Up:</B> <A NAME="tex2html2598"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html2592"
+  HREF="node151.html">The File `sys4.c'</A>
+ &nbsp; <B>  <A NAME="tex2html2600"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000180000000000000000">
+Software Interrupts</A>
+</H1>
+
+<P>
+The principal concern of this chapter
+is the content of the file ``sig.c'',
+which appears on Sheets 39 to 42. This
+file introduces a facility for communication between processes. In particular
+it provides for the course of one ``user
+mode'' process to be interrupted,
+diverted or terminated by the action of
+another process or as the result of an
+error or operator action.
+
+<P>
+In this discussion the term ``software
+interrupt'' has been deliberately used
+in place of the term ``signal''. This
+latter has been eschewed because it has
+obtained connotations in the UNIX
+milieu which are rather different from
+the usage of ordinary English.
+
+<P>
+UNIX recognises 20 (``NSIG'', line 0113)
+different types of software interrupts,
+of which (as the reader may discover
+for himself by perusal of the the Section ``SIGNAL (II)'' of the UPM)
+thirteen
+have standard names and associations.
+Interrupt type #0 is interpreted as ``no
+interrupt''.
+
+<P>
+Within the ``per process data area'' of
+each process is an array, ``u.u_signal'',
+of ``NSIG'' words. Each word corresponds
+to a different software interrupt type
+and defines the action which should be
+taken if the process encounters that
+kind of software interrupt:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">u_signal[n]</TD>
+<TD ALIGN="LEFT">when interrupt #n occurs</TD>
+</TR>
+<TR><TD ALIGN="LEFT">zero</TD>
+<TD ALIGN="LEFT">the process will terminate itself;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">odd non-zero</TD>
+<TD ALIGN="LEFT">the software interrupt is ignored;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">even non-zero</TD>
+<TD ALIGN="LEFT">the value is taken as the address</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">in user space of a procedure which</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">which should be executed</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">forthwith.</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Interrupt type #9 (``SIGKILL'') is especially distinguished
+because UNIX ensures that ``u.u_signal[9]'' remains
+zero until the very end of a process's
+existence, so that if a process is ever
+interrupted for that reason, it will
+always terminate itself.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html2603"
+  HREF="node153.html">Anticipation</A>
+<LI><A NAME="tex2html2604"
+  HREF="node154.html">Causation</A>
+<LI><A NAME="tex2html2605"
+  HREF="node155.html">Effect</A>
+<LI><A NAME="tex2html2606"
+  HREF="node156.html">Tracing</A>
+<LI><A NAME="tex2html2607"
+  HREF="node157.html">Procedures</A>
+<LI><A NAME="tex2html2608"
+  HREF="node158.html">A. Anticipation</A>
+<LI><A NAME="tex2html2609"
+  HREF="node159.html">B. Causation</A>
+<LI><A NAME="tex2html2610"
+  HREF="node160.html">C. Effect</A>
+<LI><A NAME="tex2html2611"
+  HREF="node161.html">D. Tracing</A>
+<LI><A NAME="tex2html2612"
+  HREF="node162.html">ssig (3614)</A>
+<LI><A NAME="tex2html2613"
+  HREF="node163.html">kill (3630)</A>
+<LI><A NAME="tex2html2614"
+  HREF="node164.html">signal (3949)</A>
+<LI><A NAME="tex2html2615"
+  HREF="node165.html">psignal (3963)</A>
+<LI><A NAME="tex2html2616"
+  HREF="node166.html">issig (3991)</A>
+<LI><A NAME="tex2html2617"
+  HREF="node167.html">psig (4043)</A>
+<LI><A NAME="tex2html2618"
+  HREF="node168.html">core (4094)</A>
+<LI><A NAME="tex2html2619"
+  HREF="node169.html">grow (4136)</A>
+<LI><A NAME="tex2html2620"
+  HREF="node170.html">exit (3219)</A>
+<LI><A NAME="tex2html2621"
+  HREF="node171.html">rexit (3205)</A>
+<LI><A NAME="tex2html2622"
+  HREF="node172.html">wait (3270)</A>
+<LI><A NAME="tex2html2623"
+  HREF="node173.html">Tracing</A>
+<LI><A NAME="tex2html2624"
+  HREF="node174.html">stop (4016)</A>
+<LI><A NAME="tex2html2625"
+  HREF="node175.html">wait (3270) (continued)</A>
+<LI><A NAME="tex2html2626"
+  HREF="node176.html">ptrace (4164)</A>
+<LI><A NAME="tex2html2627"
+  HREF="node177.html">procxmt (4204)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2601"
+  HREF="node153.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2597"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2591"
+  HREF="node151.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2599"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2602"
+  HREF="node153.html">Anticipation</A>
+<B> Up:</B> <A NAME="tex2html2598"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html2592"
+  HREF="node151.html">The File `sys4.c'</A>
+ &nbsp; <B>  <A NAME="tex2html2600"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

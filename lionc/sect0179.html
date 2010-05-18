@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: xfree (4398)</title>
+
+<link href="sect0180.html" title="Introduction to Basic I/O" rel="next" />
+<link href="sect0178.html" title="xalloc (4433)" rel="prev" />
+<link href="sect0174.html" title="Program Swapping" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0178.html" title="xalloc (4433)"><img alt="Previous: xalloc (4433)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Next: Introduction to Basic I/O" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0174.html">Program Swapping</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">xfree (4398)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000180">14.5 xfree (4398)</h2>
+<p>“xfree” is called by “exit” (3233); when a process is being terminated, and by “exec” (3128), when a process is being transmogrified. </p><dl class="description">
+
+    <a href="../all.html#line4402" target="source" <dt>4402:</dt></a>
+    <dd><p>Set the text pointer in the “proc” entry to “NULL”; </p></dd>
+
+    <a href="../all.html#line4403" target="source" <dt>4403:</dt></a>
+    <dd><p>Decrement the main memory count and if it is now zero ... </p></dd>
+
+    <a href="../all.html#line4406" target="source" <dt>4406:</dt></a>
+    <dd><p>and if the text segment has not been flagged to be saved, ... </p></dd>
+
+    <a href="../all.html#line4408" target="source" <dt>4408:</dt></a>
+    <dd><p>Abandon the image of the text segment in the disk swap area; </p></dd>
+
+    <a href="../all.html#line4411" target="source" <dt>4411:</dt></a>
+    <dd><p>Call “iput” (7344) to decrement the “inode” reference count and if necessary delete it. </p></dd>
+
+</dl><p>“ISVTX” (5695) is a mask which defines the “sticky bit” mentioned in section “CHMOD(I)” of the UPM. If this bit is set, the disk copy of the text segment is allowed to remain in the disk swap area even when no programs are running which reference it, in the expectation that it will be required again shortly. This is an efficient device for commonly used programs such as the “shell” or the editor.  </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0178.html" title="xalloc (4433)"><img alt="Previous: xalloc (4433)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Next: Introduction to Basic I/O" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

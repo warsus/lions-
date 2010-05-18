@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Interactive Terminals</TITLE>
+<META NAME="description" CONTENT="Interactive Terminals">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node315.html">
+<LINK REL="previous" HREF="node287.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node298.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4453"
+  HREF="node298.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4449"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4443"
+  HREF="node296.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4451"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4454"
+  HREF="node298.html">The 'tty' Structure (7926)</A>
+<B> Up:</B> <A NAME="tex2html4450"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html4444"
+  HREF="node296.html">partab (7947)</A>
+ &nbsp; <B>  <A NAME="tex2html4452"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000290000000000000000">
+Interactive Terminals</A>
+</H1>
+
+<P>
+Our remaining task, to be completed in
+this and the following chapter, is to
+consider the code which controls
+interactive terminals (or ``terminals'',
+for short).
+
+<P>
+A wide variety of terminals is available and several different types may be
+simultaneously attached to a single
+computer. Distinguishing characteristics for different classes of terminal
+include (besides such non-essential
+features as shape, size and colour):
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>transmission speed, e.g. 110
+baud for an ASR33 teletype, 300
+baud for a DECwriter, 2400 baud
+or 9600 baud for a Visual
+Display unit (``VD'');
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>graphic character set, notably
+the full ASCII graphic set and
+the 64 graphic subset;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>transmission parity: odd, even,
+none or inoperatlve;
+
+<P>
+</DD>
+<DT><STRONG>(d)</STRONG></DT>
+<DD>output technique:  serial printer
+or visual display;
+
+<P>
+</DD>
+<DT><STRONG>(e)</STRONG></DT>
+<DD>miscellaneous: combined carriage
+return/line feed character, half
+duplex terminal (input characters do not need echoing);
+recognition of tab characters;
+
+<P>
+</DD>
+<DT><STRONG>(f)</STRONG></DT>
+<DD>characteristic delays for certain control functions, e.g.
+carriage returns may not be completed within a single character
+transmission time, etc.
+</DD>
+</DL>
+
+<P>
+As well as the wide variety of terminals which are available and in use,
+there is also a variety of hardware
+devices which may be used to interface
+a terminal to a PDP 11 computer. For example:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">DL11/KL11</TD>
+<TD ALIGN="LEFT">single line, asynchronous</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">interface; 13 standard</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">transmission rates between</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">40 and 9600 baud;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">DJ11</TD>
+<TD ALIGN="LEFT">16 line, asynchronous, buffered</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">serial line multiplexer; 11</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">speeds between 75 and 9600 baud,</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">selectable in four line groups;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">DH11</TD>
+<TD ALIGN="LEFT">16 line, asynchronous, buffered,</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">serial line multiplexer; 14 speeds,</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">individually selectable; DMA</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">transmission</TD>
+</TR>
+</TABLE>
+
+<P>
+Each of the above interfaces will work
+in full or half duplex mode; handle 5,
+6, 7 or 8 level codes; generate odd,
+even or no parity; and generate a stop
+code of 1, 1.5 or 2 bits.
+
+<P>
+In addition to the above asynchronous
+interfaces, there are a number of synchronous interfaces, e.g. DQ11.
+
+<P>
+Each interface has its own control
+characteristics and it requires a
+separate operating system device
+driver. The common code which can be
+shared between these is gathered into a
+single file ``tty.c'', to be found on
+Sheets 81 to 85. A set of common definitions is gathered in the file ``tty.h''
+on Sheet 79.
+
+<P>
+By way of example, Sheet 80 contains
+the file ``kl.c'', which constitutes the
+device driver for a set of DL11/KL11
+interfaces. This device driver always
+needs to be present, since one KL11
+interface is invariably included in a
+system for the the operator's console
+terminal.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html4455"
+  HREF="node298.html">The 'tty' Structure (7926)</A>
+<LI><A NAME="tex2html4456"
+  HREF="node299.html">Interactive Terminals</A>
+<LI><A NAME="tex2html4457"
+  HREF="node300.html">Initialisation</A>
+<LI><A NAME="tex2html4458"
+  HREF="node301.html">stty (8183)</A>
+<LI><A NAME="tex2html4459"
+  HREF="node302.html">sgtty (8201)</A>
+<LI><A NAME="tex2html4460"
+  HREF="node303.html">klsgtty (8090)</A>
+<LI><A NAME="tex2html4461"
+  HREF="node304.html">tysty (8577)</A>
+<LI><A NAME="tex2html4462"
+  HREF="node305.html">The DL11/KL11 Terminal Device Handler</A>
+<LI><A NAME="tex2html4463"
+  HREF="node306.html">Device Registers</A>
+<LI><A NAME="tex2html4464"
+  HREF="node307.html">UNIBUS Addresses</A>
+<LI><A NAME="tex2html4465"
+  HREF="node308.html">Software Considerations</A>
+<LI><A NAME="tex2html4466"
+  HREF="node309.html">Interrupt Vector Addresses</A>
+<LI><A NAME="tex2html4467"
+  HREF="node310.html">Source Code</A>
+<LI><A NAME="tex2html4468"
+  HREF="node311.html">klopen (8023)</A>
+<LI><A NAME="tex2html4469"
+  HREF="node312.html">klclose (8055)</A>
+<LI><A NAME="tex2html4470"
+  HREF="node313.html">klxint (8070)</A>
+<LI><A NAME="tex2html4471"
+  HREF="node314.html">klrint (8078)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4453"
+  HREF="node298.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4449"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4443"
+  HREF="node296.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4451"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4454"
+  HREF="node298.html">The 'tty' Structure (7926)</A>
+<B> Up:</B> <A NAME="tex2html4450"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html4444"
+  HREF="node296.html">partab (7947)</A>
+ &nbsp; <B>  <A NAME="tex2html4452"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

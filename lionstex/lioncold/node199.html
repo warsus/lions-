@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>devstart (5096)</TITLE>
+<META NAME="description" CONTENT="devstart (5096)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node200.html">
+<LINK REL="previous" HREF="node198.html">
+<LINK REL="up" HREF="node195.html">
+<LINK REL="next" HREF="node200.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3205"
+  HREF="node200.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3201"
+  HREF="node195.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3195"
+  HREF="node198.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3203"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3206"
+  HREF="node200.html">rkintr (5451)</A>
+<B> Up:</B> <A NAME="tex2html3202"
+  HREF="node195.html">The RK Disk Driver</A>
+<B> Previous:</B> <A NAME="tex2html3196"
+  HREF="node198.html">rkaddr (5420)</A>
+ &nbsp; <B>  <A NAME="tex2html3204"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000214000000000000000">
+devstart (5096)</A>
+</H2>
+
+<P>
+This procedure when called for the RK
+disk loads appropriate values into the
+registers RKDA, RKBA, RKWC and RKCS in
+succession. Only the last value needs
+to be computed at this stage.
+
+<P>
+The calculation, though messy in
+appearance, is straight forward. Note
+that ``hbcom'' is zero and ``rbp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">b_xmem''
+contains the two high order bits of the
+physical core address. The loading of
+RKCS initialises the disk controller
+i.e. the operation is now entirely
+under the control of the hardware.
+
+<P>
+``devstart'' returns to ``rkstart'' (5448),
+which returns to ``rkstrategy'' (5416),
+which resets the processor priority and
+returns to ``swap'' (5213), which ...
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

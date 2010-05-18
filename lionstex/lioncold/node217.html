@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>File Access and Control</TITLE>
+<META NAME="description" CONTENT="File Access and Control">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node240.html">
+<LINK REL="previous" HREF="node202.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node218.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3431"
+  HREF="node218.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3427"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3421"
+  HREF="node216.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3429"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3432"
+  HREF="node218.html">File Characteristics</A>
+<B> Up:</B> <A NAME="tex2html3428"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html3422"
+  HREF="node216.html">physio (5259)</A>
+ &nbsp; <B>  <A NAME="tex2html3430"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000230000000000000000">
+File Access and Control</A>
+</H1>
+
+<P>
+A large part of every operating system
+seems to be concerned with data management and file management, and UNIX
+turns out to be no exception.
+
+<P>
+Section Four of the source code contains thirteen files.
+
+<P>
+The first four contain common declarations needed by various of the other
+routines:
+
+<P>
+<DL>
+<DT><STRONG>``file.h''</STRONG></DT>
+<DD>describes the structure
+of the ``file'' array;
+
+<P>
+</DD>
+<DT><STRONG>``filsvs.h''</STRONG></DT>
+<DD>describes the structure
+of the ``super block'' for ``mounted''
+file systems;
+
+<P>
+</DD>
+<DT><STRONG>``ino.h''</STRONG></DT>
+<DD>describes the structure of
+``inodes'' recorded on ``mounted''
+devices;
+
+<P>
+</DD>
+<DT><STRONG>``inode.h''</STRONG></DT>
+<DD>describes the structure
+of the ``inode'' array;
+</DD>
+</DL>
+
+<P>
+The next two files, ``sys2.c'' and
+``sys3.c'' contain code for system calls.
+(``sys1.c'' and ``sys4.c'' were presented
+in Section Two).
+
+<P>
+Tne next five files, ``rdwri.c'',
+``subr.c'', ``fio.c'', ``alloc.c'' and
+``iget.c'', together present the principal routines for file management, and
+provide a link between the i/o oriented
+system calls and the basic i/o routines.
+
+<P>
+The file ``nami.c'' is concerned with
+searching directories to convert file
+pathnames into ``inode'' references.
+
+<P>
+Finally, ``pipe.c'' is the ``device
+driver'' for pipes.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3433"
+  HREF="node218.html">File Characteristics</A>
+<LI><A NAME="tex2html3434"
+  HREF="node219.html">System Calls</A>
+<LI><A NAME="tex2html3435"
+  HREF="node220.html">Control Tables</A>
+<LI><A NAME="tex2html3436"
+  HREF="node221.html">file (5507)</A>
+<LI><A NAME="tex2html3437"
+  HREF="node222.html">inode (5659)</A>
+<LI><A NAME="tex2html3438"
+  HREF="node223.html">Resources Required</A>
+<LI><A NAME="tex2html3439"
+  HREF="node224.html">Opening a File</A>
+<LI><A NAME="tex2html3440"
+  HREF="node225.html">creat (5781)</A>
+<LI><A NAME="tex2html3441"
+  HREF="node226.html">openl (5804)</A>
+<LI><A NAME="tex2html3442"
+  HREF="node227.html">open (5763)</A>
+<LI><A NAME="tex2html3443"
+  HREF="node228.html">openl revisited</A>
+<LI><A NAME="tex2html3444"
+  HREF="node229.html">close (5846)</A>
+<LI><A NAME="tex2html3445"
+  HREF="node230.html">closef (6643)</A>
+<LI><A NAME="tex2html3446"
+  HREF="node231.html">iput (7344)</A>
+<LI><A NAME="tex2html3447"
+  HREF="node232.html">Deletion of Files</A>
+<LI><A NAME="tex2html3448"
+  HREF="node233.html">Reading and Writing</A>
+<LI><A NAME="tex2html3449"
+  HREF="node234.html">rdwr (5731)</A>
+<LI><A NAME="tex2html3450"
+  HREF="node235.html">readi (6221)</A>
+<LI><A NAME="tex2html3451"
+  HREF="node236.html">writei</A>
+<LI><A NAME="tex2html3452"
+  HREF="node237.html">iomove (6364)</A>
+<LI><A NAME="tex2html3453"
+  HREF="node238.html">bmap (6415)</A>
+<LI><A NAME="tex2html3454"
+  HREF="node239.html">Leftovers</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3431"
+  HREF="node218.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3427"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3421"
+  HREF="node216.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3429"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3432"
+  HREF="node218.html">File Characteristics</A>
+<B> Up:</B> <A NAME="tex2html3428"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html3422"
+  HREF="node216.html">physio (5259)</A>
+ &nbsp; <B>  <A NAME="tex2html3430"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

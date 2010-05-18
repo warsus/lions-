@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Memory Management</title>
+
+<link href="sect0021.html" title="Segmentation Registers." rel="next" />
+<link href="sect0019.html" title="Unix Assembler" rel="prev" />
+<link href="sect0013.html" title="Fundamentals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0019.html" title="Unix Assembler"><img alt="Previous: Unix Assembler" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0021.html" title="Segmentation Registers."><img alt="Next: Segmentation Registers." border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0013.html">Fundamentals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Memory Management</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000021">2.7 Memory Management</h2>
+<p>Programs running on the PDP11 may address directly up to 64K bytes (32K words) of storage. This is consistent with an address size of sixteen bits. Since it is economical and not unreasonable to do so the larger PDP11 models may be equipped with larger amounts of memory (up to 256K bytes for the PDP11/40) plus a mechanism for converting sixteen bit <i class="it">virtual</i> (program) addresses into <i class="it">physical</i> addresses of eighteen bits or more. The mechanism, which is known as the memory management unit, is simpler on the PDP11/40 than on the 11/45 or the 11/70. </p><p>On the PDP11/40 the memory management unit consists of two sets of registers for mapping virtual addresses to physical addresses. These are known as “active page registers” or “segmentation registers”. One set is used when the processor is in user mode and the other set, in kernel mode. Changing the contents of these registers changes the details of these mappings. The ability to make these changes is a privilege that the operating system keeps firmly to itself. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0019.html" title="Unix Assembler"><img alt="Previous: Unix Assembler" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0021.html" title="Segmentation Registers."><img alt="Next: Segmentation Registers." border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

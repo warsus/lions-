@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: swtch revisited</title>
+
+<link href="sect0114.html" title="Critical Sections" rel="next" />
+<link href="sect0112.html" title="expand (2268)" rel="prev" />
+<link href="sect0098.html" title="Process Management" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0112.html" title="expand (2268)"><img alt="Previous: expand (2268)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0114.html" title="Critical Sections"><img alt="Next: Critical Sections" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0098.html">Process Management</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">swtch revisited</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000114">8.15 swtch revisited</h2>
+<p>What happens to the process when it is reactivated i.e. it becomes the “arising” process in “swtch”? </p><dl class="description">
+
+    <dt>2228:</dt>
+    <dd><p>The stack and environment pointers are restored from “u.u_rsav” (Note that a pointer to “u” is also a pointer to “u.u_rsav” (0415) but ... </p></dd>
+
+    <dt>2240:</dt>
+    <dd><p>If the core image was swapped out e.g. by “expand” ... </p></dd>
+
+    <dt>2242:</dt>
+    <dd><p>No reliance is placed on the values of the stack and environment pointers, and they are reset </p></dd>
+
+</dl><p>The question is if the values stored in “u.u_ssav” at line 2284 are the same as values stored in “u.u_rsav” at line 2281, how did they get to be different? </p><p>Presumably this is what “you are not expected to understand” (line 2238) ... clearly “xswap” should be investigated ... the trail finally ends at Chapter Fifteen ... in the meantime you may wish to investigate for yourself so that you may join the “2238” club that much sooner. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0112.html" title="expand (2268)"><img alt="Previous: expand (2268)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0114.html" title="Critical Sections"><img alt="Next: Critical Sections" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

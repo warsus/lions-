@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The File ‘buf.h’</title>
+
+<link href="sect0182.html" title="devtab (4551)" rel="next" />
+<link href="sect0180.html" title="Introduction to Basic I/O" rel="prev" />
+<link href="sect0180.html" title="Introduction to Basic I/O" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Previous: Introduction to Basic I/O" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0182.html" title="devtab (4551)"><img alt="Next: devtab (4551)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0180.html">Introduction to Basic I/O</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The File ‘buf.h’</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000182">15.1 The File ‘buf.h’</h2>
+<p>This file declares two structures called “buf” (4520) and “devtab” (4551). Instances of the structure “buf” are declared as ’bfreelist (4567) and as the array “buf” (!) (4535) with “NBUF” elements. </p><p>The structure “buf” is possibly misnamed because it is in fact a <b class="bf">buffer header</b> (or buffer control block). The buffer areas proper are allocated separately and declared (4720) as </p><pre>
+   ``char buffers [NBUF] [514];''
+</pre><p>Pointers from the “buf” array to the “buffers” array are set up by the procedure “binit”. </p><p>Other instances of the structure “buf” are declared as “swbuf” (4721) and “rrkbuf” (5387). No 514 character buffer areas are associated with “bfreelist” or “swbuf” or “rrkbuf”. </p><p>The “buf” structure may be divided into three parts: </p><dl class="description">
+
+    <dt>(a) flags</dt>
+    <dd><p>These convey status information and are contained within a single word. Masks for setting these flags are defined as “B_WRITE”, “B_READ” etc. in lines 4572 to 4586. </p></dd>
+
+    <dt>(b) list pointer</dt>
+    <dd><p>Forward and backward pointers for two doubly linked lists, which we shall refer to as the “b”-list and the “av”-list. </p></dd>
+
+    <dt>(c) i/o parameters</dt>
+    <dd><p>A set of values associated with the actual data transfer. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Previous: Introduction to Basic I/O" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0182.html" title="devtab (4551)"><img alt="Next: devtab (4551)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

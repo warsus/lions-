@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The File `buf.h'</TITLE>
+<META NAME="description" CONTENT="The File `buf.h'">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node186.html">
+<LINK REL="previous" HREF="node184.html">
+<LINK REL="up" HREF="node184.html">
+<LINK REL="next" HREF="node186.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3033"
+  HREF="node186.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3029"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3023"
+  HREF="node184.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3031"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3034"
+  HREF="node186.html">devtab (4551)</A>
+<B> Up:</B> <A NAME="tex2html3030"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3024"
+  HREF="node184.html">Introduction to Basic I/O</A>
+ &nbsp; <B>  <A NAME="tex2html3032"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000201000000000000000">
+The File `buf.h'</A>
+</H2>
+
+<P>
+This file declares two structures
+called ``buf'' (4520) and ``devtab''
+(4551). Instances of the structure
+``buf'' are declared as 'bfreelist
+(4567) and as the array ``buf'' (!)
+(4535) with ``NBUF'' elements.
+
+<P>
+The structure ``buf'' is possibly
+misnamed because it is in fact a <B>buffer
+header</B> (or buffer control block). The
+buffer areas proper are allocated
+separately and declared (4720) as
+
+<P>
+<PRE>
+   ``char buffers [NBUF] [514];''
+</PRE>
+
+<P>
+Pointers from the ``buf'' array to the
+``buffers'' array are set up by the procedure ``binit''.
+
+<P>
+Other instances of the structure ``buf''
+are declared as ``swbuf'' (4721) and
+``rrkbuf'' (5387). No 514 character
+buffer areas are associated with
+``bfreelist'' or ``swbuf'' or ``rrkbuf''.
+
+<P>
+The ``buf'' structure may be divided into
+three parts:
+
+<P>
+<DL>
+<DT><STRONG>(a) flags</STRONG></DT>
+<DD>These convey status information and are contained within
+ a single word. Masks for setting these flags are defined as
+ ``B_WRITE'', ``B_READ'' etc. in lines 4572 to 4586.
+
+<P>
+</DD>
+<DT><STRONG>(b) list pointer</STRONG></DT>
+<DD>Forward and backward pointers for two doubly
+ linked lists, which we shall
+ refer to as the ``b''-list and the
+ ``av''-list.
+
+<P>
+</DD>
+<DT><STRONG>(c)  i/o parameters</STRONG></DT>
+<DD>A set of values
+ associated with the actual data
+ transfer.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3033"
+  HREF="node186.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3029"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3023"
+  HREF="node184.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3031"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3034"
+  HREF="node186.html">devtab (4551)</A>
+<B> Up:</B> <A NAME="tex2html3030"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3024"
+  HREF="node184.html">Introduction to Basic I/O</A>
+ &nbsp; <B>  <A NAME="tex2html3032"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

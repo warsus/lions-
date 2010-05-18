@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>exit (3219)</TITLE>
+<META NAME="description" CONTENT="exit (3219)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node171.html">
+<LINK REL="previous" HREF="node169.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node171.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2842"
+  HREF="node171.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2838"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2832"
+  HREF="node169.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2840"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2843"
+  HREF="node171.html">rexit (3205)</A>
+<B> Up:</B> <A NAME="tex2html2839"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2833"
+  HREF="node169.html">grow (4136)</A>
+ &nbsp; <B>  <A NAME="tex2html2841"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001818000000000000000">
+exit (3219)</A>
+</H2>
+
+<P>
+This procedure is called when a process
+is to terminate itself.
+
+<P>
+<DL>
+<DT><STRONG>3224:</STRONG></DT>
+<DD>Reset the ``tracing'' flag;
+
+<P>
+</DD>
+<DT><STRONG>3225:</STRONG></DT>
+<DD>Set all of the values in the
+ array ``u.u_signal'' (including
+ ``u.u_signal[SIGKILL]'') to one so
+ that no future execution of
+ ``issig'' will ever be followed by
+ execution of ``psig'';
+
+<P>
+</DD>
+<DT><STRONG>3227:</STRONG></DT>
+<DD>Call ``close'' (6643) to close all
+ the files which the process has
+ open. (For the most part, ``closing'' simply involves decrementing
+ a reference count.);
+
+<P>
+</DD>
+<DT><STRONG>3232:</STRONG></DT>
+<DD>Reduce the reference count for
+ the current directory;
+
+<P>
+</DD>
+<DT><STRONG>3233:</STRONG></DT>
+<DD>Sever the process's connection
+ with any text segment;
+
+<P>
+</DD>
+<DT><STRONG>3234:</STRONG></DT>
+<DD>A place is needed to store ``per
+ process'' information until the
+ parent process can look at it. A
+ block (256 words) in the swap
+ area of the disk is a convenient
+ place;
+
+<P>
+</DD>
+<DT><STRONG>3237:</STRONG></DT>
+<DD>Find a suitable buffer (256
+ words) and ...
+
+<P>
+</DD>
+<DT><STRONG>3238:</STRONG></DT>
+<DD>Copy the <B>lower half</B> of the ``u''
+ structure into the buffer area;
+
+<P>
+</DD>
+<DT><STRONG>3239:</STRONG></DT>
+<DD>Write the buffer into the swap
+ area;
+
+<P>
+</DD>
+<DT><STRONG>3241:</STRONG></DT>
+<DD>Enter the core space occupied by
+ the process into the free list.
+ (This space is of course still in
+ use, but the use will terminate
+ before any other process gets to
+ dip into the free list again.
+ This could not be done any
+ sooner, because, as will be seen
+ later, both ``getblk'' and ``bwrite''
+ can call ``sleep'', during which
+ all sorts of things might happen.
+ In view of all this, it might be
+ reasonable if the statement
+
+<P>
+<DIV ALIGN="CENTER">
+expand (USIZE);
+
+</DIV>
+
+<P>
+were inserted after line 3226.);
+
+<P>
+</DD>
+<DT><STRONG>3243:</STRONG></DT>
+<DD>Set the process state to ``zombie''
+ (i.e. ``a corpse said to be
+ revived by witchcraft''
+<BR>(O.E.D.));
+
+<P>
+</DD>
+<DT><STRONG>3245:</STRONG></DT>
+<DD>The remaining code searches the
+ ``proc'' array to find the parent
+ process and to wake it up, to
+ make any children ``wards of the
+ state'', and, if they have
+ ``stopped'' for tracing, to release
+ them. Finally the code includes
+ (for this process) a last call on
+ ``swtch''.
+</DD>
+</DL>
+
+<P>
+Before going on to consider tracing,
+there are two routines which are
+closely associated with ``exit'', which
+can be conveniently disposed of now.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2842"
+  HREF="node171.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2838"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2832"
+  HREF="node169.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2840"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2843"
+  HREF="node171.html">rexit (3205)</A>
+<B> Up:</B> <A NAME="tex2html2839"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2833"
+  HREF="node169.html">grow (4136)</A>
+ &nbsp; <B>  <A NAME="tex2html2841"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

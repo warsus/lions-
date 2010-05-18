@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Sources of Traps and Interrupts</TITLE>
+<META NAME="description" CONTENT="Sources of Traps and Interrupts">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node132.html">
+<LINK REL="previous" HREF="node130.html">
+<LINK REL="up" HREF="node130.html">
+<LINK REL="next" HREF="node132.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2342"
+  HREF="node132.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2338"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2332"
+  HREF="node130.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2340"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2343"
+  HREF="node132.html">fuibyte (0814), fuiword (0844)</A>
+<B> Up:</B> <A NAME="tex2html2339"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2333"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+ &nbsp; <B>  <A NAME="tex2html2341"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000151000000000000000">
+Sources of Traps and Interrupts</A>
+</H2>
+
+<P>
+The discussion in Section One introduced three places where the occurrence
+of a trap or interrupt was expected:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>``main'' (1564) calls ``fuibyte''
+ repeatedly until a negative
+ value is returned. This will
+ occur after a ``bus timeout
+ error'' has been encountered with
+ a subsequent trap to vector
+ location 4 (line 0512);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>The clock has been set running
+ and will generate an interrupt
+ every clock tick i.e. 16.7 or 20
+ milliseconds;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>Process #1 is about to execute a
+ ``trap'' instruction as part of
+ the system call on ``exec''.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

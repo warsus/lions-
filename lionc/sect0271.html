@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Character Oriented Special Files</title>
+
+<link href="sect0272.html" title="LP11 Line Printer Driver" rel="next" />
+<link href="sect0270.html" title="prele (7882)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0270.html" title="prele (7882)"><img alt="Previous: prele (7882)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0272.html" title="LP11 Line Printer Driver"><img alt="Next: LP11 Line Printer Driver" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Character Oriented Special Files</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000272">22 Character Oriented Special Files</h1>
+<p>Character oriented peripheral devices are relatively slow (<img src="images/img-0004.png" alt="$&lt;$" style="vertical-align:&images/img-0004.png-depth;&px;; 
+                                     width:&images/img-0004.png-width;&px;; 
+                                     height:&images/img-0004.png-height;&px;" class="math gen" /> 1000 charaeters per second) and involve character by character transmission of variable length, usually short, records. </p><p>A device handler (as its name suggests) is the software part of the interface between a device and the general system. In general, the device handler is the only part of the software which recognises the idiosyncrasies of a particular device. </p><p>As far as possible or reasonable, a single device driver is written to serve many separate devices of similar types, and, where appropriate, several such devices simultaneously. The group of “interactive terminals” (with keyboard input and a serial printer or visual display output) can just be coerced with difficulty into a single device driver, as the reader may judge during his perusal of the file “tty.c”. </p><p>The standard UNIX device handlers for character devices make use of the procedures “putc” and “getc” which store and retrieve characters into and from a standard buffer pool. This will be described in more detail in Chapter Twenty-Three. </p><p>The “PDP11 Peripherals Handbook” should be consulted for more complete information on the device controller hardware and the devices themselves. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0272.html">22.1 LP11 Line Printer Driver</a>
+   
+</li><li><a href="sect0273.html">22.2 lpopen (8850)</a>
+   
+</li><li><a href="sect0274.html">22.3 Notes</a>
+   
+</li><li><a href="sect0275.html">22.4 lpoutput (8986)</a>
+   
+</li><li><a href="sect0276.html">22.5 lpstart (8967)</a>
+   
+</li><li><a href="sect0277.html">22.6 lpinit(8976)</a>
+   
+</li><li><a href="sect0278.html">22.7 lpwrite (8870)</a>
+   
+</li><li><a href="sect0279.html">22.8 Discussion</a>
+   
+</li><li><a href="sect0280.html">22.9 lpcanon (8879)</a>
+   
+</li><li><a href="sect0281.html">22.10 For idle readers: A suggestion</a>
+   
+</li><li><a href="sect0282.html">22.11 PC-11 Paper Tape Reader/Punch Driver</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0270.html" title="prele (7882)"><img alt="Previous: prele (7882)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0272.html" title="LP11 Line Printer Driver"><img alt="Next: LP11 Line Printer Driver" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

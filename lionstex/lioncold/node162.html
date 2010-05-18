@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ssig (3614)</TITLE>
+<META NAME="description" CONTENT="ssig (3614)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node163.html">
+<LINK REL="previous" HREF="node161.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node163.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2746"
+  HREF="node163.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2742"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2736"
+  HREF="node161.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2744"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2747"
+  HREF="node163.html">kill (3630)</A>
+<B> Up:</B> <A NAME="tex2html2743"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2737"
+  HREF="node161.html">D. Tracing</A>
+ &nbsp; <B>  <A NAME="tex2html2745"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001810000000000000000">
+ssig (3614)</A>
+</H2>
+
+<P>
+This procedure implements the ``signal''
+system call.
+
+<P>
+<DL>
+<DT><STRONG>3619:</STRONG></DT>
+<DD>If the interrupt reason is out of
+ range or is equal to ``SIGKILL''
+ (9), take an error exit;
+
+<P>
+</DD>
+<DT><STRONG>3623:</STRONG></DT>
+<DD>Capture the initial value in
+``u.u_signal[a]'' for return as the
+result of the system call;
+
+<P>
+</DD>
+<DT><STRONG>3624:</STRONG></DT>
+<DD>Set the element of ``u.u_signal''
+to the desired value ...
+
+<P>
+</DD>
+<DT><STRONG>3625:</STRONG></DT>
+<DD>If an interrupt for the current
+reason is pending, cancel it. (It
+is not clear why this step should
+be necessary or even desirable.
+Any suggestions??)
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

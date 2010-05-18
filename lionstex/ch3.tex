@@ -1,0 +1,1167 @@
+%
+% The Lion's Commentary, file ch3.tex, version 1.5, 18 May 1994
+%
+\se{Reading ``C'' Programs}
+
+Learning to read programs written in
+the ``C'' language is one of the hurdles
+that must be overcome before you will
+be able to study the source code of
+UNIX effectively.
+
+As with natural languages, reading is
+an easier skill to acquire than writing.
+Even so you will need to be careful lest
+some of the more subtle points pass you by.
+
+There are two of the ``UNIX Documents''
+which relate directly to the ``C''
+language:
+
+``C Reference Manual'', by Dennis Ritchie
+
+``Programming in C -- A Tutorial'',
+ by Brian Kernighan
+
+You should read them now, as far as you
+can, and return to reread them from
+time to time with increasing comprehension.
+
+Learning to write ``C'' programs is not
+required. However if you have the
+opportunity, you should attempt to
+write at least a few small programs.
+This does represent the accepted way to
+learn a programming language, and your
+understanding of the proper use of such
+items as:
+
+semicolons; \\
+``='' and ``=='' \\
+``\{'' and ``\}'' \\
+``$++$'' and ``$--$'' \\
+declarations; \\
+register variables; \\
+``if'' and ``for'' statements \\
+
+
+You will find that ``C'' is a very
+convenient language for accessing and
+manipulating data structures and
+character strings, which is what a large
+part of operating systems is about. As
+befits a terminal oriented language,
+which requires concise, compact expression,
+``C'' uses a large character set
+and makes many symbols such as ``*'' and
+``\&'' work hard. In this respect it
+invites comparison with APL.
+
+There many features of ``C'' which are
+reminiscent of PL/1, but it goes well
+beyond the latter in the range of
+facilities provided for structured programming.
+
+\sbs{Some Selected Examples}
+
+The examples which follow are taken
+directly from the source code.
+
+\sbs{Example 1}
+
+The simplest possible procedure, which
+does nothing, occurs twice(!) in the
+source code as ``nullsys'' (2864) and
+``nulldev'' (6577), sic.
+
+\newpage
+\begin{verbatim}
+  6577 nulldev ()
+       {
+       }
+\end{verbatim}
+
+While there are no parameters, the
+parentheses, ``('' and ``)'', are still
+required. The brackets ``\{'' and ``\}''
+delimit the procedure body, which is
+empty.
+
+\sbs{Example 2}
+
+The next example is a little less
+trivial:
+
+\begin{verbatim}
+  6566 nodev ()
+       {
+        u.u_error = ENODEV;
+       }
+\end{verbatim}
+
+
+The additional statement is an assignment
+statement. It is terminated by a
+semicolon which is part of the statement,
+not a statement separator as in
+Algol-like languages.
+
+``ENODEV'' is a defined symbol, i.e. a
+symbol which is replaced by an associated
+character string by the compiler
+preprocessor before actual compilation.
+``ENODEV'' is defined on line 0484 as 19.
+The UNIX convention is that defined
+symbols are written in upper case, and
+all other symbols in lower case.
+
+``='' is the assignment operator, and
+``u.u\_error'' is an element of the structure
+``u''. (See line 0419.) Note the use
+of ``.'' as the operator which selects an
+element of a structure. The element
+name is ``u\_error'' which may be taken as
+a paradigm for the way names of structure
+elements are constructed in the
+UNIX source code: a distinguishing
+letter is followed by an underscore
+followed by a name.
+
+\sbs{Example 3}
+
+\begin{verbatim}
+  6585 bcopy (from, to, count)
+       int *from, *to;
+       {
+        register *a, *b, c;
+        a = from;
+        b = to;
+        c = count;
+        do
+          *b++ = *a++;
+        while (--cc);
+       }
+\end{verbatim}
+
+The function of this procedure is very
+simple: it copies a specified number of
+words from one set of consecutive
+locations to another set.
+
+There are three parameters. The second
+line
+
+\begin{verbatim}
+   int *from, *to;
+\end{verbatim}
+
+\noindent specifies that the first two variables
+are pointers to integers. Since no
+specification is supplied for the third
+parameter, it is assumed to be an
+integer by default.
+
+The three local variables, a, b, and c,
+have been assigned to registers,
+because registers are more accessible
+and the object code to reference them
+is shorter. ``a'' and ``b'' are pointers to
+integers and ``c'' is an integer. The
+register declaration could have been
+written more pedantically as
+
+\begin{verbatim}
+   register int *a, *b, c;
+\end{verbatim}
+
+\noindent to emphasise the connection with
+integers.
+
+The three lines beginning with ``do''
+should be studied carefully. If ``b'' is
+a ``pointer to integer'' type, then
+
+\begin{verbatim}
+    *b
+\end{verbatim}
+
+\noindent denotes the integer pointed to. Thus to
+copy the value pointed to by ``a'' to the
+location designated by ``b'', we could
+write
+
+\begin{verbatim}
+    *b = *a;
+\end{verbatim}
+
+\noindent If we wrote instead
+
+\begin{verbatim}
+    b = a;
+\end{verbatim}
+
+this would make the value of ``b'' the
+same as the value of ``a'', i.e. ``b'' and
+``a'' would point to the same place.
+Here at least, that is not what is
+required.
+
+Having copied the first word from
+source to destination, we need to
+increase the values of ``b'' and ``a'' so
+that the point to the next words of
+their respective sets. This can be done
+by writing
+
+\begin{verbatim}
+    b = b+1; a = a+1;
+\end{verbatim}
+
+\noindent but ``C'' provides a shorter notation
+(which is more useful when the variable
+names are longer) viz.
+
+\begin{verbatim}
+    b++; a++;
+\end{verbatim}
+
+Now there is no difference between the
+statements ``b++;'' and ``++b;'' here.
+
+However ``b++'' and ``++b'' may be used as
+terms in an expression, in which case
+they are different. In both cases the
+effect of incrementing ``b'' is retained,
+but the value which enters the expression is
+the initial value for ``b++'' and
+the final value for ``++b''.
+
+The ``$--$'' operator obeys the same rules
+as the ``++'' operator, except that it
+decrements by one. Thus ``$--$c'' enters an
+expression as the value after decrementation.
+
+The ``++'' and ``$--$'' operators are very
+useful, and are used throughout UNIX.
+Occasionally you will have to go back
+to first principles to work out exactly
+what their use implies. Note also
+there is a difference between {\tt *b++} and {\tt (*b)++}.
+
+These operators are applicable to
+pointers to structures as well as to
+simple data types. When a pointer
+which has been declared with reference
+to a particular type of structure is
+incremented, the actual value of the
+pointer is incremented by the size of
+the structure.
+
+\noindent We can now see the meaning of the line
+
+\begin{verbatim}
+    *b++ = *a++;
+\end{verbatim}
+
+\noindent The word is copied and the pointers are
+incremented, all in one hit.
+
+\noindent The line
+
+\begin{verbatim}
+    while (--c);
+\end{verbatim}
+
+\noindent delimits the end of the set of statements
+which began after the ``do''. The
+expression in parentheses ``$--$c'', is
+evaluated and tested (the value tested
+is the value after decrementation). If
+the value is non-zero, the loop is
+repeated, else it is terminated.
+
+Obviously if the initial value for
+``count'' were negative, the loop would
+not terminate properly. If this were a
+serious possibility then the routine
+would have to be modified.
+
+\sbs{Example 4}
+
+\begin{verbatim}
+  6619 getf (f)
+       {
+         register *fp, rf;
+         rf = f;
+         if (rf < 0 || rf >= NOFILE)
+           goto bad;
+         fp = u.u_ofile[rf];
+         if (fp != NULL)
+         return (fp);
+       bad:
+         u.u_error = EBADF;
+         return (NULL);
+       }
+\end{verbatim}
+
+The parameter ``f'' is a presumed
+integer, and is copied directly into
+the register variable ``rf''. (This pattern will become so familiar that we
+will now cease to remark upon it.)
+
+\noindent The three simple relational expressions
+
+\begin{verbatim}
+  rf < 0    rf >=NOFILE    fp != NULL
+\end{verbatim}
+
+\noindent are each accorded the value one if
+true, and the value zero if false. The
+first tests if the value of ``rf'' is
+less than zero, the second, if ``rf'' is
+greater than the value defined by
+``NOFILE'' and the third, if the value of
+``fp'' is not equal to ``NULL'' (which is
+defined to be zero).
+
+The conditions tested by the ``if''
+statements are the arithmetic expressions contained within parentheses.
+
+If the expression is greater than zero
+the test is successful and the following statement is executed. Thus if for
+instance, ``fp'' had the value 001375,
+then
+
+\begin{verbatim}
+    fp != NULL
+\end{verbatim}
+
+\noindent is true, and as a term in an arithmetic
+expression, is accorded the value one.
+This value is greater than zero, and
+hence the statement
+
+\begin{verbatim}
+    return(fp);
+\end{verbatim}
+
+\noindent would be executed, to terminate further
+execution of ``getf'', and to return the
+value of ``fp'' to the calling procedure
+as the result of ``getf''.
+
+
+The expression
+
+\begin{verbatim}
+    rf < 0 || rf >= NOFILE
+\end{verbatim}
+
+
+\noindent is the logical disjunction (``or'') of
+the two simple relational expressions.
+
+An example of a ``goto'' statement and
+associated label will be noted.
+
+
+``fp'' is assigned a value, which is an
+{\bf address}, from the ``rf''-th element of
+the array of integers ``u\_ofile'', which
+is embedded in the structure ``u''.
+
+
+The procedure ``getf'' returns a value to
+its calling procedure. This is either
+the vale of ``fp'' (i.e. an address) or
+``NULL''.
+
+\sbs{Example 5}
+
+\begin{verbatim}
+  2113 wakeup (chan)
+       {
+         register struct proc *p;
+         register c, i;
+         c= chan;
+         p= &proc[0];
+         i= NPROC;
+         do {
+             if (p->p_wchan == c) {
+               setrun(p);
+             }
+             p++;
+         } while (--i);
+       }
+\end{verbatim}
+
+There are a number of similarities
+between this example and the previous
+one. We have a new concept however, an
+array of structures. To be just a
+little confusing, in this example it
+turns out that both the array and the
+structure are called ``proc'' (yes, ``C''
+allows this). They are declared on
+Sheet 03 in the following form:
+
+\begin{verbatim}
+  0358 struct proc
+       {
+         char p_stat;
+         ..........
+         int p_wchan;
+         ..........
+       } proc[NPROC];
+\end{verbatim}
+
+``p'' is a register variable of type
+pointer to a structure of type ``proc''.
+
+\begin{verbatim}
+    p = &proc[0];
+\end{verbatim}
+
+
+\noindent assigns to ``p'' the address of the first
+element of the array ``proc''. The
+operator ``\&'' in this context means ``the
+address of''.
+
+
+Note that if an array has n elements,
+the elements have subscripts 0, 1, .., (n-1).
+Also it is permissible to write
+the above statement more simply as
+
+\begin{verbatim}
+    p = proc;
+\end{verbatim}
+
+There are two statements in between the
+``do'' and the ``while''.
+The first of these could be rewritten
+more simply as
+
+\begin{verbatim}
+    if (p->p wchan == c) setrun (p);
+\end{verbatim}
+
+\noindent i.e. the brackets are superfluous in
+this case, and since ``C'' is a free form
+language, the arrangement of text
+between lines is not significant.
+
+
+\noindent The statement
+
+\begin{verbatim}
+    setrun (p);
+\end{verbatim}
+
+
+\noindent invokes the procedure ``setrun'' passing
+the value of ``p'' as a parameter (All
+parameters are passed by value.). The relation
+
+\begin{verbatim}
+    p->p_wchan == c
+\end{verbatim}
+
+
+\noindent tests the equality of the value of ``c''
+and the value of the element ``p\_wchan''
+of the structure pointed to by ``p''.
+Note that it would have been wrong to
+have written
+
+\begin{verbatim}
+    p.p_wchan == c
+\end{verbatim}
+
+\noindent because ``p'' is not the {\bf name} of a structure.
+
+The second statement, which cannot be
+combined with the first, increments ``p''
+by the size of the ``proc'' structure,
+whatever that is. (The compiler can
+figure it out.)
+
+In order to do this calculation
+correctly, the compiler needs to know
+the kind of structure pointed at. When
+this is not a consideration, you will
+notice that often in similar situations, ``p'' will be declared simply as
+
+\begin{verbatim}
+    register *p;
+\end{verbatim}
+
+\noindent because it was easier for the
+programmer, and the compiler does not insist.
+
+The latter part of this procedure could
+have been written equivalently but less
+efficiently as
+
+\begin{verbatim}
+      ............
+      i = 0;
+      do
+        if (proc[i].p_wchan == c)
+          setrun (&proc[i]);
+      while (++i < NPROC);
+\end{verbatim}
+
+\sbs{Example 6}
+
+\begin{verbatim}
+  5336 geterror (abp)
+       struct buf *abp;
+       {
+         register struct buf bp;
+         bp = abp;
+         if (bp->b flags & B_ERROR)
+           if ((u.u_error=bp->b_error)==0)
+             u.u_error = EIO;
+       }
+\end{verbatim}
+
+
+
+This procedure simply checks if there
+has been an error, and if the error
+indicator ``u.u\_error'' has not been set,
+sets it to a general error indication
+
+``B\_ERROR'' has the value 04 (see line
+4575) so that, with only one bit set,
+it can be used as mask to isolate bit
+number 2. The operator ``\&'' as used in
+
+\begin{verbatim}
+    bp->b_flags & B_ERROR
+\end{verbatim}
+
+\noindent is the bitwise logical conjunction
+(``and'') applied to arithmetic values.
+
+The above expression is greater than
+one if bit 2 of the element ``b\_flags''
+of the ``buf'' structure pointed to by
+``bp'', is set.
+
+Thus if there has been an error, the
+expression
+
+\begin{verbatim}
+    (u.u_error) = bp->b_error)
+\end{verbatim}
+
+\noindent is evaluated and compared with zero.
+Now this expression includes an assignment operator ``=''.
+The value of the expression is the value of ``u.u\_error''
+{\bf after} the value of ``bp-$>$b\_flags'' has
+been assigned to it.
+
+This use of an assignment as part of an
+expression is useful and quite common.
+
+
+\sbs{Example 7}
+
+\begin{verbatim}
+  3428 stime ()
+       {
+         if (suser()) {
+           time[0] = u.u_ar0[R0];
+           time[1] = u.u_ar0[R1];
+           wakeup (tout);
+         }
+       }
+\end{verbatim}
+
+In this example, you should note that
+the procedure ``suser'' returns a value
+which is used for the ``if'' test. The
+three statements whose execution
+depends on this value are enclosed in
+the brackets ``\{'' and ``\}''.
+
+Note that a call on a procedure with no
+parameters must still be written-with a
+set of empty parentheses, sic.
+
+\begin{verbatim}
+    suser ()
+\end{verbatim}
+
+\sbs{Example 8}
+
+``C'' provides a conditional expression.
+Thus if ``a'' and ``b'' are integer variables,
+
+\begin{verbatim}
+    (a > b ? a : b)
+\end{verbatim}
+
+\noindent is an expression whose value is that of
+the larger of ``a'' and ``b''.
+
+However this does not work if ``a'' and
+``b'' are to be regarded as unsigned
+integers. Hence there is a use for the
+procedure
+
+\begin{verbatim}
+  6326 max (a, b)
+       char *a, *b;
+       {
+         if (a > b)
+           return(a);
+         return(b);
+       }
+\end{verbatim}
+
+The trick here is that ``a'' and ``b'',
+having been declared as pointers to
+characters are treated for comparison
+purposes as unsigned integers.
+
+The body of the procedure could have
+been written as
+
+\begin{verbatim}
+    max (a, b)
+    char *a, *b;
+    {
+      if (a > b)
+        return(a);
+      else
+        return(b);
+    }
+\end{verbatim}
+
+\noindent but the nature of ``return'' is such that
+the ``else'' is not needed here!
+
+\sbs{Example 9}
+
+
+Here are two quickies which introduce
+some different and exotic looking
+expressions. First:
+
+\begin{verbatim}
+  7679 schar()
+       {
+         return *u.u_dirp++ & 0377);
+       }
+\end{verbatim}
+
+\noindent where the declaration
+
+\begin{verbatim}
+    char *u_dirp;
+\end{verbatim}
+
+\noindent is part of the declaration of the
+structure ``u''.
+
+``u.u\_dirp'' is a character pointer.
+Therefore the value of ``*u.u\_dirp++'' is
+a character. (Incrementation of the
+pointer occurs as a side effect.)
+
+When a character is loaded into a sixteen bit register, sign extension may
+occur. By ``and''ing the word with 0377
+any extraneous high order bits are
+eliminated. Thus the result returned
+is simply a character.
+
+Note that any integer which begins with
+a zero (e.g. 0377) is interpreted as an
+octal integer.
+
+The second example is:
+
+\begin{verbatim}
+  1771 nseg(n)
+       {
+         return ((n+127)>>7);
+       }
+\end{verbatim}
+
+The value returned is n divided by 128
+and rounded up to the next highest
+``integer''.
+
+
+
+Note the use of the right shift operator ``$>>$'' in preference to the division
+operator ``/''.
+
+\sbs{Example 10}
+
+Many of the points which have been
+introduced above are collected in the
+following procedure:
+
+\begin{verbatim}
+  2134 setrun (p)
+       {
+         register struct proc *rp;
+         rp = p;
+         rp->p_wchan = 0;
+         rp->p_stat = SRUN;
+         if (rp->p_pri < curpri)
+           runrun++;
+         if (runout != 0 &&
+             (rp->p_flag & SLOAD) == 0) {
+            runout = 0;
+            wakeup (&runout);
+         }
+       }
+\end{verbatim}
+
+
+\noindent Check your understanding of ``C'' by
+figuring out what this one does.
+
+There are two additional features you
+may need to know about:
+
+``\&\&'' is the logical conjunction (``and'')
+for relational expressions. (Cf. ``\verb+||+''
+introduced earlier.)
+
+
+The last statement contains the expression
+
+\begin{verbatim}
+    &runout
+\end{verbatim}
+
+which is syntactically an address variable but semantically just a unique bit
+pattern.
+
+This is an example of a device which is
+used throughout UNIX. The programmer
+needed a unique bit pattern for a particular purpose. The exact value did
+not matter as long as it was unique.
+An adequate solution to the problem was
+to use the address of a suitable global
+variable.
+
+\sbs{Example 11}
+
+\begin{verbatim}
+  4856 bawrite (bp)
+       struct buf *bp;
+       {
+         register struct buf *rbp;
+         rbp = bp;
+         rbp->b_flags =| B_ASYNC;
+         bwrite (rbp);
+       }
+\end{verbatim}
+
+The second last statement is interesting because it could have been written
+as
+
+\begin{verbatim}
+   rbp->b_flags = rbp->b_flags | B_ASYNC;
+\end{verbatim}
+
+In this statement the bit mask
+``B ASYNC'' is ``or''ed into
+``rbp-$>$b\_flags''. The symbol ``\verb+|+'' is the
+logical disjunction for arithmetic
+values.
+
+
+This is an example of a very useful
+construction in UNIX, which can save
+the programmer much labour. If ``O'' is
+any binary operator, then
+
+
+\begin{verbatim}
+    x = x O a;
+\end{verbatim}
+
+\noindent where ``a'' is an expression, can be
+rewritten more succinctly as
+
+\begin{verbatim}
+    x =O  a;
+\end{verbatim}
+
+A programmer using this construction
+has to be careful about the placement
+of blank characters, since
+
+\begin{verbatim}
+    x =+ 1;
+\end{verbatim}
+
+\noindent is different from
+
+\begin{verbatim}
+    x = +1;
+\end{verbatim}
+
+\noindent What is to be the meaning of
+
+\begin{verbatim}
+    x =+1;        ?
+\end{verbatim}
+
+\sbs{Example 12}
+
+\begin{verbatim}
+  6824 ufalloc ()
+       {
+         register i;
+         for (i=0; i<NOFILE; i++)
+           if (u.u_ofile[i]==NULL) {
+             u.u_ar0[R0] = i;
+             return (i);
+           }
+         u.u_error = EMFILE;
+         return (-1);
+       }
+\end{verbatim}
+
+This example introduces the ``for''
+statement, which has a very general
+syntax making it both powerful and compact.
+
+The structure of the ``for'' statement is
+adequately described on page 10 of the
+``C Tutorial'', and that description is
+not repeated here.
+
+The Algol equivalent of the above ``for''
+statement would be
+
+\begin{verbatim}
+   for i:=1 step 1 until NOFILE-1 do
+\end{verbatim}
+
+The power of the ``for'' statement in ``C''
+derives from the great freedom the programmer
+has in choosing what to include
+between the parentheses. Certainly
+there is nothing which restricts the
+calculations to integers, as the next
+example will demonstrate.
+
+
+\sbs{Example 13}
+
+\begin{verbatim}
+  3949 signal (tp, sig)
+       {
+         register struct proc *p;
+         for (p=proc;p<&proc[NPROC];p++)
+           if (p->p ttyp == tp)
+             psignal (p,sig);
+       }
+\end{verbatim}
+
+
+In this example of the ``for'' statement,
+the pointer variable ``p'' is stepped
+through each element of the array
+``proc'' in turn.
+
+Actually the original code had
+
+\begin{verbatim}
+   for (p=&proc[0];p<&proc[NPROC];p++)
+\end{verbatim}
+
+\noindent but it wouldn't fit on the line! As
+noted earlier, the use of ``proc'' as an
+alternative to the expression
+``\&proc[0]'' is acceptable in this context.
+
+This kind of ``for'' statement is almost
+a cliche in UNIX so you had better
+learn to recognise it. Read it as
+
+\medskip
+
+{\it for p = each process in turn}
+
+\medskip
+
+\noindent Note that ``proc[NPROC]'' is the address
+of the (NPROC+1)-th element of the
+array (which does not of course exist)
+i.e. it is the first location beyond
+the end of the array.
+
+
+At the risk of overkill we would point
+out again that whereas in the previous
+example
+
+\begin{verbatim}
+    i++;
+\end{verbatim}
+
+meant add one to the integer ``i'', here
+
+\begin{verbatim}
+    p++;
+\end{verbatim}
+
+means ``skip p to point to the next structure''.
+
+
+\sbs{Example 14}
+
+\begin{verbatim}
+  8870 lpwrite ()
+       {
+        register int c;
+        while ((c=cpass()) >= 0)
+          lpcanon(c);
+       }
+\end{verbatim}
+
+
+This is an example of the ``while''
+statement, which should be compared
+with the ``do ... while ...'' construction encountered earlier. (Cf. the
+``while'' and ``repeat'' statements of Pascal.)
+
+\noindent The meaning of the procedure is
+
+{\it Keep calling ``cpass'' while the
+result is positive, and pass the
+result as a parameter to a call on
+lpcanon.} 
+
+Note the redundant ``int'' in the
+declaration for ``c''. It isn't always
+omitted!
+
+
+\sbs{Example 15}
+
+The next example is abbreviated from
+the original:
+
+\begin{verbatim}
+  5861 seek ()
+       {
+         int n[2];
+         register *fp, t;
+         fp = getf (u.u_ar0[R0]);
+         ...........
+         t = u.u_arg[1];
+         switch (t) {
+
+         case 1:
+         case 4:
+           n[0] =+ fp->f_offset[0];
+           dpadd (n, fp->f_offset[1]);
+           break;
+
+         default:
+           n[0] =+ fp->f_inode->i size0 & 0377;
+           dpadd(n,fp->f_inode->i_size1);
+
+         case 0:
+         case 3:
+           ;
+         }
+         ...........
+       }
+\end{verbatim}
+
+Note the array declaration for the two
+word array ``n'', and the use of getf
+(which appeared in Example 4).
+
+The ``switch'' statement makes a multiway branch depending on the value of
+the expression in parentheses. The
+individual parts have ``case labels'':
+
+\bi
+\item If ``t'' is one or  four,  then  one
+set of actions is in order.
+
+\item If ``t'' is zero or  three,  nothing
+is to be done at all.
+
+\item If ``t'' is anything  else,  then  a
+set  of actions labelled ``default''
+is to be executed.
+\ei
+
+Note the use of ``break'' as an escape to
+the next statement after the end of the
+``switch''   statement.    Without    the
+``break'',  the normal execution sequence
+would be followed within  the  ``switch''
+statement.
+
+Thus  a  ``break''  would   normally   be
+required  at  the  end of the ``default''
+actions.  It has  been  omitted  safely
+here  because  the only remaining cases
+actually have null  actions  associated
+with them.
+
+The two non-trivial  pairs  of  actions
+represent  the  addition  of one 32 bit
+integer to another.  The later versions
+of the ``C'' compiler will support ``long''
+variables and make this  sort  of  code
+much easier to write (and read).
+
+
+Note also that in the expression
+
+\begin{verbatim}
+    fp->f_inode->i_size0
+\end{verbatim}
+
+\noindent there are two levels of indirection.
+
+\sbs{Example 16}
+
+\begin{verbatim}
+  6672 closei (ip, rw)
+       int *ip;
+       {
+         register *rip;
+         register dev, maj;
+         rip = ip;
+         dev = rip->i_addr[0];
+         maj = rip->i_addr[0].d major;
+         switch (rip->i_mode&IFMT) {
+
+         case IFCHR:
+           (*cdevsw[maj].d_close)(dev,rw);
+           break;
+         
+         case IFBLK:
+           (*bdevsw[maj].d_close)(dev,rw);
+         }
+         iput(rip);
+       }
+\end{verbatim}
+
+This example has a number of interesting features.
+
+The declaration for ``d\_major'' is
+
+\begin{verbatim}
+    struct {
+       char d_minor;
+       char d_major;
+    }
+\end{verbatim}
+
+
+\noindent so that the value assigned to ``maj''  is
+the   hiqh  order  byte  of  the  value
+assigned to ``dev''.
+
+
+In this example, the ``switch'' statement
+has  onlv  two  non-null  cases, and no
+``default''.  The actions for the  recognised cases, e.g.
+
+\begin{verbatim}
+     (*bdevsw[maj].d_close)(dev,rw);
+\end{verbatim}
+
+\noindent look formidable
+
+
+First it should be noted that this is a
+procedure  call,  with parameters ``dev''
+and ``rw''.
+
+Second  ``bdevsw''  (and  ``cdevsw'')   are
+arrays  of  structures, whose ``d\_close''
+element is a  pointer  to  a  function,
+i.e.
+
+\begin{verbatim}
+     bdevsw[maj]
+\end{verbatim}
+
+\noindent is the name of a structure, and
+
+\begin{verbatim}
+     bdevsw[maj].d_close
+\end{verbatim}
+
+
+\noindent is an element of that  structure  which
+happens  to be a pointer to a function,
+so that
+
+\begin{verbatim}
+     *bdevsw[maj].d_close
+\end{verbatim}
+
+\noindent is the name of a function.   The  first
+pair  of  parentheses  is  ``syntactical
+sugar'' to put the compiler in the right
+frame of mind!
+
+\sbs{Example 17}
+
+We offer the following as a final example:
+
+\begin{verbatim}
+  4043 psig ()
+       {
+         register n, p;
+         .........
+         switch (n) {
+
+         case SIGQIT:
+         case SIGINS:
+         case SIGTRC:
+         case SIGIOT:
+         case SIGEMT:
+         case SIGEPT:
+         case SIGBUS:
+         case SIGSEG:
+         case SIGSYS:
+             u.u arg[0] = n;
+             if (core())
+               n =+ 0200;
+         }
+         u.u_arg[0]=(u.u_ar0[R0]<<8) | n;
+         exit ();
+       }
+\end{verbatim}
+
+Here  the  ``switch''   selects certain
+values for ``n'' for which the one set of
+actions should be carried out.
+
+An alternative would have been to write
+a ``monster'' ``if'' statement such as
+
+\begin{verbatim}
+   if (n==SIGQUIT || n==SIGINS || ...
+              ... || n==SIGSYS)
+\end{verbatim}
+
+\noindent but that would  not  have  been  either
+transparent or efficient.
+
+Note the addition of an octal  constant
+to ``n'' and the method of composing a 16
+bit value from two eight bit values.

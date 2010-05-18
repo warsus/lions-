@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: psignal (3963)</title>
+
+<link href="sect0162.html" title="issig (3991)" rel="next" />
+<link href="sect0160.html" title="signal (3949)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0160.html" title="signal (3949)"><img alt="Previous: signal (3949)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0162.html" title="issig (3991)"><img alt="Next: issig (3991)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">psignal (3963)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000162">13.13 psignal (3963)</h2>
+<dl class="description">
+
+    <a href="../all.html#line3966" target="source" <dt>3966:</dt></a>
+    <dd><p>Reject the call if “sig” is too large (but why not if negative?? “kill” does not check this parameter before passing it to “psignal”. Admittedly the “kill” command could only result in a positive value for “sig” ...); </p></dd>
+
+    <a href="../all.html#line3971" target="source" <dt>3971:</dt></a>
+    <dd><p>If the current value of “p_sig” is NOT set to “SIGKILL”, then overwrite it (i.e. once a process has been “killed outright” there is no way to revive it.); </p></dd>
+
+    <a href="../all.html#line3973" target="source" <dt>3973:</dt></a>
+    <dd><p>Seems to be an error here ... for “p_stat” read “p_pri” ... improve the priority of the process if it is not too good; </p></dd>
+
+    <a href="../all.html#line3975" target="source" <dt>3975:</dt></a>
+    <dd><p>If the process is waiting for a non-kernel event i.e. it called “sleep” (2066) with a positive priority, then set it running again. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0160.html" title="signal (3949)"><img alt="Previous: signal (3949)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0162.html" title="issig (3991)"><img alt="Next: issig (3991)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

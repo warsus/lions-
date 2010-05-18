@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>bmap (6415)</TITLE>
+<META NAME="description" CONTENT="bmap (6415)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node239.html">
+<LINK REL="previous" HREF="node237.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node239.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3705"
+  HREF="node239.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3701"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3695"
+  HREF="node237.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3703"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3706"
+  HREF="node239.html">Leftovers</A>
+<B> Up:</B> <A NAME="tex2html3702"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3696"
+  HREF="node237.html">iomove (6364)</A>
+ &nbsp; <B>  <A NAME="tex2html3704"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002321000000000000000">
+bmap (6415)</A>
+</H2>
+
+<P>
+A general description of the function
+of ``bmap'' may be found on Page 2 of
+``FILE SYSTEM (V)'' of the UPM.
+
+<P>
+<DL>
+<DT><STRONG>6423:</STRONG></DT>
+<DD>Files of more than 2**15 blocks
+ (2**24 characters) are not supported;
+
+<P>
+</DD>
+<DT><STRONG>6427:</STRONG></DT>
+<DD>Start with the ``small'' file algorithm (file is not greater than
+ eight blocks i.e. 4096 characters);
+
+<P>
+</DD>
+<DT><STRONG>6431:</STRONG></DT>
+<DD>If the block number is 8 or more,
+the ``small'' file must converted
+into a large file. Note this is
+a side effect of ``bmap'', and
+should occur only when ``bmap'' has
+been called by ``writei'' (and
+never by ``readi'' - see line
+6245). Thus all files start life
+as ``small'' files and are never
+explicitly changed to ``large''
+files. Note also that the change
+is irreversible!
+
+<P>
+</DD>
+<DT><STRONG>6435:</STRONG></DT>
+<DD>``alloc'' (6956) allocates a block
+on device ``d'' from the device's
+free list. It then assigns a
+buffer to this block and returns
+a pointer to the buffer header;
+
+<P>
+</DD>
+<DT><STRONG>6438:</STRONG></DT>
+<DD>The eight buffer addresses in the
+``i_addr'' array for the ``inode''
+are copied into the buffer area
+and then erased;
+
+<P>
+</DD>
+<DT><STRONG>6442:</STRONG></DT>
+<DD>``i_addr[0]'' is set to point to
+ the buffer which is set up for a
+ ``delayed'' write;
+
+<P>
+</DD>
+<DT><STRONG>6448:</STRONG></DT>
+<DD>The file is still small. Get the
+next block if necessary;
+
+<P>
+</DD>
+<DT><STRONG>6456:</STRONG></DT>
+<DD>Note the setting of ``rablock'';
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3705"
+  HREF="node239.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3701"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3695"
+  HREF="node237.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3703"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3706"
+  HREF="node239.html">Leftovers</A>
+<B> Up:</B> <A NAME="tex2html3702"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3696"
+  HREF="node237.html">iomove (6364)</A>
+ &nbsp; <B>  <A NAME="tex2html3704"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

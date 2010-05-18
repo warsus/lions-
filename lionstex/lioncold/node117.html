@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>swtch revisited</TITLE>
+<META NAME="description" CONTENT="swtch revisited">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node118.html">
+<LINK REL="previous" HREF="node116.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node118.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2163"
+  HREF="node118.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2159"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2153"
+  HREF="node116.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2161"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2164"
+  HREF="node118.html">Critical Sections</A>
+<B> Up:</B> <A NAME="tex2html2160"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2154"
+  HREF="node116.html">expand (2268)</A>
+ &nbsp; <B>  <A NAME="tex2html2162"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001215000000000000000">
+swtch revisited</A>
+</H2>
+
+<P>
+What happens to the process when it is
+reactivated i.e. it becomes the ``arising'' process in ``swtch''?
+
+<P>
+<DL>
+<DT><STRONG>2228:</STRONG></DT>
+<DD>The stack and environment
+ pointers are restored from
+ ``u.u_rsav'' (Note that a pointer
+ to ``u'' is also a pointer to
+ ``u.u_rsav'' (0415) but ...
+
+<P>
+</DD>
+<DT><STRONG>2240:</STRONG></DT>
+<DD>If the core image was swapped
+ out e.g. by ``expand'' ...
+
+<P>
+</DD>
+<DT><STRONG>2242:</STRONG></DT>
+<DD>No reliance is placed on the
+ values of the stack and environment pointers, and they are reset
+</DD>
+</DL>
+
+<P>
+The question is if the values stored
+in ``u.u_ssav'' at line 2284 are the same
+as values stored in ``u.u_rsav'' at line
+2281, how did they get to be different?
+
+<P>
+Presumably this is what ``you are not
+expected to understand'' (line 2238) ...
+clearly ``xswap'' should be investigated
+... the trail finally ends at Chapter
+Fifteen ... in the meantime you may
+wish to investigate for yourself so
+that you may join the ``2238'' club that
+much sooner.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

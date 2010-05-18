@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>psignal (3963)</TITLE>
+<META NAME="description" CONTENT="psignal (3963)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node166.html">
+<LINK REL="previous" HREF="node164.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node166.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2782"
+  HREF="node166.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2778"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2772"
+  HREF="node164.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2780"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2783"
+  HREF="node166.html">issig (3991)</A>
+<B> Up:</B> <A NAME="tex2html2779"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2773"
+  HREF="node164.html">signal (3949)</A>
+ &nbsp; <B>  <A NAME="tex2html2781"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001813000000000000000">
+psignal (3963)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>3966:</STRONG></DT>
+<DD>Reject the call if ``sig'' is too
+ large (but why not if negative?? ``kill'' does not
+check this parameter before passing it to ``psignal''.
+Admittedly the ``kill'' command could only result in a
+positive value for ``sig'' ...);
+
+<P>
+</DD>
+<DT><STRONG>3971:</STRONG></DT>
+<DD>If the current value of ``p_sig''
+ is NOT set to ``SIGKILL'', then
+ overwrite it (i.e. once a process
+ has been ``killed outright'' there
+ is no way to revive it.);
+
+<P>
+</DD>
+<DT><STRONG>3973:</STRONG></DT>
+<DD>Seems to be an error here ... for
+ ``p_stat'' read ``p_pri'' ... improve
+ the priority of the process if it
+ is not too good;
+
+<P>
+</DD>
+<DT><STRONG>3975:</STRONG></DT>
+<DD>If the process is waiting for a
+ non-kernel event i.e. it called
+ ``sleep'' (2066) with a positive
+ priority, then set it running
+ again.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

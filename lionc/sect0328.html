@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Section One</title>
+
+<link href="sect0329.html" title="Section Two" rel="next" />
+<link href="sect0327.html" title="Suggested Exercises" rel="prev" />
+<link href="sect0327.html" title="Suggested Exercises" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0327.html" title="Suggested Exercises"><img alt="Previous: Suggested Exercises" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0327.html" title="Suggested Exercises"><img alt="Up: Suggested Exercises" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0329.html" title="Section Two"><img alt="Next: Section Two" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0327.html">Suggested Exercises</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Section One</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000329">26.1 Section One</h2>
+<dl class="description">
+
+    <dt>1.1</dt>
+    <dd><p>Devise changes to “malloc” (2528) to implement the Best Fit algorithm. </p></dd>
+
+    <dt>1.2</dt>
+    <dd><p>Rewrite the procedure “mfree” (2556) to render its function more easily discernible by the reader. </p></dd>
+
+    <dt>1.3</dt>
+    <dd><p>Investigate the adequacy of the sizes of the arrays “coremap” and “swapmap” (0203, 0204). How should “CMAPSIZ” and “SWAPSIZ” change when “NPROC” is increased? </p></dd>
+
+    <dt>1.4</dt>
+    <dd><p>Prove that “malloc” and “mfree” jointly solve the memory aliocation problem correctly. </p></dd>
+
+    <dt>1.5</dt>
+    <dd><p>By monitoring the contents of “coremap”, estimate the efficiency with which main memory is utilised. Estimate also the cost of compacting “in use areas” of main memory from time to time to reduce memory fragmentation. </p><p>Hence decide whether it would be worthwhile to extend the present memory allocation scheme to include memory compaction. </p></dd>
+
+    <dt>1.6</dt>
+    <dd><p>In setting the first six kernel page description registers, UNIX does not make use of all the hardware protection features that are available e.g. some pages which contain only pure text could be made read-only. Devise changes to the code to maximise the use of the available hardware protection. </p></dd>
+
+    <dt>1.7</dt>
+    <dd><p>Compile the program </p><pre>
+    char *init ``/etc/init'';
+    main ( ) {
+    execl (init, init, 0);
+    while (1);
+    }
+</pre><p>and compare the result with the contents of the array “icode” (1516). </p></dd>
+
+    <dt>1.8</dt>
+    <dd><p>Investigate the size required for kernel mode stack areas. Hence show that the 367 word area which is provided is adequate. </p></dd>
+
+    <dt>1.9</dt>
+    <dd><p>If main memory consists of several independent memory modules and one of these, not the last, is down, “main” will not include memory modules beyond the one which is down, in the list of available space in “coremap”. Devise some simple changes to “main” to handle this situation. what other parts of the system would also need revision? </p></dd>
+
+    <dt>1.10</dt>
+    <dd><p>Rewrite the routines “estabur” (1650) and “sureg” (1739) so that they will work as efficiently as possible on the PDP11/40. How often are these routines used in practice? Would it really be worthwhile trying to implement your improved versions? </p></dd>
+
+    <dt>1.11</dt>
+    <dd><p>Investigate the overheads involved in initiating a new process. Perform a series of measurements for a set of different sized programs under different conditions. </p></dd>
+
+    <dt>1.12</dt>
+    <dd><p>Evaluate the following scheme which is intended by Ken Thompson as the basis for a revised scheduling algorithm: </p><p>A number “p” is kept for each process, stored as “p_cpu”. “p” is incremented by one every clock tick that the process is found to be executing. “p” therefore accumulates the CPU usage. Every second, each value of “p” is replaced by four fifths of its value rounded to the nearest integer. This means that “o” has values which are bounded by zero and the solution of the equation <img src="images/img-0022.png" alt="$k = 0.8*(k + HZ)$" style="vertical-align:&images/img-0022.png-depth;&px;; 
+                                     width:&images/img-0022.png-width;&px;; 
+                                     height:&images/img-0022.png-height;&px;" class="math gen" /> i.e. 4*HZ. Hence if HZ is 50 or 60, and “p” is integerised, “p” can be stored in one byte. </p></dd>
+
+    <dt>1.13</dt>
+    <dd><p>The “proc” table is always searched via a direct linear search. As the table size is increased, the search overheads also increase. Survey the alternatives for improving the search mechanism, when “NPROC” is say 300. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0327.html" title="Suggested Exercises"><img alt="Previous: Suggested Exercises" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0327.html" title="Suggested Exercises"><img alt="Up: Suggested Exercises" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0329.html" title="Section Two"><img alt="Next: Section Two" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

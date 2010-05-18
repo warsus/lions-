@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>trap (2693)</TITLE>
+<META NAME="description" CONTENT="trap (2693)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node142.html">
+<LINK REL="previous" HREF="node140.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node142.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2471"
+  HREF="node142.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2467"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2461"
+  HREF="node140.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2469"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2472"
+  HREF="node142.html">Kernel Mode Traps</A>
+<B> Up:</B> <A NAME="tex2html2468"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2462"
+  HREF="node140.html">Traps and System Calls</A>
+ &nbsp; <B>  <A NAME="tex2html2470"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000171000000000000000">
+trap (2693)</A>
+</H2>
+
+<P>
+The way that this procedure is invoked
+was explored in Chapter Ten. The
+assembler ``trap'' routine carries out
+certain fundamental housekeeping tasks
+to set up the kernel stack, so that
+when this procedure is called, everything appears to be kosher.
+
+<P>
+The ``trap'' procedure can operate as
+though it had been called by another
+``C'' procedure in the normal way with
+seven parameters
+
+<P>
+<DIV ALIGN="CENTER">
+dev, sp, rl, nps, r0, pc, ps.
+
+</DIV>
+
+<P>
+(There is a special consideration which
+should be mentioned here in passing.
+Normally all parameters passed to ``C''
+procedures are passed by value. If the
+procedure subsequently changes the
+values of the parameters, this will not
+affect the calling procedure directly.
+
+<P>
+However if ``trap'' or the interrupt
+handlers change the values of their
+parameters, the new values will be
+picked up and reflected back when the
+``previous mode'' registers are
+restored.)
+
+<P>
+The value of ``dev'' was obtained by capturing the value of the processor
+status word immediately after the trap
+and masking out all but the lower five
+bits. Immediately before this, the processor status word had been set using
+the prototype contained in the
+appropriate vector location.
+
+<P>
+Thus if the second word of the vector
+location was ``br7+n;'' (e.g. line 0516)
+then the value of ``dev'' will be n.
+
+<P>
+<DL>
+<DT><STRONG>2698:</STRONG></DT>
+<DD>``savfp'' saves the floating point
+ registers (for the PDP11/40, this
+ is a no-op!);
+
+<P>
+</DD>
+<DT><STRONG>2700:</STRONG></DT>
+<DD>If the previous mode is ``user
+ mode', the value of ``dev'' is
+ modified by the addition of the
+ octal value 020 (2662);
+
+<P>
+</DD>
+<DT><STRONG>2701:</STRONG></DT>
+<DD>The stack address where r0 is
+ stored is noted in ``u.u_ar0'' for
+ future reference. (Subsequently
+the various register values can
+be referenced as ``u.u_ar0[Rn]''.);
+
+<P>
+</DD>
+<DT><STRONG>2702:</STRONG></DT>
+<DD>There is now a multi-way ``switch''
+ depending on the value of ``dev''.
+</DD>
+</DL>
+
+<P>
+At this point we can observe that UNIX
+divides traps into three classes,
+depending on the prior processor mode
+and the source of the trap:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>kernel mode;
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>user mode, not due to a ``trap''
+ instruction;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>user mode, due to a ``trap''
+ instruction.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2471"
+  HREF="node142.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2467"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2461"
+  HREF="node140.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2469"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2472"
+  HREF="node142.html">Kernel Mode Traps</A>
+<B> Up:</B> <A NAME="tex2html2468"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2462"
+  HREF="node140.html">Traps and System Calls</A>
+ &nbsp; <B>  <A NAME="tex2html2470"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

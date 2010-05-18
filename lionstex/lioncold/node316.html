@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>flushtty (8252)</TITLE>
+<META NAME="description" CONTENT="flushtty (8252)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node317.html">
+<LINK REL="previous" HREF="node315.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node317.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4711"
+  HREF="node317.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4707"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4701"
+  HREF="node315.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4709"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4712"
+  HREF="node317.html">wflushtty (8217)</A>
+<B> Up:</B> <A NAME="tex2html4708"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4702"
+  HREF="node315.html">The File ``tty.c''</A>
+ &nbsp; <B>  <A NAME="tex2html4710"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000301000000000000000">
+flushtty (8252)</A>
+</H2>
+
+<P>
+The purpose of this procedure is to
+``normalise'' the queries associated with
+a particular terminal. Its effect is
+to terminate transmission to the
+terminal forthwith and to throw away any
+accumulated input characters.
+
+<P>
+<DL>
+<DT><STRONG>8258:</STRONG></DT>
+<DD>Throw away everything in the
+``cooked'' input queue;
+
+<P>
+</DD>
+<DT><STRONG>8259:</STRONG></DT>
+<DD>ditto for the output queue;
+
+<P>
+</DD>
+<DT><STRONG>8260:</STRONG></DT>
+<DD>Wakeup any process waiting to
+extract a character from the
+``raw'' input queue;
+
+<P>
+</DD>
+<DT><STRONG>8261:</STRONG></DT>
+<DD>ditto for the output queue;
+
+<P>
+</DD>
+<DT><STRONG>8263:</STRONG></DT>
+<DD>Raise the processor priority to
+prevent an interrupt from the
+terminal while ...
+
+<P>
+</DD>
+<DT><STRONG>8264:</STRONG></DT>
+<DD>the ``raw'' input queue is flushed,
+
+<P>
+</DD>
+<DT><STRONG>8265:</STRONG></DT>
+<DD>the ``delimiter count'' is properly
+set to zero.
+</DD>
+</DL>
+
+<P>
+``flushtty'' is called by ``wflushtty''
+(see below) and ``ttyinput'' (8346, 8350)
+when either:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>the terminal is not operating in
+``raw'' mode and a ``quit'' or
+``delete'' character is received
+from the terminal; or
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>the ``raw'' input queue has grown
+unreasonably large (presumably
+because no process is reading
+input from the terminal);
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

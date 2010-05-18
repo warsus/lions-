@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Initial Conditions</TITLE>
+<META NAME="description" CONTENT="Initial Conditions">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node31.html">
+<LINK REL="previous" HREF="node29.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node31.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1051"
+  HREF="node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1047"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1041"
+  HREF="node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1049"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1052"
+  HREF="node31.html">Special Device Registers</A>
+<B> Up:</B> <A NAME="tex2html1048"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html1042"
+  HREF="node29.html">``i'' and ``d'' Spaces</A>
+ &nbsp; <B>  <A NAME="tex2html1050"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000513000000000000000">
+Initial Conditions</A>
+</H2>
+
+<P>
+When the system is first started after
+all the devices on the Unibus have been
+reinitialised, the memory management
+unit is disabled and the processor is
+in kernel mode.
+
+<P>
+Under these circumstances, virtual
+(byte) addresses in the range 0 to 56K
+are mapped into identically valued
+physical addresses. However the highest
+page of the virtual address space is
+mapped into the highest page of the
+physical address space, i.e. on the
+PDP11/40 or 11/45, addresses in the
+range
+
+<P>
+<DIV ALIGN="CENTER">
+0160000 to 0177777
+
+</DIV>
+
+<P>
+are mapped into the range
+
+<P>
+<DIV ALIGN="CENTER">
+0760000 to 0777777
+
+</DIV>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

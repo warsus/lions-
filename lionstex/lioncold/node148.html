@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>fork (3322)</TITLE>
+<META NAME="description" CONTENT="fork (3322)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node149.html">
+<LINK REL="previous" HREF="node147.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node149.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2555"
+  HREF="node149.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2551"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2545"
+  HREF="node147.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2553"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2556"
+  HREF="node149.html">sbreak (3354)</A>
+<B> Up:</B> <A NAME="tex2html2552"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2546"
+  HREF="node147.html">exec (3020)</A>
+ &nbsp; <B>  <A NAME="tex2html2554"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000178000000000000000">
+fork (3322)</A>
+</H2>
+
+<P>
+A call on ``exec'' is frequently preceded
+by a call on ``fork''. Most of the work
+for ``fork'' is done by ``newproc'' (1826),
+but before the latter is called, ``fork''
+makes an independent search for a slot
+in the ``proc'' array, and remembers the
+place as ``p2'' (3327).
+
+<P>
+``newproc'' also searches ``proc'' but
+independently. Presumably it always
+locates the same empty slot as ``fork'',
+since it does not report the value
+back. (Why is there no confusion on
+this point?)
+
+<P>
+<DL>
+<DT><STRONG>3335:</STRONG></DT>
+<DD>For the new process, ``fork''
+returns the value of the parent's
+process identification, and initialises various accounting
+parameters;
+
+<P>
+</DD>
+<DT><STRONG>3344:</STRONG></DT>
+<DD>For the parent process, ``fork''
+returns the value of the child's
+process identification, and <B>skips</B>
+the user mode program counter by
+one word.
+</DD>
+</DL>
+
+<P>
+Note that the values finally returned
+to a ``C'' program are slightly different
+from the above. Refer to the section
+FORK(II) of the UPM.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: link (5909)</title>
+
+<link href="sect0242.html" title="wdir (7477)" rel="next" />
+<link href="sect0240.html" title="Some Comments" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0240.html" title="Some Comments"><img alt="Previous: Some Comments" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0242.html" title="wdir (7477)"><img alt="Next: wdir (7477)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">link (5909)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000242">19.5 link (5909)</h2>
+<p>This procedure implements a system call which enters a new name for an existing file into the directory structure. Arguments to the procedure are the existing and the new names of the file; </p><dl class="description">
+
+    <a href="../all.html#line5914" target="source" <dt>5914:</dt></a>
+    <dd><p>Look up the existing file name; </p></dd>
+
+    <a href="../all.html#line5917" target="source" <dt>5917:</dt></a>
+    <dd><p>If the file already has 127 different names, quit in disgust; </p></dd>
+
+    <a href="../all.html#line5921" target="source" <dt>5921:</dt></a>
+    <dd><p>If the existing file turns out to be a directory, then only the super-user may rename it; </p></dd>
+
+    <a href="../all.html#line5926" target="source" <dt>5926:</dt></a>
+    <dd><p>Unlock the existing file “inode” This is locked when the first call on “namei” does an “iget” (7534, 7664). </p><p>Under what conditions would the failure to unlock the “inode” here be disastrous? The chances that the existing file would be a directory encountered in the search for the new name would seem slight, if not impossible. Most probably the relevant circumstance is where the system is attempting to recreate an alternative file name or alias, which <b class="bf">already</b> exists; </p></dd>
+
+    <a href="../all.html#line5927" target="source" <dt>5927:</dt></a>
+    <dd><p>Search the directory for the second name, with the intention of creating a new entry; </p></dd>
+
+    <a href="../all.html#line5930" target="source" <dt>5930:</dt></a>
+    <dd><p>There is an existing file with the second name; </p></dd>
+
+    <a href="../all.html#line5935" target="source" <dt>5935:</dt></a>
+    <dd><p>“u.u_pdir” is set as a side effect of the call on “namei” (5928). Check that the directory resides on the same device as the file; </p></dd>
+
+    <a href="../all.html#line5940" target="source" <dt>5940:</dt></a>
+    <dd><p>Write a new directory entry (see below); </p></dd>
+
+    <a href="../all.html#line5941" target="source" <dt>5941:</dt></a>
+    <dd><p>Increase the “link” count for the file. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0240.html" title="Some Comments"><img alt="Previous: Some Comments" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0242.html" title="wdir (7477)"><img alt="Next: wdir (7477)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

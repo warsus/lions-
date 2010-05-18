@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: iput (7344)</title>
+
+<link href="sect0228.html" title="Deletion of Files" rel="next" />
+<link href="sect0226.html" title="closef (6643)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0226.html" title="closef (6643)"><img alt="Previous: closef (6643)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0228.html" title="Deletion of Files"><img alt="Next: Deletion of Files" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">iput (7344)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000228">18.14 iput (7344)</h2>
+<p>“closei”, as its last action calls “iput”. This routine is in fact called from many places, whenever a connection to a core “inode” is to be severed and the reference count decremented. </p><dl class="description">
+
+    <a href="../all.html#line7350" target="source" <dt>7350:</dt></a>
+    <dd><p>If the reference count is one at this point, the “inode” is to be released. While this is happening, it should be locked. </p></dd>
+
+    <a href="../all.html#line7352" target="source" <dt>7352:</dt></a>
+    <dd><p>If the number of “links” to the file is zero (or less) the file is to be deallocated (see below); </p></dd>
+
+    <a href="../all.html#line7357" target="source" <dt>7357:</dt></a>
+    <dd><p>“iupdat” (7374) updates the accessed and update times as recorded on the disk “inode”; </p></dd>
+
+    <a href="../all.html#line7358" target="source" <dt>7358:</dt></a>
+    <dd><p>“prele” unlocks the “inode”. Why should it be called here as well as at line 7363? </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0226.html" title="closef (6643)"><img alt="Previous: closef (6643)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0228.html" title="Deletion of Files"><img alt="Next: Deletion of Files" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

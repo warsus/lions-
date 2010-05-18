@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Notes</TITLE>
+<META NAME="description" CONTENT="Notes">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node279.html">
+<LINK REL="previous" HREF="node277.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node279.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4220"
+  HREF="node279.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4216"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4210"
+  HREF="node277.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4218"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4221"
+  HREF="node279.html">lpoutput (8986)</A>
+<B> Up:</B> <A NAME="tex2html4217"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4211"
+  HREF="node277.html">lpopen (8850)</A>
+ &nbsp; <B>  <A NAME="tex2html4219"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000273000000000000000">
+Notes</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>``lp11'' is a seven word structure
+defined beginning at line 8829. The
+first three words of the structure in
+fact constitute a structure of type
+``clist'' (7908). Only the first element
+is explicitly manipulated in ``lp.c''.
+The next two are used implicitly by
+``putc'' and ``getc''.
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>``flag'' is the fourth element of
+the structure. The remaining three elements are
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">``mcc''</TD>
+<TD ALIGN="LEFT">maximum character count</TD>
+</TR>
+<TR><TD ALIGN="LEFT">``ccc''</TD>
+<TD ALIGN="LEFT">current character count</TD>
+</TR>
+<TR><TD ALIGN="LEFT">``mlc''</TD>
+<TD ALIGN="LEFT">maximum line count</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<P><P>
+<BR>
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>The line printer controller has
+two registers on the UNIBUS.
+</DD>
+</DL>
+
+<P>
+<FONT SIZE="+1"><B>Line Printer Status Register (``lpsr'')</B></FONT>
+
+<P>
+<DL>
+<DT><STRONG>bit 15</STRONG></DT>
+<DD>Set when an error condition
+exists (see above);
+
+<P>
+</DD>
+<DT><STRONG>bit 7 ``DONE''</STRONG></DT>
+<DD>Set when the printer
+controller is ready to receive the next character;
+
+<P>
+</DD>
+<DT><STRONG>bit 6 ``IENABLE''</STRONG></DT>
+<DD>Set to allow ``DONE'' or ``Error''
+to cause an interrupt;
+</DD>
+</DL>
+
+<P>
+<FONT SIZE="+1"><B>Line Printer Data Buffer Register (``lpbuf'')</B></FONT>
+
+<P>
+Bits 6 through 0 hold the seven bit
+ASCII code for the character to be
+printed. This register is ``write only''.
+
+<P>
+<DL>
+<DT><STRONG>8858:</STRONG></DT>
+<DD>Set the ``enable interrupts'' bit
+in the line printer status register;
+
+<P>
+</DD>
+<DT><STRONG>8859:</STRONG></DT>
+<DD>Send a ``form feed'' (or ``new
+page'') character to the printer,
+to ensure that characters which
+follow will start on a new page.
+(As already noted above, at this
+stage we are ignoring ``lpcanon''
+and assuming line 8859 to be simply ``lpoutput (FORM)''. ``lpcanon''
+does things like suppressing all
+but the first ``form feed'' in a
+string of ``form feed''s and ``new
+line''s, to avoid wasting paper.);
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4220"
+  HREF="node279.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4216"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4210"
+  HREF="node277.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4218"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4221"
+  HREF="node279.html">lpoutput (8986)</A>
+<B> Up:</B> <A NAME="tex2html4217"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4211"
+  HREF="node277.html">lpopen (8850)</A>
+ &nbsp; <B>  <A NAME="tex2html4219"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

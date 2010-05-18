@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Device Registers</TITLE>
+<META NAME="description" CONTENT="Device Registers">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node307.html">
+<LINK REL="previous" HREF="node305.html">
+<LINK REL="up" HREF="node297.html">
+<LINK REL="next" HREF="node307.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4578"
+  HREF="node307.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4574"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4568"
+  HREF="node305.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4576"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4579"
+  HREF="node307.html">UNIBUS Addresses</A>
+<B> Up:</B> <A NAME="tex2html4575"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4569"
+  HREF="node305.html">The DL11/KL11 Terminal Device</A>
+ &nbsp; <B>  <A NAME="tex2html4577"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000299000000000000000">
+Device Registers</A>
+</H2>
+
+<P>
+Each DL11/RL11 unit has a group of four
+registers occupying four consecutive
+words on the UNIBS. UNIX maps a
+structure of type ``klregs'' (8016) onto
+each register group.
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT" COLSPAN=2><B>Receiver Status Register (klrcsr)</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">bit 7</TD>
+<TD ALIGN="LEFT"><B>Receiver Done.</B> (A character has</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">been transferred into the</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Receiver Data Buffer Register.);</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">bit 6</TD>
+<TD ALIGN="LEFT"><B>Receiver Interrupt Enable.</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">(When set, an interrupt is</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">caused every time bit 7 is set.);</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">bit 1</TD>
+<TD ALIGN="LEFT"><B>Data terminal ready;</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">bit 0</TD>
+<TD ALIGN="LEFT"><B>Reader Enable. Write only.</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">(When set, bit 7 is cleared.).</TD>
+</TR>
+</TABLE>
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT" COLSPAN=2><B>Receiver Data Buffer Register (klrbuf)</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">bit 15</TD>
+<TD ALIGN="LEFT">Error indication, when set.</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">bits 7-0</TD>
+<TD ALIGN="LEFT">Received character, Read</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">only.</TD>
+</TR>
+</TABLE>
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT" COLSPAN=2><B>Transmitter Status Register (kltcsr)</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">bit 7</TD>
+<TD ALIGN="LEFT"><B>Transmitter ready.</B> This is</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">cleared when data is loaded</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">into the Transmitter Data</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Buffer, and is set when the</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">latter is ready to receive</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">another chatacter;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">bit 6</TD>
+<TD ALIGN="LEFT"><B>Transmitter Interrupt Enable.</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">(when set, causes an</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">interrupt to be generated</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">whenever bit 7 is set.)</TD>
+</TR>
+</TABLE>
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT" COLSPAN=2><B>Transmitter Data Buffer Register (kltbuf)</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">bits 7-0</TD>
+<TD ALIGN="LEFT">Transmitted data. Write only.</TD>
+</TR>
+</TABLE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4578"
+  HREF="node307.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4574"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4568"
+  HREF="node305.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4576"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4579"
+  HREF="node307.html">UNIBUS Addresses</A>
+<B> Up:</B> <A NAME="tex2html4575"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4569"
+  HREF="node305.html">The DL11/KL11 Terminal Device</A>
+ &nbsp; <B>  <A NAME="tex2html4577"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

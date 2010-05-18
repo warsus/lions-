@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>klopen (8023)</TITLE>
+<META NAME="description" CONTENT="klopen (8023)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node312.html">
+<LINK REL="previous" HREF="node310.html">
+<LINK REL="up" HREF="node297.html">
+<LINK REL="next" HREF="node312.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4638"
+  HREF="node312.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4634"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4628"
+  HREF="node310.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4636"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4639"
+  HREF="node312.html">klclose (8055)</A>
+<B> Up:</B> <A NAME="tex2html4635"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4629"
+  HREF="node310.html">Source Code</A>
+ &nbsp; <B>  <A NAME="tex2html4637"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002914000000000000000">
+klopen (8023)</A>
+</H2>
+
+<P>
+This procedure is called to ``open'' a
+terminal as a character special file.
+This call is usually made by the program ``/etc/init'' for each terminal
+which is to be active in the system.
+Since child processes inherit the open
+files of their parents, it is not usually necessary for other processes to
+``open'' the device again. It will be
+noted that the there is no attempt to
+stop two unrelated processes having the
+terminal as an open file simultaneously.
+
+<P>
+<DL>
+<DT><STRONG>8026:</STRONG></DT>
+<DD>Check the minor device number;
+
+<P>
+</DD>
+<DT><STRONG>8030:</STRONG></DT>
+<DD>Locate the appropriate ``tty''
+structure;
+
+<P>
+</DD>
+<DT><STRONG>8031:</STRONG></DT>
+<DD>If the process opening the file
+has no associated controlling
+terminal designate the current
+terminal for this role. (Note
+that the reference stored is the
+address of a ``tty'' structure.):
+
+<P>
+</DD>
+<DT><STRONG>8033:</STRONG></DT>
+<DD>Store the terminal device number
+in the ``tty'' structure
+
+<P>
+</DD>
+<DT><STRONG>8039:</STRONG></DT>
+<DD>Calculate the address of the
+appropriate set of device registers for the
+terminal and store
+
+<P>
+</DD>
+<DT><STRONG>8045:</STRONG></DT>
+<DD>If the terminal is not already
+``open'', do some initialisation of
+the ``tty'' structure ..
+
+<P>
+</DD>
+<DT><STRONG>8046:</STRONG></DT>
+<DD>``t_state'' is set to show the file
+is ``open'', so that the next three
+lines will not be executed if the
+file is opened a second time,
+possibly undoing the effect of a
+``stty'' system call:
+
+<P>
+``t_state'' is also set to show
+``CARR_ON'' (``carrier on''). This is
+a software flag which shows that
+the terminal is logically
+enabled, regardless of the true
+hardware status of the terminal.
+If ``CARR_ON'' is reset for a terminal, the system <B>should</B> ignore
+all input from the terminal.
+
+<P>
+(This does not seem to be
+entirely true, and this point
+will be taken up again later.);
+
+<P>
+</DD>
+<DT><STRONG>8047:</STRONG></DT>
+<DD>The standard terminal is assumed
+to be unable to interpret horizontal tabs, to support only the
+64 character ASCII subset, to run
+in full duplex mode and to
+require both ``carriage return''
+and ``line feed'' characters to
+provide normal ``new line'' processing. (Could this be a Model
+33 teletype?);
+
+<P>
+</DD>
+<DT><STRONG>8048:</STRONG></DT>
+<DD>The ``erase'' and ``kill'' characters
+are set according to the UNIX
+convention;
+
+<P>
+</DD>
+<DT><STRONG>8051:</STRONG></DT>
+<DD>The Receiver Control Status
+register is initialised with the
+pattern ``0103'' so that the terminal is made ready, reading is
+enabled and receiver interrupts
+are enabled;
+
+<P>
+</DD>
+<DT><STRONG>8052:</STRONG></DT>
+<DD>The Transmitter Control Status
+register is initialised so that
+an interrupt will be generated
+whenever the interface is ready
+to receive another character.
+</DD>
+</DL>
+
+<P>
+Note that the ``open'' routine does not
+distinguish between the cases where the
+file is opened for reading only, or
+writing only, or for both reading and
+writing.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4638"
+  HREF="node312.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4634"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4628"
+  HREF="node310.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4636"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4639"
+  HREF="node312.html">klclose (8055)</A>
+<B> Up:</B> <A NAME="tex2html4635"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4629"
+  HREF="node310.html">Source Code</A>
+ &nbsp; <B>  <A NAME="tex2html4637"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

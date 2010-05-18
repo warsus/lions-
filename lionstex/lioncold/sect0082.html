@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: swtch (2178)</title>
+
+<link href="sect0083.html" title="main revisited" rel="next" />
+<link href="sect0081.html" title="sleep (2066)" rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0081.html" title="sleep (2066)"><img alt="Previous: sleep (2066)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0083.html" title="main revisited"><img alt="Next: main revisited" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">swtch (2178)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000083">6.9 swtch (2178)</h2>
+<dl class="description">
+
+    <dt>2184:</dt>
+    <dd><p>“p” is a static variable (2180), which means that its value is initialised to zero (1566) and is preserved between calls. For the very first call on “swtch”, “p” is set to point to “proc[0]”; </p></dd>
+
+    <dt>2189:</dt>
+    <dd><p>“savu” is called to save the stack pointer and the environment pointer for the current process in “u.u_rsav”; </p></dd>
+
+    <dt>2193:</dt>
+    <dd><p>“retu” is called to reset the kernel address register for segment #6 to the value passed as an argument (this causes a change in the current process!), and to reset the stack and environment pointers to values appropriate to the revised current process, whose execution is about to be resumed. </p></dd>
+
+</dl><p>The combination of successive calls on “savu” and “retu” at this point constitutes a so-called “coroutine jump” (Cf. “exchange jump” on the Cyber or “Load PSW” on the /360 or “Move Stack” on the B6700). </p><p>This time however the coroutine jump is from process 0 to process 0 (not very interesting!). </p><dl class="description">
+
+    <dt>2201:</dt>
+    <dd><p>The set of processes is searched to find the process whose state is “SRUN” and which is loaded and for which “p_pri” is a maximum. </p><p>The search is successful and process #1 is found. (N.B. The state of process #0 was just changed from “SRUN” to “SSLEEP” in “sleep” so it no longer satisfies the search criterion); </p></dd>
+
+    <dt>2218:</dt>
+    <dd><p>Since “p” is not “NULL”, the idle loop is not entered; </p></dd>
+
+    <dt>2228:</dt>
+    <dd><p>“retu” (0740) causes a coroutine jump to process #1 which becomes the current process. </p><p>What is process #1 ? It is a copy of process #0, made at a previous stage of the latter’s existence. </p></dd>
+
+</dl><p>This call on “retu” was not preceded by a call on “savu” because the necessary information has in fact been saved already. (Where?) </p><dl class="description">
+
+    <dt>2229:</dt>
+    <dd><p>“sureg” is a routine 1738) which copies into the user mode segmentation registers, the values appropriate for the current process. These have been stored earlier in the arrays “u.u_uisa” and “u.u _uisd”. </p></dd>
+
+</dl><p>The very first call on “sureg” copies zeroes and serves no real purpose. </p><dl class="description">
+
+    <dt>2240:</dt>
+    <dd><p>The “SSWAP” flag is not set, so that this enigmatic (2239) section can be ignored for now; </p></dd>
+
+    <dt>2247:</dt>
+    <dd><p>Finally “swtch” returns with a value of “1”. But where does the “return” return to? <b class="bf">Not to “sleep” !</b> </p></dd>
+
+</dl><p>The “return” follows values set by the stack pointer and the environment pointer. These (just before the return) have values equal to those in force when the most recent “savu(u.u_rsav)” was performed. </p><p>Now process #1, which is only just starting has never performed a “savu”, but values were stored in “u.u_rsav” before the copy of process #0 was made by “newproc”, which had been called from “main”. </p><p>Thus in this case, <i class="it">the return from “swtch” is made to “main”, with a value of one.</i> (Look over this again, to be sure you understand!) </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0081.html" title="sleep (2066)"><img alt="Previous: sleep (2066)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0083.html" title="main revisited"><img alt="Next: main revisited" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

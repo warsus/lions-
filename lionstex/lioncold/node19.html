@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Processor Status Word</TITLE>
+<META NAME="description" CONTENT="Processor Status Word">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html919"
+  HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html915"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html909"
+  HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html917"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html920"
+  HREF="node20.html">General Registers</A>
+<B> Up:</B> <A NAME="tex2html916"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html910"
+  HREF="node18.html">The Processor</A>
+ &nbsp; <B>  <A NAME="tex2html918"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00052000000000000000">
+Processor Status Word</A>
+</H2>
+
+<P>
+This sixteen bit register has subfields
+which are interpreted as follows:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><B>bits</B></TD>
+<TD ALIGN="LEFT"><B>description</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">14,15</TD>
+<TD ALIGN="LEFT">current mode (00 = kernel;)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">12,13</TD>
+<TD ALIGN="LEFT">previous mode (11 = user;)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5,6,7</TD>
+<TD ALIGN="LEFT">processor priority (range 0..7)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">4</TD>
+<TD ALIGN="LEFT">trap bit</TD>
+</TR>
+<TR><TD ALIGN="LEFT">3</TD>
+<TD ALIGN="LEFT">N, set if the previous</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">result was negative</TD>
+</TR>
+<TR><TD ALIGN="LEFT">2</TD>
+<TD ALIGN="LEFT">Z, set if the previous</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">result was zero</TD>
+</TR>
+<TR><TD ALIGN="LEFT">1</TD>
+<TD ALIGN="LEFT">V, set if the previous</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">result gave an overflow</TD>
+</TR>
+<TR><TD ALIGN="LEFT">0</TD>
+<TD ALIGN="LEFT">C, set if the previous</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">operation gave a carry</TD>
+</TR>
+</TABLE>
+
+<P>
+The processor can operate in two different
+modes: kernel and user. Kernel
+mode is the more privileged of the two
+and is reserved by the operating system
+for its own use. The choice of mode
+determines:
+
+<P>
+
+<UL>
+<LI>The set of memory management segmentation
+registers which is used
+to translate program virtual
+addresses to physical addresses;
+
+<P>
+</LI>
+<LI>The actual register used as r6, the
+``stack pointer'';
+
+<P>
+</LI>
+<LI>Whether certain instructions such as
+``halt'' will be obeyed.
+</LI>
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html919"
+  HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html915"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html909"
+  HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html917"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html920"
+  HREF="node20.html">General Registers</A>
+<B> Up:</B> <A NAME="tex2html916"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html910"
+  HREF="node18.html">The Processor</A>
+ &nbsp; <B>  <A NAME="tex2html918"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

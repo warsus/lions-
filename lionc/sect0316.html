@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: canon (8274)</title>
+
+<link href="sect0317.html" title="Notes" rel="next" />
+<link href="sect0315.html" title="ttread (8535)" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0315.html" title="ttread (8535)"><img alt="Previous: ttread (8535)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0317.html" title="Notes"><img alt="Next: Notes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">canon (8274)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000317">25.5 canon (8274)</h2>
+<p>This procedure is called by “ttread” (8543) to transfer characters from the “raw” input queue to the “cooked” input queue (after processing “erase” and “kill” characters and, in the case of upper case only terminals, processing “escaped” characters, i.e. characters preceded by the character ‘<tt>\</tt>’). “canon” returns a non-zero value if the “cooked” input queue is no longer empty. </p><dl class="description">
+
+    <a href="../all.html#line8284" target="source" <dt>8284:</dt></a>
+    <dd><p>If the number of delimiters in the “raw” input queue is zero then ... </p></dd>
+
+    <a href="../all.html#line8285" target="source" <dt>8285:</dt></a>
+    <dd><p>if the terminal is logically inactive, then just return; </p></dd>
+
+    <a href="../all.html#line8286" target="source" <dt>8286:</dt></a>
+    <dd><p>otherwise go to “sleep”. </p></dd>
+
+</dl><p>Note that delimiters in this context are characters of all ones (octal value is 377) and are inserted by “ttyinput” (8358). </p><dl class="description">
+
+    <a href="../all.html#line8291" target="source" <dt>8291:</dt></a>
+    <dd><p>Set “bp” to point to the third character of the work array, “canonb”; </p></dd>
+
+    <a href="../all.html#line8292" target="source" <dt>8292:</dt></a>
+    <dd><p>Begin a loop (extending to line 8318) which removes one character from the “raw” queue per cycle; </p></dd>
+
+    <a href="../all.html#line8293" target="source" <dt>8293:</dt></a>
+    <dd><p>If the character is a delimiter, reduce the delimiter count by one and exit the loop i.e. go to line 8319; </p></dd>
+
+    <a href="../all.html#line8297" target="source" <dt>8297:</dt></a>
+    <dd><p>If the terminal is not operating in “raw” mode ... </p></dd>
+
+    <a href="../all.html#line8298" target="source" <dt>8298:</dt></a>
+    <dd><p>If the previous character (note the “bp[–1]” notation!) was not a backslash, ‘<tt>\</tt>’, execute the code from line 8299 to 8307, otherwise execute the code beginning at line 8309. </p></dd>
+
+</dl><p><b class="bf">Previous character was not a backslash</b> </p><dl class="description">
+
+    <a href="../all.html#line8299" target="source" <dt>8299:</dt></a>
+    <dd><p>If the characters is an “erase” and ... </p></dd>
+
+    <a href="../all.html#line8300" target="source" <dt>8300:</dt></a>
+    <dd><p>if there is at least one charater to erase, backup the pointer “bp”; </p></dd>
+
+    <a href="../all.html#line8302" target="source" <dt>8302:</dt></a>
+    <dd><p>Start on the next cycle of the loop beginning at line 8292; </p></dd>
+
+    <a href="../all.html#line8304" target="source" <dt>8304:</dt></a>
+    <dd><p>If the character is a “kill”, throw away all the characters accumulated for the current line, by going back to line 8290; </p></dd>
+
+    <a href="../all.html#line8306" target="source" <dt>8306:</dt></a>
+    <dd><p>If the character is an “eot” (004) (usually generated at the terminal as “control-D”), ignore it (and do not put it inot “canonb”) and start on the next cycle; </p><p>(If this character occurs at the beginning of a line, then subsequently “ttread” (8544) will find no characters in the “cooked” input queue i.e. it will read a zero length record, which then leads to the program receiving the normal “end of file” indication.) </p></dd>
+
+</dl><p><b class="bf">Previous character was a backslash</b> </p><dl class="description">
+
+    <a href="../all.html#line8309" target="source" <dt>8309:</dt></a>
+    <dd><p>If “maptab[c]” is non-zero, and either<br />“maptab[c] == c” or the terminal is upper case only, then ... </p></dd>
+
+    <a href="../all.html#line8310" target="source" <dt>8310:</dt></a>
+    <dd><p>if the last character but one was <b class="bf">not</b> a backslash (‘<tt>\</tt>’), then replace “c” by “maptab[c]” and back up “bp” (so that the backslash will be erased). </p></dd>
+
+</dl><p><b class="bf">Character ready</b> </p><dl class="description">
+
+    <a href="../all.html#line8315" target="source" <dt>8315:</dt></a>
+    <dd><p>Move “c” into the next character in “canonb”, and if this array is now full, leave the loop. </p></dd>
+
+</dl><p><b class="bf">Line completed</b> </p><dl class="description">
+
+    <a href="../all.html#line8319" target="source" <dt>8319:</dt></a>
+    <dd><p>At this point, an input line has been assembled in the array “canonb”; </p></dd>
+
+    <a href="../all.html#line8322" target="source" <dt>8322:</dt></a>
+    <dd><p>Shift the contents of “canonb” into the “cooked” input queue, and return a “successful” result. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0315.html" title="ttread (8535)"><img alt="Previous: ttread (8535)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0317.html" title="Notes"><img alt="Next: Notes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

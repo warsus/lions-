@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Race Conditions</title>
+
+<link href="sect0188.html" title="Reentrancy" rel="next" />
+<link href="sect0186.html" title="swap (5196)" rel="prev" />
+<link href="sect0180.html" title="Introduction to Basic I/O" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0186.html" title="swap (5196)"><img alt="Previous: swap (5196)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0188.html" title="Reentrancy"><img alt="Next: Reentrancy" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0180.html">Introduction to Basic I/O</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Race Conditions</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000188">15.7 Race Conditions</h2>
+<p>The code for “swap” has a number of interesting features. In particular it displays in microcosm the problems of race conditions when several processes are running together. </p><p>Consider the following scenario: </p><p>No swapping is taking place when process A initiates a swapping operation. Denoting “swbuf.b_flags” by simply “flags”, we have initially </p><pre>
+  flags == null
+</pre><p>Process A is not delayed at line 5204, initiates its i/o operation and goes to sleep at line 5215. We now have </p><pre>
+  flags == B_BUSY | B_PHYS | rdflg
+</pre><p>which was set at line 5206. </p><p>Suppose now while the i/o operation is proceeding, process B also initiates a swapping operation. It too begins to execute “swap”, but finds the “B_BUSY” flag set, so it sets the “B_WANTED” flag (5203) and goes to sleep also (5204). We now have </p><pre>
+  flags == B_BUSY | B_PHYS | rdflg | B_WANTED
+</pre><p>At last the i/o operation completes. Process C takes the interrupt and executes “rkintr”, which calls (5471) “iodone” which calls (5301) “wakeup” to awaken process A and process B. “iodone” also sets the “B_DONE” flag and resets the “B_WANTED” flag so that </p><pre>
+  flags == B_BUSY | B_PHYS | rdflg | B_DONE
+</pre><p>What happens next depends on the order in which process A and process B are reactivated. (Since they both have the same priority, “PSWP”, it is a toss-up which goes first.) </p><dl class="description">
+
+    <dt>Case (a):</dt>
+    <dd><p>Process A goes first. “B_DONE” is set so no more sleeping is needed. “B_WANTED” is reset so there is no one to “wakeup”. Process A tidies up (5219), and leaves “swap” with </p><pre>
+  flags == B_PHYS | rdflg | B_DONE
+</pre><p>Process B now runs and is able to initiate its i/o operation without further delay. </p></dd>
+
+    <dt>Case (b):</dt>
+    <dd><p>Process B goes first. It finds “B_BUSY” on, so it turns the “B_WANTED” flag back on, and goes to sleep again, leaving </p><pre>
+  flags == B_BUSY | B_PHYS | rdflg |
+           B_DONE | B_WANTED
+</pre><p>Process A starts again as in Case (a), but this time finds “B_WANTED” on so it must call “wakeup” (5217) in addition to its other chores. Process B finally wakes again and the whole chain completes. </p></dd>
+
+</dl><p>Case (b) is obviously much less efficient than case (a). It would seem that a simple change to line 5215 to read </p><pre>
+  sleep (fp, PSWP-1);
+</pre><p>would cost virtually nothing and ensure that Case (b) never occurred! </p><p>The necessity for the raising of processor priority at various points should be studied: for example if line 5201 was omitted and if process B had just completed line 5203 when the “i/o complete” interrupt occurred for Process A’s operation, then “iodone” would turn off “B_WANTED” and perform “wakeup” before process B went to sleep ... forever! A bad scene. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0186.html" title="swap (5196)"><img alt="Previous: swap (5196)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0188.html" title="Reentrancy"><img alt="Next: Reentrancy" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

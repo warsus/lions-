@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>call (0776)</TITLE>
+<META NAME="description" CONTENT="call (0776)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node135.html">
+<LINK REL="previous" HREF="node133.html">
+<LINK REL="up" HREF="node130.html">
+<LINK REL="next" HREF="node135.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2378"
+  HREF="node135.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2374"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2368"
+  HREF="node133.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2376"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2379"
+  HREF="node135.html">User Program Traps</A>
+<B> Up:</B> <A NAME="tex2html2375"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2369"
+  HREF="node133.html">Interrupts</A>
+ &nbsp; <B>  <A NAME="tex2html2377"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000154000000000000000">
+call (0776)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>0777:</STRONG></DT>
+<DD>Copy PS onto the stack;
+
+<P>
+</DD>
+<DT><STRONG>0779:</STRONG></DT>
+<DD>Copy r1 onto the stack;
+
+<P>
+</DD>
+<DT><STRONG>0780:</STRONG></DT>
+<DD>Copy the stack pointer for the
+ previous address space onto the
+ stack. (This is only significant
+ if the previous mode was user
+ mode).
+
+<P>
+This represents a <B>special case</B> of
+the ``mfpi'' instruction. See the
+``PDP11 Processor Handbook'', page
+6-20;
+
+<P>
+</DD>
+<DT><STRONG>781:</STRONG></DT>
+<DD>Copy the copy of PS onto the
+ stack and mask out all but the
+ lower five bits. The resulting
+ value designates the cause of the
+ interrupt (or trap). The original value of the PS had to be
+ captured quickly;
+
+<P>
+</DD>
+<DT><STRONG>0783:</STRONG></DT>
+<DD>Test if the previous mode is kernel or user.
+
+<P>
+<B>If the previous mode is kernel
+mode</B> the branch is taken (0784).
+PS is changed to show the previous
+mode as user mode (0798);
+
+<P>
+</DD>
+<DT><STRONG>0799:</STRONG></DT>
+<DD>The specialised interrupt handling routine pointed to by r0 is
+entered. (In this case it is the
+routine ``clock'', which is discussed in detail in the next
+chapter.)
+
+<P>
+</DD>
+<DT><STRONG>0800:</STRONG></DT>
+<DD>When the ``clock'' routine (or some
+other interrupt handler) returns,
+the top two words of the stack
+are deleted. These are the
+masked copy of the PS and the
+copy of the stack pointer;
+
+<P>
+</DD>
+<DT><STRONG>0802:</STRONG></DT>
+<DD>r1 is restored from the stack;
+
+<P>
+</DD>
+<DT><STRONG>0803:</STRONG></DT>
+<DD>Delete the copy of PS from the
+ stack;
+
+<P>
+</DD>
+<DT><STRONG>0804:</STRONG></DT>
+<DD>Restore the value of r0 from the
+ stack;
+
+<P>
+</DD>
+<DT><STRONG>0805:</STRONG></DT>
+<DD>Finally the ``rtt'' instruction
+returns to the ``kernel'' mode
+routine that was interrupted;
+
+<P>
+<B>If the previous mode was user mode</B>
+it is not certain that the interrupted routine will be resumed
+immediately;
+
+<P>
+</DD>
+<DT><STRONG>0788:</STRONG></DT>
+<DD>After the specialised interrupt
+routine (in this case ``clock'')
+returns, a check (``runrun <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$"> 0'')
+is made to see if any process of
+higher priority than the current
+process is ready to run. If the
+decision is to allow the current
+process to continue, then it is
+important that it be not interrupted as
+it restores its registers prior to the ``return from
+interrupt'' instruction. Hence
+before the test, the processor
+priority is raised to seven (line
+0787), thus ensuring that no more
+interrupts occur until user mode
+is resumed. (Another interrupt
+may occur immediately thereafter,
+however.)
+</DD>
+</DL>
+
+<P>
+If ``runrun <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$"> 0'', then another, higher
+priority, process is waiting. The processor priority is reset to 0, allowing
+any pending interrupt to be taken. A
+call is then made to ``swtch'' (2178), to
+allow the higher priority process to
+proceed. When the process returns from
+``swtch'', the program loops back to
+repeat the test.
+
+<P>
+The above discussion obviously extends
+to all interrupts. The only part which
+relates specifically to the clock
+interrupt is the call on the specialised routine ``clock''.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2378"
+  HREF="node135.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2374"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2368"
+  HREF="node133.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2376"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2379"
+  HREF="node135.html">User Program Traps</A>
+<B> Up:</B> <A NAME="tex2html2375"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2369"
+  HREF="node133.html">Interrupts</A>
+ &nbsp; <B>  <A NAME="tex2html2377"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

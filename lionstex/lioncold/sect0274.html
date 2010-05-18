@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Notes</title>
+
+<link href="sect0275.html" title="lpoutput (8986)" rel="next" />
+<link href="sect0273.html" title="lpopen (8850)" rel="prev" />
+<link href="sect0271.html" title="Character Oriented Special Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0273.html" title="lpopen (8850)"><img alt="Previous: lpopen (8850)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0275.html" title="lpoutput (8986)"><img alt="Next: lpoutput (8986)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0271.html">Character Oriented Special Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Notes</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000275">22.3 Notes</h2>
+<dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>“lp11” is a seven word structure defined beginning at line 8829. The first three words of the structure in fact constitute a structure of type “clist” (7908). Only the first element is explicitly manipulated in “lp.c”. The next two are used implicitly by “putc” and “getc”. </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>“flag” is the fourth element of the structure. The remaining three elements are </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>“mcc” </p></td>
+
+    
+    <td style="text-align:left"><p> maximum character count</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>“ccc” </p></td>
+
+    
+    <td style="text-align:left"><p> current character count</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>“mlc” </p></td>
+
+    
+    <td style="text-align:left"><p> maximum line count</p></td>
+
+</tr>
+</table></dd>
+
+    <dt>(c)</dt>
+    <dd><p>The line printer controller has two registers on the UNIBUS. </p></dd>
+
+</dl><p><big class="large"><b class="bf">Line Printer Status Register (“lpsr”)</b></big> </p><dl class="description">
+
+    <dt>bit 15</dt>
+    <dd><p>Set when an error condition exists (see above); </p></dd>
+
+    <dt>bit 7 “DONE”</dt>
+    <dd><p>Set when the printer controller is ready to receive the next character; </p></dd>
+
+    <dt>bit 6 “IENABLE”</dt>
+    <dd><p>Set to allow “DONE” or “Error” to cause an interrupt; </p></dd>
+
+</dl><p><big class="large"><b class="bf">Line Printer Data Buffer Register (“lpbuf”)</b></big> </p><p>Bits 6 through 0 hold the seven bit ASCII code for the character to be printed. This register is “write only”. </p><dl class="description">
+
+    <dt>8858:</dt>
+    <dd><p>Set the “enable interrupts” bit in the line printer status register; </p></dd>
+
+    <dt>8859:</dt>
+    <dd><p>Send a “form feed” (or “new page”) character to the printer, to ensure that characters which follow will start on a new page. (As already noted above, at this stage we are ignoring “lpcanon” and assuming line 8859 to be simply “lpoutput (FORM)”. “lpcanon” does things like suppressing all but the first “form feed” in a string of “form feed”s and “new line”s, to avoid wasting paper.); </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0273.html" title="lpopen (8850)"><img alt="Previous: lpopen (8850)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0275.html" title="lpoutput (8986)"><img alt="Next: lpoutput (8986)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Interrupt Vector</TITLE>
+<META NAME="description" CONTENT="The Interrupt Vector">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node123.html">
+<LINK REL="previous" HREF="node121.html">
+<LINK REL="up" HREF="node120.html">
+<LINK REL="next" HREF="node123.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2230"
+  HREF="node123.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2226"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2220"
+  HREF="node121.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2228"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2231"
+  HREF="node123.html">Interrupt Handlers</A>
+<B> Up:</B> <A NAME="tex2html2227"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2221"
+  HREF="node121.html">Hardware Interrupts</A>
+ &nbsp; <B>  <A NAME="tex2html2229"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000142000000000000000">
+The Interrupt Vector</A>
+</H2>
+
+<P>
+For our sample system, the representative peripheral devices chosen are
+listed in Table 9.1, along with their
+conventional hardware defined vector
+locations and priorities.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>vector</B></TD>
+<TD ALIGN="LEFT"><B>peripheral</B></TD>
+<TD ALIGN="CENTER"><B>interrupt</B></TD>
+<TD ALIGN="CENTER"><B>process</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><B>location</B></TD>
+<TD ALIGN="LEFT"><B>device</B></TD>
+<TD ALIGN="CENTER"><B>priority</B></TD>
+<TD ALIGN="CENTER"><B>priority</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">060</TD>
+<TD ALIGN="LEFT">teletype input</TD>
+<TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">4</TD>
+</TR>
+<TR><TD ALIGN="LEFT">064</TD>
+<TD ALIGN="LEFT">teletype output</TD>
+<TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">4</TD>
+</TR>
+<TR><TD ALIGN="LEFT">070</TD>
+<TD ALIGN="LEFT">paper tape input</TD>
+<TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">4</TD>
+</TR>
+<TR><TD ALIGN="LEFT">074</TD>
+<TD ALIGN="LEFT">paper tape output</TD>
+<TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">4</TD>
+</TR>
+<TR><TD ALIGN="LEFT">100</TD>
+<TD ALIGN="LEFT">line clock</TD>
+<TD ALIGN="CENTER">6</TD>
+<TD ALIGN="CENTER">6</TD>
+</TR>
+<TR><TD ALIGN="LEFT">104</TD>
+<TD ALIGN="LEFT">programmable</TD>
+<TD ALIGN="CENTER">6</TD>
+<TD ALIGN="CENTER">6</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">clock</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">200</TD>
+<TD ALIGN="LEFT">line printer</TD>
+<TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">4</TD>
+</TR>
+<TR><TD ALIGN="LEFT">220</TD>
+<TD ALIGN="LEFT">RK disk drive</TD>
+<TD ALIGN="CENTER">5</TD>
+<TD ALIGN="CENTER">5</TD>
+</TR>
+</TABLE>
+</DIV>
+<P><P>
+<BR>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<DIV ALIGN="CENTER"><B>Table 9.1 Interrupt Vector Locations and Priorities</B>
+
+</DIV>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

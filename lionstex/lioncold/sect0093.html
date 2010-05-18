@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: An Example</title>
+
+<link href="sect0094.html" title="Setting the Segmentation Registers" rel="next" />
+<link href="sect0092.html" title="User Mode Execution" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0092.html" title="User Mode Execution"><img alt="Previous: User Mode Execution" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0094.html" title="Setting the Segmentation Registers"><img alt="Next: Setting the Segmentation Registers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">An Example</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000094">7.9 An Example</h2>
+<p>Consider a program on the PDP11/40 which uses 1.7 pages of text, 3.3 pages of data, and 0.7 pages of stack area. (Our use of fractions in this example is admittedly a little crude.) The set of virtual addresses would be divided as shown in the following diagram: </p><center><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p>  888 s1 </p></td>
+
+    
+    <td style="text-align:left"><p> Stack </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>888 s1 </p></td>
+
+    
+    <td style="text-align:left"><p> area </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 888 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 777 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>777 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>777 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 666 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>666 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 666 d4 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 555 d3 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>555 d3 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>555 d3 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 444 d2 </p></td>
+
+    
+    <td style="text-align:left"><p> Data </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>444 d2 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>444 d2 </p></td>
+
+    
+    <td style="text-align:left"><p> area </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 333 d1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>333 d1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>333 d1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 222 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 222 t2 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>222 t2 </p></td>
+
+    
+    <td style="text-align:left"><p> Text </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 111 t1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>111 t1 </p></td>
+
+    
+    <td style="text-align:left"><p> area </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-bottom-style:solid; border-bottom-width:1px; border-left:1px solid black; border-right:1px solid black; text-align:left; border-bottom-color:black"><p>111 t1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr>
+</table><p>Virtual Address Space </p></center><p>Two whole pages in the virtual address space must be allocated to the text segment, even though the physical area required is only 1.7 pages. </p><center><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p>   222 t2 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>222 t2 </p></td>
+
+    
+    <td style="text-align:left"><p> Text </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 111 t1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>111 t1 </p></td>
+
+    
+    <td style="text-align:left"><p> area </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-bottom-style:solid; border-bottom-width:1px; border-left:1px solid black; border-right:1px solid black; text-align:left; border-bottom-color:black"><p>111 t1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr>
+</table><p>Text Segment </p></center><p>The data and stack areas require the dedication of four and one pages of virtual address space, and 3.3 and 0.7 pages of physical memory respectively. </p><p>The whole data segment requires four and one eighth pages of physical memory. The extra eighth is for the “per process data area” which corresponds (from time to time) to the seventh kernel address page. </p><center><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p>  888 s1 </p></td>
+
+    
+    <td style="text-align:left"><p> Stack </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>888 s1 </p></td>
+
+    
+    <td style="text-align:left"><p> area </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 666 d4 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 555 d3 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>555 d3 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>555 d3 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 444 d2 </p></td>
+
+    
+    <td style="text-align:left"><p> Data </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>444 d2 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>444 d2 </p></td>
+
+    
+    <td style="text-align:left"><p> area </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; text-align:left"><p> 333 d1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>333 d1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left; border-right:1px solid black; border-left:1px solid black"><p>333 d1 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-bottom-style:solid; border-bottom-width:1px; border-left:1px solid black; border-right:1px solid black; border-top-color:black; border-top-width:1px; border-bottom-color:black; text-align:right" colspan="1"><p> ppda </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr>
+</table><p>Data Segment </p></center><p>Note the order of the components of the data segment, and that there is no embedded unused space. </p><p>The user mode segmentation need to be set to reflect the values in the following table, where “t”, “d” denote the block numbers of beginning of the text and data segments respectively: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Page</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Address</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Size</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Comment</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>1 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> t+0 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> 1.0 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> read only </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>2 </p></td>
+
+    
+    <td style="text-align:left"><p> t+128 </p></td>
+
+    
+    <td style="text-align:left"><p> 0.7 </p></td>
+
+    
+    <td style="text-align:left"><p> read only </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>3 </p></td>
+
+    
+    <td style="text-align:left"><p> d+16 </p></td>
+
+    
+    <td style="text-align:left"><p> 1.0 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>4 </p></td>
+
+    
+    <td style="text-align:left"><p> d+144 </p></td>
+
+    
+    <td style="text-align:left"><p> 1.0 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5 </p></td>
+
+    
+    <td style="text-align:left"><p> d+272 </p></td>
+
+    
+    <td style="text-align:left"><p> 1.0 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>6 </p></td>
+
+    
+    <td style="text-align:left"><p> d+400 </p></td>
+
+    
+    <td style="text-align:left"><p> 0.3 </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>7 </p></td>
+
+    
+    <td style="text-align:left"><p> ? </p></td>
+
+    
+    <td style="text-align:left"><p> 0.0 </p></td>
+
+    
+    <td style="text-align:left"><p> not used </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>8 </p></td>
+
+    
+    <td style="text-align:left"><p> d+400 </p></td>
+
+    
+    <td style="text-align:left"><p> 0.7 </p></td>
+
+    
+    <td style="text-align:left"><p> grows downward </p></td>
+
+</tr>
+</table><p>Note the setting of the eighth address register. The address prototypes stored in the array “u.u_uisa” are obtained by setting “t” and “d” to zero. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0092.html" title="User Mode Execution"><img alt="Previous: User Mode Execution" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0094.html" title="Setting the Segmentation Registers"><img alt="Next: Setting the Segmentation Registers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

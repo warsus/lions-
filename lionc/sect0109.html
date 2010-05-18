@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: sleep (2066)</title>
+
+<link href="sect0110.html" title="wakeup (2113)" rel="next" />
+<link href="sect0108.html" title="setpri (2156)" rel="prev" />
+<link href="sect0098.html" title="Process Management" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0108.html" title="setpri (2156)"><img alt="Previous: setpri (2156)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0110.html" title="wakeup (2113)"><img alt="Next: wakeup (2113)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0098.html">Process Management</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">sleep (2066)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000110">8.11 sleep (2066)</h2>
+<p>This procedure is called (from nearly 30 different places in the code) when a kernel process chooses to suspend itself. There are two parameters: </p><ul class="itemize">
+<li><p>the reason for sleeping; </p></li><li><p>a priority with which the process will run after being awakened. </p></li>
+</ul><p>If this priority is negative the process cannot be aroused from its sleep by the arrival of a “signal”. “signals” are discussed in Chapter Thirteen. </p><dl class="description">
+
+    <a href="../all.html#line2070" target="source" <dt>2070:</dt></a>
+    <dd><p>The current processor status is saved to preserve the incoming processor priority and previous mode information; </p></dd>
+
+    <a href="../all.html#line2072" target="source" <dt>2072:</dt></a>
+    <dd><p>If the priority is non-negative, a test is made for “waiting signals”; </p></dd>
+
+    <a href="../all.html#line2075" target="source" <dt>2075:</dt></a>
+    <dd><p>A small critical section begins here, wherein the process status is changed and the parameters are stored in generally accessible locations (viz. within the array “proc”). </p><p>This code is critical because the same information fields may be interrogated and changed by “wakeup” (2113) which is frequently called by interrupt handlers; </p></dd>
+
+    <a href="../all.html#line2080" target="source" <dt>2080:</dt></a>
+    <dd><p>When “runin” is non-zero, the scheduler (process #0) is waiting to swap another process into main memory; </p></dd>
+
+    <a href="../all.html#line2084" target="source" <dt>2084:</dt></a>
+    <dd><p>The call on “swtch” represents a delay of unknown extent during which a relevant external event may have occurred. Hence the second test on “issig” (2085) is not irrelevant; </p></dd>
+
+    <a href="../all.html#line2087" target="source" <dt>2087:</dt></a>
+    <dd><p>For negative priority “sleeps”, where the process typically waits for freeing of system table space, the occurrence of a “signal” is not allowed to deflect the course of the activity. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0108.html" title="setpri (2156)"><img alt="Previous: setpri (2156)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0110.html" title="wakeup (2113)"><img alt="Next: wakeup (2113)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

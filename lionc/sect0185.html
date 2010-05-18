@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: System Generation</title>
+
+<link href="sect0186.html" title="swap (5196)" rel="next" />
+<link href="sect0184.html" title="The File ‘conf.c’" rel="prev" />
+<link href="sect0180.html" title="Introduction to Basic I/O" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0184.html" title="The File ‘conf.c’"><img alt="Previous: The File ‘conf.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0186.html" title="swap (5196)"><img alt="Next: swap (5196)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0180.html">Introduction to Basic I/O</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">System Generation</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000186">15.5 System Generation</h2>
+<p>System generation at a UNIX installation consists mainly of: </p><ul class="itemize">
+<li><p>running “mkconf” with appropriate input; </p></li><li><p>recompiling the output files (created as “c.c” and “l.s”); </p></li><li><p>reloading the system with the revised object files. </p></li>
+</ul><p>This process only takes a few minutes (not the several hours of some other operating systems). Note that “bdevsw” and “cdevsw” are defined differently in “conf.c” from elsewhere, namely as a one dimensional array of pointers to functions which return integer values. This quietly ignores the fact that, for example, “rktab” is not a function, and relies on the linking program not to enquire too closely into the nature of the work which it is performing. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0184.html" title="The File ‘conf.c’"><img alt="Previous: The File ‘conf.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0186.html" title="swap (5196)"><img alt="Next: swap (5196)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

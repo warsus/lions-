@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>tysty (8577)</TITLE>
+<META NAME="description" CONTENT="tysty (8577)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node305.html">
+<LINK REL="previous" HREF="node303.html">
+<LINK REL="up" HREF="node297.html">
+<LINK REL="next" HREF="node305.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4554"
+  HREF="node305.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4550"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4544"
+  HREF="node303.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4552"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4555"
+  HREF="node305.html">The DL11/KL11 Terminal Device</A>
+<B> Up:</B> <A NAME="tex2html4551"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4545"
+  HREF="node303.html">klsgtty (8090)</A>
+ &nbsp; <B>  <A NAME="tex2html4553"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000297000000000000000">
+tysty (8577)</A>
+</H2>
+
+<P>
+A call originating from ``stty'' will
+have a second parameter of zero.
+
+<P>
+<DL>
+<DT><STRONG>8589:</STRONG></DT>
+<DD>Empty all the queues associated
+with the terminal forthwith. They
+quite likely contain nonsense;
+
+<P>
+</DD>
+<DT><STRONG>8591:</STRONG></DT>
+<DD>Reset the speed information (useful in the
+case of a DH11 interface, but of little interest for
+the present selection of code);
+
+<P>
+Reset the ``erase'' character and
+the ``kill'' character. (``kill''
+here denotes ``throw away the
+current input line''.) Note that
+if these characters are changed
+away from their normal values of
+``#'' and ``@'' respectively, no
+corresponding changes are made to
+``maptab''. Nor should they!),
+
+<P>
+</DD>
+<DT><STRONG>8593:</STRONG></DT>
+<DD>Reset the ``flags'' defining some
+relevant terminal characteristics
+(see Sheet 79):
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><B>flag</B></TD>
+<TD ALIGN="LEFT"><B>bit</B></TD>
+<TD ALIGN="LEFT"><B>if set ...</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">XTABS</TD>
+<TD ALIGN="LEFT">1</TD>
+<TD ALIGN="LEFT">the terminal will not interpret</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">horizontal tab characters</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">correctly;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">LCASE</TD>
+<TD ALIGN="LEFT">2</TD>
+<TD ALIGN="LEFT">the terminal supports only the</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">64 character ASCII subset;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">ECHO</TD>
+<TD ALIGN="LEFT">3</TD>
+<TD ALIGN="LEFT">the terminal is operating in</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">full duplex mode, and input</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">characters must be echoed</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">back;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">CRMOD</TD>
+<TD ALIGN="LEFT">4</TD>
+<TD ALIGN="LEFT">upon input, a ``carriage</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">return'' is replaced by a</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">``line feed''; upon output, a</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">``line feed'' is replaced by a</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">``carriage return'' and a ``line</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">feed'';</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">RAW</TD>
+<TD ALIGN="LEFT">5</TD>
+<TD ALIGN="LEFT">input characters are to be</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">sent to the program exactly</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">as received, without ``erase''</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">or``kill'' processing, or</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">adjustment for backslash</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">characters.</TD>
+</TR>
+</TABLE>
+
+<P>
+In addition, the following bits are
+interrogated by ``ttyoutput'' (8373) in
+choosing the delay which should ensue
+after the character indicated is sent,
+before sending the next character:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">8,9</TD>
+<TD ALIGN="LEFT">line feed;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">10,11</TD>
+<TD ALIGN="LEFT">horizontal tab;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">12,13</TD>
+<TD ALIGN="LEFT">carriage return;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">14</TD>
+<TD ALIGN="LEFT">vertical tab or form feed.</TD>
+</TR>
+</TABLE>
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4554"
+  HREF="node305.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4550"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4544"
+  HREF="node303.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4552"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4555"
+  HREF="node305.html">The DL11/KL11 Terminal Device</A>
+<B> Up:</B> <A NAME="tex2html4551"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4545"
+  HREF="node303.html">klsgtty (8090)</A>
+ &nbsp; <B>  <A NAME="tex2html4553"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

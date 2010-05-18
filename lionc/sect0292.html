@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: partab (7947)</title>
+
+<link href="sect0293.html" title="Interactive Terminals" rel="next" />
+<link href="sect0291.html" title="maptab (8117)" rel="prev" />
+<link href="sect0283.html" title="Character Handling" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0291.html" title="maptab (8117)"><img alt="Previous: maptab (8117)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Next: Interactive Terminals" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0283.html">Character Handling</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">partab (7947)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000293">23.9 partab (7947)</h2>
+<p>This array consists of 256 characters, like “maptab”. Unfortunately the initialisation of “partab” was omitted from the UNIX Operating System Source Code booklet. It is certainly needed, and so is given now: </p><pre>
+  char partab [] {
+
+0001,0201,0201,0001,0201,0001,0001,0201,
+0202,0004,0003,0205,0005,0206,0201,0001,
+0201,0001,0001,0201,0001,0201,0201,0001,
+0001,0201,0201,0001,0201,0001,0001,0201,
+0200 0000,0000,0200,0000,0200,0200,0000,
+0000 0200,0200 0000,0200,0000,0000,0200,
+0000,0200,0200 0000,0200,0000,0000,0200,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0000,0200,0200,0000,0200,0000,0000,0200,
+0000,0200,0200,0000,0200,0000,0000,0200,
+0200 0000,0000 0200,0000,0200,0200,0000,
+0000 0200,0200 0000,0200,0000,0000,0200,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0000,0200,0200,0000,0200,0000,0000,0201
+   };
+</pre><p>Each element of “partab” is an eight bit character, which, with the use of appropriate bitmasks (0200 and 0177), can be interpreted as a two part structure: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>bit 7 </p></td>
+
+    
+    <td style="text-align:left"><p> parity bit;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bits 3-5 </p></td>
+
+    
+    <td style="text-align:left"><p> not used. Always zero;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bits 0-2 </p></td>
+
+    
+    <td style="text-align:left"><p> code number.</p></td>
+
+</tr>
+</table><p>The parity bit is appended to the seven bit ASCII code when a character is transmitted by the computer, to form an eight bit code with even parity. </p><p>The code number is used by “ttyoutput” (8426) to classify the character into one of seven categories for determining the delay which should ensue before the transmission of the next character. (This is particularly important for mechanical printers which require time for the carriage to return from the end of a line, etc.)  </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0291.html" title="maptab (8117)"><img alt="Previous: maptab (8117)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Next: Interactive Terminals" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: lpstart (8967)</title>
+
+<link href="sect0277.html" title="lpinit(8976)" rel="next" />
+<link href="sect0275.html" title="lpoutput (8986)" rel="prev" />
+<link href="sect0271.html" title="Character Oriented Special Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0275.html" title="lpoutput (8986)"><img alt="Previous: lpoutput (8986)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0277.html" title="lpinit(8976)"><img alt="Next: lpinit(8976)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0271.html">Character Oriented Special Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">lpstart (8967)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000277">22.5 lpstart (8967)</h2>
+<p>While the line printer is ready, and while there are still characters stored away in the “safe place”, keep sending characters to the printer controller. </p><p>The presumption is that while the controller is building up a set of characters for a complete line, the “DONE” bit will reset faster than the CP can feed characters to the controller. </p><p>However once a print cycle has been initiated, the “DONE” bit will not be reset again for a period of the order of 100 milliseconds (depending on the speed of the printer). </p><p>Note that during this series of data transfers, interrupts will be inhiblted and so “lpint” will not be getting into the act whenever the “DONE” bit is set, except possibly once at the very end when the processor priority is reduced again. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0275.html" title="lpoutput (8986)"><img alt="Previous: lpoutput (8986)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0277.html" title="lpinit(8976)"><img alt="Next: lpinit(8976)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

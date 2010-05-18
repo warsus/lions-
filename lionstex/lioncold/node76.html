@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Included Files</TITLE>
+<META NAME="description" CONTENT="Included Files">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node75.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node77.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1636"
+  HREF="node77.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1632"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1628"
+  HREF="node75.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1634"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1637"
+  HREF="node77.html">Getting Started</A>
+<B> Up:</B> <A NAME="tex2html1633"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1629"
+  HREF="node75.html">prdev (2433), deverror (2447)</A>
+ &nbsp; <B>  <A NAME="tex2html1635"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000912000000000000000">
+Included Files</A>
+</H2>
+
+<P>
+It will be noted that whereas the file
+``malloc.c'' contains no request to
+include other files, requests to
+include four separate files are
+included at the beginning of ``prf.c''.
+
+<P>
+(The observant reader will note that
+these files are presumed to reside one
+level higher in the file hierarchy than
+``prf.c'' itself.)
+
+<P>
+The statement on line 2304 is to be
+understood as if it were replaced by
+the entire contents of the file
+``param.h''. This then supplies definitions for the identifiers ``SW'', ``KL''
+and ``integ'' which occur in ``putchar''.
+
+<P>
+We noted earlier that declarations for
+``KL'', ``SW'' and ``integ'' occurred on
+lines 0165, 0166 and 0175 respectively,
+but this would have been meaningless,
+if the file ``param.h'' had not been
+``included'' in ``prf.c''.
+
+<P>
+The files ``buf.h'' and ``conf.h'' have
+been included to provide declarations
+for ``d_major'', ``d_minor'', ``b_dev'' and
+``b_blkno'', which are used in ``prdev''
+and ``deverror''.
+
+<P>
+The reason for the inclusion of the
+fourth file, ``seg.h'', is a little
+harder to find. In fact it is not
+necessary as the code stands, and the
+author owes his readers an apology. In
+editing the source code, it seemed like
+a good idea to move the declaration for
+``integ'' from ``seg.h'' to ``param.h''.
+Q.E.D.
+
+<P>
+Note that the variable ``panicstr''
+(2328) is also global but since it is
+not referenced outside ``prf.c'', its
+declaration has not been placed in any
+``.h'' file.
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1636"
+  HREF="node77.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1632"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1628"
+  HREF="node75.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1634"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1637"
+  HREF="node77.html">Getting Started</A>
+<B> Up:</B> <A NAME="tex2html1633"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1629"
+  HREF="node75.html">prdev (2433), deverror (2447)</A>
+ &nbsp; <B>  <A NAME="tex2html1635"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

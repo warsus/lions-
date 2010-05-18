@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>openl (5804)</TITLE>
+<META NAME="description" CONTENT="openl (5804)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node227.html">
+<LINK REL="previous" HREF="node225.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node227.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3561"
+  HREF="node227.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3557"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3551"
+  HREF="node225.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3559"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3562"
+  HREF="node227.html">open (5763)</A>
+<B> Up:</B> <A NAME="tex2html3558"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3552"
+  HREF="node225.html">creat (5781)</A>
+ &nbsp; <B>  <A NAME="tex2html3560"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000239000000000000000">
+openl (5804)</A>
+</H2>
+
+<P>
+This procedure is called by ``open''
+(5774) and ``creat'' (5793, 5795), passing values of the third parameter,
+``trf'', of 0, 2 and 1 respectively. The
+value 2 represents the case where no
+file of the desired name already
+exists.
+
+<P>
+<DL>
+<DT><STRONG>5812:</STRONG></DT>
+<DD>The second parameter, ``mode'', can
+ take the values 01 (``FREAD''), 02
+(``FWRITE'') or 03 (``FREAD <code>|</code> FWRITE'')
+when ``trf'' is 0, but only 02 otherwise;
+
+<P>
+Whete a file of the desired name
+already exists, check the access
+permissions for the desired
+mode(s) of activity via calls on
+``access'' (6746), which may set
+``u.u_error'' as a side-effect;
+
+<P>
+</DD>
+<DT><STRONG>5824:</STRONG></DT>
+<DD>If the file is being ``created'',
+ eliminate its previous contents
+ via a call on ``itrunc'' (7414).
+ The code here could be improved
+ by changing the test to ``(trf ==
+ 1)''. Verify that this would be
+ so.
+
+<P>
+</DD>
+<DT><STRONG>5826:</STRONG></DT>
+<DD>``prele'' (7882) is used to
+ ``unlock'' ``inodes''. Where, you
+ may ask, did the ``inode'' get
+ ``locked'', and why?
+
+<P>
+</DD>
+<DT><STRONG>5827:</STRONG></DT>
+<DD>Note that ``falloc'' (6847) calls
+ ``ufalloc'' (6824) as the first
+ thing it does;
+
+<P>
+</DD>
+<DT><STRONG>5831:</STRONG></DT>
+<DD>``ufalloc'' leaves
+ the user file
+identifying number
+``u.u_ar0[R0]''. Why does this
+statement occur where it does,
+instead of after line 5834?
+
+<P>
+</DD>
+<DT><STRONG>5832:</STRONG></DT>
+<DD>``openi'' (6702) is called to call
+ handlers for special files, in
+ cae any device specific actions
+ are required (for disk files
+ there is no action);
+
+<P>
+</DD>
+<DT><STRONG>5839:</STRONG></DT>
+<DD>In the case of an error while
+ making the ``file'' array entry,
+ the ``inode'' entry is released by
+ a call on ``iput''.
+</DD>
+</DL>
+
+<P>
+It will be seen that responsibility is
+quite widely distributed. The ``file''
+table entry is initialised by ``falloc''
+and ``openl''; the ``inode'' table entry,
+by ``iget'', ``ialloc'' and ``maknode''.
+
+<P>
+Note that ``ialloc'' clears out the
+``i_addr'' array of a newly allocated
+``inode'' and ``itrunc'' does the same for
+a pre-existing ``inode'', so that after
+the ``creat'' system call, there are no
+disk blocks associated with the file,
+now classed as ``small''.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3561"
+  HREF="node227.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3557"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3551"
+  HREF="node225.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3559"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3562"
+  HREF="node227.html">open (5763)</A>
+<B> Up:</B> <A NAME="tex2html3558"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3552"
+  HREF="node225.html">creat (5781)</A>
+ &nbsp; <B>  <A NAME="tex2html3560"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

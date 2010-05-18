@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: grow (4136)</title>
+
+<link href="sect0166.html" title="exit (3219)" rel="next" />
+<link href="sect0164.html" title="core (4094)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0164.html" title="core (4094)"><img alt="Previous: core (4094)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0166.html" title="exit (3219)"><img alt="Next: exit (3219)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">grow (4136)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000166">13.17 grow (4136)</h2>
+<p>The parameter, “sp”, of this procedure defines the address of a word which should be included in the user mode stack. </p><dl class="description">
+
+    <dt>4141:</dt>
+    <dd><p>If the stack already extends far enough, simply return with a zero value. </p><p>Note that this test relies on the idiosyncrasies of 2’s complement arithmetic, and if both </p><center> <tt>|</tt>sp<tt>|</tt> <img src="images/img-0013.png" alt="$&gt; 2^{15}$" style="vertical-align:&images/img-0013.png-depth;&px;; 
+                                     width:&images/img-0013.png-width;&px;; 
+                                     height:&images/img-0013.png-height;&px;" class="math gen" /> </center><p>and </p><center> <tt>|</tt>u.u_size <img src="images/img-0014.png" alt="$* 64$" style="vertical-align:&images/img-0014.png-depth;&px;; 
+                                     width:&images/img-0014.png-width;&px;; 
+                                     height:&images/img-0014.png-height;&px;" class="math gen" /><tt>|</tt> <img src="images/img-0013.png" alt="$&gt; 2^{15}$" style="vertical-align:&images/img-0013.png-depth;&px;; 
+                                     width:&images/img-0013.png-width;&px;; 
+                                     height:&images/img-0013.png-height;&px;" class="math gen" /> </center><p>the decision to extend the stack may be taken wrongly at this juncture; </p></dd>
+
+    <dt>4143:</dt>
+    <dd><p>Calculate the stack size increment needed to include the new stack point plus a 20*32 word margin; </p></dd>
+
+    <dt>4144:</dt>
+    <dd><p>Check that this value is in fact positive (i.e. we are not dealing with a failure of the test on line 4141.); </p></dd>
+
+    <dt>4146:</dt>
+    <dd><p>Check that the new stack size does not conflict with the memory segmentation constraints (“estabur” sets “u.u_error” if they do) and reset the segmentation register prototypes; </p></dd>
+
+    <dt>4148:</dt>
+    <dd><p>Get a new, enlarged data area, copy the stack segments (32 words at a time) into the high end of the new data area, and clear the segments which now become the stack expansion; </p></dd>
+
+    <dt>4156:</dt>
+    <dd><p>Update the stack size, “u.u_ssize” and return a “successful” result. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0164.html" title="core (4094)"><img alt="Previous: core (4094)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0166.html" title="exit (3219)"><img alt="Next: exit (3219)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

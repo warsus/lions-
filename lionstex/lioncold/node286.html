@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>PC-11 Paper Tape Reader/Punch Driver</TITLE>
+<META NAME="description" CONTENT="PC-11 Paper Tape Reader/Punch Driver">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node285.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node287.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4314"
+  HREF="node287.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4310"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4306"
+  HREF="node285.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4312"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4315"
+  HREF="node287.html">Character Handling</A>
+<B> Up:</B> <A NAME="tex2html4311"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4307"
+  HREF="node285.html">For idle readers: A</A>
+ &nbsp; <B>  <A NAME="tex2html4313"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002711000000000000000">
+PC-11 Paper Tape Reader/Punch Driver</A>
+</H2>
+
+<P>
+This driver is to be found in the file
+``pc.c'' on Sheets 86, 87. It is simpler
+than the line printer driver in that
+there is ro routine analogous to
+``lpcanon''. However it is more complicated in that there is both an input
+and an output device which can be
+simultaneously and independently
+active.
+
+<P>
+A description of the operation of this
+device is inciuded in the document ``The
+UNIX I/O System'' by D. Ritchie. Certain
+special features may be noted:
+
+<P>
+<DL>
+<DT><STRONG>(1)</STRONG></DT>
+<DD>Only one process may open the file
+for reading at a time, but there is no
+limit on the nmber of writers;
+
+<P>
+</DD>
+<DT><STRONG>(2)</STRONG></DT>
+<DD>This routine pays a little more
+attention to error conditions than the
+line printer driver, but the treatment
+is still not exhaustive;
+
+<P>
+</DD>
+<DT><STRONG>(3)</STRONG></DT>
+<DD>``passc'' (8695) knows how many
+characters are required and returns a
+negative valie when ``enough'' is
+reached;
+
+<P>
+</DD>
+<DT><STRONG>(4)</STRONG></DT>
+<DD>``pcclose'' is careful to flush out
+any remaining characters in the input
+queue if and only if it believes the
+device was opened for input.
+</DD>
+</DL>
+
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4314"
+  HREF="node287.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4310"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4306"
+  HREF="node285.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4312"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4315"
+  HREF="node287.html">Character Handling</A>
+<B> Up:</B> <A NAME="tex2html4311"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4307"
+  HREF="node285.html">For idle readers: A</A>
+ &nbsp; <B>  <A NAME="tex2html4313"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

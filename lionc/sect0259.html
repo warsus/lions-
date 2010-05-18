@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: alloc (6965)</title>
+
+<link href="sect0260.html" title="itrunc (7414)" rel="next" />
+<link href="sect0258.html" title="Resource Allocation" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0258.html" title="Resource Allocation"><img alt="Previous: Resource Allocation" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0260.html" title="itrunc (7414)"><img alt="Next: itrunc (7414)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">alloc (6965)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000260">20.12 alloc (6965)</h2>
+<p>This is called by “bmap” (6435, 6448, 6468, 6480, 6497) whenever a new storage block is needed to store part of a file. </p><dl class="description">
+
+    <a href="../all.html#line6961" target="source" <dt>6961:</dt></a>
+    <dd><p>Convert knowledge of the device name into a pointer to the “super block”; </p></dd>
+
+    <a href="../all.html#line6962" target="source" <dt>6962:</dt></a>
+    <dd><p>If “s_flock” is set, the list of available blocks is currently being updated by another process; </p></dd>
+
+    <a href="../all.html#line6967" target="source" <dt>6967:</dt></a>
+    <dd><p>Obtain the block number of the next available storage block; </p></dd>
+
+    <a href="../all.html#line6968" target="source" <dt>6968:</dt></a>
+    <dd><p>If the last block number on the list is zero, the entire list is now empty; </p></dd>
+
+    <a href="../all.html#line6970" target="source" <dt>6970:</dt></a>
+    <dd><p>“badblock” (7040) is used to check that the block number obtained from the list seems reasonable; </p></dd>
+
+    <a href="../all.html#line6971" target="source" <dt>6971:</dt></a>
+    <dd><p>If the list of available blocks in the “super block” is now empty, then the block just located will contain the addresses of the next group of </p></dd>
+
+    <a href="../all.html#line6972" target="source" <dt>6972:</dt></a>
+    <dd><p>Set “s_flock” to delay any other process from getting a “no space” indication before the list of available blocks in the “super block” can be replenished; </p></dd>
+
+    <a href="../all.html#line6975" target="source" <dt>6975:</dt></a>
+    <dd><p>Determine the number of valid entries in the list to be copied; </p></dd>
+
+    <a href="../all.html#line6978" target="source" <dt>6978:</dt></a>
+    <dd><p>Reset “s_flock”, and “wakeup” anyone waiting; </p></dd>
+
+    <a href="../all.html#line6982" target="source" <dt>6982:</dt></a>
+    <dd><p>Clear the buffer so that any information recorded in the file by default will be all zeros; </p></dd>
+
+    <a href="../all.html#line6983" target="source" <dt>6983:</dt></a>
+    <dd><p>Set the “modified” flag to ensure that the “super block” will be written out by “update” (7213). </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0258.html" title="Resource Allocation"><img alt="Previous: Resource Allocation" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0260.html" title="itrunc (7414)"><img alt="Next: itrunc (7414)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

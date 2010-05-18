@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Interactive Terminals</title>
+
+<link href="sect0294.html" title="The ’tty’ Structure (7926)" rel="next" />
+<link href="sect0292.html" title="partab (7947)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0292.html" title="partab (7947)"><img alt="Previous: partab (7947)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0294.html" title="The ’tty’ Structure (7926)"><img alt="Next: The ’tty’ Structure (7926)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Interactive Terminals</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000294">24 Interactive Terminals</h1>
+<p>Our remaining task, to be completed in this and the following chapter, is to consider the code which controls interactive terminals (or “terminals”, for short). </p><p>A wide variety of terminals is available and several different types may be simultaneously attached to a single computer. Distinguishing characteristics for different classes of terminal include (besides such non-essential features as shape, size and colour): </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>transmission speed, e.g. 110 baud for an ASR33 teletype, 300 baud for a DECwriter, 2400 baud or 9600 baud for a Visual Display unit (“VD”); </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>graphic character set, notably the full ASCII graphic set and the 64 graphic subset; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>transmission parity: odd, even, none or inoperatlve; </p></dd>
+
+    <dt>(d)</dt>
+    <dd><p>output technique: serial printer or visual display; </p></dd>
+
+    <dt>(e)</dt>
+    <dd><p>miscellaneous: combined carriage return/line feed character, half duplex terminal (input characters do not need echoing); recognition of tab characters; </p></dd>
+
+    <dt>(f)</dt>
+    <dd><p>characteristic delays for certain control functions, e.g. carriage returns may not be completed within a single character transmission time, etc. </p></dd>
+
+</dl><p>As well as the wide variety of terminals which are available and in use, there is also a variety of hardware devices which may be used to interface a terminal to a PDP 11 computer. For example: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>DL11/KL11 </p></td>
+
+    
+    <td style="text-align:left"><p> single line, asynchronous</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> interface; 13 standard</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> transmission rates between</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 40 and 9600 baud;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>DJ11 </p></td>
+
+    
+    <td style="text-align:left"><p> 16 line, asynchronous, buffered</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> serial line multiplexer; 11</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> speeds between 75 and 9600 baud,</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> selectable in four line groups;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>DH11 </p></td>
+
+    
+    <td style="text-align:left"><p> 16 line, asynchronous, buffered,</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> serial line multiplexer; 14 speeds,</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> individually selectable; DMA </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> transmission</p></td>
+
+</tr>
+</table><p>Each of the above interfaces will work in full or half duplex mode; handle 5, 6, 7 or 8 level codes; generate odd, even or no parity; and generate a stop code of 1, 1.5 or 2 bits. </p><p>In addition to the above asynchronous interfaces, there are a number of synchronous interfaces, e.g. DQ11. </p><p>Each interface has its own control characteristics and it requires a separate operating system device driver. The common code which can be shared between these is gathered into a single file “tty.c”, to be found on Sheets 81 to 85. A set of common definitions is gathered in the file “tty.h” on Sheet 79. </p><p>By way of example, Sheet 80 contains the file “kl.c”, which constitutes the device driver for a set of DL11/KL11 interfaces. This device driver always needs to be present, since one KL11 interface is invariably included in a system for the the operator’s console terminal. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0294.html">24.1 The ’tty’ Structure (7926)</a>
+   
+</li><li><a href="sect0295.html">24.2  Interactive Terminals</a>
+   
+</li><li><a href="sect0296.html">24.3 Initialisation</a>
+   
+</li><li><a href="sect0297.html">24.4 stty (8183)</a>
+   
+</li><li><a href="sect0298.html">24.5 sgtty (8201)</a>
+   
+</li><li><a href="sect0299.html">24.6 klsgtty (8090)</a>
+   
+</li><li><a href="sect0300.html">24.7 tysty (8577)</a>
+   
+</li><li><a href="sect0301.html">24.8 The DL11/KL11 Terminal Device Handler</a>
+   
+</li><li><a href="sect0302.html">24.9 Device Registers</a>
+   
+</li><li><a href="sect0303.html">24.10 UNIBUS Addresses</a>
+   
+</li><li><a href="sect0304.html">24.11 Software Considerations</a>
+   
+</li><li><a href="sect0305.html">24.12 Interrupt Vector Addresses</a>
+   
+</li><li><a href="sect0306.html">24.13 Source Code</a>
+   
+</li><li><a href="sect0307.html">24.14 klopen (8023)</a>
+   
+</li><li><a href="sect0308.html">24.15 klclose (8055)</a>
+   
+</li><li><a href="sect0309.html">24.16 klxint (8070)</a>
+   
+</li><li><a href="sect0310.html">24.17 klrint (8078)</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0292.html" title="partab (7947)"><img alt="Previous: partab (7947)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0294.html" title="The ’tty’ Structure (7926)"><img alt="Next: The ’tty’ Structure (7926)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

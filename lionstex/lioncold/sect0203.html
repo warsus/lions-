@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: getblk (4921)</title>
+
+<link href="sect0204.html" title="brelse (4869)" rel="next" />
+<link href="sect0202.html" title="incore (4899)" rel="prev" />
+<link href="sect0198.html" title="Buffer Manipulation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0202.html" title="incore (4899)"><img alt="Previous: incore (4899)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0204.html" title="brelse (4869)"><img alt="Next: brelse (4869)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0198.html">Buffer Manipulation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">getblk (4921)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000204">17.5 getblk (4921)</h2>
+<p>This routine performs the same search as “incore” but goes further in that if the initial search is unsuccessful, a buffer is allocated from the “av”-list (available list). </p><p>By a call on “notavail” (4999), the buffer is removed from the “av”-list and flagged as “B_BUSY”. </p><p>“getblk” is more suspicious of its parameters than “incore”. It is called by </p><pre>
+  exec   (3040)        writei (6304)
+  exit   (3237)        iinit  (6928)
+  bread  (4758)        alloc  (6981)
+  breada (4781,4789)   free   (7016)
+  smount (6123)        update (7216)
+</pre><dl class="description">
+
+    <dt>4940:</dt>
+    <dd><p>At this point the required buffer has been located by searching the “b”-list. Either it is “B_BUSY” in which case a “sleep” must be taken (4943), or else it is appropriated (4948); </p></dd>
+
+    <dt>4953:</dt>
+    <dd><p>If the required buffer has not been located, and if the “av”-list is empty, set the “B_WANTED” flag for the “av”-list and go to “sleep” (4955); </p></dd>
+
+    <dt>4960:</dt>
+    <dd><p>If the “av”-list is not empty, select the first member, and if it represents a “delayed write” arrange to have it written out asynchronously (4962); </p></dd>
+
+    <dt>4966:</dt>
+    <dd><p>“B_RELOC” is a relic! (See 4583); </p></dd>
+
+    <dt>4967:</dt>
+    <dd><p>The code from here until 4973 unconditionally removes the buffer from the “b”-list for its current device type and reinserts it into the bn-list for the new device type. Since this will frequently be a “no-op” i.e. the new and old device type will be the same, it would seem desirable to insert a test </p><pre>
+ if (bp-&gt;b_dev == dev)
+</pre><p>before executing lines 4967 to 4974. </p><p>Note the special handling for calls where<br />“dev == NODEV” (–1). (Such calls incidentally are made without a second parameter - tut! tut! See e.g. 3040.) </p></dd>
+
+</dl><p>“bfreelist” serves as the “devtab” structure for the “b”-list for “NODEV”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0202.html" title="incore (4899)"><img alt="Previous: incore (4899)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0204.html" title="brelse (4869)"><img alt="Next: brelse (4869)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<toc version="1.0"> 
+<tocitem>
+    <tocitem target="a0000000002">Preface
+        
+    </tocitem><tocitem target="a0000000003">Introduction
+        <tocitem target="a0000000004">The UNIX Operating System
+            
+        </tocitem><tocitem target="a0000000005">Utilities
+            
+        </tocitem><tocitem target="a0000000006">Other Documentation
+            
+        </tocitem><tocitem target="a0000000007">UNIX Programmer&#8217;s Manual
+            
+        </tocitem><tocitem target="a0000000008">UNIX Documents
+            
+        </tocitem><tocitem target="a0000000009">UNIX Operating System Source Code
+            
+        </tocitem><tocitem target="a0000000010">Source Code Selections
+            
+        </tocitem><tocitem target="a0000000011">Source Code Files
+            
+        </tocitem><tocitem target="a0000000012">Use of these notes
+            
+        </tocitem><tocitem target="a0000000013">A Note on Programming Standards
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000014">Fundamentals
+        <tocitem target="a0000000015">The Processor
+            
+        </tocitem><tocitem target="a0000000016">Processor Status Word
+            
+        </tocitem><tocitem target="a0000000017">General Registers
+            
+        </tocitem><tocitem target="a0000000018">Instruction Set
+            
+        </tocitem><tocitem target="a0000000019">Addressing Modes
+            
+        </tocitem><tocitem target="a0000000020">Unix Assembler
+            
+        </tocitem><tocitem target="a0000000021">Memory Management
+            
+        </tocitem><tocitem target="a0000000022">Segmentation Registers.
+            
+        </tocitem><tocitem target="a0000000023">Page Description Register
+            
+        </tocitem><tocitem target="a0000000024">Memory Allocation
+            
+        </tocitem><tocitem target="a0000000025">Memory Management Status Registers
+            
+        </tocitem><tocitem target="a0000000026">&#8220;i&#8221; and &#8220;d&#8221; Spaces
+            
+        </tocitem><tocitem target="a0000000027">Initial Conditions
+            
+        </tocitem><tocitem target="a0000000028">Special Device Registers
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000029">Reading &#8220;C&#8221; Programs
+        <tocitem target="a0000000030">Some Selected Examples
+            
+        </tocitem><tocitem target="a0000000031">Example 1
+            
+        </tocitem><tocitem target="a0000000032">Example 2
+            
+        </tocitem><tocitem target="a0000000033">Example 3
+            
+        </tocitem><tocitem target="a0000000034">Example 4
+            
+        </tocitem><tocitem target="a0000000035">Example 5
+            
+        </tocitem><tocitem target="a0000000036">Example 6
+            
+        </tocitem><tocitem target="a0000000037">Example 7
+            
+        </tocitem><tocitem target="a0000000038">Example 8
+            
+        </tocitem><tocitem target="a0000000039">Example 9
+            
+        </tocitem><tocitem target="a0000000040">Example 10
+            
+        </tocitem><tocitem target="a0000000041">Example 11
+            
+        </tocitem><tocitem target="a0000000042">Example 12
+            
+        </tocitem><tocitem target="a0000000043">Example 13
+            
+        </tocitem><tocitem target="a0000000044">Example 14
+            
+        </tocitem><tocitem target="a0000000045">Example 15
+            
+        </tocitem><tocitem target="a0000000046">Example 16
+            
+        </tocitem><tocitem target="a0000000047">Example 17
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000048">An Overview
+        <tocitem target="a0000000049">Variable Allocation
+            
+        </tocitem><tocitem target="a0000000050">Global Variables
+            
+        </tocitem><tocitem target="a0000000051">The &#8216;C&#8217; Preprocessor
+            
+        </tocitem><tocitem target="a0000000052">Section One
+            
+        </tocitem><tocitem target="a0000000053">The First Group of &#8216;.h&#8217; Files
+            
+        </tocitem><tocitem target="a0000000054">Assembly Language Files
+            
+        </tocitem><tocitem target="a0000000055">Other Files in Section One
+            
+        </tocitem><tocitem target="a0000000056">Section Two
+            
+        </tocitem><tocitem target="a0000000057">Section Three
+            
+        </tocitem><tocitem target="a0000000058">Section Four
+            
+        </tocitem><tocitem target="a0000000059">Section Five
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000060">Section One
+        
+    </tocitem><tocitem target="a0000000061">Two Files
+        <tocitem target="a0000000062">The File &#8216;malloc.c&#8217;
+            
+        </tocitem><tocitem target="a0000000063">Rules for List Maintenance
+            
+        </tocitem><tocitem target="a0000000064">malloc (2528)
+            
+        </tocitem><tocitem target="a0000000065">mfree (2556)
+            
+        </tocitem><tocitem target="a0000000066">In conclusion ...
+            
+        </tocitem><tocitem target="a0000000067">The File &#8216;prf.c&#8217;
+            
+        </tocitem><tocitem target="a0000000068">printf (2340)
+            
+        </tocitem><tocitem target="a0000000069">printn (2369)
+            
+        </tocitem><tocitem target="a0000000070">putchar (2386)
+            
+        </tocitem><tocitem target="a0000000071">panic (2419)
+            
+        </tocitem><tocitem target="a0000000072">prdev (2433), deverror (2447)
+            
+        </tocitem><tocitem target="a0000000073">Included Files
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000074">Getting Started
+        <tocitem target="a0000000075">Operator Actions
+            
+        </tocitem><tocitem target="a0000000076">start (0612)
+            
+        </tocitem><tocitem target="a0000000077">main (1550)
+            
+        </tocitem><tocitem target="a0000000078">Processes
+            
+        </tocitem><tocitem target="a0000000079">Initialisation of proc[0]
+            
+        </tocitem><tocitem target="a0000000080">The story continues ...
+            
+        </tocitem><tocitem target="a0000000081">sched (1940)
+            
+        </tocitem><tocitem target="a0000000082">sleep (2066)
+            
+        </tocitem><tocitem target="a0000000083">swtch (2178)
+            
+        </tocitem><tocitem target="a0000000084">main revisited
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000085">Processes
+        <tocitem target="a0000000086">The Process
+            
+        </tocitem><tocitem target="a0000000087">The proc Structure (0358)
+            
+        </tocitem><tocitem target="a0000000088">The user Structure (0413)
+            
+        </tocitem><tocitem target="a0000000089">The Per Process Data Area
+            
+        </tocitem><tocitem target="a0000000090">The Segments
+            
+        </tocitem><tocitem target="a0000000091">Execution of an Image
+            
+        </tocitem><tocitem target="a0000000092">Kernel Mode Execution
+            
+        </tocitem><tocitem target="a0000000093">User Mode Execution
+            
+        </tocitem><tocitem target="a0000000094">An Example
+            
+        </tocitem><tocitem target="a0000000095">Setting the Segmentation Registers
+            
+        </tocitem><tocitem target="a0000000096">estabur (1650)
+            
+        </tocitem><tocitem target="a0000000097">sureg (1739)
+            
+        </tocitem><tocitem target="a0000000098">newproc (1826)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000099">Process Management
+        <tocitem target="a0000000100">Process Switching
+            
+        </tocitem><tocitem target="a0000000101">Interrupts
+            
+        </tocitem><tocitem target="a0000000102">Program Swapping
+            
+        </tocitem><tocitem target="a0000000103">Jobs
+            
+        </tocitem><tocitem target="a0000000104">Assembler Procedures
+            
+        </tocitem><tocitem target="a0000000105">savu (0725)
+            
+        </tocitem><tocitem target="a0000000106">retu (0740)
+            
+        </tocitem><tocitem target="a0000000107">aretu (0734)
+            
+        </tocitem><tocitem target="a0000000108">swtch (2178)
+            
+        </tocitem><tocitem target="a0000000109">setpri (2156)
+            
+        </tocitem><tocitem target="a0000000110">sleep (2066)
+            
+        </tocitem><tocitem target="a0000000111">wakeup (2113)
+            
+        </tocitem><tocitem target="a0000000112">setrun (2134)
+            
+        </tocitem><tocitem target="a0000000113">expand (2268)
+            
+        </tocitem><tocitem target="a0000000114">swtch revisited
+            
+        </tocitem><tocitem target="a0000000115">Critical Sections
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000116">Section Two
+        
+    </tocitem><tocitem target="a0000000117">Hardware Interrupts and Traps
+        <tocitem target="a0000000118">Hardware Interrupts
+            
+        </tocitem><tocitem target="a0000000119">The Interrupt Vector
+            
+        </tocitem><tocitem target="a0000000120">Interrupt Handlers
+            
+        </tocitem><tocitem target="a0000000121">Priorities
+            
+        </tocitem><tocitem target="a0000000122">Interrupt Priorities
+            
+        </tocitem><tocitem target="a0000000123">Rules for Interrupt Handlers
+            
+        </tocitem><tocitem target="a0000000124">Traps
+            
+        </tocitem><tocitem target="a0000000125">Assembly Language &#8216;trap&#8217;
+            
+        </tocitem><tocitem target="a0000000126">Return
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000127">The Assembler &#8220;Trap&#8221; Routine
+        <tocitem target="a0000000128">Sources of Traps and Interrupts
+            
+        </tocitem><tocitem target="a0000000129">fuibyte (0814), fuiword (0844)
+            
+        </tocitem><tocitem target="a0000000130">Interrupts
+            
+        </tocitem><tocitem target="a0000000131">call (0776)
+            
+        </tocitem><tocitem target="a0000000132">User Program Traps
+            
+        </tocitem><tocitem target="a0000000133">The Kernel Stack
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000134">Clock Interrupts
+        <tocitem target="a0000000135">clock (3725)
+            
+        </tocitem><tocitem target="a0000000136">timeout (3845)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000137">Traps and System Calls
+        <tocitem target="a0000000138">trap (2693)
+            
+        </tocitem><tocitem target="a0000000139">Kernel Mode Traps
+            
+        </tocitem><tocitem target="a0000000140">User Mode Traps
+            
+        </tocitem><tocitem target="a0000000141">System Calls
+            
+        </tocitem><tocitem target="a0000000142">System Call Handlers
+            
+        </tocitem><tocitem target="a0000000143">The File &#8216;sysl.c&#8217;
+            
+        </tocitem><tocitem target="a0000000144">exec (3020)
+            
+        </tocitem><tocitem target="a0000000145">fork (3322)
+            
+        </tocitem><tocitem target="a0000000146">sbreak (3354)
+            
+        </tocitem><tocitem target="a0000000147">The Files &#8216;sys2.c&#8217; and &#8216;sys3.c&#8217;
+            
+        </tocitem><tocitem target="a0000000148">The File &#8216;sys4.c&#8217;
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000149">Software Interrupts
+        <tocitem target="a0000000150">Anticipation
+            
+        </tocitem><tocitem target="a0000000151">Causation
+            
+        </tocitem><tocitem target="a0000000152">Effect
+            
+        </tocitem><tocitem target="a0000000153">Tracing
+            
+        </tocitem><tocitem target="a0000000154">Procedures
+            
+        </tocitem><tocitem target="a0000000155">A. Anticipation
+            
+        </tocitem><tocitem target="a0000000156">B. Causation
+            
+        </tocitem><tocitem target="a0000000157">C. Effect
+            
+        </tocitem><tocitem target="a0000000158">D. Tracing
+            
+        </tocitem><tocitem target="a0000000159">ssig (3614)
+            
+        </tocitem><tocitem target="a0000000160">kill (3630)
+            
+        </tocitem><tocitem target="a0000000161">signal (3949)
+            
+        </tocitem><tocitem target="a0000000162">psignal (3963)
+            
+        </tocitem><tocitem target="a0000000163">issig (3991)
+            
+        </tocitem><tocitem target="a0000000164">psig (4043)
+            
+        </tocitem><tocitem target="a0000000165">core (4094)
+            
+        </tocitem><tocitem target="a0000000166">grow (4136)
+            
+        </tocitem><tocitem target="a0000000167">exit (3219)
+            
+        </tocitem><tocitem target="a0000000168">rexit (3205)
+            
+        </tocitem><tocitem target="a0000000169">wait (3270)
+            
+        </tocitem><tocitem target="a0000000170">Tracing
+            
+        </tocitem><tocitem target="a0000000171">stop (4016)
+            
+        </tocitem><tocitem target="a0000000172">wait (3270) (continued)
+            
+        </tocitem><tocitem target="a0000000173">ptrace (4164)
+            
+        </tocitem><tocitem target="a0000000174">procxmt (4204)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000175">Program Swapping
+        <tocitem target="a0000000176">Text Segments
+            
+        </tocitem><tocitem target="a0000000177">sched (1940)
+            
+        </tocitem><tocitem target="a0000000178">xswap (4368)
+            
+        </tocitem><tocitem target="a0000000179">xalloc (4433)
+            
+        </tocitem><tocitem target="a0000000180">xfree (4398)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000181">Introduction to Basic I/O
+        <tocitem target="a0000000182">The File &#8216;buf.h&#8217;
+            
+        </tocitem><tocitem target="a0000000183">devtab (4551)
+            
+        </tocitem><tocitem target="a0000000184">The File &#8216;conf.h&#8217;
+            
+        </tocitem><tocitem target="a0000000185">The File &#8216;conf.c&#8217;
+            
+        </tocitem><tocitem target="a0000000186">System Generation
+            
+        </tocitem><tocitem target="a0000000187">swap (5196)
+            
+        </tocitem><tocitem target="a0000000188">Race Conditions
+            
+        </tocitem><tocitem target="a0000000189">Reentrancy
+            
+        </tocitem><tocitem target="a0000000190">For the Uninitiated
+            
+        </tocitem><tocitem target="a0000000191">Additional Reading
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000192">The RK Disk Driver
+        <tocitem target="a0000000193">The file &#8216;rk.c&#8217;
+            
+        </tocitem><tocitem target="a0000000194">rkstrategy (5389)
+            
+        </tocitem><tocitem target="a0000000195">rkaddr (5420)
+            
+        </tocitem><tocitem target="a0000000196">devstart (5096)
+            
+        </tocitem><tocitem target="a0000000197">rkintr (5451)
+            
+        </tocitem><tocitem target="a0000000198">iodone (5018)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000199">Buffer Manipulation
+        <tocitem target="a0000000200">Flags
+            
+        </tocitem><tocitem target="a0000000201">A Cache-like Memory
+            
+        </tocitem><tocitem target="a0000000202">clrbuf (5038)
+            
+        </tocitem><tocitem target="a0000000203">incore (4899)
+            
+        </tocitem><tocitem target="a0000000204">getblk (4921)
+            
+        </tocitem><tocitem target="a0000000205">brelse (4869)
+            
+        </tocitem><tocitem target="a0000000206">binit (5055)
+            
+        </tocitem><tocitem target="a0000000207">bread (4754)
+            
+        </tocitem><tocitem target="a0000000208">breada (4773)
+            
+        </tocitem><tocitem target="a0000000209">bwrite (4809)
+            
+        </tocitem><tocitem target="a0000000210">bawrite (4856)
+            
+        </tocitem><tocitem target="a0000000211">bdwrite (4836)
+            
+        </tocitem><tocitem target="a0000000212">bflush (5229)
+            
+        </tocitem><tocitem target="a0000000213">physio (5259)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000214">File Access and Control
+        <tocitem target="a0000000215">File Characteristics
+            
+        </tocitem><tocitem target="a0000000216">System Calls
+            
+        </tocitem><tocitem target="a0000000217">Control Tables
+            
+        </tocitem><tocitem target="a0000000218">file (5507)
+            
+        </tocitem><tocitem target="a0000000219">inode (5659)
+            
+        </tocitem><tocitem target="a0000000220">Resources Required
+            
+        </tocitem><tocitem target="a0000000221">Opening a File
+            
+        </tocitem><tocitem target="a0000000222">creat (5781)
+            
+        </tocitem><tocitem target="a0000000223">openl (5804)
+            
+        </tocitem><tocitem target="a0000000224">open (5763)
+            
+        </tocitem><tocitem target="a0000000225">openl revisited
+            
+        </tocitem><tocitem target="a0000000226">close (5846)
+            
+        </tocitem><tocitem target="a0000000227">closef (6643)
+            
+        </tocitem><tocitem target="a0000000228">iput (7344)
+            
+        </tocitem><tocitem target="a0000000229">Deletion of Files
+            
+        </tocitem><tocitem target="a0000000230">Reading and Writing
+            
+        </tocitem><tocitem target="a0000000231">rdwr (5731)
+            
+        </tocitem><tocitem target="a0000000232">readi (6221)
+            
+        </tocitem><tocitem target="a0000000233">writei
+            
+        </tocitem><tocitem target="a0000000234">iomove (6364)
+            
+        </tocitem><tocitem target="a0000000235">bmap (6415)
+            
+        </tocitem><tocitem target="a0000000236">Leftovers
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000237">File Directories and Directory Files
+        <tocitem target="a0000000238">The Directory Data Structure
+            
+        </tocitem><tocitem target="a0000000239">Directory Files
+            
+        </tocitem><tocitem target="a0000000240">namei (7518)
+            
+        </tocitem><tocitem target="a0000000241">Some Comments
+            
+        </tocitem><tocitem target="a0000000242">link (5909)
+            
+        </tocitem><tocitem target="a0000000243">wdir (7477)
+            
+        </tocitem><tocitem target="a0000000244">maknode (7455)
+            
+        </tocitem><tocitem target="a0000000245">unlink (3510)
+            
+        </tocitem><tocitem target="a0000000246">mknod (5952)
+            
+        </tocitem><tocitem target="a0000000247">access (6746)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000248">File Systems
+        <tocitem target="a0000000249">The &#8216;Super Block&#8217; (5561)
+            
+        </tocitem><tocitem target="a0000000250">The &#8217;mount&#8217; table (0272)
+            
+        </tocitem><tocitem target="a0000000251">iinit (6922)
+            
+        </tocitem><tocitem target="a0000000252">Mounting
+            
+        </tocitem><tocitem target="a0000000253">smount (6086)
+            
+        </tocitem><tocitem target="a0000000254">Notes
+            
+        </tocitem><tocitem target="a0000000255">iget (7276)
+            
+        </tocitem><tocitem target="a0000000256">getfs (7167)
+            
+        </tocitem><tocitem target="a0000000257">update (7201)
+            
+        </tocitem><tocitem target="a0000000258">sumount (6144)
+            
+        </tocitem><tocitem target="a0000000259">Resource Allocation
+            
+        </tocitem><tocitem target="a0000000260">alloc (6965)
+            
+        </tocitem><tocitem target="a0000000261">itrunc (7414)
+            
+        </tocitem><tocitem target="a0000000262">free (7000)
+            
+        </tocitem><tocitem target="a0000000263">iput (7344)
+            
+        </tocitem><tocitem target="a0000000264">ifree (7134)
+            
+        </tocitem><tocitem target="a0000000265">iupdat (7374)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000266">Pipes
+        <tocitem target="a0000000267">pipe (7723)
+            
+        </tocitem><tocitem target="a0000000268">readp (7758)
+            
+        </tocitem><tocitem target="a0000000269">writep (7805)
+            
+        </tocitem><tocitem target="a0000000270">plock (7862)
+            
+        </tocitem><tocitem target="a0000000271">prele (7882)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000272">Character Oriented Special Files
+        <tocitem target="a0000000273">LP11 Line Printer Driver
+            
+        </tocitem><tocitem target="a0000000274">lpopen (8850)
+            
+        </tocitem><tocitem target="a0000000275">Notes
+            
+        </tocitem><tocitem target="a0000000276">lpoutput (8986)
+            
+        </tocitem><tocitem target="a0000000277">lpstart (8967)
+            
+        </tocitem><tocitem target="a0000000278">lpinit(8976)
+            
+        </tocitem><tocitem target="a0000000279">lpwrite (8870)
+            
+        </tocitem><tocitem target="a0000000280">Discussion
+            
+        </tocitem><tocitem target="a0000000281">lpcanon (8879)
+            
+        </tocitem><tocitem target="a0000000282">For idle readers: A suggestion
+            
+        </tocitem><tocitem target="a0000000283">PC-11 Paper Tape Reader/Punch Driver
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000284">Character Handling
+        <tocitem target="a0000000285">cinit (8234)
+            
+        </tocitem><tocitem target="a0000000286">getc (0930)
+            
+        </tocitem><tocitem target="a0000000287">putc (0967)
+            
+        </tocitem><tocitem target="a0000000288">Character Sets
+            
+        </tocitem><tocitem target="a0000000289">Control Characters
+            
+        </tocitem><tocitem target="a0000000290">Graphic Characters
+            
+        </tocitem><tocitem target="a0000000291">Graphic Character Sets
+            
+        </tocitem><tocitem target="a0000000292">maptab (8117)
+            
+        </tocitem><tocitem target="a0000000293">partab (7947)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000294">Interactive Terminals
+        <tocitem target="a0000000295">The &#8217;tty&#8217; Structure (7926)
+            
+        </tocitem><tocitem target="a0000000296"> Interactive Terminals
+            
+        </tocitem><tocitem target="a0000000297">Initialisation
+            
+        </tocitem><tocitem target="a0000000298">stty (8183)
+            
+        </tocitem><tocitem target="a0000000299">sgtty (8201)
+            
+        </tocitem><tocitem target="a0000000300">klsgtty (8090)
+            
+        </tocitem><tocitem target="a0000000301">tysty (8577)
+            
+        </tocitem><tocitem target="a0000000302">The DL11/KL11 Terminal Device Handler
+            
+        </tocitem><tocitem target="a0000000303">Device Registers
+            
+        </tocitem><tocitem target="a0000000304">UNIBUS Addresses
+            
+        </tocitem><tocitem target="a0000000305">Software Considerations
+            
+        </tocitem><tocitem target="a0000000306">Interrupt Vector Addresses
+            
+        </tocitem><tocitem target="a0000000307">Source Code
+            
+        </tocitem><tocitem target="a0000000308">klopen (8023)
+            
+        </tocitem><tocitem target="a0000000309">klclose (8055)
+            
+        </tocitem><tocitem target="a0000000310">klxint (8070)
+            
+        </tocitem><tocitem target="a0000000311">klrint (8078)
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000312">The File &#8220;tty.c&#8221;
+        <tocitem target="a0000000313">flushtty (8252)
+            
+        </tocitem><tocitem target="a0000000314">wflushtty (8217)
+            
+        </tocitem><tocitem target="a0000000315">Character Input
+            
+        </tocitem><tocitem target="a0000000316">ttread (8535)
+            
+        </tocitem><tocitem target="a0000000317">canon (8274)
+            
+        </tocitem><tocitem target="a0000000318">Notes
+            
+        </tocitem><tocitem target="a0000000319">ttyinput (8333)
+            
+        </tocitem><tocitem target="a0000000320">Character Output &#8211; ttwrite (8550)
+            
+        </tocitem><tocitem target="a0000000321">ttstart
+            
+        </tocitem><tocitem target="a0000000322">ttrstrt (8486)
+            
+        </tocitem><tocitem target="a0000000323">ttyoutput (8373)
+            
+        </tocitem><tocitem target="a0000000324">Terminals with a restricted character set
+            
+        </tocitem><tocitem target="a0000000325">A. The test for &#8217;TTLOWAT&#8217; (Line 8074)
+            
+        </tocitem><tocitem target="a0000000326">B. Inactive Terminals
+            
+        </tocitem><tocitem target="a0000000327">Well, that&#8217;s all, folks ...
+            
+        </tocitem>
+    </tocitem><tocitem target="a0000000328">Suggested Exercises
+        <tocitem target="a0000000329">Section One
+            
+        </tocitem><tocitem target="a0000000330">Section Two
+            
+        </tocitem><tocitem target="a0000000331">Section Three
+            
+        </tocitem><tocitem target="a0000000332">Section Four
+            
+        </tocitem><tocitem target="a0000000333">General
+            
+        </tocitem>
+    </tocitem>
+</tocitem>
+</toc>

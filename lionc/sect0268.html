@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: writep (7805)</title>
+
+<link href="sect0269.html" title="plock (7862)" rel="next" />
+<link href="sect0267.html" title="readp (7758)" rel="prev" />
+<link href="sect0265.html" title="Pipes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0267.html" title="readp (7758)"><img alt="Previous: readp (7758)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0265.html" title="Pipes"><img alt="Up: Pipes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0269.html" title="plock (7862)"><img alt="Next: plock (7862)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0265.html">Pipes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">writep (7805)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000269">21.3 writep (7805)</h2>
+<p>The structure of this procedure echoes that of “readp” in many respects. </p><dl class="description">
+
+    <a href="../all.html#line7828" target="source" <dt>7828:</dt></a>
+    <dd><p>Note that a “writer”, which finds that there are no more “readers” left, receives a “signal” just in case he is not monitoring the result of his “write” operation. </p><p>(A “reader” in the analogous situation receives a zero character count as the result of the read, and this is the standard end-of-file indication.) </p></dd>
+
+    <a href="../all.html#line7835" target="source" <dt>7835:</dt></a>
+    <dd><p>The “pipe” size is not allowed to grow beyond “PIPSIZ” characters. As long as “PIPSIZ” (7715) is no greater than 4096, the file will not be converted to a “large” file. This is highly desirable from the viewpoint of access efficiency. </p><p>(Note that “PIPSIZ” limits the “write” offset pointer value. If the “read” offset pointer is not far behind, the true content of the “pipe” may be quite small). </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0267.html" title="readp (7758)"><img alt="Previous: readp (7758)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0265.html" title="Pipes"><img alt="Up: Pipes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0269.html" title="plock (7862)"><img alt="Next: plock (7862)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Section Five</TITLE>
+<META NAME="description" CONTENT="Section Five">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node61.html">
+<LINK REL="up" HREF="node51.html">
+<LINK REL="next" HREF="node63.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1458"
+  HREF="node63.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1454"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1450"
+  HREF="node61.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1456"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1459"
+  HREF="node63.html">Section One</A>
+<B> Up:</B> <A NAME="tex2html1455"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1451"
+  HREF="node61.html">Section Four</A>
+ &nbsp; <B>  <A NAME="tex2html1457"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000711000000000000000">
+Section Five</A>
+</H2>
+
+<P>
+Section Five is the final section. It
+is concerned with input/output for the
+slower, character oriented peripheral
+devices.
+
+<P>
+Such devices share a common buffer
+pool, which is manipulated by a set of
+standard procedures.
+
+<P>
+The set of character peripheral devices
+are exemplified by the following:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT"><B>KL/DL11</B></TD>
+<TD ALIGN="LEFT">interactive terminal</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><B>PC11</B></TD>
+<TD ALIGN="LEFT">paper tape reader/punch</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><B>LP11</B></TD>
+<TD ALIGN="LEFT">line printer</TD>
+</TR>
+</TABLE>
+
+<P>
+<DL>
+<DT><STRONG>tty.h</STRONG></DT>
+<DD>[Sheet 79; Chapters 23, 24]
+defines the ``clist'' structure (used
+as a list head for character buffer
+queues), the ``tty'' structure (stores
+relevant data for controlling an
+individual terminal), declares the
+``partab'' table (used to control
+transmission of individual characters 
+to terminals) and defines names
+for many associated parameters.
+
+<P>
+</DD>
+<DT><STRONG>kl.c</STRONG></DT>
+<DD>[Sheet 80; Chapters 24, 25] is
+the device driver for terminals connected 
+via KL11 or DL11 interfaces.
+
+<P>
+</DD>
+<DT><STRONG>tty.c</STRONG></DT>
+<DD>[Sheets 81..85; Chapters 23,
+24, 25] contains common procedures
+which are independent of the attaching 
+interfaces, for controlling
+transmission to or from terminals,
+and which take into account various
+terminal idiosyncrasies.
+
+<P>
+</DD>
+<DT><STRONG>pc.c</STRONG></DT>
+<DD>[Sheets 86,87; Chapter 22] is
+the device handler for the PC11
+paper tape reader/punch controller.
+
+<P>
+</DD>
+<DT><STRONG>lp.c</STRONG></DT>
+<DD>[Sheets 88, 89; Chapter 22] is
+the device handler for the LP11 line
+printer controller.
+
+<P>
+</DD>
+<DT><STRONG>mem.c</STRONG></DT>
+<DD>[Sheet 90] contains procedures
+which provide access to main memory
+as though it were an ordinary file.
+This code has been left to the
+reader to survey as an exercise.
+</DD>
+</DL>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1458"
+  HREF="node63.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1454"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1450"
+  HREF="node61.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1456"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1459"
+  HREF="node63.html">Section One</A>
+<B> Up:</B> <A NAME="tex2html1455"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1451"
+  HREF="node61.html">Section Four</A>
+ &nbsp; <B>  <A NAME="tex2html1457"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

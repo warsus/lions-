@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>free (7000)</TITLE>
+<META NAME="description" CONTENT="free (7000)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node266.html">
+<LINK REL="previous" HREF="node264.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node266.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4052"
+  HREF="node266.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4048"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4042"
+  HREF="node264.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4050"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4053"
+  HREF="node266.html">iput (7344)</A>
+<B> Up:</B> <A NAME="tex2html4049"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4043"
+  HREF="node264.html">itrunc (7414)</A>
+ &nbsp; <B>  <A NAME="tex2html4051"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002514000000000000000">
+free (7000)</A>
+</H2>
+
+<P>
+This procedure is  called  by  ``itrunc''
+(7435, 7438, 7442) to reinsert a simple
+storage block into the  available  list
+for a device.
+
+<P>
+<DL>
+<DT><STRONG>7005:</STRONG></DT>
+<DD>It is not clear why the ``s_fmod'' flag
+is set here as well as at the end of  the  procedure  (line
+7026). Any suggestions?
+
+<P>
+</DD>
+<DT><STRONG>7006:</STRONG></DT>
+<DD>Observe the locking protocol;
+
+<P>
+</DD>
+<DT><STRONG>7010:</STRONG></DT>
+<DD>If  no  free  blocks   previously
+      existed  for  the device, restore
+      the situation by setting up a one
+      element  list containing an entry
+      for block #0.   This  value  will
+      subsequently be interpreted as an
+      ``end of list'' sentinel;
+
+<P>
+</DD>
+<DT><STRONG>7014:</STRONG></DT>
+<DD>If  the  available  list  in  the
+      ``super block'' is already full, it
+      is time to write it out onto  the
+      FSV. Set ``s_flock'';
+
+<P>
+</DD>
+<DT><STRONG>7016:</STRONG></DT>
+<DD>Get a buffer, associated with the
+      block  now  being  entered in the
+	free list;
+
+<P>
+</DD>
+<DT><STRONG>7019:</STRONG></DT>
+<DD>Copy the contents  of  the  super
+      block  list,  preceded by a count
+      of the number  of  valid  blocks,
+      into   the   buffer;   write  the
+      buffer;  unset   the   lock   and
+      ``wakeup'' anybody waiting,
+
+<P>
+</DD>
+<DT><STRONG>7025:</STRONG></DT>
+<DD>Add the  returned  block  to  the
+      available list.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4052"
+  HREF="node266.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4048"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4042"
+  HREF="node264.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4050"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4053"
+  HREF="node266.html">iput (7344)</A>
+<B> Up:</B> <A NAME="tex2html4049"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4043"
+  HREF="node264.html">itrunc (7414)</A>
+ &nbsp; <B>  <A NAME="tex2html4051"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

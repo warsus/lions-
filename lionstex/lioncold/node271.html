@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>readp (7758)</TITLE>
+<META NAME="description" CONTENT="readp (7758)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node272.html">
+<LINK REL="previous" HREF="node270.html">
+<LINK REL="up" HREF="node269.html">
+<LINK REL="next" HREF="node272.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4127"
+  HREF="node272.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4123"
+  HREF="node269.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4117"
+  HREF="node270.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4125"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4128"
+  HREF="node272.html">writep (7805)</A>
+<B> Up:</B> <A NAME="tex2html4124"
+  HREF="node269.html">Pipes</A>
+<B> Previous:</B> <A NAME="tex2html4118"
+  HREF="node270.html">pipe (7723)</A>
+ &nbsp; <B>  <A NAME="tex2html4126"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000262000000000000000">
+readp (7758)</A>
+</H2>
+
+<P>
+``pipes'' are different from other  files
+in  that  two separate offsets into the
+file are kept - one for  ``read''  operations 
+and  one for ``write'' operations.
+The ``write'' offset is actually the same
+as the file size.
+
+<P>
+<DL>
+<DT><STRONG>7763:</STRONG></DT>
+<DD>the parameter passed  to  ``readp''
+      is  a  pointer  to a ``file'' array
+      entry,  from  which  an   ``inode''
+      pointer can be extracted;
+
+<P>
+</DD>
+<DT><STRONG>7768:</STRONG></DT>
+<DD>``plock'' (7862) ensures that  only
+      one  operation  takes  place at a
+      time: either ``read'' or ``write'';
+
+<P>
+</DD>
+<DT><STRONG>7776:</STRONG></DT>
+<DD>If a process wishing to write  to
+      a ``pipe'' has been blocked because
+      the pipe was  ``full''  (or  rather
+      because  the  valid  part  of the
+      file had reached the file limit),
+      it will have signified its predicament by  setting  the  ``IWRITE''
+      flag in ``ip-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">i_mode'';
+
+<P>
+</DD>
+<DT><STRONG>7786:</STRONG></DT>
+<DD>Release the lock before going  to
+      sleep;
+
+<P>
+</DD>
+<DT><STRONG>7787:</STRONG></DT>
+<DD>``i_count'' is the number  of  file
+      table  entries  pointing  at  the
+      ``inode''. If  this  is  less  than
+      two,  then the group of ``writers''
+      must be extinct;
+
+<P>
+</DD>
+<DT><STRONG>7789:</STRONG></DT>
+<DD>A process waiting for input  will
+raise  the ``IREAD'' flag.  Since a
+pipe cannot  be  full  and  empty
+simultaneously,  no more than one
+of the flaqs ``IWRITE'' or  ``IREAD''
+should be set at any one time;
+
+<P>
+</DD>
+<DT><STRONG>7799:</STRONG></DT>
+<DD>``prele''  unlocks  the  file   and
+      ``wakes  up''  any  process waiting
+      for the pipe.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4127"
+  HREF="node272.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4123"
+  HREF="node269.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4117"
+  HREF="node270.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4125"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4128"
+  HREF="node272.html">writep (7805)</A>
+<B> Up:</B> <A NAME="tex2html4124"
+  HREF="node269.html">Pipes</A>
+<B> Previous:</B> <A NAME="tex2html4118"
+  HREF="node270.html">pipe (7723)</A>
+ &nbsp; <B>  <A NAME="tex2html4126"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

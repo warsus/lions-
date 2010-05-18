@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 16</title>
+
+<link href="sect0046.html" title="Example 17" rel="next" />
+<link href="sect0044.html" title="Example 15" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0044.html" title="Example 15"><img alt="Previous: Example 15" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0046.html" title="Example 17"><img alt="Next: Example 17" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 16</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000046">3.17 Example 16</h2>
+<pre>
+  6672 closei (ip, rw)
+       int *ip;
+       {
+         register *rip;
+         register dev, maj;
+         rip = ip;
+         dev = rip-&gt;i_addr[0];
+         maj = rip-&gt;i_addr[0].d major;
+         switch (rip-&gt;i_mode&amp;IFMT) {
+
+         case IFCHR:
+           (*cdevsw[maj].d_close)(dev,rw);
+           break;
+         
+         case IFBLK:
+           (*bdevsw[maj].d_close)(dev,rw);
+         }
+         iput(rip);
+       }
+</pre><p>This example has a number of interesting features. </p><p>The declaration for “d_major” is </p><pre>
+    struct {
+       char d_minor;
+       char d_major;
+    }
+</pre><p>so that the value assigned to “maj” is the hiqh order byte of the value assigned to “dev”. </p><p>In this example, the “switch” statement has onlv two non-null cases, and no “default”. The actions for the recognised cases, e.g. </p><pre>
+     (*bdevsw[maj].d_close)(dev,rw);
+</pre><p>look formidable </p><p>First it should be noted that this is a procedure call, with parameters “dev” and “rw”. </p><p>Second “bdevsw” (and “cdevsw”) are arrays of structures, whose “d_close” element is a pointer to a function, i.e. </p><pre>
+     bdevsw[maj]
+</pre><p>is the name of a structure, and </p><pre>
+     bdevsw[maj].d_close
+</pre><p>is an element of that structure which happens to be a pointer to a function, so that </p><pre>
+     *bdevsw[maj].d_close
+</pre><p>is the name of a function. The first pair of parentheses is “syntactical sugar” to put the compiler in the right frame of mind! </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0044.html" title="Example 15"><img alt="Previous: Example 15" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0046.html" title="Example 17"><img alt="Next: Example 17" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

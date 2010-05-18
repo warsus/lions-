@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Clock Interrupts</TITLE>
+<META NAME="description" CONTENT="Clock Interrupts">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node140.html">
+<LINK REL="previous" HREF="node130.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node138.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2412"
+  HREF="node138.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2408"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2402"
+  HREF="node136.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2410"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2413"
+  HREF="node138.html">clock (3725)</A>
+<B> Up:</B> <A NAME="tex2html2409"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html2403"
+  HREF="node136.html">The Kernel Stack</A>
+ &nbsp; <B>  <A NAME="tex2html2411"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000160000000000000000">
+Clock Interrupts</A>
+</H1>
+
+<P>
+The procedure ``clock'' (3725) handles
+interrupts from either the line frequency time clock
+(type KW11-L, interrupt vector address 100) or the
+programmable real-time clock (type KW11-P,
+interrupt vector address 104).
+
+<P>
+UNIX requires that at least one of
+these should be available. (If both are
+present, only the line time clock is
+used.)
+
+<P>
+Whichever clock is used, interrupts are
+generated at line frequency (i.e. with
+a 50 Hz power supply, every 20 milliseconds).
+The clock interrupt priority level is six, higher than for any
+other peripheral device on our typical
+system, so that there will usually be
+very little delay in the initiation of
+``clock'' once the interrupt has been
+requested by the clock controller.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html2414"
+  HREF="node138.html">clock (3725)</A>
+<LI><A NAME="tex2html2415"
+  HREF="node139.html">timeout (3845)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

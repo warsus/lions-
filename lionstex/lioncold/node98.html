@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Setting the Segmentation Registers</TITLE>
+<META NAME="description" CONTENT="Setting the Segmentation Registers">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node99.html">
+<LINK REL="previous" HREF="node97.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node99.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1921"
+  HREF="node99.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1917"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1911"
+  HREF="node97.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1919"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1922"
+  HREF="node99.html">estabur (1650)</A>
+<B> Up:</B> <A NAME="tex2html1918"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1912"
+  HREF="node97.html">An Example</A>
+ &nbsp; <B>  <A NAME="tex2html1920"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001110000000000000000">
+Setting the Segmentation Registers</A>
+</H2>
+
+<P>
+Prototypes for the user segmentation
+registers are set up by ``estabur'' which
+is called when a program is first
+launched into execution, and again
+whenever a significant change in memory
+allocation requires it. The prototypes
+are stored in the arrays ``u.u_uisa'',
+``u.u_uisd''.
+
+<P>
+Whenever process #i is about to be reactivated, the procedure ``sureg'' is
+called to copy the the prototypes into
+the appropriate registers. The description registers are copied directly, but
+the address registers must be adjusted
+to reflect the actual location in physical memory of the area used.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

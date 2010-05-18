@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>clock (3725)</TITLE>
+<META NAME="description" CONTENT="clock (3725)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node139.html">
+<LINK REL="previous" HREF="node137.html">
+<LINK REL="up" HREF="node137.html">
+<LINK REL="next" HREF="node139.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2426"
+  HREF="node139.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2422"
+  HREF="node137.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2416"
+  HREF="node137.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2424"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2427"
+  HREF="node139.html">timeout (3845)</A>
+<B> Up:</B> <A NAME="tex2html2423"
+  HREF="node137.html">Clock Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2417"
+  HREF="node137.html">Clock Interrupts</A>
+ &nbsp; <B>  <A NAME="tex2html2425"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000161000000000000000">
+clock (3725)</A>
+</H2>
+
+<P>
+The function of ``clock'' is one of general housekeeping:
+
+<P>
+
+<UL>
+<LI>the display register is updated
+(PDP11/45 and 11/70 only);
+
+<P>
+</LI>
+<LI>various accounting values such as
+the time of day, accumulated processing times
+and execution profiles are maintained;
+
+<P>
+</LI>
+<LI>processes sleeping for a fixed
+time interval are awakened as per
+schedule;
+
+<P>
+</LI>
+<LI>core swapping activity is initiated once per second.
+</LI>
+</UL>
+
+<P>
+``clock'' breaks most of the rules for
+peripheral device handlers: it does
+reference the current ``u'' structure,
+and it also runs at a low priority for
+some of the time. It abbreviates its
+activity if a previous execution has
+not yet completed.
+
+<P>
+<DL>
+<DT><STRONG>3740:</STRONG></DT>
+<DD>``display'' is a no-op on the
+ PDP11/40;
+
+<P>
+</DD>
+<DT><STRONG>3743:</STRONG></DT>
+<DD>The array ``callout'' (0265) is an
+ array of ``NCALL'' (0143) structures
+of type ``callo'' (0260).
+The ``callo'' structure contains
+three elements: an incremental
+time, an argument and the address
+of a function. When the function
+element is not null, the function
+is to be executed with the supplied
+argument after a specified time.
+
+<P>
+(For the systems under study, the
+only function ever executed in
+this way is ``ttrstrt'' (8486),
+handler. (See Chapter 25.));
+
+<P>
+</DD>
+<DT><STRONG>3748:</STRONG></DT>
+<DD>If the first element of the list
+ is null, the whole list is null;
+
+<P>
+</DD>
+<DT><STRONG>3750:</STRONG></DT>
+<DD>The ``callout'' list is arranged in
+ the desired order of execution.
+ The time recorded is the number
+of clock ticks between events.
+Unless the first time (the time
+before the next event) is already
+zero, (meaning that the execution
+is already due) this time should
+be decremented by one.
+
+<P>
+If this time has already been
+counted to zero, decrement the
+next time unless it is already
+zero also, etc. i.e. decrement
+the first non-zero time in the
+list. All the leading entries
+with zero times represent operations which are already due. (The
+operations are actually carried
+out a little later.);
+
+<P>
+</DD>
+<DT><STRONG>3759:</STRONG></DT>
+<DD>Examine the previous processor
+status word, and if the priority
+was non-zero, bypass the next
+section, which executes those
+operations which are due;
+
+<P>
+</DD>
+<DT><STRONG>3766:</STRONG></DT>
+<DD>Reduce the processor priority to
+five (other level six interrupts
+may now occur);
+
+<P>
+</DD>
+<DT><STRONG>3767:</STRONG></DT>
+<DD>Search the ``callout'' array looking
+for operations which are due and execute them;
+
+<P>
+</DD>
+<DT><STRONG>3773:</STRONG></DT>
+<DD>Move the entries for operations
+which are still not yet due, to
+ the beginning of the array;
+
+<P>
+</DD>
+<DT><STRONG>3787:</STRONG></DT>
+<DD>The code from here until line
+3797 is executed, whatever the
+previous processor priority, at
+either priority level five or
+six;
+
+<P>
+</DD>
+<DT><STRONG>3788:</STRONG></DT>
+<DD>If the previous mode was ``user
+ mode'', then increment the user
+ time counter, and if an execution
+ profile is being accumulated,
+ call ``incupc'' (a895) to make an
+ entry in a histogram for the user
+ mode program counter (PC).
+
+<P>
+``incupc'' is written in assembler,
+presumably for efficiency and
+convenience. A description of
+what it does may be found in the
+section ``PROFIL(II)'' of the UPM.
+See also the procedure ``profil''
+(3667);
+
+<P>
+</DD>
+<DT><STRONG>3792:</STRONG></DT>
+<DD>If the previous mode was not user
+mode, increment the system (kernel) time counter for the process.
+</DD>
+</DL>
+
+<P>
+The code just described performs the
+basic time accounting for the system.
+Every clock tick results in the incrementing of either ``u.u_utime'' or
+``u.u_stime'' for some process. Both
+``u.u_utime'' and ``u.u_stime'' are
+initialised to zero in ``fork'' (3322). Their
+values are interrogated in ``wait''
+(3270). The values will go negative
+after 32K ticks (about 10 hours)!
+
+<P>
+<DL>
+<DT><STRONG>3795:</STRONG></DT>
+<DD>``p_cpu'' is used in determining
+ process priorities. It is a character value which is always
+ interpreted as a positive integer
+ (0 to 255). When it is moved to a
+ special register, sign extension
+ occurs so that 255, for instance,
+ becomes like -1. Adding one then
+ leaves a zero result. In this
+ case the value is reduced to -1
+ again, and stored as 255
+ unsigned. Note that in the other
+ places where ``p_cpu'' is referenced (2161, 3814), the top eight
+ bits are masked off after the
+ value has been transferred to a
+ special register;
+
+<P>
+</DD>
+<DT><STRONG>3797:</STRONG></DT>
+<DD>Increment ``lbolt'' and if it
+exceeds ``HZ'', i.e. a second or
+more has elapsed ...
+
+<P>
+</DD>
+<DT><STRONG>3798:</STRONG></DT>
+<DD>Then provided the processor was
+ not previously running at a nonzero priority, do a whole lot of
+ housekeeping;
+
+<P>
+</DD>
+<DT><STRONG>3800:</STRONG></DT>
+<DD>Decrement ``lbolt'' by ``HZ'';
+
+<P>
+</DD>
+<DT><STRONG>3801:</STRONG></DT>
+<DD>Increment the time of day accumulator;
+
+<P>
+</DD>
+<DT><STRONG>3803:</STRONG></DT>
+<DD>The events which follow may take
+ some time, but they may reasonably be interrupted to service
+ other peripherals. So the processor priority is dropped below all
+ the device priority levels i.e.
+ below <B>four</B>.
+
+<P>
+However there is now a possibility of another clock interrupt
+before this activation of the
+``clock'' procedure is completed.
+By setting the processor priority
+to <B>one</B> rather than to <B>zero</B>, a
+second activation of ``clock'' will
+not attempt to execute the code
+from line 3804 on also. Note however that
+to the hardware, priority one is functionally the same
+as priority zero;
+
+<P>
+</DD>
+<DT><STRONG>3804:</STRONG></DT>
+<DD>If the current time (measured in
+ seconds) is equal to the value
+ stored in ``tout'', wake all
+ processes which have elected to
+ suspend themselves for a period
+ of time via the ``sleep'' system
+ call i.e. via the procedure
+ ``sslep'' (5979).
+</DD>
+</DL>
+
+<P>
+``tout'' stores the time at which the
+next process is to be awakened. If
+there is more than one such process,
+then the remainder, which will have
+been disturbed, must reset ``tout''
+between them. This mechanism, while
+quite effective, will not be efficient
+if the number of such processes ever
+becomes large.
+
+<P>
+In this situation, a mechanism similar
+to the ``callout'' array (see 3767) would
+need to be provided. (In fact, how difficult would it be to merge the two
+mechanisms? What would be the disadvantages ??);
+
+<P>
+<DL>
+<DT><STRONG>3806:</STRONG></DT>
+<DD>When the last two bits of
+ ``time[1]'' are zero i.e. every
+ four seconds, reset the scheduling flag ``runrun'' and wake up
+ everything waiting for a ``lightning bolt''. (``lbolt'' represents a
+ general event which is caused
+ every four seconds, to initiate
+ miscellaneous housekeeping. It is
+ used by ``pcopen'' (8648).);
+
+<P>
+</DD>
+<DT><STRONG>3810:</STRONG></DT>
+<DD>For all currently defined
+ processes:
+
+<P>
+increment ``p_time'' up to a maximum
+of 127 (it is only a character
+variable);
+
+<P>
+decrement ``p_cpu'' by ``SCHMAG''
+(3707) but do not allow it to go
+negative. Note that as discussed
+earlier (line 3795) ``p_cpu'' is
+treated as a positive integer in
+the range 0 to 255;
+
+<P>
+if the processor priority is currently set
+at a depressed value, recalculate it.
+</DD>
+</DL>
+
+<P>
+Note that ``p_cpu'' enters into the calculation of process priorities,
+``p_pri'', by ``setpri'' (2156). ``p_pri''
+is used by ``swtch'' (2209) in choosing
+which process, from among those which
+are in core (``SLOAD'') and ready to run
+(``SRUN''), should next receive the CPU's
+attention.
+
+<P>
+``p_time'' is used to measure how long
+(in seconds) a process has been either
+in core or swapped out to disk.
+``p_time'' is set to zero by ``newproc''
+(1869), by ``sched'' (2047) and by
+``xswap'' (4386). It is used by ``sched''
+(1962, 2009) to determine which
+processes to swap in or out.
+
+<P>
+<DL>
+<DT><STRONG>3820:</STRONG></DT>
+<DD>If the scheduler is waiting to
+ rearrange things, wake it up.
+ Thus the normal rate for scheduling decisions is once per second;
+
+<P>
+</DD>
+<DT><STRONG>3824:</STRONG></DT>
+<DD>If the previous mode before the
+ interrupt was ``user mode'', store
+ the address of ``r0'' in a standard
+ place, and if a ``signal'' has been
+ received for the process, call
+ ``psig'' (4043) for the appropriate
+ action.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2426"
+  HREF="node139.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2422"
+  HREF="node137.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2416"
+  HREF="node137.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2424"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2427"
+  HREF="node139.html">timeout (3845)</A>
+<B> Up:</B> <A NAME="tex2html2423"
+  HREF="node137.html">Clock Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2417"
+  HREF="node137.html">Clock Interrupts</A>
+ &nbsp; <B>  <A NAME="tex2html2425"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

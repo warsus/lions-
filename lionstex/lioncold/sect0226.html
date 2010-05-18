@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: closef (6643)</title>
+
+<link href="sect0227.html" title="iput (7344)" rel="next" />
+<link href="sect0225.html" title="close (5846)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0225.html" title="close (5846)"><img alt="Previous: close (5846)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0227.html" title="iput (7344)"><img alt="Next: iput (7344)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">closef (6643)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000227">18.13 closef (6643)</h2>
+<p>“closef” is called by “close” (5854) and by “exit” (3230). (The latter is more common since most files do not get closed explicitly but only implicitly when the user program terminates.) </p><dl class="description">
+
+    <dt>6649:</dt>
+    <dd><p>If the file is a pipe, reset the mode of the pipe and “wakeup” any process which is waiting for the pipe, either for information or for space; </p></dd>
+
+    <dt>6655:</dt>
+    <dd><p>If this is the last process to reference the file, call “closei” (6672) to handle any special end of file processing for special files and then call “iput”; </p></dd>
+
+    <dt>6657:</dt>
+    <dd><p>Decrement the “file” entry reference count. If this now zero, the entry is no longer allocated. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0225.html" title="close (5846)"><img alt="Previous: close (5846)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0227.html" title="iput (7344)"><img alt="Next: iput (7344)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

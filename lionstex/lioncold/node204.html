@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>A Cache-like Memory</TITLE>
+<META NAME="description" CONTENT="A Cache-like Memory">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node205.html">
+<LINK REL="previous" HREF="node203.html">
+<LINK REL="up" HREF="node202.html">
+<LINK REL="next" HREF="node205.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3277"
+  HREF="node205.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3273"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3267"
+  HREF="node203.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3275"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3278"
+  HREF="node205.html">clrbuf (5038)</A>
+<B> Up:</B> <A NAME="tex2html3274"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3268"
+  HREF="node203.html">Flags</A>
+ &nbsp; <B>  <A NAME="tex2html3276"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000222000000000000000">
+A Cache-like Memory</A>
+</H2>
+
+<P>
+It will be seen that the large buffers
+in UNIX are manipulated in a way which
+is analogous to the operation of
+hardware cache attached to the main
+memory of a computer e.g. the PDP11/70.
+
+<P>
+Buffers are not assigned to any particular program or file, except for very
+short intervals at a time. In this way
+a relatively small number of buffers
+can be shared effectively amongst a
+large number of programs and files.
+
+<P>
+Information is left in the buffers
+until the buffer is needed i.e. immediate ``write through'' is avoided if only
+part of the buffer has recently been
+changed. Programs which read or write
+records which are small compared with
+the buffer size are then not penalised
+unduly.
+
+<P>
+Finally when programs are terminated
+and files are closed, the problems of
+ensuring that the program's buffers are
+flushed properly (problems which have
+plagued other operating systems) have
+largely disappeared.
+
+<P>
+There is one area of practical concern:
+if the decision ``when to write'' is left
+to the operating system alone, then
+some buffers may not be written out for
+a very long time. Accordingly there is
+a utility program which runs twice per
+minute and forces all such buffers to
+be written out unconditionally. This
+limits the likely amount of damage that
+a sudden system crash may cause.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3277"
+  HREF="node205.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3273"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3267"
+  HREF="node203.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3275"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3278"
+  HREF="node205.html">clrbuf (5038)</A>
+<B> Up:</B> <A NAME="tex2html3274"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3268"
+  HREF="node203.html">Flags</A>
+ &nbsp; <B>  <A NAME="tex2html3276"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

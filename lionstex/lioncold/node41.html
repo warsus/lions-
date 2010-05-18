@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 8</TITLE>
+<META NAME="description" CONTENT="Example 8">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node42.html">
+<LINK REL="previous" HREF="node40.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node42.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1199"
+  HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1195"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1189"
+  HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1197"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1200"
+  HREF="node42.html">Example 9</A>
+<B> Up:</B> <A NAME="tex2html1196"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1190"
+  HREF="node40.html">Example 7</A>
+ &nbsp; <B>  <A NAME="tex2html1198"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00069000000000000000">
+Example 8</A>
+</H2>
+
+<P>
+``C'' provides a conditional expression.
+Thus if ``a'' and ``b'' are integer variables,
+
+<P>
+<PRE>
+    (a &gt; b ? a : b)
+</PRE>
+
+<P>
+is an expression whose value is that of
+the larger of ``a'' and ``b''.
+
+<P>
+However this does not work if ``a'' and
+``b'' are to be regarded as unsigned
+integers. Hence there is a use for the
+procedure
+
+<P>
+<PRE>
+  6326 max (a, b)
+       char *a, *b;
+       {
+         if (a &gt; b)
+           return(a);
+         return(b);
+       }
+</PRE>
+
+<P>
+The trick here is that ``a'' and ``b'',
+having been declared as pointers to
+characters are treated for comparison
+purposes as unsigned integers.
+
+<P>
+The body of the procedure could have
+been written as
+
+<P>
+<PRE>
+    max (a, b)
+    char *a, *b;
+    {
+      if (a &gt; b)
+        return(a);
+      else
+        return(b);
+    }
+</PRE>
+
+<P>
+but the nature of ``return'' is such that
+the ``else'' is not needed here!
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

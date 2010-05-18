@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>main (1550)</TITLE>
+<META NAME="description" CONTENT="main (1550)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node81.html">
+<LINK REL="previous" HREF="node79.html">
+<LINK REL="up" HREF="node77.html">
+<LINK REL="next" HREF="node81.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1694"
+  HREF="node81.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1690"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1684"
+  HREF="node79.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1692"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1695"
+  HREF="node81.html">Processes</A>
+<B> Up:</B> <A NAME="tex2html1691"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1685"
+  HREF="node79.html">start (0612)</A>
+ &nbsp; <B>  <A NAME="tex2html1693"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000103000000000000000">
+main (1550)</A>
+</H2>
+
+<P>
+Upon entry to this procedure:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>the processor is running at
+priority zero, in kernel mode
+and with the previous mode shown
+as user mode;
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>the kernel mode segmentation
+registers have been set and the
+memory management unit has been
+enabled;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>all the data areas used by the
+operating system have been initialised;
+
+<P>
+</DD>
+<DT><STRONG>(d)</STRONG></DT>
+<DD>the stack pointer (SP or r6)
+points to a word which contains
+a return address in ``start''.
+</DD>
+</DL>
+
+<P>
+<DL>
+<DT><STRONG>1559:</STRONG></DT>
+<DD>The first action of ``main'' would
+ appear to be redundant, since
+ ``updlock'' should have already
+ been set to zero as part of the
+ initialisation performed by
+ ``start'';
+
+<P>
+</DD>
+<DT><STRONG>1560:</STRONG></DT>
+<DD>``i'' is initialised to the ordinal
+ of the first 32 word block beyond
+ the ``per process data area'' for
+ process #0;
+
+<P>
+</DD>
+<DT><STRONG>1562:</STRONG></DT>
+<DD>The first pair of user mode segmentation registers are used to
+ provide a ``moving window'' into
+ higher areas of the physical
+ memory.
+
+<P>
+At each position of the window an
+attempt is made (using ``fuibyte'')
+to read the first accessible word
+in the window. If this is not
+successful, it is assumed that
+the end of the physical memory
+has been reached.
+Otherwise the next 32 word block
+is initialised to zero (using
+``clearseg'' (0676)) and added to
+the list of available memory, and
+the window is advanced by 32
+words.
+</DD>
+</DL>
+
+<P>
+``fuibyte'' and ``clearseg'' are both to be
+found in ``m40.s'', ``fuibyte'' will normally return a positive value in the
+range 0 to 255. However, in the exceptional case where the memory location
+referenced does not respond, the value
+-1 is returned. The way this is
+brought about is a little obscure, and
+will be explained later in Chapter
+Ten.)
+
+<P>
+<DL>
+<DT><STRONG>1582:</STRONG></DT>
+<DD>``maxmem'' defines the maximum
+ amount of main memory which may
+ be used by a user program. This
+ is the minimum of:
+
+<P>
+
+<UL>
+<LI>the physically available memory (``maxmem'');
+
+<P>
+</LI>
+<LI>an installation definable parameter (``MAXMEM'') (0135);
+
+<P>
+</LI>
+<LI>the ultimate limit imposed by the PDP11 architecture;
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG>1583:</STRONG></DT>
+<DD>``swapmap'' defines available space
+ on the swapping disk which may be
+ used when user programs are
+ swapped out of main memory. It is
+ initialised to a single area of
+ size ``nswap'', starting at relative address ``swplo''. Note that
+ ``nswap'' and ``swplo'' are initialised in ``conf.c'' (lines 4697,
+ 4698);
+
+<P>
+</DD>
+<DT><STRONG>1589:</STRONG></DT>
+<DD>The significance of this and the
+ next four lines will be discussed
+ shortly;
+
+<P>
+</DD>
+<DT><STRONG>1599:</STRONG></DT>
+<DD>The design of UNIX assumes the
+ existence of a system clock which
+ interrupts the processor at line
+ frequency (i.e 50 Hz or 60 Hz).
+
+<P>
+There are two possible clock
+types available: a line frequency
+clock (KW11-L) which has a control register on the Unibus at
+address 777546, or a programmable, real-time clock (KW11-P)
+located at address 777540 (lines
+1509, 1510).
+
+<P>
+UNIX does not presume which clock
+will be present. It attempts to
+read the status word for the line
+frequency clock first. If successful,
+that clock is initialised and the other (if present)
+remains unused. If the first
+attempt is unsuccessful, then the
+other clock is tried. If both
+attempts are unsuccessful, there
+is a call on ``panic'' which effectively halts the system with an
+error message to the operator.
+</DD>
+</DL>
+
+<P>
+Since the absence of a clock will be
+indicated by a bus timeout error, it is
+convenient to make the reference via
+``fuiword'', preceded by the setting of a
+user mode segmentation register pair
+(1599, 1600).
+
+<P>
+<DL>
+<DT><STRONG>1607:</STRONG></DT>
+<DD>Either type of clock is initialised by the statement
+
+<P>
+*lks = 0115;
+
+<P>
+As a consequence of this action,
+the clock will interrupt the processor within the next 20
+ milliseconds. This interrupt may
+occur at any time, but it will be
+convenient for this discussion to
+assume that no interrupt will
+occur before initialisation is
+complete;
+
+<P>
+</DD>
+<DT><STRONG>1613:</STRONG></DT>
+<DD>``cinit'' (82l4) initialises the
+ pool of character buffers. See
+ Chapter 23;
+
+<P>
+</DD>
+<DT><STRONG>1614:</STRONG></DT>
+<DD>``binit'' (5055) initialises
+ the pool of large buffers. See Chapter 17;
+
+<P>
+</DD>
+<DT><STRONG>1615:</STRONG></DT>
+<DD>``iinit'' (6922) initialises table
+ entries for the root device. See
+ Chapter Twenty.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1694"
+  HREF="node81.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1690"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1684"
+  HREF="node79.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1692"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1695"
+  HREF="node81.html">Processes</A>
+<B> Up:</B> <A NAME="tex2html1691"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1685"
+  HREF="node79.html">start (0612)</A>
+ &nbsp; <B>  <A NAME="tex2html1693"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

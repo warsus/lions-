@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 13</title>
+
+<link href="sect0043.html" title="Example 14" rel="next" />
+<link href="sect0041.html" title="Example 12" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0041.html" title="Example 12"><img alt="Previous: Example 12" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0043.html" title="Example 14"><img alt="Next: Example 14" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 13</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000043">3.14 Example 13</h2>
+<pre>
+  3949 signal (tp, sig)
+       {
+         register struct proc *p;
+         for (p=proc;p&lt;&amp;proc[NPROC];p++)
+           if (p-&gt;p ttyp == tp)
+             psignal (p,sig);
+       }
+</pre><p>In this example of the “for” statement, the pointer variable “p” is stepped through each element of the array “proc” in turn. </p><p>Actually the original code had </p><pre>
+   for (p=&amp;proc[0];p&lt;&amp;proc[NPROC];p++)
+</pre><p>but it wouldn’t fit on the line! As noted earlier, the use of “proc” as an alternative to the expression “&amp;proc[0]” is acceptable in this context. </p><p>This kind of “for” statement is almost a cliche in UNIX so you had better learn to recognise it. Read it as </p><p><i class="it">for p = each process in turn</i> </p><p>Note that “proc[NPROC]” is the address of the (NPROC+1)-th element of the array (which does not of course exist) i.e. it is the first location beyond the end of the array. </p><p>At the risk of overkill we would point out again that whereas in the previous example </p><pre>
+    i++;
+</pre><p>meant add one to the integer “i”, here </p><pre>
+    p++;
+</pre><p>means “skip p to point to the next structure”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0041.html" title="Example 12"><img alt="Previous: Example 12" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0043.html" title="Example 14"><img alt="Next: Example 14" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

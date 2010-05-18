@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>closef (6643)</TITLE>
+<META NAME="description" CONTENT="closef (6643)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node231.html">
+<LINK REL="previous" HREF="node229.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node231.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3609"
+  HREF="node231.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3605"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3599"
+  HREF="node229.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3607"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3610"
+  HREF="node231.html">iput (7344)</A>
+<B> Up:</B> <A NAME="tex2html3606"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3600"
+  HREF="node229.html">close (5846)</A>
+ &nbsp; <B>  <A NAME="tex2html3608"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002313000000000000000">
+closef (6643)</A>
+</H2>
+
+<P>
+``closef'' is called by ``close'' (5854)
+and by ``exit'' (3230). (The latter is
+more common since most files do not get
+closed explicitly but only implicitly
+when the user program terminates.)
+
+<P>
+<DL>
+<DT><STRONG>6649:</STRONG></DT>
+<DD>If the file is a pipe, reset the
+mode of the pipe and ``wakeup'' any
+process which is waiting for the
+pipe, either for information or
+for space;
+
+<P>
+</DD>
+<DT><STRONG>6655:</STRONG></DT>
+<DD>If this is the last process to
+ reference the file, call ``closei''
+ (6672) to handle any special end
+ of file processing for special
+ files and then call ``iput'';
+
+<P>
+</DD>
+<DT><STRONG>6657:</STRONG></DT>
+<DD>Decrement the ``file'' entry reference count. If this now zero, the
+ entry is no longer allocated.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

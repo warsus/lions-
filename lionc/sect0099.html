@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Process Switching</title>
+
+<link href="sect0100.html" title="Interrupts" rel="next" />
+<link href="sect0098.html" title="Process Management" rel="prev" />
+<link href="sect0098.html" title="Process Management" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0098.html" title="Process Management"><img alt="Previous: Process Management" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0100.html" title="Interrupts"><img alt="Next: Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0098.html">Process Management</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Process Switching</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000100">8.1 Process Switching</h2>
+<p>An active process may suspend itself i.e relinquish the processor, by calling “swtch” (2178) which calls “retu” (0740). This may be done for example if a process has reached a point beyond which it cannot proceed immediately. The process calls “sleep” (2066) which calls “swtch”. </p><p>Alternatively a kernel process which is ready to revert to user mode will test the variable “runrun” and if this is non-zero, implying that a process with a higher precedence is ready to run, the kernel process will call “swtch”. </p><p>“swtch” searches the “proc” table, for entries for which “p_stat” equals “SRUN” and the “SLOAD” bit is set in “p_flag”. From these it selects the process for which the value of “p_pri” is a minimum, and transfers control to it. </p><p>Values for “p_pri” are recalculated for each process from time to time by use of the procedure “setpri” (2156). Obviously the algorithm used by “setpri” has a significant influence. A process which has called “sleep” and suspended itself may be returned to the “ready to run” state by another process. This often occurs during the handling of interrupts when the process handling the interrupt calls “setrun” (2134) either directly or indirectly via a call on “wakeup” (2113). </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0098.html" title="Process Management"><img alt="Previous: Process Management" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0100.html" title="Interrupts"><img alt="Next: Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Buffer Manipulation</TITLE>
+<META NAME="description" CONTENT="Buffer Manipulation">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node217.html">
+<LINK REL="previous" HREF="node195.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node203.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3239"
+  HREF="node203.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3235"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3229"
+  HREF="node201.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3237"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3240"
+  HREF="node203.html">Flags</A>
+<B> Up:</B> <A NAME="tex2html3236"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html3230"
+  HREF="node201.html">iodone (5018)</A>
+ &nbsp; <B>  <A NAME="tex2html3238"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000220000000000000000">
+Buffer Manipulation</A>
+</H1>
+
+<P>
+In this chapter we look at the file
+``bio.c'' in detail. It contains most of
+the basic routines used to manipulate
+buffer headers and buffers (4535,
+4720).
+
+<P>
+Individual buffer headers are tagged by
+a device number ``b_dev'', (4527) and a
+block number ``b_blkno'', (4531). (Note
+the way in which the latter is declared
+as an unsigned integer.)
+
+<P>
+Buffer headers may be linked simultaneously into two lists:
+
+<P>
+<DL>
+<DT><STRONG>the ``b''-lists</STRONG></DT>
+<DD>are lists, one per
+device controller, which link
+together buffers associated with
+that device type;
+
+<P>
+</DD>
+<DT><STRONG>the ``av''-list</STRONG></DT>
+<DD>is a list of buffers
+which may be detached from their
+current use and converted to an
+alternate use.
+</DD>
+</DL>
+
+<P>
+Both the ``av''-list and the various
+``b''-lists are doubly linked to facilitate insertion and deletion at any
+point.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3241"
+  HREF="node203.html">Flags</A>
+<LI><A NAME="tex2html3242"
+  HREF="node204.html">A Cache-like Memory</A>
+<LI><A NAME="tex2html3243"
+  HREF="node205.html">clrbuf (5038)</A>
+<LI><A NAME="tex2html3244"
+  HREF="node206.html">incore (4899)</A>
+<LI><A NAME="tex2html3245"
+  HREF="node207.html">getblk (4921)</A>
+<LI><A NAME="tex2html3246"
+  HREF="node208.html">brelse (4869)</A>
+<LI><A NAME="tex2html3247"
+  HREF="node209.html">binit (5055)</A>
+<LI><A NAME="tex2html3248"
+  HREF="node210.html">bread (4754)</A>
+<LI><A NAME="tex2html3249"
+  HREF="node211.html">breada (4773)</A>
+<LI><A NAME="tex2html3250"
+  HREF="node212.html">bwrite (4809)</A>
+<LI><A NAME="tex2html3251"
+  HREF="node213.html">bawrite (4856)</A>
+<LI><A NAME="tex2html3252"
+  HREF="node214.html">bdwrite (4836)</A>
+<LI><A NAME="tex2html3253"
+  HREF="node215.html">bflush (5229)</A>
+<LI><A NAME="tex2html3254"
+  HREF="node216.html">physio (5259)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

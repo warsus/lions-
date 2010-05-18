@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>panic (2419)</TITLE>
+<META NAME="description" CONTENT="panic (2419)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node75.html">
+<LINK REL="previous" HREF="node73.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node75.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1614"
+  HREF="node75.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1610"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1604"
+  HREF="node73.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1612"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1615"
+  HREF="node75.html">prdev (2433), deverror (2447)</A>
+<B> Up:</B> <A NAME="tex2html1611"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1605"
+  HREF="node73.html">putchar (2386)</A>
+ &nbsp; <B>  <A NAME="tex2html1613"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000910000000000000000">
+panic (2419)</A>
+</H2>
+
+<P>
+This procedure is called from a number
+of locations in the operating system.
+(e.g. line 1605). When circumstances
+exist under which continued operation
+of the system seems undesirable.
+
+<P>
+UNIX does not profess to be a ``fault
+tolerant'' or ``fail soft'' system, and in
+many cases the call on ``panic'' can be
+interpreted as a fairly unsophisticated
+response to a straightforward problem.
+
+<P>
+However more complicated responses
+require additional code, lots of it,
+and this is contrary to the general
+UNIX philosophy of ``keep it simple''.
+
+<P>
+<DL>
+<DT><STRONG>2419:</STRONG></DT>
+<DD>The reason for this statement is
+ given in the comment beginning at
+ line 2323;
+
+<P>
+</DD>
+<DT><STRONG>2420:</STRONG></DT>
+<DD>``update'' causes all the large
+ block buffers to be written out.
+ See Chapter Twenty;
+
+<P>
+</DD>
+<DT><STRONG>2421:</STRONG></DT>
+<DD>``printf'' is called with a format
+ string and one parameter, which
+ was passed to ``panic'';
+
+<P>
+</DD>
+<DT><STRONG>2422:</STRONG></DT>
+<DD>This ``for'' statement defines an
+ infinite loop in which the only
+ action is a call on the assembly
+ language procedure ``idle'' (1284).
+
+<P>
+``idle'' drops the processor priority to zero, and performs a
+``wait''. This is a ``do nothing''
+instruction of indefinite duration. It terminates when a
+hardware interrupt occurs.
+
+<P>
+An infinite set of calls on ``idle'' is
+better than the execution of a ``halt''
+instruction, since any i/o activities
+which were under way can be allowed to
+complete and the system clock can keep
+ticking.
+
+<P>
+The only way for the operator to
+recover from a ``panic'' is to reinitialise the system, (after taking a core
+dump, if desired).
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1614"
+  HREF="node75.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1610"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1604"
+  HREF="node73.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1612"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1615"
+  HREF="node75.html">prdev (2433), deverror (2447)</A>
+<B> Up:</B> <A NAME="tex2html1611"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1605"
+  HREF="node73.html">putchar (2386)</A>
+ &nbsp; <B>  <A NAME="tex2html1613"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

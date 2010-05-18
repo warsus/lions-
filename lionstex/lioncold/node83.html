@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The story continues ...</TITLE>
+<META NAME="description" CONTENT="The story continues ...">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node84.html">
+<LINK REL="previous" HREF="node82.html">
+<LINK REL="up" HREF="node77.html">
+<LINK REL="next" HREF="node84.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1730"
+  HREF="node84.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1726"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1720"
+  HREF="node82.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1728"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1731"
+  HREF="node84.html">sched (1940)</A>
+<B> Up:</B> <A NAME="tex2html1727"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1721"
+  HREF="node82.html">Initialisation of proc[0]</A>
+ &nbsp; <B>  <A NAME="tex2html1729"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000106000000000000000">
+The story continues ...</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>1627:</STRONG></DT>
+<DD>``newproc'' (1826) will be discussed in detail in the next
+ chapter.
+
+<P>
+In brief this initialises a
+second ``proc'' structure viz.
+``proc[1]'', and allocates a second
+``per process data area'' in core.
+This is a copy of the ``per process data area'' for process #0,
+exact in all but one respect: the
+value of ``u.u_procp'' in the
+second area is ``&amp;proc[1]''.
+
+<P>
+We should note here that at line
+1889, there is a call on ``savu''
+(0725) which saves the current
+values of the environment and the
+stack pointers in ``u.u_rsav''
+before the copy is made.
+
+<P>
+Also from line 1918 we can see
+that the value returned by
+``newproc'' will be zero, so that
+the statements on lines 1628 to
+1635 will not be executed;
+
+<P>
+</DD>
+<DT><STRONG>1637:</STRONG></DT>
+<DD>A call is made to ``sched'' (1940)
+ which, it may be observed, contains an infinite loop, so that
+ it never returns!
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

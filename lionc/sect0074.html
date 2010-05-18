@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Operator Actions</title>
+
+<link href="sect0075.html" title="start (0612)" rel="next" />
+<link href="sect0073.html" title="Getting Started" rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0073.html" title="Getting Started"><img alt="Previous: Getting Started" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0075.html" title="start (0612)"><img alt="Next: start (0612)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Operator Actions</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000075">6.1 Operator Actions</h2>
+<p>Reinitialisation requires operator action at the processor console. The operator must: </p><ul class="itemize">
+<li><p>stop the processor by setting the “enable/halt” switch to “halt”; </p></li><li><p>set the switch register with the address of the hardware bootstrap loader program; </p></li><li><p>depress and release the “ load address” switch; </p></li><li><p>move the “enable/halt” switch to “enable”; </p></li><li><p>depress and release the “start” switch. </p></li>
+</ul><p>This activates the bootstrap program which is permanently recorded in a ROM in the processor. </p><p>The bootstrap loader program loads a larger loader program (from block #0 of the system disk), which looks for and loads a file called “/unix” into the low part of memory. </p><p>It then transfers control to the instruction loaded at address zero. </p><p>Address zero is occupied by a branch instruction (line 0508), which branches to location 000040, which contains a jump instruction (line 0522), which jumps to the instruction labelled “start” in the file “m40.s” (line 0612). </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0073.html" title="Getting Started"><img alt="Previous: Getting Started" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0075.html" title="start (0612)"><img alt="Next: start (0612)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

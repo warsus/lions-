@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>rkintr (5451)</TITLE>
+<META NAME="description" CONTENT="rkintr (5451)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node201.html">
+<LINK REL="previous" HREF="node199.html">
+<LINK REL="up" HREF="node195.html">
+<LINK REL="next" HREF="node201.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3217"
+  HREF="node201.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3213"
+  HREF="node195.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3207"
+  HREF="node199.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3215"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3218"
+  HREF="node201.html">iodone (5018)</A>
+<B> Up:</B> <A NAME="tex2html3214"
+  HREF="node195.html">The RK Disk Driver</A>
+<B> Previous:</B> <A NAME="tex2html3208"
+  HREF="node199.html">devstart (5096)</A>
+ &nbsp; <B>  <A NAME="tex2html3216"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000215000000000000000">
+rkintr (5451)</A>
+</H2>
+
+<P>
+This procedure is invoked to handle the
+interrupts which occur when RK disk
+operations are completed.
+
+<P>
+<DL>
+<DT><STRONG>5455:</STRONG></DT>
+<DD>Check for a false alarm!
+
+<P>
+</DD>
+<DT><STRONG>5459:</STRONG></DT>
+<DD>Inspect the error bit; if set ...
+
+<P>
+</DD>
+<DT><STRONG>5460:</STRONG></DT>
+<DD>Call ``deverror'' (2447) to display
+a message on the system console
+terminal;
+
+<P>
+</DD>
+<DT><STRONG>5461:</STRONG></DT>
+<DD>Clear the internal registers of
+ the disk controller and ...
+
+<P>
+</DD>
+<DT><STRONG>5462:</STRONG></DT>
+<DD>Wait till this is completed (usually a few microseconds);
+
+<P>
+</DD>
+<DT><STRONG>5463:</STRONG></DT>
+<DD>If the operation has been retried
+ less than ten times, call
+ ``rkstart'' to try again. Otherwise
+ give up and report an error;
+
+<P>
+</DD>
+<DT><STRONG>5469:</STRONG></DT>
+<DD>Set the ``retry'' (!) count back to
+ zero, remove the current operation from the ``actf'' list, and
+ complete the operation by calling
+ ``iodone'';
+
+<P>
+</DD>
+<DT><STRONG>5472:</STRONG></DT>
+<DD>``rkstart'' is called unconditionally here. If the call is not
+ necessary (because the ``actf''
+ list is empty) ``rkstart'' will
+ return immediately (5444).
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

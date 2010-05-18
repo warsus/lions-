@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 2</TITLE>
+<META NAME="description" CONTENT="Example 2">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node36.html">
+<LINK REL="previous" HREF="node34.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node36.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1127"
+  HREF="node36.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1123"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1117"
+  HREF="node34.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1125"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1128"
+  HREF="node36.html">Example 3</A>
+<B> Up:</B> <A NAME="tex2html1124"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1118"
+  HREF="node34.html">Example 1</A>
+ &nbsp; <B>  <A NAME="tex2html1126"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00063000000000000000">
+Example 2</A>
+</H2>
+
+<P>
+The next example is a little less
+trivial:
+
+<P>
+<PRE>
+  6566 nodev ()
+       {
+        u.u_error = ENODEV;
+       }
+</PRE>
+
+<P>
+The additional statement is an assignment
+statement. It is terminated by a
+semicolon which is part of the statement,
+not a statement separator as in
+Algol-like languages.
+
+<P>
+``ENODEV'' is a defined symbol, i.e. a
+symbol which is replaced by an associated
+character string by the compiler
+preprocessor before actual compilation.
+``ENODEV'' is defined on line 0484 as 19.
+The UNIX convention is that defined
+symbols are written in upper case, and
+all other symbols in lower case.
+
+<P>
+``='' is the assignment operator, and
+``u.u_error'' is an element of the structure
+``u''. (See line 0419.) Note the use
+of ``.'' as the operator which selects an
+element of a structure. The element
+name is ``u_error'' which may be taken as
+a paradigm for the way names of structure
+elements are constructed in the
+UNIX source code: a distinguishing
+letter is followed by an underscore
+followed by a name.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

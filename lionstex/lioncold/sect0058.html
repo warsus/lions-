@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Section Five</title>
+
+<link href="sect0059.html" title="Section One" rel="next" />
+<link href="sect0057.html" title="Section Four" rel="prev" />
+<link href="sect0047.html" title="An Overview" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0057.html" title="Section Four"><img alt="Previous: Section Four" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0059.html" title="Section One"><img alt="Next: Section One" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0047.html">An Overview</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Section Five</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000059">4.11 Section Five</h2>
+<p>Section Five is the final section. It is concerned with input/output for the slower, character oriented peripheral devices. </p><p>Such devices share a common buffer pool, which is manipulated by a set of standard procedures. </p><p>The set of character peripheral devices are exemplified by the following: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">KL/DL11</b> </p></td>
+
+    
+    <td style="text-align:left"><p> interactive terminal</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">PC11</b> </p></td>
+
+    
+    <td style="text-align:left"><p> paper tape reader/punch</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">LP11</b> </p></td>
+
+    
+    <td style="text-align:left"><p> line printer</p></td>
+
+</tr>
+</table><dl class="description">
+
+    <dt>tty.h</dt>
+    <dd><p>[Sheet 79; Chapters 23, 24] defines the “clist” structure (used as a list head for character buffer queues), the “tty” structure (stores relevant data for controlling an individual terminal), declares the “partab” table (used to control transmission of individual characters to terminals) and defines names for many associated parameters. </p></dd>
+
+    <dt>kl.c</dt>
+    <dd><p>[Sheet 80; Chapters 24, 25] is the device driver for terminals connected via KL11 or DL11 interfaces. </p></dd>
+
+    <dt>tty.c</dt>
+    <dd><p>[Sheets 81..85; Chapters 23, 24, 25] contains common procedures which are independent of the attaching interfaces, for controlling transmission to or from terminals, and which take into account various terminal idiosyncrasies. </p></dd>
+
+    <dt>pc.c</dt>
+    <dd><p>[Sheets 86,87; Chapter 22] is the device handler for the PC11 paper tape reader/punch controller. </p></dd>
+
+    <dt>lp.c</dt>
+    <dd><p>[Sheets 88, 89; Chapter 22] is the device handler for the LP11 line printer controller. </p></dd>
+
+    <dt>mem.c</dt>
+    <dd><p>[Sheet 90] contains procedures which provide access to main memory as though it were an ordinary file. This code has been left to the reader to survey as an exercise. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0057.html" title="Section Four"><img alt="Previous: Section Four" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0059.html" title="Section One"><img alt="Next: Section One" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

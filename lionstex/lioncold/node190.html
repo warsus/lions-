@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>swap (5196)</TITLE>
+<META NAME="description" CONTENT="swap (5196)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node191.html">
+<LINK REL="previous" HREF="node189.html">
+<LINK REL="up" HREF="node184.html">
+<LINK REL="next" HREF="node191.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3093"
+  HREF="node191.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3089"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3083"
+  HREF="node189.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3091"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3094"
+  HREF="node191.html">Race Conditions</A>
+<B> Up:</B> <A NAME="tex2html3090"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3084"
+  HREF="node189.html">System Generation</A>
+ &nbsp; <B>  <A NAME="tex2html3092"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000206000000000000000">
+swap (5196)</A>
+</H2>
+
+<P>
+Before plunging into all the detail of
+the file ``bio.c'', it will be instructive as well as convenient to examine
+one routine which was introduced earlier, namely ``swap''.
+
+<P>
+The buffer head ``swbuf'' was declared to
+control swapping input/output, which
+must share access to the disk with
+other activity. No element of ``buffers''
+is associated with ``swbuf''. Instead the
+core area occupied (or to be occupied)
+by the program serves as the data
+buffer.
+
+<P>
+<DL>
+<DT><STRONG>5200:</STRONG></DT>
+<DD>The address of the flags in
+``swbuf'' is transferred to the
+register variable ``fp'' for convenience and economy;
+
+<P>
+</DD>
+<DT><STRONG>5202:</STRONG></DT>
+<DD>The ``B_BUSY'' flag is tested, and
+if it is on, a swap operation is
+already under way, so that the
+``B_WANTED'' flag is set and the
+process must wait via a call on ``sleep''.
+</DD>
+</DL>
+
+<P>
+Note that the code loop on lines
+5202 to 5205 runs at priority
+level six, i.e. one higher than
+the disk interrupt priority.
+
+<P>
+Can you see why this is necessary? Under what conditions will
+the ``B_BUSY'' flag be set?
+
+<P>
+<DL>
+<DT><STRONG>5206:</STRONG></DT>
+<DD>The flags are set to reflect:
+
+<P>
+
+<UL>
+<LI>``swbuf'' is in use (``B_BUSY'');
+
+<P>
+</LI>
+<LI>physical i/o implying a large
+transfer direct to/from the user
+data segment
+<BR>(``B_PHYS'');
+
+<P>
+</LI>
+<LI>whether the operation is read or
+write. (``rdflg'' is a parameter to
+``swap'');
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG>5207:</STRONG></DT>
+<DD>The ``b_dev'' field is initialised.
+(Presumably this could have been
+performed once during initialisation rather than every time
+``swbuf'' is used, i.e. in ``binit''.);
+
+<P>
+</DD>
+<DT><STRONG>5208:</STRONG></DT>
+<DD>``b_wcount'' is initialised. Note
+ the negative value and the effective multiplication by 32;
+
+<P>
+</DD>
+<DT><STRONG>5210:</STRONG></DT>
+<DD>The hardware device controller
+requires a full physical address
+(18 bits on the PDP 11/40). The
+block number of a 32 word block
+must be converted into two parts:
+the low order ten bits are
+shifted left six places and
+stored as ``b_addr'', and the
+remaining six high order bits as
+``b_xmem''. (On the PDP 11/40 and
+11/45 only two of these bits are
+significant.);
+
+<P>
+</DD>
+<DT><STRONG>5212:</STRONG></DT>
+<DD>A mouthful at first glance! Shift
+``swapdev'' eight places to the
+right to obtain the major device
+number. Use the result to index
+``bdevsw''. From the structure
+thus selected, extract the strategy routine and execute it with
+the address of ``swbuf'' passed as
+a parameter;
+
+<P>
+</DD>
+<DT><STRONG>5213:</STRONG></DT>
+<DD>Explain why this call on ``spl6''
+is necessary;
+
+<P>
+</DD>
+<DT><STRONG>5214:</STRONG></DT>
+<DD>Wait until the i/o operation is
+ complete. Note that the first
+ parameter to ``sleep'' is in effect
+ the address of ``swbuf'';
+
+<P>
+</DD>
+<DT><STRONG>5216:</STRONG></DT>
+<DD>Wakeup those processes (if any)
+ which are waiting for ``swbuf'';
+
+<P>
+</DD>
+<DT><STRONG>5218:</STRONG></DT>
+<DD>Reset the process or priority to
+ zero, thus allowing any pending
+ interrupts to ``happen'';
+
+<P>
+</DD>
+<DT><STRONG>5219:</STRONG></DT>
+<DD>Reset both the ``B_BUSY'' and
+ ``B_WANTED'' flags.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3093"
+  HREF="node191.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3089"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3083"
+  HREF="node189.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3091"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3094"
+  HREF="node191.html">Race Conditions</A>
+<B> Up:</B> <A NAME="tex2html3090"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3084"
+  HREF="node189.html">System Generation</A>
+ &nbsp; <B>  <A NAME="tex2html3092"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>issig (3991)</TITLE>
+<META NAME="description" CONTENT="issig (3991)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node167.html">
+<LINK REL="previous" HREF="node165.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node167.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2794"
+  HREF="node167.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2790"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2784"
+  HREF="node165.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2792"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2795"
+  HREF="node167.html">psig (4043)</A>
+<B> Up:</B> <A NAME="tex2html2791"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2785"
+  HREF="node165.html">psignal (3963)</A>
+ &nbsp; <B>  <A NAME="tex2html2793"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001814000000000000000">
+issig (3991)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>3997:</STRONG></DT>
+<DD>If ``p_sig'' is non-zero, then ...
+
+<P>
+</DD>
+<DT><STRONG>3998:</STRONG></DT>
+<DD>If the ``tracing'' flag is on, call
+ ``stop'' (this topic will be resumed later);
+
+<P>
+</DD>
+<DT><STRONG>4000:</STRONG></DT>
+<DD>Return a zero value if ``p_sig'' is
+ zero. (This apparently redundant
+ test is necessary because ``stop''
+ may reset ``p_sig'' as a side
+ effect.);
+
+<P>
+4003. If the value in the corresponding
+ element of ``u.u_signal'' is even
+ (may be zero) return a non-zero
+ value;
+
+<P>
+</DD>
+<DT><STRONG>4006:</STRONG></DT>
+<DD>Otherwise return a zero value.
+</DD>
+</DL>
+
+<P>
+The comment regarding the frequency of
+calls on ``issig'' which occurs on lines
+3983 to 3985 needs some clarification.
+At least one call on ``issig'' is a part
+of every execution of ``trap'' but only
+of one interrupt routine (``clock'',
+which calls ``issig'' only once per
+second). In cases where ``pri'' is positive, ``sleep'' (2073, 2085) calls
+``issig'' before and after calling
+``swtch''.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

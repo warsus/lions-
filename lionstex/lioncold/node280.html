@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>lpstart (8967)</TITLE>
+<META NAME="description" CONTENT="lpstart (8967)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node281.html">
+<LINK REL="previous" HREF="node279.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node281.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4244"
+  HREF="node281.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4240"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4234"
+  HREF="node279.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4242"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4245"
+  HREF="node281.html">lpinit(8976)</A>
+<B> Up:</B> <A NAME="tex2html4241"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4235"
+  HREF="node279.html">lpoutput (8986)</A>
+ &nbsp; <B>  <A NAME="tex2html4243"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000275000000000000000">
+lpstart (8967)</A>
+</H2>
+
+<P>
+While the line printer is ready, and
+while there are still characters stored
+away in the ``safe place'', keep sending
+characters to the printer controller.
+
+<P>
+The presumption is that while the controller
+is building up a set of characters for a complete line, the ``DONE''
+bit will reset faster than the CP can
+feed characters to the controller.
+
+<P>
+However once a print cycle has been
+initiated, the ``DONE'' bit will not be
+reset again for a period of the order
+of 100 milliseconds (depending on the
+speed of the printer).
+
+<P>
+Note that during this series of data
+transfers, interrupts will be inhiblted
+and so ``lpint'' will not be getting into
+the act whenever the ``DONE'' bit is set,
+except possibly once at the very end
+when the processor priority is reduced
+again.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

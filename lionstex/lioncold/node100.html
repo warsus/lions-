@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>sureg (1739)</TITLE>
+<META NAME="description" CONTENT="sureg (1739)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node101.html">
+<LINK REL="previous" HREF="node99.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node101.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1945"
+  HREF="node101.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1941"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1935"
+  HREF="node99.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1943"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1946"
+  HREF="node101.html">newproc (1826)</A>
+<B> Up:</B> <A NAME="tex2html1942"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1936"
+  HREF="node99.html">estabur (1650)</A>
+ &nbsp; <B>  <A NAME="tex2html1944"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001112000000000000000">
+sureg (1739)</A>
+</H2>
+
+<P>
+This routine is called by ``estabur''
+(1724), ``swtch'' (2229) and ``expand''
+(2295), to copy the prototype
+segmentation registers into the actual
+hardware segmentation registers.
+
+<P>
+<DL>
+<DT><STRONG>1743:</STRONG></DT>
+<DD>Get the base address for the data
+ area from the appropriate element
+ of the ``proc'' array;
+
+<P>
+</DD>
+<DT><STRONG>1744:</STRONG></DT>
+<DD>The prototype address registers
+ (of which there are only eight
+ for the PDP11/40) are modified by
+ the addition of ``a'' and stored in
+ the hardware segmentation address
+ registers;
+
+<P>
+</DD>
+<DT><STRONG>1752:</STRONG></DT>
+<DD>Test if a separate text area has
+ been allocated, and if so, reset
+ ``a'' to the relative address of
+ the text area to the data area.
+ (Note this value may be negative!
+ Fortunately at this point,
+ addresses are in terms of 32 word
+ blocks.);
+
+<P>
+</DD>
+<DT><STRONG>1754:</STRONG></DT>
+<DD>The pattern of code now followed
+ is similar to the beginning of
+ the routine, except ...
+
+<P>
+</DD>
+<DT><STRONG>1762:</STRONG></DT>
+<DD>a rather obscure piece of code
+adjusts the setting of the
+address register for segments
+which are not ``writable'' i.e.
+which presumably are text segments.
+</DD>
+</DL>
+
+<P>
+The code in ``estabur'' and ``sureg'' shows
+evidence of having been developed in
+several stages and is not as elegant as
+could be desired.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1945"
+  HREF="node101.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1941"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1935"
+  HREF="node99.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1943"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1946"
+  HREF="node101.html">newproc (1826)</A>
+<B> Up:</B> <A NAME="tex2html1942"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1936"
+  HREF="node99.html">estabur (1650)</A>
+ &nbsp; <B>  <A NAME="tex2html1944"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

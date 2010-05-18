@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: lpcanon (8879)</title>
+
+<link href="sect0281.html" title="For idle readers: A suggestion" rel="next" />
+<link href="sect0279.html" title="Discussion" rel="prev" />
+<link href="sect0271.html" title="Character Oriented Special Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0279.html" title="Discussion"><img alt="Previous: Discussion" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0281.html" title="For idle readers: A suggestion"><img alt="Next: For idle readers: A suggestion" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0271.html">Character Oriented Special Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">lpcanon (8879)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000281">22.9 lpcanon (8879)</h2>
+<p>This procedure interprets characters being sent to the line printer and make various modifications, insertions and deletions. It thus functions as a filter. </p><dl class="description">
+
+    <dt>8884:</dt>
+    <dd><p>The section of code from here to line 8913 is concerned with character translation when the full 96 character set is not available, and a 64 character set is in use. </p><p>Since the capabilities of a printer do not usually change with time, the defined variable “CAP” (8840) must be set once and for all (at a particular installation). </p><p>The run-time test on (lp11.flag &amp; CAP) could be replaced by a compile-time test on (CAP) and if the compiler has its “druthers”, if CAP turns out to be zero, the whole section of code to line 8913 could be compiled down to nothing. </p><p>The present code could be said to plan ahead for a situation where an installation may have two or more printers of different types. Even so there is a basic inconsistency here in the use of “CAP”, “IND” and “EJECT” on the one hand, and “EJLINE” and “MAXCOL” on the other. In fact since forms of different sizes are not uncommonly used on a single printer, the last two should not be constants at all, but should be dynamically settable. </p></dd>
+
+    <dt>8885:</dt>
+    <dd><p>Lower case alphabetics are translated by the addition of a constant, which is conveniently defined as “’A’ – ’a”’; </p></dd>
+
+    <dt>8887:</dt>
+    <dd><p>Certain of the remaining characters are special characters which are printed as a similar character with an overprinted minus sign, e.g. “{” (8889) is printed as “{-”; </p></dd>
+
+    <dt>8909:</dt>
+    <dd><p>The “similiar” character is output via a recursive call on “lpcanon”, which will increment “lp11.ccc” by one as a side effect; </p></dd>
+
+    <dt>8910:</dt>
+    <dd><p>Decrement the current character count (for the same effect as a “back space” character) and ... </p></dd>
+
+    <dt>8911:</dt>
+    <dd><p>Prepare to output a minus sign; </p></dd>
+
+    <dt>8915:</dt>
+    <dd><p>The “switch” statement beginning here extends to line 8963. Certain characters involved in vertical and horizontal spacing are given special interpretations with delayed actions; </p></dd>
+
+    <dt>8917:</dt>
+    <dd><p>For a horizontal tab character, round the current character count up to the next multiple of eight. Do not output any blank characters immediately; </p></dd>
+
+    <dt>8921:</dt>
+    <dd><p>For a “form feed” or “new line” character, if: </p><p>(a) the printer does not have a “page restore” capability; or </p><p>(b) the current line is not empty; or </p><p>(c) some lines have been completed since the last “form feed” character, then ... </p></dd>
+
+    <dt>8925:</dt>
+    <dd><p>reset “lp11.mcc” to zero; </p></dd>
+
+    <dt>8926:</dt>
+    <dd><p>Increment the completed line count; </p></dd>
+
+    <dt>8927:</dt>
+    <dd><p>Convert a “new line” character to a “form feed” if sufficient lines have been completed on the current page, and the printer has a “form feed” capability; </p></dd>
+
+    <dt>8929:</dt>
+    <dd><p>Output the character, and if was a “form feed”, reset number of completed lines zero; </p></dd>
+
+</dl><p>Examination of this code will show that: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>Any string of “form feed”s or “new line”s which begins with a “form feed”, will, if sent to a printer with “form feed” capability, be reduced to a single “form feed”; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>A “form feed” character sent to a printer without the “form feed” capability, will cause a new line to be started but will be passed on otherwise without comment. </p></dd>
+
+</dl><dl class="description">
+
+    <dt>8934:</dt>
+    <dd><p>For “carriage return”s, <b class="bf">and</b>, note, “form feed”s and “new line”s, reset the current character count to zero or eight, depending on “IND”, and return; </p></dd>
+
+    <dt>8949:</dt>
+    <dd><p>For all other characters ... </p></dd>
+
+    <dt>8950:</dt>
+    <dd><p>If a string of “backspace”s (real or contrived) and/or “carriage returns” has been received, output a single “carriage return” and reset the maximum character count to zero; </p></dd>
+
+    <dt>8954:</dt>
+    <dd><p>Provided the count does not exceed the maximum line length, output blank characters to bring the maximum character count to the current character count. (Perhaps these two variables would be more accurately called the “actual character count” and the “logical character count”.); </p></dd>
+
+    <dt>8959:</dt>
+    <dd><p>Output the actual character. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0279.html" title="Discussion"><img alt="Previous: Discussion" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0281.html" title="For idle readers: A suggestion"><img alt="Next: For idle readers: A suggestion" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

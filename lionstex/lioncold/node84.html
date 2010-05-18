@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>sched (1940)</TITLE>
+<META NAME="description" CONTENT="sched (1940)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node85.html">
+<LINK REL="previous" HREF="node83.html">
+<LINK REL="up" HREF="node77.html">
+<LINK REL="next" HREF="node85.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1742"
+  HREF="node85.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1738"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1732"
+  HREF="node83.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1740"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1743"
+  HREF="node85.html">sleep (2066)</A>
+<B> Up:</B> <A NAME="tex2html1739"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1733"
+  HREF="node83.html">The story continues ...</A>
+ &nbsp; <B>  <A NAME="tex2html1741"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000107000000000000000">
+sched (1940)</A>
+</H2>
+
+<P>
+At this stage we are only interested in
+what happens when ``sched'' is entered
+for the first time.
+
+<P>
+<DL>
+<DT><STRONG>1958:</STRONG></DT>
+<DD>``spl6'' is an assembler routine
+ (1292) which sets the processor
+ priority level to six. (Cf. also
+ ``spl0'', ``spl4'', ``spl5'' and ``spl7''
+ in ``m40.s'').
+</DD>
+</DL>
+
+<P>
+When the processor is at level six,
+only devices with priority seven can
+interrupt it. The clock whose priority
+level is six is thus inhibited from
+interrupting the processor between this
+point and the subsequent call on ``spl0''
+at line 1976.
+
+<P>
+<DL>
+<DT><STRONG>1960:</STRONG></DT>
+<DD>A search is made through ``proc''
+ whose status is
+``SRUN'' and which is not ``loaded''.
+</DD>
+</DL>
+
+<P>
+(Processes #0 and 1 have status ``SRUN''
+and are loaded. All remaining 2193:
+processes, have a status of zero, which
+is equivalent to ``undefined'' or 
+``NULL'' ) .
+
+<P>
+<DL>
+<DT><STRONG>1966:</STRONG></DT>
+<DD>The search fails (``n'' is still
+ -1). The flag ``runout'' is made
+ non-zero, indicating that there
+ are no processes which are both
+ ready to run and ``swapped out''
+ onto disk;
+
+<P>
+</DD>
+<DT><STRONG>1968:</STRONG></DT>
+<DD>``sleep'' is called (to wait for
+ such an event) with a priority
+ ``PSWP'' (== -100) for when it
+ wakes up, which is in the
+ category of ``very urgent''.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1742"
+  HREF="node85.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1738"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1732"
+  HREF="node83.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1740"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1743"
+  HREF="node85.html">sleep (2066)</A>
+<B> Up:</B> <A NAME="tex2html1739"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1733"
+  HREF="node83.html">The story continues ...</A>
+ &nbsp; <B>  <A NAME="tex2html1741"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

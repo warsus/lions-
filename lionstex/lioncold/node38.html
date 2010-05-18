@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 5</TITLE>
+<META NAME="description" CONTENT="Example 5">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node39.html">
+<LINK REL="previous" HREF="node37.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node39.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1163"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1159"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1153"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1161"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1164"
+  HREF="node39.html">Example 6</A>
+<B> Up:</B> <A NAME="tex2html1160"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1154"
+  HREF="node37.html">Example 4</A>
+ &nbsp; <B>  <A NAME="tex2html1162"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00066000000000000000">
+Example 5</A>
+</H2>
+
+<P>
+<PRE>
+  2113 wakeup (chan)
+       {
+         register struct proc *p;
+         register c, i;
+         c= chan;
+         p= &amp;proc[0];
+         i= NPROC;
+         do {
+             if (p-&gt;p_wchan == c) {
+               setrun(p);
+             }
+             p++;
+         } while (--i);
+       }
+</PRE>
+
+<P>
+There are a number of similarities
+between this example and the previous
+one. We have a new concept however, an
+array of structures. To be just a
+little confusing, in this example it
+turns out that both the array and the
+structure are called ``proc'' (yes, ``C''
+allows this). They are declared on
+Sheet 03 in the following form:
+
+<P>
+<PRE>
+  0358 struct proc
+       {
+         char p_stat;
+         ..........
+         int p_wchan;
+         ..........
+       } proc[NPROC];
+</PRE>
+
+<P>
+``p'' is a register variable of type
+pointer to a structure of type ``proc''.
+
+<P>
+<PRE>
+    p = &amp;proc[0];
+</PRE>
+
+<P>
+assigns to ``p'' the address of the first
+element of the array ``proc''. The
+operator ``SPMamp;'' in this context means ``the
+address of''.
+
+<P>
+Note that if an array has n elements,
+the elements have subscripts 0, 1, .., (n-1).
+Also it is permissible to write
+the above statement more simply as
+
+<P>
+<PRE>
+    p = proc;
+</PRE>
+
+<P>
+There are two statements in between the
+``do'' and the ``while''.
+The first of these could be rewritten
+more simply as
+
+<P>
+<PRE>
+    if (p-&gt;p wchan == c) setrun (p);
+</PRE>
+
+<P>
+i.e. the brackets are superfluous in
+this case, and since ``C'' is a free form
+language, the arrangement of text
+between lines is not significant.
+
+<P>
+The statement
+
+<P>
+<PRE>
+    setrun (p);
+</PRE>
+
+<P>
+invokes the procedure ``setrun'' passing
+the value of ``p'' as a parameter (All
+parameters are passed by value.). The relation
+
+<P>
+<PRE>
+    p-&gt;p_wchan == c
+</PRE>
+
+<P>
+tests the equality of the value of ``c''
+and the value of the element ``p_wchan''
+of the structure pointed to by ``p''.
+Note that it would have been wrong to
+have written
+
+<P>
+<PRE>
+    p.p_wchan == c
+</PRE>
+
+<P>
+because ``p'' is not the <B>name</B> of a structure.
+
+<P>
+The second statement, which cannot be
+combined with the first, increments ``p''
+by the size of the ``proc'' structure,
+whatever that is. (The compiler can
+figure it out.)
+
+<P>
+In order to do this calculation
+correctly, the compiler needs to know
+the kind of structure pointed at. When
+this is not a consideration, you will
+notice that often in similar situations, ``p'' will be declared simply as
+
+<P>
+<PRE>
+    register *p;
+</PRE>
+
+<P>
+because it was easier for the
+programmer, and the compiler does not insist.
+
+<P>
+The latter part of this procedure could
+have been written equivalently but less
+efficiently as
+
+<P>
+<PRE>
+      ............
+      i = 0;
+      do
+        if (proc[i].p_wchan == c)
+          setrun (&amp;proc[i]);
+      while (++i &lt; NPROC);
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1163"
+  HREF="node39.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1159"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1153"
+  HREF="node37.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1161"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1164"
+  HREF="node39.html">Example 6</A>
+<B> Up:</B> <A NAME="tex2html1160"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1154"
+  HREF="node37.html">Example 4</A>
+ &nbsp; <B>  <A NAME="tex2html1162"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>update (7201)</TITLE>
+<META NAME="description" CONTENT="update (7201)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node261.html">
+<LINK REL="previous" HREF="node259.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node261.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3992"
+  HREF="node261.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3988"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3982"
+  HREF="node259.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3990"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3993"
+  HREF="node261.html">sumount (6144)</A>
+<B> Up:</B> <A NAME="tex2html3989"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3983"
+  HREF="node259.html">getfs (7167)</A>
+ &nbsp; <B>  <A NAME="tex2html3991"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000259000000000000000">
+update (7201)</A>
+</H2>
+
+<P>
+The function of this procedure, in  its
+broadest   terms,  is  to  ensure  that
+information on the file system  volumes
+is  kept  up  to date.  The comment for
+this procedure (beginning on line 7190)
+describes the three main sub-functions,
+(in the reverse order!).
+
+<P>
+``update'' is the whole business  of  the
+``sync''  system call (3486). This may be
+invoked via the ``sync''  shell  command.
+Alternatively  there is a standard system program
+which runs continuously and
+whose  only  function is to call ``sync''
+every 30 seconds.  (See  ``UPDATE(VIII)''
+in the UPM.)
+
+<P>
+``update'' is called by ``sumount''  (6150)
+before   a   file   system   volume  is
+unmounted, and by ``panic'' (2420) as the
+last   action   of  the  system  before
+activity ceases.
+
+<P>
+<DL>
+<DT><STRONG>7207:</STRONG></DT>
+<DD>If another execution of  ``update''
+      is under way, then just return;
+
+<P>
+</DD>
+<DT><STRONG>7210:</STRONG></DT>
+<DD>Search the ``mount'' table;
+
+<P>
+</DD>
+<DT><STRONG>7211:</STRONG></DT>
+<DD>For each mounted volume, ...
+
+<P>
+</DD>
+<DT><STRONG>7213:</STRONG></DT>
+<DD>Unless the file  system  has  not
+      been  recently  modified  or  the
+      ``super block'' is  locked  or  the
+      volume  has  been  mounted  ``read
+      only'' ...
+
+<P>
+</DD>
+<DT><STRONG>7217:</STRONG></DT>
+<DD>Update the ``super block'', copy it
+      into   a  buffer  and  write  the
+      buffer out onto the volume;
+
+<P>
+</DD>
+<DT><STRONG>7223:</STRONG></DT>
+<DD>Search the ``inode'' table, and for
+      each  non-null  entry,  lock  the
+      entry and call ``iupdat'' to update
+      the  ``inode''  entry on the volume
+      if appropriate;
+
+<P>
+</DD>
+<DT><STRONG>7229:</STRONG></DT>
+<DD>Allow  additional  executions  of
+      ``update'' to commence;
+
+<P>
+</DD>
+<DT><STRONG>7230:</STRONG></DT>
+<DD>``bflush'' (5229)  forces  out  any
+      ``delayed write'' blocks.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3992"
+  HREF="node261.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3988"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3982"
+  HREF="node259.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3990"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3993"
+  HREF="node261.html">sumount (6144)</A>
+<B> Up:</B> <A NAME="tex2html3989"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3983"
+  HREF="node259.html">getfs (7167)</A>
+ &nbsp; <B>  <A NAME="tex2html3991"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

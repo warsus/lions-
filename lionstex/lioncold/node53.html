@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Global Variables</TITLE>
+<META NAME="description" CONTENT="Global Variables">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node54.html">
+<LINK REL="previous" HREF="node52.html">
+<LINK REL="up" HREF="node51.html">
+<LINK REL="next" HREF="node54.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1352"
+  HREF="node54.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1348"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1342"
+  HREF="node52.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1350"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1353"
+  HREF="node54.html">The `C' Preprocessor</A>
+<B> Up:</B> <A NAME="tex2html1349"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1343"
+  HREF="node52.html">Variable Allocation</A>
+ &nbsp; <B>  <A NAME="tex2html1351"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00072000000000000000">
+Global Variables</A>
+</H2>
+
+<P>
+In UNIX with very few exceptions, the
+declarations for global variables have
+been all gathered into the set of ``h''
+files. The exceptions are:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>the static variable ``p'' (2180)
+declared in ``swtch'' which is
+stored globally, but is accessible 
+only from within the procedure 
+``swtch'' (Actually ``p'' is
+a very popular name for local
+variables in UNIX.);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>a number of variables such as
+``swbuf'' (4721) which are referenced 
+only by procedures within
+a single file, and are declared
+at the beginning of that file.
+</DD>
+</DL>
+
+<P>
+Global variables may be declared
+separately within each file in which
+they are referenced. It is then the job
+of the loader, which links the compiled
+versions of the program files together
+to match up the different declarations
+for the same variable.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

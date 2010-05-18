@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The Kernel Stack</title>
+
+<link href="sect0133.html" title="Clock Interrupts" rel="next" />
+<link href="sect0131.html" title="User Program Traps" rel="prev" />
+<link href="sect0126.html" title="The Assembler “Trap” Routine" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0131.html" title="User Program Traps"><img alt="Previous: User Program Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0126.html" title="The Assembler “Trap” Routine"><img alt="Up: The Assembler “Trap” Routine" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0133.html" title="Clock Interrupts"><img alt="Next: Clock Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0126.html">The Assembler “Trap” Routine</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The Kernel Stack</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000133">10.6 The Kernel Stack</h2>
+<p>The state of the kernel stack at the time that the “trap” procedure (“C” version) or one of the specialised interrupt handling routines is entered, is shown in Figure 10.1. </p><center><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:right">&nbsp;</td>
+
+    
+    <td style="text-align:left; border-right:1px solid black">&nbsp;</td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> .... </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Previous top of stack</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>(rps </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:right"><p> 2) </p></td>
+
+    
+    <td style="border-top-style:solid; text-align:left; border-top-color:black; border-top-width:1px; border-right:1px solid black"><p> 7 </p></td>
+
+    
+    <td style="border-top-style:solid; text-align:center; border-top-color:black; border-top-width:1px; border-right:1px solid black"><p> ps </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> old PS </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>(r7 </p></td>
+
+    
+    <td style="text-align:right"><p> 1) </p></td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> 6 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> pc </p></td>
+
+    
+    <td style="text-align:left"><p> old PC (r7) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>(r0 </p></td>
+
+    
+    <td style="text-align:right"><p> 0) </p></td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> 5 –<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" /> </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> r0 </p></td>
+
+    
+    <td style="text-align:left"><p> old r0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:right">&nbsp;</td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> 4 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> nps </p></td>
+
+    
+    <td style="text-align:left"><p> new PS after trap </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>(r1 </p></td>
+
+    
+    <td style="text-align:right"><p> –2) </p></td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> 3 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> r1 </p></td>
+
+    
+    <td style="text-align:left"><p> old r1 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>(r6 </p></td>
+
+    
+    <td style="text-align:right"><p> –3) </p></td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> 2 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> sp </p></td>
+
+    
+    <td style="text-align:left"><p> old SP for previous mode </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:right">&nbsp;</td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> 1 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> dev </p></td>
+
+    
+    <td style="text-align:left"><p> masked new PS </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:right">&nbsp;</td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> 0 –<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" /> </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> tpc </p></td>
+
+    
+    <td style="text-align:left"><p> return address in “call” </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>(r5 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:right"><p> –6 </p></td>
+
+    
+    <td style="border-top-style:solid; text-align:left; border-top-color:black; border-top-width:1px; border-right:1px solid black"><p> –1 </p></td>
+
+    
+    <td style="border-top-style:solid; text-align:center; border-top-color:black; border-top-width:1px; border-right:1px solid black"><p> (r5) </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> old r5 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>(r4 </p></td>
+
+    
+    <td style="text-align:right"><p> –7 </p></td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> –2 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> (r4) </p></td>
+
+    
+    <td style="text-align:left"><p> old r4 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>(r3 </p></td>
+
+    
+    <td style="text-align:right"><p> –8 </p></td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> –3 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> (r3) </p></td>
+
+    
+    <td style="text-align:left"><p> old r3 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>(r2 </p></td>
+
+    
+    <td style="text-align:right"><p> –9 </p></td>
+
+    
+    <td style="text-align:left; border-right:1px solid black"><p> –4 </p></td>
+
+    
+    <td style="text-align:center; border-right:1px solid black"><p> (r2) </p></td>
+
+    
+    <td style="text-align:left"><p> old r2 </p></td>
+
+</tr>
+</table><p>Figure 10.1 </p></center><p>Columns (2) and (3) give the positions of stack words relative to the positions in the stack of the words labelled “r0” and “tpc” respectively. </p><p>Columns (1) and (2) define (or explain) the contents of the file “reg.h” (Sheet 26). </p><p>“dev”, “sp”, “r1”, “nps” “r0”, “pc” and “ps” in that order are the names of the parameters used in the declaration of the procedures “trap” (2693) and “clock” (3725). </p><p>Note that just before entry to “trap” (“C” version) or the other interrupt handling routines, the values for the registers r2, r3, r4 and r5 have not yet been saved in the stack. This is performed by a call on “csv” (lg20) which is automatically included by the “C” compiler at the beginning of every compiled procedure. The form of the call on “csv” is equivalent to the assembler instruction </p><pre>
+   jsr r5,csv
+</pre><p>This saves the current value of r5 on the stack and replaces it by the address of the next instruction in the “C” procedure. </p><dl class="description">
+
+    <dt>1421:</dt>
+    <dd><p>This value of r5 is copied into r0; </p></dd>
+
+    <dt>1422:</dt>
+    <dd><p>the current value of the stack pointer is copied into r5. </p></dd>
+
+</dl><p>Note that at this point, r5 points to a stack location containing the previous value of r5 i.e. it points to the beginning of a chain of pointers, one per procedure, which “thread” the stack. When a “C” procedure exits, it actually returns to “cret” (1430) where the value of r5 is used to restore the stack and r2, r3 and r4 to their earlier condition (i.e. as they were immediately prior to entering the procedure). For this reason r5 is often called the <b class="bf">environment pointer</b>.  </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0131.html" title="User Program Traps"><img alt="Previous: User Program Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0126.html" title="The Assembler “Trap” Routine"><img alt="Up: The Assembler “Trap” Routine" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0133.html" title="Clock Interrupts"><img alt="Next: Clock Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

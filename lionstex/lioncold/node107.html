@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Assembler Procedures</TITLE>
+<META NAME="description" CONTENT="Assembler Procedures">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node108.html">
+<LINK REL="previous" HREF="node106.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node108.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2043"
+  HREF="node108.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2039"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2033"
+  HREF="node106.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2041"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2044"
+  HREF="node108.html">savu (0725)</A>
+<B> Up:</B> <A NAME="tex2html2040"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2034"
+  HREF="node106.html">Jobs</A>
+ &nbsp; <B>  <A NAME="tex2html2042"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000125000000000000000">
+Assembler Procedures</A>
+</H2>
+
+<P>
+The next three procedures are written
+in assembler and run with the processor
+priority level set to seven. These
+procedures do not observe the normal
+procedure entry conventions so that r5
+and r6, the environment and stack
+pointers, are not disturbed during procedure entry and exit.
+
+<P>
+As has already been noted, ``savu'' and
+``retu'' can combine to produce the
+effect of a coroutine jump. The third
+procedure, ``aretu,'' when followed by a
+``return'' statement produces the effect
+of a non-local ``goto''.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

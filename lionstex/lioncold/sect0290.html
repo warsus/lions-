@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Graphic Character Sets</title>
+
+<link href="sect0291.html" title="maptab (8117)" rel="next" />
+<link href="sect0289.html" title="Graphic Characters" rel="prev" />
+<link href="sect0283.html" title="Character Handling" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0289.html" title="Graphic Characters"><img alt="Previous: Graphic Characters" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0291.html" title="maptab (8117)"><img alt="Next: maptab (8117)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0283.html">Character Handling</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Graphic Character Sets</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000291">23.7 Graphic Character Sets</h2>
+<p>Devices such as line printers or terminals which support <b class="bf">all</b> the ASCII graphic symbols are often said to support the 96 ASCII character set (though there are only 94 graphics actually involved). </p><p>Devices which support all the ASCII graphic symbols except those in the last group of 32, are said to support the 64 ASCII character set. Such devices lack the lower case alphabetics and the symbols listed above, namely “<tt>~</tt>”, “{”, “<tt>|</tt>” and “<tt>\}</tt>”. Note that “delete”, since it is not a visible character, can still be supported. </p><p>Devices in this latter group may be referred to as “upper case only”. </p><p>Sometimes some of the graphic symbols may be non-standard, e.g. <img src="images/img-0020.png" alt="$\leftarrow $" style="vertical-align:&images/img-0020.png-depth;&px;; 
+                                     width:&images/img-0020.png-width;&px;; 
+                                     height:&images/img-0020.png-height;&px;" class="math gen" /> instead of _ and this can be inconvenient, though not usually fatal. </p><p>UNIX prefers, as the reader is no doubt well aware, to view the world through “lower case” spectacles. Alphabetic characters received from an “upper case only” terminal are translated immediately upon receipt from upper case to lower case. A lower case alphabetic may subsequently be translated back to upper case if it is preceded by a single backslash. For output to such a terminal, both upper and lower case alphabetic characters are mapped to uppercase. </p><p>The conventions for line printers and terminals are different because: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>for line printers, horizontal alignment is usually important, and it is possible (without too much difficulty) to print composite, overstruck characters (using the minus sign in this case); and </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>for terminals, horizontal alignment is not considered to be so important; backspacing to provide overstruck characters does not work on most VDUs; and, since the same graphic conventions are used for both input and output, the symbols should be as convenient to type as possible. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0289.html" title="Graphic Characters"><img alt="Previous: Graphic Characters" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0291.html" title="maptab (8117)"><img alt="Next: maptab (8117)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

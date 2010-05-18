@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Kernel Mode Execution</TITLE>
+<META NAME="description" CONTENT="Kernel Mode Execution">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node96.html">
+<LINK REL="previous" HREF="node94.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node96.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1885"
+  HREF="node96.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1881"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1875"
+  HREF="node94.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1883"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1886"
+  HREF="node96.html">User Mode Execution</A>
+<B> Up:</B> <A NAME="tex2html1882"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1876"
+  HREF="node94.html">Execution of an Image</A>
+ &nbsp; <B>  <A NAME="tex2html1884"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000117000000000000000">
+Kernel Mode Execution</A>
+</H2>
+
+<P>
+The seventh kernel segmentation address
+register must be set appropriately.
+None of the other kernel segmentation
+registers is ever disturbed and so
+their values are assumed. As was seen
+earlier, the first six kernel pages are
+mapped to the first six pages of physical memory, while the eighth is mapped
+into the highest page of physical
+memory. The size of the seventh segment
+is always the same.
+
+<P>
+In kernel mode the setting of the user
+mode segmentation registers is in general
+irrelevant. However they are normally
+set correctly for the user process.
+
+<P>
+The environment and stack pointers
+point into the kernel stack area in the
+seventh page, above the ``user'' structure.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

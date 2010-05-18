@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>rkstrategy (5389)</TITLE>
+<META NAME="description" CONTENT="rkstrategy (5389)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node198.html">
+<LINK REL="previous" HREF="node196.html">
+<LINK REL="up" HREF="node195.html">
+<LINK REL="next" HREF="node198.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3181"
+  HREF="node198.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3177"
+  HREF="node195.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3171"
+  HREF="node196.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3179"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3182"
+  HREF="node198.html">rkaddr (5420)</A>
+<B> Up:</B> <A NAME="tex2html3178"
+  HREF="node195.html">The RK Disk Driver</A>
+<B> Previous:</B> <A NAME="tex2html3172"
+  HREF="node196.html">The file `rk.c'</A>
+ &nbsp; <B>  <A NAME="tex2html3180"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000212000000000000000">
+rkstrategy (5389)</A>
+</H2>
+
+<P>
+The strategy routine is called, e.g.
+from ``swap'' (5212), to handle both read
+and write requests.
+
+<P>
+<DL>
+<DT><STRONG>5397:</STRONG></DT>
+<DD>The test and call on ``mapalloc''
+ here is a ``no-op'' except on the
+ PDP11/70 system;
+
+<P>
+</DD>
+<DT><STRONG>5399:</STRONG></DT>
+<DD>The code from here to line 5402
+ appears to be unnecessarily devious! See the discussion of
+ ``rkaddr'' below. If the block
+ number is too large, set the
+ ``B_ERROR'' flag and report ``completion'';
+
+<P>
+</DD>
+<DT><STRONG>5407:</STRONG></DT>
+<DD>Link the buffer into a FIFO list
+ for the controller. The list is
+singly linked, uses the ``av_forw''
+pointer of the ``buf'' structures,
+and has head and tail pointers in
+``rktab''. Interrupts from disk
+devices may not be allowed after
+the first step;
+
+<P>
+</DD>
+<DT><STRONG>5414:</STRONG></DT>
+<DD>If the RK controller is not
+ currently active, wake it up via
+ a call on ``rkstart'' (5440), which
+ checks that there is something to
+ do (5444), flags the controller
+ as busy (5446) and calls
+ ``devstart'' (5447), passing as
+ parameters:
+
+<P>
+
+<UL>
+<LI>a pointer to the first enqueued
+buffer header;
+
+<P>
+</LI>
+<LI>the address of the RKDA disk
+address register. (The value
+passed is in effect 0177412. See
+lines 5363, 5382.);
+
+<P>
+</LI>
+<LI>a ``disk address'' computed by
+``rkaddr'';
+
+<P>
+</LI>
+<LI>zero (not really important in our
+discussion, and may be ignored).
+
+<P>
+</LI>
+</UL>
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3181"
+  HREF="node198.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3177"
+  HREF="node195.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3171"
+  HREF="node196.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3179"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3182"
+  HREF="node198.html">rkaddr (5420)</A>
+<B> Up:</B> <A NAME="tex2html3178"
+  HREF="node195.html">The RK Disk Driver</A>
+<B> Previous:</B> <A NAME="tex2html3172"
+  HREF="node196.html">The file `rk.c'</A>
+ &nbsp; <B>  <A NAME="tex2html3180"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

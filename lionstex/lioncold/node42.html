@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 9</TITLE>
+<META NAME="description" CONTENT="Example 9">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node43.html">
+<LINK REL="previous" HREF="node41.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node43.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1211"
+  HREF="node43.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1207"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1201"
+  HREF="node41.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1209"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1212"
+  HREF="node43.html">Example 10</A>
+<B> Up:</B> <A NAME="tex2html1208"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1202"
+  HREF="node41.html">Example 8</A>
+ &nbsp; <B>  <A NAME="tex2html1210"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000610000000000000000">
+Example 9</A>
+</H2>
+
+<P>
+Here are two quickies which introduce
+some different and exotic looking
+expressions. First:
+
+<P>
+<PRE>
+  7679 schar()
+       {
+         return *u.u_dirp++ &amp; 0377);
+       }
+</PRE>
+
+<P>
+where the declaration
+
+<P>
+<PRE>
+    char *u_dirp;
+</PRE>
+
+<P>
+is part of the declaration of the
+structure ``u''.
+
+<P>
+``u.u_dirp'' is a character pointer.
+Therefore the value of ``*u.u_dirp++'' is
+a character. (Incrementation of the
+pointer occurs as a side effect.)
+
+<P>
+When a character is loaded into a sixteen bit register, sign extension may
+occur. By ``and''ing the word with 0377
+any extraneous high order bits are
+eliminated. Thus the result returned
+is simply a character.
+
+<P>
+Note that any integer which begins with
+a zero (e.g. 0377) is interpreted as an
+octal integer.
+
+<P>
+The second example is:
+
+<P>
+<PRE>
+  1771 nseg(n)
+       {
+         return ((n+127)&gt;&gt;7);
+       }
+</PRE>
+
+<P>
+The value returned is n divided by 128
+and rounded up to the next highest
+``integer''.
+
+<P>
+Note the use of the right shift operator ``<IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$&gt;&gt;$">'' in preference to the division
+operator ``/''.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

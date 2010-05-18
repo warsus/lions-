@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: klopen (8023)</title>
+
+<link href="sect0308.html" title="klclose (8055)" rel="next" />
+<link href="sect0306.html" title="Source Code" rel="prev" />
+<link href="sect0293.html" title="Interactive Terminals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0306.html" title="Source Code"><img alt="Previous: Source Code" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0308.html" title="klclose (8055)"><img alt="Next: klclose (8055)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0293.html">Interactive Terminals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">klopen (8023)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000308">24.14 klopen (8023)</h2>
+<p>This procedure is called to “open” a terminal as a character special file. This call is usually made by the program “/etc/init” for each terminal which is to be active in the system. Since child processes inherit the open files of their parents, it is not usually necessary for other processes to “open” the device again. It will be noted that the there is no attempt to stop two unrelated processes having the terminal as an open file simultaneously. </p><dl class="description">
+
+    <a href="../all.html#line8026" target="source" <dt>8026:</dt></a>
+    <dd><p>Check the minor device number; </p></dd>
+
+    <a href="../all.html#line8030" target="source" <dt>8030:</dt></a>
+    <dd><p>Locate the appropriate “tty” structure; </p></dd>
+
+    <a href="../all.html#line8031" target="source" <dt>8031:</dt></a>
+    <dd><p>If the process opening the file has no associated controlling terminal designate the current terminal for this role. (Note that the reference stored is the address of a “tty” structure.): </p></dd>
+
+    <a href="../all.html#line8033" target="source" <dt>8033:</dt></a>
+    <dd><p>Store the terminal device number in the “tty” structure </p></dd>
+
+    <a href="../all.html#line8039" target="source" <dt>8039:</dt></a>
+    <dd><p>Calculate the address of the appropriate set of device registers for the terminal and store </p></dd>
+
+    <a href="../all.html#line8045" target="source" <dt>8045:</dt></a>
+    <dd><p>If the terminal is not already “open”, do some initialisation of the “tty” structure .. </p></dd>
+
+    <a href="../all.html#line8046" target="source" <dt>8046:</dt></a>
+    <dd><p>“t_state” is set to show the file is “open”, so that the next three lines will not be executed if the file is opened a second time, possibly undoing the effect of a “stty” system call: </p><p>“t_state” is also set to show “CARR_ON” (“carrier on”). This is a software flag which shows that the terminal is logically enabled, regardless of the true hardware status of the terminal. If “CARR_ON” is reset for a terminal, the system <b class="bf">should</b> ignore all input from the terminal. </p><p>(This does not seem to be entirely true, and this point will be taken up again later.); </p></dd>
+
+    <a href="../all.html#line8047" target="source" <dt>8047:</dt></a>
+    <dd><p>The standard terminal is assumed to be unable to interpret horizontal tabs, to support only the 64 character ASCII subset, to run in full duplex mode and to require both “carriage return” and “line feed” characters to provide normal “new line” processing. (Could this be a Model 33 teletype?); </p></dd>
+
+    <a href="../all.html#line8048" target="source" <dt>8048:</dt></a>
+    <dd><p>The “erase” and “kill” characters are set according to the UNIX convention; </p></dd>
+
+    <a href="../all.html#line8051" target="source" <dt>8051:</dt></a>
+    <dd><p>The Receiver Control Status register is initialised with the pattern “0103” so that the terminal is made ready, reading is enabled and receiver interrupts are enabled; </p></dd>
+
+    <a href="../all.html#line8052" target="source" <dt>8052:</dt></a>
+    <dd><p>The Transmitter Control Status register is initialised so that an interrupt will be generated whenever the interface is ready to receive another character. </p></dd>
+
+</dl><p>Note that the “open” routine does not distinguish between the cases where the file is opened for reading only, or writing only, or for both reading and writing. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0306.html" title="Source Code"><img alt="Previous: Source Code" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0308.html" title="klclose (8055)"><img alt="Next: klclose (8055)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

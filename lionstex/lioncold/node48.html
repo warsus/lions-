@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 15</TITLE>
+<META NAME="description" CONTENT="Example 15">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node49.html">
+<LINK REL="previous" HREF="node47.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node49.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1283"
+  HREF="node49.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1279"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1273"
+  HREF="node47.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1281"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1284"
+  HREF="node49.html">Example 16</A>
+<B> Up:</B> <A NAME="tex2html1280"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1274"
+  HREF="node47.html">Example 14</A>
+ &nbsp; <B>  <A NAME="tex2html1282"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000616000000000000000">
+Example 15</A>
+</H2>
+
+<P>
+The next example is abbreviated from
+the original:
+
+<P>
+<PRE>
+  5861 seek ()
+       {
+         int n[2];
+         register *fp, t;
+         fp = getf (u.u_ar0[R0]);
+         ...........
+         t = u.u_arg[1];
+         switch (t) {
+
+         case 1:
+         case 4:
+           n[0] =+ fp-&gt;f_offset[0];
+           dpadd (n, fp-&gt;f_offset[1]);
+           break;
+
+         default:
+           n[0] =+ fp-&gt;f_inode-&gt;i size0 &amp; 0377;
+           dpadd(n,fp-&gt;f_inode-&gt;i_size1);
+
+         case 0:
+         case 3:
+           ;
+         }
+         ...........
+       }
+</PRE>
+
+<P>
+Note the array declaration for the two
+word array ``n'', and the use of getf
+(which appeared in Example 4).
+
+<P>
+The ``switch'' statement makes a multiway branch depending on the value of
+the expression in parentheses. The
+individual parts have ``case labels'':
+
+<P>
+
+<UL>
+<LI>If ``t'' is one or  four,  then  one
+set of actions is in order.
+
+<P>
+</LI>
+<LI>If ``t'' is zero or  three,  nothing
+is to be done at all.
+
+<P>
+</LI>
+<LI>If ``t'' is anything  else,  then  a
+set  of actions labelled ``default''
+is to be executed.
+</LI>
+</UL>
+
+<P>
+Note the use of ``break'' as an escape to
+the next statement after the end of the
+``switch''   statement.    Without    the
+``break'',  the normal execution sequence
+would be followed within  the  ``switch''
+statement.
+
+<P>
+Thus  a  ``break''  would   normally   be
+required  at  the  end of the ``default''
+actions.  It has  been  omitted  safely
+here  because  the only remaining cases
+actually have null  actions  associated
+with them.
+
+<P>
+The two non-trivial  pairs  of  actions
+represent  the  addition  of one 32 bit
+integer to another.  The later versions
+of the ``C'' compiler will support ``long''
+variables and make this  sort  of  code
+much easier to write (and read).
+
+<P>
+Note also that in the expression
+
+<P>
+<PRE>
+    fp-&gt;f_inode-&gt;i_size0
+</PRE>
+
+<P>
+there are two levels of indirection.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1283"
+  HREF="node49.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1279"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1273"
+  HREF="node47.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1281"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1284"
+  HREF="node49.html">Example 16</A>
+<B> Up:</B> <A NAME="tex2html1280"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1274"
+  HREF="node47.html">Example 14</A>
+ &nbsp; <B>  <A NAME="tex2html1282"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

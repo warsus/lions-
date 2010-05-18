@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Initialisation</title>
+
+<link href="sect0297.html" title="stty (8183)" rel="next" />
+<link href="sect0295.html" title=" Interactive Terminals" rel="prev" />
+<link href="sect0293.html" title="Interactive Terminals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0295.html" title=" Interactive Terminals"><img alt="Previous:  Interactive Terminals" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0297.html" title="stty (8183)"><img alt="Next: stty (8183)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0293.html">Interactive Terminals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Initialisation</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000297">24.3 Initialisation</h2>
+<p>Initialisation of the “tty” structures is the responsibility of the various “open” routines in the device drivers, for example, “klopen” (8023). </p><p>The items in Group B of Table 24.1 may be changed by a “stty” system call. The current values may be interrogated by a “gtty” system call. </p><p>A description of these is contained in the sections, “STTY(II)” and “GTTY(II)” of the UPM. These calls are invoked by the “stty” shell command which is described in the section “STTY(I)”. </p><p>Since the “stty” and “gtty” system calls require a file descriptor as a parameter, they can only be applied to an “open” character special file. </p><p>The two system calls share a good deal of common code. We will trace the progress of an execution of “stty” below and leave the tracing of a similar execution of “gtty” to the reader. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0295.html" title=" Interactive Terminals"><img alt="Previous:  Interactive Terminals" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0297.html" title="stty (8183)"><img alt="Next: stty (8183)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

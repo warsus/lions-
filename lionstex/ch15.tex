@@ -1,0 +1,389 @@
+%
+% The Lion's Commentary, file ch15.tex, version 1.5, 17 May 1994
+%
+\se{Introduction to Basic I/O}
+
+There are three files whose contents
+need to be thoroughly absorbed before
+the subject of UNIX input/output is
+broached in detail.
+
+\sbs{The File `buf.h'}
+
+This file declares two structures
+called ``buf'' (4520) and ``devtab''
+(4551). Instances of the structure
+``buf'' are declared as 'bfreelist
+(4567) and as the array ``buf'' (!)
+(4535) with ``NBUF'' elements.
+
+The structure ``buf'' is possibly
+misnamed because it is in fact a {\bf buffer
+header} (or buffer control block). The
+buffer areas proper are allocated
+separately and declared (4720) as
+
+\begin{verbatim}
+   ``char buffers [NBUF] [514];''
+\end{verbatim}
+
+Pointers from the ``buf'' array to the
+``buffers'' array are set up by the procedure ``binit''.
+
+
+Other instances of the structure ``buf''
+are declared as ``swbuf'' (4721) and
+``rrkbuf'' (5387). No 514 character
+buffer areas are associated with
+``bfreelist'' or ``swbuf'' or ``rrkbuf''.
+
+The ``buf'' structure may be divided into
+three parts:
+
+\bd
+\item[(a) flags] These convey status information and are contained within
+ a single word. Masks for setting these flags are defined as
+ ``B\_WRITE'', ``B\_READ'' etc. in lines 4572 to 4586.
+
+\item[(b) list pointer] Forward and backward pointers for two doubly
+ linked lists, which we shall
+ refer to as the ``b''-list and the
+ ``av''-list.
+
+\item[(c)  i/o parameters] A set of values
+ associated with the actual data
+ transfer.
+\ed
+
+\sbs{devtab (4551)}
+
+The ``devtab'' structure has five words,
+the last four of which are forward and
+backward pointers.
+
+One instance of ``devtab'' is declared
+within the device handler for each
+block type of peripheral device. For
+our model system the only block device
+is the RK05 disk, and ``rktab'' is
+declared as a ``devtab'' structure at
+line 5386.
+
+The ``devtab'' structure contains some
+status information for the the device
+and serves as a list head for:
+
+\bd
+\item[(a)] the list of buffers associated
+ with the device, and simultaneously on the ``av''-list;
+
+\item[(b)] the list of outstanding i/o
+ requests for the device.
+\ed
+
+\sbs{The File `conf.h'}
+
+The file ``conf.h'' declares:
+
+\bi
+\item yet another way to dissect an
+integer into two parts (``d\_minor''
+and ``d\_major''). Note that
+``d\_major'' corresponds to ``hibyte'' (0180);
+
+\item two arrays of structures;
+
+\item two integer variables, ``nlkdev''
+and ``nchrdev''.
+\ei
+
+The two arrays of structures, ``bdevsw''
+and ``cdevsw'', are declared but not
+dimensioned or initialised in ``conf.h''.
+The initialisation of these arrays is
+performed in the file ``conf.c''.
+
+\sbs{The File `conf.c'}
+
+This file, along with ``low.s'', is generated individually at each installation (to reflect the set of peripherals
+actually installed) by the program
+``mkconf''. (In our case, ``conf.c''
+reflects the representative devices for
+our model system.)
+
+This file initialises the following:
+
+\begin{verbatim}
+  bdevsw  (4656)   swapdev (4696)
+  cdevsw  (4663)   swplo   (4637)
+  rootdev (4635)   nswap   (4698)
+\end{verbatim}
+
+\sbs{System Generation}
+
+System generation at a UNIX installation consists mainly of:
+
+\bi
+\item running ``mkconf'' with appropriate
+ input;
+
+\item recompiling the output files (created
+as ``c.c'' and ``l.s'');
+
+\item reloading the system with the revised
+ object files.
+\ei
+
+This process only takes a few minutes
+(not the several hours of some other
+operating systems). Note that ``bdevsw''
+and ``cdevsw'' are defined differently in
+``conf.c'' from elsewhere, namely as a
+one dimensional array of pointers to
+functions which return integer values.
+This quietly ignores the fact that, for
+example, ``rktab'' is not a function, and
+relies on the linking program not to
+enquire too closely into the nature of
+the work which it is performing.
+
+\sbs{swap (5196)}
+
+Before plunging into all the detail of
+the file ``bio.c'', it will be instructive as well as convenient to examine
+one routine which was introduced earlier, namely ``swap''.
+
+The buffer head ``swbuf'' was declared to
+control swapping input/output, which
+must share access to the disk with
+other activity. No element of ``buffers''
+is associated with ``swbuf''. Instead the
+core area occupied (or to be occupied)
+by the program serves as the data
+buffer.
+
+\bd
+\item[5200:] The address of the flags in
+``swbuf'' is transferred to the
+register variable ``fp'' for convenience and economy;
+
+\item[5202:] The ``B\_BUSY'' flag is tested, and
+if it is on, a swap operation is
+already under way, so that the
+``B\_WANTED'' flag is set and the
+process must wait via a call on ``sleep''.
+\ed
+
+Note that the code loop on lines
+5202 to 5205 runs at priority
+level six, i.e. one higher than
+the disk interrupt priority.
+
+Can you see why this is necessary? Under what conditions will
+the ``B\_BUSY'' flag be set?
+
+\bd
+\item[5206:] The flags are set to reflect:
+
+\bi
+\item ``swbuf'' is in use (``B\_BUSY'');
+
+\item physical i/o implying a large
+transfer direct to/from the user
+data segment\\
+(``B\_PHYS'');
+
+\item whether the operation is read or
+write. (``rdflg'' is a parameter to
+``swap'');
+\ei
+
+\item[5207:] The ``b\_dev'' field is initialised.
+(Presumably this could have been
+performed once during initialisation rather than every time
+``swbuf'' is used, i.e. in ``binit''.);
+
+\item[5208:] ``b\_wcount'' is initialised. Note
+ the negative value and the effective multiplication by 32;
+
+\item[5210:] The hardware device controller
+requires a full physical address
+(18 bits on the PDP 11/40). The
+block number of a 32 word block
+must be converted into two parts:
+the low order ten bits are
+shifted left six places and
+stored as ``b\_addr'', and the
+remaining six high order bits as
+``b\_xmem''. (On the PDP 11/40 and
+11/45 only two of these bits are
+significant.);
+
+\item[5212:] A mouthful at first glance! Shift
+``swapdev'' eight places to the
+right to obtain the major device
+number. Use the result to index
+``bdevsw''. From the structure
+thus selected, extract the strategy routine and execute it with
+the address of ``swbuf'' passed as
+a parameter;
+
+\item[5213:] Explain why this call on ``spl6''
+is necessary;
+
+\item[5214:] Wait until the i/o operation is
+ complete. Note that the first
+ parameter to ``sleep'' is in effect
+ the address of ``swbuf'';
+
+\item[5216:] Wakeup those processes (if any)
+ which are waiting for ``swbuf'';
+
+\item[5218:] Reset the process or priority to
+ zero, thus allowing any pending
+ interrupts to ``happen'';
+
+\item[5219:] Reset both the ``B\_BUSY'' and
+ ``B\_WANTED'' flags.
+\ed
+
+\sbs{Race Conditions}
+
+The code for ``swap'' has a number of
+interesting features. In particular it
+displays in microcosm the problems of
+race conditions when several processes
+are running together.
+
+\bigskip
+
+\noindent Consider the following scenario:
+
+No swapping is taking place when process A initiates a swapping operation.
+Denoting ``swbuf.b\_flags'' by simply
+``flags'', we have initially
+
+\begin{verbatim}
+  flags == null
+\end{verbatim}
+
+\noindent Process A is not delayed at line 5204,
+initiates its i/o operation and goes to
+sleep at line 5215. We now have
+
+\begin{verbatim}
+  flags == B_BUSY | B_PHYS | rdflg
+\end{verbatim}
+
+\noindent which was set at line 5206.
+
+
+Suppose now while the i/o operation is
+proceeding, process B also initiates a
+swapping operation. It too begins to
+execute ``swap'', but finds the ``B\_BUSY''
+flag set, so it sets the ``B\_WANTED''
+flag (5203) and goes to sleep also
+(5204). We now have
+
+\begin{verbatim}
+  flags == B_BUSY | B_PHYS | rdflg | B_WANTED
+\end{verbatim}
+
+At last the i/o operation completes.
+Process C takes the interrupt and executes ``rkintr'', which calls (5471)
+``iodone'' which calls (5301) ``wakeup'' to
+awaken process A and process B.
+``iodone'' also sets the ``B\_DONE'' flag
+and resets the ``B\_WANTED'' flag so that
+
+\begin{verbatim}
+  flags == B_BUSY | B_PHYS | rdflg | B_DONE
+\end{verbatim}
+
+What happens next depends on the order
+in which process A and process B are
+reactivated. (Since they both have the
+same priority, ``PSWP'', it is a toss-up
+which goes first.)
+
+\bd
+\item[Case (a):] Process A goes first.
+``B\_DONE'' is set so no more sleeping is
+needed. ``B\_WANTED'' is reset so there is
+no one to ``wakeup''. Process A tidies up
+(5219), and leaves ``swap'' with
+
+\begin{verbatim}
+  flags == B_PHYS | rdflg | B_DONE
+\end{verbatim}
+
+Process B now runs and is able to initiate its i/o operation without further
+delay.
+
+\item[Case (b):] Process B goes first. It
+ finds ``B\_BUSY'' on, so it turns the
+ ``B\_WANTED'' flag back on, and goes to
+ sleep again, leaving
+
+\begin{verbatim}
+  flags == B_BUSY | B_PHYS | rdflg |
+           B_DONE | B_WANTED
+\end{verbatim}
+
+Process A starts again as in Case (a),
+but this time finds ``B\_WANTED'' on so it
+must call ``wakeup'' (5217) in addition
+to its other chores. Process B finally
+wakes again and the whole chain completes.
+\ed
+
+Case (b) is obviously much less efficient than case (a). It would seem that
+a simple change to line 5215 to read
+
+\begin{verbatim}
+  sleep (fp, PSWP-1);
+\end{verbatim}
+
+\noindent would cost virtually nothing and ensure
+that Case (b) never occurred!
+
+The necessity for the raising of processor priority at various points
+should be studied: for example if line
+5201 was omitted and if process B had
+just completed line 5203 when the ``i/o
+complete'' interrupt occurred for Process A's operation, then ``iodone'' would
+turn off ``B\_WANTED'' and perform
+``wakeup'' before process B went to sleep ... forever! A bad scene.
+
+\sbs{Reentrancy}
+
+Note also the assumption made above,
+that both process A and process B could
+execute ``swap'' simultaneously. All UNIX
+procedures are in general ``re-entrant''
+(which means multiple simultaneous executions are possible). How would UNIX
+have to change if re-entrancy were not
+allowed?
+
+\sbs{For the Uninitiated}
+
+We can now return to complete an investigation started
+in Chapter Eight concerning ``aretu'' and ``u.u\_ssav'':
+
+After setting ``u.u\_ssav'' (2284),
+``expand'' calls (2285) ``xswap'',
+which calls (4380) ``swap'',
+which calls (5215) ``sleep'',
+which calls (2084) ``swtch'',
+which {\bf resets} ``u.u\_rsav'' (2189).
+
+Thus in fact ``u.u\_rsav'' finally gets
+reset to a value appropriate to four
+procedure calls deeper than that for
+``u.u\_ssav''.
+
+\sbs{Additional Reading}
+
+The article ``The UNIX I/O System'' by
+Dennis Ritchie is highly pertinent.

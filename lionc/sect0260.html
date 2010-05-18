@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: itrunc (7414)</title>
+
+<link href="sect0261.html" title="free (7000)" rel="next" />
+<link href="sect0259.html" title="alloc (6965)" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0259.html" title="alloc (6965)"><img alt="Previous: alloc (6965)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0261.html" title="free (7000)"><img alt="Next: free (7000)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">itrunc (7414)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000261">20.13 itrunc (7414)</h2>
+<p>This procedure is called by “core” (4112), “openl” (5825) and “iput” (7353). In the first two cases, the contents of the “file” are about to be replaced. In the third case, the file is about to be abandoned. </p><dl class="description">
+
+    <a href="../all.html#line7421" target="source" <dt>7421:</dt></a>
+    <dd><p>If the file is a character or block special file then there is nothing to do; </p></dd>
+
+    <a href="../all.html#line7423" target="source" <dt>7423:</dt></a>
+    <dd><p>Search backwards the list of block numbers stored in the “inode”; </p></dd>
+
+    <a href="../all.html#line7425" target="source" <dt>7425:</dt></a>
+    <dd><p>If the file is large, then an indirect fetch is needed. (A double indirect fetch is needed for blocks numbered seven and higher.); </p></dd>
+
+    <a href="../all.html#line7427" target="source" <dt>7427:</dt></a>
+    <dd><p>Reference all <b class="bf">257</b> elements of the buffer in reverse order. (Note this seems to be the only place where characters #512, #513 of the buffer area are referenced. Since they will presumably contain zero, they will contribute nothing to the calculation. Hence if “510” were substituted for “512” here, and again on line 7432, a general improvement all round would result (?)); </p></dd>
+
+    <a href="../all.html#line7438" target="source" <dt>7438:</dt></a>
+    <dd><p>“free” returns an individual block to the available list; </p></dd>
+
+    <a href="../all.html#line7439" target="source" <dt>7439:</dt></a>
+    <dd><p>This is the end of the “for” statement commencing on line 7427. (Likewise the statement which begins at 7432 ends at 7435.); </p></dd>
+
+    <a href="../all.html#line7443" target="source" <dt>7443:</dt></a>
+    <dd><p>Clear the entry in “i_addr[ ]”; </p></dd>
+
+    <a href="../all.html#line7445" target="source" <dt>7445:</dt></a>
+    <dd><p>Reset size information, and flag the “inode” as “updated”. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0259.html" title="alloc (6965)"><img alt="Previous: alloc (6965)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0261.html" title="free (7000)"><img alt="Next: free (7000)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

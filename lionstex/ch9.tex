@@ -1,0 +1,391 @@
+%
+% The Lion's Commentary, file ch9.tex, version 1.5, 18 May 1994
+%
+\section*{Section Two}
+
+{\sf Section Two is concerned with traps,
+hardware interrupts and software interrupts.
+
+Traps and hardware interrupts introduce
+sudden switches into the CPU's normal
+instruction execution sequence. This
+provides a mechanism for handling special conditions which occur outside the
+CPU's immediate control.
+
+Use is made of this facility as part of
+another mechanism called the ``system
+call'', whereby a user program may execute a ``trap'' instruction to cause a
+trap deliberately and so obtain the
+operating system's attention and assistance.
+
+The software interrupt (or ``signal'') is
+a mechanism for communication between
+processes, particularly when there is
+``bad news''.}
+
+\se{Hardware Interrupts and Traps}
+
+In the PDP11 computer, as in many other
+computers, there is an ``interrupt''
+mechanism, which allows the controllers
+of peripheral devices (which are devices external to the CPU) to interrupt
+the CPU at appropriate times, with
+requests for operating system service.
+
+
+The same mechanism has been usefully
+and conveniently applied to ``traps''
+which are events internal to the CPU,
+which relate to hardware and software
+errors, and to requests for service
+from user programs.
+
+\sbs{Hardware Interrupts}
+
+The effect of an interrupt is to divert
+the CPU from whatever it was doing and
+to redirect it to execute another program.
+
+During a hardware interrupt:
+
+\bi
+\item The CPU saves the current processor
+ status word (PS) and the current
+ program count (PC) in its internal registers;
+
+\item the PC and PS are then reloaded from
+ two consecutive words located in
+ the low area of main memory. The
+ address of the first of these
+ two words is known as the
+ ``{\bf vector location}'' of the interrupt;
+
+\item finally the original PC and PS values
+ are stored into the newly
+ current stack. (Whether this is
+ the kernel or user stack depends
+ on the new value of the PS.)
+\ei
+
+Different peripheral devices may have
+different vector locations. The actual
+vector location for a particular device
+is determined by hard wiring, and can
+only be changed with difficulty. Moreover there are well entrenched conventions for choosing vector locations for
+the various devices.
+
+Thus after the interrupt has occurred,
+because the PC has been reloaded, the
+source of instructions executed by the
+CPU has been changed. The new source
+should be a procedure associated with
+the peripheral device controller which
+caused the interrupt.
+
+
+Also since the PS has also been
+changed, the processor mode may have
+changed. In UNIX, the initial mode may
+be either ``user'' or ``kernel'', but after
+the interrupt, the mode is always ``kernel''. Recall also that a change in mode
+implies:
+
+\bd
+\item[(a)] a change in memory mappings.
+(Note that to avoid any confusion, vector locations are
+always interpreted as kernel
+mode addresses.);
+
+\item[(b)] a change in stack pointers.
+ (Recall that the stack pointer,
+SP or r6, is the only special
+register which is replicated for
+each mode. This implies that
+after a mode change, the stack
+pointer value will have changed
+even though it has not been
+reloaded!)
+\ed
+
+\sbs{The Interrupt Vector}
+
+For our sample system, the representative peripheral devices chosen are
+listed in Table 9.1, along with their
+conventional hardware defined vector
+locations and priorities.
+
+\begin{center}
+\begin{tabular}{llcc}
+{\bf vector} & {\bf peripheral} & {\bf interrupt} & {\bf process} \\
+{\bf location} & {\bf device} & {\bf priority} & {\bf priority} \\ \hline
+060 & teletype input & 4 & 4 \\
+064 & teletype output & 4 & 4 \\
+070 & paper tape input & 4 & 4 \\
+074 & paper tape output & 4 & 4 \\
+100 & line clock & 6 & 6 \\
+104 & programmable & 6 & 6 \\
+    & clock & &\\
+200 & line printer & 4 & 4 \\
+220 & RK disk drive & 5 & 5 \\
+\end{tabular}
+\bigskip
+
+{\bf Table 9.1 Interrupt Vector Locations and Priorities}
+\end{center}
+
+\sbs{Interrupt Handlers}
+
+Within this selection of UNIX source
+code, there are seven procedures known
+as ``interrupt handlers'', i.e. which are
+executed as the result of, and only as
+the result of, interrupts:
+
+\begin{verbatim}
+   clock  (3725)  pcrint (8719)
+   rkintr (5451)  pcpint (8739)
+   klxint (8070)  lpint  (8976)
+   klrint (8078)
+\end{verbatim}
+
+\noindent ``clock'' will be examined in detail in
+Chapter 11. The others are discussed
+with the code for their associated devices.
+
+\sbs{Priorities}
+
+An interrupt does not necessarily occur
+immediately the peripheral device controller requests it, but only when the
+CPU is ready to accept it. It is usually desirable that a request for a low
+priority service should not be allowed
+to interrupt an activity with a higher
+priority.
+
+Bits 7 to 5 of the PS determine the
+processor priority at one of eight levels (labelled zero to seven). Each
+interrupt also has an associated priority level determined by hardware
+wiring. An interrupt will be inhibited as
+long as the processor priority is
+greater than or equal to the interrupt
+priority.
+
+
+After the interrupt the processor
+priority will be determined from the PS
+stored in the vector location and this
+does not have to be the same as the
+interrupt priority. Whereas the interrupt priority is determined by
+hardware, it is possible for the
+operating system to change the contents
+of the vector location at any time.
+
+
+As a matter of curiosity, it may be
+noted that the PDP11 hardware restricts
+the possible interrupt priorities to 4,
+5, 6 and 7 i.e. levels 1, 2 and 3 are
+not supported by the Unibus.
+
+\sbs{Interrupt Priorities}
+
+In UNIX, interrupt handling routines
+are initiated at the same priority as
+the interrupt priority.
+
+This means that during the handling of
+the interrupt, a second interrupt from
+a device of the same priority class
+will be delayed until the processor
+priority is reduced, either by the execution of one of the ``spl'' procedures,
+which are intended for just this purpose (see lines 1293 to 1315), or by
+reloading the processor status word
+e.g. upon returning from the interrupt.
+
+During interrupt handling, the processor priority may be raised temporarily
+to protect the integrity of certain
+operations. For instance, character
+oriented devices such as the paper tape
+reader/punch or the line printer interrupt at level four. Their interrupt
+handlers call ``getc'' (0930) or ``putc''
+(0967), which raise the processor
+priority temporarily to level five,
+while the character buffer queues are
+manipulated.
+
+The interrupt handler for the console
+teletype makes use of a ``timeout''
+facility. This involves a queue which
+is also manipulated by the clock interrupt handler, which runs at level six.
+To prevent possible interference, the
+``timeout'' procedure (3835) runs at
+level seven (the highest possible
+level).
+
+
+Usually it does not make sense to run
+an interrupt handler at a processor
+priority lower than the interrupt
+priority, for this would then risk a
+second interrupt of the same type, even
+from the same device, before completion
+of the processing of the first interrupt. This likely to be at
+best inconvenient and at worst disastrous. However the clock
+interrupt handler, which
+once per second has a lot of extra work
+to do, does exactly this.
+
+\sbs{Rules for Interrupt Handlers}
+
+As discussed above, interrupt handlers
+need to be careful about the manipulation of the processor priority to avoid
+allowing other interrupts to happen
+``too soon''. Likewise care needs to be
+taken that the other interrupts are not
+delayed excessively, lest the performance of the whole system be degraded.
+It is important to note that when an
+interrupt occurs, the process which is
+currently active will very likely not
+be the process which is interested in
+the occurrence. Consider the following
+scenario:
+
+
+User process \#m is active and initiates
+an i/o operation. It executes a trap
+instruction and transfers to kernel
+mode. Kernel process \#m initiates the
+required operation and then calls
+``sleep'' to suspend itself to await completion of the operation ...
+
+Some time later, when some other process, user process \#n say, is active,
+the operation is completed and an
+interrupt occurs. Process \#n reverts to
+kernel mode, and kernel process \#n
+deals with the interrupt, even though
+it may have no interest in or prior
+knowledge of the operation.
+
+
+Usually kernel process \#n will include
+waking process \#m as part of its
+activity. This will not always be the
+case though, e.g. where an error has
+occurred and the operation is retried.
+
+Clearly, the interrupt handler for a
+peripheral device should not made
+references to the current ``u'' structure
+for this is not likely to be the
+appropriate ``u'' structure. (The
+appropriate ``u'' structure could quite
+possibly be inaccessible, if it has
+been temporarily swapped out to the
+disk.)
+
+Likewise the interrupt handler should
+not call ``sleep'' because the process
+thus suspended will most likely be some
+innocent process.
+
+\sbs{Traps}
+
+``Traps'' are like ``interrupts'' in that
+they are events which are handled by
+the same hardware mechanism, and hence
+by similar software mechanisms.
+
+``Traps'' are unlike ``interrupts'' in that
+they occur as the result of events
+internal to the CPU, rather than externally. (In other systems the
+terminology ``internal interrupt'' and ``external
+interrupt'' is used to draw this distinction more forcefully.) Traps may
+occur unexpectedly as the result of
+hardware or power failures, or predictably and reproducibly, e.g. as the
+result of executing an illegal instruction or a ``trap'' instruction.
+
+
+``Traps'' are always recognised by the
+CPU immediately. They cannot be delayed
+in the way low priority interrupts may
+be. If you like, ``traps'' have an
+``interrupt priority'' of eight.
+
+``Trap'' instructions may be deliberately
+inserted in user mode programs to catch
+the attention of the operating system
+with a request to perform a specified
+service. This mechanism is used as part
+of the facility known as ``system
+calls''.
+
+Like interrupts, traps result in the
+reloading of the PC and PS from a vector location, and the saving of the old
+values of the PC and PS in the current
+stack. Table 9.2 lists the vector locations for the various ``trap'' types.
+
+\begin{center}
+\begin{tabular}{llc}
+{\bf vector} & {\bf trap type} & {\bf process} \\
+{\bf location} & & {\bf priority} \\ \hline
+004 & bus timeout & 7 \\
+010 & illegal instruction & 7 \\
+014 & bpt-trace & 7 \\
+020 & iot & 7 \\
+024 & power failure & 7 \\
+030 & emulator trap instruction & 7 \\
+034 & trap instruction & 7 \\
+114 & 11/10 parity & 7 \\
+240 & programmed interrupt & 7 \\
+244 & floating point error & 7 \\
+250 & segmentation violation & 7 \\
+\end{tabular}
+\bigskip
+
+{\bf Table 9.2 Trap Vector Locations and Priorities}
+\end{center}
+
+
+The contents of Tables 9.1 and 9.2
+should be compared with the file
+``low.s'' on Sheet 05. As noted earlier,
+this file is generated at each installation (along with the file ``conf.c''
+(sheet 46)), as the product of the
+utility program ``mkconf'', so as to
+reflect the actual set of peripherals
+installed.
+
+
+\sbs{Assembly Language `trap'}
+
+From ``low.s'' it appears that traps and
+interrupts are handled separately by
+the software. However closer examination reveals that ``call'' and ``trap'' are
+different entry points to a single code
+sequence in the file ``m40.s'' (see lines
+0755, 0776). This sequence is examined
+in detail in the next chapter.
+
+
+During the execution of this sequence,
+a call is made on a ``C'' language procedure to carry out further specific
+processing. In the case of an interrupt, the ``C'' procedure
+is the interrupt handler specific to the particular
+device controller.
+
+ In the case of a trap, the ``C'' procedure is another procedure called
+ ``trap'' (yes, the word ``trap'' is definitely overworked!), which in the case
+process of a system error will most likely call
+priority ``panic'' and in the case of a ``system
+ call'', will invoke (indirectly via
+ ``trapl''(2841)) the appropriate system
+ call procedure.
+
+\sbs{Return}
+
+Upon completion of the handling of an
+interrupt or trap the code follows a
+common path ending in an ``rtt'' instruction (0805). This reloads both the PC
+and PS from the current stack, i.e. the
+kernel stack, in order to restore the
+processor environment that existed
+before the interrupt or trap.

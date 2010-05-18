@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The First Group of `.h' Files</TITLE>
+<META NAME="description" CONTENT="The First Group of `.h' Files">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node57.html">
+<LINK REL="previous" HREF="node55.html">
+<LINK REL="up" HREF="node51.html">
+<LINK REL="next" HREF="node57.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1388"
+  HREF="node57.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1384"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1378"
+  HREF="node55.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1386"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1389"
+  HREF="node57.html">Assembly Language Files</A>
+<B> Up:</B> <A NAME="tex2html1385"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1379"
+  HREF="node55.html">Section One</A>
+ &nbsp; <B>  <A NAME="tex2html1387"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00075000000000000000">
+The First Group of `.h' Files</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>param.h</STRONG></DT>
+<DD>[Sheet 01] contains no variable 
+declarations, but many definitions 
+for operating system constants
+and parameters, and the declarations
+for three simple structures. The
+convention will be noted of using
+``upper case only'' for defined constants.
+
+<P>
+</DD>
+<DT><STRONG>systm.h</STRONG></DT>
+<DD>[Sheet 02; Chapter 19] consists 
+entirely of declarations (with
+definitions of the structures ``callout''
+and ``mount'' as side-effects).
+Note that none of the variables is
+initialised explicitly, and hence
+all are initialised to zero.
+
+<P>
+The dimensions for the first three
+arrays are parameters defined in
+param.h. Hence any file which
+``includes'' ``systm.h'' must have
+previously included ``param.h''.
+
+<P>
+</DD>
+<DT><STRONG>seg.h</STRONG></DT>
+<DD>[Sheet 03] contains a few
+definitions and one declaration,
+which are used for referencing the
+segmentation registers. This file
+could be absorbed into ``param.h'' and
+``systm.h'' without any real loss.
+
+<P>
+</DD>
+<DT><STRONG>proc.h</STRONG></DT>
+<DD>[Sheet 03; Chapter 7] contains 
+the important declaration for
+``proc'' which is both a structure
+type and an array of such structures.
+Each element of the ``proc''
+structure has a name which begins
+with ``p_'' and no other variable is
+so named. Similar conventions are
+used for naming the elements of the
+other structures.
+
+<P>
+The sets of values for the first two
+elements, ``p_stat'' and ``p_flag''
+have individual names which are
+define.
+
+<P>
+</DD>
+<DT><STRONG>user.h</STRONG></DT>
+<DD>[Sheet 04; Chapter 7] contains 
+the declaration for the very
+important ``user'' structure, plus a
+set of defined values for ``u_error''.
+
+<P>
+Only one instance of the ``user''
+structure is ever accessible at one
+time. This is referenced under the
+name ``u'' and is in the low address
+part of a 1024 byte area known as
+the ``per process data area''.
+
+<P>
+In general the complete ``h'' files are
+not analysed in detail later in this
+text. It is expected that the reader
+will refer to them from time to time
+(with increasing familiarity and understanding).
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1388"
+  HREF="node57.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1384"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1378"
+  HREF="node55.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1386"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1389"
+  HREF="node57.html">Assembly Language Files</A>
+<B> Up:</B> <A NAME="tex2html1385"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1379"
+  HREF="node55.html">Section One</A>
+ &nbsp; <B>  <A NAME="tex2html1387"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

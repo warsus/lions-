@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: sched (1940)</title>
+
+<link href="sect0177.html" title="xswap (4368)" rel="next" />
+<link href="sect0175.html" title="Text Segments" rel="prev" />
+<link href="sect0174.html" title="Program Swapping" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0175.html" title="Text Segments"><img alt="Previous: Text Segments" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0177.html" title="xswap (4368)"><img alt="Next: xswap (4368)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0174.html">Program Swapping</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">sched (1940)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000177">14.2 sched (1940)</h2>
+<p>Process #0 executes “sched”. When it is not waiting for the completion of an input/output operation that it has initiated, it spends most of its time waiting in one of the following situations: </p><dl class="description">
+
+    <dt>A. (runout)</dt>
+    <dd><p>None of the processes which are swap­ped out is ready to run, so that there is nothing to do. The situation may be changed by a call to “wakeup”, or to “xswap” called by either “newproc” or “expand”. </p></dd>
+
+    <dt>B. (runin)</dt>
+    <dd><p>There is at least one process swapped out and ready to run, but it hasn’t been out more than 3 seconds and/or none of the processes presently in main memory is inactive or has been there more than 2 seconds. The situation may be changed by the effluxion of time as measured by “clock” or by a call to “sleep”. </p></dd>
+
+</dl><p>When either of these situations terminate: </p><dl class="description">
+
+    <a href="../all.html#line1958" target="source" <dt>1958:</dt></a>
+    <dd><p>With the processor running at priority six, so that the clock can’t interrupt and change values of “p_time”, a search is made for the process which is ready to run and has been swapped out for the longest time; </p></dd>
+
+    <a href="../all.html#line1966" target="source" <dt>1966:</dt></a>
+    <dd><p>If there is no such process then situation A holds; </p></dd>
+
+    <a href="../all.html#line1976" target="source" <dt>1976:</dt></a>
+    <dd><p>Search for a main memory area of adequate size to hold the data segment. If an associated text segment must be present also but is not currently in main memory, the area is increased by the size of the text segment; </p></dd>
+
+    <a href="../all.html#line1982" target="source" <dt>1982:</dt></a>
+    <dd><p>If an area of adequate size is available the program branches to “found2” (2031). (Note that the program does not handle the case where there is sufficient space for both text and data segments but in distinct areas of main memory. Would it be worth while to extend the code to cover this possibility?); </p></dd>
+
+    <a href="../all.html#line1990" target="source" <dt>1990:</dt></a>
+    <dd><p>Search for a process which is in main memory, but which is not the scheduler or locked (i.e. already being swapped out), and whose state is “SWAIT” or “SSTOP” (but <b class="bf">not</b><br />“SSLEEP”) (i.e. the process is waiting for an event of low precedence, or has stopped during tracing (see Chapter Thirteen)). If such a process is found, go to line 2021, to swap the image out. </p><p>Note that there seems to be a bias here against processes whose “proc” entries are early in the “proc” array; </p></dd>
+
+    <a href="../all.html#line2003" target="source" <dt>2003:</dt></a>
+    <dd><p>If the image to be swapped in has been out less than 3 seconds, then situation B holds; </p></dd>
+
+    <a href="../all.html#line2005" target="source" <dt>2005:</dt></a>
+    <dd><p>Search for the process which is loaded, but is not the scheduler or locked, whose state is “SRUN” or “SSLEEP” (i.e. ready to run, or waiting for an event of high precedence) and which has been in main memory for the longest time; </p></dd>
+
+    <a href="../all.html#line2013" target="source" <dt>2013:</dt></a>
+    <dd><p>If the process image to be swapped out has been in main memory for less than 2 seconds, then situation B holds. </p><p>The constant “2” here (also the “3” on line 2003) is somewhat arbitrary. For some reason the programmer has departed from his usual practice of naming such constants to emphasise their origins; </p></dd>
+
+    <a href="../all.html#line2022" target="source" <dt>2022:</dt></a>
+    <dd><p>The process image is flagged as not loaded and is swapped out using “xswap” (4368). </p><p>Note that the “SSWAP” flag is not set here because the process swapped out is not the current process. (Cf. lines 1907, 2286); </p></dd>
+
+    <a href="../all.html#line2032" target="source" <dt>2032:</dt></a>
+    <dd><p>Read the text segment into main memory if necessary. Note that the arguments for the “swap” procedure are: </p><ul class="itemize">
+<li><p>an address within the swap area of the disk; </p></li><li><p>a main memory address (ordinal number of a 32 word block); </p></li><li><p>a size (number of 32 word blocks to be transferred); </p></li><li><p>a direction indicator (“B_READ==1” denotes “disk to main memory”); </p></li>
+</ul></dd>
+
+    <a href="../all.html#line2042" target="source" <dt>2042:</dt></a>
+    <dd><p>Swap in the data segment and ... </p></dd>
+
+    <a href="../all.html#line2044" target="source" <dt>2044:</dt></a>
+    <dd><p>Release the disk swap area to the available list, record the main memory address, set the “SLOAD” flag and reset the accumulated time indicator. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0175.html" title="Text Segments"><img alt="Previous: Text Segments" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0177.html" title="xswap (4368)"><img alt="Next: xswap (4368)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

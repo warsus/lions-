@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: sbreak (3354)</title>
+
+<link href="sect0146.html" title="The Files ‘sys2.c’ and ‘sys3.c’" rel="next" />
+<link href="sect0144.html" title="fork (3322)" rel="prev" />
+<link href="sect0136.html" title="Traps and System Calls" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0144.html" title="fork (3322)"><img alt="Previous: fork (3322)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0146.html" title="The Files ‘sys2.c’ and ‘sys3.c’"><img alt="Next: The Files ‘sys2.c’ and ‘sys3.c’" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0136.html">Traps and System Calls</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">sbreak (3354)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000146">12.9 sbreak (3354)</h2>
+<p>This procedure implements system call #17 which is described in the Section “BREAK (II)” of the UPM. The comment at the head of the procedure has confused more than one reader: clearly the identifier “break” is used in “C” programs (leave an enclosing program loop) in an entirely different way from that intended here (change the size of the program data area). </p><p>“sbreak” has clear similarities with the procedure “grow” (4136) but unlike the latter, it is only invoked explicitly and may in fact cause a contraction of the data area as well as an expansion (depending on the new desired size). </p><dl class="description">
+
+    <a href="../all.html#line3364" target="source" <dt>3364:</dt></a>
+    <dd><p>Calculate the new size for the data area (in 32 word blocks); </p></dd>
+
+    <a href="../all.html#line3371" target="source" <dt>3371:</dt></a>
+    <dd><p>Check that the new size is consistent with the memory segmentation constraints; </p></dd>
+
+    <a href="../all.html#line3376" target="source" <dt>3376:</dt></a>
+    <dd><p>The area is shrinking. Copy the stack area down into the former data area. Call “expand” to trim off the excess; </p></dd>
+
+    <a href="../all.html#line3386" target="source" <dt>3386:</dt></a>
+    <dd><p>Call “expand” to increase the total area. Copy the stack area up into the new part, and clear the areas which were formerly occupied by the stack. </p></dd>
+
+</dl><p>The following procedures which are also contained in “sysl.c” are described in Chapter 13: </p><pre>
+  rexit (3205)     wait (3270)
+  exit  (3219)
+</pre></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0144.html" title="fork (3322)"><img alt="Previous: fork (3322)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0146.html" title="The Files ‘sys2.c’ and ‘sys3.c’"><img alt="Next: The Files ‘sys2.c’ and ‘sys3.c’" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

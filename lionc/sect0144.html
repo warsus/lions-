@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: fork (3322)</title>
+
+<link href="sect0145.html" title="sbreak (3354)" rel="next" />
+<link href="sect0143.html" title="exec (3020)" rel="prev" />
+<link href="sect0136.html" title="Traps and System Calls" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0143.html" title="exec (3020)"><img alt="Previous: exec (3020)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0145.html" title="sbreak (3354)"><img alt="Next: sbreak (3354)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0136.html">Traps and System Calls</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">fork (3322)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000145">12.8 fork (3322)</h2>
+<p>A call on “exec” is frequently preceded by a call on “fork”. Most of the work for “fork” is done by “newproc” (1826), but before the latter is called, “fork” makes an independent search for a slot in the “proc” array, and remembers the place as “p2” (3327). </p><p>“newproc” also searches “proc” but independently. Presumably it always locates the same empty slot as “fork”, since it does not report the value back. (Why is there no confusion on this point?) </p><dl class="description">
+
+    <a href="../all.html#line3335" target="source" <dt>3335:</dt></a>
+    <dd><p>For the new process, “fork” returns the value of the parent’s process identification, and initialises various accounting parameters; </p></dd>
+
+    <a href="../all.html#line3344" target="source" <dt>3344:</dt></a>
+    <dd><p>For the parent process, “fork” returns the value of the child’s process identification, and <b class="bf">skips</b> the user mode program counter by one word. </p></dd>
+
+</dl><p>Note that the values finally returned to a “C” program are slightly different from the above. Refer to the section FORK(II) of the UPM. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0143.html" title="exec (3020)"><img alt="Previous: exec (3020)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0145.html" title="sbreak (3354)"><img alt="Next: sbreak (3354)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

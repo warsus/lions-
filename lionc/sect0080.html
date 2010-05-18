@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: sched (1940)</title>
+
+<link href="sect0081.html" title="sleep (2066)" rel="next" />
+<link href="sect0079.html" title="The story continues ..." rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0079.html" title="The story continues ..."><img alt="Previous: The story continues ..." border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0081.html" title="sleep (2066)"><img alt="Next: sleep (2066)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">sched (1940)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000081">6.7 sched (1940)</h2>
+<p>At this stage we are only interested in what happens when “sched” is entered for the first time. </p><dl class="description">
+
+    <a href="../all.html#line1958" target="source" <dt>1958:</dt></a>
+    <dd><p>“spl6” is an assembler routine (1292) which sets the processor priority level to six. (Cf. also “spl0”, “spl4”, “spl5” and “spl7” in “m40.s”). </p></dd>
+
+</dl><p>When the processor is at level six, only devices with priority seven can interrupt it. The clock whose priority level is six is thus inhibited from interrupting the processor between this point and the subsequent call on “spl0” at line 1976. </p><dl class="description">
+
+    <a href="../all.html#line1960" target="source" <dt>1960:</dt></a>
+    <dd><p>A search is made through “proc” whose status is “SRUN” and which is not “loaded”. </p></dd>
+
+</dl><p>(Processes #0 and 1 have status “SRUN” and are loaded. All remaining 2193: processes, have a status of zero, which is equivalent to “undefined” or “NULL” ) . </p><dl class="description">
+
+    <a href="../all.html#line1966" target="source" <dt>1966:</dt></a>
+    <dd><p>The search fails (“n” is still –1). The flag “runout” is made non-zero, indicating that there are no processes which are both ready to run and “swapped out” onto disk; </p></dd>
+
+    <a href="../all.html#line1968" target="source" <dt>1968:</dt></a>
+    <dd><p>“sleep” is called (to wait for such an event) with a priority “PSWP” (== –100) for when it wakes up, which is in the category of “very urgent”. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0079.html" title="The story continues ..."><img alt="Previous: The story continues ..." border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0081.html" title="sleep (2066)"><img alt="Next: sleep (2066)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

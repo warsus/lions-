@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Program Swapping</title>
+
+<link href="sect0175.html" title="Text Segments" rel="next" />
+<link href="sect0173.html" title="procxmt (4204)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0173.html" title="procxmt (4204)"><img alt="Previous: procxmt (4204)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0175.html" title="Text Segments"><img alt="Next: Text Segments" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Program Swapping</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000175">14 Program Swapping</h1>
+<p>UNIX, like all time-sharing systems, and some multiprogramming systems uses “program swapping” (also called “rollin/roll-out”) to share the limited resource of the main physical memory among several processes. </p><p>Processes which are suspended may be selectively “swapped out” by writing their data segments (including the “per process data”) into a “swap area” on disk </p><p>The main memory area which was occupied can then be reassigned to other processes, which quite probably will be “swapped in” from the “swap area”. </p><p>Most of the decisions regarding “swapping out”, and all the decisions regarding “swapping in”, are made by the procedure “sched”. “Swapping in” is handled by a direct call (2034) on the procedure “swap” (5196), whereas “swapping out” is handled by a call (2024) on “xswap” (4368). </p><p>For those archaeologists who like to ponder the “bones” of earlier versions of operating systems, it seems that originally “sched” called “swap” directly to “swap out” processes, rather than via “xswap”. The extra procedure (one of several to be found in the file “text.c”) has been necessitated by the implementation of the sharable “text segments”. </p><p>It is instructive to estimate how much extra code has been necessitated by the text segment feature: in “text.c” are four procedures “xswap”, “xalloc”, “xfree” and “xccdec”, which manipulate an array of structures called “text”, which is declared in the file “text.h”. Additional code has also been added to “sysl.c” and “slp.c”. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0175.html">14.1 Text Segments</a>
+   
+</li><li><a href="sect0176.html">14.2 sched (1940)</a>
+   
+</li><li><a href="sect0177.html">14.3 xswap (4368)</a>
+   
+</li><li><a href="sect0178.html">14.4 xalloc (4433)</a>
+   
+</li><li><a href="sect0179.html">14.5 xfree (4398)</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0173.html" title="procxmt (4204)"><img alt="Previous: procxmt (4204)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0175.html" title="Text Segments"><img alt="Next: Text Segments" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

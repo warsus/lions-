@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>iput (7344)</TITLE>
+<META NAME="description" CONTENT="iput (7344)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node267.html">
+<LINK REL="previous" HREF="node265.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node267.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4064"
+  HREF="node267.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4060"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4054"
+  HREF="node265.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4062"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4065"
+  HREF="node267.html">ifree (7134)</A>
+<B> Up:</B> <A NAME="tex2html4061"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4055"
+  HREF="node265.html">free (7000)</A>
+ &nbsp; <B>  <A NAME="tex2html4063"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002515000000000000000">
+iput (7344)</A>
+</H2>
+
+<P>
+This procedure is one of the most popular  in UNIX (called from nearly thirty
+different places) and its use will have
+already been frequently observed.
+
+<P>
+In essence  it  simply  decrements  the
+reference  count for the ``inode'' passed
+as a parameter, and then calls  ``prele''
+(7882) to reset the ``inode'' lock and to
+perform any necessary ``wakeup''s.
+
+<P>
+``iput'' has an important side effect. If
+the  reference  count  is  going  to be
+reduced to  zero,  then  a  release  of
+resources  is  indicated.  This  may be
+simply the core ``inode'', or  both  that
+and  the  file itself, if the number of
+links is also zero.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Processor Status Word</title>
+
+<link href="sect0016.html" title="General Registers" rel="next" />
+<link href="sect0014.html" title="The Processor" rel="prev" />
+<link href="sect0013.html" title="Fundamentals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0014.html" title="The Processor"><img alt="Previous: The Processor" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0016.html" title="General Registers"><img alt="Next: General Registers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0013.html">Fundamentals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Processor Status Word</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000016">2.2 Processor Status Word</h2>
+<p>This sixteen bit register has subfields which are interpreted as follows: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">bits</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">description</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>14,15 </p></td>
+
+    
+    <td style="text-align:left"><p> current mode (00 = kernel;) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>12,13 </p></td>
+
+    
+    <td style="text-align:left"><p> previous mode (11 = user;) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5,6,7 </p></td>
+
+    
+    <td style="text-align:left"><p> processor priority (range 0..7) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>4 </p></td>
+
+    
+    <td style="text-align:left"><p> trap bit </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>3 </p></td>
+
+    
+    <td style="text-align:left"><p> N, set if the previous </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> result was negative </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>2 </p></td>
+
+    
+    <td style="text-align:left"><p> Z, set if the previous </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> result was zero </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>1 </p></td>
+
+    
+    <td style="text-align:left"><p> V, set if the previous </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> result gave an overflow </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>0 </p></td>
+
+    
+    <td style="text-align:left"><p> C, set if the previous </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> operation gave a carry </p></td>
+
+</tr>
+</table><p>The processor can operate in two different modes: kernel and user. Kernel mode is the more privileged of the two and is reserved by the operating system for its own use. The choice of mode determines: </p><ul class="itemize">
+<li><p>The set of memory management segmentation registers which is used to translate program virtual addresses to physical addresses; </p></li><li><p>The actual register used as r6, the “stack pointer”; </p></li><li><p>Whether certain instructions such as “halt” will be obeyed. </p></li>
+</ul></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0014.html" title="The Processor"><img alt="Previous: The Processor" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0016.html" title="General Registers"><img alt="Next: General Registers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

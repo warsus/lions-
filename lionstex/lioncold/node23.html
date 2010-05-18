@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Unix Assembler</TITLE>
+<META NAME="description" CONTENT="Unix Assembler">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node24.html">
+<LINK REL="previous" HREF="node22.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node24.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html967"
+  HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html963"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html957"
+  HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html965"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html968"
+  HREF="node24.html">Memory Management</A>
+<B> Up:</B> <A NAME="tex2html964"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html958"
+  HREF="node22.html">Addressing Modes</A>
+ &nbsp; <B>  <A NAME="tex2html966"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00056000000000000000">
+Unix Assembler</A>
+</H2>
+
+<P>
+The UNIX assembler is a two pass assembler
+without macro facilities. A full
+description may be found in the ``UNIX
+Assembler Reference Manual'' which is
+contained in the ``UNIX Documents''
+
+<P>
+The following brief notes should be of
+some assistance:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>a string of digits may define a
+constant number. This is assumed
+to be an octal number unless the
+string is terminated by a period
+(``.''), when it is interpreted as
+a decimal number.
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>The character ``/'' is used to
+signify that the rest of the
+line is a comment;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>If two or more statements occur
+on the same line, they must be
+separated by semicolons;
+
+<P>
+</DD>
+<DT><STRONG>(d)</STRONG></DT>
+<DD>The character ``.'' is used to
+denote the current location;
+
+<P>
+</DD>
+<DT><STRONG>(e)</STRONG></DT>
+<DD>UNIX assembler uses the characters $
+and ``*'' where the DEC
+assemblers use ``#'' and ``@''
+respectively.
+
+<P>
+</DD>
+<DT><STRONG>(f)</STRONG></DT>
+<DD>An identifier consists of a set
+of alphanumeric characters
+(including the underscore).
+Only the first eight characters
+are significant and the first
+may not be numeric;
+
+<P>
+</DD>
+<DT><STRONG>(g)</STRONG></DT>
+<DD>Names which occur in ``C'' programs
+for variables which are to
+be known globally, are modified
+by the addition of a prefix consisting
+of a single underscore.
+Thus for example the variable
+``_regloc'' which occurs on line
+1025 in the assembly language
+file, ``m40.s'', refers to the
+same variable as ``regloc'' at
+line 2677 of the file, ``trap.c'';
+
+<P>
+</DD>
+<DT><STRONG>(h)</STRONG></DT>
+<DD>There are two kinds of statement
+labels: name labels and numeric
+labels. The latter consist of a
+single digit followed by a
+colon, and need not be unique.
+A reference to ``nf'' where ``n'' is
+a digit, refers to the first
+occurrence of the label ``n:''
+found by searching forward.
+
+<P>
+A reference to ``nb'' is similar
+except that the search is conducted in
+the backwards direction;
+
+<P>
+</DD>
+<DT><STRONG>(i)</STRONG></DT>
+<DD>An assignment statement of the
+form
+
+<P>
+<DIV ALIGN="CENTER">
+identifier = expression
+
+</DIV>
+
+<P>
+associates a value <B>and</B> type with
+the identifier. In the example
+
+<P>
+<DIV ALIGN="CENTER">
+. = 60<code>^</code>.
+
+</DIV>
+
+<P>
+the operator '<code>^</code>' delivers the
+value of the first operand and
+the type of the second operand
+(in this case, ``location'');
+
+<P>
+</DD>
+<DT><STRONG>(j)</STRONG></DT>
+<DD>The string quote symbols
+are ``<IMG
+ WIDTH="63" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$&lt;$">'' and ``<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">''.
+
+<P>
+</DD>
+<DT><STRONG>(k)</STRONG></DT>
+<DD>Statements of the form
+
+<P>
+<DIV ALIGN="CENTER">
+.globl x, y, z
+
+</DIV>
+
+<P>
+serve to make the names ``x'', ``y''
+and ``z'' external;
+
+<P>
+</DD>
+<DT><STRONG>(l)</STRONG></DT>
+<DD>The names ``_edata'' and ``_end''
+are loader pseudo variables
+which the define the size of the
+data segment, and the data segment
+plus the bss segment
+respectively.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html967"
+  HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html963"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html957"
+  HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html965"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html968"
+  HREF="node24.html">Memory Management</A>
+<B> Up:</B> <A NAME="tex2html964"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html958"
+  HREF="node22.html">Addressing Modes</A>
+ &nbsp; <B>  <A NAME="tex2html966"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

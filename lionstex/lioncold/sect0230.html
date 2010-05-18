@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: rdwr (5731)</title>
+
+<link href="sect0231.html" title="readi (6221)" rel="next" />
+<link href="sect0229.html" title="Reading and Writing" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0229.html" title="Reading and Writing"><img alt="Previous: Reading and Writing" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0231.html" title="readi (6221)"><img alt="Next: readi (6221)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">rdwr (5731)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000231">18.17 rdwr (5731)</h2>
+<p>“read” and “write” perform similar operations and share much code. The two system calls, “read” (5711) and “write” (5720), call “rdwr” immediately to: </p><dl class="description">
+
+    <dt>5736:</dt>
+    <dd><p>Convert the user program file identification to a pointer in the file table; </p></dd>
+
+    <dt>5739:</dt>
+    <dd><p>Check that the operation (read or write) is in accordance with the mode with which the file was opened; </p></dd>
+
+    <dt>5743:</dt>
+    <dd><p>Set up various standard locations in “u” with the appropriate parameters; </p></dd>
+
+    <dt>5746:</dt>
+    <dd><p>“pipes” get special treatment right from the start! </p></dd>
+
+    <dt>5755:</dt>
+    <dd><p>Call “readi” or “writei” as appropriate; </p></dd>
+
+    <dt>5756:</dt>
+    <dd><p>Update the file offset by, and set the value returned to the user program to, the number of characters actually transferred. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0229.html" title="Reading and Writing"><img alt="Previous: Reading and Writing" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0231.html" title="readi (6221)"><img alt="Next: readi (6221)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>xfree (4398)</TITLE>
+<META NAME="description" CONTENT="xfree (4398)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node182.html">
+<LINK REL="up" HREF="node178.html">
+<LINK REL="next" HREF="node184.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2999"
+  HREF="node184.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2995"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2991"
+  HREF="node182.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2997"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3000"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Up:</B> <A NAME="tex2html2996"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2992"
+  HREF="node182.html">xalloc (4433)</A>
+ &nbsp; <B>  <A NAME="tex2html2998"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000195000000000000000">
+xfree (4398)</A>
+</H2>
+
+<P>
+``xfree'' is called by ``exit'' (3233);
+when a process is being terminated, and
+by ``exec'' (3128), when a process is
+being transmogrified.
+
+<P>
+<DL>
+<DT><STRONG>4402:</STRONG></DT>
+<DD>Set the text pointer in the
+ ``proc'' entry to ``NULL'';
+
+<P>
+</DD>
+<DT><STRONG>4403:</STRONG></DT>
+<DD>Decrement the main memory count
+ and if it is now zero ...
+
+<P>
+</DD>
+<DT><STRONG>4406:</STRONG></DT>
+<DD>and if the text segment has not
+ been flagged to be saved, ...
+
+<P>
+</DD>
+<DT><STRONG>4408:</STRONG></DT>
+<DD>Abandon the image of the text
+ segment in the disk swap area;
+
+<P>
+</DD>
+<DT><STRONG>4411:</STRONG></DT>
+<DD>Call ``iput'' (7344) to decrement
+ the ``inode'' reference count and
+ if necessary delete it.
+</DD>
+</DL>
+
+<P>
+``ISVTX'' (5695) is a mask which defines
+the ``sticky bit'' mentioned in section
+``CHMOD(I)'' of the UPM. If this bit is
+set, the disk copy of the text segment
+is allowed to remain in the disk swap
+area even when no programs are running
+which reference it, in the expectation
+that it will be required again shortly.
+This is an efficient device for commonly used programs such as the ``shell''
+or the editor.
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Buffer Manipulation</title>
+
+<link href="sect0199.html" title="Flags" rel="next" />
+<link href="sect0197.html" title="iodone (5018)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0197.html" title="iodone (5018)"><img alt="Previous: iodone (5018)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0199.html" title="Flags"><img alt="Next: Flags" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Buffer Manipulation</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000199">17 Buffer Manipulation</h1>
+<p>In this chapter we look at the file “bio.c” in detail. It contains most of the basic routines used to manipulate buffer headers and buffers (4535, 4720). </p><p>Individual buffer headers are tagged by a device number “b_dev”, (4527) and a block number “b_blkno”, (4531). (Note the way in which the latter is declared as an unsigned integer.) </p><p>Buffer headers may be linked simultaneously into two lists: </p><dl class="description">
+
+    <dt>the “b”-lists</dt>
+    <dd><p>are lists, one per device controller, which link together buffers associated with that device type; </p></dd>
+
+    <dt>the “av”-list</dt>
+    <dd><p>is a list of buffers which may be detached from their current use and converted to an alternate use. </p></dd>
+
+</dl><p>Both the “av”-list and the various “b”-lists are doubly linked to facilitate insertion and deletion at any point. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0199.html">17.1 Flags</a>
+   
+</li><li><a href="sect0200.html">17.2 A Cache-like Memory</a>
+   
+</li><li><a href="sect0201.html">17.3 clrbuf (5038)</a>
+   
+</li><li><a href="sect0202.html">17.4 incore (4899)</a>
+   
+</li><li><a href="sect0203.html">17.5 getblk (4921)</a>
+   
+</li><li><a href="sect0204.html">17.6 brelse (4869)</a>
+   
+</li><li><a href="sect0205.html">17.7 binit (5055)</a>
+   
+</li><li><a href="sect0206.html">17.8 bread (4754)</a>
+   
+</li><li><a href="sect0207.html">17.9 breada (4773)</a>
+   
+</li><li><a href="sect0208.html">17.10 bwrite (4809)</a>
+   
+</li><li><a href="sect0209.html">17.11 bawrite (4856)</a>
+   
+</li><li><a href="sect0210.html">17.12 bdwrite (4836)</a>
+   
+</li><li><a href="sect0211.html">17.13 bflush (5229)</a>
+   
+</li><li><a href="sect0212.html">17.14 physio (5259)</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0197.html" title="iodone (5018)"><img alt="Previous: iodone (5018)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0199.html" title="Flags"><img alt="Next: Flags" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: brelse (4869)</title>
+
+<link href="sect0205.html" title="binit (5055)" rel="next" />
+<link href="sect0203.html" title="getblk (4921)" rel="prev" />
+<link href="sect0198.html" title="Buffer Manipulation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0203.html" title="getblk (4921)"><img alt="Previous: getblk (4921)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0205.html" title="binit (5055)"><img alt="Next: binit (5055)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0198.html">Buffer Manipulation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">brelse (4869)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000205">17.6 brelse (4869)</h2>
+<p>This procedure takes the buffer passed as a parameter and links it back into the “av”-list. </p><p>Any process which is either waiting for the particular buffer or any available buffer is woken up. </p><p>Note however that since both “sleeps” (4943, 4955) are at the same priority, if two processes are waiting – one for the particular buffer and one for any buffer – it will be a toss-up which will get it. </p><p>By giving the first priority over the second (e.g. by biasing by one) the race should be resolved more satisfactorily. The disadvantage of such a change might be that it could lead to a deadlock situation in certain rather peculiar circumstances. </p><p>If an error has occurred e.g. upon reading information into the buffer the information in the buffer may be incorrect. The assignment on line 4883 ensures that the information in the buffer will not be mistakenly retrieved subsequently. The “B_ERROR” flag is set e.g. by “rkstrategy” (5403) and “rkintr” (5467). </p><p>To see how this could occur, consider what happens to a buffer when a disk i/o operation is completed: </p><dl class="description">
+
+    <dt>5471</dt>
+    <dd><p>“rkintr” calls “iodone”; </p></dd>
+
+    <dt>5026</dt>
+    <dd><p>“iodone” sets the “B_DONE” flag; </p></dd>
+
+    <dt>5028</dt>
+    <dd><p>“iodone” calls “brelse”; </p></dd>
+
+    <dt>4387</dt>
+    <dd><p>“brelse” resets the “B_WANTED”, “B_BUSY” and “B_ASYNC” flags but not the “B_DONE” flag; </p><p>. . . . . . . . . . . . </p></dd>
+
+    <dt>4948</dt>
+    <dd><p>“getblk” finds the buffer and calls “notavail”; </p></dd>
+
+    <dt>5010</dt>
+    <dd><p>“notavail” sets the “B_BUSY” flag; </p></dd>
+
+    <dt>4759</dt>
+    <dd><p>“bread” (which called “getblk”) finds the “B_DONE” flag set and exits. </p></dd>
+
+</dl><p>Note that buffer headers are removed from the “av”-list by “notavail” and are returned by “brelse”. Buffer headers are moved from one “b”-list to another by “getblk”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0203.html" title="getblk (4921)"><img alt="Previous: getblk (4921)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0205.html" title="binit (5055)"><img alt="Next: binit (5055)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

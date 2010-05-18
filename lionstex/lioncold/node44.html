@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 11</TITLE>
+<META NAME="description" CONTENT="Example 11">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node45.html">
+<LINK REL="previous" HREF="node43.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node45.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1235"
+  HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1231"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1225"
+  HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1233"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1236"
+  HREF="node45.html">Example 12</A>
+<B> Up:</B> <A NAME="tex2html1232"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1226"
+  HREF="node43.html">Example 10</A>
+ &nbsp; <B>  <A NAME="tex2html1234"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000612000000000000000">
+Example 11</A>
+</H2>
+
+<P>
+<PRE>
+  4856 bawrite (bp)
+       struct buf *bp;
+       {
+         register struct buf *rbp;
+         rbp = bp;
+         rbp-&gt;b_flags =| B_ASYNC;
+         bwrite (rbp);
+       }
+</PRE>
+
+<P>
+The second last statement is interesting because it could have been written
+as
+
+<P>
+<PRE>
+   rbp-&gt;b_flags = rbp-&gt;b_flags | B_ASYNC;
+</PRE>
+
+<P>
+In this statement the bit mask
+``B ASYNC'' is ``or''ed into
+``rbp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">b_flags''. The symbol ``<code>|</code>'' is the
+logical disjunction for arithmetic
+values.
+
+<P>
+This is an example of a very useful
+construction in UNIX, which can save
+the programmer much labour. If ``O'' is
+any binary operator, then
+
+<P>
+<PRE>
+    x = x O a;
+</PRE>
+
+<P>
+where ``a'' is an expression, can be
+rewritten more succinctly as
+
+<P>
+<PRE>
+    x =O  a;
+</PRE>
+
+<P>
+A programmer using this construction
+has to be careful about the placement
+of blank characters, since
+
+<P>
+<PRE>
+    x =+ 1;
+</PRE>
+
+<P>
+is different from
+
+<P>
+<PRE>
+    x = +1;
+</PRE>
+
+<P>
+What is to be the meaning of
+
+<P>
+<PRE>
+    x =+1;        ?
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

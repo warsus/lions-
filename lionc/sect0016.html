@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: General Registers</title>
+
+<link href="sect0017.html" title="Instruction Set" rel="next" />
+<link href="sect0015.html" title="Processor Status Word" rel="prev" />
+<link href="sect0013.html" title="Fundamentals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0015.html" title="Processor Status Word"><img alt="Previous: Processor Status Word" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0017.html" title="Instruction Set"><img alt="Next: Instruction Set" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0013.html">Fundamentals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">General Registers</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000017">2.3 General Registers</h2>
+<p>The processor incorporates a number of sixteen bit registers of which eight are accessible at any time as “general registers”. These are known as r0, r1, r2, r3, r4, r5, r6 and r7. </p><p>The first six of the general registers are available for use as accumulators, address pointers or index registers. The convention in UNIX for the use of these registers is as follows: </p><dl class="description">
+
+    <dt>r0, r1</dt>
+    <dd><p>are used as temporary accumulators during expression evaluation, to return results from a procedure, and in some cases to communicate actual parameters during a procedure call; </p></dd>
+
+    <dt>r2, r3, r4</dt>
+    <dd><p>are used for local variables during procedure execution. Their values are almost always stored upon procedure entry, and restored upon procedure exit; </p></dd>
+
+    <dt>r5</dt>
+    <dd><p>is used as the head pointer to a “dynamic chain” of procedure activation records stored in the current stack. It is referred to as the “environment pointer”. </p></dd>
+
+</dl><p>The last two of the “general registers” do have a special significance and are to all intents, “special purpose”: </p><dl class="description">
+
+    <dt>r6</dt>
+    <dd><p>(also known as “sp”) is used as the stack pointer. The PDP11/40 processor incorporates two separate registers which may be used as “sp”, depending on whether the processor is in kernel or user mode. No other one of the general registers is duplicated in this way; </p></dd>
+
+    <dt>r7</dt>
+    <dd><p>(also known as “pc”) is used as the program instruction address register. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0015.html" title="Processor Status Word"><img alt="Previous: Processor Status Word" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0017.html" title="Instruction Set"><img alt="Next: Instruction Set" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

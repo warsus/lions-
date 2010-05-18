@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: namei (7518)</title>
+
+<link href="sect0240.html" title="Some Comments" rel="next" />
+<link href="sect0238.html" title="Directory Files" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0238.html" title="Directory Files"><img alt="Previous: Directory Files" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0240.html" title="Some Comments"><img alt="Next: Some Comments" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">namei (7518)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000240">19.3 namei (7518)</h2>
+<dl class="description">
+
+    <dt>7531:</dt>
+    <dd><p>“u.u_cdir” defines the “inode” of a process’s current directory. A process inherits its parent’s current directory at birth (“newproc”, 1883). The current directory may be changed using the “chdir” (3538) system call; </p></dd>
+
+    <dt>7532:</dt>
+    <dd><p>Note that “func” is a parameter to “namei” and is always either “uchar” (7689) or “schar” (7679); </p></dd>
+
+    <dt>7534:</dt>
+    <dd><p>“iget” (7276) is called to: </p><ul class="itemize">
+<li><p>wait until such time as the “inode” corresponding to “dp” is no longer locked; </p></li><li><p>check that the associated file system is still mounted; </p></li><li><p>increment the reference count; </p></li><li><p>lock the “inode”; </p></li>
+</ul></dd>
+
+    <dt>7535:</dt>
+    <dd><p>Multiple slashes are acceptable! (i.e.<br />“////a///b/” is the same as “/a/b”); </p></dd>
+
+    <dt>7537:</dt>
+    <dd><p>Any attempt to replace or delete the current working directory or the root directory is bounced immediately! </p></dd>
+
+    <dt>7542:</dt>
+    <dd><p>The label “cloop” marks the beginning of a program loop that extends to line 7667. Each cycle analyses a component of the pathname (i.e. a string terminated by a null character or one or more slashes). Note that a name may be constructed from many different characters (7571); </p></dd>
+
+    <dt>7550:</dt>
+    <dd><p>The end of the pathname has been reached (successfully). Return the current value of “dp”; </p></dd>
+
+    <dt>7563:</dt>
+    <dd><p>“search” permission for directories is coded in the same way as “execute” permission for other files; </p></dd>
+
+    <dt>7570:</dt>
+    <dd><p>Copy the name into a more accessible location before attempting to match it with a directory entry. Note that a name of greater than “DIRSIZ” characters is truncated; </p></dd>
+
+    <dt>7589:</dt>
+    <dd><p>“u.u_count” is set to the number of entries in the directory; </p></dd>
+
+    <dt>7592:</dt>
+    <dd><p>The label “eloop” marks the beginning of a program loop which extends to line 7647. Each cycle of the loop handles a single directory entry; </p></dd>
+
+    <dt>7600:</dt>
+    <dd><p>If the directory has been searched (linearly!) without matching the supplied pathname component, then there must be an error unless: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>this is the last component of the pathname, i.e. “c==‘<tt>\</tt>0’ ”; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>the file is to be created, i.e. “flag == 1”; ard </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>the user program has “write” permission for the directory; </p></dd>
+
+</dl></dd>
+
+    <dt>7606:</dt>
+    <dd><p>Record the “inode” address for the directory for the new file in “u.u_pdir”; </p></dd>
+
+    <dt>7607:</dt>
+    <dd><p>If a suitable slot for a new directory entry has previously been encountered (7642), store the value in “u.u_offset[1]”; else set the “IUPD” fIag for the “dp” designated “inode” (but why?); </p></dd>
+
+    <dt>7622:</dt>
+    <dd><p>When appropriate, read a new block from the directory file (note the use of “bread”) (why not “breada”?), after carefully releasing any previously held buffer; </p></dd>
+
+    <dt>7636:</dt>
+    <dd><p>Copy the eight words of the directory entry into the array “u.u_dent”. The reason for copying before comparing is obscure! Can this actually be more efficient? (The reason for copying the whole directory at all is rather perplexing to the author of these notes.); </p></dd>
+
+    <dt>7645:</dt>
+    <dd><p>This comparison makes efficient use of a single character pointer register variable, “cp”. The loop would be even more efficient if word by word comparison were used; </p></dd>
+
+    <dt>7647:</dt>
+    <dd><p>The “eloop” cycle is terminated by one of: </p><pre>
+   return(NULL);    (7610)
+   goto out;        (7605, 7613)
+</pre><p>a successful match so that the branch to “eloop” (7647) is not taken; </p></dd>
+
+    <dt>7657:</dt>
+    <dd><p>If the name is to be deleted (“flag==2”), if the pathname has been completed, and if the user program has “write” access to the directory, then return a pointer to the directory “inode”; </p><p>Save the device identity temporarily (why not in the register “c”?) and call “iput” (7344) to unlock “dp”, to decrement the reference count on “dp” and to perform any consequent processlng; </p></dd>
+
+    <dt>7664:</dt>
+    <dd><p>Revalidate “dp” to point to the “inode” for the next level file; </p></dd>
+
+    <dt>7665:</dt>
+    <dd><p>“dp==NULL” shouldn’t happen, since the directory says the file exists! However “inode” table overflows and i/o errors can occur, and sometimes the file system may be left in an inconsistent state after a system crash. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0238.html" title="Directory Files"><img alt="Previous: Directory Files" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0240.html" title="Some Comments"><img alt="Next: Some Comments" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

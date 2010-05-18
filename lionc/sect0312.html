@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: flushtty (8252)</title>
+
+<link href="sect0313.html" title="wflushtty (8217)" rel="next" />
+<link href="sect0311.html" title="The File “tty.c”" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Previous: The File “tty.c”" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0313.html" title="wflushtty (8217)"><img alt="Next: wflushtty (8217)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">flushtty (8252)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000313">25.1 flushtty (8252)</h2>
+<p>The purpose of this procedure is to “normalise” the queries associated with a particular terminal. Its effect is to terminate transmission to the terminal forthwith and to throw away any accumulated input characters. </p><dl class="description">
+
+    <a href="../all.html#line8258" target="source" <dt>8258:</dt></a>
+    <dd><p>Throw away everything in the “cooked” input queue; </p></dd>
+
+    <a href="../all.html#line8259" target="source" <dt>8259:</dt></a>
+    <dd><p>ditto for the output queue; </p></dd>
+
+    <a href="../all.html#line8260" target="source" <dt>8260:</dt></a>
+    <dd><p>Wakeup any process waiting to extract a character from the “raw” input queue; </p></dd>
+
+    <a href="../all.html#line8261" target="source" <dt>8261:</dt></a>
+    <dd><p>ditto for the output queue; </p></dd>
+
+    <a href="../all.html#line8263" target="source" <dt>8263:</dt></a>
+    <dd><p>Raise the processor priority to prevent an interrupt from the terminal while ... </p></dd>
+
+    <a href="../all.html#line8264" target="source" <dt>8264:</dt></a>
+    <dd><p>the “raw” input queue is flushed, </p></dd>
+
+    <a href="../all.html#line8265" target="source" <dt>8265:</dt></a>
+    <dd><p>the “delimiter count” is properly set to zero. </p></dd>
+
+</dl><p>“flushtty” is called by “wflushtty” (see below) and “ttyinput” (8346, 8350) when either: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>the terminal is not operating in “raw” mode and a “quit” or “delete” character is received from the terminal; or </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>the “raw” input queue has grown unreasonably large (presumably because no process is reading input from the terminal); </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Previous: The File “tty.c”" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0313.html" title="wflushtty (8217)"><img alt="Next: wflushtty (8217)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

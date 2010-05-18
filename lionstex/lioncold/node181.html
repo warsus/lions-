@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>xswap (4368)</TITLE>
+<META NAME="description" CONTENT="xswap (4368)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node182.html">
+<LINK REL="previous" HREF="node180.html">
+<LINK REL="up" HREF="node178.html">
+<LINK REL="next" HREF="node182.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2977"
+  HREF="node182.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2973"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2967"
+  HREF="node180.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2975"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2978"
+  HREF="node182.html">xalloc (4433)</A>
+<B> Up:</B> <A NAME="tex2html2974"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2968"
+  HREF="node180.html">sched (1940)</A>
+ &nbsp; <B>  <A NAME="tex2html2976"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000193000000000000000">
+xswap (4368)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>4373:</STRONG></DT>
+<DD>If ``oldsize'' data was not supplied, use the current size of
+the data segment stored in ``u'';
+
+<P>
+</DD>
+<DT><STRONG>4375:</STRONG></DT>
+<DD>Find a space in the disk swap
+area for the process's data segment. (Note that the disk swap
+area is allocated in terms of 512
+character blocks);
+
+<P>
+</DD>
+<DT><STRONG>4378:</STRONG></DT>
+<DD>``xccdec'' (4490) is called (unconditionally!) to decrease the
+count, associated with the text
+segment, of the number of ``in
+main memory'' processes which
+reference that text segment. If
+the count becomes zero, the main
+memory area occupied by the text
+segment is simply returned to the
+available space. (There is no
+need to copy it out, since, as we
+shall see, there will be a copy
+already in the disk swap area);
+
+<P>
+</DD>
+<DT><STRONG>4379:</STRONG></DT>
+<DD>The ``SLOCK'' flag is set while the
+process is being swapped out.
+This is to prevent ``sched'' from
+attempting to ``swap out'' a process which is already in the process of being ``swapped out''.
+(This can only happen if ``swapping out'' was started initially
+by some routine other than
+``sched'' e.g. by ``expand'');
+
+<P>
+</DD>
+<DT><STRONG>4382:</STRONG></DT>
+<DD>The main memory image is released
+ except when ``xswap'' is called by
+ ``newproc'';
+
+<P>
+</DD>
+<DT><STRONG>4388:</STRONG></DT>
+<DD>If ``runout'' is set, ``sched'' is
+ waiting for something to ``swap
+ in'', so wake it up.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2977"
+  HREF="node182.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2973"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2967"
+  HREF="node180.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2975"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2978"
+  HREF="node182.html">xalloc (4433)</A>
+<B> Up:</B> <A NAME="tex2html2974"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2968"
+  HREF="node180.html">sched (1940)</A>
+ &nbsp; <B>  <A NAME="tex2html2976"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

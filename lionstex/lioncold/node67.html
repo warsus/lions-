@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>malloc (2528)</TITLE>
+<META NAME="description" CONTENT="malloc (2528)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node68.html">
+<LINK REL="previous" HREF="node66.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node68.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1530"
+  HREF="node68.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1526"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1520"
+  HREF="node66.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1528"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1531"
+  HREF="node68.html">mfree (2556)</A>
+<B> Up:</B> <A NAME="tex2html1527"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1521"
+  HREF="node66.html">Rules for List Maintenance</A>
+ &nbsp; <B>  <A NAME="tex2html1529"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00093000000000000000">
+malloc (2528)</A>
+</H2>
+
+<P>
+The body of this procedure consists of
+a ``for'' loop to search the ``map'' array
+until either:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>the end of the list of available
+ resources is encountered; or
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>an area large enough to honour
+ the current request is found;
+</DD>
+</DL>
+
+<P>
+<DL>
+<DT><STRONG>2534:</STRONG></DT>
+<DD>The ``for'' statement initialises
+ ``bp'' to point to the first element
+	of the resource map. At
+ each succeeding iteration ``bp'' is
+ incremented to point to the next
+ ``map'' structure.
+</DD>
+</DL>
+
+<P>
+Note that the continuation condition
+<BR>``bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size'' is an expression, which becomes zero with the
+sentinel is referenced. This
+expression could have been written 
+equivalently but more transparently as ``bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">0''.
+
+<P>
+Note also that no explicit test for the
+end of the array is made. (It can be
+shown that this latter is not necessary
+provided CMAPSIZ, SMAPSIZ <IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img6.png"
+ ALT="$\ge$"> 2 * NPROC !)
+
+<P>
+<DL>
+<DT><STRONG>2535:</STRONG></DT>
+<DD>If the list element defines an
+ area at least as large as that
+ requested, then ...
+
+<P>
+</DD>
+<DT><STRONG>2536:</STRONG></DT>
+<DD>Remember the address of the first
+ unit of the area;
+
+<P>
+</DD>
+<DT><STRONG>2537:</STRONG></DT>
+<DD>Increment the address stored in
+ the array element;
+
+<P>
+</DD>
+<DT><STRONG>2538:</STRONG></DT>
+<DD>Decrement the size stored in the
+ element and compare the result
+ with zero (i.e. was it an exact
+ fit?);
+
+<P>
+</DD>
+<DT><STRONG>2539:</STRONG></DT>
+<DD>In the case of an exact fit, move
+ all the remaining list elements
+ (up to and including the sentinel) down one place.
+
+<P>
+Note that ``(bp-l)'' points to the
+structure before the one referenced by ``bp'';
+
+<P>
+</DD>
+<DT><STRONG>2542:</STRONG></DT>
+<DD>The ``while'' continuation condition does <B>not</B>
+test the equality of ``(bp-l)-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size'' and
+<BR>
+bm-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size !
+
+<P>
+The value tested is the value assigned to
+<BR>``(bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size'' copied from ``bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m_size''.
+
+<P>
+(You are forgiven for not
+recognising this at once.);
+
+<P>
+</DD>
+<DT><STRONG>2543:</STRONG></DT>
+<DD>Return the address of the area.
+ This represents the end of the
+ procedure and hence very definitely the end of the ``for'' loop.
+
+<P>
+Note that a value of zero
+returned means ``no luck'' This is
+based on the assumption that no
+valid area can ever begin at
+location zero.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1530"
+  HREF="node68.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1526"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1520"
+  HREF="node66.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1528"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1531"
+  HREF="node68.html">mfree (2556)</A>
+<B> Up:</B> <A NAME="tex2html1527"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1521"
+  HREF="node66.html">Rules for List Maintenance</A>
+ &nbsp; <B>  <A NAME="tex2html1529"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

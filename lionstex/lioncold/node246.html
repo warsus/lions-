@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>wdir (7477)</TITLE>
+<META NAME="description" CONTENT="wdir (7477)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node247.html">
+<LINK REL="previous" HREF="node245.html">
+<LINK REL="up" HREF="node240.html">
+<LINK REL="next" HREF="node247.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3809"
+  HREF="node247.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3805"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3799"
+  HREF="node245.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3807"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3810"
+  HREF="node247.html">maknode (7455)</A>
+<B> Up:</B> <A NAME="tex2html3806"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3800"
+  HREF="node245.html">link (5909)</A>
+ &nbsp; <B>  <A NAME="tex2html3808"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000246000000000000000">
+wdir (7477)</A>
+</H2>
+
+<P>
+This procedure enters a new name into a
+directory.   It  is  called  by  ``link''
+(5940)  and  ``maknode''  (7467)  with  a
+pointer  to a (core) ``inode'' as parameter.
+
+<P>
+The sixteen characters of the directory
+entry  are  copied  into  the structure
+``u.u_dent'', and written from there into
+the directory file. (Note that the previous content of ``u.u_dent''  will  have
+been  the name of the last entry in the
+directory file.)
+
+<P>
+The procedure assumes that  the  directory  file  has  already been searched,
+that the ``inode'' for the dlrectory file
+has already been allocated and that the
+values of ``u.u offset''  have  been  set
+appropriately.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

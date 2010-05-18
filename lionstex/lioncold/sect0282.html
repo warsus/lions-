@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: PC-11 Paper Tape Reader/Punch Driver</title>
+
+<link href="sect0283.html" title="Character Handling" rel="next" />
+<link href="sect0281.html" title="For idle readers: A suggestion" rel="prev" />
+<link href="sect0271.html" title="Character Oriented Special Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0281.html" title="For idle readers: A suggestion"><img alt="Previous: For idle readers: A suggestion" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Next: Character Handling" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0271.html">Character Oriented Special Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">PC-11 Paper Tape Reader/Punch Driver</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000283">22.11 PC-11 Paper Tape Reader/Punch Driver</h2>
+<p>This driver is to be found in the file “pc.c” on Sheets 86, 87. It is simpler than the line printer driver in that there is ro routine analogous to “lpcanon”. However it is more complicated in that there is both an input and an output device which can be simultaneously and independently active. </p><p>A description of the operation of this device is inciuded in the document “The UNIX I/O System” by D. Ritchie. Certain special features may be noted: </p><dl class="description">
+
+    <dt>(1)</dt>
+    <dd><p>Only one process may open the file for reading at a time, but there is no limit on the nmber of writers; </p></dd>
+
+    <dt>(2)</dt>
+    <dd><p>This routine pays a little more attention to error conditions than the line printer driver, but the treatment is still not exhaustive; </p></dd>
+
+    <dt>(3)</dt>
+    <dd><p>“passc” (8695) knows how many characters are required and returns a negative valie when “enough” is reached; </p></dd>
+
+    <dt>(4)</dt>
+    <dd><p>“pcclose” is careful to flush out any remaining characters in the input queue if and only if it believes the device was opened for input. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0281.html" title="For idle readers: A suggestion"><img alt="Previous: For idle readers: A suggestion" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Next: Character Handling" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Some Comments</title>
+
+<link href="sect0241.html" title="link (5909)" rel="next" />
+<link href="sect0239.html" title="namei (7518)" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0239.html" title="namei (7518)"><img alt="Previous: namei (7518)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0241.html" title="link (5909)"><img alt="Next: link (5909)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Some Comments</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000241">19.4 Some Comments</h2>
+<p>“namei” is a key procedure which would seem to have been written very early, to have been thoroughly debugged and then to have been left essentially unchanged. The interface between “namei” and the rest of the system is rather complex, and for that reason alone, it would not win the prize for “Procedure of the Year”. </p><p>“namei” is called thirteen times by twelve different procedures: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">line</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">routine</b> </p></td>
+
+    
+    <td style="text-align:left" colspan="2"><p> <b class="bf">parameters</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>3034 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> exec </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> uchar </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>3543 </p></td>
+
+    
+    <td style="text-align:left"><p> chdir </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5770 </p></td>
+
+    
+    <td style="text-align:left"><p> open </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5914 </p></td>
+
+    
+    <td style="text-align:left"><p> link </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>6033 </p></td>
+
+    
+    <td style="text-align:left"><p> stat </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>6097 </p></td>
+
+    
+    <td style="text-align:left"><p> smount </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>6186 </p></td>
+
+    
+    <td style="text-align:left"><p> getmdev </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>6976 </p></td>
+
+    
+    <td style="text-align:left"><p> owner </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5786 </p></td>
+
+    
+    <td style="text-align:left"><p> creat </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5928 </p></td>
+
+    
+    <td style="text-align:left"><p> link </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5958 </p></td>
+
+    
+    <td style="text-align:left"><p> mknod </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>3515 </p></td>
+
+    
+    <td style="text-align:left"><p> unlink </p></td>
+
+    
+    <td style="text-align:left"><p> uchar </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>4101 </p></td>
+
+    
+    <td style="text-align:left"><p> core </p></td>
+
+    
+    <td style="text-align:left"><p> schar </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+</tr>
+</table><p>It will be seen that: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>there are two calls from “link”; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>the calls can be divided into four categories, of which the first is by far the largest; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>the last two categories have only one representative each; </p></dd>
+
+    <dt>(d)</dt>
+    <dd><p>in particular, there is only one call involving the routine “schar”, which is always for a file called “core”. (If this case were handled as a special case e.g. where the second parameter had the value “3”, then the “uchar”s and “schar” could be eliminated.) </p></dd>
+
+</dl><p>“namei” may terminate in a variety of ways: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>if there has been an error, then a “NULL” value is returned and the variable “u.u_error” is set. </p><p>(Most errors result in a branch to the label “out” (7669) so that reference counts for the inodes are properly maintained (7670). This is not necessary if the failure occurs in “iget” (7664).); </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>if “flag==2” (i.e. the call is from “unlink”), the value returned (in normal circumstances) is an “inode” pointer for the parent directory of the named file (7660); </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>if “flag==1” (i.e. the call is from “creat” or “link” or “mknod”, and a file is to be created if it does not already exist) and if the named file does not exist, then a “NULL” value is returned (7610). In this case a pointer to the “inode” for the directory which will point to the new file, is left in “u.u_pdir” (7606). (Note also that in this case, “u.u_offset” is left pointing either at an empty directory entry or at the end of the directory file.); </p></dd>
+
+    <dt>(d)</dt>
+    <dd><p>if in the remaining cases, the file exists, an “inode” pointer for the file is returned (7551). The “inode” is locked and the reference count has been incremented. A call to “iput” is needed subsequently to undo both these side effects. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0239.html" title="namei (7518)"><img alt="Previous: namei (7518)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0241.html" title="link (5909)"><img alt="Next: link (5909)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

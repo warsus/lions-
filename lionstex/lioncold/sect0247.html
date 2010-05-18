@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: File Systems</title>
+
+<link href="sect0248.html" title="The ‘Super Block’ (5561)" rel="next" />
+<link href="sect0246.html" title="access (6746)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0246.html" title="access (6746)"><img alt="Previous: access (6746)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0248.html" title="The ‘Super Block’ (5561)"><img alt="Next: The ‘Super Block’ (5561)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">File Systems</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000248">20 File Systems</h1>
+<p>In most computer systems more than one peripheral storage device is used for the storage of files. It is now necessary to discuss a number of matters pertaining to the management by UNIX of the whole set of files and file storage devices. First, some definitions: </p><dl class="description">
+
+    <dt>file system:</dt>
+    <dd><p>an integrated collection of files with a hierarchical system of directories recorded on a single block oriented storage device; </p></dd>
+
+    <dt>storage device:</dt>
+    <dd><p>a device which can store information (especially disk pack or DECtape, etc.); </p></dd>
+
+    <dt>access device:</dt>
+    <dd><p>a mechanism for transferring information to or from a storage device; </p></dd>
+
+    <dt>a storage device</dt>
+    <dd><p>is only <b class="bf">accessible</b> if it is inserted in an access device. In this situation reference to the storage device is made via a reference to the access devce; </p></dd>
+
+    <dt>a storage device</dt>
+    <dd><p>is acceptable as a <b class="bf">file system volume</b> if: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>information is recorded as addressable blocks of 512 characters each, which can be independently read or written. </p><p>(Note IBM compatible magnetic tape does not satisfy this condition.); </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>the information recorded on the device satisfies certain consistency criteria: </p><p>block #1 is formatted as a “super block” (see below); </p><p>blocks #2 to #(n+1) (where n is recorded in the “super block”) contain an “inode” table which references all files recorded on the storage device, and does not reference any other files; </p><p>directory files recorded on the storage device reference all, and only, files on the same storage device, i.e. a file system volume constitutes a self-contained set of files, directories and “inode” table; </p></dd>
+
+</dl></dd>
+
+    <dt>a file system volume</dt>
+    <dd><p>is mounted if the presence of the storage device in an access device has been formally recognised by the operating system. </p></dd>
+
+</dl></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0248.html">20.1 The ‘Super Block’ (5561)</a>
+   
+</li><li><a href="sect0249.html">20.2 The ’mount’ table (0272)</a>
+   
+</li><li><a href="sect0250.html">20.3 iinit (6922)</a>
+   
+</li><li><a href="sect0251.html">20.4 Mounting</a>
+   
+</li><li><a href="sect0252.html">20.5 smount (6086)</a>
+   
+</li><li><a href="sect0253.html">20.6 Notes</a>
+   
+</li><li><a href="sect0254.html">20.7 iget (7276)</a>
+   
+</li><li><a href="sect0255.html">20.8 getfs (7167)</a>
+   
+</li><li><a href="sect0256.html">20.9 update (7201)</a>
+   
+</li><li><a href="sect0257.html">20.10 sumount (6144)</a>
+   
+</li><li><a href="sect0258.html">20.11 Resource Allocation</a>
+   
+</li><li><a href="sect0259.html">20.12 alloc (6965)</a>
+   
+</li><li><a href="sect0260.html">20.13 itrunc (7414)</a>
+   
+</li><li><a href="sect0261.html">20.14 free (7000)</a>
+   
+</li><li><a href="sect0262.html">20.15 iput (7344)</a>
+   
+</li><li><a href="sect0263.html">20.16 ifree (7134)</a>
+   
+</li><li><a href="sect0264.html">20.17 iupdat (7374)</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0246.html" title="access (6746)"><img alt="Previous: access (6746)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0248.html" title="The ‘Super Block’ (5561)"><img alt="Next: The ‘Super Block’ (5561)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

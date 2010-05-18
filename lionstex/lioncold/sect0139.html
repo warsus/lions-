@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: User Mode Traps</title>
+
+<link href="sect0140.html" title="System Calls" rel="next" />
+<link href="sect0138.html" title="Kernel Mode Traps" rel="prev" />
+<link href="sect0136.html" title="Traps and System Calls" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0138.html" title="Kernel Mode Traps"><img alt="Previous: Kernel Mode Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0140.html" title="System Calls"><img alt="Next: System Calls" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0136.html">Traps and System Calls</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">User Mode Traps</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000140">12.3 User Mode Traps</h2>
+<p>Consider first of all a trap which is not generated as the result of the execution of a “trap instruction”. This is regarded as a probable error for which the operating system makes no provision apart from the possibility of a “core dump”. However the use program itself may have anticipated it and provided for it. </p><p>The way this provision is made and implemented is the subject of the next chapter. At this stage, the principal requirement is to “signal” that the trap has occurred. </p><dl class="description">
+
+    <dt>2721:</dt>
+    <dd><p>A bus error has occurred while the system is in user mode. Set “i” to the value “SIGBUS” (0123); </p></dd>
+
+    <dt>2723:</dt>
+    <dd><p>The “break” causes a branch out of the “switch” statement to line 2818; </p></dd>
+
+    <dt>2733:</dt>
+    <dd><p>Apart from the one special case noted, the treatment of illegal instructions is the same at this level as for bus errors; </p></dd>
+
+    <dt>2739:</dt>
+    <dd></dd>
+
+    <dt>2743:</dt>
+    <dd></dd>
+
+    <dt>2747:</dt>
+    <dd></dd>
+
+    <dt>2796:</dt>
+    <dd><p>Cf. the comment for line 2721. </p></dd>
+
+</dl><p>Note that cases “4+USER” (power fail) and<br />“7+USER” (programmed interrupt) are handled by the “default” case (line 2715). </p><dl class="description">
+
+    <dt>2810:</dt>
+    <dd><p>This represents a case where operating system assistance is required to extend the user mode stack area. </p><p>The assembler routine “backup” (1012) is used to reconstruct the situation that existed before execution of the instruction that caused the trap. </p><p>“grow” (4136) is used to do the actual extension. </p></dd>
+
+</dl><p>The procedure “backup” is non-trivial and its comprehension involves a careful consideration of various aspects of the PDP11 architecture. It has been left for the interested reader to pursue privately. </p><p>As noted for the PDP11/40, “backup” may not always succeed because the processor does not save enough information to resolve all possibilities. </p><dl class="description">
+
+    <dt>218:</dt>
+    <dd><p>Call “psignal” (3963) to set the appropriate “signal”. (Note that this statement is only reached from those cases of the “switch” which included a “break” statement.); </p></dd>
+
+    <dt>2821:</dt>
+    <dd><p>“issig” checks if a “signal” has been sent to the user program, either just now or at some earlier time and has not yet been attended to; </p></dd>
+
+    <dt>2822:</dt>
+    <dd><p>“psig” performs the appropriate actions. (Both “issig” and “psig” are discussed in detail in the next chapter.); </p></dd>
+
+    <dt>2823:</dt>
+    <dd><p>Recalculate the priority for the current process. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0138.html" title="Kernel Mode Traps"><img alt="Previous: Kernel Mode Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0140.html" title="System Calls"><img alt="Next: System Calls" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

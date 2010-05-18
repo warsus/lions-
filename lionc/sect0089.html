@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The Segments</title>
+
+<link href="sect0090.html" title="Execution of an Image" rel="next" />
+<link href="sect0088.html" title="The Per Process Data Area" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0088.html" title="The Per Process Data Area"><img alt="Previous: The Per Process Data Area" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0090.html" title="Execution of an Image"><img alt="Next: Execution of an Image" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The Segments</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000090">7.5 The Segments</h2>
+<p>The data segment is allocated as one single area of physical memory but consists of three distinct parts: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>a “per process data area”; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>a data area for the user program. This may be further divided into areas for program text, initialised data and uninitialised data; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>a stack for the user program. </p></dd>
+
+</dl><p>The size of (a) is always “USIZE” blocks. The sizes of (b) and (c) are given in blocks by “u.u_dsize” and “u.u_ssize”. (It may be noted in passing that the latter two may change during the life of a process.) </p><p>A separate text segment containing only pure text is allocated as one single area of physical memory. The internal structure of the segment is not important here. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0088.html" title="The Per Process Data Area"><img alt="Previous: The Per Process Data Area" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0090.html" title="Execution of an Image"><img alt="Next: Execution of an Image" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

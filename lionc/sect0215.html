@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: System Calls</title>
+
+<link href="sect0216.html" title="Control Tables" rel="next" />
+<link href="sect0214.html" title="File Characteristics" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0214.html" title="File Characteristics"><img alt="Previous: File Characteristics" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0216.html" title="Control Tables"><img alt="Next: Control Tables" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">System Calls</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000216">18.2 System Calls</h2>
+<p>The following system calls are provided expressly for file manipulation: </p><center> <table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> <b class="bf">#</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Name</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Line </b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">#</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Name</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Line</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>3 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> read </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> 5711 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> 14 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> mknod </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> 5952</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>4 </p></td>
+
+    
+    <td style="text-align:left"><p> write </p></td>
+
+    
+    <td style="text-align:left"><p> 5720 </p></td>
+
+    
+    <td style="text-align:left"><p> 15 </p></td>
+
+    
+    <td style="text-align:left"><p> chmod </p></td>
+
+    
+    <td style="text-align:left"><p> 3560</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>5 </p></td>
+
+    
+    <td style="text-align:left"><p> open </p></td>
+
+    
+    <td style="text-align:left"><p> 5765 </p></td>
+
+    
+    <td style="text-align:left"><p> 16 </p></td>
+
+    
+    <td style="text-align:left"><p> chown </p></td>
+
+    
+    <td style="text-align:left"><p> 3575</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>6 </p></td>
+
+    
+    <td style="text-align:left"><p> close </p></td>
+
+    
+    <td style="text-align:left"><p> 5846 </p></td>
+
+    
+    <td style="text-align:left"><p> 19 </p></td>
+
+    
+    <td style="text-align:left"><p> seek </p></td>
+
+    
+    <td style="text-align:left"><p> 5861</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>8 </p></td>
+
+    
+    <td style="text-align:left"><p> creat </p></td>
+
+    
+    <td style="text-align:left"><p> 5781 </p></td>
+
+    
+    <td style="text-align:left"><p> 21 </p></td>
+
+    
+    <td style="text-align:left"><p> mount </p></td>
+
+    
+    <td style="text-align:left"><p> 6086</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>9 </p></td>
+
+    
+    <td style="text-align:left"><p> link </p></td>
+
+    
+    <td style="text-align:left"><p> 5909 </p></td>
+
+    
+    <td style="text-align:left"><p> 22 </p></td>
+
+    
+    <td style="text-align:left"><p> umount </p></td>
+
+    
+    <td style="text-align:left"><p> 6144</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>10 </p></td>
+
+    
+    <td style="text-align:left"><p> unlink </p></td>
+
+    
+    <td style="text-align:left"><p> 3510 </p></td>
+
+    
+    <td style="text-align:left"><p> 41 </p></td>
+
+    
+    <td style="text-align:left"><p> dup </p></td>
+
+    
+    <td style="text-align:left"><p> 6069</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>12 </p></td>
+
+    
+    <td style="text-align:left"><p> chdir </p></td>
+
+    
+    <td style="text-align:left"><p> 3538 </p></td>
+
+    
+    <td style="text-align:left"><p> 42 </p></td>
+
+    
+    <td style="text-align:left"><p> pipe </p></td>
+
+    
+    <td style="text-align:left"><p> 7723</p></td>
+
+</tr>
+</table> </center></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0214.html" title="File Characteristics"><img alt="Previous: File Characteristics" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0216.html" title="Control Tables"><img alt="Next: Control Tables" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

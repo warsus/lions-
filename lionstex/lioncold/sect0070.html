@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: panic (2419)</title>
+
+<link href="sect0071.html" title="prdev (2433), deverror (2447)" rel="next" />
+<link href="sect0069.html" title="putchar (2386)" rel="prev" />
+<link href="sect0060.html" title="Two Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0069.html" title="putchar (2386)"><img alt="Previous: putchar (2386)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0071.html" title="prdev (2433), deverror (2447)"><img alt="Next: prdev (2433), deverror (2447)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0060.html">Two Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">panic (2419)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000071">5.10 panic (2419)</h2>
+<p>This procedure is called from a number of locations in the operating system. (e.g. line 1605). When circumstances exist under which continued operation of the system seems undesirable. </p><p>UNIX does not profess to be a “fault tolerant” or “fail soft” system, and in many cases the call on “panic” can be interpreted as a fairly unsophisticated response to a straightforward problem. </p><p>However more complicated responses require additional code, lots of it, and this is contrary to the general UNIX philosophy of “keep it simple”. </p><dl class="description">
+
+    <dt>2419:</dt>
+    <dd><p>The reason for this statement is given in the comment beginning at line 2323; </p></dd>
+
+    <dt>2420:</dt>
+    <dd><p>“update” causes all the large block buffers to be written out. See Chapter Twenty; </p></dd>
+
+    <dt>2421:</dt>
+    <dd><p>“printf” is called with a format string and one parameter, which was passed to “panic”; </p></dd>
+
+    <dt>2422:</dt>
+    <dd><p>This “for” statement defines an infinite loop in which the only action is a call on the assembly language procedure “idle” (1284). </p><p>“idle” drops the processor priority to zero, and performs a “wait”. This is a “do nothing” instruction of indefinite duration. It terminates when a hardware interrupt occurs. </p><p>An infinite set of calls on “idle” is better than the execution of a “halt” instruction, since any i/o activities which were under way can be allowed to complete and the system clock can keep ticking. </p><p>The only way for the operator to recover from a “panic” is to reinitialise the system, (after taking a core dump, if desired). </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0069.html" title="putchar (2386)"><img alt="Previous: putchar (2386)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0071.html" title="prdev (2433), deverror (2447)"><img alt="Next: prdev (2433), deverror (2447)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

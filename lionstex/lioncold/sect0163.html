@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: psig (4043)</title>
+
+<link href="sect0164.html" title="core (4094)" rel="next" />
+<link href="sect0162.html" title="issig (3991)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0162.html" title="issig (3991)"><img alt="Previous: issig (3991)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0164.html" title="core (4094)"><img alt="Next: core (4094)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">psig (4043)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000164">13.15 psig (4043)</h2>
+<p>This procedure is only called if “u.u_signal[n]” was found by “issig” to have an even value. If this value is found (4051) to be non-zero, it is taken as the address of a user mode function which has to be executed. </p><dl class="description">
+
+    <dt>4054:</dt>
+    <dd><p>Reset “u.u_signal[n]” except the case where the interrupt for an illegal instruction or trace trap; </p></dd>
+
+    <dt>4055:</dt>
+    <dd><p>Calculate the user space addresses of the lower of two words which are to be inserted into the user mode stack ... </p></dd>
+
+    <dt>4056:</dt>
+    <dd><p>Call “grow” to check the current user mode stack size, and to extend it (downwards!) if necessary; </p></dd>
+
+    <dt>4057:</dt>
+    <dd><p>Put the values of the processor status register and the program counter which were captured at the time of the “trap” or hardware interrupt (in the case of a “clock” interrupt) into the user stack, and update the “remembered” values of r6, r7 and the processor status word. Upon returning to user mode, execution will resume at the beginning of the designated procedure. When this procedure returns, the procedure which was originally interrupted will be resumed; </p></dd>
+
+    <dt>4066:</dt>
+    <dd><p>If “u.u_signal[n]” is zero, then for the interrupt types listed, generate a core image via the procedure “core”; </p></dd>
+
+    <dt>4079:</dt>
+    <dd><p>Store a value in “u.u_arg[0]” composed of the low order byte of the remembered value of r0, and of “n”, which records the interrupt type and whether a core image was successfully created; </p></dd>
+
+    <dt>4080:</dt>
+    <dd><p>Call “exit” for the process to terminate itself. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0162.html" title="issig (3991)"><img alt="Previous: issig (3991)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0164.html" title="core (4094)"><img alt="Next: core (4094)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

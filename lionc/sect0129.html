@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Interrupts</title>
+
+<link href="sect0130.html" title="call (0776)" rel="next" />
+<link href="sect0128.html" title="fuibyte (0814), fuiword (0844)" rel="prev" />
+<link href="sect0126.html" title="The Assembler “Trap” Routine" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0128.html" title="fuibyte (0814), fuiword (0844)"><img alt="Previous: fuibyte (0814), fuiword (0844)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0126.html" title="The Assembler “Trap” Routine"><img alt="Up: The Assembler “Trap” Routine" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0130.html" title="call (0776)"><img alt="Next: call (0776)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0126.html">The Assembler “Trap” Routine</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Interrupts</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000130">10.3 Interrupts</h2>
+<p>Suppose the clock has interrupted the processor. </p><p>Both clock vector locations, 100 and 104, have the same information. PC is set to the address of the location labelled “kwlp” (0568) and PS is set to show: </p><p>present mode = kernel mode </p><p>previous mode = kernel or user mode </p><p>priority = 6 </p><p>Note. The PS will contain the true previous mode, regardless of the value picked up from the vector location. </p><dl class="description">
+
+    <a href="../all.html#line0570" target="source" <dt>0570:</dt></a>
+    <dd><p>The vector location contains a new PC value which is the address of the statement labelled “kwlp”. This instruction is a subroutine call on “call” via r0. </p><p>After the execution of this instruction, r0 is left with the address of the code word after the instruction which contains “_clock”, i.e. r0 contains <b class="bf">the address of the address</b> of the “clock” routine in the file “clock.c” (3725). </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0128.html" title="fuibyte (0814), fuiword (0844)"><img alt="Previous: fuibyte (0814), fuiword (0844)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0126.html" title="The Assembler “Trap” Routine"><img alt="Up: The Assembler “Trap” Routine" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0130.html" title="call (0776)"><img alt="Next: call (0776)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>file (5507)</TITLE>
+<META NAME="description" CONTENT="file (5507)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node222.html">
+<LINK REL="previous" HREF="node220.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node222.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3501"
+  HREF="node222.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3497"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3491"
+  HREF="node220.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3499"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3502"
+  HREF="node222.html">inode (5659)</A>
+<B> Up:</B> <A NAME="tex2html3498"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3492"
+  HREF="node220.html">Control Tables</A>
+ &nbsp; <B>  <A NAME="tex2html3500"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000234000000000000000">
+file (5507)</A>
+</H2>
+
+<P>
+The array ``file'' is defined as an array
+of structures (also named ``file'').
+
+<P>
+An element of the ``file'' array is considered to be unallocated if ``f_count''
+is zero.
+
+<P>
+Each ``open'' or ``creat'' system call
+results in the allocation of an element
+of the ``file'' array. The address of
+this element is stored in an element of
+the calling process's array
+``u.u_ofile''. It is the index of the
+newly allocated element of the latter
+array which is passed back to the user
+process. Descendants of a process
+created by ``newproc'' inherit the
+contents of the parent's ``u.u_ofile''
+array.
+
+<P>
+Each element of ``file'' includes a
+counter, ``f_count'', to determine the
+number of current processes which
+reference it.
+
+<P>
+``f_count'' is incremented by ``newproc''
+(1878), ``dup'' (6079) and ``falloc''
+(6857); it is decremented by ``closef''
+(6657) and (if the file can't be
+opened) by ``openl'' (5836).
+
+<P>
+The ``f_flag'' (5509) of the ``file'' element notes whether the file is open for
+reading and/or writing or whether it is
+a ``pipe'' or not. (Further discussion of
+``pipes'' will be deferred till Chapter
+Twenty-One.)
+
+<P>
+The ``file'' structure also contains a
+pointer, ``f_inode'' (5511) to an entry
+in the ``inode'' table, and a 32 bit
+integer, ``f_offset'' (5512), which is a
+logical pointer to a character within
+the file.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3501"
+  HREF="node222.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3497"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3491"
+  HREF="node220.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3499"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3502"
+  HREF="node222.html">inode (5659)</A>
+<B> Up:</B> <A NAME="tex2html3498"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3492"
+  HREF="node220.html">Control Tables</A>
+ &nbsp; <B>  <A NAME="tex2html3500"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

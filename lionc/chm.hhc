@@ -1,0 +1,2398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="plasTeX - http://plastex.sf.net/">
+<!-- Sitemap 1.0 -->
+</head>
+<body>
+<object type="text/site properties">
+   <param name="Auto Generated" value="Yes">
+</object>
+<ul>
+    <li><object type="text/sitemap">
+        <param name="Name">
+        <param name="Local" value="index.html">
+        
+    </object></li>
+    <ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Preface">
+          <param name="Local" value="sect0001.html">
+          <param name="ImageNumber" value="11">
+      </object></li>
+      
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Introduction">
+          <param name="Local" value="sect0002.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The UNIX Operating System">
+             <param name="Local" value="sect0003.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Utilities">
+             <param name="Local" value="sect0004.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Other Documentation">
+             <param name="Local" value="sect0005.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="UNIX Programmer&#8217;s Manual">
+             <param name="Local" value="sect0006.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="UNIX Documents">
+             <param name="Local" value="sect0007.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="UNIX Operating System Source Code">
+             <param name="Local" value="sect0008.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Source Code Selections">
+             <param name="Local" value="sect0009.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Source Code Files">
+             <param name="Local" value="sect0010.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Use of these notes">
+             <param name="Local" value="sect0011.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="A Note on Programming Standards">
+             <param name="Local" value="sect0012.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Fundamentals">
+          <param name="Local" value="sect0013.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Processor">
+             <param name="Local" value="sect0014.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Processor Status Word">
+             <param name="Local" value="sect0015.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="General Registers">
+             <param name="Local" value="sect0016.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Instruction Set">
+             <param name="Local" value="sect0017.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Addressing Modes">
+             <param name="Local" value="sect0018.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Unix Assembler">
+             <param name="Local" value="sect0019.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Memory Management">
+             <param name="Local" value="sect0020.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Segmentation Registers.">
+             <param name="Local" value="sect0021.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Page Description Register">
+             <param name="Local" value="sect0022.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Memory Allocation">
+             <param name="Local" value="sect0023.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Memory Management Status Registers">
+             <param name="Local" value="sect0024.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="&#8220;i&#8221; and &#8220;d&#8221; Spaces">
+             <param name="Local" value="sect0025.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Initial Conditions">
+             <param name="Local" value="sect0026.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Special Device Registers">
+             <param name="Local" value="sect0027.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Reading &#8220;C&#8221; Programs">
+          <param name="Local" value="sect0028.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Some Selected Examples">
+             <param name="Local" value="sect0029.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 1">
+             <param name="Local" value="sect0030.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 2">
+             <param name="Local" value="sect0031.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 3">
+             <param name="Local" value="sect0032.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 4">
+             <param name="Local" value="sect0033.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 5">
+             <param name="Local" value="sect0034.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 6">
+             <param name="Local" value="sect0035.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 7">
+             <param name="Local" value="sect0036.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 8">
+             <param name="Local" value="sect0037.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 9">
+             <param name="Local" value="sect0038.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 10">
+             <param name="Local" value="sect0039.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 11">
+             <param name="Local" value="sect0040.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 12">
+             <param name="Local" value="sect0041.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 13">
+             <param name="Local" value="sect0042.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 14">
+             <param name="Local" value="sect0043.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 15">
+             <param name="Local" value="sect0044.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 16">
+             <param name="Local" value="sect0045.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Example 17">
+             <param name="Local" value="sect0046.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="An Overview">
+          <param name="Local" value="sect0047.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Variable Allocation">
+             <param name="Local" value="sect0048.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Global Variables">
+             <param name="Local" value="sect0049.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The &#8216;C&#8217; Preprocessor">
+             <param name="Local" value="sect0050.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section One">
+             <param name="Local" value="sect0051.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The First Group of &#8216;.h&#8217; Files">
+             <param name="Local" value="sect0052.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Assembly Language Files">
+             <param name="Local" value="sect0053.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Other Files in Section One">
+             <param name="Local" value="sect0054.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section Two">
+             <param name="Local" value="sect0055.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section Three">
+             <param name="Local" value="sect0056.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section Four">
+             <param name="Local" value="sect0057.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section Five">
+             <param name="Local" value="sect0058.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Section One">
+          <param name="Local" value="sect0059.html">
+          <param name="ImageNumber" value="11">
+      </object></li>
+      
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Two Files">
+          <param name="Local" value="sect0060.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The File &#8216;malloc.c&#8217;">
+             <param name="Local" value="sect0061.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Rules for List Maintenance">
+             <param name="Local" value="sect0062.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="malloc (2528)">
+             <param name="Local" value="sect0063.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="mfree (2556)">
+             <param name="Local" value="sect0064.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="In conclusion ...">
+             <param name="Local" value="sect0065.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The File &#8216;prf.c&#8217;">
+             <param name="Local" value="sect0066.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="printf (2340)">
+             <param name="Local" value="sect0067.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="printn (2369)">
+             <param name="Local" value="sect0068.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="putchar (2386)">
+             <param name="Local" value="sect0069.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="panic (2419)">
+             <param name="Local" value="sect0070.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="prdev (2433), deverror (2447)">
+             <param name="Local" value="sect0071.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Included Files">
+             <param name="Local" value="sect0072.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Getting Started">
+          <param name="Local" value="sect0073.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Operator Actions">
+             <param name="Local" value="sect0074.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="start (0612)">
+             <param name="Local" value="sect0075.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="main (1550)">
+             <param name="Local" value="sect0076.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Processes">
+             <param name="Local" value="sect0077.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Initialisation of proc[0]">
+             <param name="Local" value="sect0078.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The story continues ...">
+             <param name="Local" value="sect0079.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sched (1940)">
+             <param name="Local" value="sect0080.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sleep (2066)">
+             <param name="Local" value="sect0081.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="swtch (2178)">
+             <param name="Local" value="sect0082.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="main revisited">
+             <param name="Local" value="sect0083.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Processes">
+          <param name="Local" value="sect0084.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Process">
+             <param name="Local" value="sect0085.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The proc Structure (0358)">
+             <param name="Local" value="sect0086.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The user Structure (0413)">
+             <param name="Local" value="sect0087.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Per Process Data Area">
+             <param name="Local" value="sect0088.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Segments">
+             <param name="Local" value="sect0089.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Execution of an Image">
+             <param name="Local" value="sect0090.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Kernel Mode Execution">
+             <param name="Local" value="sect0091.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="User Mode Execution">
+             <param name="Local" value="sect0092.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="An Example">
+             <param name="Local" value="sect0093.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Setting the Segmentation Registers">
+             <param name="Local" value="sect0094.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="estabur (1650)">
+             <param name="Local" value="sect0095.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sureg (1739)">
+             <param name="Local" value="sect0096.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="newproc (1826)">
+             <param name="Local" value="sect0097.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Process Management">
+          <param name="Local" value="sect0098.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Process Switching">
+             <param name="Local" value="sect0099.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Interrupts">
+             <param name="Local" value="sect0100.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Program Swapping">
+             <param name="Local" value="sect0101.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Jobs">
+             <param name="Local" value="sect0102.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Assembler Procedures">
+             <param name="Local" value="sect0103.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="savu (0725)">
+             <param name="Local" value="sect0104.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="retu (0740)">
+             <param name="Local" value="sect0105.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="aretu (0734)">
+             <param name="Local" value="sect0106.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="swtch (2178)">
+             <param name="Local" value="sect0107.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="setpri (2156)">
+             <param name="Local" value="sect0108.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sleep (2066)">
+             <param name="Local" value="sect0109.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="wakeup (2113)">
+             <param name="Local" value="sect0110.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="setrun (2134)">
+             <param name="Local" value="sect0111.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="expand (2268)">
+             <param name="Local" value="sect0112.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="swtch revisited">
+             <param name="Local" value="sect0113.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Critical Sections">
+             <param name="Local" value="sect0114.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Section Two">
+          <param name="Local" value="sect0115.html">
+          <param name="ImageNumber" value="11">
+      </object></li>
+      
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Hardware Interrupts and Traps">
+          <param name="Local" value="sect0116.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Hardware Interrupts">
+             <param name="Local" value="sect0117.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Interrupt Vector">
+             <param name="Local" value="sect0118.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Interrupt Handlers">
+             <param name="Local" value="sect0119.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Priorities">
+             <param name="Local" value="sect0120.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Interrupt Priorities">
+             <param name="Local" value="sect0121.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Rules for Interrupt Handlers">
+             <param name="Local" value="sect0122.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Traps">
+             <param name="Local" value="sect0123.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Assembly Language &#8216;trap&#8217;">
+             <param name="Local" value="sect0124.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Return">
+             <param name="Local" value="sect0125.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="The Assembler &#8220;Trap&#8221; Routine">
+          <param name="Local" value="sect0126.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Sources of Traps and Interrupts">
+             <param name="Local" value="sect0127.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="fuibyte (0814), fuiword (0844)">
+             <param name="Local" value="sect0128.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Interrupts">
+             <param name="Local" value="sect0129.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="call (0776)">
+             <param name="Local" value="sect0130.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="User Program Traps">
+             <param name="Local" value="sect0131.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Kernel Stack">
+             <param name="Local" value="sect0132.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Clock Interrupts">
+          <param name="Local" value="sect0133.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="clock (3725)">
+             <param name="Local" value="sect0134.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="timeout (3845)">
+             <param name="Local" value="sect0135.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Traps and System Calls">
+          <param name="Local" value="sect0136.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="trap (2693)">
+             <param name="Local" value="sect0137.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Kernel Mode Traps">
+             <param name="Local" value="sect0138.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="User Mode Traps">
+             <param name="Local" value="sect0139.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="System Calls">
+             <param name="Local" value="sect0140.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="System Call Handlers">
+             <param name="Local" value="sect0141.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The File &#8216;sysl.c&#8217;">
+             <param name="Local" value="sect0142.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="exec (3020)">
+             <param name="Local" value="sect0143.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="fork (3322)">
+             <param name="Local" value="sect0144.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sbreak (3354)">
+             <param name="Local" value="sect0145.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Files &#8216;sys2.c&#8217; and &#8216;sys3.c&#8217;">
+             <param name="Local" value="sect0146.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The File &#8216;sys4.c&#8217;">
+             <param name="Local" value="sect0147.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Software Interrupts">
+          <param name="Local" value="sect0148.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Anticipation">
+             <param name="Local" value="sect0149.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Causation">
+             <param name="Local" value="sect0150.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Effect">
+             <param name="Local" value="sect0151.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Tracing">
+             <param name="Local" value="sect0152.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Procedures">
+             <param name="Local" value="sect0153.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="A. Anticipation">
+             <param name="Local" value="sect0154.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="B. Causation">
+             <param name="Local" value="sect0155.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="C. Effect">
+             <param name="Local" value="sect0156.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="D. Tracing">
+             <param name="Local" value="sect0157.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ssig (3614)">
+             <param name="Local" value="sect0158.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="kill (3630)">
+             <param name="Local" value="sect0159.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="signal (3949)">
+             <param name="Local" value="sect0160.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="psignal (3963)">
+             <param name="Local" value="sect0161.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="issig (3991)">
+             <param name="Local" value="sect0162.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="psig (4043)">
+             <param name="Local" value="sect0163.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="core (4094)">
+             <param name="Local" value="sect0164.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="grow (4136)">
+             <param name="Local" value="sect0165.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="exit (3219)">
+             <param name="Local" value="sect0166.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="rexit (3205)">
+             <param name="Local" value="sect0167.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="wait (3270)">
+             <param name="Local" value="sect0168.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Tracing">
+             <param name="Local" value="sect0169.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="stop (4016)">
+             <param name="Local" value="sect0170.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="wait (3270) (continued)">
+             <param name="Local" value="sect0171.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ptrace (4164)">
+             <param name="Local" value="sect0172.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="procxmt (4204)">
+             <param name="Local" value="sect0173.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Program Swapping">
+          <param name="Local" value="sect0174.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Text Segments">
+             <param name="Local" value="sect0175.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sched (1940)">
+             <param name="Local" value="sect0176.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="xswap (4368)">
+             <param name="Local" value="sect0177.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="xalloc (4433)">
+             <param name="Local" value="sect0178.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="xfree (4398)">
+             <param name="Local" value="sect0179.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Introduction to Basic I/O">
+          <param name="Local" value="sect0180.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The File &#8216;buf.h&#8217;">
+             <param name="Local" value="sect0181.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="devtab (4551)">
+             <param name="Local" value="sect0182.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The File &#8216;conf.h&#8217;">
+             <param name="Local" value="sect0183.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The File &#8216;conf.c&#8217;">
+             <param name="Local" value="sect0184.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="System Generation">
+             <param name="Local" value="sect0185.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="swap (5196)">
+             <param name="Local" value="sect0186.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Race Conditions">
+             <param name="Local" value="sect0187.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Reentrancy">
+             <param name="Local" value="sect0188.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="For the Uninitiated">
+             <param name="Local" value="sect0189.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Additional Reading">
+             <param name="Local" value="sect0190.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="The RK Disk Driver">
+          <param name="Local" value="sect0191.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The file &#8216;rk.c&#8217;">
+             <param name="Local" value="sect0192.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="rkstrategy (5389)">
+             <param name="Local" value="sect0193.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="rkaddr (5420)">
+             <param name="Local" value="sect0194.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="devstart (5096)">
+             <param name="Local" value="sect0195.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="rkintr (5451)">
+             <param name="Local" value="sect0196.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="iodone (5018)">
+             <param name="Local" value="sect0197.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Buffer Manipulation">
+          <param name="Local" value="sect0198.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Flags">
+             <param name="Local" value="sect0199.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="A Cache-like Memory">
+             <param name="Local" value="sect0200.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="clrbuf (5038)">
+             <param name="Local" value="sect0201.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="incore (4899)">
+             <param name="Local" value="sect0202.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="getblk (4921)">
+             <param name="Local" value="sect0203.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="brelse (4869)">
+             <param name="Local" value="sect0204.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="binit (5055)">
+             <param name="Local" value="sect0205.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="bread (4754)">
+             <param name="Local" value="sect0206.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="breada (4773)">
+             <param name="Local" value="sect0207.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="bwrite (4809)">
+             <param name="Local" value="sect0208.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="bawrite (4856)">
+             <param name="Local" value="sect0209.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="bdwrite (4836)">
+             <param name="Local" value="sect0210.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="bflush (5229)">
+             <param name="Local" value="sect0211.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="physio (5259)">
+             <param name="Local" value="sect0212.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="File Access and Control">
+          <param name="Local" value="sect0213.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="File Characteristics">
+             <param name="Local" value="sect0214.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="System Calls">
+             <param name="Local" value="sect0215.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Control Tables">
+             <param name="Local" value="sect0216.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="file (5507)">
+             <param name="Local" value="sect0217.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="inode (5659)">
+             <param name="Local" value="sect0218.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Resources Required">
+             <param name="Local" value="sect0219.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Opening a File">
+             <param name="Local" value="sect0220.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="creat (5781)">
+             <param name="Local" value="sect0221.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="openl (5804)">
+             <param name="Local" value="sect0222.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="open (5763)">
+             <param name="Local" value="sect0223.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="openl revisited">
+             <param name="Local" value="sect0224.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="close (5846)">
+             <param name="Local" value="sect0225.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="closef (6643)">
+             <param name="Local" value="sect0226.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="iput (7344)">
+             <param name="Local" value="sect0227.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Deletion of Files">
+             <param name="Local" value="sect0228.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Reading and Writing">
+             <param name="Local" value="sect0229.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="rdwr (5731)">
+             <param name="Local" value="sect0230.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="readi (6221)">
+             <param name="Local" value="sect0231.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="writei">
+             <param name="Local" value="sect0232.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="iomove (6364)">
+             <param name="Local" value="sect0233.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="bmap (6415)">
+             <param name="Local" value="sect0234.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Leftovers">
+             <param name="Local" value="sect0235.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="File Directories and Directory Files">
+          <param name="Local" value="sect0236.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The Directory Data Structure">
+             <param name="Local" value="sect0237.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Directory Files">
+             <param name="Local" value="sect0238.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="namei (7518)">
+             <param name="Local" value="sect0239.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Some Comments">
+             <param name="Local" value="sect0240.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="link (5909)">
+             <param name="Local" value="sect0241.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="wdir (7477)">
+             <param name="Local" value="sect0242.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="maknode (7455)">
+             <param name="Local" value="sect0243.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="unlink (3510)">
+             <param name="Local" value="sect0244.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="mknod (5952)">
+             <param name="Local" value="sect0245.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="access (6746)">
+             <param name="Local" value="sect0246.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="File Systems">
+          <param name="Local" value="sect0247.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The &#8216;Super Block&#8217; (5561)">
+             <param name="Local" value="sect0248.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The &#8217;mount&#8217; table (0272)">
+             <param name="Local" value="sect0249.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="iinit (6922)">
+             <param name="Local" value="sect0250.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Mounting">
+             <param name="Local" value="sect0251.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="smount (6086)">
+             <param name="Local" value="sect0252.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Notes">
+             <param name="Local" value="sect0253.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="iget (7276)">
+             <param name="Local" value="sect0254.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="getfs (7167)">
+             <param name="Local" value="sect0255.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="update (7201)">
+             <param name="Local" value="sect0256.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sumount (6144)">
+             <param name="Local" value="sect0257.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Resource Allocation">
+             <param name="Local" value="sect0258.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="alloc (6965)">
+             <param name="Local" value="sect0259.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="itrunc (7414)">
+             <param name="Local" value="sect0260.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="free (7000)">
+             <param name="Local" value="sect0261.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="iput (7344)">
+             <param name="Local" value="sect0262.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ifree (7134)">
+             <param name="Local" value="sect0263.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="iupdat (7374)">
+             <param name="Local" value="sect0264.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Pipes">
+          <param name="Local" value="sect0265.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="pipe (7723)">
+             <param name="Local" value="sect0266.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="readp (7758)">
+             <param name="Local" value="sect0267.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="writep (7805)">
+             <param name="Local" value="sect0268.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="plock (7862)">
+             <param name="Local" value="sect0269.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="prele (7882)">
+             <param name="Local" value="sect0270.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Character Oriented Special Files">
+          <param name="Local" value="sect0271.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="LP11 Line Printer Driver">
+             <param name="Local" value="sect0272.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="lpopen (8850)">
+             <param name="Local" value="sect0273.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Notes">
+             <param name="Local" value="sect0274.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="lpoutput (8986)">
+             <param name="Local" value="sect0275.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="lpstart (8967)">
+             <param name="Local" value="sect0276.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="lpinit(8976)">
+             <param name="Local" value="sect0277.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="lpwrite (8870)">
+             <param name="Local" value="sect0278.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Discussion">
+             <param name="Local" value="sect0279.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="lpcanon (8879)">
+             <param name="Local" value="sect0280.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="For idle readers: A suggestion">
+             <param name="Local" value="sect0281.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="PC-11 Paper Tape Reader/Punch Driver">
+             <param name="Local" value="sect0282.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Character Handling">
+          <param name="Local" value="sect0283.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="cinit (8234)">
+             <param name="Local" value="sect0284.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="getc (0930)">
+             <param name="Local" value="sect0285.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="putc (0967)">
+             <param name="Local" value="sect0286.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Character Sets">
+             <param name="Local" value="sect0287.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Control Characters">
+             <param name="Local" value="sect0288.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Graphic Characters">
+             <param name="Local" value="sect0289.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Graphic Character Sets">
+             <param name="Local" value="sect0290.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="maptab (8117)">
+             <param name="Local" value="sect0291.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="partab (7947)">
+             <param name="Local" value="sect0292.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Interactive Terminals">
+          <param name="Local" value="sect0293.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The &#8217;tty&#8217; Structure (7926)">
+             <param name="Local" value="sect0294.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value=" Interactive Terminals">
+             <param name="Local" value="sect0295.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Initialisation">
+             <param name="Local" value="sect0296.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="stty (8183)">
+             <param name="Local" value="sect0297.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="sgtty (8201)">
+             <param name="Local" value="sect0298.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="klsgtty (8090)">
+             <param name="Local" value="sect0299.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="tysty (8577)">
+             <param name="Local" value="sect0300.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="The DL11/KL11 Terminal Device Handler">
+             <param name="Local" value="sect0301.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Device Registers">
+             <param name="Local" value="sect0302.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="UNIBUS Addresses">
+             <param name="Local" value="sect0303.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Software Considerations">
+             <param name="Local" value="sect0304.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Interrupt Vector Addresses">
+             <param name="Local" value="sect0305.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Source Code">
+             <param name="Local" value="sect0306.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="klopen (8023)">
+             <param name="Local" value="sect0307.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="klclose (8055)">
+             <param name="Local" value="sect0308.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="klxint (8070)">
+             <param name="Local" value="sect0309.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="klrint (8078)">
+             <param name="Local" value="sect0310.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="The File &#8220;tty.c&#8221;">
+          <param name="Local" value="sect0311.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="flushtty (8252)">
+             <param name="Local" value="sect0312.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="wflushtty (8217)">
+             <param name="Local" value="sect0313.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Character Input">
+             <param name="Local" value="sect0314.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ttread (8535)">
+             <param name="Local" value="sect0315.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="canon (8274)">
+             <param name="Local" value="sect0316.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Notes">
+             <param name="Local" value="sect0317.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ttyinput (8333)">
+             <param name="Local" value="sect0318.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Character Output &#8211; ttwrite (8550)">
+             <param name="Local" value="sect0319.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ttstart">
+             <param name="Local" value="sect0320.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ttrstrt (8486)">
+             <param name="Local" value="sect0321.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="ttyoutput (8373)">
+             <param name="Local" value="sect0322.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Terminals with a restricted character set">
+             <param name="Local" value="sect0323.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="A. The test for &#8217;TTLOWAT&#8217; (Line 8074)">
+             <param name="Local" value="sect0324.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="B. Inactive Terminals">
+             <param name="Local" value="sect0325.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Well, that&#8217;s all, folks ...">
+             <param name="Local" value="sect0326.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+      <li><object type="text/sitemap">
+          <param name="Name" value="Suggested Exercises">
+          <param name="Local" value="sect0327.html">
+          
+      </object></li>
+      <ul>
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section One">
+             <param name="Local" value="sect0328.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section Two">
+             <param name="Local" value="sect0329.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section Three">
+             <param name="Local" value="sect0330.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="Section Four">
+             <param name="Local" value="sect0331.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+         <li><object type="text/sitemap">
+             <param name="Name" value="General">
+             <param name="Local" value="sect0332.html">
+             <param name="ImageNumber" value="11">
+         </object></li>
+         
+         
+      </ul>
+      
+    </ul>
+</ul>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: System Calls</title>
+
+<link href="sect0141.html" title="System Call Handlers" rel="next" />
+<link href="sect0139.html" title="User Mode Traps" rel="prev" />
+<link href="sect0136.html" title="Traps and System Calls" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0139.html" title="User Mode Traps"><img alt="Previous: User Mode Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0141.html" title="System Call Handlers"><img alt="Next: System Call Handlers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0136.html">Traps and System Calls</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">System Calls</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000141">12.4 System Calls</h2>
+<p>User mode programs use “trap” instructions as part of the “system call” mechanism to call upon the operating system for assistance. </p><p>Since there are many possible “versions” of the “trap” instruction, the type of assistance requested can be and is encoded as part of the “trap” instruction. </p><p>Parameters which are part of a system call may be passed from the user program in different ways: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>via the special register r0; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>as a set of words embedded in the program string following the “trap” instruction; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>as a set of words in the program’s data area. (This is the “indirect” call.) </p></dd>
+
+</dl><p>Indirect calls have a higher overhead than direct system calls. Indirect calls are needed when the parameters are data dependent and cannot be determined at compile time. </p><p>Indirect calls may sometimes be avoided if there is only one data dependent parameter, which is passed via r0. In choosing which parameters should be passed via r0, the system designers have presumably been guided by their own experience, since the pattern doesn’t satisfy the law of least astonishment. </p><p>The “C” compiler does not give special recognition to system calls, but treats them in the same way as other procedures. When the loader comes to resolve undetermined references, it satisfies these with library routines which contain the actual “trap” instructions. </p><dl class="description">
+
+    <dt>2752:</dt>
+    <dd><p>The error indicators are reset; </p></dd>
+
+    <dt>2754:</dt>
+    <dd><p>The user mode instruction which caused the trap is retrieved and all but the least significant six bits are masked off. The result is used to select an entry from the array of structures, “sysent”. The address of the selected entry is stored in “callp”; </p></dd>
+
+    <dt>2755:</dt>
+    <dd><p>The “zeroeth” system call is the “indirect” system call, in which the parameter passed is actually the address in the user program data space of a system call parameter sequence. </p></dd>
+
+</dl><p>Note the separate uses of “fuword” and “fuiword”. The distinction between these is unimportant on the PDP11/40, but is most important on machines with separate “i” and “d” address spaces; </p><dl class="description">
+
+    <dt>2760:</dt>
+    <dd><p>“i=077” simulates a call on the very last system call (2975), which results in a call on “nosys” (2855), which results in an error condition which will usually be fatal for the user mode program; </p></dd>
+
+    <dt>2762:</dt>
+    <dd></dd>
+
+    <dt>2765:</dt>
+    <dd><p>The number of arguments specified in “sysent” is the actual number provided by the user programmer, or that number less one if one argument is transferred via r0. The arguments are copied from the user data or instruction area into the five element array “u.u_arg”. (From “sysent” (Sheet 29) it would seem that four elements would have been sufficient for “u_area[ ]” – is this an allowance for future inflation?); </p></dd>
+
+    <dt>2770:</dt>
+    <dd><p>The value of the first argument is copied into “u.u_dirp”, which seems to function mainly as a convenient temporary storage location; </p></dd>
+
+    <dt>2771:</dt>
+    <dd><p>“trapl” is called with the address of the desired system routine. Note the comment beginning on line 2828; </p></dd>
+
+    <dt>2776:</dt>
+    <dd><p>When an error occurs, the “c-bit” in the old processor status word is set (see line 2658) and the error number is returned via r0. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0139.html" title="User Mode Traps"><img alt="Previous: User Mode Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0141.html" title="System Call Handlers"><img alt="Next: System Call Handlers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Causation</title>
+
+<link href="sect0151.html" title="Effect" rel="next" />
+<link href="sect0149.html" title="Anticipation" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0149.html" title="Anticipation"><img alt="Previous: Anticipation" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0151.html" title="Effect"><img alt="Next: Effect" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Causation</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000151">13.2 Causation</h2>
+<p>An interrupt is “caused” for a process quite simply by setting the value of “p_sig” (0363) in the process’s “proc” entry, to the type number appropriate to the interrupt (i.e. a value in the range 1 to “NSIG”–1). </p><p>“p_sig” is always directly accessible, even when the affected process and its “per process data area” have been swapped out to disk. Obviously this mechanism only allows one interrupt per process to be outstanding at any one time. The outstanding interrupt will always be the most recent one, unless one of the interrupts was of type #9, which always prevails. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0149.html" title="Anticipation"><img alt="Previous: Anticipation" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0151.html" title="Effect"><img alt="Next: Effect" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

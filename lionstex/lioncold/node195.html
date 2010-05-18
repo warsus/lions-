@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The RK Disk Driver</TITLE>
+<META NAME="description" CONTENT="The RK Disk Driver">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node202.html">
+<LINK REL="previous" HREF="node184.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node196.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3151"
+  HREF="node196.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3147"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3141"
+  HREF="node194.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3149"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3152"
+  HREF="node196.html">The file `rk.c'</A>
+<B> Up:</B> <A NAME="tex2html3148"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html3142"
+  HREF="node194.html">Additional Reading</A>
+ &nbsp; <B>  <A NAME="tex2html3150"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000210000000000000000">
+The RK Disk Driver</A>
+</H1>
+
+<P>
+The RK disk storage system employs a
+removable disk cartridge containing a
+single disk, which is mounted inside a
+drive with moving read/write heads.
+
+<P>
+The device designated RK11-D consists
+of a disk controller together with a
+single drive. Additional drives, designated RK05, up to a total of seven, may
+be added to a single RK11-D.
+
+<P>
+A requirement for more than eight
+drives would require an additional controller with a different set of UNIBUS
+addresses. Also the code in the file
+``rk.c'' would have to be modified to
+handle the case of two or more controllers. This case is most unlikely
+because requirements for large amounts
+of on-line disk storage will be more
+economically provided otherwise e.g.
+by the RP04 disk system.
+
+<P>
+<DIV ALIGN="CENTER">
+</DIV><PRE><TT>
+Cartridge capacity: 1,228,800 words
+<BR>(4800 512 byte records)
+<BR>
+Surfaces/cartridge: 		 		 2
+<BR>
+Tracks/surface: 		 		200 (plus 3 spare)
+<BR>
+Sectors/Track: 		 		 12
+<BR>
+Words/Sector: 		 		 256
+<BR>
+Recording density: 		 		 2040 bpi maximum
+<BR>
+Rotation speed: 		 		 1500 rpm
+<BR>
+Half revolution: 		 		 20 msecs
+<BR>
+Track positioning:
+<BR>
+10 msecs (one track)
+<BR>
+50 msecs (average)
+<BR>
+85 msecs (worst case)
+<BR>
+Interrupt Vector Address: 220
+<BR>
+Priority Level: 		 		 5
+<BR>
+</TT></PRE>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER" COLSPAN=3><B>Unibus Register Addresses</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">Drive Status</TD>
+<TD ALIGN="LEFT">RKDS</TD>
+<TD ALIGN="LEFT">777400</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Error</TD>
+<TD ALIGN="LEFT">RKER</TD>
+<TD ALIGN="LEFT">777402</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Control Status</TD>
+<TD ALIGN="LEFT">RKCS</TD>
+<TD ALIGN="LEFT">777404</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Word Count</TD>
+<TD ALIGN="LEFT">RKWC</TD>
+<TD ALIGN="LEFT">777406</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Current bus address</TD>
+<TD ALIGN="LEFT">RKBA</TD>
+<TD ALIGN="LEFT">777410</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Disk address</TD>
+<TD ALIGN="LEFT">RKDA</TD>
+<TD ALIGN="LEFT">777412</TD>
+</TR>
+<TR><TD ALIGN="LEFT">Data Buffer</TD>
+<TD ALIGN="LEFT">RKDB</TD>
+<TD ALIGN="LEFT">777416</TD>
+</TR>
+</TABLE>
+
+<P>
+<DIV ALIGN="CENTER">
+Table 16.1 RK Vital Statistics
+
+</DIV>
+
+<P>
+The average total access time is 70
+milllseconds. With multi-drive subsystems,
+seeking by one drive may be overlapped with reading or writing by
+another drive. However this feature is
+not used by UNIX because of bugs which
+existed at one time in the hardware
+controller.
+
+<P>
+In initiating a data transfer, RKDA,
+RRBA and RKC are set, and then RKCS is
+set. Upon completion, status information is available in RKCS, RRER and
+RKDS. When an error occurs, UNIX simply
+calls ``deverror'' (2447) to display RKER
+and RKDS on the system console, without
+any attempt at analysis. An operation
+is repeated up to ten times before an
+error is reported by the device driver.
+
+<P>
+The register formats which are
+described fully in the ``PDP11 Peripherals Handbook'' are reflected in the
+program code at several points. The
+following summaries suffice to describe
+the features used by UNIX:
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER" COLSPAN=2><B>Control Status Register (RKCS)</B></TD>
+</TR>
+<TR><TD ALIGN="CENTER" COLSPAN=1>bit</TD>
+<TD ALIGN="CENTER" COLSPAN=1>description</TD>
+</TR>
+<TR><TD ALIGN="LEFT">15</TD>
+<TD ALIGN="LEFT">Set when any bit of RKER (the</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">Error Register) is set;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">7</TD>
+<TD ALIGN="LEFT">Set when the control is no</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">longer engaged in actively</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">executing a function and is ready</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">to accept a command;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">6</TD>
+<TD ALIGN="LEFT">When set, the control will issue</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">an interrupt to vector address</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">220 upon operation completion or</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">error;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5-4</TD>
+<TD ALIGN="LEFT">Memory Extension. The two most</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">significant bits of the 13 bit</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">physical bus address. (The other</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">16 bits are recorded in RKBA.);</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">3-1</TD>
+<TD ALIGN="LEFT">Function to be performed:</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">CONTROL RESET: 000</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">WRITE: 001</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">READ: 010</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">etc.,</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">0</TD>
+<TD ALIGN="LEFT">Initiate the function designated</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">by bits 1 to 3 when set. (write</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">only);</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="CENTER" COLSPAN=2><B>Word Count Register (RKWC)</B></TD>
+</TR>
+</TABLE>
+
+<P>
+Contains the twos complement of the
+number of words to be transferred.
+
+<P>
+
+<P><P>
+<BR>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER" COLSPAN=2><B>Disk Address Register (RKDA)</B></TD>
+</TR>
+<TR><TD ALIGN="CENTER" COLSPAN=1>bit</TD>
+<TD ALIGN="CENTER" COLSPAN=1>description</TD>
+</TR>
+<TR><TD ALIGN="LEFT">15-13</TD>
+<TD ALIGN="LEFT">Drive number (0 to 7)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">12-5</TD>
+<TD ALIGN="LEFT">Cylinder number (0 to 199)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">4</TD>
+<TD ALIGN="LEFT">Surface number (0,1)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">3-0</TD>
+<TD ALIGN="LEFT">Sector address (0 to 11)</TD>
+</TR>
+</TABLE>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3153"
+  HREF="node196.html">The file `rk.c'</A>
+<LI><A NAME="tex2html3154"
+  HREF="node197.html">rkstrategy (5389)</A>
+<LI><A NAME="tex2html3155"
+  HREF="node198.html">rkaddr (5420)</A>
+<LI><A NAME="tex2html3156"
+  HREF="node199.html">devstart (5096)</A>
+<LI><A NAME="tex2html3157"
+  HREF="node200.html">rkintr (5451)</A>
+<LI><A NAME="tex2html3158"
+  HREF="node201.html">iodone (5018)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3151"
+  HREF="node196.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3147"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3141"
+  HREF="node194.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3149"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3152"
+  HREF="node196.html">The file `rk.c'</A>
+<B> Up:</B> <A NAME="tex2html3148"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html3142"
+  HREF="node194.html">Additional Reading</A>
+ &nbsp; <B>  <A NAME="tex2html3150"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>lpopen (8850)</TITLE>
+<META NAME="description" CONTENT="lpopen (8850)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node278.html">
+<LINK REL="previous" HREF="node276.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node278.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4208"
+  HREF="node278.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4204"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4198"
+  HREF="node276.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4206"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4209"
+  HREF="node278.html">Notes</A>
+<B> Up:</B> <A NAME="tex2html4205"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4199"
+  HREF="node276.html">LP11 Line Printer Driver</A>
+ &nbsp; <B>  <A NAME="tex2html4207"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000272000000000000000">
+lpopen (8850)</A>
+</H2>
+
+<P>
+When a line printer file is opened, the
+normal calling sequence is followed:
+
+<P>
+``open'' (5774) calls ``open1'',
+which (5832) calls ``openi'', which
+(6716) calls, in the case of a
+character      special      file,
+``cdevsw[..].d_open''. In the case
+of the line printer, this latter
+translates (4675) to ``lpopen''.
+
+<P>
+<DL>
+<DT><STRONG>8853:</STRONG></DT>
+<DD>Take the error exit if either
+another line printer file is
+already open, or if the line
+printer is not ready (e.g the
+power is off, or there is no
+paper, or the printer drum gate
+is open, or the temperature is
+too high, or the operator has
+switched the printer off-line.)
+
+<P>
+</DD>
+<DT><STRONG>8857:</STRONG></DT>
+<DD>Set the ``lp11.flag'' to indicate
+that the file is open, the
+printer has a ``form feed'' capability and lines are to be
+indented by eight characters.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

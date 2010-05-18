@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: newproc (1826)</title>
+
+<link href="sect0098.html" title="Process Management" rel="next" />
+<link href="sect0096.html" title="sureg (1739)" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0096.html" title="sureg (1739)"><img alt="Previous: sureg (1739)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Next: Process Management" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">newproc (1826)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000098">7.13 newproc (1826)</h2>
+<p>It is now time to take a good look at the procedure which creates new processes as (almost exact) replicas of their creators. </p><dl class="description">
+
+    <dt>1841:</dt>
+    <dd><p>“mpid” is an integer which is stepped through the values 0 to 32767. As each new process is created, a new value for “mpid” is created to provide a unique distinguishing number for the process. Since the cycle of values may eventually repeat, a check is made that the number is not still in use; if so a new value is tried; </p></dd>
+
+    <dt>1846:</dt>
+    <dd><p>A search is made through the “proc” array for a null “proc” structure (indicated by “p_stat” having a null value); </p></dd>
+
+    <dt>1860:</dt>
+    <dd><p>At this point, the address of the new entry in the “proc” array is stored as both “p” and “rpp”, and the address of “proc” entry for the current process is stored both as “up” and “rip”; </p></dd>
+
+    <dt>1861:</dt>
+    <dd><p>The attributes of the new process are stored in the new “proc” entry. Many of these are copied from the current process; </p></dd>
+
+    <dt>1876:</dt>
+    <dd><p>The new process inherits the open files of its parent. Increment the reference count for each of these; </p></dd>
+
+    <dt>1879:</dt>
+    <dd><p>If there is a separate text segment increment the associated reference counts. Notice that “rip”, “rpp” are used for temporary reference here; </p></dd>
+
+    <dt>1883:</dt>
+    <dd><p>Increment the reference count for the parent’s current directory; </p></dd>
+
+    <dt>1889:</dt>
+    <dd><p>Save the current values of the environment and stack pointers in “u.u_rsav”. “savu” is an assembler routine defined at line 0725; </p></dd>
+
+    <dt>1890:</dt>
+    <dd><p>Restore the values of “rip” and “rpp”. Temporarily change the value of “u.u_procp” from the value appropriate to the current process to the value appropriate to the new process; </p></dd>
+
+    <dt>1896:</dt>
+    <dd><p>Try to find an area in main memory in which to create the new data segment; </p></dd>
+
+    <dt>1902:</dt>
+    <dd><p>If there is no suitable area in main memory, the new copy will have to be made on disk. The next section of code should be analysed carefully because of the inconsistency introduced at line 1891 i.e.<br />u.u_procp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" />p_addr != *ka6 </p></dd>
+
+    <dt>1903:</dt>
+    <dd><p>Mark the current process as “SIDL” to head off temporarily any further attempt to swap it out (i.e. initiated by “sched” (1940)); </p></dd>
+
+    <dt>1904:</dt>
+    <dd><p>Make the new “proc” entry consistent, i.e set rpp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" />p_addr = *ka6; </p></dd>
+
+    <dt>1905:</dt>
+    <dd><p>Save the current values of the environment and stack pointers in “u.u_ssav”; </p></dd>
+
+    <dt>1906:</dt>
+    <dd><p>Call “xswap” (4368) to copy the data segment into the disk swap area. Because the second parameter is zero, the main memory area will not be released; </p></dd>
+
+    <dt>1907:</dt>
+    <dd><p>Mark the new process as “swapped out”; </p></dd>
+
+    <dt>1908:</dt>
+    <dd><p>Return the current process to its normal state; </p></dd>
+
+    <dt>1913:</dt>
+    <dd><p>There was room in main memory, so store the address of the new “proc” entry and copy the data segment a block at a time; </p></dd>
+
+    <dt>1917:</dt>
+    <dd><p>Restore the current process’ “per process data area” to its previous state; </p></dd>
+
+    <dt>1918:</dt>
+    <dd><p>Return with a value of zero. </p></dd>
+
+</dl><p>Obviously “newproc” on its own is not sufficient to produce an interesting and varied set of processes. The procedure “exec” (3020) which is discussed in Chapter Twelve provides the necessary additional facility: the means for a process to change its character, to be reincarnated.  </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0096.html" title="sureg (1739)"><img alt="Previous: sureg (1739)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Next: Process Management" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

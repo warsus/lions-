@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: binit (5055)</title>
+
+<link href="sect0206.html" title="bread (4754)" rel="next" />
+<link href="sect0204.html" title="brelse (4869)" rel="prev" />
+<link href="sect0198.html" title="Buffer Manipulation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0204.html" title="brelse (4869)"><img alt="Previous: brelse (4869)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0206.html" title="bread (4754)"><img alt="Next: bread (4754)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0198.html">Buffer Manipulation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">binit (5055)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000206">17.7 binit (5055)</h2>
+<p>This procedure is called by “main” (1614) to initialise the buffer pool. Empty, doubly linked circular lists are set up: </p><ul class="itemize">
+<li><p>for the “av”-list (“bfreelist” is head); </p></li><li><p>the “b”-list for null devices (“dev == NODEV”) (“bfreelist” is again head); </p></li><li><p>a “b”-list for each major device type. </p></li>
+</ul><p>For each buffer: </p><ul class="itemize">
+<li><p>the buffer header is linked into the “b”-list for the device “NODEV” (–1); </p></li><li><p>the address of the buffer is set in the header (5067); </p></li><li><p>the buffer flags are set as “B_BUSY” (this doesn’t seem to be really necessary) (5072); </p></li><li><p>the buffer header is linked into the “av”-list by a call on “brelse” (5073); </p></li>
+</ul><p>The number of block devices is recorded as “nblkdev”. This is used for checking values for “dev” in “getblk” (4927), “getmdev” (6192) and “openi” (6720). Inspection of “bdevsw” (4656) shows that “nblkdev” will be set to eight whereas the value one is what is really required. </p><p>This result could be obtained by “editing” as follows: </p><pre>
+    /5084/m/5081/ "nblkdev=i;
+    /5083/m/5077/ "i++
+</pre></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0204.html" title="brelse (4869)"><img alt="Previous: brelse (4869)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0206.html" title="bread (4754)"><img alt="Next: bread (4754)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

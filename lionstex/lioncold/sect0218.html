@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: inode (5659)</title>
+
+<link href="sect0219.html" title="Resources Required" rel="next" />
+<link href="sect0217.html" title="file (5507)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0217.html" title="file (5507)"><img alt="Previous: file (5507)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0219.html" title="Resources Required"><img alt="Next: Resources Required" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">inode (5659)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000219">18.5 inode (5659)</h2>
+<p>“inode” is defined as an array of structures (also named “inode”). </p><p>An element of the “inode” is considered to be unallocated if the reference count, “i_count”, is zero. </p><p>At each point in time, “inode” contains a single entry for each file which may be referenced for normal i/o operations, or which is being executed or which has been executed and has the “sticky” bit set, or which is the working directory for some process. </p><p>Several “file” table entries may point to a single “inode” entry. The inode entry describes the general disporition of the file. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0217.html" title="file (5507)"><img alt="Previous: file (5507)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0219.html" title="Resources Required"><img alt="Next: Resources Required" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

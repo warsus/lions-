@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 3</title>
+
+<link href="sect0033.html" title="Example 4" rel="next" />
+<link href="sect0031.html" title="Example 2" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0031.html" title="Example 2"><img alt="Previous: Example 2" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0033.html" title="Example 4"><img alt="Next: Example 4" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 3</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000033">3.4 Example 3</h2>
+<pre>
+  6585 bcopy (from, to, count)
+       int *from, *to;
+       {
+        register *a, *b, c;
+        a = from;
+        b = to;
+        c = count;
+        do
+          *b++ = *a++;
+        while (--cc);
+       }
+</pre><p>The function of this procedure is very simple: it copies a specified number of words from one set of consecutive locations to another set. </p><p>There are three parameters. The second line </p><pre>
+   int *from, *to;
+</pre><p>specifies that the first two variables are pointers to integers. Since no specification is supplied for the third parameter, it is assumed to be an integer by default. </p><p>The three local variables, a, b, and c, have been assigned to registers, because registers are more accessible and the object code to reference them is shorter. “a” and “b” are pointers to integers and “c” is an integer. The register declaration could have been written more pedantically as </p><pre>
+   register int *a, *b, c;
+</pre><p>to emphasise the connection with integers. </p><p>The three lines beginning with “do” should be studied carefully. If “b” is a “pointer to integer” type, then </p><pre>
+    *b
+</pre><p>denotes the integer pointed to. Thus to copy the value pointed to by “a” to the location designated by “b”, we could write </p><pre>
+    *b = *a;
+</pre><p>If we wrote instead </p><pre>
+    b = a;
+</pre><p>this would make the value of “b” the same as the value of “a”, i.e. “b” and “a” would point to the same place. Here at least, that is not what is required. </p><p>Having copied the first word from source to destination, we need to increase the values of “b” and “a” so that the point to the next words of their respective sets. This can be done by writing </p><pre>
+    b = b+1; a = a+1;
+</pre><p>but “C” provides a shorter notation (which is more useful when the variable names are longer) viz. </p><pre>
+    b++; a++;
+</pre><p>Now there is no difference between the statements “b++;” and “++b;” here. </p><p>However “b++” and “++b” may be used as terms in an expression, in which case they are different. In both cases the effect of incrementing “b” is retained, but the value which enters the expression is the initial value for “b++” and the final value for “++b”. </p><p>The “<img src="images/img-0007.png" alt="$–$" style="vertical-align:&images/img-0007.png-depth;&px;; 
+                                     width:&images/img-0007.png-width;&px;; 
+                                     height:&images/img-0007.png-height;&px;" class="math gen" />” operator obeys the same rules as the “++” operator, except that it decrements by one. Thus “<img src="images/img-0007.png" alt="$–$" style="vertical-align:&images/img-0007.png-depth;&px;; 
+                                     width:&images/img-0007.png-width;&px;; 
+                                     height:&images/img-0007.png-height;&px;" class="math gen" />c” enters an expression as the value after decrementation. </p><p>The “++” and “<img src="images/img-0007.png" alt="$–$" style="vertical-align:&images/img-0007.png-depth;&px;; 
+                                     width:&images/img-0007.png-width;&px;; 
+                                     height:&images/img-0007.png-height;&px;" class="math gen" />” operators are very useful, and are used throughout UNIX. Occasionally you will have to go back to first principles to work out exactly what their use implies. Note also there is a difference between <tt class="tt">*b++</tt> and <tt class="tt">(*b)++</tt>. </p><p>These operators are applicable to pointers to structures as well as to simple data types. When a pointer which has been declared with reference to a particular type of structure is incremented, the actual value of the pointer is incremented by the size of the structure. </p><p>We can now see the meaning of the line </p><pre>
+    *b++ = *a++;
+</pre><p>The word is copied and the pointers are incremented, all in one hit. </p><p>The line </p><pre>
+    while (--c);
+</pre><p>delimits the end of the set of statements which began after the “do”. The expression in parentheses “<img src="images/img-0007.png" alt="$–$" style="vertical-align:&images/img-0007.png-depth;&px;; 
+                                     width:&images/img-0007.png-width;&px;; 
+                                     height:&images/img-0007.png-height;&px;" class="math gen" />c”, is evaluated and tested (the value tested is the value after decrementation). If the value is non-zero, the loop is repeated, else it is terminated. </p><p>Obviously if the initial value for “count” were negative, the loop would not terminate properly. If this were a serious possibility then the routine would have to be modified. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0031.html" title="Example 2"><img alt="Previous: Example 2" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0033.html" title="Example 4"><img alt="Next: Example 4" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

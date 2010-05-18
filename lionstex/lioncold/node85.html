@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>sleep (2066)</TITLE>
+<META NAME="description" CONTENT="sleep (2066)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node86.html">
+<LINK REL="previous" HREF="node84.html">
+<LINK REL="up" HREF="node77.html">
+<LINK REL="next" HREF="node86.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1754"
+  HREF="node86.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1750"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1744"
+  HREF="node84.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1752"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1755"
+  HREF="node86.html">swtch (2178)</A>
+<B> Up:</B> <A NAME="tex2html1751"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1745"
+  HREF="node84.html">sched (1940)</A>
+ &nbsp; <B>  <A NAME="tex2html1753"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000108000000000000000">
+sleep (2066)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>2070:</STRONG></DT>
+<DD>``PS'' is the address of the processor status word. The processor
+ status is stored in the register
+ ``s'' (0164, 0175);
+
+<P>
+</DD>
+<DT><STRONG>2071:</STRONG></DT>
+<DD>``rp'' is set to the address of the
+ entry in the array ``proc'' of the
+ current process (still ``proc[0]''
+ at this stage!);
+
+<P>
+</DD>
+<DT><STRONG>2072:</STRONG></DT>
+<DD>``pri'' is negative, so the ``else''
+ branch is taken, setting the
+ status of the current process
+ (0) to ``SSLEEP''. The reason for
+ ``going to sleep'' and the ``awakening priority'' are noted.
+
+<P>
+</DD>
+<DT><STRONG>2093:</STRONG></DT>
+<DD>``swtch'' is then called.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

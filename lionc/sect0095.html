@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: estabur (1650)</title>
+
+<link href="sect0096.html" title="sureg (1739)" rel="next" />
+<link href="sect0094.html" title="Setting the Segmentation Registers" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0094.html" title="Setting the Segmentation Registers"><img alt="Previous: Setting the Segmentation Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0096.html" title="sureg (1739)"><img alt="Next: sureg (1739)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">estabur (1650)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000096">7.11 estabur (1650)</h2>
+<dl class="description">
+
+    <a href="../all.html#line1654" target="source" <dt>1654:</dt></a>
+    <dd><p>Various checks on consistency are performed, to ensure that the requested sizes for the text, data and stack are reasonable. </p><p>Note that a non-zero value for “sep” implies separate mappings for the text area (“i” space) and the data area (“d” space). This is never possible on the PDP11/40; </p></dd>
+
+    <a href="../all.html#line1664" target="source" <dt>1664:</dt></a>
+    <dd><p>“a” defines the address of a segment relative to an arbitrary base of zero. “ap” and “dp” point to the set of prototype segmentation address and descriptor registers respectively. </p></dd>
+
+</dl><p>The first eight of each of these sets are intended to refer to “i” space, and </p><dl class="description">
+
+    <a href="../all.html#line1667" target="source" <dt>1667:</dt></a>
+    <dd><p>“nt” measures the number of 32 word blocks needed for the text segment. If “nt” is non-zero, one or more pages must be allocated for this purpose. </p></dd>
+
+</dl><p>Where more than one page is allocated, all but the last will consist of 128 blocks (4096 words), and will be read only, and will have relative addresses starting at zero and increasing successively by 128. </p><dl class="description">
+
+    <a href="../all.html#line1672" target="source" <dt>1672:</dt></a>
+    <dd><p>If some fraction of a page of text is still to be assigned, allocate the appropriate part of the next page; </p></dd>
+
+    <a href="../all.html#line1677" target="source" <dt>1677:</dt></a>
+    <dd><p>if “i” and “d” spaces are being used separately, mark the segmentation registers for the remaining “i” pages as null; </p></dd>
+
+    <a href="../all.html#line1682" target="source" <dt>1682:</dt></a>
+    <dd><p>“a” is reset because all remaining addresses refer to the data area (not the text area) and are relative to the beginning of this area. The first “USIZE” blocks of this area are reserved for the “per process data area”; </p></dd>
+
+    <a href="../all.html#line1703" target="source" <dt>1703:</dt></a>
+    <dd><p>The stack area is allocated from the top of the address space towards the lower addresses (“downwards”); </p></dd>
+
+    <a href="../all.html#line1711" target="source" <dt>1711:</dt></a>
+    <dd><p>If a partial page must be allocated for the stack area, it is the high address art of the page which is valid. (For text and data areas, which grow “upwards”, it is the lower part of a partial page which is valid.) This requires an extra bit in the descriptor, hence “ED” (“expansion downwards”); </p></dd>
+
+    <a href="../all.html#line1714" target="source" <dt>1714:</dt></a>
+    <dd><p>If separate “i” and “d” spaces are not used, only the first eight of the sixteen prototype register pairs will have been initialised by this point. In this case, the second eight are copied from the first eight. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0094.html" title="Setting the Segmentation Registers"><img alt="Previous: Setting the Segmentation Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0096.html" title="sureg (1739)"><img alt="Next: sureg (1739)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: smount (6086)</title>
+
+<link href="sect0253.html" title="Notes" rel="next" />
+<link href="sect0251.html" title="Mounting" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0251.html" title="Mounting"><img alt="Previous: Mounting" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0253.html" title="Notes"><img alt="Next: Notes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">smount (6086)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000253">20.5 smount (6086)</h2>
+<dl class="description">
+
+    <dt>6093:</dt>
+    <dd><p>“getmdev” decodes the first argument to locate a block oriented access device; </p></dd>
+
+    <dt>6096:</dt>
+    <dd><p>“u.u_dirp” is reset preparatory to calling “namei” to decode the second file name. (Note that “u.u_dirp” is set by “trap” to “u.u_arg[0]” (2770); </p></dd>
+
+    <dt>6100:</dt>
+    <dd><p>Check that the file named by the second parameter is in a satisfactory condition, i.e. no one else is currently accessing the file, and that the file is not a special file (block or character); </p></dd>
+
+    <dt>6103:</dt>
+    <dd><p>Search the “mount” table looking for an empty entry (“mp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" />m bufp==NULL”) or an entry already made for the device. (The “mount” data structure is defined at line 0272); </p></dd>
+
+    <dt>6111:</dt>
+    <dd><p>“smp” should point to a suitable entry in the “mount” table; </p></dd>
+
+    <dt>6113:</dt>
+    <dd><p>Perform the appropriate “open” routine, with the device name and a read/write flag as arguments. (As was seen earlier, for the RK05 disk the “open” routine is a “no-op”); </p></dd>
+
+    <dt>6116:</dt>
+    <dd><p>Read block #1 from the device. This block is the “super block”; </p></dd>
+
+    <dt>6124:</dt>
+    <dd><p>Copy the “super block” into a buffer associated with “NODEV”, from the buffer associated with “d”. The second buffer will not be released again until the device is unmounted; </p></dd>
+
+    <dt>6130:</dt>
+    <dd><p>“ip” points to the “inode” for the second named file. This “inode” is now flagged as “IMOUNT”. The effect of this is to force “iget” (7292) to ignore the normal contents of the file, while the file system volume is mounted. (In practice, the second file is an empty file created especially for this purpose.) </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0251.html" title="Mounting"><img alt="Previous: Mounting" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0253.html" title="Notes"><img alt="Next: Notes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

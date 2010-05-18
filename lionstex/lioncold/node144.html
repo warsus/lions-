@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>System Calls</TITLE>
+<META NAME="description" CONTENT="System Calls">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node145.html">
+<LINK REL="previous" HREF="node143.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node145.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2507"
+  HREF="node145.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2503"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2497"
+  HREF="node143.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2505"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2508"
+  HREF="node145.html">System Call Handlers</A>
+<B> Up:</B> <A NAME="tex2html2504"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2498"
+  HREF="node143.html">User Mode Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2506"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000174000000000000000">
+System Calls</A>
+</H2>
+
+<P>
+User mode programs use ``trap'' instructions as part of the ``system call''
+mechanism to call upon the operating
+system for assistance.
+
+<P>
+Since there are many possible ``versions'' of the ``trap'' instruction, the
+type of assistance requested can be and
+is encoded as part of the ``trap''
+instruction.
+
+<P>
+Parameters which are part of a system
+call may be passed from the user program in different ways:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>via the special register r0;
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>as a set of words embedded in
+ the program string following the
+ ``trap'' instruction;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>as a set of words in the
+ program's data area. (This is
+ the ``indirect'' call.)
+</DD>
+</DL>
+
+<P>
+Indirect calls have a higher overhead
+than direct system calls. Indirect
+calls are needed when the parameters
+are data dependent and cannot be determined at compile time.
+
+<P>
+Indirect calls may sometimes be avoided
+if there is only one data dependent
+parameter, which is passed via r0. In
+choosing which parameters should be
+passed via r0, the system designers
+have presumably been guided by their
+own experience, since the pattern
+doesn't satisfy the law of least astonishment.
+
+<P>
+The ``C'' compiler does not give special
+recognition to system calls, but treats
+them in the same way as other procedures. When the loader comes to
+resolve undetermined references, it
+satisfies these with library routines
+which contain the actual ``trap''
+instructions.
+
+<P>
+<DL>
+<DT><STRONG>2752:</STRONG></DT>
+<DD>The error indicators are reset;
+
+<P>
+</DD>
+<DT><STRONG>2754:</STRONG></DT>
+<DD>The user mode instruction which
+ caused the trap is retrieved and
+ all but the least significant six
+ bits are masked off. The result
+ is used to select an entry from
+ the array of structures,
+``sysent''. The address of the
+selected entry is stored in
+``callp'';
+
+<P>
+</DD>
+<DT><STRONG>2755:</STRONG></DT>
+<DD>The ``zeroeth'' system call is the
+``indirect'' system call, in which
+the parameter passed is actually
+the address in the user program
+data space of a system call
+parameter sequence.
+</DD>
+</DL>
+
+<P>
+Note the separate uses of ``fuword'' and
+``fuiword''. The distinction between
+these is unimportant on the PDP11/40,
+but is most important on machines with
+separate ``i'' and ``d'' address spaces;
+
+<P>
+<DL>
+<DT><STRONG>2760:</STRONG></DT>
+<DD>``i=077'' simulates a call on the
+very last system call (2975),
+which results in a call on
+``nosys'' (2855), which results in
+an error condition which will
+usually be fatal for the user
+mode program;
+
+<P>
+</DD>
+<DT><STRONG>2762:</STRONG></DT>
+<DD>
+</DD>
+<DT><STRONG>2765:</STRONG></DT>
+<DD>The number of arguments specified
+in ``sysent'' is the actual number
+provided by the user programmer,
+or that number less one if one
+argument is transferred via r0.
+The arguments are copied from the
+user data or instruction area
+into the five element array
+``u.u_arg''. (From ``sysent'' (Sheet
+29) it would seem that four elements would have been sufficient
+for ``u_area[ ]'' - is this an
+allowance for future inflation?);
+
+<P>
+</DD>
+<DT><STRONG>2770:</STRONG></DT>
+<DD>The value of the first argument
+is copied into ``u.u_dirp'', which
+seems to function mainly as a
+convenient temporary storage
+location;
+
+<P>
+</DD>
+<DT><STRONG>2771:</STRONG></DT>
+<DD>``trapl'' is called with the
+ address of the desired system
+ routine. Note the comment beginning on line 2828;
+
+<P>
+</DD>
+<DT><STRONG>2776:</STRONG></DT>
+<DD>When an error occurs, the ``c-bit''
+in the old processor status word
+is set (see line 2658) and the
+error number is returned via r0.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2507"
+  HREF="node145.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2503"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2497"
+  HREF="node143.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2505"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2508"
+  HREF="node145.html">System Call Handlers</A>
+<B> Up:</B> <A NAME="tex2html2504"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2498"
+  HREF="node143.html">User Mode Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2506"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

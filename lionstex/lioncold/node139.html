@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>timeout (3845)</TITLE>
+<META NAME="description" CONTENT="timeout (3845)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node138.html">
+<LINK REL="up" HREF="node137.html">
+<LINK REL="next" HREF="node140.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2436"
+  HREF="node140.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2432"
+  HREF="node137.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2428"
+  HREF="node138.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2434"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2437"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Up:</B> <A NAME="tex2html2433"
+  HREF="node137.html">Clock Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2429"
+  HREF="node138.html">clock (3725)</A>
+ &nbsp; <B>  <A NAME="tex2html2435"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000162000000000000000">
+timeout (3845)</A>
+</H2>
+
+<P>
+This procedure makes new entries in the
+``callout'' array. In this system it is
+only called from the routine ``ttstart''
+(8505), passing the procedure ``ttrstrt''
+(3486). Note that ``ttrstrt'' calls
+``ttstart'', which may call ``timeout'',
+for a thoroughly incestuous relationship!
+
+<P>
+Note also that most of ``timeout'' runs
+at priority level seven, to avoid clock
+interrupts.
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

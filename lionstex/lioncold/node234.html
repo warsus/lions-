@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>rdwr (5731)</TITLE>
+<META NAME="description" CONTENT="rdwr (5731)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node235.html">
+<LINK REL="previous" HREF="node233.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node235.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3657"
+  HREF="node235.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3653"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3647"
+  HREF="node233.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3655"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3658"
+  HREF="node235.html">readi (6221)</A>
+<B> Up:</B> <A NAME="tex2html3654"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3648"
+  HREF="node233.html">Reading and Writing</A>
+ &nbsp; <B>  <A NAME="tex2html3656"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002317000000000000000">
+rdwr (5731)</A>
+</H2>
+
+<P>
+``read'' and ``write'' perform similar
+operations and share much code. The
+two system calls, ``read'' (5711) and
+``write'' (5720), call ``rdwr'' immediately
+to:
+
+<P>
+<DL>
+<DT><STRONG>5736:</STRONG></DT>
+<DD>Convert the user program file
+ identification to a pointer in
+ the file table;
+
+<P>
+</DD>
+<DT><STRONG>5739:</STRONG></DT>
+<DD>Check that the operation (read or
+ write) is in accordance with the
+ mode with which the file was
+ opened;
+
+<P>
+</DD>
+<DT><STRONG>5743:</STRONG></DT>
+<DD>Set up various standard locations
+ in ``u'' with the appropriate
+ parameters;
+
+<P>
+</DD>
+<DT><STRONG>5746:</STRONG></DT>
+<DD>``pipes'' get special treatment
+ right from the start!
+
+<P>
+</DD>
+<DT><STRONG>5755:</STRONG></DT>
+<DD>Call ``readi'' or ``writei'' as
+ appropriate;
+
+<P>
+</DD>
+<DT><STRONG>5756:</STRONG></DT>
+<DD>Update the file offset by, and
+set the value returned to the
+user program to, the number of
+characters actually transferred.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: fuibyte (0814), fuiword (0844)</title>
+
+<link href="sect0129.html" title="Interrupts" rel="next" />
+<link href="sect0127.html" title="Sources of Traps and Interrupts" rel="prev" />
+<link href="sect0126.html" title="The Assembler “Trap” Routine" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0127.html" title="Sources of Traps and Interrupts"><img alt="Previous: Sources of Traps and Interrupts" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0126.html" title="The Assembler “Trap” Routine"><img alt="Up: The Assembler “Trap” Routine" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0129.html" title="Interrupts"><img alt="Next: Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0126.html">The Assembler “Trap” Routine</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">fuibyte (0814), fuiword (0844)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000129">10.2 fuibyte (0814), fuiword (0844)</h2>
+<p>“main” uses both “fuibyte” and “fuiword”. Since the former is more complicated in a non-essential way, we leave it to the reader, and concentrate on the latter. </p><p>“fuiword” is called (1602) when the system is running in kernel mode with one argument which is an address in user address space. The function of the routine is to fetch the value of the corresponding word and to return it as a result (left in r0). However if an error occurs, the value –1 is to be returned. </p><p>Note that with “fuiword”, there is an ambiguity which does not occur with “fuibyte”, namely a returned value of –1 may not necessarily be an error indication but the actual value in the user space. Convince yourself that for the way it is used in “main”, this does not matter. </p><p>Also the code does not distinguish between a “bus timeout error” and a “segmentation error”. </p><p>The routine proceeds as follows: </p><dl class="description">
+
+    <a href="../all.html#line0846" target="source" <dt>0846:</dt></a>
+    <dd><p>The argument is moved to r1; </p></dd>
+
+    <a href="../all.html#line0848" target="source" <dt>0848:</dt></a>
+    <dd><p>“gword” is called; </p></dd>
+
+    <a href="../all.html#line0852" target="source" <dt>0852:</dt></a>
+    <dd><p>The current PS is stored on the stack; </p></dd>
+
+    <a href="../all.html#line0853" target="source" <dt>0853:</dt></a>
+    <dd><p>The priority level is raised to 7 (to disable interrupts); </p></dd>
+
+    <a href="../all.html#line0854" target="source" <dt>0854:</dt></a>
+    <dd><p>The contents of the location nofault (1466) are saved in the stack; </p></dd>
+
+    <a href="../all.html#line0855" target="source" <dt>0855:</dt></a>
+    <dd><p>“nofault” is loaded with address of the routine “err”; </p></dd>
+
+    <a href="../all.html#line0856" target="source" <dt>0856:</dt></a>
+    <dd><p>An “mfpi” instruction is used to fetch the word from user space. </p></dd>
+
+</dl><p><b class="bf">If nothing goes wrong</b> this value will left on the kernel stack. </p><dl class="description">
+
+    <a href="../all.html#line0857" target="source" <dt>0857:</dt></a>
+    <dd><p>The value is transferred from the stack to r0; </p></dd>
+
+    <a href="../all.html#line0876" target="source" <dt>0876:</dt></a>
+    <dd><p>The previous values of “nofault” and PS are restored; </p></dd>
+
+</dl><p><b class="bf">Now suppose something does go wrong</b> with the “mfpi” instruction, and a bus time-out does occur. </p><dl class="description">
+
+    <a href="../all.html#line0856" target="source" <dt>0856:</dt></a>
+    <dd><p>The “mfpi” instruction will be aborted. PC will point to the next instruction (0857) and a trap via vector location 4 will occur; </p></dd>
+
+    <a href="../all.html#line0512" target="source" <dt>0512:</dt></a>
+    <dd><p>The new PC will have the value of “trap”. The new PS will indicate: </p><p>present mode = kernel mode </p><p>previous mode = kernel mode </p><p>priority = 7; </p></dd>
+
+    <a href="../all.html#line0756" target="source" <dt>0756:</dt></a>
+    <dd><p>The next instruction executed is the first instruction of “trap”. This saves the processor status word two words beyond the current “top of stack”. (This is not relevant here.); </p></dd>
+
+    <a href="../all.html#line0757" target="source" <dt>0757:</dt></a>
+    <dd><p>“nofault” contains the address of “err” and is non-zero; </p></dd>
+
+    <a href="../all.html#line0765" target="source" <dt>0765:</dt></a>
+    <dd><p>Moving 1 to SR0 reinitialises the memory management unit; </p></dd>
+
+    <a href="../all.html#line0766" target="source" <dt>0766:</dt></a>
+    <dd><p>The contents of “nofault” are moved on top of the stack, <b class="bf">overwriting</b> the previous contents, which was the return address in “gword”; </p></dd>
+
+    <a href="../all.html#line0767" target="source" <dt>0767:</dt></a>
+    <dd><p>The “rtt” returns, not to “gword” but to the first word of “err”; </p></dd>
+
+    <a href="../all.html#line0880" target="source" <dt>0880:</dt></a>
+    <dd><p>“err” restores “nofault” and PS, skips the return to “fuiword”, places –1 in r0, and returns directly to the calling routine. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0127.html" title="Sources of Traps and Interrupts"><img alt="Previous: Sources of Traps and Interrupts" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0126.html" title="The Assembler “Trap” Routine"><img alt="Up: The Assembler “Trap” Routine" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0129.html" title="Interrupts"><img alt="Next: Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

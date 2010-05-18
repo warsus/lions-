@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: printf (2340)</title>
+
+<link href="sect0068.html" title="printn (2369)" rel="next" />
+<link href="sect0066.html" title="The File ‘prf.c’" rel="prev" />
+<link href="sect0060.html" title="Two Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0066.html" title="The File ‘prf.c’"><img alt="Previous: The File ‘prf.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0068.html" title="printn (2369)"><img alt="Next: printn (2369)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0060.html">Two Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">printf (2340)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000068">5.7 printf (2340)</h2>
+<p>The procedure “printf” provides a direct, unsophisticated low-level, unbuffered way for the operating system to send messages to the system console terminal. It is used during initialisation and to report hardware errors or the imminent collapse of the system. </p><p>(These versions of “printf” and “putchar” run in kernel mode and are similar to, but not the same as, the versions invoked by a “C” program which runs in user mode. The latter versions of “printf” and “putchar” live in the library “/lib/libc.a”. You may still find it useful to read the sections “PRINTF(III)” and “PUTCHAR(III)” of the UPM at this point.) </p><dl class="description">
+
+    <dt>2340:</dt>
+    <dd><p>The programmer must have been carried away when he declared all the parameters for this procedure. In fact the procedure body only contains references to “xl” and “fmt”. </p></dd>
+
+</dl><p>This serves to reveal one of the facts of “C” programming. The rules for matching parameters in procedure calls and procedure declarations are not enforced, not even with respect to the numbers of parameters. </p><p>Parameters are placed on the stack in <b class="bf">reverse</b> order. Thus when “printf” is called “fmt” will be nearer to the “top of stack” than “xl”, etc. </p><pre>
+        |   .   |
+        ---------
+        |   .   |
+        ---------
+        |   .   |        stack grows down
+        ---------
+        |   .   |
+        ---------
+        |  x2   |
+        ---------
+        |  xl   |
+        ---------
+        |  fmt  |
+        ---------
+        |   .   |        top of stack
+        ---------
+</pre><p>“xl” has a higher address then “fmt” but a lower address then “x2”, because stacks grow downwards on the PDP11. </p><dl class="description">
+
+    <dt>2341:</dt>
+    <dd><p>“fmt” may be interpreted as a constant character pointer. This declaration is (almost) equivalent to </p><p>“char *fmt;” </p><p>The difference is that here the value of “fmt” cannot be changed; </p></dd>
+
+    <dt>2346:</dt>
+    <dd><p>“adx” is set to point to “xl”. The expression “&amp;xl” is the address of “xl”. Note that since “xl” is a stack location, this expression cannot be evaluated at compile time. </p><p>(Many of the expressions you will find elsewhere involving the addresses of variables or arrays are effective because they <b class="bf">can</b> be evaluated at compile or load time.); </p></dd>
+
+    <dt>2348:</dt>
+    <dd><p>Extract into the register “c” successive characters from the format string; </p></dd>
+
+    <dt>2349:</dt>
+    <dd><p>If “c” is not a ‘%’ then ... </p></dd>
+
+    <dt>2350:</dt>
+    <dd><p>If “c” is a null character (‘<tt>\</tt>0’), this indicates the end of the format string in the normal way, and “printf” terminates; </p></dd>
+
+    <dt>2351:</dt>
+    <dd><p>Otherwise call “putchar” to send the character to the system console terminal; </p></dd>
+
+    <dt>2353:</dt>
+    <dd><p>A ‘%’ character has been seen. Get the next character (it had better not be the ‘<tt>\</tt>0’!); </p></dd>
+
+    <dt>2354:</dt>
+    <dd><p>If this character is a ‘d’ or ‘l’ or ‘o’, call “printn” passing as parameters the value referenced by “adx” and either the value “8” or “10” depending on whether “c” is ‘o’ or not. (The ‘d’ and ‘l’ codes are clearly equivalent.) </p><p>“printn” expresses the binary numbers as a set of digit characters according to the radix supplied as the second parameter; </p></dd>
+
+    <dt>2356:</dt>
+    <dd><p>If the editing character is ‘s’, then all but the last character of a null terminated string is to be sent to the terminal. “adx” should point to a character pointer in this case; </p></dd>
+
+    <dt>2361:</dt>
+    <dd><p>Increment “adx” to point to the next word in the stack i.e. to the next parameter passed to “printf”; </p></dd>
+
+    <dt>2362:</dt>
+    <dd><p>Go back to line 2347 and continue scanning the format string. Enthusiasts for structured programming will prefer to replace lines 2347 and this by “while (1) {” and “}” respectively . </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0066.html" title="The File ‘prf.c’"><img alt="Previous: The File ‘prf.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0068.html" title="printn (2369)"><img alt="Next: printn (2369)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

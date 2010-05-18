@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>klrint (8078)</TITLE>
+<META NAME="description" CONTENT="klrint (8078)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node313.html">
+<LINK REL="up" HREF="node297.html">
+<LINK REL="next" HREF="node315.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4672"
+  HREF="node315.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4668"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4664"
+  HREF="node313.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4670"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4673"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Up:</B> <A NAME="tex2html4669"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4665"
+  HREF="node313.html">klxint (8070)</A>
+ &nbsp; <B>  <A NAME="tex2html4671"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002917000000000000000">
+klrint (8078)</A>
+</H2>
+
+<P>
+This procedure is executed in response
+to a receiver interrupt. It is not so
+readily compared with ``pcrint'' (8719)
+although similarities certainly exist.
+
+<P>
+<DL>
+<DT><STRONG>8083:</STRONG></DT>
+<DD>Read the input character from the
+Receiver Data Buffer register;
+
+<P>
+</DD>
+<DT><STRONG>8084:</STRONG></DT>
+<DD>Enable the receiver for the next
+character;
+
+<P>
+</DD>
+<DT><STRONG>8085:</STRONG></DT>
+<DD>The comment says ``hardware
+botch''. Better believe it;
+
+<P>
+</DD>
+<DT><STRONG>8086:</STRONG></DT>
+<DD>Pass the character to ``ttyinput''
+to insert it into the appropriate
+``raw'' input queue.
+</DD>
+</DL>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

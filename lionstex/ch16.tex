@@ -1,0 +1,291 @@
+%
+% The Lion's Commentary, file ch16.tex, version 1.3, 16 May 1994
+%
+\se{The RK Disk Driver}
+
+The RK disk storage system employs a
+removable disk cartridge containing a
+single disk, which is mounted inside a
+drive with moving read/write heads.
+
+The device designated RK11-D consists
+of a disk controller together with a
+single drive. Additional drives, designated RK05, up to a total of seven, may
+be added to a single RK11-D.
+
+A requirement for more than eight
+drives would require an additional controller with a different set of UNIBUS
+addresses. Also the code in the file
+``rk.c'' would have to be modified to
+handle the case of two or more controllers. This case is most unlikely
+because requirements for large amounts
+of on-line disk storage will be more
+economically provided otherwise e.g.
+by the RP04 disk system.
+
+
+\begin{center}
+\begin{tabbing}
+Cartridge \= capacity: \= 1,228,800 words\\
+\> (4800 512 byte records)\\
+Surfaces/cartridge: \> \> 2\\
+Tracks/surface: \> \>200 (plus 3 spare)\\
+Sectors/Track: \> \> 12\\
+Words/Sector: \> \> 256\\
+Recording density: \> \> 2040 bpi maximum\\
+Rotation speed: \> \> 1500 rpm\\
+Half revolution: \> \> 20 msecs\\
+Track positioning:\\
+\> 10 msecs (one track)\\
+\> 50 msecs (average)\\
+\> 85 msecs (worst case)\\
+Interrupt Vector Address: 220\\
+Priority Level: \> \> 5\\
+\end{tabbing}
+\end{center}
+
+\begin{tabular}{lll}
+\multicolumn{3}{c}{\bf Unibus Register Addresses}\\
+Drive Status        & RKDS & 777400 \\
+Error               & RKER & 777402 \\
+Control Status      & RKCS & 777404 \\
+Word Count          & RKWC & 777406 \\
+Current bus address & RKBA & 777410 \\
+Disk address        & RKDA & 777412 \\
+Data Buffer         & RKDB & 777416 \\
+\end{tabular}
+
+\begin{center}
+ Table 16.1 RK Vital Statistics
+\end{center}
+
+The average total access time is 70
+milllseconds. With multi-drive subsystems,
+seeking by one drive may be overlapped with reading or writing by
+another drive. However this feature is
+not used by UNIX because of bugs which
+existed at one time in the hardware
+controller.
+
+
+In initiating a data transfer, RKDA,
+RRBA and RKC are set, and then RKCS is
+set. Upon completion, status information is available in RKCS, RRER and
+RKDS. When an error occurs, UNIX simply
+calls ``deverror'' (2447) to display RKER
+and RKDS on the system console, without
+any attempt at analysis. An operation
+is repeated up to ten times before an
+error is reported by the device driver.
+
+
+The register formats which are
+described fully in the ``PDP11 Peripherals Handbook'' are reflected in the
+program code at several points. The
+following summaries suffice to describe
+the features used by UNIX:
+
+\begin{tabular}{ll}
+\multicolumn{2}{c}{\bf Control Status Register (RKCS)}\\ \hline
+\multicolumn{1}{c}{bit} & \multicolumn{1}{c}{description}
+\\
+15 & Set when any bit of RKER (the\\
+   & Error Register) is set;\\
+\\
+7  & Set when the control is no\\
+   & longer engaged in actively\\
+   & executing a function and is ready\\
+   & to accept a command;\\
+\\
+6  & When set, the control will issue\\
+   & an interrupt to vector address\\
+   & 220 upon operation completion or\\
+   & error;\\
+\\
+5--4 & Memory Extension. The two most\\
+   & significant bits of the 13 bit\\
+   & physical bus address. (The other\\
+   & 16 bits are recorded in RKBA.);\\
+\\
+3--1 & Function to be performed:\\
+\\
+   & CONTROL RESET: 000\\
+   & WRITE: 001\\
+   & READ: 010\\
+   & etc.,\\
+\\
+0 & Initiate the function designated\\
+ & by bits 1 to 3 when set. (write\\
+ & only);\\
+\\
+\multicolumn{2}{c}{\bf Word Count Register (RKWC)}\\ \hline
+\end{tabular}
+
+Contains the twos complement of the
+number of words to be transferred.
+
+\bigskip
+
+\begin{tabular}{ll}
+\multicolumn{2}{c}{\bf Disk Address Register (RKDA)}\\ \hline
+\multicolumn{1}{c}{bit} & \multicolumn{1}{c}{description}
+\\
+15--13 & Drive number (0 to 7)\\
+12--5 & Cylinder number (0 to 199)\\
+ 4 & Surface number (0,1)\\
+ 3-0 & Sector address (0 to 11)\\
+\end{tabular}
+ 
+
+\sbs{The file `rk.c'}
+
+This file contains the code which is
+specific to the RK disk system, i.e.
+which is the RK ``device driver''.
+
+
+\sbs{rkstrategy (5389)}
+
+The strategy routine is called, e.g.
+from ``swap'' (5212), to handle both read
+and write requests.
+
+\bd
+\item[5397:] The test and call on ``mapalloc''
+ here is a ``no-op'' except on the
+ PDP11/70 system;
+
+\item[5399:] The code from here to line 5402
+ appears to be unnecessarily devious! See the discussion of
+ ``rkaddr'' below. If the block
+ number is too large, set the
+ ``B\_ERROR'' flag and report ``completion'';
+
+\item[5407:] Link the buffer into a FIFO list
+ for the controller. The list is
+singly linked, uses the ``av\_forw''
+pointer of the ``buf'' structures,
+and has head and tail pointers in
+``rktab''. Interrupts from disk
+devices may not be allowed after
+the first step;
+
+\item[5414:] If the RK controller is not
+ currently active, wake it up via
+ a call on ``rkstart'' (5440), which
+ checks that there is something to
+ do (5444), flags the controller
+ as busy (5446) and calls
+ ``devstart'' (5447), passing as
+ parameters:
+
+\bi
+\item a pointer to the first enqueued
+buffer header;
+
+\item the address of the RKDA disk
+address register. (The value
+passed is in effect 0177412. See
+lines 5363, 5382.);
+
+\item a ``disk address'' computed by
+``rkaddr'';
+
+\item zero (not really important in our
+discussion, and may be ignored).
+
+\ei
+\ed
+
+
+\sbs{rkaddr (5420)}
+
+The code in this procedure incorporates
+a special feature for files which
+extend over more than one disk drive.
+This feature is described in the UPM
+Section ``RK(IV)''. Its usefulness seems
+to be restricted.
+
+The value returned by ``rkaddr'' is formatted for direct transmission to the
+control register, RKDA.
+
+
+\sbs{devstart (5096)}
+
+This procedure when called for the RK
+disk loads appropriate values into the
+registers RKDA, RKBA, RKWC and RKCS in
+succession. Only the last value needs
+to be computed at this stage.
+
+The calculation, though messy in
+appearance, is straight forward. Note
+that ``hbcom'' is zero and ``rbp-$>$b\_xmem''
+contains the two high order bits of the
+physical core address. The loading of
+RKCS initialises the disk controller
+i.e. the operation is now entirely
+under the control of the hardware.
+
+``devstart'' returns to ``rkstart'' (5448),
+which returns to ``rkstrategy'' (5416),
+which resets the processor priority and
+returns to ``swap'' (5213), which ...
+
+\sbs{rkintr (5451)}
+
+This procedure is invoked to handle the
+interrupts which occur when RK disk
+operations are completed.
+
+\bd
+\item[5455:] Check for a false alarm!
+
+\item[5459:] Inspect the error bit; if set ...
+
+\item[5460:] Call ``deverror'' (2447) to display
+a message on the system console
+terminal;
+
+\item[5461:] Clear the internal registers of
+ the disk controller and ...
+
+\item[5462:] Wait till this is completed (usually a few microseconds);
+
+\item[5463:] If the operation has been retried
+ less than ten times, call
+ ``rkstart'' to try again. Otherwise
+ give up and report an error;
+
+\item[5469:] Set the ``retry'' (!) count back to
+ zero, remove the current operation from the ``actf'' list, and
+ complete the operation by calling
+ ``iodone'';
+
+\item[5472:] ``rkstart'' is called unconditionally here. If the call is not
+ necessary (because the ``actf''
+ list is empty) ``rkstart'' will
+ return immediately (5444).
+\ed
+
+
+\sbs{iodone (5018)}
+
+This routine is primarily concerned
+with the return of resources when a
+block i/o operation has completed. It:
+
+\bi
+\item frees up the Unibus map (for 11/70's,
+ if appropriate);
+
+\item sets the ``B\_DONE'' flag;
+
+\item releases the buffer if the i/o was
+ asynchronous, or else resets the
+ ``B\_WANTED'' flag and wakes up any
+ process waiting for the i/o
+ operation to complete.
+\ei
+

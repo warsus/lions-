@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: B. Inactive Terminals</title>
+
+<link href="sect0326.html" title="Well, that’s all, folks ..." rel="next" />
+<link href="sect0324.html" title="A. The test for ’TTLOWAT’ (Line 8074)" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0324.html" title="A. The test for ’TTLOWAT’ (Line 8074)"><img alt="Previous: A. The test for ’TTLOWAT’ (Line 8074)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0326.html" title="Well, that’s all, folks ..."><img alt="Next: Well, that’s all, folks ..." border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">B. Inactive Terminals</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000326">25.14 B. Inactive Terminals</h2>
+<p>When the last special file for a terminal is closed, “klclose” (8055) is called and resets (8059) the “ISOPEN” and “CARR_ON” flags. However the “read enable” bit of the receiver control status register is not reset, so that incoming characters may still be received and will be stored away (8087) in the terminal’s “raw” input queue by “klrint” (8078), and “ttyinput” (8333), which do not test the “CARR_ON” flag, to see if the terminal is logically connected. </p><p>These characters may accumulate for a long time and clog up the character buffer storage. Only when the “raw” input queue reaches 256 characters (“TTYHOG”, 8349) will the contents of this queue be thrown away. It does seem therefore, that a statement to disable reader interrupts should be included in “klclose” before line 8058. </p><p><br /></p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0324.html" title="A. The test for ’TTLOWAT’ (Line 8074)"><img alt="Previous: A. The test for ’TTLOWAT’ (Line 8074)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0326.html" title="Well, that’s all, folks ..."><img alt="Next: Well, that’s all, folks ..." border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

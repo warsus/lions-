@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Kernel Mode Execution</title>
+
+<link href="sect0092.html" title="User Mode Execution" rel="next" />
+<link href="sect0090.html" title="Execution of an Image" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0090.html" title="Execution of an Image"><img alt="Previous: Execution of an Image" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0092.html" title="User Mode Execution"><img alt="Next: User Mode Execution" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Kernel Mode Execution</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000092">7.7 Kernel Mode Execution</h2>
+<p>The seventh kernel segmentation address register must be set appropriately. None of the other kernel segmentation registers is ever disturbed and so their values are assumed. As was seen earlier, the first six kernel pages are mapped to the first six pages of physical memory, while the eighth is mapped into the highest page of physical memory. The size of the seventh segment is always the same. </p><p>In kernel mode the setting of the user mode segmentation registers is in general irrelevant. However they are normally set correctly for the user process. </p><p>The environment and stack pointers point into the kernel stack area in the seventh page, above the “user” structure. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0090.html" title="Execution of an Image"><img alt="Previous: Execution of an Image" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0092.html" title="User Mode Execution"><img alt="Next: User Mode Execution" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

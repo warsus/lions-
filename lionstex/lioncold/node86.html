@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>swtch (2178)</TITLE>
+<META NAME="description" CONTENT="swtch (2178)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node87.html">
+<LINK REL="previous" HREF="node85.html">
+<LINK REL="up" HREF="node77.html">
+<LINK REL="next" HREF="node87.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1766"
+  HREF="node87.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1762"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1756"
+  HREF="node85.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1764"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1767"
+  HREF="node87.html">main revisited</A>
+<B> Up:</B> <A NAME="tex2html1763"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1757"
+  HREF="node85.html">sleep (2066)</A>
+ &nbsp; <B>  <A NAME="tex2html1765"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000109000000000000000">
+swtch (2178)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>2184:</STRONG></DT>
+<DD>``p'' is a static variable (2180),
+ which means that its value is
+ initialised to zero (1566) and is
+ preserved between calls. For the
+ very first call on ``swtch'', ``p''
+ is set to point to ``proc[0]'';
+
+<P>
+</DD>
+<DT><STRONG>2189:</STRONG></DT>
+<DD>``savu'' is called to save the
+stack pointer and the environment
+pointer for the current process
+in ``u.u_rsav'';
+
+<P>
+</DD>
+<DT><STRONG>2193:</STRONG></DT>
+<DD>``retu'' is called
+to reset the kernel address
+register for segment #6 to the
+value passed as an argument
+(this causes a change in the
+current process!), and
+ to reset the stack and environment pointers to values
+ appropriate to the revised
+ current process, whose execution
+ is about to be resumed.
+</DD>
+</DL>
+
+<P>
+The combination of successive calls on
+``savu'' and ``retu'' at this point constitutes a so-called ``coroutine jump''
+(Cf.
+``exchange jump'' on the Cyber or ``Load
+PSW'' on the /360 or ``Move Stack'' on the
+B6700).
+
+<P>
+This time however the coroutine jump is
+from process 0 to process 0 (not very
+interesting!).
+
+<P>
+<DL>
+<DT><STRONG>2201:</STRONG></DT>
+<DD>The set of processes is searched
+ to find the process whose state
+ is ``SRUN'' and which is loaded and
+ for which ``p_pri'' is a maximum.
+
+<P>
+The search is successful and process #1 is found. (N.B. The
+state of process #0 was just
+changed from ``SRUN'' to ``SSLEEP''
+in ``sleep'' so it no longer satisfies the search criterion);
+
+<P>
+</DD>
+<DT><STRONG>2218:</STRONG></DT>
+<DD>Since ``p'' is not ``NULL'', the idle
+ loop is not entered;
+
+<P>
+</DD>
+<DT><STRONG>2228:</STRONG></DT>
+<DD>``retu'' (0740) causes a coroutine
+ jump to process #1 which becomes
+the current process.
+
+<P>
+What is process #1 ? It is a copy
+of process #0, made at a previous
+stage of the latter's existence.
+</DD>
+</DL>
+
+<P>
+This call on ``retu'' was not preceded by
+a call on ``savu'' because the necessary
+information has in fact been saved
+already. (Where?)
+
+<P>
+<DL>
+<DT><STRONG>2229:</STRONG></DT>
+<DD>``sureg'' is a routine 1738) which
+ copies into the user mode segmentation registers, the values
+ appropriate for the current process.
+	These have been stored earlier in the arrays ``u.u_uisa'' and
+ ``u.u _uisd''.
+</DD>
+</DL>
+
+<P>
+The very first call on ``sureg'' copies
+zeroes and serves no real purpose.
+
+<P>
+<DL>
+<DT><STRONG>2240:</STRONG></DT>
+<DD>The ``SSWAP'' flag is not set, so
+ that this enigmatic (2239) section can be
+ignored for now;
+
+<P>
+</DD>
+<DT><STRONG>2247:</STRONG></DT>
+<DD>Finally ``swtch'' returns with a
+ value of ``1''. But where does the ``return'' return to?
+<B>Not to ``sleep'' !</B>
+</DD>
+</DL>
+
+<P>
+The ``return'' follows values set by the
+stack pointer and the environment
+pointer. These (just before the return)
+have values equal to those in force
+when the most recent ``savu(u.u_rsav)''
+was performed.
+
+<P>
+Now process #1, which is only just
+starting has never performed a ``savu'',
+but values were stored in ``u.u_rsav''
+before the copy of process #0 was made
+by ``newproc'', which had been called
+from ``main''.
+
+<P>
+Thus in this case, <I>the return from
+``swtch'' is made to ``main'', with a value
+of one.</I> (Look over this again, to be
+sure you understand!)
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1766"
+  HREF="node87.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1762"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1756"
+  HREF="node85.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1764"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1767"
+  HREF="node87.html">main revisited</A>
+<B> Up:</B> <A NAME="tex2html1763"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1757"
+  HREF="node85.html">sleep (2066)</A>
+ &nbsp; <B>  <A NAME="tex2html1765"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

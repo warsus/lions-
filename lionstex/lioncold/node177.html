@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>procxmt (4204)</TITLE>
+<META NAME="description" CONTENT="procxmt (4204)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node176.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node178.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2924"
+  HREF="node178.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2920"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2916"
+  HREF="node176.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2922"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2925"
+  HREF="node178.html">Program Swapping</A>
+<B> Up:</B> <A NAME="tex2html2921"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2917"
+  HREF="node176.html">ptrace (4164)</A>
+ &nbsp; <B>  <A NAME="tex2html2923"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001825000000000000000">
+procxmt (4204)</A>
+</H2>
+
+<P>
+This procedure is executed by the child
+process under the influence of data
+left by the parent in the ipc structure.
+
+<P>
+<DL>
+<DT><STRONG>4209:</STRONG></DT>
+<DD>If ``ipc.ip_lock'' is set wrongly
+ for the current process, then
+ certainly the rest of ``ipc''
+ should be ignored.
+</DD>
+</DL>
+
+<P>
+After ``stop'' (4027) calls ``swtch'', the
+chide process is restarted by one of
+three calls on ``setrun'' which leave the
+``STRC'' and ``SWTED'' flags in the state
+indicated:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">STRC</TD>
+<TD ALIGN="LEFT">SWTED</TD>
+<TD ALIGN="LEFT">ipc.ipc_lock</TD>
+</TR>
+<TR><TD ALIGN="LEFT">exit</TD>
+<TD ALIGN="LEFT">(3254)</TD>
+<TD ALIGN="LEFT">set</TD>
+<TD ALIGN="LEFT">set</TD>
+<TD ALIGN="LEFT">arbitrary</TD>
+</TR>
+<TR><TD ALIGN="LEFT">wait</TD>
+<TD ALIGN="LEFT">(3310)</TD>
+<TD ALIGN="LEFT">reset</TD>
+<TD ALIGN="LEFT">reset</TD>
+<TD ALIGN="LEFT">arbitrary</TD>
+</TR>
+<TR><TD ALIGN="LEFT">ptrace</TD>
+<TD ALIGN="LEFT">(4188)</TD>
+<TD ALIGN="LEFT">set</TD>
+<TD ALIGN="LEFT">reset</TD>
+<TD ALIGN="LEFT">properly set</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+In the third case ``ptrace'' will always
+set ``ipc.ip_lock'' properly, before the
+child is restarted, so that there is
+then no chance of the test on 4209
+into ``ipc'' failing.
+
+<P>
+In the second case, where the parent
+has ignored the child, ``procxmt'' will
+never in fact be called.
+
+<P>
+By executing the statement ``return(0)'';
+on line 4210, ``procxmt'' forces
+``stop'' to loop back to line 4020. In
+the case where the parent has already
+died, the test on line 4022 will then
+fail, and a call on ``exit'' (4032) will
+result.
+
+<P>
+<DL>
+<DT><STRONG>4211:</STRONG></DT>
+<DD>Store the value of ``ipc.ip_req''
+ before resetting the latter,
+ ``wake up'' the parent, and select
+ the next action as indicated.
+</DD>
+</DL>
+
+<P>
+The various actions are adequately
+explained in Section ``PTRACE (II)'' of
+the UPM, with the one qualification
+that cases 1, 2 and 4, 5 are documented
+the wrong way around (i.e. ``I'' and ``D''
+spaces respectively, not ``D'' and ``I''!).
+<FONT SIZE="+2"><B>Section Three</B></FONT>
+
+<P>
+<I>Section Three
+is concerned with basic
+input/output operations between the
+main memory and disk storage.
+</I>
+<P>
+<I>These operations are fundamental to the
+activities of program swapping and the
+creation and referencing of disk files.
+</I>
+<P>
+<I>This section also introduces procedures
+for the use and manipulation of the
+large (512 byte) buffers.
+</I>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2924"
+  HREF="node178.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2920"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2916"
+  HREF="node176.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2922"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2925"
+  HREF="node178.html">Program Swapping</A>
+<B> Up:</B> <A NAME="tex2html2921"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2917"
+  HREF="node176.html">ptrace (4164)</A>
+ &nbsp; <B>  <A NAME="tex2html2923"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

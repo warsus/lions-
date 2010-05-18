@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Resource Allocation</TITLE>
+<META NAME="description" CONTENT="Resource Allocation">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node263.html">
+<LINK REL="previous" HREF="node261.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node263.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4016"
+  HREF="node263.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4012"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4006"
+  HREF="node261.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4014"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4017"
+  HREF="node263.html">alloc (6965)</A>
+<B> Up:</B> <A NAME="tex2html4013"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4007"
+  HREF="node261.html">sumount (6144)</A>
+ &nbsp; <B>  <A NAME="tex2html4015"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002511000000000000000">
+Resource Allocation</A>
+</H2>
+
+<P>
+Our attention now turns to the  management  of the resources of an individual
+FSV (file system volume).
+
+<P>
+Storage blocks are allocated  from  the
+free  list by ``alloc'' at the request of
+``bmap''.  Storage blocks are returned to
+the  free  list by ``free'' at the behest
+of ``itrunc'' (which is called by ``core'',
+``openl'' and ``iput'').
+
+<P>
+Entries in the FSV ``inode''  tables  are
+made  by  ``ialloc'',  which is called by
+``maknode'' and ``pipe''. Entries  in  this
+table  are  cancelled by ``ifree'', which
+is called by ``iput''.
+
+<P>
+The ``super block'' for the FSV  is  central  to  the  resource management procedures.  The ``super block'' (5561) contains:
+
+<P>
+
+<UL>
+<LI>size  information (total resources available);
+
+<P>
+</LI>
+<LI>list of up to 100  available  storage blocks;
+
+<P>
+</LI>
+<LI>list of up to 100  available  ``inode'' entries;
+
+<P>
+</LI>
+<LI>locks to control manipulation of  the above lists;
+
+<P>
+</LI>
+<LI>flags;
+
+<P>
+</LI>
+<LI>current date of last update.
+</LI>
+</UL>
+
+<P>
+If the list in core of available
+``inode'' entries for the file system
+volume ever becomes exhausted, then the
+entire table on the FSV is read and
+searched to rebuild the list. Conversely if the available ``inode'' table
+overflows, additional entries are simply forgotten to be rediscovered later.
+
+<P>
+A different strategy is used for the
+list of available storage blocks.
+These blocks are arranged in groups of
+up to one hundred blocks. The first
+block in each group (except the very
+first) is used to store the addresses
+of the blocks belonging to the previous
+group. Addresses of blocks in the last
+incomplete group are stored in the
+``super block''.
+
+<P>
+The first entry in the first list of
+block numbers is zero, which acts as a
+sentinel. Since the whole list is subject to a LIFO discipline, discovery of
+a block number of zero in the list signifies that the list is in fact empty.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4016"
+  HREF="node263.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4012"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4006"
+  HREF="node261.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4014"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4017"
+  HREF="node263.html">alloc (6965)</A>
+<B> Up:</B> <A NAME="tex2html4013"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4007"
+  HREF="node261.html">sumount (6144)</A>
+ &nbsp; <B>  <A NAME="tex2html4015"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: devstart (5096)</title>
+
+<link href="sect0196.html" title="rkintr (5451)" rel="next" />
+<link href="sect0194.html" title="rkaddr (5420)" rel="prev" />
+<link href="sect0191.html" title="The RK Disk Driver" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0194.html" title="rkaddr (5420)"><img alt="Previous: rkaddr (5420)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0191.html" title="The RK Disk Driver"><img alt="Up: The RK Disk Driver" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0196.html" title="rkintr (5451)"><img alt="Next: rkintr (5451)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0191.html">The RK Disk Driver</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">devstart (5096)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000196">16.4 devstart (5096)</h2>
+<p>This procedure when called for the RK disk loads appropriate values into the registers RKDA, RKBA, RKWC and RKCS in succession. Only the last value needs to be computed at this stage. </p><p>The calculation, though messy in appearance, is straight forward. Note that “hbcom” is zero and “rbp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" />b_xmem” contains the two high order bits of the physical core address. The loading of RKCS initialises the disk controller i.e. the operation is now entirely under the control of the hardware. </p><p>“devstart” returns to “rkstart” (5448), which returns to “rkstrategy” (5416), which resets the processor priority and returns to “swap” (5213), which ... </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0194.html" title="rkaddr (5420)"><img alt="Previous: rkaddr (5420)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0191.html" title="The RK Disk Driver"><img alt="Up: The RK Disk Driver" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0196.html" title="rkintr (5451)"><img alt="Next: rkintr (5451)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

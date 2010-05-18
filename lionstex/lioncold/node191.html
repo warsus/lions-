@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Race Conditions</TITLE>
+<META NAME="description" CONTENT="Race Conditions">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node192.html">
+<LINK REL="previous" HREF="node190.html">
+<LINK REL="up" HREF="node184.html">
+<LINK REL="next" HREF="node192.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3105"
+  HREF="node192.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3101"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3095"
+  HREF="node190.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3103"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3106"
+  HREF="node192.html">Reentrancy</A>
+<B> Up:</B> <A NAME="tex2html3102"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3096"
+  HREF="node190.html">swap (5196)</A>
+ &nbsp; <B>  <A NAME="tex2html3104"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000207000000000000000">
+Race Conditions</A>
+</H2>
+
+<P>
+The code for ``swap'' has a number of
+interesting features. In particular it
+displays in microcosm the problems of
+race conditions when several processes
+are running together.
+
+<P>
+
+<P><P>
+<BR>
+
+<P>
+Consider the following scenario:
+
+<P>
+No swapping is taking place when process A initiates a swapping operation.
+Denoting ``swbuf.b_flags'' by simply
+``flags'', we have initially
+
+<P>
+<PRE>
+  flags == null
+</PRE>
+
+<P>
+Process A is not delayed at line 5204,
+initiates its i/o operation and goes to
+sleep at line 5215. We now have
+
+<P>
+<PRE>
+  flags == B_BUSY | B_PHYS | rdflg
+</PRE>
+
+<P>
+which was set at line 5206.
+
+<P>
+Suppose now while the i/o operation is
+proceeding, process B also initiates a
+swapping operation. It too begins to
+execute ``swap'', but finds the ``B_BUSY''
+flag set, so it sets the ``B_WANTED''
+flag (5203) and goes to sleep also
+(5204). We now have
+
+<P>
+<PRE>
+  flags == B_BUSY | B_PHYS | rdflg | B_WANTED
+</PRE>
+
+<P>
+At last the i/o operation completes.
+Process C takes the interrupt and executes ``rkintr'', which calls (5471)
+``iodone'' which calls (5301) ``wakeup'' to
+awaken process A and process B.
+``iodone'' also sets the ``B_DONE'' flag
+and resets the ``B_WANTED'' flag so that
+
+<P>
+<PRE>
+  flags == B_BUSY | B_PHYS | rdflg | B_DONE
+</PRE>
+
+<P>
+What happens next depends on the order
+in which process A and process B are
+reactivated. (Since they both have the
+same priority, ``PSWP'', it is a toss-up
+which goes first.)
+
+<P>
+<DL>
+<DT><STRONG>Case (a):</STRONG></DT>
+<DD>Process A goes first.
+``B_DONE'' is set so no more sleeping is
+needed. ``B_WANTED'' is reset so there is
+no one to ``wakeup''. Process A tidies up
+(5219), and leaves ``swap'' with
+
+<P>
+<PRE>
+  flags == B_PHYS | rdflg | B_DONE
+</PRE>
+
+<P>
+Process B now runs and is able to initiate its i/o operation without further
+delay.
+
+<P>
+</DD>
+<DT><STRONG>Case (b):</STRONG></DT>
+<DD>Process B goes first. It
+ finds ``B_BUSY'' on, so it turns the
+ ``B_WANTED'' flag back on, and goes to
+ sleep again, leaving
+
+<P>
+<PRE>
+  flags == B_BUSY | B_PHYS | rdflg |
+           B_DONE | B_WANTED
+</PRE>
+
+<P>
+Process A starts again as in Case (a),
+but this time finds ``B_WANTED'' on so it
+must call ``wakeup'' (5217) in addition
+to its other chores. Process B finally
+wakes again and the whole chain completes.
+</DD>
+</DL>
+
+<P>
+Case (b) is obviously much less efficient than case (a). It would seem that
+a simple change to line 5215 to read
+
+<P>
+<PRE>
+  sleep (fp, PSWP-1);
+</PRE>
+
+<P>
+would cost virtually nothing and ensure
+that Case (b) never occurred!
+
+<P>
+The necessity for the raising of processor priority at various points
+should be studied: for example if line
+5201 was omitted and if process B had
+just completed line 5203 when the ``i/o
+complete'' interrupt occurred for Process A's operation, then ``iodone'' would
+turn off ``B_WANTED'' and perform
+``wakeup'' before process B went to sleep ... forever! A bad scene.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3105"
+  HREF="node192.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3101"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3095"
+  HREF="node190.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3103"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3106"
+  HREF="node192.html">Reentrancy</A>
+<B> Up:</B> <A NAME="tex2html3102"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3096"
+  HREF="node190.html">swap (5196)</A>
+ &nbsp; <B>  <A NAME="tex2html3104"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

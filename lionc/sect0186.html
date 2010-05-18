@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: swap (5196)</title>
+
+<link href="sect0187.html" title="Race Conditions" rel="next" />
+<link href="sect0185.html" title="System Generation" rel="prev" />
+<link href="sect0180.html" title="Introduction to Basic I/O" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0185.html" title="System Generation"><img alt="Previous: System Generation" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0187.html" title="Race Conditions"><img alt="Next: Race Conditions" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0180.html">Introduction to Basic I/O</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">swap (5196)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000187">15.6 swap (5196)</h2>
+<p>Before plunging into all the detail of the file “bio.c”, it will be instructive as well as convenient to examine one routine which was introduced earlier, namely “swap”. </p><p>The buffer head “swbuf” was declared to control swapping input/output, which must share access to the disk with other activity. No element of “buffers” is associated with “swbuf”. Instead the core area occupied (or to be occupied) by the program serves as the data buffer. </p><dl class="description">
+
+    <a href="../all.html#line5200" target="source" <dt>5200:</dt></a>
+    <dd><p>The address of the flags in “swbuf” is transferred to the register variable “fp” for convenience and economy; </p></dd>
+
+    <a href="../all.html#line5202" target="source" <dt>5202:</dt></a>
+    <dd><p>The “B_BUSY” flag is tested, and if it is on, a swap operation is already under way, so that the “B_WANTED” flag is set and the process must wait via a call on “sleep”. </p></dd>
+
+</dl><p>Note that the code loop on lines 5202 to 5205 runs at priority level six, i.e. one higher than the disk interrupt priority. </p><p>Can you see why this is necessary? Under what conditions will the “B_BUSY” flag be set? </p><dl class="description">
+
+    <a href="../all.html#line5206" target="source" <dt>5206:</dt></a>
+    <dd><p>The flags are set to reflect: </p><ul class="itemize">
+<li><p>“swbuf” is in use (“B_BUSY”); </p></li><li><p>physical i/o implying a large transfer direct to/from the user data segment<br />(“B_PHYS”); </p></li><li><p>whether the operation is read or write. (“rdflg” is a parameter to “swap”); </p></li>
+</ul></dd>
+
+    <a href="../all.html#line5207" target="source" <dt>5207:</dt></a>
+    <dd><p>The “b_dev” field is initialised. (Presumably this could have been performed once during initialisation rather than every time “swbuf” is used, i.e. in “binit”.); </p></dd>
+
+    <a href="../all.html#line5208" target="source" <dt>5208:</dt></a>
+    <dd><p>“b_wcount” is initialised. Note the negative value and the effective multiplication by 32; </p></dd>
+
+    <a href="../all.html#line5210" target="source" <dt>5210:</dt></a>
+    <dd><p>The hardware device controller requires a full physical address (18 bits on the PDP 11/40). The block number of a 32 word block must be converted into two parts: the low order ten bits are shifted left six places and stored as “b_addr”, and the remaining six high order bits as “b_xmem”. (On the PDP 11/40 and 11/45 only two of these bits are significant.); </p></dd>
+
+    <a href="../all.html#line5212" target="source" <dt>5212:</dt></a>
+    <dd><p>A mouthful at first glance! Shift “swapdev” eight places to the right to obtain the major device number. Use the result to index “bdevsw”. From the structure thus selected, extract the strategy routine and execute it with the address of “swbuf” passed as a parameter; </p></dd>
+
+    <a href="../all.html#line5213" target="source" <dt>5213:</dt></a>
+    <dd><p>Explain why this call on “spl6” is necessary; </p></dd>
+
+    <a href="../all.html#line5214" target="source" <dt>5214:</dt></a>
+    <dd><p>Wait until the i/o operation is complete. Note that the first parameter to “sleep” is in effect the address of “swbuf”; </p></dd>
+
+    <a href="../all.html#line5216" target="source" <dt>5216:</dt></a>
+    <dd><p>Wakeup those processes (if any) which are waiting for “swbuf”; </p></dd>
+
+    <a href="../all.html#line5218" target="source" <dt>5218:</dt></a>
+    <dd><p>Reset the process or priority to zero, thus allowing any pending interrupts to “happen”; </p></dd>
+
+    <a href="../all.html#line5219" target="source" <dt>5219:</dt></a>
+    <dd><p>Reset both the “B_BUSY” and “B_WANTED” flags. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0185.html" title="System Generation"><img alt="Previous: System Generation" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0180.html" title="Introduction to Basic I/O"><img alt="Up: Introduction to Basic I/O" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0187.html" title="Race Conditions"><img alt="Next: Race Conditions" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

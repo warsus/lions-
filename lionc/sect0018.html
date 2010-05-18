@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Addressing Modes</title>
+
+<link href="sect0019.html" title="Unix Assembler" rel="next" />
+<link href="sect0017.html" title="Instruction Set" rel="prev" />
+<link href="sect0013.html" title="Fundamentals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0017.html" title="Instruction Set"><img alt="Previous: Instruction Set" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0019.html" title="Unix Assembler"><img alt="Next: Unix Assembler" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0013.html">Fundamentals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Addressing Modes</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000019">2.5 Addressing Modes</h2>
+<p>Much of the novelty and complexity of the PDP11 instruction set lies in the variety of addressing modes which may be used for defining the source and destination operands. </p><p>The addressing modes which are used in “m40.s” are described below. </p><dl class="description">
+
+    <dt>Register Mode:</dt>
+    <dd><p>The operand resides in one of the general registers, e.g. </p><pre>
+    clr r0
+    mov rl,r0
+    add r4,r2
+</pre><p>In the following modes, the designated register contains an address value which is used to locate the operand. </p></dd>
+
+    <dt>Register Deferred Mode:</dt>
+    <dd><p>The register contains the address of the operand, e.g. </p><pre>
+    inc (rl)
+    asr (sp)
+    add (r2),rl
+</pre></dd>
+
+    <dt>Autoincrement Mode:</dt>
+    <dd><p>The register contains the address of the operand. As a side effect, the register is incremented after the operation, e.g. </p><pre>
+    clr  (rl)+
+    mfpi (r0)+
+    mov  (r1)+,r0
+    mov  r2,(r0)+
+    cmp (sp)+,(sp)+
+</pre></dd>
+
+    <dt>Autodecrement Mode:</dt>
+    <dd><p>The register is decremented and then operand, e.g. </p><pre>
+    inc -(r0)
+    mov -(r1),r2
+    mov (r0)+,-(sp)
+    clr -(sp)
+</pre></dd>
+
+    <dt>Index Mode:</dt>
+    <dd><p>The register contains a value which is added to a sixteen bit word following the instruction to form the operand address, e.g. </p><pre>
+    clr  2(r0)
+    movb 6(sp),(sp)
+    movb _reloc(r0),r0
+    mov  -10(r2),(rl)
+</pre><p>Depending on your viewpoint, in this mode the register is either an index register or a base register. The latter case actually predominates in “m40.s”. The third example above is actually one of the few uses of a register as an index register. (Note that “_reloc” is an acceptable variable name.) </p><p>There are two addressing modes whose use is limited to the following two examples: </p><pre>
+    jsr pc,(r0)+
+    jmp *0f(r0)
+</pre><p>The first example involves the use of the “<i class="it">autoincrement deferred</i>” mode. (This occurs in the routine “call” on lines 0785, 0799.) The address of a routine intended for execution is to be found in the word addressed by r0, i.e. two levels of indirection are involved. The fact that r0 is incremented as a side effect is not relevant in this usage. </p><p>The second example (which occurs on lines 1055, 1066) is an instance of the “<i class="it">index deferred</i>” mode. The destination of the “jump” is the content of the word whose address is labelled by “0f” <i class="it">plus</i> the value of r0 (a small positive integer). This is a standard way to implement a multi-way switch. </p><p>The following two modes use the program counter as the designated register to achieve certain special effects. </p></dd>
+
+    <dt>Immediate Mode:</dt>
+    <dd><p>This is the pc autoincrement mode. The operand is thus extracted from the program string, i.e. it becomes an immediate operand, e.g. </p><pre>
+    add $2,r0
+    add $2,(rl)
+    bic $17,r0
+    mov $KISA0,r0
+    mov $77406,(rl)+
+</pre></dd>
+
+    <dt>Relative Mode:</dt>
+    <dd><p>This is the pc index mode. The address relative to the current program counter value is extracted from the program string and added to the pc value to form the absolute address of the operand, e.g. </p><pre>
+    bic $340,PS
+    bit $l,SSR0
+    inc SSR0
+    mov (sp),KISA6
+</pre></dd>
+
+</dl><p>It may be noted that each of the modes “index”, “index deferred”, “immediate” and “relative” extends the instruction size by one word. </p><p>The existence of the “autoincrement” and “autodecrement” modes, together with the special attributes of r6, make it conveniently possible to store many operands in a stack, or LIFO list, which grows downwards in memory. There are a number of advantages which flow from this: code string lengths are shorter and it is easier to write position independent code. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0017.html" title="Instruction Set"><img alt="Previous: Instruction Set" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0019.html" title="Unix Assembler"><img alt="Next: Unix Assembler" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

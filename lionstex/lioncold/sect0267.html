@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: readp (7758)</title>
+
+<link href="sect0268.html" title="writep (7805)" rel="next" />
+<link href="sect0266.html" title="pipe (7723)" rel="prev" />
+<link href="sect0265.html" title="Pipes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0266.html" title="pipe (7723)"><img alt="Previous: pipe (7723)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0265.html" title="Pipes"><img alt="Up: Pipes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0268.html" title="writep (7805)"><img alt="Next: writep (7805)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0265.html">Pipes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">readp (7758)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000268">21.2 readp (7758)</h2>
+<p>“pipes” are different from other files in that two separate offsets into the file are kept – one for “read” operations and one for “write” operations. The “write” offset is actually the same as the file size. </p><dl class="description">
+
+    <dt>7763:</dt>
+    <dd><p>the parameter passed to “readp” is a pointer to a “file” array entry, from which an “inode” pointer can be extracted; </p></dd>
+
+    <dt>7768:</dt>
+    <dd><p>“plock” (7862) ensures that only one operation takes place at a time: either “read” or “write”; </p></dd>
+
+    <dt>7776:</dt>
+    <dd><p>If a process wishing to write to a “pipe” has been blocked because the pipe was “full” (or rather because the valid part of the file had reached the file limit), it will have signified its predicament by setting the “IWRITE” flag in “ip-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" />i_mode”; </p></dd>
+
+    <dt>7786:</dt>
+    <dd><p>Release the lock before going to sleep; </p></dd>
+
+    <dt>7787:</dt>
+    <dd><p>“i_count” is the number of file table entries pointing at the “inode”. If this is less than two, then the group of “writers” must be extinct; </p></dd>
+
+    <dt>7789:</dt>
+    <dd><p>A process waiting for input will raise the “IREAD” flag. Since a pipe cannot be full and empty simultaneously, no more than one of the flaqs “IWRITE” or “IREAD” should be set at any one time; </p></dd>
+
+    <dt>7799:</dt>
+    <dd><p>“prele” unlocks the file and “wakes up” any process waiting for the pipe. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0266.html" title="pipe (7723)"><img alt="Previous: pipe (7723)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0265.html" title="Pipes"><img alt="Up: Pipes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0268.html" title="writep (7805)"><img alt="Next: writep (7805)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

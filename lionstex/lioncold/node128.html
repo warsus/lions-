@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Assembly Language `trap'</TITLE>
+<META NAME="description" CONTENT="Assembly Language `trap'">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node129.html">
+<LINK REL="previous" HREF="node127.html">
+<LINK REL="up" HREF="node120.html">
+<LINK REL="next" HREF="node129.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2302"
+  HREF="node129.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2298"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2292"
+  HREF="node127.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2300"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2303"
+  HREF="node129.html">Return</A>
+<B> Up:</B> <A NAME="tex2html2299"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2293"
+  HREF="node127.html">Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2301"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000148000000000000000">
+Assembly Language `trap'</A>
+</H2>
+
+<P>
+From ``low.s'' it appears that traps and
+interrupts are handled separately by
+the software. However closer examination reveals that ``call'' and ``trap'' are
+different entry points to a single code
+sequence in the file ``m40.s'' (see lines
+0755, 0776). This sequence is examined
+in detail in the next chapter.
+
+<P>
+During the execution of this sequence,
+a call is made on a ``C'' language procedure to carry out further specific
+processing. In the case of an interrupt, the ``C'' procedure
+is the interrupt handler specific to the particular
+device controller.
+
+<P>
+In the case of a trap, the ``C'' procedure is another procedure called
+ ``trap'' (yes, the word ``trap'' is definitely overworked!), which in the case
+process of a system error will most likely call
+priority ``panic'' and in the case of a ``system
+ call'', will invoke (indirectly via
+ ``trapl''(2841)) the appropriate system
+ call procedure.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Tracing</title>
+
+<link href="sect0170.html" title="stop (4016)" rel="next" />
+<link href="sect0168.html" title="wait (3270)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0168.html" title="wait (3270)"><img alt="Previous: wait (3270)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0170.html" title="stop (4016)"><img alt="Next: stop (4016)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Tracing</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000170">13.21 Tracing</h2>
+<p>The tracing facilities are provided through a modification and extension of the software interrupt facilities. Briefly, if a parent process is tracing the progress of child process, every time the child process encounters a software interrupt, the parent process is given the opportunity to intervene as part of the total response to the interrupt. </p><p>The parent’s intervention may involve interrogation of values within the child process’s data areas, including the “per process data area”. Subject to certain constraints, the parent process may also change values within these data areas. </p><p>The source of the software interrupts may be the parent process, the user himself (e.g. by entering “kill” commands or “delete”s through his terminal) or the child process itself (e.g. instructions or other maladies). </p><p>The communication between child and parent processes is a kind of ritual dance: </p><dl class="description">
+
+    <dt>(1)</dt>
+    <dd><p>the child experiences a software interrupt and “stops”; </p></dd>
+
+    <dt>(2)</dt>
+    <dd><p>the waiting parent discovers the “stopped” child (line 3301), and revives. Subsequently ... </p></dd>
+
+    <dt>(3)</dt>
+    <dd><p>the parent may execute the “ptrace” system call which has the effect of leaving a request message in the system defined structure “ipc” (3939) for the child process; </p></dd>
+
+    <dt>(4)</dt>
+    <dd><p>the parent then goes to “sleep” while the child “wakes up”; </p></dd>
+
+    <dt>(5)</dt>
+    <dd><p>the child reads the message in “ipc” and acts upon it (e.g copying one of its own values into “ipc.ip_data”); </p></dd>
+
+    <dt>(6)</dt>
+    <dd><p>the child then goes to “sleep” while the parent “wakes up”; </p></dd>
+
+    <dt>(7)</dt>
+    <dd><p>the parent inspects the result, as recorded in “ipc”, of the operation; </p></dd>
+
+    <dt>(8)</dt>
+    <dd><p>steps (3) to (7) may be repeated several times in succession. </p></dd>
+
+</dl><p>Finally the parent may allow the child to continue its normal execution, possibly without ever knowing that a software interrupt had occurred. </p><p>A discussion of the tracing facility is contained in the Section “PTRACE (II)” of the UPM. To the list of functional limitations noted in the “Bugs” paragraph, we can add the following comments on efficiency: </p><ul class="itemize">
+<li><p>There should be a mechanism for transferring large blocks (e.g. up to 256 words at a time) of information from the child to the parent (though not necessarily in the reverse direction); </p></li><li><p>There should be a proper coroutine procedure (analogous to “swtch”) to allow rapid transfer of control between child and parent. </p></li>
+</ul></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0168.html" title="wait (3270)"><img alt="Previous: wait (3270)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0170.html" title="stop (4016)"><img alt="Next: stop (4016)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

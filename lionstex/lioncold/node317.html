@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>wflushtty (8217)</TITLE>
+<META NAME="description" CONTENT="wflushtty (8217)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node318.html">
+<LINK REL="previous" HREF="node316.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node318.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4723"
+  HREF="node318.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4719"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4713"
+  HREF="node316.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4721"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4724"
+  HREF="node318.html">Character Input</A>
+<B> Up:</B> <A NAME="tex2html4720"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4714"
+  HREF="node316.html">flushtty (8252)</A>
+ &nbsp; <B>  <A NAME="tex2html4722"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000302000000000000000">
+wflushtty (8217)</A>
+</H2>
+
+<P>
+This procedure waits until the queue of
+characters for a terminal is empty
+(because they've all been sent!) and
+then calls ``flushtty'' to clean up the
+input queues.
+
+<P>
+``wflushtty'' is called (3053) by
+``klclose''. This does not happen very
+often - in fact only when all files
+referencing the terminal are closed
+i.e. usually only when the user logs
+off.
+
+<P>
+It is also called by ``ttystty'' (8589)
+just before the terminal environment
+parameters are adjusted.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

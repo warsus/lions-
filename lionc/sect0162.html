@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: issig (3991)</title>
+
+<link href="sect0163.html" title="psig (4043)" rel="next" />
+<link href="sect0161.html" title="psignal (3963)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0161.html" title="psignal (3963)"><img alt="Previous: psignal (3963)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0163.html" title="psig (4043)"><img alt="Next: psig (4043)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">issig (3991)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000163">13.14 issig (3991)</h2>
+<dl class="description">
+
+    <a href="../all.html#line3997" target="source" <dt>3997:</dt></a>
+    <dd><p>If “p_sig” is non-zero, then ... </p></dd>
+
+    <a href="../all.html#line3998" target="source" <dt>3998:</dt></a>
+    <dd><p>If the “tracing” flag is on, call “stop” (this topic will be resumed later); </p></dd>
+
+    <a href="../all.html#line4000" target="source" <dt>4000:</dt></a>
+    <dd><p>Return a zero value if “p_sig” is zero. (This apparently redundant test is necessary because “stop” may reset “p_sig” as a side effect.); </p><p>4003. If the value in the corresponding element of “u.u_signal” is even (may be zero) return a non-zero value; </p></dd>
+
+    <a href="../all.html#line4006" target="source" <dt>4006:</dt></a>
+    <dd><p>Otherwise return a zero value. </p></dd>
+
+</dl><p>The comment regarding the frequency of calls on “issig” which occurs on lines 3983 to 3985 needs some clarification. At least one call on “issig” is a part of every execution of “trap” but only of one interrupt routine (“clock”, which calls “issig” only once per second). In cases where “pri” is positive, “sleep” (2073, 2085) calls “issig” before and after calling “swtch”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0161.html" title="psignal (3963)"><img alt="Previous: psignal (3963)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0163.html" title="psig (4043)"><img alt="Next: psig (4043)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

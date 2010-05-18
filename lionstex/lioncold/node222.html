@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>inode (5659)</TITLE>
+<META NAME="description" CONTENT="inode (5659)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node223.html">
+<LINK REL="previous" HREF="node221.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node223.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3513"
+  HREF="node223.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3509"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3503"
+  HREF="node221.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3511"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3514"
+  HREF="node223.html">Resources Required</A>
+<B> Up:</B> <A NAME="tex2html3510"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3504"
+  HREF="node221.html">file (5507)</A>
+ &nbsp; <B>  <A NAME="tex2html3512"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000235000000000000000">
+inode (5659)</A>
+</H2>
+
+<P>
+``inode'' is defined as an array of
+structures (also named ``inode'').
+
+<P>
+An element of the ``inode''
+is considered to be unallocated if the reference
+count, ``i_count'', is zero.
+
+<P>
+At each point in time, ``inode'' contains
+a single entry for each file which may
+be referenced for normal i/o operations, or which is being executed or
+which has been executed and has the
+``sticky'' bit set, or which is the working directory for some process.
+
+<P>
+Several ``file'' table entries may point
+to a single ``inode'' entry. The inode
+entry describes the general disporition
+of the file.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

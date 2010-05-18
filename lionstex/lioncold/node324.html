@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ttstart</TITLE>
+<META NAME="description" CONTENT="ttstart">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node325.html">
+<LINK REL="previous" HREF="node323.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node325.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4807"
+  HREF="node325.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4803"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4797"
+  HREF="node323.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4805"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4808"
+  HREF="node325.html">ttrstrt (8486)</A>
+<B> Up:</B> <A NAME="tex2html4804"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4798"
+  HREF="node323.html">Character Output - ttwrite</A>
+ &nbsp; <B>  <A NAME="tex2html4806"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000309000000000000000">
+ttstart</A>
+</H2>
+
+<P>
+This procedure is called whenever it
+seems reasonable to try and send the
+next character to the terminal. It
+often achieves nothing useful.
+
+<P>
+<DL>
+<DT><STRONG>8514:</STRONG></DT>
+<DD>See the comment on line 8499.
+This code is not relevant here;
+
+<P>
+</DD>
+<DT><STRONG>8518:</STRONG></DT>
+<DD>If the controller is not ready
+(i.e. bit 7 of the transmitter
+stalus register is not set) or
+the necessary delay following the
+preious character has not yet
+elapsed, do nothing;
+
+<P>
+</DD>
+<DT><STRONG>8520:</STRONG></DT>
+<DD>Remove a character from the output queue. If ``c'' is positive,
+the queue was not empty (as
+expected) ...
+
+<P>
+</DD>
+<DT><STRONG>8521:</STRONG></DT>
+<DD>If ``c'' is less than ``0177'' it is
+a character to be transmitted ...
+
+<P>
+</DD>
+<DT><STRONG>8522:</STRONG></DT>
+<DD>After setting the parity bit from
+the corresponding element of the
+array ``partab'', write ``c'' to the
+transmitter data buffer register
+to initiate the hardware operation;
+
+<P>
+</DD>
+<DT><STRONG>8524:</STRONG></DT>
+<DD>Otherwise (``c'' <IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$"> 0177)
+the character was inserted in the output
+queue to signal a delay. Call
+``timeout'' (3845) to make an entry
+in the ``callout'' list. The
+result of this will be to initiate an execution of ``ttrstrt''
+(8486) after ``c &amp; 0177'' clock
+ticks . It will be seen that
+``ttrstrt'' calls ``ttstart'' again,
+and that the manipulation of the ``TIMEOUT''
+flag (8524, 8491) will
+ensure that if another execution
+of ``ttstart'' is initiated in the
+interim, on behalf of the same
+terminal, it will (8518) return
+without doing anything.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4807"
+  HREF="node325.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4803"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4797"
+  HREF="node323.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4805"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4808"
+  HREF="node325.html">ttrstrt (8486)</A>
+<B> Up:</B> <A NAME="tex2html4804"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4798"
+  HREF="node323.html">Character Output - ttwrite</A>
+ &nbsp; <B>  <A NAME="tex2html4806"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

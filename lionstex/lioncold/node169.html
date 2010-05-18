@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>grow (4136)</TITLE>
+<META NAME="description" CONTENT="grow (4136)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node170.html">
+<LINK REL="previous" HREF="node168.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node170.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2830"
+  HREF="node170.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2826"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2820"
+  HREF="node168.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2828"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2831"
+  HREF="node170.html">exit (3219)</A>
+<B> Up:</B> <A NAME="tex2html2827"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2821"
+  HREF="node168.html">core (4094)</A>
+ &nbsp; <B>  <A NAME="tex2html2829"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001817000000000000000">
+grow (4136)</A>
+</H2>
+
+<P>
+The parameter, ``sp'', of this procedure
+defines the address of a word which
+should be included in the user mode
+stack.
+
+<P>
+<DL>
+<DT><STRONG>4141:</STRONG></DT>
+<DD>If the stack already extends far
+ enough, simply return with a zero
+ value.
+
+<P>
+Note that this test relies on the
+idiosyncrasies of 2's complement
+arithmetic, and if both
+
+<P>
+<DIV ALIGN="CENTER">
+<code>|</code>sp<code>|</code> <IMG
+ WIDTH="75" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$&gt; 2^{15}$">
+</DIV>
+
+<P>
+and
+
+<P>
+<DIV ALIGN="CENTER">
+<code>|</code>u.u_size <IMG
+ WIDTH="43" HEIGHT="34" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="$* 64$"><code>|</code> <IMG
+ WIDTH="75" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$&gt; 2^{15}$">
+</DIV>
+
+<P>
+the decision to extend the stack
+may be taken wrongly at this
+juncture;
+
+<P>
+</DD>
+<DT><STRONG>4143:</STRONG></DT>
+<DD>Calculate the stack size increment needed to include the new
+ stack point plus a 20*32 word
+ margin;
+
+<P>
+</DD>
+<DT><STRONG>4144:</STRONG></DT>
+<DD>Check that this value is in fact
+ positive (i.e. we are not dealing
+ with a failure of the test on
+ line 4141.);
+
+<P>
+</DD>
+<DT><STRONG>4146:</STRONG></DT>
+<DD>Check that the new stack size
+ does not conflict with the memory
+ segmentation constraints (``estabur'' sets ``u.u_error'' if they do)
+ and reset the segmentation register prototypes;
+
+<P>
+</DD>
+<DT><STRONG>4148:</STRONG></DT>
+<DD>Get a new, enlarged data area,
+ copy the stack segments (32 words
+ at a time) into the high end of
+ the new data area, and clear the
+ segments which now become the
+ stack expansion;
+
+<P>
+</DD>
+<DT><STRONG>4156:</STRONG></DT>
+<DD>Update the stack size,
+ ``u.u_ssize'' and return a ``successful'' result.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2830"
+  HREF="node170.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2826"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2820"
+  HREF="node168.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2828"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2831"
+  HREF="node170.html">exit (3219)</A>
+<B> Up:</B> <A NAME="tex2html2827"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2821"
+  HREF="node168.html">core (4094)</A>
+ &nbsp; <B>  <A NAME="tex2html2829"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

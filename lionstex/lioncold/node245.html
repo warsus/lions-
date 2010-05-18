@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>link (5909)</TITLE>
+<META NAME="description" CONTENT="link (5909)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node246.html">
+<LINK REL="previous" HREF="node244.html">
+<LINK REL="up" HREF="node240.html">
+<LINK REL="next" HREF="node246.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3797"
+  HREF="node246.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3793"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3787"
+  HREF="node244.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3795"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3798"
+  HREF="node246.html">wdir (7477)</A>
+<B> Up:</B> <A NAME="tex2html3794"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3788"
+  HREF="node244.html">Some Comments</A>
+ &nbsp; <B>  <A NAME="tex2html3796"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000245000000000000000">
+link (5909)</A>
+</H2>
+
+<P>
+This procedure implements a system call
+which enters a new name for an existing
+file  into  the  directory   structure.
+Arguments  to  the  procedure  are  the
+existing and the new names of the file;
+
+<P>
+<DL>
+<DT><STRONG>5914:</STRONG></DT>
+<DD>Look up the existing file name;
+
+<P>
+</DD>
+<DT><STRONG>5917:</STRONG></DT>
+<DD>If the file already has 127  different names, quit in disgust;
+
+<P>
+</DD>
+<DT><STRONG>5921:</STRONG></DT>
+<DD>If the existing file turns out to
+      be  a  directory,  then  only the
+      super-user may rename it;
+
+<P>
+</DD>
+<DT><STRONG>5926:</STRONG></DT>
+<DD>Unlock the existing file  ``inode''
+      This  is  locked  when  the first
+      call on ``namei''  does  an  ``iget''
+      (7534, 7664).
+
+<P>
+Under what conditions  would  the
+failure  to  unlock  the  ``inode''
+here be disastrous?  The  chances
+that the existing file would be a
+directory  encountered   in   the
+search  for  the  new  name would
+seem slight, if  not  impossible.
+Most  probably  the relevant circumstance is where the system  is
+attempting  to recreate an alternative file name or alias,  which
+<B>already</B> exists;
+
+<P>
+</DD>
+<DT><STRONG>5927:</STRONG></DT>
+<DD>Search  the  directory  for   the
+      second  name,  with the intention
+      of creating a new entry;
+
+<P>
+</DD>
+<DT><STRONG>5930:</STRONG></DT>
+<DD>There is an  existing  file  with
+      the second name;
+
+<P>
+</DD>
+<DT><STRONG>5935:</STRONG></DT>
+<DD>``u.u_pdir'' is set as a side effect
+of  the  call  on ``namei'' (5928).
+Check that the directory  resides
+on the same device as the file;
+
+<P>
+</DD>
+<DT><STRONG>5940:</STRONG></DT>
+<DD>Write a new directory entry  (see
+      below);
+
+<P>
+</DD>
+<DT><STRONG>5941:</STRONG></DT>
+<DD>Increase the ``link'' count for the
+      file.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3797"
+  HREF="node246.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3793"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3787"
+  HREF="node244.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3795"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3798"
+  HREF="node246.html">wdir (7477)</A>
+<B> Up:</B> <A NAME="tex2html3794"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3788"
+  HREF="node244.html">Some Comments</A>
+ &nbsp; <B>  <A NAME="tex2html3796"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

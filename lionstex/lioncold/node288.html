@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>cinit (8234)</TITLE>
+<META NAME="description" CONTENT="cinit (8234)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node289.html">
+<LINK REL="previous" HREF="node287.html">
+<LINK REL="up" HREF="node287.html">
+<LINK REL="next" HREF="node289.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4347"
+  HREF="node289.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4343"
+  HREF="node287.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4337"
+  HREF="node287.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4345"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4348"
+  HREF="node289.html">getc (0930)</A>
+<B> Up:</B> <A NAME="tex2html4344"
+  HREF="node287.html">Character Handling</A>
+<B> Previous:</B> <A NAME="tex2html4338"
+  HREF="node287.html">Character Handling</A>
+ &nbsp; <B>  <A NAME="tex2html4346"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000281000000000000000">
+cinit (8234)</A>
+</H2>
+
+<P>
+This procedure, which is called once by
+``main'' (1613), links the set of character buffers into the free list,
+``cfreelist'', and counts the number of
+character device types.
+
+<P>
+<DL>
+<DT><STRONG>8239:</STRONG></DT>
+<DD>``ccp'' is the address of the first
+word in the array ``cfree'' (8146);
+
+<P>
+</DD>
+<DT><STRONG>8240:</STRONG></DT>
+<DD>Round ``ccp'' up to the next
+highest multiple of eight, and
+mark out ``cblock'' sized pieces,
+taking care not to exceed the
+boundary of ``cfree''.
+
+<P>
+Note. In general there will be
+``NCLIST - 1'' (rather than
+``NCLIST'') blocks so defined;
+
+<P>
+</DD>
+<DT><STRONG>8241:</STRONG></DT>
+<DD>Set the first word of the
+``cblock'' to point to the current
+head of the free list.
+
+<P>
+Note that ``c_next'' is defined on
+line 8141, and that the initial
+value of ``cfreelist'' is ``NULL''.
+
+<P>
+</DD>
+<DT><STRONG>8242:</STRONG></DT>
+<DD>Update ``cfreelist'' to point to
+the new head of the list;
+
+<P>
+</DD>
+<DT><STRONG>8244:</STRONG></DT>
+<DD>Count the number of character
+device types. Upon reference to
+``cdevsw'' on Sheet 46, it will be
+seen that ``nchrdev'' will be set
+to 16, whereas a more appropriate
+value would be 10.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

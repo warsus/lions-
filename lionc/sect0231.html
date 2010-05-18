@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: readi (6221)</title>
+
+<link href="sect0232.html" title="writei" rel="next" />
+<link href="sect0230.html" title="rdwr (5731)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0230.html" title="rdwr (5731)"><img alt="Previous: rdwr (5731)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0232.html" title="writei"><img alt="Next: writei" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">readi (6221)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000232">18.18 readi (6221)</h2>
+<dl class="description">
+
+    <a href="../all.html#line6230" target="source" <dt>6230:</dt></a>
+    <dd><p>If no characters are to be transferred, do nothing; </p></dd>
+
+    <a href="../all.html#line6232" target="source" <dt>6232:</dt></a>
+    <dd><p>Set the “inode” flag to indicate that the “inode” has been accessed; </p></dd>
+
+    <a href="../all.html#line6233" target="source" <dt>6233:</dt></a>
+    <dd><p>If the file is a character special file, call the appropriate device “read” procedure, passing the device identification as parameter; </p></dd>
+
+    <a href="../all.html#line6238" target="source" <dt>6238:</dt></a>
+    <dd><p>Begin a loop to transfer data in amounts up to 512 characters at a time until (6262) either an irrecoverable error condition has been encountered or the requested number of characters has been transferred; </p></dd>
+
+    <a href="../all.html#line6239" target="source" <dt>6239:</dt></a>
+    <dd><p>“lshift” (1410) concatenates the two words of the array “u.u_offset”, shifts right by nine places, and truncates to 16 bits. This defines the “logical block number” of the file which is to be referenced; </p></dd>
+
+    <a href="../all.html#line6240" target="source" <dt>6240:</dt></a>
+    <dd><p>“on” is a character offset within the block; </p></dd>
+
+    <a href="../all.html#line6241" target="source" <dt>6241:</dt></a>
+    <dd><p>“n” is determined initially as the minimum of the number of characters beyond “on” in the block, and the number requested for transfer. (Note that “min” (6339) treats its arguments as unsigned integers.) </p></dd>
+
+    <a href="../all.html#line6242" target="source" <dt>6242:</dt></a>
+    <dd><p>If the file is not a special block file then ... </p></dd>
+
+    <a href="../all.html#line6243" target="source" <dt>6243:</dt></a>
+    <dd><p>Compare the file offset with the current file size; </p></dd>
+
+    <a href="../all.html#line6246" target="source" <dt>6246:</dt></a>
+    <dd><p>Reset “n” as the minimum of the characters requested and the remaining characters in the file; </p></dd>
+
+    <a href="../all.html#line6248" target="source" <dt>6248:</dt></a>
+    <dd><p>Call “bmap” to convert the logical block number for the file to a physical block number for its host device. There will be more on “bmap” shortly. For now, note that “bmap” sets “rablock” as a side effect; </p></dd>
+
+    <a href="../all.html#line6250" target="source" <dt>6250:</dt></a>
+    <dd><p>Set “dn” as the device identification from the “inode”; </p></dd>
+
+    <a href="../all.html#line6251" target="source" <dt>6251:</dt></a>
+    <dd><p>If the file is a special block file then ... </p></dd>
+
+    <a href="../all.html#line6252" target="source" <dt>6252:</dt></a>
+    <dd><p>Set “dn” from the “i_addr” field of the “inode” entry. (Presumably this will nearly always be the same as the “i_dev” field, so why the distinction?) </p></dd>
+
+    <a href="../all.html#line6253" target="source" <dt>6253:</dt></a>
+    <dd><p>Set the “read ahead block” to the next physical block; </p></dd>
+
+    <a href="../all.html#line6255" target="source" <dt>6255:</dt></a>
+    <dd><p>If the blocks of the file are apparently being read sequentially then ... </p></dd>
+
+    <a href="../all.html#line6256" target="source" <dt>6256:</dt></a>
+    <dd><p>Call “breada” to read the desired block and to initiate reading of the “read ahead block”; </p></dd>
+
+    <a href="../all.html#line6258" target="source" <dt>6258:</dt></a>
+    <dd><p>else just read the desired block; </p></dd>
+
+    <a href="../all.html#line6260" target="source" <dt>6260:</dt></a>
+    <dd><p>Call “iomove” to transfer information from the buffer to the user area; </p></dd>
+
+    <a href="../all.html#line6261" target="source" <dt>6261:</dt></a>
+    <dd><p>Return the buffer to the “av”-list. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0230.html" title="rdwr (5731)"><img alt="Previous: rdwr (5731)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0232.html" title="writei"><img alt="Next: writei" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

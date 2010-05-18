@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>lpinit(8976)</TITLE>
+<META NAME="description" CONTENT="lpinit(8976)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node282.html">
+<LINK REL="previous" HREF="node280.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node282.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4256"
+  HREF="node282.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4252"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4246"
+  HREF="node280.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4254"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4257"
+  HREF="node282.html">lpwrite (8870)</A>
+<B> Up:</B> <A NAME="tex2html4253"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4247"
+  HREF="node280.html">lpstart (8967)</A>
+ &nbsp; <B>  <A NAME="tex2html4255"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000276000000000000000">
+lpinit(8976)</A>
+</H2>
+
+<P>
+This procedure is called to handle
+interrupts from the line printer. As
+mentioned above, most potential interrupts are ignored by the processor.
+Those interrupts which are accepted by
+the CP will be associated with either
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>completion of a print cycle; or
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>the printer going ready after a
+period during which the ``Error''
+bit was set; or
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>the last transfer in a series of
+	character transfers;
+</DD>
+</DL>
+
+<P>
+<DL>
+<DT><STRONG>8980:</STRONG></DT>
+<DD>Start transferring characters
+into the printer buffer again;
+
+<P>
+</DD>
+<DT><STRONG>8981:</STRONG></DT>
+<DD>Wakeup the process waiting to
+feed characters to the printer if
+the number of characters waiting
+to be sent is either zero or
+exactly ``LPLWAT'' (8818).
+</DD>
+</DL>
+
+<P>
+This latter condition is somewhat puzzling
+in that it will only <B>occasionally</B>
+be satisfied. The intention surely is
+``if the number of characters in the
+list is getting low, start refilling''.
+However if ``lpstart'' carries out a
+series of transfers without interruption (at least by ``lpint'') the number
+of characters could go from a value
+greater than ``LPLWAT'' to one less than
+this without this test ever being made.
+Accordingly the waiting process will
+not be awakened until the list is completely empty.
+The result could be frequently to delay the initiation of the
+next print cycle, and hence to allow
+the printer to run below its rated
+capacity.
+
+<P>
+One solution to this problem is to
+change entirely the buffering strategy
+for line printers. A less drastic
+change would involve inventing a new
+flag, ``lp11.wflag'' say, replacing lines
+8981, 8982 by something like
+
+<P>
+<PRE>
+  if (lp11.cc &lt;= LPLWAT &amp;&amp; lp11.wflag)
+  {       wakeup (&amp;lp11);
+          lp11.wflag = 0
+  }
+</PRE>
+
+<P>
+and replacing line 8989 by
+
+<P>
+<PRE>
+  {       lp11.wflag++;
+          sleep(&amp;lp11, LPRI);
+  }
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4256"
+  HREF="node282.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4252"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4246"
+  HREF="node280.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4254"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4257"
+  HREF="node282.html">lpwrite (8870)</A>
+<B> Up:</B> <A NAME="tex2html4253"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4247"
+  HREF="node280.html">lpstart (8967)</A>
+ &nbsp; <B>  <A NAME="tex2html4255"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

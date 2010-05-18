@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Instruction Set</TITLE>
+<META NAME="description" CONTENT="Instruction Set">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node20.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html943"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html939"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html933"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html941"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html944"
+  HREF="node22.html">Addressing Modes</A>
+<B> Up:</B> <A NAME="tex2html940"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html934"
+  HREF="node20.html">General Registers</A>
+ &nbsp; <B>  <A NAME="tex2html942"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00054000000000000000">
+Instruction Set</A>
+</H2>
+
+<P>
+The PDP11 instruction set includes double,
+single and zero operand instructions.
+Instruction length is usually
+one word, with some instructions being
+extended to two or three words with
+additional addressing information.
+
+<P>
+With single operand instructions, the
+operand is usually called the ``destination'';
+with double operand instructions, the two operands are called the
+``source'' and ``destination''. The various
+modes of addressing are described later.
+
+<P>
+The following instructions have been
+used in the file ``m40.s'' i.e. the file
+of assembly language support routines
+for use with the 11/40 processor. Note
+that N, Z, V and C are the condition
+codes i.e. bits in the processor status
+word (``ps''), and that these are set as
+side effects of many instructions
+besides just ``bit'', ``cmp'' and ``tst''
+(whose stated function is to set the
+condition codes).
+
+<P>
+<DL>
+<DT><STRONG>adc</STRONG></DT>
+<DD>Add the contents of the C bit to
+the destination;
+
+<P>
+</DD>
+<DT><STRONG>add</STRONG></DT>
+<DD>Add the source to the destination;
+
+<P>
+</DD>
+<DT><STRONG>ash</STRONG></DT>
+<DD>Shift the contents of the defined
+register left the number of times
+specified by the shift count. (A
+negative value implies a right
+shift.);
+
+<P>
+</DD>
+<DT><STRONG>ashc</STRONG></DT>
+<DD>Similar to ``ash'' except that two
+registers are involved;
+
+<P>
+</DD>
+<DT><STRONG>asl</STRONG></DT>
+<DD>Shift all bits one place to the
+left. Bit 0 becomes 0 and bit 15
+is loaded into C;
+
+<P>
+</DD>
+<DT><STRONG>asr</STRONG></DT>
+<DD>Shift all bits one place to the
+right. Bit 15 is replicated and
+bit 0 is loaded into C;
+
+<P>
+</DD>
+<DT><STRONG>beq</STRONG></DT>
+<DD>Branch if eaual, i.e. if Z = l;
+
+<P>
+</DD>
+<DT><STRONG>bge</STRONG></DT>
+<DD>Branch if greater than or equal
+to, i.e. if
+<BR>
+N = V;
+
+<P>
+</DD>
+<DT><STRONG>bhi</STRONG></DT>
+<DD>Branch if higher, i.e if C = 0 and
+Z = 0;
+
+<P>
+</DD>
+<DT><STRONG>bhis</STRONG></DT>
+<DD>Branch if higher or the same, i.e.
+if C = 0;
+
+<P>
+</DD>
+<DT><STRONG>bic</STRONG></DT>
+<DD>Clear each bit to zero in the
+destination that corresponds to a
+non-zero bit in the source;
+
+<P>
+</DD>
+<DT><STRONG>bis</STRONG></DT>
+<DD>Perform an ``inclusive or'' of
+source and destination and store
+the result in the destination;
+
+<P>
+</DD>
+<DT><STRONG>bit</STRONG></DT>
+<DD>Perform a logical ``and'' of the
+source and destination to set the
+condition codes;
+
+<P>
+</DD>
+<DT><STRONG>ble</STRONG></DT>
+<DD>Branch if greater than or
+equal to, i.e if Z = 1 or N = V;
+
+<P>
+</DD>
+<DT><STRONG>blo</STRONG></DT>
+<DD>Branch if lower (than zero),
+if C = l;
+
+<P>
+</DD>
+<DT><STRONG>bne</STRONG></DT>
+<DD>Branch if not equal (to zero),
+i.e. if Z = 0;
+
+<P>
+</DD>
+<DT><STRONG>br</STRONG></DT>
+<DD>Branch to a location within the
+range (.&nbsp;-128,
+<BR>.&nbsp;+127) where ``.'' is the current location;
+
+<P>
+</DD>
+<DT><STRONG>clc</STRONG></DT>
+<DD>Clear C;
+
+<P>
+</DD>
+<DT><STRONG>clr</STRONG></DT>
+<DD>Clear destination to zero;
+
+<P>
+</DD>
+<DT><STRONG>cmp</STRONG></DT>
+<DD>Compare the source and destination
+to set the condition codes. N is
+set if the source value is less
+than the destination value;
+
+<P>
+</DD>
+<DT><STRONG>dec</STRONG></DT>
+<DD>Subtract one from the contents of
+the destination;
+
+<P>
+</DD>
+<DT><STRONG>div</STRONG></DT>
+<DD>The 32 bit two's complement
+integer stored in rn and r(n+l)
+(where n is even) is divided by
+the source operand. The quotient
+is left in rn, and the remainder
+in r(n+l);
+
+<P>
+</DD>
+<DT><STRONG>inc</STRONG></DT>
+<DD>Add one to the contents of the
+destination;
+
+<P>
+</DD>
+<DT><STRONG>jmp</STRONG></DT>
+<DD>Jump to the destination;
+
+<P>
+</DD>
+<DT><STRONG>jsr</STRONG></DT>
+<DD>Jump to subroutine. Register
+values are shuffled as follows:
+
+<P>
+pc, rn, -(sp) = dest., pc, rn
+
+<P>
+</DD>
+<DT><STRONG>mfpi</STRONG></DT>
+<DD>Push onto the current stack the
+value of the designated word in
+the ``previous'' address space;
+
+<P>
+</DD>
+<DT><STRONG>mov</STRONG></DT>
+<DD>Copy the source value to the destination;
+
+<P>
+</DD>
+<DT><STRONG>mtpi</STRONG></DT>
+<DD>Pop the current stack and store
+the value in the designated word
+in the ``previous'' address space;
+
+<P>
+</DD>
+<DT><STRONG>mul</STRONG></DT>
+<DD>Multiply the contents of rn and
+the source. If n is even, the product
+is left in rn and r(n+l);
+
+<P>
+</DD>
+<DT><STRONG>reset</STRONG></DT>
+<DD>Set the INIT line on the Unibus
+for 10 milliseconds. This will
+have the effect of reinitialising
+all the device controllers;
+
+<P>
+</DD>
+<DT><STRONG>ror</STRONG></DT>
+<DD>Rotate all bits of the destination
+one place to the right. Bit 0 is
+loaded into C, and the previous
+value of C is loaded into bit 15;
+
+<P>
+</DD>
+<DT><STRONG>rts</STRONG></DT>
+<DD>Return from subroutine. Reload pc
+from rn, and reload rn from the
+stack;
+
+<P>
+</DD>
+<DT><STRONG>rtt</STRONG></DT>
+<DD>Return from interrupt or trap.
+Reload both pc and ps from the
+stack;
+
+<P>
+</DD>
+<DT><STRONG>sbc</STRONG></DT>
+<DD>Subtract the carry bit from
+the destination;
+
+<P>
+</DD>
+<DT><STRONG>sob</STRONG></DT>
+<DD>Subtract one from the designated
+register. If the result is not
+zero, branch back ``offset'' words;
+
+<P>
+</DD>
+<DT><STRONG>sub</STRONG></DT>
+<DD>Subtract the source from the destination;
+
+<P>
+</DD>
+<DT><STRONG>swab</STRONG></DT>
+<DD>Exchange the high and low order
+bytes in the destination;
+
+<P>
+</DD>
+<DT><STRONG>tst</STRONG></DT>
+<DD>Set the condition codes, N and Z,
+according to the contents of the
+destination;
+
+<P>
+</DD>
+<DT><STRONG>wait</STRONG></DT>
+<DD>Idle the processor and release the
+Unibus until a hardware interrupt
+occurs.
+</DD>
+</DL>
+
+<P>
+The ``byte'' version of the following
+instructions are used in the file
+``m40.s'', as well as the ``word'' versions
+described above:
+
+<P>
+<PRE><TT>
+  bis   inc 
+<BR>
+clr 		 mov 
+<BR>
+cmp 		 tst 
+<BR>
+</TT></PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html943"
+  HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html939"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html933"
+  HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html941"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html944"
+  HREF="node22.html">Addressing Modes</A>
+<B> Up:</B> <A NAME="tex2html940"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html934"
+  HREF="node20.html">General Registers</A>
+ &nbsp; <B>  <A NAME="tex2html942"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

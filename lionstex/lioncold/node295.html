@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>maptab (8117)</TITLE>
+<META NAME="description" CONTENT="maptab (8117)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node296.html">
+<LINK REL="previous" HREF="node294.html">
+<LINK REL="up" HREF="node287.html">
+<LINK REL="next" HREF="node296.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4431"
+  HREF="node296.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4427"
+  HREF="node287.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4421"
+  HREF="node294.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4429"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4432"
+  HREF="node296.html">partab (7947)</A>
+<B> Up:</B> <A NAME="tex2html4428"
+  HREF="node287.html">Character Handling</A>
+<B> Previous:</B> <A NAME="tex2html4422"
+  HREF="node294.html">Graphic Character Sets</A>
+ &nbsp; <B>  <A NAME="tex2html4430"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000288000000000000000">
+maptab (8117)</A>
+</H2>
+
+<P>
+This array is used in the translation
+of character input from a terminal preceded by a single backslash, ``<code>\</code>''.
+
+<P>
+There are three characters, 004 (eot),
+`#' and `@', which always have special
+meanings and need to be asserted by a
+backslash whenever they are to be
+interpreted literally. These three
+characters occur in ``maptab'' in their
+``natural'' locations (i.e. their locations in the ASCII table). Thus for
+example `#' has code 043 and
+
+<P>
+<PRE>
+   maptab[043] == 043.
+</PRE>
+
+<P>
+The other non-null characters in ``maptab'' are involved in the translation of
+input characters from ``upper case only''
+devices and do not occur in their
+``natural'' locations but in the location
+of their equivalent character, e.g. ``<code>\</code>{''
+occurs in the natural location for ``{'',
+since ``<code>\</code>{'' will be interpreted as ``{'',
+etc.
+
+<P>
+Note the situation regarding alphabetic
+characters. This is only explicable
+when it is remembered that the alphabetic characters are all translated to
+lower case before any backslash is
+recognised.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

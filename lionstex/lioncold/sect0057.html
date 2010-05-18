@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Section Four</title>
+
+<link href="sect0058.html" title="Section Five" rel="next" />
+<link href="sect0056.html" title="Section Three" rel="prev" />
+<link href="sect0047.html" title="An Overview" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0056.html" title="Section Three"><img alt="Previous: Section Three" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0058.html" title="Section Five"><img alt="Next: Section Five" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0047.html">An Overview</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Section Four</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000058">4.10 Section Four</h2>
+<p>Section Four is concerned with files and file systems. </p><p>A file system is a set of files and associated tables and directories organised onto a single storage device such as a disk pack. </p><p>This section covers the means of creating and accessing files; locating files via directories organising and maintaining file systems. It also includes the code for an exotic breed of file called a “pipe”. </p><dl class="description">
+
+    <dt>file.h</dt>
+    <dd><p>[Sheet 55; Chapter 18] defines the “file” structure and array. </p></dd>
+
+    <dt>filsys.h</dt>
+    <dd><p>[Sheet 55; Chapter 20] defines the “filsys” structure which is copied to and from the “super block” on “mounted” file systems. </p></dd>
+
+    <dt>ino.h</dt>
+    <dd><p>[Sheet 56] describes the structure of “inodes” as recorded on the “mounted” devices. Since this file is not “included” in any other, it really exists for information only. </p></dd>
+
+    <dt>inode.h</dt>
+    <dd><p>[Sheet 56; Chapter 18] defines the “inode” structure and array. “inodes” are of fundamental importance in managing the accesses of processes to files. </p></dd>
+
+    <dt>sys2.c</dt>
+    <dd><p>[Sheets 57..59; Chapters 18, 19] contains a set of routines associated with system calls including “read”, “write”, “creat”, “open” and “close” </p></dd>
+
+    <dt>sys3.c</dt>
+    <dd><p>[Sheets 60, 61; Chapters 19, 20] contains a set of routines associated with various minor system calls. </p></dd>
+
+    <dt>rdwri.c</dt>
+    <dd><p>[Sheets 62, 63; Chapter 18] contains intermediate level routines involved with reading and writing files. </p></dd>
+
+    <dt>subr.c</dt>
+    <dd><p>[Sheets 64, 65; Chapter 18] contains more intermediate level routines for i/o, especially “bmap” which translates logical file pointers into physical disk addresses. </p></dd>
+
+    <dt>fio.c</dt>
+    <dd><p>[Sheets 66..6; Chapters 18, 19] contains intermediate level routines for file opening, closing and control of access. </p></dd>
+
+    <dt>alloc.c</dt>
+    <dd><p>[Sheets 69..72; Chapter 20] contains procedures which manage the allocation of entries in the “inode” array and of blocks of disk storage. </p></dd>
+
+    <dt>iget.c</dt>
+    <dd><p>[Sheets 72..74; Chapters 18, 19, 20] contains procedures concerned with referencing and updating “inodes”. </p></dd>
+
+    <dt>nami.c</dt>
+    <dd><p>[Sheets 75, 76; Chapter 19] contains the procedure “namei” which searches the file directories. </p></dd>
+
+    <dt>pipe.c</dt>
+    <dd><p>[Sheets 77, 78; Chapter 21] is the “device driver” for “pipes” which are a special form of short disk file used to transmit information from one process to another. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0056.html" title="Section Three"><img alt="Previous: Section Three" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0058.html" title="Section Five"><img alt="Next: Section Five" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

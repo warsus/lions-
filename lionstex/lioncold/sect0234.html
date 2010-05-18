@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: bmap (6415)</title>
+
+<link href="sect0235.html" title="Leftovers" rel="next" />
+<link href="sect0233.html" title="iomove (6364)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0233.html" title="iomove (6364)"><img alt="Previous: iomove (6364)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0235.html" title="Leftovers"><img alt="Next: Leftovers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">bmap (6415)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000235">18.21 bmap (6415)</h2>
+<p>A general description of the function of “bmap” may be found on Page 2 of “FILE SYSTEM (V)” of the UPM. </p><dl class="description">
+
+    <dt>6423:</dt>
+    <dd><p>Files of more than 2**15 blocks (2**24 characters) are not supported; </p></dd>
+
+    <dt>6427:</dt>
+    <dd><p>Start with the “small” file algorithm (file is not greater than eight blocks i.e. 4096 characters); </p></dd>
+
+    <dt>6431:</dt>
+    <dd><p>If the block number is 8 or more, the “small” file must converted into a large file. Note this is a side effect of “bmap”, and should occur only when “bmap” has been called by “writei” (and never by “readi” – see line 6245). Thus all files start life as “small” files and are never explicitly changed to “large” files. Note also that the change is irreversible! </p></dd>
+
+    <dt>6435:</dt>
+    <dd><p>“alloc” (6956) allocates a block on device “d” from the device’s free list. It then assigns a buffer to this block and returns a pointer to the buffer header; </p></dd>
+
+    <dt>6438:</dt>
+    <dd><p>The eight buffer addresses in the “i_addr” array for the “inode” are copied into the buffer area and then erased; </p></dd>
+
+    <dt>6442:</dt>
+    <dd><p>“i_addr[0]” is set to point to the buffer which is set up for a “delayed” write; </p></dd>
+
+    <dt>6448:</dt>
+    <dd><p>The file is still small. Get the next block if necessary; </p></dd>
+
+    <dt>6456:</dt>
+    <dd><p>Note the setting of “rablock”; </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0233.html" title="iomove (6364)"><img alt="Previous: iomove (6364)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0235.html" title="Leftovers"><img alt="Next: Leftovers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

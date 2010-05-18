@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>binit (5055)</TITLE>
+<META NAME="description" CONTENT="binit (5055)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node210.html">
+<LINK REL="previous" HREF="node208.html">
+<LINK REL="up" HREF="node202.html">
+<LINK REL="next" HREF="node210.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3337"
+  HREF="node210.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3333"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3327"
+  HREF="node208.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3335"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3338"
+  HREF="node210.html">bread (4754)</A>
+<B> Up:</B> <A NAME="tex2html3334"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3328"
+  HREF="node208.html">brelse (4869)</A>
+ &nbsp; <B>  <A NAME="tex2html3336"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000227000000000000000">
+binit (5055)</A>
+</H2>
+
+<P>
+This procedure is called by ``main''
+(1614) to initialise the buffer pool.
+Empty, doubly linked circular lists are
+set up:
+
+<P>
+
+<UL>
+<LI>for the ``av''-list (``bfreelist'' is
+ head);
+
+<P>
+</LI>
+<LI>the ``b''-list for null devices (``dev
+ == NODEV'') (``bfreelist'' is again
+ head);
+
+<P>
+</LI>
+<LI>a ``b''-list for each major device
+ type.
+</LI>
+</UL>
+
+<P>
+For each buffer:
+
+<P>
+
+<UL>
+<LI>the buffer header is linked into the
+ ``b''-list for the device ``NODEV'' (-1);
+
+<P>
+</LI>
+<LI>the address of the buffer is set in
+ the header (5067);
+
+<P>
+</LI>
+<LI>the buffer flags are set as ``B_BUSY''
+ (this doesn't seem to be really
+ necessary) (5072);
+
+<P>
+</LI>
+<LI>the buffer header is linked into the
+ ``av''-list by a call on ``brelse'' (5073);
+</LI>
+</UL>
+
+<P>
+The number of block devices is recorded
+as ``nblkdev''. This is used for checking
+values for ``dev'' in ``getblk'' (4927),
+``getmdev'' (6192) and ``openi'' (6720).
+Inspection of ``bdevsw'' (4656) shows
+that ``nblkdev'' will be set to eight
+whereas the value one is what is really
+required.
+
+<P>
+This result could be obtained by ``editing'' as follows:
+
+<P>
+<PRE>
+    /5084/m/5081/ "nblkdev=i;
+    /5083/m/5077/ "i++
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3337"
+  HREF="node210.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3333"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3327"
+  HREF="node208.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3335"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3338"
+  HREF="node210.html">bread (4754)</A>
+<B> Up:</B> <A NAME="tex2html3334"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3328"
+  HREF="node208.html">brelse (4869)</A>
+ &nbsp; <B>  <A NAME="tex2html3336"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

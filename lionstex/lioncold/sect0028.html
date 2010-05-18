@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Reading “C” Programs</title>
+
+<link href="sect0029.html" title="Some Selected Examples" rel="next" />
+<link href="sect0027.html" title="Special Device Registers" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0027.html" title="Special Device Registers"><img alt="Previous: Special Device Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0029.html" title="Some Selected Examples"><img alt="Next: Some Selected Examples" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Reading “C” Programs</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000029">3 Reading “C” Programs</h1>
+<p>Learning to read programs written in the “C” language is one of the hurdles that must be overcome before you will be able to study the source code of UNIX effectively. </p><p>As with natural languages, reading is an easier skill to acquire than writing. Even so you will need to be careful lest some of the more subtle points pass you by. </p><p>There are two of the “UNIX Documents” which relate directly to the “C” language: </p><p>“C Reference Manual”, by Dennis Ritchie </p><p>“Programming in C – A Tutorial”, by Brian Kernighan </p><p>You should read them now, as far as you can, and return to reread them from time to time with increasing comprehension. </p><p>Learning to write “C” programs is not required. However if you have the opportunity, you should attempt to write at least a few small programs. This does represent the accepted way to learn a programming language, and your understanding of the proper use of such items as: </p><p>semicolons; <br />“=” and “==” <br />“{” and “}” <br />“<img src="images/img-0006.png" alt="$++$" style="vertical-align:&images/img-0006.png-depth;&px;; 
+                                     width:&images/img-0006.png-width;&px;; 
+                                     height:&images/img-0006.png-height;&px;" class="math gen" />” and “<img src="images/img-0007.png" alt="$–$" style="vertical-align:&images/img-0007.png-depth;&px;; 
+                                     width:&images/img-0007.png-width;&px;; 
+                                     height:&images/img-0007.png-height;&px;" class="math gen" />” <br />declarations; <br />register variables; <br />“if” and “for” statements <br /></p><p>You will find that “C” is a very convenient language for accessing and manipulating data structures and character strings, which is what a large part of operating systems is about. As befits a terminal oriented language, which requires concise, compact expression, “C” uses a large character set and makes many symbols such as “*” and “&amp;” work hard. In this respect it invites comparison with APL. </p><p>There many features of “C” which are reminiscent of PL/1, but it goes well beyond the latter in the range of facilities provided for structured programming. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0029.html">3.1 Some Selected Examples</a>
+   
+</li><li><a href="sect0030.html">3.2 Example 1</a>
+   
+</li><li><a href="sect0031.html">3.3 Example 2</a>
+   
+</li><li><a href="sect0032.html">3.4 Example 3</a>
+   
+</li><li><a href="sect0033.html">3.5 Example 4</a>
+   
+</li><li><a href="sect0034.html">3.6 Example 5</a>
+   
+</li><li><a href="sect0035.html">3.7 Example 6</a>
+   
+</li><li><a href="sect0036.html">3.8 Example 7</a>
+   
+</li><li><a href="sect0037.html">3.9 Example 8</a>
+   
+</li><li><a href="sect0038.html">3.10 Example 9</a>
+   
+</li><li><a href="sect0039.html">3.11 Example 10</a>
+   
+</li><li><a href="sect0040.html">3.12 Example 11</a>
+   
+</li><li><a href="sect0041.html">3.13 Example 12</a>
+   
+</li><li><a href="sect0042.html">3.14 Example 13</a>
+   
+</li><li><a href="sect0043.html">3.15 Example 14</a>
+   
+</li><li><a href="sect0044.html">3.16 Example 15</a>
+   
+</li><li><a href="sect0045.html">3.17 Example 16</a>
+   
+</li><li><a href="sect0046.html">3.18 Example 17</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0027.html" title="Special Device Registers"><img alt="Previous: Special Device Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0029.html" title="Some Selected Examples"><img alt="Next: Some Selected Examples" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: ptrace (4164)</title>
+
+<link href="sect0173.html" title="procxmt (4204)" rel="next" />
+<link href="sect0171.html" title="wait (3270) (continued)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0171.html" title="wait (3270) (continued)"><img alt="Previous: wait (3270) (continued)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0173.html" title="procxmt (4204)"><img alt="Next: procxmt (4204)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">ptrace (4164)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000173">13.24 ptrace (4164)</h2>
+<p>This procedure implements the “ptrace” system call, #26. </p><dl class="description">
+
+    <a href="../all.html#line4168" target="source" <dt>4168:</dt></a>
+    <dd><p>“u.u_arg[2]” corresponds to the first parameter in the “C” program calling sequence. If this is zero, a child process is asking to be traced by its parent, so set the “STRC” flag and return. </p></dd>
+
+</dl><p>Note that this code handles the only explicit action the child process is asked to take with respect to tracing. There is no real reason why even this action should be taken by the child process and not by the parent process. From a security point of view it is most probably desirable that a child process should only be traceable if it gives its permission. On the other hand, if the child asks to be traced and is then ignored by the parent, the child process may be blocked indefinitely. Perhaps the best solution would be for the “STRC” flag to be set only after explicit action by <b class="bf">both</b> the parent <b class="bf">and</b> the child. </p><dl class="description">
+
+    <a href="../all.html#line4172" target="source" <dt>4172:</dt></a>
+    <dd><p>Search the “proc” table looking for a process which: is stopped; matches the given process identifying number; is a child of the current process; </p></dd>
+
+    <a href="../all.html#line4181" target="source" <dt>4181:</dt></a>
+    <dd><p>Wait for the “ipc” structure to become available if it is currently in use; </p></dd>
+
+    <a href="../all.html#line4183" target="source" <dt>4183:</dt></a>
+    <dd><p>Copy the parameters into “ipc” ... </p></dd>
+
+    <a href="../all.html#line4187" target="source" <dt>4187:</dt></a>
+    <dd><p>reset the “SWTED” flag, and ... </p></dd>
+
+    <a href="../all.html#line4188" target="source" <dt>4188:</dt></a>
+    <dd><p>return the child to a “ready to run” state; </p></dd>
+
+    <a href="../all.html#line4189" target="source" <dt>4189:</dt></a>
+    <dd><p>Sleep until “ipc.ip_req” is nonpositive (4212); </p></dd>
+
+    <a href="../all.html#line4191" target="source" <dt>4191:</dt></a>
+    <dd><p>Extract a value that is to be returned to the parent process, check for errors, unlock “ipc” and “wake up” any processes waiting for “ipc”. </p></dd>
+
+</dl><p>Note that the “sleeps” on lines 4182, 4190 are for essentially different reasons, and could be differentiated to good effect by replacing “&amp;ipc” by “&amp;ipc.ip_req” on lines 4190 and 4213. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0171.html" title="wait (3270) (continued)"><img alt="Previous: wait (3270) (continued)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0173.html" title="procxmt (4204)"><img alt="Next: procxmt (4204)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

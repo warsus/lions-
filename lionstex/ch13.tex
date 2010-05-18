@@ -1,0 +1,866 @@
+%
+% The Lion's Commentary, file ch13.tex, version 1.4, 17 May 1994
+%
+\se{Software Interrupts}
+
+The principal concern of this chapter
+is the content of the file ``sig.c'',
+which appears on Sheets 39 to 42. This
+file introduces a facility for communication between processes. In particular
+it provides for the course of one ``user
+mode'' process to be interrupted,
+diverted or terminated by the action of
+another process or as the result of an
+error or operator action.
+
+In this discussion the term ``software
+interrupt'' has been deliberately used
+in place of the term ``signal''. This
+latter has been eschewed because it has
+obtained connotations in the UNIX
+milieu which are rather different from
+the usage of ordinary English.
+
+UNIX recognises 20 (``NSIG'', line 0113)
+different types of software interrupts,
+of which (as the reader may discover
+for himself by perusal of the the Section ``SIGNAL (II)'' of the UPM)
+thirteen
+have standard names and associations.
+Interrupt type \#0 is interpreted as ``no
+interrupt''.
+
+Within the ``per process data area'' of
+each process is an array, ``u.u\_signal'',
+of ``NSIG'' words. Each word corresponds
+to a different software interrupt type
+and defines the action which should be
+taken if the process encounters that
+kind of software interrupt:
+
+\begin{center}
+\begin{tabular}{ll}
+u\_signal[n] & when interrupt \#n occurs\\ \hline
+zero & the process will terminate itself; \\
+\\
+odd non-zero & the software interrupt is ignored;\\
+\\
+even non-zero & the value is taken as the address\\
+              & in user space of a procedure which\\
+	      & which should be executed\\
+	      & forthwith.\\
+\end{tabular}
+\end{center}
+
+Interrupt type \#9 (``SIGKILL'') is especially distinguished
+because UNIX ensures that ``u.u\_signal[9]'' remains
+zero until the very end of a process's
+existence, so that if a process is ever
+interrupted for that reason, it will
+always terminate itself.
+
+
+\sbs{Anticipation}
+
+Each process can set the contents of
+the array\\
+``u.u\_signal[ ]'' (with the
+exception of ``u.u\_signal[9]'' as just
+noted) in anticipation of future interrupts so that the appropriate action is
+taken. The user programmer does this
+via the ``signal'' system call (see ``SIGNAL (II)'' of the UPM).
+
+Thus if for example the programmer
+wishes to ignore software interrupts of
+type \#2 (which result if the user hits
+the ``delete'' key on his terminal), he
+should set ``u.u\_signal[2]'' to one by
+executing the system call
+
+\begin{center}
+ ``signal (2,1);''
+\end{center}
+
+\noindent from his ``C'' program.
+
+
+\sbs{Causation}
+
+An interrupt is ``caused'' for a process
+quite simply by setting the value of
+``p\_sig'' (0363) in the process's ``proc''
+entry, to the type number appropriate
+to the interrupt (i.e. a value in the
+range 1 to ``NSIG''--1).
+
+``p\_sig'' is always directly accessible,
+even when the affected process and its
+``per process data area'' have been
+swapped out to disk. Obviously this
+mechanism only allows one interrupt per
+process to be outstanding at any one
+time. The outstanding interrupt will
+always be the most recent one, unless
+one of the interrupts was of type \#9,
+which always prevails.
+
+
+\sbs{Effect}
+
+The effect of a software interrupt
+never takes place immediately. It may
+occur after only some slight delay if
+the affected process is currently running, or possibly after a considerable
+delay if the affected process is
+suspended and has been swapped out.
+
+The action dictated by the interrupt is
+always inflicted on the affected process by {\bf itself}, and hence can only
+occur when the affected process is
+active.
+
+Where the effect is to execute a user
+defined procedure, the kernel mode process adjusts the user mode stack to
+make it appear that the procedure had
+been entered and immediately interrupted
+(hardware style) before executing the first instruction. The system
+then returns from kernel mode to user
+mode in the usual manner. The result
+of all this is that the next user mode
+instruction which is executed is the
+first instruction of the designated
+procedure.
+
+\sbs{Tracing}
+
+The software interrupt facility has
+been extended to provide a powerful but
+somewhat inefficient mechanism whereby
+a parent process may monitor the progress of one or more child processes.
+
+\sbs{Procedures}
+
+Since the interrelationships of the
+procedures associated with software
+interrupts are somewhat confusing at
+first sight, it is worthwhile introducing the procedures briefly before
+plunging in with both feet ....
+
+
+\sbs{A. Anticipation}
+
+``ssig'' (3614) implements system call
+\#48 (``signal'') to set the value in one
+element of the array ``u.u\_signal''.
+
+
+\sbs{B. Causation}
+
+``kill'' (3630) implements system call
+\#37 (kill) to cause a specified
+interrupt to a process defined by its
+process identifying number.
+
+``signal'' (3949) causes a specified
+interrupt to be caused for all
+processes controlled and/or initiated
+from a specified terminal.
+
+
+``psignal'' (3963) is called by ``kill''
+(3649) and ``signal'' (3955) (also ``trap''
+(2793, 2818) and ``pipe'' (7828)) to do
+the actual setting of ``p\_sig''.
+
+
+\sbs{C. Effect}
+
+``issig'' (3991) is called by ``sleep''
+( 2085), ``trap'' (2821) and ``clock''
+(3826) to enquire whether there is an
+outstanding non-ignorable software
+interrupt for the active process just
+waiting to happen.
+
+``psig'' (4043) is called whenever
+``issig'' returns a non-zero result
+(except in ``sleep'' where things are a
+little more complex) to implement the
+action triggered by the interrupt.
+
+``core'' (4094) is called by ``psig'' if a
+core dump is indicated for a terminating process.
+
+``grow'' (4136) is called by ``psig'' to
+enlarge the user mode stack area if
+necessary.
+
+``exit'' (3219) terminates the currently
+active process.
+
+\sbs{D. Tracing}
+
+``ptrace'' (4164) implements the ``ptrace''
+system call \#26.
+
+``stop'' (4016) is called by ``issig''
+(3999) for a process which is being
+traced to allow the supervising parent
+to have a ``look-see''.
+
+``procxmt'' (4204) is a procedure called
+from ``stop'' (4028) whereby the child
+carries out certain operations related
+to tracing, at the behest of the
+parent.
+
+\sbs{ssig (3614)}
+
+This procedure implements the ``signal''
+system call.
+
+\bd
+\item[3619:] If the interrupt reason is out of
+ range or is equal to ``SIGKILL''
+ (9), take an error exit;
+
+\item[3623:] Capture the initial value in
+``u.u\_signal[a]'' for return as the
+result of the system call;
+
+\item[3624:] Set the element of ``u.u\_signal''
+to the desired value ...
+
+\item[3625:] If an interrupt for the current
+reason is pending, cancel it. (It
+is not clear why this step should
+be necessary or even desirable.
+Any suggestions??)
+\ed
+
+
+\sbs{kill (3630)}
+
+This procedure implements the ``kill''
+system call to cause a specified type
+of software interrupt to another designated process.
+
+\bd
+\item[3637:] If ``a'' is non-zero, it is the
+ process identifying number of a
+ process to be interrupted. If
+ ``a'' is zero, then all processes
+ originating from the same terminal as the current process are to
+ be interrupted;
+
+\item[3639:] Consider each entry in the ``proc''
+table in turn and reject it if:
+it is the current process (3640);
+it is not the designated process
+(3642);
+no particular process was designated (``a'' == 0) but it does not
+have the same controlling terminal or it is
+one of the two initial processes (3644);
+the user is not the ``super user''
+and the user identities do not
+match (3646);
+
+\item[3649:] For any process that survives the
+above tests, call ``psignal'' to
+change ``p\_sig''.
+\ed
+
+
+\sbs{signal (3949)}
+
+For every process, if it is controlled
+by the specified terminal (denoted by
+``tp''), hit it with ``psignal''.
+
+
+\sbs{psignal (3963)}
+
+\bd
+\item[3966:] Reject the call if ``sig'' is too
+ large (but why not if negative?? ``kill'' does not
+check this parameter before passing it to ``psignal''.
+Admittedly the ``kill'' command could only result in a
+positive value for ``sig'' ...);
+
+\item[3971:] If the current value of ``p\_sig''
+ is NOT set to ``SIGKILL'', then
+ overwrite it (i.e. once a process
+ has been ``killed outright'' there
+ is no way to revive it.);
+
+\item[3973:] Seems to be an error here ... for
+ ``p\_stat'' read ``p\_pri'' ... improve
+ the priority of the process if it
+ is not too good;
+
+\item[3975:] If the process is waiting for a
+ non-kernel event i.e. it called
+ ``sleep'' (2066) with a positive
+ priority, then set it running
+ again.
+\ed
+
+\sbs{issig (3991)}
+
+\bd
+\item[3997:] If ``p\_sig'' is non-zero, then ...
+
+\item[3998:] If the ``tracing'' flag is on, call
+ ``stop'' (this topic will be resumed later);
+
+\item[4000:] Return a zero value if ``p\_sig'' is
+ zero. (This apparently redundant
+ test is necessary because ``stop''
+ may reset ``p\_sig'' as a side
+ effect.);
+
+4003. If the value in the corresponding
+ element of ``u.u\_signal'' is even
+ (may be zero) return a non-zero
+ value;
+
+\item[4006:] Otherwise return a zero value.
+\ed
+
+
+The comment regarding the frequency of
+calls on ``issig'' which occurs on lines
+3983 to 3985 needs some clarification.
+At least one call on ``issig'' is a part
+of every execution of ``trap'' but only
+of one interrupt routine (``clock'',
+which calls ``issig'' only once per
+second). In cases where ``pri'' is positive, ``sleep'' (2073, 2085) calls
+``issig'' before and after calling
+``swtch''.
+
+
+\sbs{psig (4043)}
+
+This procedure is only called if
+``u.u\_signal[n]'' was found by ``issig'' to
+have an even value. If this value is
+found (4051) to be non-zero, it is
+taken as the address of a user mode
+function which has to be executed.
+
+\bd
+\item[4054:] Reset ``u.u\_signal[n]'' except
+the case where the interrupt
+for an illegal instruction or
+trace trap;
+
+\item[4055:] Calculate the user space
+ addresses of the lower of two
+ words which are to be inserted
+ into the user mode stack ...
+
+\item[4056:] Call ``grow'' to check the current
+ user mode stack size, and to
+ extend it (downwards!) if necessary;
+
+\item[4057:] Put the values of the processor
+ status register and the program
+ counter which were captured at
+ the time of the ``trap'' or
+ hardware interrupt (in the case
+ of a ``clock'' interrupt) into the
+ user stack, and update the
+ ``remembered'' values of r6, r7 and
+ the processor status word. Upon
+ returning to user mode, execution
+ will resume at the beginning of
+ the designated procedure. When
+ this procedure returns, the procedure which was originally
+ interrupted will be resumed;
+
+\item[4066:] If ``u.u\_signal[n]'' is zero, then
+ for the interrupt types listed,
+ generate a core image via the
+ procedure ``core'';
+
+\item[4079:] Store a value in ``u.u\_arg[0]''
+ composed of the low order byte of
+ the remembered value of r0, and
+ of ``n'', which records the interrupt type and whether a core
+ image was successfully created;
+
+\item[4080:] Call ``exit'' for the process
+to terminate itself.
+\ed
+
+
+\sbs{core (4094)}
+
+This procedure copies the swappable
+program image into a file called ``core''
+in the user's current directory. A
+detailed explanation of this procedure
+must wait until the material of Sections Three and Four, which deal with
+input/output and file systems, have
+been covered.
+
+
+\sbs{grow (4136)}
+
+The parameter, ``sp'', of this procedure
+defines the address of a word which
+should be included in the user mode
+stack.
+
+\bd
+\item[4141:] If the stack already extends far
+ enough, simply return with a zero
+ value.
+
+Note that this test relies on the
+idiosyncrasies of 2's complement
+arithmetic, and if both
+
+\begin{center}
+\verb+|+sp\verb+|+ $> 2^{15}$
+\end{center}
+
+\noindent and
+
+\begin{center}
+\verb+|+u.u\_size $* 64$\verb+|+ $> 2^{15}$
+\end{center}
+
+\noindent the decision to extend the stack
+may be taken wrongly at this
+juncture;
+
+\item[4143:] Calculate the stack size increment needed to include the new
+ stack point plus a 20*32 word
+ margin;
+
+
+\item[4144:] Check that this value is in fact
+ positive (i.e. we are not dealing
+ with a failure of the test on
+ line 4141.);
+
+\item[4146:] Check that the new stack size
+ does not conflict with the memory
+ segmentation constraints (``estabur'' sets ``u.u\_error'' if they do)
+ and reset the segmentation register prototypes;
+
+\item[4148:] Get a new, enlarged data area,
+ copy the stack segments (32 words
+ at a time) into the high end of
+ the new data area, and clear the
+ segments which now become the
+ stack expansion;
+
+\item[4156:] Update the stack size,
+ ``u.u\_ssize'' and return a ``successful'' result.
+\ed
+
+
+\sbs{exit (3219)}
+
+This procedure is called when a process
+is to terminate itself.
+
+\bd
+\item[3224:] Reset the ``tracing'' flag;
+
+\item[3225:] Set all of the values in the
+ array ``u.u\_signal'' (including
+ ``u.u\_signal[SIGKILL]'') to one so
+ that no future execution of
+ ``issig'' will ever be followed by
+ execution of ``psig'';
+
+\item[3227:] Call ``close'' (6643) to close all
+ the files which the process has
+ open. (For the most part, ``closing'' simply involves decrementing
+ a reference count.);
+
+\item[3232:] Reduce the reference count for
+ the current directory;
+
+\item[3233:] Sever the process's connection
+ with any text segment;
+
+\item[3234:] A place is needed to store ``per
+ process'' information until the
+ parent process can look at it. A
+ block (256 words) in the swap
+ area of the disk is a convenient
+ place;
+
+\item[3237:] Find a suitable buffer (256
+ words) and ...
+
+\item[3238:] Copy the {\bf lower half} of the ``u''
+ structure into the buffer area;
+
+\item[3239:] Write the buffer into the swap
+ area;
+
+\item[3241:] Enter the core space occupied by
+ the process into the free list.
+ (This space is of course still in
+ use, but the use will terminate
+ before any other process gets to
+ dip into the free list again.
+ This could not be done any
+ sooner, because, as will be seen
+ later, both ``getblk'' and ``bwrite''
+ can call ``sleep'', during which
+ all sorts of things might happen.
+ In view of all this, it might be
+ reasonable if the statement
+
+\begin{center}
+ expand (USIZE);
+\end{center}
+
+\noindent were inserted after line 3226.);
+
+\item[3243:] Set the process state to ``zombie''
+ (i.e. ``a corpse said to be
+ revived by witchcraft''\\
+(O.E.D.));
+
+\item[3245:] The remaining code searches the
+ ``proc'' array to find the parent
+ process and to wake it up, to
+ make any children ``wards of the
+ state'', and, if they have
+ ``stopped'' for tracing, to release
+ them. Finally the code includes
+ (for this process) a last call on
+ ``swtch''.
+\ed
+
+
+Before going on to consider tracing,
+there are two routines which are
+closely associated with ``exit'', which
+can be conveniently disposed of now.
+
+
+\sbs{rexit (3205)}
+
+This procedure implements the ``exit''
+system call, \#1. It simply salvages the
+low order byte of the user supplied
+parameter and saves it in ``u.u\_arg[0]''.
+which is in the lower half of the ``u''
+structure i.e. the part that is written
+to the ``swap area'' as a ``zombie''.
+
+
+\sbs{wait (3270)}
+
+For every call on ``exit'', there should
+be a matching call on ``wait'' by an
+anxious parent or ancestor. The principal
+function of the latter procedure, which
+implements the ``wait'' system call, is
+for the parent or ancestor to find and
+dispose of a ``zombie'' child.
+
+``wait'' also has a secondary function,
+to look for children which have
+``stopped'' for tracing (which is the
+next major topic).
+
+\bd
+\item[3277:] Search the whole ``proc'' array
+ looking for child processes. (If
+none exist, take an error exit (line 3317));
+\item[3280:] If the child is a ``zombie'':
+
+\bi
+\item save the child's process identifying number, to report back to
+the parent;
+
+\item read the 256 word record back from the disk swap area, and release
+the swap space;
+
+\item reinitialise the ``proc'' array entry;
+
+\item accumulate the various accounting entries;
+
+save the ``u\_arg[0]'' value also to
+report back to the parent;
+\ei
+
+\item[3300:] Is the child in a ``stopped''
+ state? (If so, wait for the discussion on tracing);
+
+\item[3313:] If one or more children were
+ found but none were ``zombies'' or
+ ``stopped'', ``sleep'' and then look
+ again.
+\ed
+
+\sbs{Tracing}
+
+The tracing facilities are provided
+through a modification and extension of
+the software interrupt facilities.
+Briefly, if a parent process is tracing
+the progress of child process, every
+time the child process encounters a
+software interrupt, the parent process
+is given the opportunity to intervene
+as part of the total response to the
+interrupt.
+
+The parent's intervention may involve
+interrogation of values within the
+child process's data areas, including
+the ``per process data area''. Subject to
+certain constraints, the parent process
+may also change values within these
+data areas.
+
+
+The source of the software interrupts
+may be the parent process, the user
+himself (e.g. by entering ``kill''
+commands or ``delete''s through his terminal)
+or the child process itself (e.g.
+instructions or other maladies).
+
+The communication between child and
+parent processes is a kind of ritual
+dance:
+
+\bd
+\item[(1)] the child experiences a software
+ interrupt and ``stops'';
+
+\item[(2)] the waiting parent discovers
+ the ``stopped'' child (line 3301), and
+revives. Subsequently ...
+
+\item[(3)] the parent may execute the
+ ``ptrace'' system call which has
+ the effect of leaving a request
+ message in the system defined
+ structure ``ipc'' (3939) for the
+ child process;
+
+\item[(4)] the parent then goes to ``sleep''
+ while the child ``wakes up'';
+
+\item[(5)] the child reads the message in
+``ipc'' and acts upon it (e.g copying
+one of its own values into
+``ipc.ip\_data'');
+
+\item[(6)] the child then goes to ``sleep''
+ while the parent ``wakes up'';
+
+\item[(7)] the parent inspects the result,
+as recorded in ``ipc'', of the
+operation;
+
+\item[(8)] steps (3) to (7) may be repeated
+ several times in succession.
+\ed
+
+Finally the parent may allow the child
+to continue its normal execution, possibly without ever knowing that a
+software interrupt had occurred.
+
+A discussion of the tracing facility is
+contained in the Section ``PTRACE (II)''
+of the UPM. To the list of functional
+limitations noted in the ``Bugs''
+paragraph, we can add the following comments on efficiency:
+
+\bi
+\item There should be a mechanism for
+ transferring large blocks (e.g.
+ up to 256 words at a time) of
+ information from the child to
+ the parent (though not necessarily in the reverse direction);
+
+\item There should be a proper coroutine
+ procedure (analogous to ``swtch'')
+ to allow rapid transfer of control between child and parent.
+\ei
+
+\sbs{stop (4016)}
+
+This procedure is called by ``issig''
+(3999) if the tracing flag (``STRC'',
+0395) is set.
+
+\bd
+\item[4022:] If your parent is process 1
+ (i.e. ``/etc/init''), then call
+ ``exit'' (line 4032);
+
+\item[4023:] Otherwise look through ``proc'' for
+ your parent ... wake him up ...
+ declare yourself ``stopped'' and
+ ... call ``swtch'' (Note do NOT
+ call ``sleep''. Why?);
+
+\item[4028:] If the tracing flag has been
+ reset, or the result of the procedure ``procxmt'' is true, return
+ to ``issig'';
+
+\item[4029:] Otherwise start again.
+\ed
+
+\sbs{wait (3270) (continued)}
+
+\bd
+\item[3301:] If the child process has
+ ``stopped'' and ...
+
+\item[3302:] If the ``SWTED'' flag is not set
+ (i.e. the parent hasn't noticed
+ this child lately) ...
+
+\item[3303:] As an ``aide-memoire'' set the
+ ``SWTED'' flag. Set ``u.u\_ar0[R0]'',
+ ``u.u\_ar0[R1]'' so that the child
+ process status word is returned
+ to the parent;
+
+\item[3309:] The ``SWTED'' flag was set. This
+ means that the parent, by performing at least two ``waits'' in
+ succession without any intervening call on ``ptrace'', is not very
+ interested in the child. So
+ reset both the ``STRC'' and the
+ ``SWTED'' flags and release the
+ child. (Note the use of ``setrun''
+ (not ``wakeup'') to complement the
+ call on ``swtch'' (4027)).
+\ed
+
+\sbs{ptrace (4164)}
+
+This procedure implements the ``ptrace''
+system call, \#26.
+
+\bd
+\item[4168:] ``u.u\_arg[2]'' corresponds to the
+ first parameter in the ``C'' program calling sequence. If this is
+ zero, a child process is asking
+ to be traced by its parent, so
+ set the ``STRC'' flag and return.
+\ed
+
+Note that this code handles the only
+explicit action the child process is
+asked to take with respect to tracing.
+There is no real reason why even this
+action should be taken by the child
+process and not by the parent process.
+From a security point of view it is
+most probably desirable that a child
+process should only be traceable if it
+gives its permission. On the other
+hand, if the child asks to be traced
+and is then ignored by the parent, the
+child process may be blocked indefinitely. Perhaps the best solution would
+be for the ``STRC'' flag to be set only
+after explicit action by {\bf both} the
+parent {\bf and} the child.
+
+\bd
+\item[4172:] Search the ``proc'' table looking
+for a process which: is stopped;
+matches the given process identifying number;
+is a child of the current process;
+
+\item[4181:] Wait for the ``ipc'' structure to
+ become available if it is currently in use;
+
+\item[4183:] Copy the parameters into ``ipc'' ...
+
+\item[4187:] reset the ``SWTED'' flag, and ...
+
+\item[4188:] return the child to a ``ready to
+run'' state;
+
+\item[4189:] Sleep until ``ipc.ip\_req'' is nonpositive (4212);
+
+\item[4191:] Extract a value that is to be
+ returned to the parent process,
+ check for errors, unlock ``ipc''
+ and ``wake up'' any processes waiting for  ``ipc''.
+\ed
+
+Note that the ``sleeps'' on lines 4182,
+4190 are for essentially different reasons, and could be differentiated to
+good effect by replacing ``\&ipc'' by
+``\&ipc.ip\_req'' on lines 4190 and 4213.
+
+
+\sbs{procxmt (4204)}
+
+This procedure is executed by the child
+process under the influence of data
+left by the parent in the ipc structure.
+
+\bd
+\item[4209:] If ``ipc.ip\_lock'' is set wrongly
+ for the current process, then
+ certainly the rest of ``ipc''
+ should be ignored.
+\ed
+
+After ``stop'' (4027) calls ``swtch'', the
+chide process is restarted by one of
+three calls on ``setrun'' which leave the
+``STRC'' and ``SWTED'' flags in the state
+indicated:
+
+\begin{center}
+\begin{tabular}{lllll}
+ & & STRC & SWTED & ipc.ipc\_lock\\ \hline
+exit & (3254) & set & set & arbitrary\\
+wait & (3310) & reset & reset & arbitrary\\
+ptrace & (4188) & set & reset & properly set\\
+\end{tabular}
+\end{center}
+
+
+In the third case ``ptrace'' will always
+set ``ipc.ip\_lock'' properly, before the
+child is restarted, so that there is
+then no chance of the test on 4209
+into ``ipc'' failing.
+
+In the second case, where the parent
+has ignored the child, ``procxmt'' will
+never in fact be called.
+
+By executing the statement ``return(0)'';
+on line 4210, ``procxmt'' forces
+``stop'' to loop back to line 4020. In
+the case where the parent has already
+died, the test on line 4022 will then
+fail, and a call on ``exit'' (4032) will
+result.
+
+\bd
+\item[4211:] Store the value of ``ipc.ip\_req''
+ before resetting the latter,
+ ``wake up'' the parent, and select
+ the next action as indicated.
+\ed
+
+The various actions are adequately
+explained in Section ``PTRACE (II)'' of
+the UPM, with the one qualification
+that cases 1, 2 and 4, 5 are documented
+the wrong way around (i.e. ``I'' and ``D''
+spaces respectively, not ``D'' and ``I''!).

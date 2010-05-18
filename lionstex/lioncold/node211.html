@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>breada (4773)</TITLE>
+<META NAME="description" CONTENT="breada (4773)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node212.html">
+<LINK REL="previous" HREF="node210.html">
+<LINK REL="up" HREF="node202.html">
+<LINK REL="next" HREF="node212.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3361"
+  HREF="node212.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3357"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3351"
+  HREF="node210.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3359"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3362"
+  HREF="node212.html">bwrite (4809)</A>
+<B> Up:</B> <A NAME="tex2html3358"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3352"
+  HREF="node210.html">bread (4754)</A>
+ &nbsp; <B>  <A NAME="tex2html3360"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000229000000000000000">
+breada (4773)</A>
+</H2>
+
+<P>
+This procedure has an additional parameter, as compared with ``bread''. It is
+called only by ``readi'' (6256).
+
+<P>
+<DL>
+<DT><STRONG>4780:</STRONG></DT>
+<DD>Check if the desired block has
+ already been assigned to a
+ buffer. (It may not yet be
+ available, but at least is it
+ there?);
+
+<P>
+</DD>
+<DT><STRONG>4781:</STRONG></DT>
+<DD>If not initiate the necessary
+read operation but don't wait for
+it to finish;
+
+<P>
+</DD>
+<DT><STRONG>4788:</STRONG></DT>
+<DD>Look around for the ``read ahead''
+ block. If it is not there, allocate a buffer (4789) but release
+ it (4791) if the buffer is
+ already ready;
+
+<P>
+</DD>
+<DT><STRONG>4793:</STRONG></DT>
+<DD>The ``read ahead'' block is not
+ ready, so initiate an asynchronous read operation;
+
+<P>
+</DD>
+<DT><STRONG>4798:</STRONG></DT>
+<DD>If a buffer was assigned to the
+ current block call ``bread'' to
+ wrap it up, else...
+
+<P>
+</DD>
+<DT><STRONG>4800:</STRONG></DT>
+<DD>Wait for the completion of the
+ operation which was started at
+ line 4785.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

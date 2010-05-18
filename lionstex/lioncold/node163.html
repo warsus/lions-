@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>kill (3630)</TITLE>
+<META NAME="description" CONTENT="kill (3630)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node164.html">
+<LINK REL="previous" HREF="node162.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node164.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2758"
+  HREF="node164.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2754"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2748"
+  HREF="node162.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2756"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2759"
+  HREF="node164.html">signal (3949)</A>
+<B> Up:</B> <A NAME="tex2html2755"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2749"
+  HREF="node162.html">ssig (3614)</A>
+ &nbsp; <B>  <A NAME="tex2html2757"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001811000000000000000">
+kill (3630)</A>
+</H2>
+
+<P>
+This procedure implements the ``kill''
+system call to cause a specified type
+of software interrupt to another designated process.
+
+<P>
+<DL>
+<DT><STRONG>3637:</STRONG></DT>
+<DD>If ``a'' is non-zero, it is the
+ process identifying number of a
+ process to be interrupted. If
+ ``a'' is zero, then all processes
+ originating from the same terminal as the current process are to
+ be interrupted;
+
+<P>
+</DD>
+<DT><STRONG>3639:</STRONG></DT>
+<DD>Consider each entry in the ``proc''
+table in turn and reject it if:
+it is the current process (3640);
+it is not the designated process
+(3642);
+no particular process was designated (``a'' == 0) but it does not
+have the same controlling terminal or it is
+one of the two initial processes (3644);
+the user is not the ``super user''
+and the user identities do not
+match (3646);
+
+<P>
+</DD>
+<DT><STRONG>3649:</STRONG></DT>
+<DD>For any process that survives the
+above tests, call ``psignal'' to
+change ``p_sig''.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

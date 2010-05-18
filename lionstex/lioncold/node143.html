@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>User Mode Traps</TITLE>
+<META NAME="description" CONTENT="User Mode Traps">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node144.html">
+<LINK REL="previous" HREF="node142.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node144.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2495"
+  HREF="node144.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2491"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2485"
+  HREF="node142.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2493"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2496"
+  HREF="node144.html">System Calls</A>
+<B> Up:</B> <A NAME="tex2html2492"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2486"
+  HREF="node142.html">Kernel Mode Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2494"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000173000000000000000">
+User Mode Traps</A>
+</H2>
+
+<P>
+Consider first of all a trap which is
+not generated as the result of the execution of a ``trap instruction''. This
+is regarded as a probable error for
+which the operating system makes no
+provision apart from the possibility of
+a ``core dump''. However the use program
+itself may have anticipated it and provided for it.
+
+<P>
+The way this provision is made and
+implemented is the subject of the next
+chapter. At this stage, the principal
+requirement is to ``signal'' that the
+trap has occurred.
+
+<P>
+<DL>
+<DT><STRONG>2721:</STRONG></DT>
+<DD>A bus error has occurred while
+ the system is in user mode. Set
+ ``i'' to the value ``SIGBUS'' (0123);
+
+<P>
+</DD>
+<DT><STRONG>2723:</STRONG></DT>
+<DD>The ``break'' causes a branch out
+ of the ``switch'' statement to line
+ 2818;
+
+<P>
+</DD>
+<DT><STRONG>2733:</STRONG></DT>
+<DD>Apart from the one special case
+noted, the treatment of illegal
+instructions is the same at this
+level as for bus errors;
+
+<P>
+</DD>
+<DT><STRONG>2739:</STRONG></DT>
+<DD>
+</DD>
+<DT><STRONG>2743:</STRONG></DT>
+<DD>
+</DD>
+<DT><STRONG>2747:</STRONG></DT>
+<DD>
+</DD>
+<DT><STRONG>2796:</STRONG></DT>
+<DD>Cf. the comment for line 2721.
+</DD>
+</DL>
+
+<P>
+Note that cases ``4+USER'' (power fail)
+and
+<BR>``7+USER'' (programmed interrupt) are
+handled by the ``default'' case (line
+2715).
+
+<P>
+<DL>
+<DT><STRONG>2810:</STRONG></DT>
+<DD>This represents a case where
+ operating system assistance is
+ required to extend the user mode
+ stack area.
+
+<P>
+The assembler routine ``backup''
+(1012) is used to reconstruct the
+situation that existed before
+execution of the instruction that
+caused the trap.
+
+<P>
+``grow'' (4136) is used to do the
+actual extension.
+</DD>
+</DL>
+
+<P>
+The procedure ``backup'' is non-trivial
+and its comprehension involves a careful consideration of various aspects of
+the PDP11 architecture. It has been
+left for the interested reader to pursue privately.
+
+<P>
+As noted for the PDP11/40, ``backup'' may
+not always succeed because the processor does not save enough information to
+resolve all possibilities.
+
+<P>
+<DL>
+<DT><STRONG>218:</STRONG></DT>
+<DD>Call ``psignal'' (3963) to set the
+ appropriate ``signal''. (Note that
+ this statement is only reached
+ from those cases of the ``switch''
+ which included a ``break'' statement.);
+
+<P>
+</DD>
+<DT><STRONG>2821:</STRONG></DT>
+<DD>``issig'' checks if a ``signal'' has
+ been sent to the user program,
+ either just now or at some earlier time and has not yet been
+ attended to;
+
+<P>
+</DD>
+<DT><STRONG>2822:</STRONG></DT>
+<DD>``psig'' performs the appropriate
+ actions. (Both ``issig'' and ``psig''
+ are discussed in detail in the
+ next chapter.);
+
+<P>
+</DD>
+<DT><STRONG>2823:</STRONG></DT>
+<DD>Recalculate the priority for the
+ current process.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2495"
+  HREF="node144.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2491"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2485"
+  HREF="node142.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2493"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2496"
+  HREF="node144.html">System Calls</A>
+<B> Up:</B> <A NAME="tex2html2492"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2486"
+  HREF="node142.html">Kernel Mode Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2494"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

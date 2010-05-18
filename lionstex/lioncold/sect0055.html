@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Section Two</title>
+
+<link href="sect0056.html" title="Section Three" rel="next" />
+<link href="sect0054.html" title="Other Files in Section One" rel="prev" />
+<link href="sect0047.html" title="An Overview" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0054.html" title="Other Files in Section One"><img alt="Previous: Other Files in Section One" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0056.html" title="Section Three"><img alt="Next: Section Three" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0047.html">An Overview</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Section Two</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000056">4.8 Section Two</h2>
+<p>Section Two is concerned with traps, hardware interrupts and software interrupts. </p><p>Traps and hardware interrupts introduce sudden switches into the CPU’s normal instruction execution sequence. This provides a mechanism for handling special conditions which occur outside the CPU’s immediate control. </p><p>Use is made of this facility as part of another mechanism called the “system call” whereby a user program may execute a “trap” instruction to cause a trap deliberately and so obtain the operating system’s attention and assistance. </p><p>The software interrupt (or “signal” is a mechanism for communication between processes, particularly when there is “bad news”. </p><dl class="description">
+
+    <dt>reg.h</dt>
+    <dd><p>[Sheet 26; Chapter 10] defines a set of constants which are used in referencing the previous user mode register values when they are stored in the kernel stack. </p></dd>
+
+    <dt>trap.c</dt>
+    <dd><p>[Sheets 26..28; Chapter 12] contains the “C” procedure “trap” which recognises and handles traps of various kinds. </p></dd>
+
+    <dt>sysent.c</dt>
+    <dd><p>[Sheet 29; Chapter 12] contains the declaration and initialisation of the array “sysent” which is used by “trap” to associate the appropriate kernel mode routine with each system call type. </p></dd>
+
+    <dt>sysl.c</dt>
+    <dd><p>[Sheets 30..33; Chapters 12, 13] contains various routines associated with system calls, including “exec” “exit” “wait” and “fork”. </p></dd>
+
+    <dt>sys4.c</dt>
+    <dd><p>[Sheets 34..36; Chapters 12, 13, 19] contains routines for “unlink”, “kill” and various other minor system calls. </p></dd>
+
+    <dt>clock.c</dt>
+    <dd><p>[Sheets 37, 38; Chapter 11] contains “clock” which is the handler for clock interrupts, and which does much of the incidental housekeeping and basic accounting. </p></dd>
+
+    <dt>sig.c</dt>
+    <dd><p>[Sheets 39..42; Chapter 13] contains the procedures which handle “signals” or “software interrupts” These provide facilities for interprocess communication and tracing. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0054.html" title="Other Files in Section One"><img alt="Previous: Other Files in Section One" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0056.html" title="Section Three"><img alt="Next: Section Three" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

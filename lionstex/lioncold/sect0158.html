@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: ssig (3614)</title>
+
+<link href="sect0159.html" title="kill (3630)" rel="next" />
+<link href="sect0157.html" title="D. Tracing" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0157.html" title="D. Tracing"><img alt="Previous: D. Tracing" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0159.html" title="kill (3630)"><img alt="Next: kill (3630)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">ssig (3614)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000159">13.10 ssig (3614)</h2>
+<p>This procedure implements the “signal” system call. </p><dl class="description">
+
+    <dt>3619:</dt>
+    <dd><p>If the interrupt reason is out of range or is equal to “SIGKILL” (9), take an error exit; </p></dd>
+
+    <dt>3623:</dt>
+    <dd><p>Capture the initial value in “u.u_signal[a]” for return as the result of the system call; </p></dd>
+
+    <dt>3624:</dt>
+    <dd><p>Set the element of “u.u_signal” to the desired value ... </p></dd>
+
+    <dt>3625:</dt>
+    <dd><p>If an interrupt for the current reason is pending, cancel it. (It is not clear why this step should be necessary or even desirable. Any suggestions??) </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0157.html" title="D. Tracing"><img alt="Previous: D. Tracing" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0159.html" title="kill (3630)"><img alt="Next: kill (3630)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

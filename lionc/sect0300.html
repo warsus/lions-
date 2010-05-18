@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: tysty (8577)</title>
+
+<link href="sect0301.html" title="The DL11/KL11 Terminal Device Handler" rel="next" />
+<link href="sect0299.html" title="klsgtty (8090)" rel="prev" />
+<link href="sect0293.html" title="Interactive Terminals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0299.html" title="klsgtty (8090)"><img alt="Previous: klsgtty (8090)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0301.html" title="The DL11/KL11 Terminal Device Handler"><img alt="Next: The DL11/KL11 Terminal Device Handler" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0293.html">Interactive Terminals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">tysty (8577)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000301">24.7 tysty (8577)</h2>
+<p>A call originating from “stty” will have a second parameter of zero. </p><dl class="description">
+
+    <a href="../all.html#line8589" target="source" <dt>8589:</dt></a>
+    <dd><p>Empty all the queues associated with the terminal forthwith. They quite likely contain nonsense; </p></dd>
+
+    <a href="../all.html#line8591" target="source" <dt>8591:</dt></a>
+    <dd><p>Reset the speed information (useful in the case of a DH11 interface, but of little interest for the present selection of code); </p><p>Reset the “erase” character and the “kill” character. (“kill” here denotes “throw away the current input line”.) Note that if these characters are changed away from their normal values of “#” and “@” respectively, no corresponding changes are made to “maptab”. Nor should they!), </p></dd>
+
+    <a href="../all.html#line8593" target="source" <dt>8593:</dt></a>
+    <dd><p>Reset the “flags” defining some relevant terminal characteristics (see Sheet 79): </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">flag</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">bit</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">if set ...</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>XTABS </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+    
+    <td style="text-align:left"><p> the terminal will not interpret </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> horizontal tab characters</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> correctly; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>LCASE </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> the terminal supports only the </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 64 character ASCII subset; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>ECHO </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:left"><p> the terminal is operating in </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> full duplex mode, and input </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> characters must be echoed </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> back; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>CRMOD </p></td>
+
+    
+    <td style="text-align:left"><p> 4 </p></td>
+
+    
+    <td style="text-align:left"><p> upon input, a “carriage </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> return” is replaced by a </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> “line feed”; upon output, a</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> “line feed” is replaced by a</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> “carriage return” and a “line</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> feed”; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>RAW </p></td>
+
+    
+    <td style="text-align:left"><p> 5 </p></td>
+
+    
+    <td style="text-align:left"><p> input characters are to be </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> sent to the program exactly </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> as received, without “erase”</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> or“kill” processing, or</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> adjustment for backslash</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> characters. </p></td>
+
+</tr>
+</table><p>In addition, the following bits are interrogated by “ttyoutput” (8373) in choosing the delay which should ensue after the character indicated is sent, before sending the next character: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>8,9 </p></td>
+
+    
+    <td style="text-align:left"><p> line feed;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>10,11 </p></td>
+
+    
+    <td style="text-align:left"><p> horizontal tab;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>12,13 </p></td>
+
+    
+    <td style="text-align:left"><p> carriage return;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>14 </p></td>
+
+    
+    <td style="text-align:left"><p> vertical tab or form feed.</p></td>
+
+</tr>
+</table></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0299.html" title="klsgtty (8090)"><img alt="Previous: klsgtty (8090)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0301.html" title="The DL11/KL11 Terminal Device Handler"><img alt="Next: The DL11/KL11 Terminal Device Handler" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

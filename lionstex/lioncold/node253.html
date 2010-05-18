@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The 'mount' table (0272)</TITLE>
+<META NAME="description" CONTENT="The 'mount' table (0272)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node254.html">
+<LINK REL="previous" HREF="node252.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node254.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3908"
+  HREF="node254.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3904"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3898"
+  HREF="node252.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3906"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3909"
+  HREF="node254.html">iinit (6922)</A>
+<B> Up:</B> <A NAME="tex2html3905"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3899"
+  HREF="node252.html">The `Super Block' (5561)</A>
+ &nbsp; <B>  <A NAME="tex2html3907"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000252000000000000000">
+The 'mount' table (0272)</A>
+</H2>
+
+<P>
+The ``mount'' table  contained  an  entry
+for  each  mounted  file system volume.
+Each entry defines the device on  which
+the  file  system  volume is mounted, a
+pointer to the buffer which stores  the
+``super  block''  for  the device, and an
+``inode'' pointer.  The table  is  referenced as follows:
+
+<P>
+<DL>
+<DT><STRONG>iinit (6922)</STRONG></DT>
+<DD>which  is  called  by
+``main''  (1615), makes an entry for
+the root device;
+
+<P>
+</DD>
+<DT><STRONG>smount (6086)</STRONG></DT>
+<DD>is  a  system  call
+which makes entries for additional
+devices;
+
+<P>
+</DD>
+<DT><STRONG>iget (7276)</STRONG></DT>
+<DD>searches  the  ``mount''
+table  if it encounters an ``inode''
+with the `IMOUNT' flag set;
+
+<P>
+</DD>
+<DT><STRONG>getfs (7167)</STRONG></DT>
+<DD>searches the  ``mount''
+table to find and return a pointer
+to the ``super block'' for a particular device;
+
+<P>
+</DD>
+<DT><STRONG>update (7201)</STRONG></DT>
+<DD>is  called  periodically  and  searches  the  ``mount''
+table to locate information  which
+should be written from core tables
+into the tables maintained on  the
+file system volumes;
+
+<P>
+</DD>
+<DT><STRONG>sumount (6144)</STRONG></DT>
+<DD>is  a  system  call
+which  deletes  entries  from  the
+table.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

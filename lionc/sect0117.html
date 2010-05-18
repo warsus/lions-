@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Hardware Interrupts</title>
+
+<link href="sect0118.html" title="The Interrupt Vector" rel="next" />
+<link href="sect0116.html" title="Hardware Interrupts and Traps" rel="prev" />
+<link href="sect0116.html" title="Hardware Interrupts and Traps" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Previous: Hardware Interrupts and Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0118.html" title="The Interrupt Vector"><img alt="Next: The Interrupt Vector" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0116.html">Hardware Interrupts and Traps</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Hardware Interrupts</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000118">9.1 Hardware Interrupts</h2>
+<p>The effect of an interrupt is to divert the CPU from whatever it was doing and to redirect it to execute another program. </p><p>During a hardware interrupt: </p><ul class="itemize">
+<li><p>The CPU saves the current processor status word (PS) and the current program count (PC) in its internal registers; </p></li><li><p>the PC and PS are then reloaded from two consecutive words located in the low area of main memory. The address of the first of these two words is known as the “<b class="bf">vector location</b>” of the interrupt; </p></li><li><p>finally the original PC and PS values are stored into the newly current stack. (Whether this is the kernel or user stack depends on the new value of the PS.) </p></li>
+</ul><p>Different peripheral devices may have different vector locations. The actual vector location for a particular device is determined by hard wiring, and can only be changed with difficulty. Moreover there are well entrenched conventions for choosing vector locations for the various devices. </p><p>Thus after the interrupt has occurred, because the PC has been reloaded, the source of instructions executed by the CPU has been changed. The new source should be a procedure associated with the peripheral device controller which caused the interrupt. </p><p>Also since the PS has also been changed, the processor mode may have changed. In UNIX, the initial mode may be either “user” or “kernel”, but after the interrupt, the mode is always “kernel”. Recall also that a change in mode implies: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>a change in memory mappings. (Note that to avoid any confusion, vector locations are always interpreted as kernel mode addresses.); </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>a change in stack pointers. (Recall that the stack pointer, SP or r6, is the only special register which is replicated for each mode. This implies that after a mode change, the stack pointer value will have changed even though it has not been reloaded!) </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Previous: Hardware Interrupts and Traps" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0118.html" title="The Interrupt Vector"><img alt="Next: The Interrupt Vector" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

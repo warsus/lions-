@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>UNIX Operating System Source Code</TITLE>
+<META NAME="description" CONTENT="UNIX Operating System Source Code">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html823"
+  HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html819"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html813"
+  HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html821"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html824"
+  HREF="node13.html">Source Code Selections</A>
+<B> Up:</B> <A NAME="tex2html820"
+  HREF="node6.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html814"
+  HREF="node11.html">UNIX Documents</A>
+ &nbsp; <B>  <A NAME="tex2html822"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00046000000000000000">
+UNIX Operating System Source Code</A>
+</H2>
+
+<P>
+This is an edited version of the
+operating system as supplied by Bell
+Laboratories.
+
+<P>
+The code selection presumes a ``model''
+system consisting of:
+
+<P>
+
+<UL>
+<LI>PDP11/40 processor;
+</LI>
+<LI>RK05 disk drives;
+</LI>
+<LI>LP11 line printer;
+</LI>
+<LI>PC11 paper tape reader/punch;
+</LI>
+<LI>KL11 terminal interface.
+</LI>
+</UL>
+
+<P>
+The principal editorial changes to the
+source code are as follows:
+
+<P>
+
+<UL>
+<LI>the order of presentation of files
+has been changed;
+
+<P>
+</LI>
+<LI>the order of material within
+several files has been changed;
+
+<P>
+</LI>
+<LI>to a very limited extent, code has
+been transferred between files
+(with hindsight a lot more of this
+would have been desirable);
+
+<P>
+</LI>
+<LI>about 5% of the lines have been
+shortened in various ways to less
+than 66 characters (by elimination
+of blanks, rearrangement of comments,
+splitting into two lines, etc.);
+
+<P>
+</LI>
+<LI>a number of comments consisting of
+a line of underscore characters
+have been introduced, particularly
+at the end of procedures;
+
+<P>
+</LI>
+<LI>the size of each file has been
+adjusted to an exact multiple of
+50 lines by padding with blank
+lines;
+</LI>
+</UL>
+
+<P>
+The source code has been printed in
+double column format with fifty lines
+per column, giving one hundred lines
+per sheet (or page). Thus there is a
+convenient relationship between line
+numbers and sheet numbers.
+
+<P>
+A number of summaries have been
+included at the beginning of the Source
+Code volume:
+
+<P>
+
+<UL>
+<LI>A <I>Table of Contents</I> showing files
+in order of appearance, together
+with the Procedures they contain;
+
+<P>
+</LI>
+<LI>An <I>alphabetical list</I> of procedures
+with line numbers;
+
+<P>
+</LI>
+<LI>A <I>list of Defined Symbols</I> with
+their values;
+
+<P>
+</LI>
+<LI>A <I>Cross Reference Listing</I> giving
+the line numbers where each symbol
+is used. (Reserved words in ``C''
+and a number of commonly used symbols
+such as ``p'' and ``u'' have been
+omitted.)
+</LI>
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html823"
+  HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html819"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html813"
+  HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html821"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html824"
+  HREF="node13.html">Source Code Selections</A>
+<B> Up:</B> <A NAME="tex2html820"
+  HREF="node6.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html814"
+  HREF="node11.html">UNIX Documents</A>
+ &nbsp; <B>  <A NAME="tex2html822"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

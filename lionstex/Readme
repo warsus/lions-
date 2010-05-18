@@ -1,0 +1,15 @@
+See title.tex for details of this document.
+
+To print, run the document through LaTeX twice:
+
+	% latex lionc.tex
+	% latex lionc.tex
+
+Then use the appropriate dvi converter, e.g
+
+	% dvips lionc.dvi
+
+
+Please post typographical/other changes to this document
+to alt.folklore.computers as context diffs (i.e diff -c)
+with the Subject line of `Leo's Patches blah blah'.

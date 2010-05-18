@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: A. The test for ’TTLOWAT’ (Line 8074)</title>
+
+<link href="sect0325.html" title="B. Inactive Terminals" rel="next" />
+<link href="sect0323.html" title="Terminals with a restricted character set" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0323.html" title="Terminals with a restricted character set"><img alt="Previous: Terminals with a restricted character set" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0325.html" title="B. Inactive Terminals"><img alt="Next: B. Inactive Terminals" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">A. The test for ’TTLOWAT’ (Line 8074)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000325">25.13 A. The test for ’TTLOWAT’ (Line 8074)</h2>
+<p>On line 8074 in “klxint”, a test is made whether to restart any processes waiting to send output to the terminal. The test is successful if the number of characters is zero or if it is equal to “TTLOWAT”. </p><p>If the number of characters is between these values, no “wakeup” is performed until the queue is completely empty, with the strong likelihood that there will then be a hiatus in the flow of output to the terminal. Since temporary interruptions to the flow of output are quite frequently observed in practice and represent a source of occasional irritation if nothing more, one may reasonably enquire “is there any way the character count can get from being greater than “TTLOWAT” to below it, without this being detected at line 8074?” </p><p>Quite clearly there is, since each call on “ttstart” can decrement the queue size, and only one such call is followed by the test. Thus if the call on “ttstart” from one of “ttrstrt” (8492) or “ttwrite” (8568) happens to cross the boundary, a delay will result. The probability that this will happen is small, but finite and hence the event is likely to be observed in any reasonably long output sequence. </p><p>There are two other situations in which “ttstart” is called which seem to be satisfactory. At “ttwrite” (8561) the queue is at its maximum extent; and at “ttyinput” (8363) there is a preceding call on “ttyoutput” which usually (but not invariably!) will have added a character to the output queue. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0323.html" title="Terminals with a restricted character set"><img alt="Previous: Terminals with a restricted character set" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0325.html" title="B. Inactive Terminals"><img alt="Next: B. Inactive Terminals" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

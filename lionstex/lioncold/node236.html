@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>writei</TITLE>
+<META NAME="description" CONTENT="writei">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node237.html">
+<LINK REL="previous" HREF="node235.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node237.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3681"
+  HREF="node237.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3677"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3671"
+  HREF="node235.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3679"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3682"
+  HREF="node237.html">iomove (6364)</A>
+<B> Up:</B> <A NAME="tex2html3678"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3672"
+  HREF="node235.html">readi (6221)</A>
+ &nbsp; <B>  <A NAME="tex2html3680"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002319000000000000000">
+writei</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>6303:</STRONG></DT>
+<DD>If less than a full block is
+ being written the previous contents of the buffer must be read
+ so that the appropriate part can
+ be preserved, otherwise just get
+ any available buffer;
+
+<P>
+</DD>
+<DT><STRONG>6311:</STRONG></DT>
+<DD>There is no ``write ahead'' facility, but there is a ``delayed
+ write'' for buffers whose final
+ characters have not been changed;
+
+<P>
+</DD>
+<DT><STRONG>6312:</STRONG></DT>
+<DD>If the file offset now points
+ beyond the recorded end of file
+ character, the file has obviously
+ grown bigger!
+
+<P>
+</DD>
+<DT><STRONG>6318:</STRONG></DT>
+<DD>Why is it necessary/desirable to
+ set the ``IUPD'' flag again? (See
+ line 6285.)
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Initialisation</TITLE>
+<META NAME="description" CONTENT="Initialisation">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node301.html">
+<LINK REL="previous" HREF="node299.html">
+<LINK REL="up" HREF="node297.html">
+<LINK REL="next" HREF="node301.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4506"
+  HREF="node301.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4502"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4496"
+  HREF="node299.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4504"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4507"
+  HREF="node301.html">stty (8183)</A>
+<B> Up:</B> <A NAME="tex2html4503"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4497"
+  HREF="node299.html">Interactive Terminals</A>
+ &nbsp; <B>  <A NAME="tex2html4505"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000293000000000000000">
+Initialisation</A>
+</H2>
+
+<P>
+Initialisation of the ``tty'' structures
+is the responsibility of the various
+``open'' routines in the device drivers,
+for example, ``klopen'' (8023).
+
+<P>
+The items in Group B of Table 24.1 may
+be changed by a ``stty'' system call.
+The current values may be interrogated
+by a ``gtty'' system call.
+
+<P>
+A description of these is contained in
+the sections, ``STTY(II)'' and ``GTTY(II)''
+of the UPM. These calls are invoked by
+the ``stty'' shell command which is
+described in the section ``STTY(I)''.
+
+<P>
+Since the ``stty'' and ``gtty'' system
+calls require a file descriptor as a
+parameter, they can only be applied to
+an ``open'' character special file.
+
+<P>
+The two system calls share a good deal
+of common code. We will trace the progress of an execution of ``stty'' below
+and leave the tracing of a similar execution of ``gtty'' to the reader.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

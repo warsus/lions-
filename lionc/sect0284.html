@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: cinit (8234)</title>
+
+<link href="sect0285.html" title="getc (0930)" rel="next" />
+<link href="sect0283.html" title="Character Handling" rel="prev" />
+<link href="sect0283.html" title="Character Handling" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0283.html" title="Character Handling"><img alt="Previous: Character Handling" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0285.html" title="getc (0930)"><img alt="Next: getc (0930)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0283.html">Character Handling</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">cinit (8234)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000285">23.1 cinit (8234)</h2>
+<p>This procedure, which is called once by “main” (1613), links the set of character buffers into the free list, “cfreelist”, and counts the number of character device types. </p><dl class="description">
+
+    <a href="../all.html#line8239" target="source" <dt>8239:</dt></a>
+    <dd><p>“ccp” is the address of the first word in the array “cfree” (8146); </p></dd>
+
+    <a href="../all.html#line8240" target="source" <dt>8240:</dt></a>
+    <dd><p>Round “ccp” up to the next highest multiple of eight, and mark out “cblock” sized pieces, taking care not to exceed the boundary of “cfree”. </p><p>Note. In general there will be “NCLIST – 1” (rather than “NCLIST”) blocks so defined; </p></dd>
+
+    <a href="../all.html#line8241" target="source" <dt>8241:</dt></a>
+    <dd><p>Set the first word of the “cblock” to point to the current head of the free list. </p><p>Note that “c_next” is defined on line 8141, and that the initial value of “cfreelist” is “NULL”. </p></dd>
+
+    <a href="../all.html#line8242" target="source" <dt>8242:</dt></a>
+    <dd><p>Update “cfreelist” to point to the new head of the list; </p></dd>
+
+    <a href="../all.html#line8244" target="source" <dt>8244:</dt></a>
+    <dd><p>Count the number of character device types. Upon reference to “cdevsw” on Sheet 46, it will be seen that “nchrdev” will be set to 16, whereas a more appropriate value would be 10. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0283.html" title="Character Handling"><img alt="Previous: Character Handling" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0285.html" title="getc (0930)"><img alt="Next: getc (0930)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: ttyinput (8333)</title>
+
+<link href="sect0319.html" title="Character Output – ttwrite (8550)" rel="next" />
+<link href="sect0317.html" title="Notes" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0317.html" title="Notes"><img alt="Previous: Notes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0319.html" title="Character Output – ttwrite (8550)"><img alt="Next: Character Output – ttwrite (8550)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">ttyinput (8333)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000319">25.7 ttyinput (8333)</h2>
+<p>“canon” removes characters from the “raw” input queue. They are put there in the first place by “ttyinput” which is called by “klrint” (8087) whenever an input character is received from the hardware controller. </p><p>The parameters passed to “ttyinput” are a character and a reference to a “tty” structure. </p><dl class="description">
+
+    <a href="../all.html#line8342" target="source" <dt>8342:</dt></a>
+    <dd><p>If the character is a “carriage return” and the terminal operates with a “carriage return” only (instead of a “carriage return” “line feed” pair) change the character to a “new line”; </p></dd>
+
+    <a href="../all.html#line8344" target="source" <dt>8344:</dt></a>
+    <dd><p>If the terminal is not operating in “raw” mode and the character is a “quit” or “delete” (7958) then call “signal” (3949) to send a software interrupt to every process which has the terminal as its controlling terminal, flush all the queues associated with the terminal, and return; </p></dd>
+
+    <a href="../all.html#line8349" target="source" <dt>8349:</dt></a>
+    <dd><p>If the “raw” input queue has grown excessively large, flush <b class="bf">all</b> the queues for the terminal and return. (This may seem a trifle harsh at first sight but it will usually be what is required.); </p></dd>
+
+    <a href="../all.html#line8353" target="source" <dt>8353:</dt></a>
+    <dd><p>If the terminal has a limited character set, and the character is an upper case alphabetic, translate it into lower case; </p></dd>
+
+    <a href="../all.html#line8355" target="source" <dt>8355:</dt></a>
+    <dd><p>Insert the character into the “raw” input queue; </p></dd>
+
+    <a href="../all.html#line8356" target="source" <dt>8356:</dt></a>
+    <dd><p>If the terminal is operating in “raw” mode, or the character was a “new line” or “eot” then ... </p></dd>
+
+    <a href="../all.html#line8357" target="source" <dt>8357:</dt></a>
+    <dd><p>“wakeup” any process waiting for input from the terminal, place a delimiter character (all ones) also in the “raw” queue and increment the delimiter count Note this is one point where possible failure of “putc” (when there is no buffer space) is explicitly recognised. A failure occurring here would explain why the test on line 8316 may sometimes succeed. </p></dd>
+
+    <a href="../all.html#line8361" target="source" <dt>8361:</dt></a>
+    <dd><p>Finally, if the input character is to be echoed i.e. the terminal is running in full duplex mode, insert a copy of the character into the output queue, and and arrange to have it transmitted (“ttstart”) back to the terminal. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0317.html" title="Notes"><img alt="Previous: Notes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0319.html" title="Character Output – ttwrite (8550)"><img alt="Next: Character Output – ttwrite (8550)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>
