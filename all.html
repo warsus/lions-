@@ -1,4 +1,293 @@
 
+
+<html>
+<head>
+<title>param.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line100">0100: </a><font color="#800000">/* fundamental constants: cannot be changed */</font>
+<a name="line101">0101: </a>
+<a name="line102">0102: </a>
+<a name="line103">0103: </a><font color="#000000">#define USIZE   16              </font><font color="#800000">/* size of user block (*64) */</font><font color="#000000"></font>
+<a name="line104">0104: </a><font color="#000000">#define NULL    0</font>
+<a name="line105">0105: </a><font color="#000000">#define NODEV   (-1)</font>
+<a name="line106">0106: </a><font color="#000000">#define ROOTINO 1               </font><font color="#800000">/* i number of all roots */</font><font color="#000000"></font>
+<a name="line107">0107: </a><font color="#000000">#define DIRSIZ  14              </font><font color="#800000">/* max characters per directory */</font><font color="#000000"></font>
+<a name="line108">0108: </a>
+<a name="line109">0109: </a>
+<a name="line110">0110: </a><font color="#800000">/* signals: dont change */</font>
+<a name="line111">0111: </a>
+<a name="line112">0112: </a>
+<a name="line113">0113: </a><font color="#000000">#define NSIG    20</font>
+<a name="line114">0114: </a><font color="#000000">#define         SIGHUP  1       </font><font color="#800000">/* hangup */</font><font color="#000000"></font>
+<a name="line115">0115: </a><font color="#000000">#define         SIGINT  2       </font><font color="#800000">/* interrupt (rubout) */</font><font color="#000000"></font>
+<a name="line116">0116: </a><font color="#000000">#define         SIGQIT  3       </font><font color="#800000">/* quit (FS) */</font><font color="#000000"></font>
+<a name="line117">0117: </a><font color="#000000">#define         SIGINS  4       </font><font color="#800000">/* illegal instruction */</font><font color="#000000"></font>
+<a name="line118">0118: </a><font color="#000000">#define         SIGTRC  5       </font><font color="#800000">/* trace or breakpoint */</font><font color="#000000"></font>
+<a name="line119">0119: </a><font color="#000000">#define         SIGIOT  6       </font><font color="#800000">/* iot */</font><font color="#000000"></font>
+<a name="line120">0120: </a><font color="#000000">#define         SIGEMT  7       </font><font color="#800000">/* emt */</font><font color="#000000"></font>
+<a name="line121">0121: </a><font color="#000000">#define         SIGFPT  8       </font><font color="#800000">/* floating exception */</font><font color="#000000"></font>
+<a name="line122">0122: </a><font color="#000000">#define         SIGKIL  9       </font><font color="#800000">/* kill */</font><font color="#000000"></font>
+<a name="line123">0123: </a><font color="#000000">#define         SIGBUS  10      </font><font color="#800000">/* bus error */</font><font color="#000000"></font>
+<a name="line124">0124: </a><font color="#000000">#define         SIGSEG  11      </font><font color="#800000">/* segmentation violation */</font><font color="#000000"></font>
+<a name="line125">0125: </a><font color="#000000">#define         SIGSYS  12      </font><font color="#800000">/* sys */</font><font color="#000000"></font>
+<a name="line126">0126: </a><font color="#000000">#define         SIGPIPE 13      </font><font color="#800000">/* end of pipe */</font><font color="#000000"></font>
+<a name="line127">0127: </a>
+<a name="line128">0128: </a><font color="#800000">/* tunable variables */</font>
+<a name="line129">0129: </a>
+<a name="line130">0130: </a><font color="#000000">#define NBUF    15              </font><font color="#800000">/* size of buffer cache */</font><font color="#000000"></font>
+<a name="line131">0131: </a><font color="#000000">#define NINODE  100             </font><font color="#800000">/* number of in core inodes */</font><font color="#000000"></font>
+<a name="line132">0132: </a><font color="#000000">#define NFILE   100             </font><font color="#800000">/* number of in core file structures */</font><font color="#000000"></font>
+<a name="line133">0133: </a><font color="#000000">#define NMOUNT  5               </font><font color="#800000">/* number of mountable file systems */</font><font color="#000000"></font>
+<a name="line134">0134: </a><font color="#000000">#define NEXEC   3               </font><font color="#800000">/* number of simultaneous exec's */</font><font color="#000000"></font>
+<a name="line135">0135: </a><font color="#000000">#define MAXMEM  (64*32)         </font><font color="#800000">/* max core per process </font>
+<a name="line136">0136: </a><font color="#800000">                                                - first # is Kw */</font>
+<a name="line137">0137: </a><font color="#000000">#define SSIZE   20              </font><font color="#800000">/* initial stack size (*64 bytes) */</font><font color="#000000"></font>
+<a name="line138">0138: </a><font color="#000000">#define SINCR   20              </font><font color="#800000">/* increment of stack (*64 bytes) */</font><font color="#000000"></font>
+<a name="line139">0139: </a><font color="#000000">#define NOFILE  15              </font><font color="#800000">/* max open files per process */</font><font color="#000000"></font>
+<a name="line140">0140: </a><font color="#000000">#define CANBSIZ 256             </font><font color="#800000">/* max size of typewriter line */</font><font color="#000000"></font>
+<a name="line141">0141: </a><font color="#000000">#define CMAPSIZ 100             </font><font color="#800000">/* size of core allocation area */</font><font color="#000000"></font>
+<a name="line142">0142: </a><font color="#000000">#define SMAPSIZ 100             </font><font color="#800000">/* size of swap allocation area */</font><font color="#000000"></font>
+<a name="line143">0143: </a><font color="#000000">#define NCALL   20              </font><font color="#800000">/* max simultaneous time callouts */</font><font color="#000000"></font>
+<a name="line144">0144: </a><font color="#000000">#define NPROC   50              </font><font color="#800000">/* max number of processes */</font><font color="#000000"></font>
+<a name="line145">0145: </a><font color="#000000">#define NTEXT   40              </font><font color="#800000">/* max number of pure texts */</font><font color="#000000"></font>
+<a name="line146">0146: </a><font color="#000000">#define NCLIST  100             </font><font color="#800000">/* max total clist size */</font><font color="#000000"></font>
+<a name="line147">0147: </a><font color="#000000">#define HZ      60              </font><font color="#800000">/* Ticks/second of the clock */</font><font color="#000000"></font>
+<a name="line148">0148: </a>
+<a name="line149">0149: </a>
+<a name="line150">0150: </a>
+<a name="line151">0151: </a><font color="#800000">/* priorities: probably should not be altered too much */</font>
+<a name="line152">0152: </a>
+<a name="line153">0153: </a>
+<a name="line154">0154: </a><font color="#000000">#define PSWP    -100</font>
+<a name="line155">0155: </a><font color="#000000">#define PINOD   -90</font>
+<a name="line156">0156: </a><font color="#000000">#define PRIBIO  -50</font>
+<a name="line157">0157: </a><font color="#000000">#define PPIPE   1</font>
+<a name="line158">0158: </a><font color="#000000">#define PWAIT   40</font>
+<a name="line159">0159: </a><font color="#000000">#define PSLEP   90</font>
+<a name="line160">0160: </a><font color="#000000">#define PUSER   100</font>
+<a name="line161">0161: </a>
+<a name="line162">0162: </a><font color="#800000">/* Certain processor registers */</font>
+<a name="line163">0163: </a>
+<a name="line164">0164: </a><font color="#000000">#define PS      0177776</font>
+<a name="line165">0165: </a><font color="#000000">#define KL      0177560</font>
+<a name="line166">0166: </a><font color="#000000">#define SW      0177570</font>
+<a name="line167">0167: </a>
+<a name="line168">0168: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line169">0169: </a>
+<a name="line170">0170: </a><font color="#800000">/* structure to access : */</font>
+<a name="line171">0171: </a>
+<a name="line172">0172: </a>
+<a name="line173">0173: </a>   <font color="#800000">/* an integer */</font>
+<a name="line174">0174: </a>
+<a name="line175">0175: </a><font color="#000000">struct</font> {   int   integ;   };
+<a name="line176">0176: </a>
+<a name="line177">0177: </a>
+<a name="line178">0178: </a>   <font color="#800000">/* an integer in bytes */</font>
+<a name="line179">0179: </a>
+<a name="line180">0180: </a><font color="#000000">struct</font> {   char lobyte;   char hibyte;   };
+<a name="line181">0181: </a>
+<a name="line182">0182: </a>
+<a name="line183">0183: </a>   <font color="#800000">/* a sequence of integers */</font>
+<a name="line184">0184: </a>
+<a name="line185">0185: </a><font color="#000000">struct</font> {   int   r[];   };
+<a name="line186">0186: </a>
+<a name="line187">0187: </a>
+<a name="line188">0188: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>
+
+<html>
+<head>
+<title>systm.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line200">0200: </a><font color="#800000">/* Random set of variables used by more than one routine. */</font>
+<a name="line201">0201: </a>
+<a name="line202">0202: </a>char    canonb[CANBSIZ];        <font color="#800000">/* buffer for erase and kill (#@) */</font>
+<a name="line203">0203: </a>int     coremap[CMAPSIZ];       <font color="#800000">/* space for core allocation */</font>
+<a name="line204">0204: </a>int     swapmap[SMAPSIZ];       <font color="#800000">/* space for swap allocation */</font>
+<a name="line205">0205: </a>
+<a name="line206">0206: </a>int     *rootdir;               <font color="#800000">/* pointer to inode of root directory */</font>
+<a name="line207">0207: </a>
+<a name="line208">0208: </a>int     cputype;                <font color="#800000">/* type of cpu =40, 45, or 70 */</font>
+<a name="line209">0209: </a>
+<a name="line210">0210: </a>int     execnt;                 <font color="#800000">/* number of processes in exec */</font>
+<a name="line211">0211: </a>
+<a name="line212">0212: </a>int     lbolt;                  <font color="#800000">/* time of day in 60th not in time */</font>
+<a name="line213">0213: </a>int     time[2];                <font color="#800000">/* time in sec from 1970 */</font>
+<a name="line214">0214: </a>int     tout[2];                <font color="#800000">/* time of day of next sleep */</font>
+<a name="line215">0215: </a>
+<a name="line216">0216: </a>int     mpid;                   <font color="#800000">/* generic for unique process id's */</font>
+<a name="line217">0217: </a>
+<a name="line218">0218: </a>char    runin;                  <font color="#800000">/* scheduling flag */</font>
+<a name="line219">0219: </a>char    runout;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line220">0220: </a>char    runrun;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line221">0221: </a>
+<a name="line222">0222: </a>char    curpri;                 <font color="#800000">/* more scheduling */</font>
+<a name="line223">0223: </a>
+<a name="line224">0224: </a>int     maxmem;                 <font color="#800000">/* actual max memory per process */</font>
+<a name="line225">0225: </a>
+<a name="line226">0226: </a>int     *lks;                   <font color="#800000">/* pointer to clock device */</font>
+<a name="line227">0227: </a>
+<a name="line228">0228: </a>int     rootdev;                <font color="#800000">/* dev of root see conf.c */</font>
+<a name="line229">0229: </a>int     swapdev;                <font color="#800000">/* dev of swap see conf.c */</font>
+<a name="line230">0230: </a>
+<a name="line231">0231: </a>int     swplo;                  <font color="#800000">/* block number of swap space */</font>
+<a name="line232">0232: </a>int     nswap;                  <font color="#800000">/* size of swap space */</font>
+<a name="line233">0233: </a>
+<a name="line234">0234: </a>int     updlock;                <font color="#800000">/* lock for sync */</font>
+<a name="line235">0235: </a>int     rablock;                <font color="#800000">/* block to be read ahead */</font>
+<a name="line236">0236: </a>
+<a name="line237">0237: </a>char    regloc[];               <font color="#800000">/* locs. of saved user registers (trap.c) */</font>
+<a name="line238">0238: </a>
+<a name="line239">0239: </a>
+<a name="line240">0240: </a>
+<a name="line241">0241: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line242">0242: </a>
+<a name="line243">0243: </a>
+<a name="line244">0244: </a>
+<a name="line245">0245: </a>
+<a name="line246">0246: </a>
+<a name="line247">0247: </a>
+<a name="line248">0248: </a>
+<a name="line249">0249: </a>
+<a name="line250">0250: </a>
+<a name="line251">0251: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line252">0252: </a>
+<a name="line253">0253: </a><font color="#800000">/* The callout structure is for a routine</font>
+<a name="line254">0254: </a><font color="#800000"> * arranging to be called by the clock interrupt</font>
+<a name="line255">0255: </a><font color="#800000"> * (clock.c) with a specified argument,</font>
+<a name="line256">0256: </a><font color="#800000"> * within a specified amount of time.</font>
+<a name="line257">0257: </a><font color="#800000"> * It is used, for example, to time tab delays</font>
+<a name="line258">0258: </a><font color="#800000"> * on teletypes. */</font>
+<a name="line259">0259: </a>
+<a name="line260">0260: </a><font color="#000000">struct</font>  callo
+<a name="line261">0261: </a>{
+<a name="line262">0262: </a>        int     c_time;         <font color="#800000">/* incremental time */</font>
+<a name="line263">0263: </a>        int     c_arg;          <font color="#800000">/* argument to routine */</font>
+<a name="line264">0264: </a>        int     (*c_func)();    <font color="#800000">/* routine */</font>
+<a name="line265">0265: </a>} callout[NCALL];
+<a name="line266">0266: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line267">0267: </a>
+<a name="line268">0268: </a><font color="#800000">/* Mount structure.</font>
+<a name="line269">0269: </a><font color="#800000"> * One allocated on every mount. Used to find the super block.</font>
+<a name="line270">0270: </a><font color="#800000"> */</font>
+<a name="line271">0271: </a>
+<a name="line272">0272: </a><font color="#000000">struct</font>  mount
+<a name="line273">0273: </a>{
+<a name="line274">0274: </a>        int     m_dev;          <font color="#800000">/* device mounted */</font>
+<a name="line275">0275: </a>        int     *m_bufp;        <font color="#800000">/* pointer to superblock */</font>
+<a name="line276">0276: </a>        int     *m_inodp;       <font color="#800000">/* pointer to mounted on inode */</font>
+<a name="line277">0277: </a>} mount[NMOUNT];
+<a name="line278">0278: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>
+
+<html>
+<head>
+<title>seg.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line300">0300: </a>
+<a name="line301">0301: </a><font color="#800000">/* KT-11 addresses and bits */</font>
+<a name="line302">0302: </a>
+<a name="line303">0303: </a><font color="#000000">#define UISD    0177600         </font><font color="#800000">/* first user I-space descriptor register */</font><font color="#000000"></font>
+<a name="line304">0304: </a>
+<a name="line305">0305: </a><font color="#000000">#define UISA    0177640         </font><font color="#800000">/* first user I-space address register */</font><font color="#000000"></font>
+<a name="line306">0306: </a>
+<a name="line307">0307: </a><font color="#000000">#define UDSA    0177660         </font><font color="#800000">/* first user D-space address register */</font><font color="#000000"></font>
+<a name="line308">0308: </a>
+<a name="line309">0309: </a>
+<a name="line310">0310: </a><font color="#000000">#define UBMAP   0170200         </font><font color="#800000">/* address to access 11/70 UNIBUS map */</font><font color="#000000"></font>
+<a name="line311">0311: </a>
+<a name="line312">0312: </a><font color="#000000">#define RO      02              </font><font color="#800000">/* access abilities */</font><font color="#000000"></font>
+<a name="line313">0313: </a><font color="#000000">#define WO      04</font>
+<a name="line314">0314: </a><font color="#000000">#define RW      06</font>
+<a name="line315">0315: </a><font color="#000000">#define ED      010             </font><font color="#800000">/* extend direction */</font><font color="#000000"></font>
+<a name="line316">0316: </a>
+<a name="line317">0317: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line318">0318: </a>
+<a name="line319">0319: </a>int     *ka6;           <font color="#800000">/* 11/40 KISA6; 11/45 KDSA6 */</font>
+</pre>
+</body>
+
+</html>
+
+<html>
+<head>
+<title>proc.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line350">0350: </a><font color="#800000">/*</font>
+<a name="line351">0351: </a><font color="#800000"> * One structure allocated per active</font>
+<a name="line352">0352: </a><font color="#800000"> * process. It contains all data needed</font>
+<a name="line353">0353: </a><font color="#800000"> * about the process while the</font>
+<a name="line354">0354: </a><font color="#800000"> * process may be swapped out.</font>
+<a name="line355">0355: </a><font color="#800000"> * Other per process data (user.h)</font>
+<a name="line356">0356: </a><font color="#800000"> * is swapped with the process.</font>
+<a name="line357">0357: </a><font color="#800000"> */</font>
+<a name="line358">0358: </a><font color="#000000">struct</font>  proc
+<a name="line359">0359: </a>{
+<a name="line360">0360: </a>        char    p_stat;
+<a name="line361">0361: </a>        char    p_flag;
+<a name="line362">0362: </a>        char    p_pri;          <font color="#800000">/* priority, negative is high */</font>
+<a name="line363">0363: </a>        char    p_sig;          <font color="#800000">/* signal number sent to this process */</font>
+<a name="line364">0364: </a>        char    p_uid;          <font color="#800000">/* user id, used to direct tty signals */</font>
+<a name="line365">0365: </a>        char    p_time;         <font color="#800000">/* resident time for scheduling */</font>
+<a name="line366">0366: </a>        char    p_cpu;          <font color="#800000">/* cpu usage for scheduling */</font>
+<a name="line367">0367: </a>        char    p_nice;         <font color="#800000">/* nice for scheduling */</font>
+<a name="line368">0368: </a>        int     p_ttyp;         <font color="#800000">/* controlling tty */</font>
+<a name="line369">0369: </a>        int     p_pid;          <font color="#800000">/* unique process id */</font>
+<a name="line370">0370: </a>        int     p_ppid;         <font color="#800000">/* process id of parent */</font>
+<a name="line371">0371: </a>        int     p_addr;         <font color="#800000">/* address of swappable image */</font>
+<a name="line372">0372: </a>        int     p_size;         <font color="#800000">/* size of swappable image (*64 bytes) */</font>
+<a name="line373">0373: </a>        int     p_wchan;        <font color="#800000">/* event process is awaiting */</font>
+<a name="line374">0374: </a>        int     *p_textp;       <font color="#800000">/* pointer to text structure */</font>
+<a name="line375">0375: </a>
+<a name="line376">0376: </a>} proc[NPROC];
+<a name="line377">0377: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line378">0378: </a>
+<a name="line379">0379: </a><font color="#800000">/* stat codes */</font>
+<a name="line380">0380: </a>
+<a name="line381">0381: </a>
+<a name="line382">0382: </a><font color="#000000">#define SSLEEP  1               </font><font color="#800000">/* sleeping on high priority */</font><font color="#000000"></font>
+<a name="line383">0383: </a><font color="#000000">#define SWAIT   2               </font><font color="#800000">/* sleeping on low priority */</font><font color="#000000"></font>
+<a name="line384">0384: </a><font color="#000000">#define SRUN    3               </font><font color="#800000">/* running */</font><font color="#000000"></font>
+<a name="line385">0385: </a><font color="#000000">#define SIDL    4               </font><font color="#800000">/* intermediate state in process creation */</font><font color="#000000"></font>
+<a name="line386">0386: </a><font color="#000000">#define SZOMB   5               </font><font color="#800000">/* intermediate state in process termination */</font><font color="#000000"></font>
+<a name="line387">0387: </a><font color="#000000">#define SSTOP   6               </font><font color="#800000">/* process being traced */</font><font color="#000000"></font>
+<a name="line388">0388: </a>
+<a name="line389">0389: </a><font color="#800000">/* flag codes */</font>
+<a name="line390">0390: </a>
+<a name="line391">0391: </a><font color="#000000">#define SLOAD   01              </font><font color="#800000">/* in core */</font><font color="#000000"></font>
+<a name="line392">0392: </a><font color="#000000">#define SSYS    02              </font><font color="#800000">/* scheduling process */</font><font color="#000000"></font>
+<a name="line393">0393: </a><font color="#000000">#define SLOCK   04              </font><font color="#800000">/* process cannot be swapped */</font><font color="#000000"></font>
+<a name="line394">0394: </a><font color="#000000">#define SSWAP   010             </font><font color="#800000">/* process is being swapped out */</font><font color="#000000"></font>
+<a name="line395">0395: </a><font color="#000000">#define STRC    020             </font><font color="#800000">/* process is being traced */</font><font color="#000000"></font>
+<a name="line396">0396: </a><font color="#000000">#define SWTED   040             </font><font color="#800000">/* another tracing flag */</font><font color="#000000"></font>
+</pre>
+</body>
+
+</html>
+
+
 <html>
 <head>
 <title>user.h</title>
@@ -6143,277 +6432,286 @@
 </head>
 
 
-6600: #
-6601: /*
-6602:  */
-6603: 
-6604: #include "../param.h"
-6605: #include "../user.h"
-6606: #include "../filsys.h"
-6607: #include "../file.h"
-6608: #include "../conf.h"
-6609: #include "../inode.h"
-6610: #include "../reg.h"
-6611: 
-6612: /*
-6613:  * Convert a user supplied
-6614:  * file descriptor into a pointer
-6615:  * to a file structure.
-6616:  * Only task is to check range
-6617:  * of the descriptor.
-6618:  */
-6619: getf(f)
-6620: {
-6621:         register *fp, rf;
-6622: 
-6623:         rf = f;
-6624:         if(rf&lt;0 || rf&gt;=NOFILE)
-6625:                 goto bad;
-6626:         fp = u.u_ofile[rf];
-6627:         if(fp != NULL)
-6628:                 return(fp);
-6629: bad:
-6630:         u.u_error = EBADF;
-6631:         return(NULL);
-6632: }
-6633: /* ---------------------------       */
-6634: 
-6635: /*
-6636:  * Internal form of close.
-6637:  * Decrement reference count on
-6638:  * file structure and call closei
-6639:  * on last closef.
-6640:  * Also make sure the pipe protocol
-6641:  * does not constipate.
-6642:  */
-6643: closef(fp)
-6644: int *fp;
-6645: {
-6646:         register *rfp, *ip;
-6647: 
-6648:         rfp = fp;
-6649:         if(rfp-&gt;f_flag&amp;FPIPE) {
-6650:                 ip = rfp-&gt;f_inode;
-6651:                 ip-&gt;i_mode =&amp; ~(IREAD|IWRITE);
-6652:                 wakeup(ip+1);
-6653:                 wakeup(ip+2);
-6654:         }
-6655:         if(rfp-&gt;f_count &lt;= 1)
-6656:                 closei(rfp-&gt;f_inode, rfp-&gt;f_flag&amp;FWRITE);
-6657:         rfp-&gt;f_count--;
-6658: }
-6659: /* ---------------------------       */
-6660: 
-6661: /*
-6662:  * Decrement reference count on an
-6663:  * inode due to the removal of a
-6664:  * referencing file structure.
-6665:  * On the last closei, switchout
-6666:  * to the close entry point of special
-6667:  * device handler.
-6668:  * Note that the handler gets called
-6669:  * on every open and only on the last
-6670:  * close.
-6671:  */
-6672: closei(ip, rw)
-6673: int *ip;
-6674: {
-6675:         register *rip;
-6676:         register dev, maj;
-6677: 
-6678:         rip = ip;
-6679:         dev = rip-&gt;i_addr[0];
-6680:         maj = rip-&gt;i_addr[0].d_major;
-6681:         if(rip-&gt;i_count &lt;= 1)
-6682:         switch(rip-&gt;i_mode&amp;IFMT) {
-6683: 
-6684:         case IFCHR:
-6685:                 (*cdevsw[maj].d_close)(dev, rw);
-6686:                 break;
-6687: 
-6688:         case IFBLK:
-6689:                 (*bdevsw[maj].d_close)(dev, rw);
-6690:         }
-6691:         iput(rip);
-6692: }
-6693: /* ---------------------------       */
-6694: 
-6695: /*
-6696:  * openi called to allow handler
-6697:  * of special files to initialize and
-6698:  * validate before actual IO.
-6699:  * Called on all sorts of opens
-6700:  * and also on mount.
-6701:  */
-6702: openi(ip, rw)
-6703: int *ip;
-6704: {
-6705:         register *rip;
-6706:         register dev, maj;
-6707: 
-6708:         rip = ip;
-6709:         dev = rip-&gt;i_addr[0];
-6710:         maj = rip-&gt;i_addr[0].d_major;
-6711:         switch(rip-&gt;i_mode&amp;IFMT) {
-6712: 
-6713:         case IFCHR:
-6714:                 if(maj &gt;= nchrdev)
-6715:                         goto bad;
-6716:                 (*cdevsw[maj].d_open)(dev, rw);
-6717:                 break;
-6718: 
-6719:         case IFBLK:
-6720:                 if(maj &gt;= nblkdev)
-6721:                         goto bad;
-6722:                 (*bdevsw[maj].d_open)(dev, rw);
-6723:         }
-6724:         return;
-6725: 
-6726: bad:
-6727:         u.u_error = ENXIO;
-6728: }
-6729: /* ---------------------------       */
-6730: 
-6731: /*
-6732:  * Check mode permission on inode pointer.
-6733:  * Mode is READ, WRITE or EXEC.
-6734:  * In the case of WRITE, the
-6735:  * read-only status of the file
-6736:  * system is checked.
-6737:  * Also in WRITE, prototype text
-6738:  * segments cannot be written.
-6739:  * The mode is shifted to select
-6740:  * the owner/group/other fields.
-6741:  * The super user is granted all
-6742:  * permissions except for EXEC where
-6743:  * at least one of the EXEC bits must
-6744:  * be on.
-6745:  */
-6746: access(aip, mode)
-6747: int *aip;
-6748: {
-6749:         register *ip, m;
-6750: 
-6751:         ip = aip;
-6752:         m = mode;
-6753:         if(m == IWRITE) {
-6754:                 if(getfs(ip-&gt;i_dev)-&gt;s_ronly != 0) {
-6755:                         u.u_error = EROFS;
-6756:                         return(1);
-6757:                 }
-6758:                 if(ip-&gt;i_flag &amp; ITEXT) {
-6759:                         u.u_error = ETXTBSY;
-6760:                         return(1);
-6761:                 }
-6762:         }
-6763:         if(u.u_uid == 0) {
-6764:                 if(m == IEXEC &amp;&amp; (ip-&gt;i_mode &amp; 
-6765:                         (IEXEC | (IEXEC&gt;&gt;3) | (IEXEC&gt;&gt;6))) == 0)
-6766:                                 goto bad;
-6767:                 return(0);
-6768:         }
-6769:         if(u.u_uid != ip-&gt;i_uid) {
-6770:                 m =&gt;&gt; 3;
-6771:                 if(u.u_gid != ip-&gt;i_gid)
-6772:                         m =&gt;&gt; 3;
-6773:         }
-6774:         if((ip-&gt;i_mode&amp;m) != 0)
-6775:                 return(0);
-6776: 
-6777: bad:
-6778:         u.u_error = EACCES;
-6779:         return(1);
-6780: }
-6781: /* ---------------------------       */
-6782: 
-6783: /*
-6784:  * Look up a pathname and test if
-6785:  * the resultant inode is owned by the
-6786:  * current user.
-6787:  * If not, try for super-user.
-6788:  * If permission is granted,
-6789:  * return inode pointer.
-6790:  */
-6791: owner()
-6792: {
-6793:         register struct inode *ip;
-6794:         extern uchar();
-6795: 
-6796:         if ((ip = namei(uchar, 0)) == NULL)
-6797:                 return(NULL);
-6798:         if(u.u_uid == ip-&gt;i_uid)
-6799:                 return(ip);
-6800:         if (suser())
-6801:                 return(ip);
-6802:         iput(ip);
-6803:         return(NULL);
-6804: }
-6805: /* ---------------------------       */
-6806: 
-6807: /*
-6808:  * Test if the current user is the
-6809:  * super user.
-6810:  */
-6811: suser()
-6812: {
-6813: 
-6814:         if(u.u_uid == 0)
-6815:                 return(1);
-6816:         u.u_error = EPERM;
-6817:         return(0);
-6818: }
-6819: /* ---------------------------       */
-6820: 
-6821: /*
-6822:  * Allocate a user file descriptor.
-6823:  */
-6824: ufalloc()
-6825: {
-6826:         register i;
-6827: 
-6828:         for (i=0; i&lt;NOFILE; i++)
-6829:                 if (u.u_ofile[i] == NULL) {
-6830:                         u.u_ar0[R0] = i;
-6831:                         return(i);
-6832:                 }
-6833:         u.u_error = EMFILE;
-6834:         return(-1);
-6835: }
-6836: /* ---------------------------       */
-6837: 
-6838: /*
-6839:  * Allocate a user file descriptor
-6840:  * and a file structure.
-6841:  * Initialize the descriptor
-6842:  * to point at the file structure.
-6843:  *
-6844:  * no file -- if there are no available
-6845:  *      file structures.
-6846:  */
-6847: falloc()
-6848: {
-6849:         register struct file *fp;
-6850:         register i;
-6851: 
-6852:         if ((i = ufalloc()) &lt; 0)
-6853:                 return(NULL);
-6854:         for (fp = &amp;file[0]; fp &lt; &amp;file[NFILE]; fp++)
-6855:                 if (fp-&gt;f_count==0) {
-6856:                         u.u_ofile[i] = fp;
-6857:                         fp-&gt;f_count++;
-6858:                         fp-&gt;f_offset[0] = 0;
-6859:                         fp-&gt;f_offset[1] = 0;
-6860:                         return(fp);
-6861:                 }
-6862:         printf("no file\n");
-6863:         u.u_error = ENFILE;
-6864:         return(NULL);
-6865: }
-6866: /* ---------------------------       */
 
+<html>
+<head>
+<title>fio.c</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
 
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line6600">6600: </a><font color="#000000">#</font>
+<a name="line6601">6601: </a><font color="#800000">/*</font>
+<a name="line6602">6602: </a><font color="#800000"> */</font>
+<a name="line6603">6603: </a>
+<a name="line6604">6604: </a><font color="#000000">#include "../param.h"</font>
+<a name="line6605">6605: </a><font color="#000000">#include "../user.h"</font>
+<a name="line6606">6606: </a><font color="#000000">#include "../filsys.h"</font>
+<a name="line6607">6607: </a><font color="#000000">#include "../file.h"</font>
+<a name="line6608">6608: </a><font color="#000000">#include "../conf.h"</font>
+<a name="line6609">6609: </a><font color="#000000">#include "../inode.h"</font>
+<a name="line6610">6610: </a><font color="#000000">#include "../reg.h"</font>
+<a name="line6611">6611: </a>
+<a name="line6612">6612: </a><font color="#800000">/*</font>
+<a name="line6613">6613: </a><font color="#800000"> * Convert a user supplied</font>
+<a name="line6614">6614: </a><font color="#800000"> * file descriptor into a pointer</font>
+<a name="line6615">6615: </a><font color="#800000"> * to a file structure.</font>
+<a name="line6616">6616: </a><font color="#800000"> * Only task is to check range</font>
+<a name="line6617">6617: </a><font color="#800000"> * of the descriptor.</font>
+<a name="line6618">6618: </a><font color="#800000"> */</font>
+<a name="line6619">6619: </a><font color="#000000"><a name="etf"></a>getf(f)</font>
+<a name="line6620">6620: </a>{
+<a name="line6621">6621: </a>        register *fp, rf;
+<a name="line6622">6622: </a>
+<a name="line6623">6623: </a>        rf = f;
+<a name="line6624">6624: </a>        <font color="#000000">if</font>(rf&lt;0 || rf&gt;=NOFILE)
+<a name="line6625">6625: </a>                <font color="#000000">goto</font> bad;
+<a name="line6626">6626: </a>        fp = u.u_ofile[rf];
+<a name="line6627">6627: </a>        <font color="#000000">if</font>(fp != NULL)
+<a name="line6628">6628: </a>                <font color="#000000">return</font>(fp);
+<a name="line6629">6629: </a><font color="#000000">bad:</font>
+<a name="line6630">6630: </a>        u.u_error = EBADF;
+<a name="line6631">6631: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6632">6632: </a>}
+<a name="line6633">6633: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6634">6634: </a>
+<a name="line6635">6635: </a><font color="#800000">/*</font>
+<a name="line6636">6636: </a><font color="#800000"> * Internal form of close.</font>
+<a name="line6637">6637: </a><font color="#800000"> * Decrement reference count on</font>
+<a name="line6638">6638: </a><font color="#800000"> * file structure and call closei</font>
+<a name="line6639">6639: </a><font color="#800000"> * on last closef.</font>
+<a name="line6640">6640: </a><font color="#800000"> * Also make sure the pipe protocol</font>
+<a name="line6641">6641: </a><font color="#800000"> * does not constipate.</font>
+<a name="line6642">6642: </a><font color="#800000"> */</font>
+<a name="line6643">6643: </a><font color="#000000"><a name="losef"></a>closef(fp)</font>
+<a name="line6644">6644: </a>int *fp;
+<a name="line6645">6645: </a>{
+<a name="line6646">6646: </a>        register *rfp, *ip;
+<a name="line6647">6647: </a>
+<a name="line6648">6648: </a>        rfp = fp;
+<a name="line6649">6649: </a>        <font color="#000000">if</font>(rfp-&gt;f_flag&amp;FPIPE) {
+<a name="line6650">6650: </a>                ip = rfp-&gt;f_inode;
+<a name="line6651">6651: </a>                ip-&gt;i_mode =&amp; ~(IREAD|IWRITE);
+<a name="line6652">6652: </a>                wakeup(ip+1);
+<a name="line6653">6653: </a>                wakeup(ip+2);
+<a name="line6654">6654: </a>        }
+<a name="line6655">6655: </a>        <font color="#000000">if</font>(rfp-&gt;f_count &lt;= 1)
+<a name="line6656">6656: </a>                closei(rfp-&gt;f_inode, rfp-&gt;f_flag&amp;FWRITE);
+<a name="line6657">6657: </a>        rfp-&gt;f_count--;
+<a name="line6658">6658: </a>}
+<a name="line6659">6659: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6660">6660: </a>
+<a name="line6661">6661: </a><font color="#800000">/*</font>
+<a name="line6662">6662: </a><font color="#800000"> * Decrement reference count on an</font>
+<a name="line6663">6663: </a><font color="#800000"> * inode due to the removal of a</font>
+<a name="line6664">6664: </a><font color="#800000"> * referencing file structure.</font>
+<a name="line6665">6665: </a><font color="#800000"> * On the last closei, switchout</font>
+<a name="line6666">6666: </a><font color="#800000"> * to the close entry point of special</font>
+<a name="line6667">6667: </a><font color="#800000"> * device handler.</font>
+<a name="line6668">6668: </a><font color="#800000"> * Note that the handler gets called</font>
+<a name="line6669">6669: </a><font color="#800000"> * on every open and only on the last</font>
+<a name="line6670">6670: </a><font color="#800000"> * close.</font>
+<a name="line6671">6671: </a><font color="#800000"> */</font>
+<a name="line6672">6672: </a><font color="#000000"><a name="losei"></a>closei(ip, rw)</font>
+<a name="line6673">6673: </a>int *ip;
+<a name="line6674">6674: </a>{
+<a name="line6675">6675: </a>        register *rip;
+<a name="line6676">6676: </a>        register dev, maj;
+<a name="line6677">6677: </a>
+<a name="line6678">6678: </a>        rip = ip;
+<a name="line6679">6679: </a>        dev = rip-&gt;i_addr[0];
+<a name="line6680">6680: </a>        maj = rip-&gt;i_addr[0].d_major;
+<a name="line6681">6681: </a>        <font color="#000000">if</font>(rip-&gt;i_count &lt;= 1)
+<a name="line6682">6682: </a>        <font color="#000000">switch</font>(rip-&gt;i_mode&amp;IFMT) {
+<a name="line6683">6683: </a>
+<a name="line6684">6684: </a>        <font color="#000000">case</font> IFCHR:
+<a name="line6685">6685: </a>                (*cdevsw[maj].d_close)(dev, rw);
+<a name="line6686">6686: </a>                <font color="#000000">break</font>;
+<a name="line6687">6687: </a>
+<a name="line6688">6688: </a>        <font color="#000000">case</font> IFBLK:
+<a name="line6689">6689: </a>                (*bdevsw[maj].d_close)(dev, rw);
+<a name="line6690">6690: </a>        }
+<a name="line6691">6691: </a>        iput(rip);
+<a name="line6692">6692: </a>}
+<a name="line6693">6693: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6694">6694: </a>
+<a name="line6695">6695: </a><font color="#800000">/*</font>
+<a name="line6696">6696: </a><font color="#800000"> * openi called to allow handler</font>
+<a name="line6697">6697: </a><font color="#800000"> * of special files to initialize and</font>
+<a name="line6698">6698: </a><font color="#800000"> * validate before actual IO.</font>
+<a name="line6699">6699: </a><font color="#800000"> * Called on all sorts of opens</font>
+<a name="line6700">6700: </a><font color="#800000"> * and also on mount.</font>
+<a name="line6701">6701: </a><font color="#800000"> */</font>
+<a name="line6702">6702: </a><font color="#000000"><a name="peni"></a>openi(ip, rw)</font>
+<a name="line6703">6703: </a>int *ip;
+<a name="line6704">6704: </a>{
+<a name="line6705">6705: </a>        register *rip;
+<a name="line6706">6706: </a>        register dev, maj;
+<a name="line6707">6707: </a>
+<a name="line6708">6708: </a>        rip = ip;
+<a name="line6709">6709: </a>        dev = rip-&gt;i_addr[0];
+<a name="line6710">6710: </a>        maj = rip-&gt;i_addr[0].d_major;
+<a name="line6711">6711: </a>        <font color="#000000">switch</font>(rip-&gt;i_mode&amp;IFMT) {
+<a name="line6712">6712: </a>
+<a name="line6713">6713: </a>        <font color="#000000">case</font> IFCHR:
+<a name="line6714">6714: </a>                <font color="#000000">if</font>(maj &gt;= nchrdev)
+<a name="line6715">6715: </a>                        <font color="#000000">goto</font> bad;
+<a name="line6716">6716: </a>                (*cdevsw[maj].d_open)(dev, rw);
+<a name="line6717">6717: </a>                <font color="#000000">break</font>;
+<a name="line6718">6718: </a>
+<a name="line6719">6719: </a>        <font color="#000000">case</font> IFBLK:
+<a name="line6720">6720: </a>                <font color="#000000">if</font>(maj &gt;= nblkdev)
+<a name="line6721">6721: </a>                        <font color="#000000">goto</font> bad;
+<a name="line6722">6722: </a>                (*bdevsw[maj].d_open)(dev, rw);
+<a name="line6723">6723: </a>        }
+<a name="line6724">6724: </a>        <font color="#000000">return</font>;
+<a name="line6725">6725: </a>
+<a name="line6726">6726: </a><font color="#000000">bad:</font>
+<a name="line6727">6727: </a>        u.u_error = ENXIO;
+<a name="line6728">6728: </a>}
+<a name="line6729">6729: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6730">6730: </a>
+<a name="line6731">6731: </a><font color="#800000">/*</font>
+<a name="line6732">6732: </a><font color="#800000"> * Check mode permission on inode pointer.</font>
+<a name="line6733">6733: </a><font color="#800000"> * Mode is READ, WRITE or EXEC.</font>
+<a name="line6734">6734: </a><font color="#800000"> * In the case of WRITE, the</font>
+<a name="line6735">6735: </a><font color="#800000"> * read-only status of the file</font>
+<a name="line6736">6736: </a><font color="#800000"> * system is checked.</font>
+<a name="line6737">6737: </a><font color="#800000"> * Also in WRITE, prototype text</font>
+<a name="line6738">6738: </a><font color="#800000"> * segments cannot be written.</font>
+<a name="line6739">6739: </a><font color="#800000"> * The mode is shifted to select</font>
+<a name="line6740">6740: </a><font color="#800000"> * the owner/group/other fields.</font>
+<a name="line6741">6741: </a><font color="#800000"> * The super user is granted all</font>
+<a name="line6742">6742: </a><font color="#800000"> * permissions except for EXEC where</font>
+<a name="line6743">6743: </a><font color="#800000"> * at least one of the EXEC bits must</font>
+<a name="line6744">6744: </a><font color="#800000"> * be on.</font>
+<a name="line6745">6745: </a><font color="#800000"> */</font>
+<a name="line6746">6746: </a><font color="#000000"><a name="ccess"></a>access(aip, mode)</font>
+<a name="line6747">6747: </a>int *aip;
+<a name="line6748">6748: </a>{
+<a name="line6749">6749: </a>        register *ip, m;
+<a name="line6750">6750: </a>
+<a name="line6751">6751: </a>        ip = aip;
+<a name="line6752">6752: </a>        m = mode;
+<a name="line6753">6753: </a>        <font color="#000000">if</font>(m == IWRITE) {
+<a name="line6754">6754: </a>                <font color="#000000">if</font>(getfs(ip-&gt;i_dev)-&gt;s_ronly != 0) {
+<a name="line6755">6755: </a>                        u.u_error = EROFS;
+<a name="line6756">6756: </a>                        <font color="#000000">return</font>(1);
+<a name="line6757">6757: </a>                }
+<a name="line6758">6758: </a>                <font color="#000000">if</font>(ip-&gt;i_flag &amp; ITEXT) {
+<a name="line6759">6759: </a>                        u.u_error = ETXTBSY;
+<a name="line6760">6760: </a>                        <font color="#000000">return</font>(1);
+<a name="line6761">6761: </a>                }
+<a name="line6762">6762: </a>        }
+<a name="line6763">6763: </a>        <font color="#000000">if</font>(u.u_uid == 0) {
+<a name="line6764">6764: </a>                <font color="#000000">if</font>(m == IEXEC &amp;&amp; (ip-&gt;i_mode &amp; 
+<a name="line6765">6765: </a>                        (IEXEC | (IEXEC&gt;&gt;3) | (IEXEC&gt;&gt;6))) == 0)
+<a name="line6766">6766: </a>                                <font color="#000000">goto</font> bad;
+<a name="line6767">6767: </a>                <font color="#000000">return</font>(0);
+<a name="line6768">6768: </a>        }
+<a name="line6769">6769: </a>        <font color="#000000">if</font>(u.u_uid != ip-&gt;i_uid) {
+<a name="line6770">6770: </a>                m =&gt;&gt; 3;
+<a name="line6771">6771: </a>                <font color="#000000">if</font>(u.u_gid != ip-&gt;i_gid)
+<a name="line6772">6772: </a>                        m =&gt;&gt; 3;
+<a name="line6773">6773: </a>        }
+<a name="line6774">6774: </a>        <font color="#000000">if</font>((ip-&gt;i_mode&amp;m) != 0)
+<a name="line6775">6775: </a>                <font color="#000000">return</font>(0);
+<a name="line6776">6776: </a>
+<a name="line6777">6777: </a><font color="#000000">bad:</font>
+<a name="line6778">6778: </a>        u.u_error = EACCES;
+<a name="line6779">6779: </a>        <font color="#000000">return</font>(1);
+<a name="line6780">6780: </a>}
+<a name="line6781">6781: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6782">6782: </a>
+<a name="line6783">6783: </a><font color="#800000">/*</font>
+<a name="line6784">6784: </a><font color="#800000"> * Look up a pathname and test if</font>
+<a name="line6785">6785: </a><font color="#800000"> * the resultant inode is owned by the</font>
+<a name="line6786">6786: </a><font color="#800000"> * current user.</font>
+<a name="line6787">6787: </a><font color="#800000"> * If not, try for super-user.</font>
+<a name="line6788">6788: </a><font color="#800000"> * If permission is granted,</font>
+<a name="line6789">6789: </a><font color="#800000"> * return inode pointer.</font>
+<a name="line6790">6790: </a><font color="#800000"> */</font>
+<a name="line6791">6791: </a><font color="#000000"><a name="wner"></a>owner()</font>
+<a name="line6792">6792: </a>{
+<a name="line6793">6793: </a>        register <font color="#000000">struct inode</font> *ip;
+<a name="line6794">6794: </a>        extern uchar();
+<a name="line6795">6795: </a>
+<a name="line6796">6796: </a>        <font color="#000000">if</font> ((ip = namei(uchar, 0)) == NULL)
+<a name="line6797">6797: </a>                <font color="#000000">return</font>(NULL);
+<a name="line6798">6798: </a>        <font color="#000000">if</font>(u.u_uid == ip-&gt;i_uid)
+<a name="line6799">6799: </a>                <font color="#000000">return</font>(ip);
+<a name="line6800">6800: </a>        <font color="#000000">if</font> (suser())
+<a name="line6801">6801: </a>                <font color="#000000">return</font>(ip);
+<a name="line6802">6802: </a>        iput(ip);
+<a name="line6803">6803: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6804">6804: </a>}
+<a name="line6805">6805: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6806">6806: </a>
+<a name="line6807">6807: </a><font color="#800000">/*</font>
+<a name="line6808">6808: </a><font color="#800000"> * Test if the current user is the</font>
+<a name="line6809">6809: </a><font color="#800000"> * super user.</font>
+<a name="line6810">6810: </a><font color="#800000"> */</font>
+<a name="line6811">6811: </a><font color="#000000"><a name="user"></a>suser()</font>
+<a name="line6812">6812: </a>{
+<a name="line6813">6813: </a>
+<a name="line6814">6814: </a>        <font color="#000000">if</font>(u.u_uid == 0)
+<a name="line6815">6815: </a>                <font color="#000000">return</font>(1);
+<a name="line6816">6816: </a>        u.u_error = EPERM;
+<a name="line6817">6817: </a>        <font color="#000000">return</font>(0);
+<a name="line6818">6818: </a>}
+<a name="line6819">6819: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6820">6820: </a>
+<a name="line6821">6821: </a><font color="#800000">/*</font>
+<a name="line6822">6822: </a><font color="#800000"> * Allocate a user file descriptor.</font>
+<a name="line6823">6823: </a><font color="#800000"> */</font>
+<a name="line6824">6824: </a><font color="#000000"><a name="falloc"></a>ufalloc()</font>
+<a name="line6825">6825: </a>{
+<a name="line6826">6826: </a>        register i;
+<a name="line6827">6827: </a>
+<a name="line6828">6828: </a>        <font color="#000000">for</font> (i=0; i&lt;NOFILE; i++)
+<a name="line6829">6829: </a>                <font color="#000000">if</font> (u.u_ofile[i] == NULL) {
+<a name="line6830">6830: </a>                        u.u_ar0[R0] = i;
+<a name="line6831">6831: </a>                        <font color="#000000">return</font>(i);
+<a name="line6832">6832: </a>                }
+<a name="line6833">6833: </a>        u.u_error = EMFILE;
+<a name="line6834">6834: </a>        <font color="#000000">return</font>(-1);
+<a name="line6835">6835: </a>}
+<a name="line6836">6836: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6837">6837: </a>
+<a name="line6838">6838: </a><font color="#800000">/*</font>
+<a name="line6839">6839: </a><font color="#800000"> * Allocate a user file descriptor</font>
+<a name="line6840">6840: </a><font color="#800000"> * and a file structure.</font>
+<a name="line6841">6841: </a><font color="#800000"> * Initialize the descriptor</font>
+<a name="line6842">6842: </a><font color="#800000"> * to point at the file structure.</font>
+<a name="line6843">6843: </a><font color="#800000"> *</font>
+<a name="line6844">6844: </a><font color="#800000"> * no file -- if there are no available</font>
+<a name="line6845">6845: </a><font color="#800000"> *      file structures.</font>
+<a name="line6846">6846: </a><font color="#800000"> */</font>
+<a name="line6847">6847: </a><font color="#000000"><a name="alloc"></a>falloc()</font>
+<a name="line6848">6848: </a>{
+<a name="line6849">6849: </a>        register <font color="#000000">struct file</font> *fp;
+<a name="line6850">6850: </a>        register i;
+<a name="line6851">6851: </a>
+<a name="line6852">6852: </a>        <font color="#000000">if</font> ((i = ufalloc()) &lt; 0)
+<a name="line6853">6853: </a>                <font color="#000000">return</font>(NULL);
+<a name="line6854">6854: </a>        <font color="#000000">for</font> (fp = &amp;file[0]; fp &lt; &amp;file[NFILE]; fp++)
+<a name="line6855">6855: </a>                <font color="#000000">if</font> (fp-&gt;f_count==0) {
+<a name="line6856">6856: </a>                        u.u_ofile[i] = fp;
+<a name="line6857">6857: </a>                        fp-&gt;f_count++;
+<a name="line6858">6858: </a>                        fp-&gt;f_offset[0] = 0;
+<a name="line6859">6859: </a>                        fp-&gt;f_offset[1] = 0;
+<a name="line6860">6860: </a>                        <font color="#000000">return</font>(fp);
+<a name="line6861">6861: </a>                }
+<a name="line6862">6862: </a>        printf(<font color="#000000">"no file\n"</font>);
+<a name="line6863">6863: </a>        u.u_error = ENFILE;
+<a name="line6864">6864: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6865">6865: </a>}
+<a name="line6866">6866: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
 
-
+</html>
 
 <html>
 <head>
