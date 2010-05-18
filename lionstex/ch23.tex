@@ -1,0 +1,474 @@
+%
+% The Lion's Commentary, file ch23.tex, version 1.4, 16 May 1994
+%
+\se{Character Handling}
+
+Buffering for character special devices
+is provided via a set of four word
+blocks, each of which provides storage
+for six characters. The prototype
+storage block is ``cblock'' (8140) which
+incorporates a word pointer (to a similar
+structure) along with the six characters.
+
+Structures of type ``clist'' (7908) which
+contain a character counter plus a head
+and tail pointer are used as ``headers''
+for lists of blocks of type ``cblock''.
+
+``cblock''s which are not in current use
+are linked via their head pointers into
+a list whose head is the pointer
+``cfreelist'' (3149). The head pointer
+for the last element of the list has
+the value ``NULL''.
+
+A list of ``cblock''s provides storage
+for a list of characters. The procedure
+``putc'' may be used to add a character
+to the tail of such a list, and ``getc'',
+to remove a character from the head of
+such a list.
+
+Figures 23.1 through 23.4 illustrate
+the development of a list as characters
+are deleted and added.
+
+\input{fig23_1.tex}
+
+\input{fig23_2.tex}
+
+Initially the list is assumed to contain the fourteen characters
+``efghijklmnopqr''. Note that the head
+and tail pointers point to {\bf characters}.
+If the first character, ``e'', is removed
+by ``getc'', the situation portrayed in
+Figure 23.1 changes to that of Figure
+23.2. The character count has been
+decremented and the head pointer has
+been advanced by one character position.
+
+If a further character, ``f'', is removed
+from the head of the list, the
+situation becomes as in Figure 23.3.
+The character count has been decremented;
+the first ``cblock'' no longer
+contains any useful information and has
+been returned to ``cfreelist''; and the
+head pointer now points to the first
+character in the second ``cblock''.
+
+\input{fig23_3.tex}
+
+The question now poses itself: ``how is
+the difference between the first and
+second situations detected so that the
+action taken is always appropriate?'':
+
+The answer (if you have not already
+guessed) involves looklng at the value
+of the pointer address modulo 8. Since
+division by eight is easily performed
+on a binary computer, the reason for
+the choice of six characters per
+``cblock'' should now also be apparent.
+
+The addition of a character to the list
+is illustrated in the change between
+Figure 23.3  and Figure 23.4.
+
+\input{fig23_4.tex}
+
+Since the last ``cblock'' ln Figure 23.3
+was full, a new one has been obtained
+from ``cfreelist'' and linked into the
+list of ``cblock''s. The character count
+and tail pointer have been adjusted appropriately.
+
+\sbs{cinit (8234)}
+
+This procedure, which is called once by
+``main'' (1613), links the set of character buffers into the free list,
+``cfreelist'', and counts the number of
+character device types.
+
+\bd
+\item[8239:] ``ccp'' is the address of the first
+word in the array ``cfree'' (8146);
+
+\item[8240:] Round ``ccp'' up to the next
+highest multiple of eight, and
+mark out ``cblock'' sized pieces,
+taking care not to exceed the
+boundary of ``cfree''.
+
+Note. In general there will be
+``NCLIST -- 1'' (rather than
+``NCLIST'') blocks so defined;
+
+\item[8241:] Set the first word of the
+``cblock'' to point to the current
+head of the free list.
+
+Note that ``c\_next'' is defined on
+line 8141, and that the initial
+value of ``cfreelist'' is ``NULL''.
+
+\item[8242:] Update ``cfreelist'' to point to
+the new head of the list;
+
+\item[8244:] Count the number of character
+device types. Upon reference to
+``cdevsw'' on Sheet 46, it will be
+seen that ``nchrdev'' will be set
+to 16, whereas a more appropriate
+value would be 10.
+\ed
+
+\sbs{getc (0930)}
+
+This procedure is called by
+
+\begin{verbatim}
+   flushtty (8258, 8259, 8264)
+   canon    (8292)    pcread  (8688)
+   ttstart  (8520)    pcstart (8714)
+   ttread   (8544)    lpstart (8971)
+   pcclose  (8673)
+\end{verbatim}
+
+\noindent with a single argument which is the
+address of a ``clist'' structure.
+
+\bd
+\item[0931:] Copy the parameter to r1 and save
+the initial processor status word
+and value of r2 on the stack;
+
+\item[0934:] Set the processor priority to
+five (higher than the interrupt
+priority of a character device);
+
+\item[0936:] r1 points to the first word of a
+``clist'' structure (i.e. a character count). Move the second word
+of this structure (i.e. a pointer
+to the head character) to r2;
+
+\item[0937:] If the list is empty (head
+pointer is ``NULL'') go to line 0961;
+
+\item[0938:] Move the head character to r0 and
+increment r2 as a side effect;
+
+\item[0939:] Mask r0 to get rid of any
+extended negative sign;
+
+\item[0940:] Store the updated head pointer
+back in the ``clist'' structure.
+(This may have to be altered
+later.);
+
+\item[0941:] Decrement the character count and
+if this is still positive, go to
+line 0947;
+
+\item[0942:] The list is now empty, so reset the head and tail
+character pointers to ``NULL''. Go to line 0952;
+
+\item[0947:] Look at the three least significant bits of r2. If these are
+non-zero, branch to line 0957
+(and return to the calling routine forthwith);
+
+\item[0949:] At this point, r2 is pointing at
+the next character position
+beyond the ``cblock''. Move the
+value stored in the first word of
+the ``cblock'' (i.e. at r2 -- 8),
+which is the address of the next
+``cblock'' in the list to the head
+pointer in the ``clist''. (Note
+that r1 was incremented as a side
+effect at line 0941):
+
+\item[0950:] The last value stored needs to
+incremented by two (Consult
+Figures 23.2 and 23.3);
+
+\item[0952:] At this point, a
+``cblock'' determined by r2 is to be returned to
+``cfreelist''. Either r2 points
+into the ``cblock'' or just beyond
+it. Decrement r2 so that r2 will
+point into the ``cblock'';
+
+\item[0953:] Reset the three least significant
+bits of r2, leaving a pointer to
+the ``cblock'';
+
+\item[0954:] Link the ``cblock'' into ``cfreelist'';
+
+\item[0957:] Restore the values of r2 and PS
+from the stack and return;
+
+\item[0961:] At this point the list is known
+to be empty because a ``NULL'' head
+pointer was encountered. Make
+sure that the tail pointer is
+``NULL'' also;
+
+\item[0962:] Move --1 to r0 as the result to be
+returned when the list is empty.
+\ed
+
+\sbs{putc (0967)}
+
+This procedure is called by
+
+\begin{verbatim}
+   canon     (8323)
+   ttyinput  (8355, 8358)
+   ttyoutput (8414, 8478)
+   pcrint    (8730)
+   pcoutput  (8756)
+   lpoutput  (8990)
+\end{verbatim}
+
+\noindent with two arguments: a character and the
+address of a ``clist'' structure.
+
+``getc'' and ``putc'' have related functions and
+the codes for the two procedures are similar in many respects.
+For this reason the code for ``putc''
+will not be examined in detail, but is
+left for the reader.
+
+It should be noted that ``putc'' can fail
+if a new ``cblock'' is needed and
+``cfreelist'' is empty. In this case a
+non-zero value (line 1002) is returned
+rather than a zero value (line 0996).
+
+{\bf Note.} The procedures ``getc'' and ``putc''
+discussed here are {\bf NOT} directly related
+to the procedures d1scussed in the Sections
+``GETC(III)'' and ``PUTC(III)'' of the UPM.
+
+\sbs{Character Sets}
+
+UNIX makes use of the full ASCII character set,
+which is displayed in Section ``ASCII(V)'' of the UPM. Since
+knowledge of this character set is
+often assumed without comment, not
+always justifiably, some comment here
+would seem to be in order.
+
+``ASCII'' is an acronym for ``American
+Standard Code for Information Interchange''.
+
+\sbs{Control Characters}
+
+The first 32 of the 128 ASCII characters are non-graphic and are intended
+for the control of some aspect of
+transmission or display. The control
+characters explicitly used or recognised by UNIX are
+
+\noindent\begin{tabular}{llll}\\
+{\bf Numeric} & & \multicolumn{1}{c}{\bf Description} & {\bf UNIX} \\
+{\bf Value} &	&	& {\bf Name} \\ \hline
+004 & eot & end of transmission		& 004 \\
+    &    & or (control-D) & \\
+010 & bs & back space			& 010 \\
+011 & ht & (horizontal) tab		& '\verb+\+t' \\
+012 & nl & new line or line feed	& FORM \\
+014 & np & new page or form feed	& '\verb+\+r' \\
+015 & cr & carriage return		& '\verb+\+n' \\
+034 & fs & file separator or quit	& CQUIT \\
+040 & sp & forward space or blank	& '~' \\
+0177 & del & delete			& CINTR
+\end{tabular}
+
+
+It will be noted that the last two of
+these belong to the last 96 characters
+or the graphic portion, of the code.
+
+\sbs{Graphic Characters}
+
+There are 96 graphic characters. Two of
+these, the space and the delete, are
+not ``visible'', and may be ciassified
+with the control characters.
+
+The graphic characters may be divided
+into three groups of 32 characters,
+which may be roughly characterised as
+
+\bi
+\item numeric and special characters
+\item upper case alphabetic characters
+\item lower case alphabetic characters.
+\ei
+
+Of course, since there are only 26
+alphabetic characters, the latter two
+groups include some special characters
+as well. In particular, the last group
+includes the following six nonalphabetic characters:
+
+\begin{tabular}{lll}\\
+140 & `			& reverse apostrophe \\
+173 & \{		& left brace \\
+174 & \verb+|+		& vertical bar \\
+175 & \}		& right brace \\
+176 & \verb+~+		& tilde \\
+177 &			& delete \\
+\end{tabular}
+
+\sbs{Graphic Character Sets}
+
+Devices such as line printers or terminals which support {\bf all} the ASCII
+graphic symbols are often said to support the 96 ASCII character set (though
+there are only 94 graphics actually
+involved).
+
+Devices which support all the ASCII
+graphic symbols except those in the
+last group of 32, are said to support
+the 64 ASCII character set. Such devices lack the lower case alphabetics
+and the symbols listed above, namely ``\verb+~+'', ``\{'', ``\verb+|+'' and
+``\verb+\}+''. Note that
+``delete'', since it is not a visible
+character, can still be supported.
+
+Devices in this latter group may be
+referred to as ``upper case only''.
+
+Sometimes some of the graphic symbols
+may be non-standard, e.g. $\leftarrow$  instead
+of \_ and this can be inconvenient,
+though not usually fatal.
+
+UNIX prefers, as the reader is no doubt
+well aware, to view the world through
+``lower case'' spectacles. Alphabetic
+characters received from an ``upper case
+only'' terminal are translated
+immediately upon receipt from upper
+case to lower case. A lower case alphabetic may subsequently be translated
+back to upper case if it is preceded by
+a single backslash. For output to such
+a terminal, both upper and lower case
+alphabetic characters are mapped to uppercase.
+
+%Equivalences for the five ``upper case''
+%special characters are as follows:
+
+The conventions for line printers and
+terminals are different because:
+
+\bd
+\item[(a)] for line printers, horizontal
+alignment is usually important,
+and it is possible (without too
+much difficulty) to print composite, overstruck characters
+(using the minus sign in this
+case); and
+
+\item[(b)] for terminals, horizontal alignment is not considered to be so
+important; backspacing to provide overstruck characters does
+not work on most VDUs; and,
+since the same graphic conventions are used for both input
+and output, the symbols should
+be as convenient to type as possible.
+\ed
+
+\sbs{maptab (8117)}
+
+This array is used in the translation
+of character input from a terminal preceded by a single backslash, ``\verb+\+''.
+
+There are three characters, 004 (eot),
+`\#' and `@', which always have special
+meanings and need to be asserted by a
+backslash whenever they are to be
+interpreted literally. These three
+characters occur in ``maptab'' in their
+``natural'' locations (i.e. their locations in the ASCII table). Thus for
+example `\#' has code 043 and
+
+\begin{verbatim}
+   maptab[043] == 043.
+\end{verbatim}
+
+The other non-null characters in ``maptab'' are involved in the translation of
+input characters from ``upper case only''
+devices and do not occur in their
+``natural'' locations but in the location
+of their equivalent character, e.g. ``\verb+\+\{''
+occurs in the natural location for ``\{'',
+since ``\verb+\+\{'' will be interpreted as ``\{'',
+etc.
+
+Note the situation regarding alphabetic
+characters. This is only explicable
+when it is remembered that the alphabetic characters are all translated to
+lower case before any backslash is
+recognised.
+
+\sbs{partab (7947)}
+
+This array consists of 256 characters,
+like ``maptab''. Unfortunately the initialisation of ``partab''
+was omitted from the UNIX Operating System Source Code
+booklet. It is certainly needed, and so
+is given now:
+
+\begin{verbatim}
+  char partab [] {
+
+0001,0201,0201,0001,0201,0001,0001,0201,
+0202,0004,0003,0205,0005,0206,0201,0001,
+0201,0001,0001,0201,0001,0201,0201,0001,
+0001,0201,0201,0001,0201,0001,0001,0201,
+0200 0000,0000,0200,0000,0200,0200,0000,
+0000 0200,0200 0000,0200,0000,0000,0200,
+0000,0200,0200 0000,0200,0000,0000,0200,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0000,0200,0200,0000,0200,0000,0000,0200,
+0000,0200,0200,0000,0200,0000,0000,0200,
+0200 0000,0000 0200,0000,0200,0200,0000,
+0000 0200,0200 0000,0200,0000,0000,0200,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0000,0200,0200,0000,0200,0000,0000,0201
+   };
+\end{verbatim}
+
+Each element of ``partab'' is an eight
+bit character, which, with the use of
+appropriate bitmasks (0200 and 0177),
+can be interpreted as a two part structure:
+
+\begin{tabular}{ll}\\
+bit 7    & parity bit;\\
+bits 3-5 & not used. Always zero;\\
+bits 0-2 & code number.\\
+\end{tabular}
+
+\bigskip
+
+The parity bit is appended to the seven
+bit ASCII code when a character is
+transmitted by the computer, to form an
+eight bit code with even parity.
+
+The code number is used by ``ttyoutput''
+(8426) to classify the character into
+one of seven categories for determining
+the delay which should ensue before the
+transmission of the next character.
+(This is particularly important for
+mechanical printers which require time
+for the carriage to return from the end
+of a line, etc.)

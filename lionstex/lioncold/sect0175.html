@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Text Segments</title>
+
+<link href="sect0176.html" title="sched (1940)" rel="next" />
+<link href="sect0174.html" title="Program Swapping" rel="prev" />
+<link href="sect0174.html" title="Program Swapping" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Previous: Program Swapping" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0176.html" title="sched (1940)"><img alt="Next: sched (1940)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0174.html">Program Swapping</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Text Segments</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000176">14.1 Text Segments</h2>
+<p>Text segments are segments which contain only “pure” code and data i.e. code and data which remain unaltered throughout the program execution, so that they may be shared amongst several processes executing the same program. </p><p>The resulting economies in space can be quite substantial when many users of the system are executing the same program simultaneously e.g. the editor or the “shell”. </p><p>Information about text segments must be stored in a central location, and hence the existence of the “text” array. Each program which shares a text segment keeps a pointer to the corresponding text array element in “u.u_textp”. </p><p>The text segment is stored at the beginning of the code file. The first program to begin execution causes a copy of the text segment to be made in the “swap” area. </p><p>When subsequently no programs are left which reference the text segment, the resources absorbed by the text segment are released. The main memory resource is released whenever there are no programs which reference the text segment currently in main memory; the “swap” area is released in general whenever there are no programs left running which reference the text segment. </p><p>The numbers in each of these states are denoted by “x_ccount” and “x_count” respectively. Decrementing these numbers is handled by the routines “xccdec” and “xfree” which also take care of releasing resources when the counts reach zero. (“xccdec” is called whenever a program is swapped out or terminates. “xfree” is called by “exit” whenever a program terminates.) </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Previous: Program Swapping" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0176.html" title="sched (1940)"><img alt="Next: sched (1940)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

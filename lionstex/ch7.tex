@@ -1,0 +1,797 @@
+%
+% The Lion's Commentary, file ch7.tex, version 1.4, 18 May 1994
+%
+\se{Processes}
+
+The previous chapter traced the
+developments which occur after ``the
+operating system has been rebooted'',
+and in so doing introduced a number of
+significant features of the process
+concept. One of the aims of this
+chapter is to go back and re-explore
+some of the same ground more
+thoroughly.
+
+There are a number of serious difficulties 
+in providing a generally acceptable definition of ``process''. These are
+akin to the difficulties faced by the
+philosopher who would answer ``what is
+life?'' We will be in good company if we
+brush the more subtle points lightly
+aside.
+
+The definition for ``process'' already
+given, ``a program in execution'', does
+reasonably well in suggesting what is
+intended. However it does not fit the
+case of either process \#0 throughout
+its life or process \#1 during its first
+moments. All other processes in the
+system however are clearly associated
+with the execution of some program file
+or other.
+
+Processes can be introduced into discussions of operating systems at two
+levels.
+
+At the upper level, ``process'' is an
+important organising concept for
+describing the activity of a computer
+system as a whole. It is often
+expedient to view the latter as the
+combined activity of a number of
+processes, each associated with a particular program such as
+the ``shell'', or
+the ``editor''. A discussion of UNIX at
+this level is given in the second half
+of Ritchie's and Thompson's paper, ``The
+UNIX Time-sharing System''.
+
+
+At this level the processes themselves
+are considered to be the active entities in the system, while the 
+identities of the true active elements, the
+processor and the peripheral devices,
+are submerged: the processes are born,
+live and die; they exist in varying
+numbers; they may acquire and release
+resources; they may interact,
+cooperate, conflict, share resources;
+etc.
+
+At the lower level, ``processes'' are
+inactive entities which are acted on by
+active entities such as the processor.
+By allowing the processor to switch
+frequently from the execution of one
+process image to another, the impression can
+be created that each of the process images is
+developing continuously and this leads to the upper level
+interpretation.
+
+Our present concern is with the low
+level interpretation: with the structure of the process image, with the
+details of execution and with the means
+for switching the processor between
+processes.
+
+The following observations may be made
+about processes in the UNIX context:
+
+\bd
+\item[(a)] the existence of a process is
+implied by the existence of a
+non-null structure in the ``proc''
+array, i.e. a ``proc'' structure
+for which the element ``p\_stat''
+is non-null;
+
+\item[(b)] for each process there is a ``per
+process data area'' containing a
+copy of the ``user'' structure;
+
+\item[(c)] the processor spends its entire
+life executing one process or
+another (except when it is resting between instructions);
+
+\item[(d)] it is possible for one process
+to create or destroy another
+process;
+
+\item[(e)] a process may acquire and possess resources of various kinds.
+\ed
+
+
+\sbs{The Process}
+
+Ritchie and Thompson in their paper
+define a ``process'' as the execution of
+an ``image'', where the ``image'' is the
+current state of a pseudo-computer,
+i.e. an abstract data structure, which
+may be represented in either main
+memory or on disk.
+
+
+The process image involves two or three
+physically distinct areas of memory:
+
+\bd
+\item[(1)] {\bf the ``proc'' structure}, which is
+ contained within the core
+ resident ``proc'' array and is
+ accessible at all times;
+
+\item[(2)] {\bf the data segment}, which consists of the ``per process data
+area'', combined with a segment
+containing the user program
+data, (possibly) program text,
+and stack;
+
+\item[(3)] {\bf the text segment}, which is not
+always present, consists of a
+segment containing only pure
+program text i.e. re-entrant
+code and constant data.
+\ed
+
+Many programs do not have a separate
+text segment. Where one is defined, a
+single copy will be shared among all
+processes which are executions of the
+same particular program.
+
+
+\sbs{The proc Structure (0358)}
+
+This structure, which is permanently
+resident in main memory, contains fifteen
+elements, of which eight are characters, six are integers, and one a
+pointer to an integer. Each element
+represents information that must be
+accessible at any time, especially when
+the main part of the process image has
+been swapped out to disk:
+
+\bi
+\item ``p\_stat'' may take one of seven
+values which define seven mutually
+exclusive states. See lines 0381
+to 0387;
+
+\item ``p\_flag'' is an amalgam of six one
+bit flags which may be set
+independently. See lines 0391 to
+0396;
+
+\item ``p\_addr'' is the address of the
+data segment:
+
+\bi
+\item If the data segment is in main
+memory this is a block number;
+
+\item otherwise, if the data segment
+has been swapped out, this is a
+disk record number;
+\ei
+
+\item ``p\_size'' is the size of the data
+segment, measured in blocks;
+
+\item ``p\_pri'' is the current process
+priority. This may be recalculated
+from time to time as a function of
+``p\_nice'', ``p\_cpu'' and ``p\_time'';
+
+\item ``p\_pid'', ``p\_ppid'' are numbers
+which uniquely identify a process
+and its parent;
+
+\item ``p\_sig'', ``p\_uid'', ``p\_ttyp'' are
+involved with external communication
+i.e. with messages or ``signals'' from outside the process's
+normal domain;
+
+\item ``p\_wchan'' identifies, for a
+``sleeping'' process (``p\_stat''
+equals either ``SSLEEP'' or
+``SWAIT''), the reason for sleeping;
+
+\item ``p\_textp'' is either null or a
+pointer to an entry in the ``text''
+array (4306), which contains vital
+statistics regarding the text segment.
+\ei
+
+\sbs{The user Structure (0413)}
+
+One copy of the ``user'' structure is an
+essential ingredient of each ``per process data area''.
+At any one time there
+is exactly one copy of the ``user''
+structure which is accessible. This
+goes under the name ``u'' and is always
+to be found at kernel address 0140000
+i.e. at the beginning of the seventh
+page of the kernel address space.
+
+The ``user'' structure has more elements
+than can be conveniently or usefully
+introduced here. The comment accompanying
+ each declaration on Sheet 04 succinctly suggests the function of each
+element.
+
+For the moment you should notice:
+
+\bd
+\item[(a)] ``u\_rsav'', ``u\_qsav'' , ``u\_ssav''
+ which are two word arrays used
+ to store values for r5, r6;
+
+\item[(b)] ``u\_procp'' which gives the
+ address of the corresponding
+ ``proc'' structure in the ``proc''
+ array;
+
+\item[(c)] ``u\_uisa[16]'', ''u\_uisd[16]'' which
+ store prototypes for the page
+ address and description registers;
+
+\item[(d)] ``u\_tsize'', ``u\_dsize'', ``u\_ssize''
+ which are the size of the text
+ segment and two parameters
+ defining the size of the data
+ segment, measured in 32 word
+ blocks.
+\ed
+
+\noindent The remaining elements are concerned
+with:
+
+\bi
+\item saving floating point registers
+ (not for the\\
+PDP11/40);
+
+\item user identification;
+
+\item parameters for input/output operations;
+
+\item file access control;
+
+\item system call parameters;
+
+\item accounting information.
+\ei
+
+\sbs{The Per Process Data Area}
+
+The ``per process data area'' corresponds
+to the valid part (lower part) of the
+seventh page of the kernel address
+space. It is 1024 bytes long. The lower
+289 bytes are occupied by an instance
+of the ``user'' structure, leaving 367
+words to be used as a kernel mode stack
+area. (Obviously there will be as many
+kernel mode stacks as there are
+processes.)
+
+While the processor is in kernel mode,
+the values of r5 and r6, the environment and stack pointers, should remain
+within the range 0140441 to 01437777.
+Transition beyond the upper limit would
+be trapped as a segmentation violation,
+but the lower limit is protected only
+by the integrity of the software. (It
+may be noted that the hardware stack
+limit option is not used by UNIX.)
+
+\sbs{The Segments}
+
+The data segment is allocated as one
+single area of physical memory but consists of three distinct parts:
+
+\bd
+\item[(a)] a ``per process data area'';
+
+\item[(b)] a data area for the user program. This may be further
+ divided into areas for program
+ text, initialised data and uninitialised data;
+
+\item[(c)] a stack for the user program.
+\ed
+
+
+The size of (a) is always ``USIZE''
+blocks. The sizes of (b) and (c) are given in blocks by ``u.u\_dsize'' and
+``u.u\_ssize''. (It may be noted in passing
+that the latter two may change during the life of a process.)
+
+
+A separate text segment containing only
+pure text is allocated as one single
+area of physical memory. The internal
+structure of the segment is not important here.
+
+
+\sbs{Execution of an Image}
+
+The image currently being executed (and
+hence the identity of the current process) is determined by the setting of
+the seventh kernel segmentation address
+register. If process \#i is the current
+process, then the register has the
+value ``proc[i].p\_addr''.
+
+It is often desirable to distinguish
+between a process being executed in
+kernel mode and the same one being executed in user mode. We will use the
+terms ``kernel process \#i'' and ``user
+process \#i'' to denote ``process \#i executing in kernel mode''
+and ``process \#i
+executing in user mode'' respectively.
+
+If we chose to associate processes with
+particular execution stacks rather than
+with an entry in the ``proc'' array, then
+we would consider kernel process \#i and
+user process \#i to be separate
+processes, rather than different
+aspects of a single process \#i.
+
+\sbs{Kernel Mode Execution}
+
+The seventh kernel segmentation address
+register must be set appropriately.
+None of the other kernel segmentation
+registers is ever disturbed and so
+their values are assumed. As was seen
+earlier, the first six kernel pages are
+mapped to the first six pages of physical memory, while the eighth is mapped
+into the highest page of physical
+memory. The size of the seventh segment
+is always the same.
+
+In kernel mode the setting of the user
+mode segmentation registers is in general
+irrelevant. However they are normally
+set correctly for the user process.
+
+The environment and stack pointers
+point into the kernel stack area in the
+seventh page, above the ``user'' structure.
+
+\sbs{User Mode Execution}
+
+Each activation of a user process is
+preceded and succeeded by an activation
+of the corresponding kernel process.
+Accordingly both the user mode and kernel mode registers will be properly set
+whenever a process image is being executed in user mode.
+
+The environment and stack pointers
+point into the user stack area. This
+begins as the upper part of the eighth
+user page, but may be extended downwards, e.g. to occupy the whole of
+the eighth page and part or all of the
+seventh page, etc.
+
+Whereas the setting of the kernel segmentation registers is fairly trivial,
+setting the user segmentation registers
+is much less so.
+
+
+\sbs{An Example}
+
+Consider a program on the PDP11/40
+which uses 1.7 pages of text, 3.3 pages
+of data, and 0.7 pages of stack area.
+(Our use of fractions in this example
+is admittedly a little crude.) The set
+of virtual addresses would be divided
+as shown in the following diagram:
+
+\begin{center}
+\begin{tabular}{|l|l} \cline{1-1}
+888  s1 & Stack \\
+888  s1 & area \\
+\cline{1-1}
+888     & \\
+\cline{1-1}
+777     & \\
+777     & \\
+777     & \\
+\cline{1-1}
+666     & \\
+666     & \\
+\cline{1-1}
+666  d4 & \\
+\cline{1-1}
+555  d3 & \\
+555  d3 & \\
+555  d3 & \\
+\cline{1-1}
+444  d2 & Data \\
+444  d2 & \\
+444  d2 & area \\
+\cline{1-1}
+333  d1 & \\
+333  d1 & \\
+333  d1 & \\
+\cline{1-1}
+222     & \\
+\cline{1-1}
+222  t2 & \\
+222  t2 & Text \\
+\cline{1-1}
+111  t1 & \\
+111  t1 & area \\
+111  t1 & \\
+\cline{1-1}
+\end{tabular}
+
+\medskip
+
+Virtual Address Space
+\end{center}
+
+
+Two whole pages in the virtual address
+space must be allocated to the text
+segment, even though the physical area
+required is only 1.7 pages.
+ 
+\begin{center}
+\begin{tabular}{|l|l} \cline{1-1}
+\cline{1-1}
+222  t2 & \\
+222  t2 & Text \\
+\cline{1-1}
+111  t1 & \\
+111  t1 & area \\
+111  t1 & \\
+\cline{1-1}
+\end{tabular}
+
+\medskip
+
+Text Segment
+\end{center}
+
+The data and stack areas require the
+dedication of four and one pages of
+virtual address space, and 3.3 and 0.7
+pages of physical memory respectively.
+
+The whole data segment requires four
+and one eighth pages of physical
+memory. The extra eighth is for the
+``per process data area'' which
+corresponds (from time to time) to the
+seventh kernel address page.
+
+
+\begin{center}
+\begin{tabular}{|l|l} \cline{1-1}
+888  s1 & Stack \\
+888  s1 & area \\
+\cline{1-1}
+666  d4 & \\
+\cline{1-1}
+555  d3 & \\
+555  d3 & \\
+555  d3 & \\
+\cline{1-1}
+444  d2 & Data \\
+444  d2 & \\
+444  d2 & area \\
+\cline{1-1}
+333  d1 & \\
+333  d1 & \\
+333  d1 & \\
+\cline{1-1}
+\multicolumn{1}{|r|}{ppda} & \\
+\cline{1-1}
+\end{tabular}
+
+\medskip
+
+Data Segment
+\end{center}
+
+\noindent Note the order of the components of the
+data segment, and that there is no
+embedded unused space.
+
+The user mode segmentation need to be
+set to reflect the values in the following table, where ``t'', ``d'' denote the
+block numbers of beginning of the text
+and data segments respectively:
+
+\medskip
+
+\begin{tabular}{llll}
+{\bf Page}  & {\bf Address} & {\bf Size} & {\bf Comment} \\
+\hline
+1 & t+0    & 1.0 & read only \\
+2 & t+128  & 0.7 & read only \\
+3 & d+16   & 1.0 & \\
+4 & d+144  & 1.0 & \\
+5 & d+272  & 1.0 & \\
+6 & d+400  & 0.3 & \\
+7 & ?      & 0.0 & not used \\
+8 & d+400  & 0.7 & grows downward \\
+\end{tabular}
+
+\medskip
+
+Note the setting of the eighth address
+register. The address prototypes stored
+in the array ``u.u\_uisa'' are obtained by
+setting ``t'' and ``d'' to zero.
+
+\sbs{Setting the Segmentation Registers}
+
+Prototypes for the user segmentation
+registers are set up by ``estabur'' which
+is called when a program is first
+launched into execution, and again
+whenever a significant change in memory
+allocation requires it. The prototypes
+are stored in the arrays ``u.u\_uisa'',
+``u.u\_uisd''.
+
+Whenever process \#i is about to be reactivated, the procedure ``sureg'' is
+called to copy the the prototypes into
+the appropriate registers. The description registers are copied directly, but
+the address registers must be adjusted
+to reflect the actual location in physical memory of the area used.
+
+
+\sbs{estabur (1650)}
+
+\bd
+\item[1654:] Various checks on consistency are
+ performed, to ensure that the
+ requested sizes for the text,
+ data and stack are reasonable.
+
+Note that a non-zero value for
+``sep'' implies separate mappings
+for the text area (``i'' space) and
+the data area (``d'' space). This
+is never possible on the
+PDP11/40;
+
+\item[1664:] ``a'' defines the address of a segment relative to an arbitrary
+ base of zero. ``ap'' and ``dp'' point
+ to the set of prototype segmentation address and descriptor
+ registers respectively.
+\ed
+
+
+The first eight of each of these sets
+are intended to refer to ``i'' space, and
+
+\bd
+\item[1667:] ``nt'' measures the number of 32
+ word blocks needed for the text
+ segment. If ``nt'' is non-zero,
+ one or more pages must be allocated for this purpose.
+\ed
+
+Where more than one page is allocated,
+all but the last will consist of 128
+blocks (4096 words), and will be read
+only, and will have relative addresses
+starting at zero and increasing successively by 128.
+
+\bd
+\item[1672:] If some fraction of a page of
+ text is still to be assigned,
+ allocate the appropriate part of
+ the next page;
+
+\item[1677:] if ``i'' and ``d'' spaces are being
+ used separately, mark the segmentation registers for the 
+remaining ``i'' pages as null;
+
+\item[1682:] ``a'' is reset because all remaining addresses refer to the data
+area (not the text area) and are
+relative to the beginning of this
+area. The first ``USIZE'' blocks
+of this area are reserved for the
+``per process data area'';
+
+\item[1703:] The stack area is allocated from
+ the top of the address space
+ towards the lower addresses
+ (``downwards'');
+
+\item[1711:] If a partial page must be allocated for the stack area, it is
+ the high address art of the page
+ which is valid. (For text and
+ data areas, which grow ``upwards'',
+ it is the lower part of a partial
+ page which is valid.) This
+ requires an extra bit in the
+ descriptor, hence ``ED'' (``expansion downwards'');
+
+\item[1714:] If separate ``i'' and ``d'' spaces
+ are not used, only the first
+ eight of the sixteen prototype
+ register pairs will have been
+ initialised by this point. In
+ this case, the second eight are
+ copied from the first eight.
+\ed
+
+
+\sbs{sureg (1739)}
+
+This routine is called by ``estabur''
+(1724), ``swtch'' (2229) and ``expand''
+(2295), to copy the prototype
+segmentation registers into the actual
+hardware segmentation registers.
+
+
+\bd
+\item[1743:] Get the base address for the data
+ area from the appropriate element
+ of the ``proc'' array;
+
+\item[1744:] The prototype address registers
+ (of which there are only eight
+ for the PDP11/40) are modified by
+ the addition of ``a'' and stored in
+ the hardware segmentation address
+ registers;
+
+\item[1752:] Test if a separate text area has
+ been allocated, and if so, reset
+ ``a'' to the relative address of
+ the text area to the data area.
+ (Note this value may be negative!
+ Fortunately at this point,
+ addresses are in terms of 32 word
+ blocks.);
+
+\item[1754:] The pattern of code now followed
+ is similar to the beginning of
+ the routine, except ...
+
+\item[1762:] a rather obscure piece of code
+adjusts the setting of the
+address register for segments
+which are not ``writable'' i.e.
+which presumably are text segments.
+\ed
+
+The code in ``estabur'' and ``sureg'' shows
+evidence of having been developed in
+several stages and is not as elegant as
+could be desired.
+
+\sbs{newproc (1826)}
+
+It is now time to take a good look at
+the procedure which creates new
+processes as (almost exact) replicas of
+their creators.
+
+
+\bd
+\item[1841:] ``mpid'' is an integer which is
+ stepped through the values 0 to
+ 32767. As each new process is
+ created, a new value for ``mpid''
+ is created to provide a unique
+distinguishing number for the
+process. Since the cycle of
+values may eventually repeat, a
+check is made that the number is
+not still in use; if so a new
+value is tried;
+
+\item[1846:] A search is made through the
+ ``proc'' array for a null ``proc''
+ structure (indicated by ``p\_stat''
+ having a null value);
+
+
+\item[1860:] At this point, the address of the
+new entry in the ``proc'' array is
+stored as both ``p'' and ``rpp'', and
+the address of ``proc'' entry for
+the current process is stored both
+as ``up'' and ``rip'';
+
+\item[1861:] The attributes of the new process
+are stored in the new ``proc''
+entry. Many of these are copied
+from the current process;
+
+\item[1876:] The new process inherits the open
+files of its parent. Increment
+the reference count for each of
+these;
+
+\item[1879:] If there is a separate text segment increment the associated
+reference counts. Notice that
+``rip'', ``rpp'' are used for temporary reference here;
+
+\item[1883:] Increment the reference count for
+the parent's current directory;
+
+\item[1889:] Save the current values of the
+ environment and stack pointers in
+``u.u\_rsav''. ``savu'' is an assembler
+routine defined at line 0725;
+
+\item[1890:] Restore the values of ``rip'' and
+``rpp''. Temporarily change the
+value of ``u.u\_procp'' from the
+value appropriate to the current
+process to the value appropriate
+to the new process;
+
+\item[1896:] Try to find an area in main
+ memory in which to create the new
+ data segment;
+
+\item[1902:] If there is no suitable area in
+ main memory, the new copy will
+have to be made on disk. The
+next section of code should be
+analysed carefully because of the
+inconsistency introduced at line
+1891 i.e.\\
+u.u\_procp-$>$p\_addr != *ka6
+
+\item[1903:] Mark the current process as
+ ``SIDL'' to head off temporarily
+ any further attempt to swap it
+ out (i.e. initiated by ``sched''
+ (1940));
+
+\item[1904:] Make the new ``proc'' entry consistent,
+i.e set rpp-$>$p\_addr = *ka6;
+
+\item[1905:] Save the current values of the
+ environment and stack pointers in
+ ``u.u\_ssav'';
+
+\item[1906:] Call ``xswap'' (4368) to copy the
+ data segment into the disk swap
+ area. Because the second parameter is zero, the main memory area
+ will not be released;
+
+\item[1907:] Mark the new process as ``swapped
+ out'';
+
+\item[1908:] Return the current process to its
+ normal state;
+
+\item[1913:] There was room in main memory, so
+ store the address of the new
+ ``proc'' entry and copy the data
+ segment a block at a time;
+
+\item[1917:] Restore the current process'
+ ``per process data area'' to its
+ previous state;
+
+\item[1918:] Return with a value of zero.
+\ed
+
+
+Obviously ``newproc'' on its own is not
+sufficient to produce an interesting
+and varied set of processes. The procedure ``exec'' (3020) which is discussed
+in Chapter Twelve provides the necessary additional facility: the means for
+a process to change its character, to
+be reincarnated.

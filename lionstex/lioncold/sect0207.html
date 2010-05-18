@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: breada (4773)</title>
+
+<link href="sect0208.html" title="bwrite (4809)" rel="next" />
+<link href="sect0206.html" title="bread (4754)" rel="prev" />
+<link href="sect0198.html" title="Buffer Manipulation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0206.html" title="bread (4754)"><img alt="Previous: bread (4754)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0208.html" title="bwrite (4809)"><img alt="Next: bwrite (4809)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0198.html">Buffer Manipulation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">breada (4773)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000208">17.9 breada (4773)</h2>
+<p>This procedure has an additional parameter, as compared with “bread”. It is called only by “readi” (6256). </p><dl class="description">
+
+    <dt>4780:</dt>
+    <dd><p>Check if the desired block has already been assigned to a buffer. (It may not yet be available, but at least is it there?); </p></dd>
+
+    <dt>4781:</dt>
+    <dd><p>If not initiate the necessary read operation but don’t wait for it to finish; </p></dd>
+
+    <dt>4788:</dt>
+    <dd><p>Look around for the “read ahead” block. If it is not there, allocate a buffer (4789) but release it (4791) if the buffer is already ready; </p></dd>
+
+    <dt>4793:</dt>
+    <dd><p>The “read ahead” block is not ready, so initiate an asynchronous read operation; </p></dd>
+
+    <dt>4798:</dt>
+    <dd><p>If a buffer was assigned to the current block call “bread” to wrap it up, else... </p></dd>
+
+    <dt>4800:</dt>
+    <dd><p>Wait for the completion of the operation which was started at line 4785. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0206.html" title="bread (4754)"><img alt="Previous: bread (4754)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0208.html" title="bwrite (4809)"><img alt="Next: bwrite (4809)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

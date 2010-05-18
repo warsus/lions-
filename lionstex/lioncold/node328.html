@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>A. The test for 'TTLOWAT' (Line 8074)</TITLE>
+<META NAME="description" CONTENT="A. The test for 'TTLOWAT' (Line 8074)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node329.html">
+<LINK REL="previous" HREF="node327.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node329.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4855"
+  HREF="node329.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4851"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4845"
+  HREF="node327.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4853"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4856"
+  HREF="node329.html">B. Inactive Terminals</A>
+<B> Up:</B> <A NAME="tex2html4852"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4846"
+  HREF="node327.html">Terminals with a restricted</A>
+ &nbsp; <B>  <A NAME="tex2html4854"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0003013000000000000000">
+A. The test for 'TTLOWAT' (Line 8074)</A>
+</H2>
+
+<P>
+On line 8074 in ``klxint'', a test is
+made whether to restart any processes
+waiting to send output to the terminal.
+The test is successful if the number of
+characters is zero or if it is equal to
+``TTLOWAT''.
+
+<P>
+If the number of characters is between
+these values, no ``wakeup'' is performed
+until the queue is completely empty,
+with the strong likelihood that there
+will then be a hiatus in the flow of
+output to the terminal. Since temporary interruptions to the flow of
+output are quite frequently observed in
+practice and represent a source of
+occasional irritation if nothing more,
+one may reasonably enquire ``is there
+any way the character count can get
+from being greater than ``TTLOWAT'' to
+below it, without this being detected
+at line 8074?''
+
+<P>
+Quite clearly there is, since each call
+on ``ttstart'' can decrement the queue
+size, and only one such call is followed by the test. Thus if the call on
+``ttstart'' from one of ``ttrstrt'' (8492)
+or ``ttwrite'' (8568) happens to cross
+the boundary, a delay will result. The
+probability that this will happen is
+small, but finite and hence the event
+is likely to be observed in any reasonably long output sequence.
+
+<P>
+There are two other situations in which
+``ttstart'' is called which seem to be
+satisfactory. At ``ttwrite'' (8561) the
+queue is at its maximum extent; and at
+``ttyinput'' (8363) there is a preceding
+call on ``ttyoutput'' which usually (but
+not invariably!) will have added a
+character to the output queue.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4855"
+  HREF="node329.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4851"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4845"
+  HREF="node327.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4853"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4856"
+  HREF="node329.html">B. Inactive Terminals</A>
+<B> Up:</B> <A NAME="tex2html4852"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4846"
+  HREF="node327.html">Terminals with a restricted</A>
+ &nbsp; <B>  <A NAME="tex2html4854"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

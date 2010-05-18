@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Device Registers</title>
+
+<link href="sect0303.html" title="UNIBUS Addresses" rel="next" />
+<link href="sect0301.html" title="The DL11/KL11 Terminal Device Handler" rel="prev" />
+<link href="sect0293.html" title="Interactive Terminals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0301.html" title="The DL11/KL11 Terminal Device Handler"><img alt="Previous: The DL11/KL11 Terminal Device Handler" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0303.html" title="UNIBUS Addresses"><img alt="Next: UNIBUS Addresses" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0293.html">Interactive Terminals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Device Registers</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000303">24.9 Device Registers</h2>
+<p>Each DL11/RL11 unit has a group of four registers occupying four consecutive words on the UNIBS. UNIX maps a structure of type “klregs” (8016) onto each register group. </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left" colspan="2"><p><b class="bf">Receiver Status Register (klrcsr)</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bit 7 </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Receiver Done.</b> (A character has</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> been transferred into the</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> Receiver Data Buffer Register.);</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bit 6 </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Receiver Interrupt Enable.</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> (When set, an interrupt is</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> caused every time bit 7 is set.);</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bit 1 </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Data terminal ready;</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bit 0 </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Reader Enable. Write only.</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> (When set, bit 7 is cleared.).</p></td>
+
+</tr>
+</table><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left" colspan="2"><p><b class="bf">Receiver Data Buffer Register (klrbuf)</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bit 15 </p></td>
+
+    
+    <td style="text-align:left"><p> Error indication, when set.</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bits 7-0 </p></td>
+
+    
+    <td style="text-align:left"><p> Received character, Read</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> only.</p></td>
+
+</tr>
+</table><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left" colspan="2"><p><b class="bf">Transmitter Status Register (kltcsr)</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bit 7 </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Transmitter ready.</b> This is</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> cleared when data is loaded</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> into the Transmitter Data</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> Buffer, and is set when the</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> latter is ready to receive</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> another chatacter;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bit 6 </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">Transmitter Interrupt Enable.</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> (when set, causes an</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> interrupt to be generated</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> whenever bit 7 is set.)</p></td>
+
+</tr>
+</table><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left" colspan="2"><p><b class="bf">Transmitter Data Buffer Register (kltbuf)</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>bits 7-0 </p></td>
+
+    
+    <td style="text-align:left"><p> Transmitted data. Write only.</p></td>
+
+</tr>
+</table></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0301.html" title="The DL11/KL11 Terminal Device Handler"><img alt="Previous: The DL11/KL11 Terminal Device Handler" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0303.html" title="UNIBUS Addresses"><img alt="Next: UNIBUS Addresses" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

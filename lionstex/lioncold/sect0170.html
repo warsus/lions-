@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: stop (4016)</title>
+
+<link href="sect0171.html" title="wait (3270) (continued)" rel="next" />
+<link href="sect0169.html" title="Tracing" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0169.html" title="Tracing"><img alt="Previous: Tracing" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0171.html" title="wait (3270) (continued)"><img alt="Next: wait (3270) (continued)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">stop (4016)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000171">13.22 stop (4016)</h2>
+<p>This procedure is called by “issig” (3999) if the tracing flag (“STRC”, 0395) is set. </p><dl class="description">
+
+    <dt>4022:</dt>
+    <dd><p>If your parent is process 1 (i.e. “/etc/init”), then call “exit” (line 4032); </p></dd>
+
+    <dt>4023:</dt>
+    <dd><p>Otherwise look through “proc” for your parent ... wake him up ... declare yourself “stopped” and ... call “swtch” (Note do NOT call “sleep”. Why?); </p></dd>
+
+    <dt>4028:</dt>
+    <dd><p>If the tracing flag has been reset, or the result of the procedure “procxmt” is true, return to “issig”; </p></dd>
+
+    <dt>4029:</dt>
+    <dd><p>Otherwise start again. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0169.html" title="Tracing"><img alt="Previous: Tracing" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0171.html" title="wait (3270) (continued)"><img alt="Next: wait (3270) (continued)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

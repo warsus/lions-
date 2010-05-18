@@ -1,0 +1,445 @@
+%
+% The Lion's Commentary, file ch10.tex, version 1.5, 17 May 1994
+%
+\se{The Assembler ``Trap'' Routine}
+
+The principal purpose of this chapter
+is to examine the assembly language
+code in ``m40.s'' which is involved in
+the handling of interrupts and traps.
+
+This code is found between lines 0750
+and 0805, and has two entry points,
+``trap'' (0755) and ``call'' (0766). There
+are several different and relevant
+paths through this code and we shall
+trace some examples of these.
+
+\sbs{Sources of Traps and Interrupts}
+
+The discussion in Section One introduced three places where the occurrence
+of a trap or interrupt was expected:
+
+\bd
+\item[(a)] ``main'' (1564) calls ``fuibyte''
+ repeatedly until a negative
+ value is returned. This will
+ occur after a ``bus timeout
+ error'' has been encountered with
+ a subsequent trap to vector
+ location 4 (line 0512);
+
+\item[(b)] The clock has been set running
+ and will generate an interrupt
+ every clock tick i.e. 16.7 or 20
+ milliseconds;
+
+\item[(c)] Process \#1 is about to execute a
+ ``trap'' instruction as part of
+ the system call on ``exec''.
+\ed
+
+
+\sbs{fuibyte (0814), fuiword (0844)}
+
+``main'' uses both ``fuibyte'' and ``fuiword''.
+Since the former is more complicated in a non-essential way, we leave
+it to the reader, and concentrate on the latter.
+
+``fuiword'' is called (1602) when the
+system is running in kernel mode with
+one argument which is an address in
+user address space. The function of the
+routine is to fetch the value of the
+corresponding word and to return it as
+a result (left in r0). However if an
+error occurs, the value --1 is to be
+returned.
+
+Note that with ``fuiword'', there is an
+ambiguity which does not occur with
+``fuibyte'', namely a returned value of
+--1 may not necessarily be an error
+indication but the actual value in the
+user space. Convince yourself that for
+the way it is used in ``main'', this does
+not matter.
+
+Also the code does not distinguish
+between a ``bus timeout error'' and a
+``segmentation error''.
+
+The routine proceeds as follows:
+
+\bd
+\item[0846:] The argument is moved to r1;
+
+\item[0848:] ``gword'' is called;
+
+\item[0852:] The current PS is stored on the
+ stack;
+
+\item[0853:] The priority level is raised to 7
+ (to disable interrupts);
+
+\item[0854:] The contents of the location
+ nofault (1466) are saved in the
+ stack;
+
+\item[0855:] ``nofault'' is loaded with
+ address of the routine ``err'';
+
+\item[0856:] An ``mfpi'' instruction is used to
+ fetch the word from user space.
+\ed
+
+{\bf If nothing goes wrong} this value will
+ left on the kernel stack.
+
+\bd
+\item[0857:] The value is transferred from the
+ stack to r0;
+
+\item[0876:] The previous values of ``nofault''
+ and PS are restored;
+\ed
+
+
+{\bf Now suppose something does go wrong}
+with the ``mfpi'' instruction, and a bus
+time-out does occur.
+
+\bd
+\item[0856:] The ``mfpi'' instruction will be
+ aborted. PC will point to the
+ next instruction (0857) and a
+ trap via vector location 4 will
+ occur;
+
+\item[0512:] The new PC will have the value of
+ ``trap''. The new PS will indicate:
+
+present mode = kernel mode
+
+previous mode = kernel mode
+
+priority = 7;
+
+\item[0756:] The next instruction executed is
+ the first instruction of ``trap''.
+ This saves the processor status
+ word two words beyond the current
+ ``top of stack''. (This is not
+ relevant here.);
+
+\item[0757:] ``nofault'' contains the address of 
+ ``err'' and is non-zero;
+
+\item[0765:] Moving 1 to SR0 reinitialises the
+ memory management unit;
+
+\item[0766:] The contents of ``nofault'' are
+ moved on top of the stack,
+ {\bf overwriting} the previous contents, which was the return
+ address in ``gword'';
+
+\item[0767:] The ``rtt'' returns, not to ``gword''
+ but to the first word of ``err'';
+
+\item[0880:] ``err'' restores ``nofault'' and PS,
+ skips the return to ``fuiword'',
+ places --1 in r0, and returns
+ directly to the calling routine.
+\ed
+
+\sbs{Interrupts}
+
+Suppose the clock has interrupted the
+processor.
+
+
+Both clock vector locations, 100 and
+104, have the same information. PC is
+set to the address of the location
+labelled ``kwlp'' (0568) and PS is set to
+show:
+
+ present mode = kernel mode
+
+ previous mode = kernel or user mode
+
+ priority = 6
+
+
+\noindent Note.
+The PS will contain the true previous mode, regardless of the value
+picked up from the vector location.
+
+\bd
+\item[0570:] The vector location contains a
+ new PC value which is the address
+ of the statement labelled ``kwlp''.
+ This instruction is a subroutine
+ call on ``call'' via r0.
+
+ After the execution of this
+ instruction, r0 is left with the
+ address of the code word after
+ the instruction which contains
+ ``\_clock'', i.e. r0 contains {\bf the
+ address of the address} of the
+ ``clock'' routine in the file
+ ``clock.c'' (3725).
+\ed
+
+\sbs{call (0776)}
+
+\bd
+\item[0777:] Copy PS onto the stack;
+
+\item[0779:] Copy r1 onto the stack;
+
+\item[0780:] Copy the stack pointer for the
+ previous address space onto the
+ stack. (This is only significant
+ if the previous mode was user
+ mode).
+
+This represents a {\bf special case} of
+the ``mfpi'' instruction. See the
+``PDP11 Processor Handbook'', page
+6-20;
+
+\item[781:] Copy the copy of PS onto the
+ stack and mask out all but the
+ lower five bits. The resulting
+ value designates the cause of the
+ interrupt (or trap). The original value of the PS had to be
+ captured quickly;
+
+\item[0783:] Test if the previous mode is kernel or user.
+
+{\bf If the previous mode is kernel
+mode} the branch is taken (0784).
+PS is changed to show the previous
+mode as user mode (0798);
+
+\item[0799:] The specialised interrupt handling routine pointed to by r0 is
+entered. (In this case it is the
+routine ``clock'', which is discussed in detail in the next
+chapter.)
+
+\item[0800:] When the ``clock'' routine (or some
+other interrupt handler) returns,
+the top two words of the stack
+are deleted. These are the
+masked copy of the PS and the
+copy of the stack pointer;
+
+\item[0802:] r1 is restored from the stack;
+
+\item[0803:] Delete the copy of PS from the
+ stack;
+
+\item[0804:] Restore the value of r0 from the
+ stack;
+
+\item[0805:] Finally the ``rtt'' instruction
+returns to the ``kernel'' mode
+routine that was interrupted;
+
+{\bf If the previous mode was user mode}
+it is not certain that the interrupted routine will be resumed
+immediately;
+
+\item[0788:] After the specialised interrupt
+routine (in this case ``clock'')
+returns, a check (``runrun $>$ 0'')
+is made to see if any process of
+higher priority than the current
+process is ready to run. If the
+decision is to allow the current
+process to continue, then it is
+important that it be not interrupted as
+it restores its registers prior to the ``return from
+interrupt'' instruction. Hence
+before the test, the processor
+priority is raised to seven (line
+0787), thus ensuring that no more
+interrupts occur until user mode
+is resumed. (Another interrupt
+may occur immediately thereafter,
+however.)
+\ed
+
+
+If ``runrun $>$ 0'', then another, higher
+priority, process is waiting. The processor priority is reset to 0, allowing
+any pending interrupt to be taken. A
+call is then made to ``swtch'' (2178), to
+allow the higher priority process to
+proceed. When the process returns from
+``swtch'', the program loops back to
+repeat the test.
+
+
+The above discussion obviously extends
+to all interrupts. The only part which
+relates specifically to the clock
+interrupt is the call on the specialised routine ``clock''.
+
+
+\sbs{User Program Traps}
+
+The ``system call'' mechanism which
+enables user mode programs to call on
+the operating system for assistance,
+involves the execution by the user mode
+program of one of 256 versions of the
+``trap'' instruction. (The ``version'' is
+the value of the low order byte of the
+instruction word.)
+
+\bd
+\item[0518:] Execution of the trap instruction in a user mode program
+ causes a trap to occur to vector
+ location 34 which causes the PC
+ to be loaded with the value of
+ the label ``trap'' (lines 0512,
+ 0755). A new PS is set which
+ indicates
+
+present mode = kernel mode
+
+previous mode = user mode
+
+priority = 7
+
+\item[0756:] The next instruction executed is
+ the first instruction of ``trap''.
+ This saves the processor status
+ word in the stack two words
+ beyond the current ``top of
+ stack''.
+
+It is important to save the PS as
+soon as possible, before it can
+be changed, since it contains
+information defining the type of
+trap that occurred. The somewhat
+unconventional destination of the
+``move'' is to provide compatibility with the
+handling of interrupts, so that the same code can
+be used further on;
+
+\item[0757:] ``nofault'' will be zero so the
+ branch is not taken;
+
+\item[0759:] The memory management status
+registers are stored just in case
+they will be needed, and the
+memory management unit is reinitialised;
+
+\item[0762:] A subroutine entry is made to
+ ``call'' using r0. (This neatly
+ stores the old value of r0 in the
+ stack, but not a return address.
+ The new value is the address of
+ the address of the routine to be
+ entered next (in this case the
+ ``trap'' routine in the file
+ ``trap.c'' (2693));
+
+\item[0772:] The stack pointer is adjusted to
+ point to the location which
+ already contains the copy of PS;
+
+\item[0773:] The CPU priority is set to zero;
+
+{\bf From here the same path as for an
+interrupt is followed.}
+\ed
+
+
+\sbs{The Kernel Stack}
+
+The state of the kernel stack at the
+time that the ``trap'' procedure (``C''
+version) or one of the specialised
+interrupt handling routines is entered,
+is shown in Figure 10.1.
+
+\begin{center}
+\begin{tabular}{lrl|c|l}
+ & & & .... & {\bf Previous top of stack} \\ \hline
+(rps & 2)  & 7      & ps   & old PS \\
+(r7  & 1)  & 6      & pc   & old PC (r7) \\
+(r0  & 0)  & 5 --$>$ & r0   & old r0 \\
+     &     & 4      & nps  & new PS after trap \\
+(r1  & --2) & 3      & r1   & old r1 \\
+(r6  & --3) & 2      & sp   & old SP for previous mode \\
+     &     & 1      & dev  & masked new PS \\
+     &     & 0 --$>$ & tpc  & return address in ``call'' \\ \hline
+(r5  & --6  & --1     & (r5) & old r5 \\
+(r4  & --7  & --2     & (r4) & old r4 \\
+(r3  & --8  & --3     & (r3) & old r3 \\
+(r2  & --9  & --4     & (r2) & old r2 \\
+\end{tabular}
+\bigskip
+
+Figure 10.1
+\end{center}
+
+Columns (2) and (3) give the positions
+of stack words relative to the positions in the stack of the words
+labelled ``r0'' and ``tpc'' respectively.
+
+Columns (1) and (2) define (or explain)
+the contents of the file ``reg.h'' (Sheet 26).
+
+``dev'', ``sp'', ``r1'', ``nps'' ``r0'', ``pc'' and
+``ps'' in that order are the names of the
+parameters used in the declaration of
+the procedures ``trap'' (2693) and
+``clock'' (3725).
+
+Note that just before entry to ``trap''
+(``C'' version) or the other interrupt
+handling routines, the values for the
+registers r2, r3, r4 and r5 have not
+yet been saved in the stack. This is
+performed by a call on ``csv'' (lg20)
+which is automatically included by the
+``C'' compiler at the beginning of every
+compiled procedure. The form of the
+call on ``csv'' is equivalent to the
+assembler instruction
+
+\begin{verbatim}
+   jsr r5,csv
+\end{verbatim}
+
+This saves the current value of r5 on
+the stack and replaces it by the
+address of the next instruction in the
+``C'' procedure.
+
+\bd
+\item[1421:] This value of r5 is copied into r0;
+
+\item[1422:] the current value of the stack
+ pointer is copied into r5.
+\ed
+
+
+Note that at this point, r5 points to a
+stack location containing the previous
+value of r5 i.e. it points to the
+beginning of a chain of pointers, one
+per procedure, which ``thread'' the
+stack. When a ``C'' procedure exits, it
+actually returns to ``cret'' (1430) where
+the value of r5 is used to restore the
+stack and r2, r3 and r4 to their earlier condition (i.e. as they were
+immediately prior to entering the procedure). For this reason r5 is often
+called the {\bf environment pointer}.

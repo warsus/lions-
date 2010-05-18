@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Directory Files</TITLE>
+<META NAME="description" CONTENT="Directory Files">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node243.html">
+<LINK REL="previous" HREF="node241.html">
+<LINK REL="up" HREF="node240.html">
+<LINK REL="next" HREF="node243.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3761"
+  HREF="node243.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3757"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3751"
+  HREF="node241.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3759"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3762"
+  HREF="node243.html">namei (7518)</A>
+<B> Up:</B> <A NAME="tex2html3758"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3752"
+  HREF="node241.html">The Directory Data Structure</A>
+ &nbsp; <B>  <A NAME="tex2html3760"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000242000000000000000">
+Directory Files</A>
+</H2>
+
+<P>
+A directory file is  in  many  respects
+indistinguishable  from a non-directory
+file.  However it contains  information
+which  is  used in locating other files
+and hence its  contents  are  carefully
+protected,  and  are manipulated by the
+operating system alone.
+
+<P>
+In  every  file,  the  information   is
+stored  as  one  or  more 512 character
+blocks.  Each block of a directory file
+is  divided  into  32  *  16  character
+structures.  Each structure consists of
+a 16 bit ``inode'' table pointer and a 14
+character name.  The ``inode'' pointer is
+to  the  ``inode'' table on the same disk
+or file  system  volume  as  the  files
+which  the  directory references. (More
+on this later.)  An  ``inode''  value  of
+zero defines a null entry in the directory.
+
+<P>
+The procedures which  reference  directories are:
+
+<P>
+<PRE>
+   namei  (7518) search directory
+   link   (5909) create alternate name
+   wdir   (7477) write directory entry
+   unlink (3510) delete name
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,773 @@
+%
+% The Lion's Commentary, file ch6.tex, version 1.4, 18 May 1994
+%
+\se{Getting Started}
+
+This chapter considers the sequence of
+events which occur when UNIX is
+``rebooted'' i.e. it is loaded and initiated in an idle machine.
+
+A study of the initialisation process
+is of interest in itself, but more
+importantly, it allows a number of
+important features of the system to be
+presented in an orderly manner.
+
+The operating system may have to be
+restarted in the aftermath of a system
+crash. It will also have to be restarted frequently for quite ordinary,
+operational reasons, e.g. after an
+overnight shutdown. If we assume the
+latter case, then we can assume that
+all the disk files are intact and that
+no special circumstance needs to be
+recognised or dealt with.
+
+In particular, we can assume there is a
+file in the root directory called
+``/unix'', which is the object code for
+the operating system.
+
+This file began life as a set of source
+files such as we are investigating.
+These were compiled and linked together
+in the normal way to form a single
+object program file, and stored in the
+root directory.
+
+\sbs{Operator Actions}
+
+Reinitialisation requires operator
+action at the processor console. The
+operator must:
+
+\bi
+\item stop the processor by setting the
+``enable/halt'' switch to ``halt'';
+
+\item set the switch register with the
+address of the hardware bootstrap
+loader program;
+
+\item depress and release the `` load address'' switch;
+
+\item move the ``enable/halt'' switch to
+``enable'';
+
+\item depress and release the ``start''
+switch.
+\ei
+
+This activates the bootstrap program
+which is permanently recorded in a ROM
+in the processor.
+
+The bootstrap loader program loads a
+larger loader program (from block \#0 of
+the system disk), which looks for and
+loads a file called ``/unix'' into the
+low part of memory.
+
+It then transfers control to the
+instruction loaded at address zero.
+
+Address zero is occupied by a branch
+instruction (line 0508), which branches
+to location 000040, which contains a
+jump instruction (line 0522), which
+jumps to the instruction labelled
+``start'' in the file ``m40.s'' (line
+0612).
+
+\sbs{start (0612)}
+
+\bd
+\item[0613:] The ``enabled'' bit of the memory
+ management status register, SR0,
+ is tested. If this set, the processor will dwell forever in a
+ two instruction loop. This register will normally be cleared when
+ the operator activates the
+ ``clear'' button on the console
+ before starting the system.
+
+A number of reasons have been
+suggested for the necessity for
+this loop. The most likely is
+that in the case of a double bus
+timeout error, the processor will
+branch to location zero, and in
+this situation it should not be
+allowed to go further.
+
+\item[0615:] ``reset'' clears and initialises
+ all the peripheral device control
+ and status registers
+
+{\it The system will now be running in
+kernel mode with memory management
+disabled.}
+
+\item[0619:] KISA0 and KISD0 are the high core
+ addresses of the first pair of
+ kernel mode segmentation registers. The first six kernel
+ descriptor registers are initialised to 077406, which is the
+ description of a full size, 4K
+ word, read/write segment.
+
+The first six kernel address
+registers are initialised to 0,
+0200, 0400, 0600, 01000 and 01200
+respectively.
+
+As a result the first six kernel
+segments are initialised (without
+any reference to the actual size
+of UNIX) to point to the first
+six 4K word segments of physical
+memory. Thus the ``kernel to physical address'' translation is
+trivial for kernel addresses in
+the range 0 to 0137777;
+
+\item[0632:] ``\_end'' is a loader pseudo variable which defines the extent of
+ the program code and data area.
+ This value is rounded up to the
+ next multiple of 64 bytes and is
+ stored in the address register
+ for the seventh segment (segment
+ \#6).
+
+Note that the address of this
+register is stored in ``ka6'', so
+that the content of this register
+is accessible as ``*ka6'';
+
+\item[0634:] The corresponding descriptor
+ register is loaded with a value
+ which (since ``USIZE'' is equal to
+ 16) is the description of a
+ read/write segment which is 16 x
+ 32 = 512 words long.
+
+The value 007406 is obtained by
+shifting the octal value 017
+eight places to the left and then
+``or''ing in the value 6;
+
+\item[0641:] The eighth segment is mapped into
+ the highest 4K word segment of
+ the physical address space.
+
+It should be noted that with
+memory management disabled, the
+same translation is already in
+force i.e. addresses in the
+highest 4K word segment of the
+32K program address space are
+automatically mapped into the
+highest 4K word segment of the
+physical address space.
+\ed
+
+We may note that from this point on,
+all the kernel mode segmentation registers will remain unchanged with the
+single exception of the {\bf seventh kernel
+segmentation address register}.
+
+This register is explicitly manipulated
+by UNIX to point to a variety of
+locations in physical memory. Each such
+location is the beginning of an area
+512 words long, known as a ``per process
+data area''.
+
+The seventh kernel address register is
+now set to point to the segment which
+will become the per process data area
+for process \#0.
+
+\bd
+\item[0646:] The stack pointer is set to point
+ to the highest word of the per
+ process data area;
+
+
+\item[0647:] By incrementing the value of SR0
+ from zero to one, the ``memory
+ management enabled'' bit is conveniently set.
+\ed
+
+{\it From this point, all program addresses
+are translated to physical addresses
+the memory management hardware.}
+
+\bd
+\item[0649:] ``bss'' refers to the second part
+ of the program data area, which
+ is not initialised by the loader
+ (see ``A.OUT(V)'' in the PM). The
+ lower and upper limits of this
+ area are defined by the loader
+ pseudo variables, ``\_edata'' and
+ ``\_end'' respectively;
+
+\item[0668:] The processor status word (PS) is
+ changed to indicate that the
+ ``previous mode'' was ``user mode''.
+
+This prepares the way for the
+investigation and initialisation
+of the areas of physical memory
+which are not part of the kernel
+address space. (This involves use
+of the special instructions
+``mtpi'' and ``mfpi'' (Move To/From
+Previous Instruction space)
+together with some manipulation
+of the user mode segmentation
+registers.);
+
+\item[0669:] A call is then made to the procedure ``main'' (1550).
+\ed
+
+
+It will be seen later that ``main'' calls
+``sched'' which never terminates. The
+need for or use of the last three
+instructions of ``start'' (lines 0670,
+0671 and 0672) is therefore somewhat
+enigmatic. The reason will come later.
+In the meantime you might like to
+ponder ``why?''. What do these lines do
+anyway?
+
+
+\sbs{main (1550)}
+
+Upon entry to this procedure:
+
+\bd
+\item[(a)]  the processor is running at
+priority zero, in kernel mode
+and with the previous mode shown
+as user mode;
+
+\item[(b)] the kernel mode segmentation
+registers have been set and the
+memory management unit has been
+enabled;
+
+\item[(c)] all the data areas used by the
+operating system have been initialised;
+
+\item[(d)] the stack pointer (SP or r6)
+points to a word which contains
+a return address in ``start''.
+\ed
+
+
+\bd
+\item[1559:] The first action of ``main'' would
+ appear to be redundant, since
+ ``updlock'' should have already
+ been set to zero as part of the
+ initialisation performed by
+ ``start'';
+
+\item[1560:] ``i'' is initialised to the ordinal
+ of the first 32 word block beyond
+ the ``per process data area'' for
+ process \#0;
+
+\item[1562:] The first pair of user mode segmentation registers are used to
+ provide a ``moving window'' into
+ higher areas of the physical
+ memory.
+
+At each position of the window an
+attempt is made (using ``fuibyte'')
+to read the first accessible word
+in the window. If this is not
+successful, it is assumed that
+the end of the physical memory
+has been reached.
+Otherwise the next 32 word block
+is initialised to zero (using
+``clearseg'' (0676)) and added to
+the list of available memory, and
+the window is advanced by 32
+words.
+\ed
+
+``fuibyte'' and ``clearseg'' are both to be
+found in ``m40.s'', ``fuibyte'' will normally return a positive value in the
+range 0 to 255. However, in the exceptional case where the memory location
+referenced does not respond, the value
+--1 is returned. The way this is
+brought about is a little obscure, and
+will be explained later in Chapter
+Ten.)
+
+\bd
+\item[1582:] ``maxmem'' defines the maximum
+ amount of main memory which may
+ be used by a user program. This
+ is the minimum of:
+
+\bi
+\item the physically available memory (``maxmem'');
+
+\item an installation definable parameter (``MAXMEM'') (0135);
+
+\item the ultimate limit imposed by the PDP11 architecture;
+\ei
+
+\item[1583:] ``swapmap'' defines available space
+ on the swapping disk which may be
+ used when user programs are
+ swapped out of main memory. It is
+ initialised to a single area of
+ size ``nswap'', starting at relative address ``swplo''. Note that
+ ``nswap'' and ``swplo'' are initialised in ``conf.c'' (lines 4697,
+ 4698);
+
+\item[1589:] The significance of this and the
+ next four lines will be discussed
+ shortly;
+
+\item[1599:] The design of UNIX assumes the
+ existence of a system clock which
+ interrupts the processor at line
+ frequency (i.e 50 Hz or 60 Hz).
+
+There are two possible clock
+types available: a line frequency
+clock (KW11-L) which has a control register on the Unibus at
+address 777546, or a programmable, real-time clock (KW11-P)
+located at address 777540 (lines
+1509, 1510).
+
+UNIX does not presume which clock
+will be present. It attempts to
+read the status word for the line
+frequency clock first. If successful,
+that clock is initialised and the other (if present)
+remains unused. If the first
+attempt is unsuccessful, then the
+other clock is tried. If both
+attempts are unsuccessful, there
+is a call on ``panic'' which effectively halts the system with an
+error message to the operator.
+\ed
+
+Since the absence of a clock will be
+indicated by a bus timeout error, it is
+convenient to make the reference via
+``fuiword'', preceded by the setting of a
+user mode segmentation register pair
+(1599, 1600).
+
+
+\bd
+\item[1607:] Either type of clock is initialised by the statement
+
+*lks = 0115;
+
+As a consequence of this action,
+the clock will interrupt the processor within the next 20
+ milliseconds. This interrupt may
+occur at any time, but it will be
+convenient for this discussion to
+assume that no interrupt will
+occur before initialisation is
+complete;
+
+\item[1613:] ``cinit'' (82l4) initialises the
+ pool of character buffers. See
+ Chapter 23;
+
+\item[1614:] ``binit'' (5055) initialises
+ the pool of large buffers. See Chapter 17;
+
+\item[1615:] ``iinit'' (6922) initialises table
+ entries for the root device. See
+ Chapter Twenty.
+\ed
+
+\sbs{Processes}
+
+``process'' is a term which has occurred
+more than once already. A definition
+which will suit our purposes reasonably
+well at present is simply ``a program in
+execution''.
+
+
+Details of the representation of
+processes in UNIX will be discussed in
+the next chapter. For now we just note
+that each process involves a ``proc''
+structure from the array called ``proc''
+and a ``per process data area'' which
+includes one copy of the structure ``u''.
+
+
+\sbs{Initialisation of proc[0]}
+
+The explicit initialisation of the
+structure ``proc[0]'' is performed starting at line 1589. Only four elements
+are changed from the overall initial
+value of zero:
+
+\bd
+\item[(a)] ``p\_stat'' is set to ``SRUN'' which
+ implies that process 0 is
+ ``ready to run'';
+
+\item[(b)] ``p\_flag'' is set to show both
+ ``SLOAD'' and ``SSYS''. The former
+ implies that the process is to
+ be found in core (it has not
+ been swapped out onto the disk),
+ and the second, that it should
+ never be swapped out;
+
+\item[(c)] ``p\_size'' is set to ``USIZE'';
+
+\item[(d)] ``p\_addr'' is set to the contents
+ of the kernel segmentation address register \#6.
+\ed
+
+
+It will be seen that process \#0 has
+acquired an area of ``USIZE'' blocks
+(exactly the size of a ``per process
+data area'') which begins immediately
+after the official end (``\_end'') of the
+operating system data area.
+
+The ordinal number of the first block
+of this area has been stored for future
+reference in ``p\_addr''. This area,
+which was cleared to zero in ``start''
+(0661), contains a single copy of the
+user structure called ``u''.
+
+On line 1593, the address of ``proc[0]''
+is stored in ``u.u\_procp'', i.e. the
+``proc'' structure and the ``u'' structure
+are mutually linked.
+
+
+\sbs{The story continues ...}
+
+\bd
+\item[1627:] ``newproc'' (1826) will be discussed in detail in the next
+ chapter.
+
+In brief this initialises a
+second ``proc'' structure viz.
+``proc[1]'', and allocates a second
+``per process data area'' in core.
+This is a copy of the ``per process data area'' for process \#0,
+exact in all but one respect: the
+value of ``u.u\_procp'' in the
+second area is ``\&proc[1]''.
+
+We should note here that at line
+1889, there is a call on ``savu''
+(0725) which saves the current
+values of the environment and the
+stack pointers in ``u.u\_rsav''
+before the copy is made.
+
+Also from line 1918 we can see
+that the value returned by
+``newproc'' will be zero, so that
+the statements on lines 1628 to
+1635 will not be executed;
+
+\item[1637:] A call is made to ``sched'' (1940)
+ which, it may be observed, contains an infinite loop, so that
+ it never returns!
+\ed
+
+\sbs{sched (1940)}
+
+At this stage we are only interested in
+what happens when ``sched'' is entered
+for the first time.
+
+\bd
+\item[1958:] ``spl6'' is an assembler routine
+ (1292) which sets the processor
+ priority level to six. (Cf. also
+ ``spl0'', ``spl4'', ``spl5'' and ``spl7''
+ in ``m40.s'').
+\ed
+
+When the processor is at level six,
+only devices with priority seven can
+interrupt it. The clock whose priority
+level is six is thus inhibited from
+interrupting the processor between this
+point and the subsequent call on ``spl0''
+at line 1976.
+
+\bd
+\item[1960:] A search is made through ``proc''
+ whose status is
+``SRUN'' and which is not ``loaded''.
+\ed
+
+(Processes \#0 and 1 have status ``SRUN''
+and are loaded. All remaining 2193:
+processes, have a status of zero, which
+is equivalent to ``undefined'' or 
+``NULL'' ) .
+
+\bd
+\item[1966:] The search fails (``n'' is still
+ --1). The flag ``runout'' is made
+ non-zero, indicating that there
+ are no processes which are both
+ ready to run and ``swapped out''
+ onto disk;
+
+\item[1968:] ``sleep'' is called (to wait for
+ such an event) with a priority
+ ``PSWP'' (== --100) for when it
+ wakes up, which is in the
+ category of ``very urgent''.
+\ed
+
+\sbs{sleep (2066)}
+
+\bd
+\item[2070:] ``PS'' is the address of the processor status word. The processor
+ status is stored in the register
+ ``s'' (0164, 0175);
+
+\item[2071:] ``rp'' is set to the address of the
+ entry in the array ``proc'' of the
+ current process (still ``proc[0]''
+ at this stage!);
+
+\item[2072:] ``pri'' is negative, so the ``else''
+ branch is taken, setting the
+ status of the current process
+ (0) to ``SSLEEP''. The reason for
+ ``going to sleep'' and the ``awakening priority'' are noted.
+
+\item[2093:] ``swtch'' is then called.
+\ed
+
+\sbs{swtch (2178)}
+
+\bd
+\item[2184:] ``p'' is a static variable (2180),
+ which means that its value is
+ initialised to zero (1566) and is
+ preserved between calls. For the
+ very first call on ``swtch'', ``p''
+ is set to point to ``proc[0]'';
+
+\item[2189:] ``savu'' is called to save the
+stack pointer and the environment
+pointer for the current process
+in ``u.u\_rsav'';
+
+\item[2193:] ``retu'' is called
+to reset the kernel address
+register for segment \#6 to the
+value passed as an argument
+(this causes a change in the
+current process!), and
+ to reset the stack and environment pointers to values
+ appropriate to the revised
+ current process, whose execution
+ is about to be resumed.
+\ed
+
+The combination of successive calls on
+``savu'' and ``retu'' at this point constitutes a so-called ``coroutine jump''
+(Cf.
+``exchange jump'' on the Cyber or ``Load
+PSW'' on the /360 or ``Move Stack'' on the
+B6700).
+
+This time however the coroutine jump is
+from process 0 to process 0 (not very
+interesting!).
+
+\bd
+\item[2201:] The set of processes is searched
+ to find the process whose state
+ is ``SRUN'' and which is loaded and
+ for which ``p\_pri'' is a maximum.
+
+The search is successful and process \#1 is found. (N.B. The
+state of process \#0 was just
+changed from ``SRUN'' to ``SSLEEP''
+in ``sleep'' so it no longer satisfies the search criterion);
+
+\item[2218:] Since ``p'' is not ``NULL'', the idle
+ loop is not entered;
+
+\item[2228:] ``retu'' (0740) causes a coroutine
+ jump to process \#1 which becomes
+the current process.
+
+What is process \#1 ? It is a copy
+of process \#0, made at a previous
+stage of the latter's existence.
+\ed
+
+This call on ``retu'' was not preceded by
+a call on ``savu'' because the necessary
+information has in fact been saved
+already. (Where?)
+
+\bd
+\item[2229:] ``sureg'' is a routine 1738) which
+ copies into the user mode segmentation registers, the values
+ appropriate for the current process.
+	These have been stored earlier in the arrays ``u.u\_uisa'' and
+ ``u.u \_uisd''.
+\ed
+
+The very first call on ``sureg'' copies
+zeroes and serves no real purpose.
+
+\bd
+\item[2240:] The ``SSWAP'' flag is not set, so
+ that this enigmatic (2239) section can be
+ignored for now;
+
+
+\item[2247:] Finally ``swtch'' returns with a
+ value of ``1''. But where does the ``return'' return to?
+{\bf Not to ``sleep'' !}
+\ed
+
+
+The ``return'' follows values set by the
+stack pointer and the environment
+pointer. These (just before the return)
+have values equal to those in force
+when the most recent ``savu(u.u\_rsav)''
+was performed.
+
+Now process \#1, which is only just
+starting has never performed a ``savu'',
+but values were stored in ``u.u\_rsav''
+before the copy of process \#0 was made
+by ``newproc'', which had been called
+from ``main''.
+
+Thus in this case, {\it the return from
+``swtch'' is made to ``main'', with a value
+of one.} (Look over this again, to be
+sure you understand!)
+
+\sbs{main revisited}
+
+The story so far: process \#0, having
+created a copy of itself in the form of
+process \#1, has gone to sleep. As a
+result process \#1 has become the
+current process and has returned to
+``main ''with a value of one. Now read
+on ...
+
+\bd
+\item[1627:] The statements in ``main'' which
+ are conditional on ``newproc'' are
+ now executed:
+
+\item[1628:] ``expand'' (2268) finds a new,
+ larger area (from USIZE*32 to
+ (USIZE+1) *32 words) for process
+ \#1, and copies the original data
+ area into it.
+
+In this case, the original user
+data area consists only of a ``per
+process data area'', with zero
+length data and stack areas. The
+original area is released;
+
+\item[1629:] ``estabur'' is used to set the
+ ``prototype'' segmentation registers which are stored in
+ ``u.u\_uisa'' and ``u.u\_uisd'' for
+ later use by ``sureg''. ``estabur''
+ calls ``sureg'' as its last action.
+
+
+The parameters for ``estabur'' are
+the sizes of the text, data and
+stack areas plus an indicator to
+decide whether the text and data
+areas should be in separate
+address spaces. (Never true on
+the PDP11/40.) The sizes are all
+in units of 32 words;
+
+\item[1630:] ``copyout'' (1252) is an assembler
+ routine which copies an array in
+ kernel space of specified size
+ into a region in user space. Here
+ the array ``icode'' is copied into
+ an area starting at location zero
+ in user space;
+
+\item[1635:] The ``return'' is not special. From
+ ``main'' it goes to ``start'' (0670)
+ where the three last instructions
+ have the effect of causing
+ {\it execution in user mode of the
+ instruction at user mode address
+ zero.} i.e. the execution of a
+copy of the first instruction in
+``icode''. The instructions subsequently executed are copies also
+of instructions in ``icode''.
+\ed
+
+AT THIS POINT, THE INITIALISATION OF
+THE SYSTEM IS COMPLETE.
+
+Process \#1 is running and to all
+intents and purposes, is a normal process. Its initial form is (almost)
+that which would come from compilation,
+loading and execution of the simple,
+but non-trivial ``C'' program:
+
+\begin{verbatim}
+    char *init "/etc/init";
+    main ( ) {
+    execl (init, init, 0);
+    while (1);
+    }
+\end{verbatim}
+
+The equivalent assembler program is
+
+\begin{verbatim}
+           sys exec
+           init
+           initp
+           br   .
+    initp: init
+           0
+    init:  </etc/init\0>
+\end{verbatim}
+
+If the system call on ``exec'' fails
+(e.g. the file ``/etc/init'' cannot be
+found) the process falls into a tight
+loop, and there the processor will
+stay, except when the occasional clock
+interrupt occurs.
+
+
+A description of the functions performed by ``/etc/init'' can be found in
+the section ``INIT (VIII)'' of the UPM.

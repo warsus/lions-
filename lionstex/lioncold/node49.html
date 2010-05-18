@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 16</TITLE>
+<META NAME="description" CONTENT="Example 16">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node50.html">
+<LINK REL="previous" HREF="node48.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node50.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1295"
+  HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1291"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1285"
+  HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1293"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1296"
+  HREF="node50.html">Example 17</A>
+<B> Up:</B> <A NAME="tex2html1292"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1286"
+  HREF="node48.html">Example 15</A>
+ &nbsp; <B>  <A NAME="tex2html1294"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000617000000000000000">
+Example 16</A>
+</H2>
+
+<P>
+<PRE>
+  6672 closei (ip, rw)
+       int *ip;
+       {
+         register *rip;
+         register dev, maj;
+         rip = ip;
+         dev = rip-&gt;i_addr[0];
+         maj = rip-&gt;i_addr[0].d major;
+         switch (rip-&gt;i_mode&amp;IFMT) {
+
+         case IFCHR:
+           (*cdevsw[maj].d_close)(dev,rw);
+           break;
+         
+         case IFBLK:
+           (*bdevsw[maj].d_close)(dev,rw);
+         }
+         iput(rip);
+       }
+</PRE>
+
+<P>
+This example has a number of interesting features.
+
+<P>
+The declaration for ``d_major'' is
+
+<P>
+<PRE>
+    struct {
+       char d_minor;
+       char d_major;
+    }
+</PRE>
+
+<P>
+so that the value assigned to ``maj''  is
+the   hiqh  order  byte  of  the  value
+assigned to ``dev''.
+
+<P>
+In this example, the ``switch'' statement
+has  onlv  two  non-null  cases, and no
+``default''.  The actions for the  recognised cases, e.g.
+
+<P>
+<PRE>
+     (*bdevsw[maj].d_close)(dev,rw);
+</PRE>
+
+<P>
+look formidable
+
+<P>
+First it should be noted that this is a
+procedure  call,  with parameters ``dev''
+and ``rw''.
+
+<P>
+Second  ``bdevsw''  (and  ``cdevsw'')   are
+arrays  of  structures, whose ``d_close''
+element is a  pointer  to  a  function,
+i.e.
+
+<P>
+<PRE>
+     bdevsw[maj]
+</PRE>
+
+<P>
+is the name of a structure, and
+
+<P>
+<PRE>
+     bdevsw[maj].d_close
+</PRE>
+
+<P>
+is an element of that  structure  which
+happens  to be a pointer to a function,
+so that
+
+<P>
+<PRE>
+     *bdevsw[maj].d_close
+</PRE>
+
+<P>
+is the name of a function.   The  first
+pair  of  parentheses  is  ``syntactical
+sugar'' to put the compiler in the right
+frame of mind!
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

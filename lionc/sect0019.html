@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Unix Assembler</title>
+
+<link href="sect0020.html" title="Memory Management" rel="next" />
+<link href="sect0018.html" title="Addressing Modes" rel="prev" />
+<link href="sect0013.html" title="Fundamentals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0018.html" title="Addressing Modes"><img alt="Previous: Addressing Modes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0020.html" title="Memory Management"><img alt="Next: Memory Management" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0013.html">Fundamentals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Unix Assembler</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000020">2.6 Unix Assembler</h2>
+<p>The UNIX assembler is a two pass assembler without macro facilities. A full description may be found in the “UNIX Assembler Reference Manual” which is contained in the “UNIX Documents” </p><p>The following brief notes should be of some assistance: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>a string of digits may define a constant number. This is assumed to be an octal number unless the string is terminated by a period (“.”), when it is interpreted as a decimal number. </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>The character “/” is used to signify that the rest of the line is a comment; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>If two or more statements occur on the same line, they must be separated by semicolons; </p></dd>
+
+    <dt>(d)</dt>
+    <dd><p>The character “.” is used to denote the current location; </p></dd>
+
+    <dt>(e)</dt>
+    <dd><p>UNIX assembler uses the characters $ and “*” where the DEC assemblers use “#” and “@” respectively. </p></dd>
+
+    <dt>(f)</dt>
+    <dd><p>An identifier consists of a set of alphanumeric characters (including the underscore). Only the first eight characters are significant and the first may not be numeric; </p></dd>
+
+    <dt>(g)</dt>
+    <dd><p>Names which occur in “C” programs for variables which are to be known globally, are modified by the addition of a prefix consisting of a single underscore. Thus for example the variable “_regloc” which occurs on line 1025 in the assembly language file, “m40.s”, refers to the same variable as “regloc” at line 2677 of the file, “trap.c”; </p></dd>
+
+    <dt>(h)</dt>
+    <dd><p>There are two kinds of statement labels: name labels and numeric labels. The latter consist of a single digit followed by a colon, and need not be unique. A reference to “nf” where “n” is a digit, refers to the first occurrence of the label “n:” found by searching forward. </p><p>A reference to “nb” is similar except that the search is conducted in the backwards direction; </p></dd>
+
+    <dt>(i)</dt>
+    <dd><p>An assignment statement of the form </p><center>identifier = expression </center><p>associates a value <b class="bf">and</b> type with the identifier. In the example </p><center>. = 60<tt>^</tt>. </center><p>the operator ’<tt>^</tt>’ delivers the value of the first operand and the type of the second operand (in this case, “location”); </p></dd>
+
+    <dt>(j)</dt>
+    <dd><p>The string quote symbols are “<img src="images/img-0004.png" alt="$&lt;$" style="vertical-align:&images/img-0004.png-depth;&px;; 
+                                     width:&images/img-0004.png-width;&px;; 
+                                     height:&images/img-0004.png-height;&px;" class="math gen" />” and “<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" />”. </p></dd>
+
+    <dt>(k)</dt>
+    <dd><p>Statements of the form </p><center>.globl x, y, z </center><p>serve to make the names “x”, “y” and “z” external; </p></dd>
+
+    <dt>(l)</dt>
+    <dd><p>The names “_edata” and “_end” are loader pseudo variables which the define the size of the data segment, and the data segment plus the bss segment respectively. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0018.html" title="Addressing Modes"><img alt="Previous: Addressing Modes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0020.html" title="Memory Management"><img alt="Next: Memory Management" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

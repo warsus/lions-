@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Kernel Stack</TITLE>
+<META NAME="description" CONTENT="The Kernel Stack">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node135.html">
+<LINK REL="up" HREF="node130.html">
+<LINK REL="next" HREF="node137.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2400"
+  HREF="node137.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2396"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2392"
+  HREF="node135.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2398"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2401"
+  HREF="node137.html">Clock Interrupts</A>
+<B> Up:</B> <A NAME="tex2html2397"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2393"
+  HREF="node135.html">User Program Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2399"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000156000000000000000">
+The Kernel Stack</A>
+</H2>
+
+<P>
+The state of the kernel stack at the
+time that the ``trap'' procedure (``C''
+version) or one of the specialised
+interrupt handling routines is entered,
+is shown in Figure 10.1.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="CENTER">....</TD>
+<TD ALIGN="LEFT"><B>Previous top of stack</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">(rps</TD>
+<TD ALIGN="RIGHT">2)</TD>
+<TD ALIGN="LEFT">7</TD>
+<TD ALIGN="CENTER">ps</TD>
+<TD ALIGN="LEFT">old PS</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r7</TD>
+<TD ALIGN="RIGHT">1)</TD>
+<TD ALIGN="LEFT">6</TD>
+<TD ALIGN="CENTER">pc</TD>
+<TD ALIGN="LEFT">old PC (r7)</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r0</TD>
+<TD ALIGN="RIGHT">0)</TD>
+<TD ALIGN="LEFT">5 -<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$"></TD>
+<TD ALIGN="CENTER">r0</TD>
+<TD ALIGN="LEFT">old r0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="LEFT">4</TD>
+<TD ALIGN="CENTER">nps</TD>
+<TD ALIGN="LEFT">new PS after trap</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r1</TD>
+<TD ALIGN="RIGHT">-2)</TD>
+<TD ALIGN="LEFT">3</TD>
+<TD ALIGN="CENTER">r1</TD>
+<TD ALIGN="LEFT">old r1</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r6</TD>
+<TD ALIGN="RIGHT">-3)</TD>
+<TD ALIGN="LEFT">2</TD>
+<TD ALIGN="CENTER">sp</TD>
+<TD ALIGN="LEFT">old SP for previous mode</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="LEFT">1</TD>
+<TD ALIGN="CENTER">dev</TD>
+<TD ALIGN="LEFT">masked new PS</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="RIGHT">&nbsp;</TD>
+<TD ALIGN="LEFT">0 -<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$"></TD>
+<TD ALIGN="CENTER">tpc</TD>
+<TD ALIGN="LEFT">return address in ``call''</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r5</TD>
+<TD ALIGN="RIGHT">-6</TD>
+<TD ALIGN="LEFT">-1</TD>
+<TD ALIGN="CENTER">(r5)</TD>
+<TD ALIGN="LEFT">old r5</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r4</TD>
+<TD ALIGN="RIGHT">-7</TD>
+<TD ALIGN="LEFT">-2</TD>
+<TD ALIGN="CENTER">(r4)</TD>
+<TD ALIGN="LEFT">old r4</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r3</TD>
+<TD ALIGN="RIGHT">-8</TD>
+<TD ALIGN="LEFT">-3</TD>
+<TD ALIGN="CENTER">(r3)</TD>
+<TD ALIGN="LEFT">old r3</TD>
+</TR>
+<TR><TD ALIGN="LEFT">(r2</TD>
+<TD ALIGN="RIGHT">-9</TD>
+<TD ALIGN="LEFT">-4</TD>
+<TD ALIGN="CENTER">(r2)</TD>
+<TD ALIGN="LEFT">old r2</TD>
+</TR>
+</TABLE>
+</DIV>
+<P><P>
+<BR>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<DIV ALIGN="CENTER">Figure 10.1
+
+</DIV>
+
+<P>
+Columns (2) and (3) give the positions
+of stack words relative to the positions in the stack of the words
+labelled ``r0'' and ``tpc'' respectively.
+
+<P>
+Columns (1) and (2) define (or explain)
+the contents of the file ``reg.h'' (Sheet 26).
+
+<P>
+``dev'', ``sp'', ``r1'', ``nps'' ``r0'', ``pc'' and
+``ps'' in that order are the names of the
+parameters used in the declaration of
+the procedures ``trap'' (2693) and
+``clock'' (3725).
+
+<P>
+Note that just before entry to ``trap''
+(``C'' version) or the other interrupt
+handling routines, the values for the
+registers r2, r3, r4 and r5 have not
+yet been saved in the stack. This is
+performed by a call on ``csv'' (lg20)
+which is automatically included by the
+``C'' compiler at the beginning of every
+compiled procedure. The form of the
+call on ``csv'' is equivalent to the
+assembler instruction
+
+<P>
+<PRE>
+   jsr r5,csv
+</PRE>
+
+<P>
+This saves the current value of r5 on
+the stack and replaces it by the
+address of the next instruction in the
+``C'' procedure.
+
+<P>
+<DL>
+<DT><STRONG>1421:</STRONG></DT>
+<DD>This value of r5 is copied into r0;
+
+<P>
+</DD>
+<DT><STRONG>1422:</STRONG></DT>
+<DD>the current value of the stack
+ pointer is copied into r5.
+</DD>
+</DL>
+
+<P>
+Note that at this point, r5 points to a
+stack location containing the previous
+value of r5 i.e. it points to the
+beginning of a chain of pointers, one
+per procedure, which ``thread'' the
+stack. When a ``C'' procedure exits, it
+actually returns to ``cret'' (1430) where
+the value of r5 is used to restore the
+stack and r2, r3 and r4 to their earlier condition (i.e. as they were
+immediately prior to entering the procedure). For this reason r5 is often
+called the <B>environment pointer</B>.
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2400"
+  HREF="node137.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2396"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2392"
+  HREF="node135.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2398"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2401"
+  HREF="node137.html">Clock Interrupts</A>
+<B> Up:</B> <A NAME="tex2html2397"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2393"
+  HREF="node135.html">User Program Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2399"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

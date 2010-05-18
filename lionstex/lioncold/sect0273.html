@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: lpopen (8850)</title>
+
+<link href="sect0274.html" title="Notes" rel="next" />
+<link href="sect0272.html" title="LP11 Line Printer Driver" rel="prev" />
+<link href="sect0271.html" title="Character Oriented Special Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0272.html" title="LP11 Line Printer Driver"><img alt="Previous: LP11 Line Printer Driver" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0274.html" title="Notes"><img alt="Next: Notes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0271.html">Character Oriented Special Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">lpopen (8850)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000274">22.2 lpopen (8850)</h2>
+<p>When a line printer file is opened, the normal calling sequence is followed: </p><p>“open” (5774) calls “open1”, which (5832) calls “openi”, which (6716) calls, in the case of a character special file, “cdevsw[..].d_open”. In the case of the line printer, this latter translates (4675) to “lpopen”. </p><dl class="description">
+
+    <dt>8853:</dt>
+    <dd><p>Take the error exit if either another line printer file is already open, or if the line printer is not ready (e.g the power is off, or there is no paper, or the printer drum gate is open, or the temperature is too high, or the operator has switched the printer off-line.) </p></dd>
+
+    <dt>8857:</dt>
+    <dd><p>Set the “lp11.flag” to indicate that the file is open, the printer has a “form feed” capability and lines are to be indented by eight characters. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0272.html" title="LP11 Line Printer Driver"><img alt="Previous: LP11 Line Printer Driver" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0274.html" title="Notes"><img alt="Next: Notes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

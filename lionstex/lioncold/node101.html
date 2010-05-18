@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>newproc (1826)</TITLE>
+<META NAME="description" CONTENT="newproc (1826)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node100.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node102.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1955"
+  HREF="node102.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1951"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1947"
+  HREF="node100.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1953"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1956"
+  HREF="node102.html">Process Management</A>
+<B> Up:</B> <A NAME="tex2html1952"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1948"
+  HREF="node100.html">sureg (1739)</A>
+ &nbsp; <B>  <A NAME="tex2html1954"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001113000000000000000">
+newproc (1826)</A>
+</H2>
+
+<P>
+It is now time to take a good look at
+the procedure which creates new
+processes as (almost exact) replicas of
+their creators.
+
+<P>
+<DL>
+<DT><STRONG>1841:</STRONG></DT>
+<DD>``mpid'' is an integer which is
+ stepped through the values 0 to
+ 32767. As each new process is
+ created, a new value for ``mpid''
+ is created to provide a unique
+distinguishing number for the
+process. Since the cycle of
+values may eventually repeat, a
+check is made that the number is
+not still in use; if so a new
+value is tried;
+
+<P>
+</DD>
+<DT><STRONG>1846:</STRONG></DT>
+<DD>A search is made through the
+ ``proc'' array for a null ``proc''
+ structure (indicated by ``p_stat''
+ having a null value);
+
+<P>
+</DD>
+<DT><STRONG>1860:</STRONG></DT>
+<DD>At this point, the address of the
+new entry in the ``proc'' array is
+stored as both ``p'' and ``rpp'', and
+the address of ``proc'' entry for
+the current process is stored both
+as ``up'' and ``rip'';
+
+<P>
+</DD>
+<DT><STRONG>1861:</STRONG></DT>
+<DD>The attributes of the new process
+are stored in the new ``proc''
+entry. Many of these are copied
+from the current process;
+
+<P>
+</DD>
+<DT><STRONG>1876:</STRONG></DT>
+<DD>The new process inherits the open
+files of its parent. Increment
+the reference count for each of
+these;
+
+<P>
+</DD>
+<DT><STRONG>1879:</STRONG></DT>
+<DD>If there is a separate text segment increment the associated
+reference counts. Notice that
+``rip'', ``rpp'' are used for temporary reference here;
+
+<P>
+</DD>
+<DT><STRONG>1883:</STRONG></DT>
+<DD>Increment the reference count for
+the parent's current directory;
+
+<P>
+</DD>
+<DT><STRONG>1889:</STRONG></DT>
+<DD>Save the current values of the
+ environment and stack pointers in
+``u.u_rsav''. ``savu'' is an assembler
+routine defined at line 0725;
+
+<P>
+</DD>
+<DT><STRONG>1890:</STRONG></DT>
+<DD>Restore the values of ``rip'' and
+``rpp''. Temporarily change the
+value of ``u.u_procp'' from the
+value appropriate to the current
+process to the value appropriate
+to the new process;
+
+<P>
+</DD>
+<DT><STRONG>1896:</STRONG></DT>
+<DD>Try to find an area in main
+ memory in which to create the new
+ data segment;
+
+<P>
+</DD>
+<DT><STRONG>1902:</STRONG></DT>
+<DD>If there is no suitable area in
+ main memory, the new copy will
+have to be made on disk. The
+next section of code should be
+analysed carefully because of the
+inconsistency introduced at line
+1891 i.e.
+<BR>
+u.u_procp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">p_addr != *ka6
+
+<P>
+</DD>
+<DT><STRONG>1903:</STRONG></DT>
+<DD>Mark the current process as
+ ``SIDL'' to head off temporarily
+ any further attempt to swap it
+ out (i.e. initiated by ``sched''
+ (1940));
+
+<P>
+</DD>
+<DT><STRONG>1904:</STRONG></DT>
+<DD>Make the new ``proc'' entry consistent,
+i.e set rpp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">p_addr = *ka6;
+
+<P>
+</DD>
+<DT><STRONG>1905:</STRONG></DT>
+<DD>Save the current values of the
+ environment and stack pointers in
+ ``u.u_ssav'';
+
+<P>
+</DD>
+<DT><STRONG>1906:</STRONG></DT>
+<DD>Call ``xswap'' (4368) to copy the
+ data segment into the disk swap
+ area. Because the second parameter is zero, the main memory area
+ will not be released;
+
+<P>
+</DD>
+<DT><STRONG>1907:</STRONG></DT>
+<DD>Mark the new process as ``swapped
+ out'';
+
+<P>
+</DD>
+<DT><STRONG>1908:</STRONG></DT>
+<DD>Return the current process to its
+ normal state;
+
+<P>
+</DD>
+<DT><STRONG>1913:</STRONG></DT>
+<DD>There was room in main memory, so
+ store the address of the new
+ ``proc'' entry and copy the data
+ segment a block at a time;
+
+<P>
+</DD>
+<DT><STRONG>1917:</STRONG></DT>
+<DD>Restore the current process'
+ ``per process data area'' to its
+ previous state;
+
+<P>
+</DD>
+<DT><STRONG>1918:</STRONG></DT>
+<DD>Return with a value of zero.
+</DD>
+</DL>
+
+<P>
+Obviously ``newproc'' on its own is not
+sufficient to produce an interesting
+and varied set of processes. The procedure ``exec'' (3020) which is discussed
+in Chapter Twelve provides the necessary additional facility: the means for
+a process to change its character, to
+be reincarnated.
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1955"
+  HREF="node102.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1951"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1947"
+  HREF="node100.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1953"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1956"
+  HREF="node102.html">Process Management</A>
+<B> Up:</B> <A NAME="tex2html1952"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1948"
+  HREF="node100.html">sureg (1739)</A>
+ &nbsp; <B>  <A NAME="tex2html1954"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

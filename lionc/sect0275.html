@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: lpoutput (8986)</title>
+
+<link href="sect0276.html" title="lpstart (8967)" rel="next" />
+<link href="sect0274.html" title="Notes" rel="prev" />
+<link href="sect0271.html" title="Character Oriented Special Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0274.html" title="Notes"><img alt="Previous: Notes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0276.html" title="lpstart (8967)"><img alt="Next: lpstart (8967)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0271.html">Character Oriented Special Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">lpoutput (8986)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000276">22.4 lpoutput (8986)</h2>
+<p>This procedure is called with a character to be printed, as a parameter. </p><dl class="description">
+
+    <a href="../all.html#line8988" target="source" <dt>8988:</dt></a>
+    <dd><p>“lp11.cc” is a count of the number of characters waiting to be sent to the line printer. If this is already large enough (“LPHWAT”, 8819), “sleep” for a while (so as not to flood the character buffer pool); </p></dd>
+
+    <a href="../all.html#line8990" target="source" <dt>8990:</dt></a>
+    <dd><p>Call “putc” (0967) to store the character in a safe place. (The function of “putc” and its companion “getc” is a major topic to be discussed in Chapter Twenty Three.) It should be noted that no check is made that “putc” was successful in storing the character. (There may have been no space in the character buffers.) In practice there seems to be no real problem here, but one can wonder. </p></dd>
+
+    <a href="../all.html#line8991" target="source" <dt>8991:</dt></a>
+    <dd><p>Raise the processor priority sufficiently to inhibit the interrupts from the line printer, call “lpstart” and then drop the priority again. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0274.html" title="Notes"><img alt="Previous: Notes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0276.html" title="lpstart (8967)"><img alt="Next: lpstart (8967)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Kernel Mode Traps</TITLE>
+<META NAME="description" CONTENT="Kernel Mode Traps">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node143.html">
+<LINK REL="previous" HREF="node141.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node143.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2483"
+  HREF="node143.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2479"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2473"
+  HREF="node141.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2481"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2484"
+  HREF="node143.html">User Mode Traps</A>
+<B> Up:</B> <A NAME="tex2html2480"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2474"
+  HREF="node141.html">trap (2693)</A>
+ &nbsp; <B>  <A NAME="tex2html2482"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000172000000000000000">
+Kernel Mode Traps</A>
+</H2>
+
+<P>
+The trap is unexpected and with one
+exception, the reaction is to ``panic''.
+The code executed is the ``default'' of
+the ``switch'' statement:
+
+<P>
+<DL>
+<DT><STRONG>2716:</STRONG></DT>
+<DD>Print:
+
+<P>
+
+<UL>
+<LI>the current value of the seventh
+kernel segment address register
+(i.e. the address of the current
+per process data area);
+
+<P>
+</LI>
+<LI>the address of ``ps'' (which is in
+the kernel stack); and
+
+<P>
+</LI>
+<LI>the trap type number;
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG>2719:</STRONG></DT>
+<DD>``panic'', with no return.
+</DD>
+</DL>
+
+<P>
+Floating point operations are only used
+by programs, and not by the operating
+system. Since such operations on the
+PDP11/45 and 11/70 are handled asynchronously, it is possible that when a
+floating point exception occurs, the
+processor may have already switched to
+kernel mode to handle an interrupt.
+
+<P>
+Thus a kernel mode floating point
+exception trap can be expected occasionally and is the concern of the
+current user program.
+
+<P>
+<DL>
+<DT><STRONG>2793:</STRONG></DT>
+<DD>Call ``psignal'' (3963) to set a
+ flag to show that a floating
+ point exception has occurred;
+
+<P>
+</DD>
+<DT><STRONG>2794:</STRONG></DT>
+<DD>Return.
+</DD>
+</DL>
+
+<P>
+This raises an interesting question: ``Why are the kernel mode
+and user mode floating point
+exceptions handled slightly di£ferently?''
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2483"
+  HREF="node143.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2479"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2473"
+  HREF="node141.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2481"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2484"
+  HREF="node143.html">User Mode Traps</A>
+<B> Up:</B> <A NAME="tex2html2480"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2474"
+  HREF="node141.html">trap (2693)</A>
+ &nbsp; <B>  <A NAME="tex2html2482"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

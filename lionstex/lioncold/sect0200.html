@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: A Cache-like Memory</title>
+
+<link href="sect0201.html" title="clrbuf (5038)" rel="next" />
+<link href="sect0199.html" title="Flags" rel="prev" />
+<link href="sect0198.html" title="Buffer Manipulation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0199.html" title="Flags"><img alt="Previous: Flags" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0201.html" title="clrbuf (5038)"><img alt="Next: clrbuf (5038)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0198.html">Buffer Manipulation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">A Cache-like Memory</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000201">17.2 A Cache-like Memory</h2>
+<p>It will be seen that the large buffers in UNIX are manipulated in a way which is analogous to the operation of hardware cache attached to the main memory of a computer e.g. the PDP11/70. </p><p>Buffers are not assigned to any particular program or file, except for very short intervals at a time. In this way a relatively small number of buffers can be shared effectively amongst a large number of programs and files. </p><p>Information is left in the buffers until the buffer is needed i.e. immediate “write through” is avoided if only part of the buffer has recently been changed. Programs which read or write records which are small compared with the buffer size are then not penalised unduly. </p><p>Finally when programs are terminated and files are closed, the problems of ensuring that the program’s buffers are flushed properly (problems which have plagued other operating systems) have largely disappeared. </p><p>There is one area of practical concern: if the decision “when to write” is left to the operating system alone, then some buffers may not be written out for a very long time. Accordingly there is a utility program which runs twice per minute and forces all such buffers to be written out unconditionally. This limits the likely amount of damage that a sudden system crash may cause. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0199.html" title="Flags"><img alt="Previous: Flags" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0201.html" title="clrbuf (5038)"><img alt="Next: clrbuf (5038)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

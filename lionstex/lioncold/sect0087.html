@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The user Structure (0413)</title>
+
+<link href="sect0088.html" title="The Per Process Data Area" rel="next" />
+<link href="sect0086.html" title="The proc Structure (0358)" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0086.html" title="The proc Structure (0358)"><img alt="Previous: The proc Structure (0358)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0088.html" title="The Per Process Data Area"><img alt="Next: The Per Process Data Area" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The user Structure (0413)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000088">7.3 The user Structure (0413)</h2>
+<p>One copy of the “user” structure is an essential ingredient of each “per process data area”. At any one time there is exactly one copy of the “user” structure which is accessible. This goes under the name “u” and is always to be found at kernel address 0140000 i.e. at the beginning of the seventh page of the kernel address space. </p><p>The “user” structure has more elements than can be conveniently or usefully introduced here. The comment accompanying each declaration on Sheet 04 succinctly suggests the function of each element. </p><p>For the moment you should notice: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>“u_rsav”, “u_qsav” , “u_ssav” which are two word arrays used to store values for r5, r6; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>“u_procp” which gives the address of the corresponding “proc” structure in the “proc” array; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>“u_uisa[16]”, ”u_uisd[16]” which store prototypes for the page address and description registers; </p></dd>
+
+    <dt>(d)</dt>
+    <dd><p>“u_tsize”, “u_dsize”, “u_ssize” which are the size of the text segment and two parameters defining the size of the data segment, measured in 32 word blocks. </p></dd>
+
+</dl><p>The remaining elements are concerned with: </p><ul class="itemize">
+<li><p>saving floating point registers (not for the<br />PDP11/40); </p></li><li><p>user identification; </p></li><li><p>parameters for input/output operations; </p></li><li><p>file access control; </p></li><li><p>system call parameters; </p></li><li><p>accounting information. </p></li>
+</ul></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0086.html" title="The proc Structure (0358)"><img alt="Previous: The proc Structure (0358)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0088.html" title="The Per Process Data Area"><img alt="Next: The Per Process Data Area" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

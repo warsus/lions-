@@ -1,0 +1,594 @@
+%
+% The Lion's Commentary, file ch4.tex, version 1.4, 18 May 1994
+%
+\se{An Overview}
+
+The purpose of this chapter is to survey 
+the source code as a whole i.e. to
+present the ``wood'' before the ``trees''
+
+
+Examination of the source code will
+reveal that it consists of some 44 distinct 
+files, of which:
+
+\bi
+\item two are in assembly language, and
+have names ending in ``s'';
+
+\item 28 are in the ``C'' language and
+have names ending in ``c'';
+
+\item 14 are in the ``C'' language, but
+are not intended for independent
+compilation, and have names ending
+in ``h''.
+\ei
+
+The files and their contents were
+arranged by the programmers presumably
+to suit their convenience and not for
+ours. In many ways the divisions
+between files is irrelevant to the
+present discussion and might well be
+abolished entirely.
+
+As mentioned already in Chapter One,
+the files have been organised into five
+sections. As far as was possible, the
+sections were chosen to be of roughly
+equal size, to cluster files which are
+strongly associated and to separate
+files which are only weakly associated.
+
+
+\sbs{Variable Allocation}
+
+The PDP11 architecture allows efficient
+access to variables whose absolute
+address is known, or whose address
+relative to the stack pointer can be
+determined exactly at compile time.
+
+
+There is no hardware support for multiple 
+lexical levels for variable
+declarations such as are available in
+block structured languages such as
+Algol or Pascal. Thus ``C'' as implemented 
+on the PDP11 supports only two
+lexical levels: global and local.
+
+
+Global variables are allocated statically;
+local variables are allocated
+dynamically within the current stack
+area or in the general registers (r2,
+r3 and r4 are used in this way).
+
+
+\sbs{Global Variables}
+
+In UNIX with very few exceptions, the
+declarations for global variables have
+been all gathered into the set of ``h''
+files. The exceptions are:
+
+\bd
+\item[(a)] the static variable ``p'' (2180)
+declared in ``swtch'' which is
+stored globally, but is accessible 
+only from within the procedure 
+``swtch'' (Actually ``p'' is
+a very popular name for local
+variables in UNIX.);
+
+\item[(b)] a number of variables such as
+``swbuf'' (4721) which are referenced 
+only by procedures within
+a single file, and are declared
+at the beginning of that file.
+\ed
+
+Global variables may be declared
+separately within each file in which
+they are referenced. It is then the job
+of the loader, which links the compiled
+versions of the program files together
+to match up the different declarations
+for the same variable.
+
+\sbs{The `C' Preprocessor}
+
+
+If global declarations must be repeated
+in full in each file (as is required by
+Fortran, for instance) then the bulk of
+the program is increased, and modifying
+a declaration is at best a nuisance,
+and at worst, highly error-prone.
+
+These difficulties are avoided in UNIX
+by use of the preprocessor facility of
+the ``C'' compiler. This allows declarations 
+for most global variables to be
+recorded once only in one of the few
+``h'' files.
+
+
+Whenever the declaration for a particular 
+global variable is required the
+appropriate ``h'' file can then be
+``included'' in the file being compiled.
+
+UNIX also uses the ``h'' files as vehicles 
+for lists of standard definitions
+for many symbolic names which represent
+constants and adjustable parameters,
+and for declaration of some structure
+types.
+
+For example, if the file bottle.c
+contains a procedure ``glug'' which
+global variable called
+``gin'' which is declared in the file
+``box.h'' then a statement:
+
+\begin{verbatim}
+        #include "box.h"
+\end{verbatim}
+
+\noindent must be inserted at the beginning of
+the file ``bottle.c'' When the file
+``bottle.c'' is compiled, all declarations 
+in ``box.h'' are compiled, and
+since they are found before the beginning 
+of any procedure in ``bottle.c''
+they are flagged as external in the
+relocatable module which is produced.
+
+When all the object modules are linked
+together, a reference to ``gin'' will be
+found in every file for which the
+source included ``box.h'' All these
+references will be consistent and the
+loader will allocate a single space for
+``gin'' and adjust all the references
+accordingly.
+
+
+\sbs{Section One}
+
+Section One contains many of the ``h''
+files and the assembly language files.
+
+It also contains a number of files concerned 
+with system initialisation and
+process management.
+
+\sbs{The First Group of `.h' Files}
+
+\bd
+\item[param.h] [Sheet 01] contains no variable 
+declarations, but many definitions 
+for operating system constants
+and parameters, and the declarations
+for three simple structures. The
+convention will be noted of using
+``upper case only'' for defined constants.
+
+
+\item[systm.h] [Sheet 02; Chapter 19] consists 
+entirely of declarations (with
+definitions of the structures ``callout''
+and ``mount'' as side-effects).
+Note that none of the variables is
+initialised explicitly, and hence
+all are initialised to zero.
+
+The dimensions for the first three
+arrays are parameters defined in
+param.h. Hence any file which
+``includes'' ``systm.h'' must have
+previously included ``param.h''.
+
+\item[seg.h] [Sheet 03] contains a few
+definitions and one declaration,
+which are used for referencing the
+segmentation registers. This file
+could be absorbed into ``param.h'' and
+``systm.h'' without any real loss.
+
+\item[proc.h] [Sheet 03; Chapter 7] contains 
+the important declaration for
+``proc'' which is both a structure
+type and an array of such structures.
+Each element of the ``proc''
+structure has a name which begins
+with ``p\_'' and no other variable is
+so named. Similar conventions are
+used for naming the elements of the
+other structures.
+
+The sets of values for the first two
+elements, ``p\_stat'' and ``p\_flag''
+have individual names which are
+define.
+
+
+\item[user.h] [Sheet 04; Chapter 7] contains 
+the declaration for the very
+important ``user'' structure, plus a
+set of defined values for ``u\_error''.
+
+Only one instance of the ``user''
+structure is ever accessible at one
+time. This is referenced under the
+name ``u'' and is in the low address
+part of a 1024 byte area known as
+the ``per process data area''.
+
+In general the complete ``h'' files are
+not analysed in detail later in this
+text. It is expected that the reader
+will refer to them from time to time
+(with increasing familiarity and understanding).
+\ed
+
+
+\sbs{Assembly Language Files}
+
+There are two files in assembly
+language which comprise about 10\% of
+the source code. A reasonable acquaintance 
+with these files is necessary.
+
+\bd
+\item[low.s] [Sheet 05, Chapter 9] contains
+information, including the trap vector,
+for initialising the low
+address part of main memory. This
+file is generated by a utility program 
+called ``mkconf'' to suit the set
+of peripheral devices present at a
+particular installation.
+
+\item[m40.s] [Sheets 06..14; Chapters 6, 8,
+9, 10, 22] contains a set of routines 
+appropriate to the PDP11/40,
+to carry out a variety of specialised 
+functions which cannot be
+implemented directly in ``C''.
+\ed
+
+Sections of this file are introduced
+into the discussion as and where
+appropriate. (The largest of the
+assembler procedures, ``backup'' has
+been left to the reader to survey as
+an exercise.)
+
+There is an alternative to ``m40.s''
+which is not presented here, namely
+``m45.s'' which is used on PDP11/45's
+and 70's.
+
+
+\sbs{Other Files in Section One}
+
+\bd
+\item[main.c] [Sheets 15..17; Chapters 6,
+7] contains ``main'' which performs
+various initialisation tasks to get
+UNIX running. It also contains
+``sureg'' and ``estabur'' which set the
+user segmentation registers.
+
+
+\item[slp.c] [Sheets 18..22; Chapters 6, 7,
+8, 14] contains the major procedures
+required for process management
+including ``newproc'', ``sched'',
+``sleep'' and ``swtch''.
+
+
+\item[prf.c] [Sheets 23, 24; Chapter 5]
+contains ``panic'' and a number of
+other procedures which provide a
+simple mechanism for displaying initialisation 
+messages and error messages 
+to the operator.
+
+\item[malloc.c] [Sheet 25; Chapter 5] contains 
+``malloc'' and ``mfree'' which are
+used to manage memory resources.
+\ed
+
+
+\sbs{Section Two}
+
+Section Two is concerned with traps,
+hardware interrupts and software interrupts.
+
+
+Traps and hardware interrupts introduce
+sudden switches into the CPU's normal
+instruction execution sequence. This
+provides a mechanism for handling special 
+conditions which occur outside the
+CPU's immediate control.
+
+Use is made of this facility as part of
+another mechanism called the ``system
+call'' whereby a user program may execute 
+a ``trap'' instruction to cause a
+trap deliberately and so obtain the
+operating system's attention and assistance.
+
+
+The software interrupt (or ``signal'' is
+a mechanism for communication between
+processes, particularly when there is
+``bad news''.
+
+\bd
+\item[reg.h] [Sheet 26; Chapter 10] defines
+a set of constants which are used in
+referencing the previous user mode
+register values when they are stored
+in the kernel stack.
+
+\item[trap.c] [Sheets 26..28; Chapter 12]
+contains the ``C'' procedure ``trap''
+which recognises and handles traps
+of various kinds.
+
+\item[sysent.c] [Sheet 29; Chapter 12] contains 
+the declaration and initialisation 
+of the array ``sysent'' which
+is used by ``trap'' to associate the
+appropriate kernel mode routine with
+each system call type.
+
+\item[sysl.c] [Sheets 30..33; Chapters 12,
+13] contains various routines associated 
+with system calls, including
+``exec'' ``exit'' ``wait'' and ``fork''.
+
+\item[sys4.c] [Sheets 34..36; Chapters 12,
+13, 19] contains routines for
+``unlink'', ``kill'' and various other
+minor system calls.
+
+\item[clock.c] [Sheets 37, 38; Chapter 11]
+contains ``clock'' which is the
+handler for clock interrupts, and
+which does much of the incidental
+housekeeping and basic accounting.
+
+\item[sig.c] [Sheets 39..42; Chapter 13]
+contains the procedures which handle
+``signals'' or ``software interrupts''
+These provide facilities for interprocess 
+communication and tracing.
+\ed
+
+\sbs{Section Three}
+
+Section Three is concerned with basic
+input/output operations between the
+main memory and disk storage.
+
+These operations are fundamental to the
+activities of program swapping and the
+creation and referencing of disk files.
+
+
+This section also introduces procedures
+for the use and manipulation of the
+large (512 byte) buffers.
+
+\bd
+\item[text.h] [Sheet 43; Chapter 14]
+defines the ``text'' structure and
+array. One ``text'' structure is used
+to define the status of a shared
+text segment.
+
+\item[text.c] [Sheets 43, 44; Chapter 14]
+contains the procedures which manage
+the shared text segments.
+
+\item[buf.h] [Sheet 45; Chapter 15] defines
+the ``buf'' structure and array, the
+structure ``devtab'' and names for
+the values of ``b\_error'' All these
+are needed for the management of the
+large (512 byte) buffers.
+
+\item[conf.h] [Sheet 46; Chapter 15]
+defines the arrays of structures
+``bdevsw'' and ``cdevsw'' which specify
+the device oriented procedures
+needed to carry out logical file
+operations.
+
+\item[conf.c] [Sheet 46; Chapter 15] is
+generated, like ``low.s'' by the
+``mkconf'' utility to suit the set of
+peripheral devices present at a particular 
+installation. It contains
+the initialisation for the arrays
+``bdevsw'' and ``cdevsw'' which control
+the basic i/o operations.
+
+\item[bio.c] [Sheets 47..53; Chapters 15,
+16, 17] is the largest file after
+``m40.s'' It contains the procedures
+for manipulation of the large
+buffers, and for basic block
+oriented i/o.
+
+\item[rk.c] [Sheets 53, 54; Chapter 16] is
+the device driver for the RK11/K05
+disk controller.
+\ed
+
+
+\sbs{Section Four}
+
+Section Four is concerned with files
+and file systems.
+
+A file system is a set of files and
+associated tables and directories
+organised onto a single storage device
+such as a disk pack.
+
+
+This section covers the means of
+creating and accessing files;
+locating files via directories
+organising and maintaining
+file systems.
+It also includes the code for an exotic
+breed of file called a ``pipe''.
+
+
+\bd
+\item[file.h] [Sheet 55; Chapter 18]
+defines the ``file'' structure and
+array.
+
+\item[filsys.h] [Sheet 55; Chapter 20]
+defines the ``filsys'' structure which
+is copied to and from the ``super
+block'' on ``mounted'' file systems.
+
+
+\item[ino.h] [Sheet 56] describes the
+structure of ``inodes'' as recorded on
+the ``mounted'' devices. Since this
+file is not ``included'' in any other,
+it really exists for information
+only.
+
+
+\item[inode.h] [Sheet 56; Chapter 18]
+defines the ``inode'' structure and
+array. ``inodes'' are of fundamental
+importance in managing the accesses
+of processes to files.
+
+\item[sys2.c] [Sheets 57..59; Chapters 18,
+19] contains a set of routines associated
+with system calls including
+``read'', ``write'', ``creat'', ``open'' and
+``close''
+ 
+\item[sys3.c] [Sheets 60, 61; Chapters 19, 20]
+contains a set of routines associated
+with various minor system
+calls.
+ 
+\item[rdwri.c] [Sheets 62, 63; Chapter 18]
+contains intermediate level routines
+involved with reading and writing
+files.
+ 
+ 
+\item[subr.c] [Sheets 64, 65; Chapter 18]
+contains more intermediate level
+routines for i/o, especially ``bmap''
+which translates logical file
+pointers into physical disk
+addresses.
+
+\item[fio.c] [Sheets 66..6; Chapters 18,
+19] contains intermediate level routines 
+for file opening, closing and
+control of access.
+
+\item[alloc.c] [Sheets 69..72; Chapter 20]
+contains procedures which manage the
+allocation of entries in the ``inode''
+array and of blocks of disk storage.
+
+\item[iget.c] [Sheets 72..74; Chapters 18,
+19, 20] contains procedures concerned 
+with referencing and updating
+``inodes''.
+
+\item[nami.c] [Sheets 75, 76; Chapter 19]
+contains the procedure ``namei'' which
+searches the file directories.
+
+
+\item[pipe.c] [Sheets 77, 78; Chapter 21]
+is the ``device driver'' for ``pipes''
+which are a special form of short
+disk file used to transmit information 
+from one process to another.
+\ed
+
+
+\sbs{Section Five}
+
+Section Five is the final section. It
+is concerned with input/output for the
+slower, character oriented peripheral
+devices.
+
+Such devices share a common buffer
+pool, which is manipulated by a set of
+standard procedures.
+
+
+The set of character peripheral devices
+are exemplified by the following:
+
+\begin{tabular}{ll}\\
+{\bf KL/DL11} & interactive terminal\\
+{\bf PC11}    & paper tape reader/punch\\
+{\bf LP11}    & line printer\\
+\end{tabular}
+
+
+\bd
+\item[tty.h] [Sheet 79; Chapters 23, 24]
+defines the ``clist'' structure (used
+as a list head for character buffer
+queues), the ``tty'' structure (stores
+relevant data for controlling an
+individual terminal), declares the
+``partab'' table (used to control
+transmission of individual characters 
+to terminals) and defines names
+for many associated parameters.
+
+\item[kl.c] [Sheet 80; Chapters 24, 25] is
+the device driver for terminals connected 
+via KL11 or DL11 interfaces.
+
+\item[tty.c] [Sheets 81..85; Chapters 23,
+24, 25] contains common procedures
+which are independent of the attaching 
+interfaces, for controlling
+transmission to or from terminals,
+and which take into account various
+terminal idiosyncrasies.
+
+\item[pc.c] [Sheets 86,87; Chapter 22] is
+the device handler for the PC11
+paper tape reader/punch controller.
+
+\item[lp.c] [Sheets 88, 89; Chapter 22] is
+the device handler for the LP11 line
+printer controller.
+
+\item[mem.c] [Sheet 90] contains procedures
+which provide access to main memory
+as though it were an ordinary file.
+This code has been left to the
+reader to survey as an exercise.
+\ed

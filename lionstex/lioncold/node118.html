@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Critical Sections</TITLE>
+<META NAME="description" CONTENT="Critical Sections">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node117.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node119.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2173"
+  HREF="node119.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2169"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2165"
+  HREF="node117.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2171"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2174"
+  HREF="node119.html">Section Two</A>
+<B> Up:</B> <A NAME="tex2html2170"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2166"
+  HREF="node117.html">swtch revisited</A>
+ &nbsp; <B>  <A NAME="tex2html2172"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001216000000000000000">
+Critical Sections</A>
+</H2>
+
+<P>
+If two or more processes operate on the
+same set of data, then the combined
+output of the set of processes may
+depend on the relative synchronisation
+of the various processes.
+
+<P>
+This is usually considered to be highly
+undesirable and to be avoided at all
+costs. The solution is usually to
+define ``critical sections'' (it is the
+programmer's responsibility to recognise these) in the code which is executed by each process. The programmer
+must then ensure that at any time no
+more than process is executing a
+section of code which is critical with
+respect to a part1cular set of data.
+
+<P>
+In UNIX user processes do not share
+data and so do not conflict in this
+way. Kernel processes however have
+shared access to various system data
+and can conflict.
+
+<P>
+In UNIX an interrupt does not cause a
+change in process as a direct side
+effect. Only where kernel processes
+may suspend themselves in the middle of
+a critical section by an explicit call
+on ``sleep'', does an explicit lock variable which may be observed by a group
+of processes) need to be introduced.
+Even then the actions of testing and
+setting the locks do not usually have
+to be made inseparable.
+
+<P>
+Some critical sections of code are executed by interrupt
+handlers. To protect other sections of code whose outcome may
+be affected by the handling of
+certain interrupts, the processor
+priority is raised temporarily high
+enough before the critical section is
+entered to delay such interrupts until
+it is safe, when the processor priority
+is reduced again. There are of course
+a number of conventions which interrupt
+handling code should observe, as will
+be discussed later in Chapter Nine.
+
+<P>
+In passing it may be noted that the
+strategy adopted by UNIX works only for
+a single processor system and would be
+totally inappropriate in a multiprocessor system.
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2173"
+  HREF="node119.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2169"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2165"
+  HREF="node117.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2171"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2174"
+  HREF="node119.html">Section Two</A>
+<B> Up:</B> <A NAME="tex2html2170"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2166"
+  HREF="node117.html">swtch revisited</A>
+ &nbsp; <B>  <A NAME="tex2html2172"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Kernel Mode Traps</title>
+
+<link href="sect0139.html" title="User Mode Traps" rel="next" />
+<link href="sect0137.html" title="trap (2693)" rel="prev" />
+<link href="sect0136.html" title="Traps and System Calls" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0137.html" title="trap (2693)"><img alt="Previous: trap (2693)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0139.html" title="User Mode Traps"><img alt="Next: User Mode Traps" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0136.html">Traps and System Calls</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Kernel Mode Traps</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000139">12.2 Kernel Mode Traps</h2>
+<p>The trap is unexpected and with one exception, the reaction is to “panic”. The code executed is the “default” of the “switch” statement: </p><dl class="description">
+
+    <a href="../all.html#line2716" target="source" <dt>2716:</dt></a>
+    <dd><p>Print: </p><ul class="itemize">
+<li><p>the current value of the seventh kernel segment address register (i.e. the address of the current per process data area); </p></li><li><p>the address of “ps” (which is in the kernel stack); and </p></li><li><p>the trap type number; </p></li>
+</ul></dd>
+
+    <a href="../all.html#line2719" target="source" <dt>2719:</dt></a>
+    <dd><p>“panic”, with no return. </p></dd>
+
+</dl><p>Floating point operations are only used by programs, and not by the operating system. Since such operations on the PDP11/45 and 11/70 are handled asynchronously, it is possible that when a floating point exception occurs, the processor may have already switched to kernel mode to handle an interrupt. </p><p>Thus a kernel mode floating point exception trap can be expected occasionally and is the concern of the current user program. </p><dl class="description">
+
+    <a href="../all.html#line2793" target="source" <dt>2793:</dt></a>
+    <dd><p>Call “psignal” (3963) to set a flag to show that a floating point exception has occurred; </p></dd>
+
+    <a href="../all.html#line2794" target="source" <dt>2794:</dt></a>
+    <dd><p>Return. </p></dd>
+
+</dl><p>This raises an interesting question: “Why are the kernel mode and user mode floating point exceptions handled slightly di�ferently?” </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0137.html" title="trap (2693)"><img alt="Previous: trap (2693)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0139.html" title="User Mode Traps"><img alt="Next: User Mode Traps" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

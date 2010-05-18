@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Program Swapping</TITLE>
+<META NAME="description" CONTENT="Program Swapping">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node184.html">
+<LINK REL="previous" HREF="node152.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node179.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2936"
+  HREF="node179.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2932"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2926"
+  HREF="node177.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2934"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2937"
+  HREF="node179.html">Text Segments</A>
+<B> Up:</B> <A NAME="tex2html2933"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html2927"
+  HREF="node177.html">procxmt (4204)</A>
+ &nbsp; <B>  <A NAME="tex2html2935"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000190000000000000000">
+Program Swapping</A>
+</H1>
+
+<P>
+UNIX, like all time-sharing systems,
+and some multiprogramming systems uses
+``program swapping'' (also called ``rollin/roll-out'')
+ to share the limited
+resource of the main physical memory
+among several processes.
+
+<P>
+Processes which are suspended may be
+selectively ``swapped out'' by writing
+their data segments (including the ``per
+process data'') into a ``swap area'' on
+disk
+
+<P>
+The main memory area which was occupied
+can then be reassigned to other
+processes, which quite probably will be
+``swapped in'' from the ``swap area''.
+
+<P>
+Most of the decisions regarding ``swapping out'', and all the decisions
+regarding ``swapping in'', are made by
+the procedure ``sched''. ``Swapping in'' is
+handled by a direct call (2034) on the
+procedure ``swap'' (5196), whereas ``swapping out'' is handled by a call (2024)
+on ``xswap'' (4368).
+
+<P>
+For those archaeologists who like to
+ponder the ``bones'' of earlier versions
+of operating systems, it seems that
+originally ``sched'' called ``swap''
+directly to ``swap out'' processes,
+rather than via ``xswap''. The extra procedure (one of several to be found in
+the file ``text.c'') has been necessitated by the implementation of the
+sharable ``text segments''.
+
+<P>
+It is instructive to estimate how much
+extra code has been necessitated by the
+text segment feature: in ``text.c'' are
+four procedures ``xswap'', ``xalloc'',
+``xfree'' and ``xccdec'', which manipulate
+an array of structures called ``text'',
+which is declared in the file ``text.h''.
+Additional code has also been added to
+``sysl.c'' and ``slp.c''.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html2938"
+  HREF="node179.html">Text Segments</A>
+<LI><A NAME="tex2html2939"
+  HREF="node180.html">sched (1940)</A>
+<LI><A NAME="tex2html2940"
+  HREF="node181.html">xswap (4368)</A>
+<LI><A NAME="tex2html2941"
+  HREF="node182.html">xalloc (4433)</A>
+<LI><A NAME="tex2html2942"
+  HREF="node183.html">xfree (4398)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2936"
+  HREF="node179.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2932"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2926"
+  HREF="node177.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2934"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2937"
+  HREF="node179.html">Text Segments</A>
+<B> Up:</B> <A NAME="tex2html2933"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html2927"
+  HREF="node177.html">procxmt (4204)</A>
+ &nbsp; <B>  <A NAME="tex2html2935"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

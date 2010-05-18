@@ -1,0 +1,820 @@
+%
+% The Lion's Commentary, file ch18.tex, version 1.4, 16 May 1994
+%
+{\noindent \Large Section Four}
+
+{\sf Section Four is concerned with files
+and file systems.
+
+A file system is a set of files and
+associated tables and directories
+organised onto a single storage device
+such as a disk pack.
+
+This section covers the means of
+creating and accessing files,
+locating files via directories, and
+organising and maintaining
+file systems.
+
+It also includes the code for an exotic
+breed of file called a ``pipe''.
+}
+
+
+\se{File Access and Control}
+
+
+A large part of every operating system
+seems to be concerned with data management and file management, and UNIX
+turns out to be no exception.
+
+
+Section Four of the source code contains thirteen files.
+
+
+The first four contain common declarations needed by various of the other
+routines:
+
+\bd
+\item[``file.h''] describes the structure
+of the ``file'' array;
+
+\item[``filsvs.h''] describes the structure
+of the ``super block'' for ``mounted''
+file systems;
+
+\item[``ino.h''] describes the structure of
+``inodes'' recorded on ``mounted''
+devices;
+
+\item[``inode.h''] describes the structure
+of the ``inode'' array;
+\ed
+
+The next two files, ``sys2.c'' and
+``sys3.c'' contain code for system calls.
+(``sys1.c'' and ``sys4.c'' were presented
+in Section Two).
+
+Tne next five files, ``rdwri.c'',
+``subr.c'', ``fio.c'', ``alloc.c'' and
+``iget.c'', together present the principal routines for file management, and
+provide a link between the i/o oriented
+system calls and the basic i/o routines.
+
+The file ``nami.c'' is concerned with
+searching directories to convert file
+pathnames into ``inode'' references.
+
+Finally, ``pipe.c'' is the ``device
+driver'' for pipes.
+
+\sbs{File Characteristics}
+
+
+A UNIX file is conceptually a named
+character string, stored on one of a
+variety of peripheral devices (or in
+the main memory), and accessible via
+mechanisms appropriate to the usual
+peripheral devices.
+
+It will be noted that there is no
+record structure associated with UNIX
+files. However ``newline'' characters may
+be inserted into the file to define
+substrings analogous to records.
+ 
+UNIX carries the ideas of device
+independence to their logical extreme
+by allowing the file name in effect to
+determine uniquely all relevant attributes of the file.
+
+
+\sbs{System Calls}
+
+The following system calls are provided
+expressly for file manipulation:
+
+\begin{center}
+\begin{tabular}{llllll}
+{\bf \#} & {\bf Name} & {\bf Line \hspace{0.5cm}} & {\bf \#} & {\bf Name} & {\bf Line}\\ \hline
+3 & read & 5711 & 14 & mknod & 5952\\
+4 & write & 5720 & 15 & chmod & 3560\\
+5 & open & 5765 & 16 & chown & 3575\\
+6 & close & 5846 & 19 & seek & 5861\\
+8 & creat & 5781 & 21 & mount & 6086\\
+9 & link & 5909 & 22 & umount & 6144\\
+10 & unlink & 3510 & 41 & dup & 6069\\
+12 & chdir & 3538 & 42 & pipe & 7723\\
+\end{tabular}
+\end{center}
+
+
+\sbs{Control Tables}
+
+The arrays ``file'' and ``inode'' are
+essential components of the file access
+mechanism.
+
+\sbs{file (5507)}
+
+The array ``file'' is defined as an array
+of structures (also named ``file'').
+
+An element of the ``file'' array is considered to be unallocated if ``f\_count''
+is zero.
+
+Each ``open'' or ``creat'' system call
+results in the allocation of an element
+of the ``file'' array. The address of
+this element is stored in an element of
+the calling process's array
+``u.u\_ofile''. It is the index of the
+newly allocated element of the latter
+array which is passed back to the user
+process. Descendants of a process
+created by ``newproc'' inherit the
+contents of the parent's ``u.u\_ofile''
+array.
+
+
+Each element of ``file'' includes a
+counter, ``f\_count'', to determine the
+number of current processes which
+reference it.
+
+``f\_count'' is incremented by ``newproc''
+(1878), ``dup'' (6079) and ``falloc''
+(6857); it is decremented by ``closef''
+(6657) and (if the file can't be
+opened) by ``openl'' (5836).
+
+The ``f\_flag'' (5509) of the ``file'' element notes whether the file is open for
+reading and/or writing or whether it is
+a ``pipe'' or not. (Further discussion of
+``pipes'' will be deferred till Chapter
+Twenty-One.)
+
+The ``file'' structure also contains a
+pointer, ``f\_inode'' (5511) to an entry
+in the ``inode'' table, and a 32 bit
+integer, ``f\_offset'' (5512), which is a
+logical pointer to a character within
+the file.
+
+
+\sbs{inode (5659)}
+
+``inode'' is defined as an array of
+structures (also named ``inode'').
+
+
+An element of the ``inode''
+is considered to be unallocated if the reference
+count, ``i\_count'', is zero.
+
+At each point in time, ``inode'' contains
+a single entry for each file which may
+be referenced for normal i/o operations, or which is being executed or
+which has been executed and has the
+``sticky'' bit set, or which is the working directory for some process.
+
+
+Several ``file'' table entries may point
+to a single ``inode'' entry. The inode
+entry describes the general disporition
+of the file.
+
+\sbs{Resources Required}
+
+Each file requires the dedication of
+certain system resources. When a file
+exists, but is not being referenced in
+any way, it requires:
+
+\bd
+\item[(a)] a directory entry (16 characters
+ in a directory file);
+
+\item[(b)] a disk ``inode'' entry (32 characters in a table stored on the
+disk);
+
+\item[(c)] zero, one or more blocks of disk
+ storage (512 characters each).
+\ed
+
+
+\noindent In addition if the file is being referenced for some purpose, it requires
+
+\bd
+\item[(d)] a core ``inode'' entry (32 characters in the ``inode'' array);
+\ed
+
+
+\noindent Finally if a user program has ``opened''
+the file for reading or writing, a
+number of resources are required:
+
+\bd
+\item[(e)] a ``file'' array entry (8 characters);
+
+\item[(f)] an entry in the user program's
+``u.u\_ofile'' array (one word per
+file, pointing to a ``file'' array
+entry);
+\ed
+
+
+Mechanisms have to be set up for allocating and deallocating each of these
+resources in an orderly manner. The
+following table gives the names of the
+principal procedures involved:
+
+\begin{center}
+\begin{tabular}{lll}
+{\bf resource} & {\bf obtain} & {\bf free} \\ \hline
+directory entry & namei & namei\\
+disk ``inode'' entry & ialloc & ifree\\
+disk storage block & alloc & free\\
+core ``inode'' entry & iget & iput\\
+``file'' table entry & falloc & closef\\
+``u\_ofile'' entry & ufalloc & close\\
+\end{tabular}
+\end{center}
+
+\sbs{Opening a File}
+
+When a program wishes to reference a
+file which already exists, it must
+``open'' the file to create a ``bridge'' to
+the file. (Note that in UNIX,
+processes usually inherit the open
+files of their parents or predecessors,
+so that often all needed files are
+already implicitly open.) If the file
+does not already exist, it must be
+``created''.
+
+
+This second case will be investigated
+first:
+
+
+\sbs{creat (5781)}
+
+\bd
+\item[5786:] ``namei'' (7518) converts a pathname into an ``inode'' pointer.
+ ``uchar'' is the name of a procedure which recovers the pathname, character by character,
+ from the user program data area;
+
+\item[5787:] A null ``inode'' pointer indicates
+ either an error or that no file
+ of that name already exists;
+
+\item[5788:] For error conditions, see ``CREAT
+ (II)'' in the UPM;
+
+\item[5790:] ``maknode'' (7455) creates a core
+ ``inode'' via a call on ``ialloc''
+ and then initialises it and
+ enters it into the appropriate
+ directory. Note the explicit
+ resetting of the ``sticky'' bit
+\ed
+
+
+\sbs{openl (5804)}
+
+This procedure is called by ``open''
+(5774) and ``creat'' (5793, 5795), passing values of the third parameter,
+``trf'', of 0, 2 and 1 respectively. The
+value 2 represents the case where no
+file of the desired name already
+exists.
+
+\bd
+\item[5812:] The second parameter, ``mode'', can
+ take the values 01 (``FREAD''), 02
+(``FWRITE'') or 03 (``FREAD \verb+|+ FWRITE'')
+when ``trf'' is 0, but only 02 otherwise;
+
+Whete a file of the desired name
+already exists, check the access
+permissions for the desired
+mode(s) of activity via calls on
+``access'' (6746), which may set
+``u.u\_error'' as a side-effect;
+
+\item[5824:] If the file is being ``created'',
+ eliminate its previous contents
+ via a call on ``itrunc'' (7414).
+ The code here could be improved
+ by changing the test to ``(trf ==
+ 1)''. Verify that this would be
+ so.
+
+\item[5826:] ``prele'' (7882) is used to
+ ``unlock'' ``inodes''. Where, you
+ may ask, did the ``inode'' get
+ ``locked'', and why?
+
+\item[5827:] Note that ``falloc'' (6847) calls
+ ``ufalloc'' (6824) as the first
+ thing it does;
+
+\item[5831:] ``ufalloc'' leaves
+ the user file
+identifying number
+``u.u\_ar0[R0]''. Why does this
+statement occur where it does,
+instead of after line 5834?
+
+\item[5832:] ``openi'' (6702) is called to call
+ handlers for special files, in
+ cae any device specific actions
+ are required (for disk files
+ there is no action);
+
+\item[5839:] In the case of an error while
+ making the ``file'' array entry,
+ the ``inode'' entry is released by
+ a call on ``iput''.
+\ed
+
+It will be seen that responsibility is
+quite widely distributed. The ``file''
+table entry is initialised by ``falloc''
+and ``openl''; the ``inode'' table entry,
+by ``iget'', ``ialloc'' and ``maknode''.
+
+Note that ``ialloc'' clears out the
+``i\_addr'' array of a newly allocated
+``inode'' and ``itrunc'' does the same for
+a pre-existing ``inode'', so that after
+the ``creat'' system call, there are no
+disk blocks associated with the file,
+now classed as ``small''.
+
+
+\sbs{open (5763)}
+
+We now turn to consider the case where
+a program wishes to reference a file
+which already exists.
+
+``namei'' is called (5770) with a second
+parameter of zero to locate the named
+file. (``u.u\_arg[0]'' contains the
+address in the user space of a character string which defines a file path
+name.)
+
+``u.u\_arg[1]'' has to be incremented by
+one, because there is a mismatch
+between the user programming conventions and the internal data representations.)
+
+
+\sbs{openl revisited}
+
+``trf'' is now zero, so access permissions are checked (5813) but the existing file (if any) is not deallocated
+(5824).
+
+What is a little disconcerting here is
+that, apart from the call on ``falloc''
+(5827), there is no direct call on any
+of the ``resource allocation'' routines.
+Of course, for an existing file, neither directory entry nor disk ``inode''
+entry nor disk blocks need be allocated. The core ``inode'' entry is allocated (if necessary) as a side-effect
+of the call on ``namei'', but ... where
+is it initialised?
+
+
+\sbs{close (5846)}
+
+The ``close'' system call is used to
+sever explicitly the connection between
+a user program and a file and thus can
+be regarded as the inverse of ``open''.
+
+
+The user program's file identification
+is passed via r0. The value is validated by
+``getf'' (6619), the ``u.u\_ofile''
+entry is erased, and a call is made on ``closef''.
+
+
+\sbs{closef (6643)}
+
+``closef'' is called by ``close'' (5854)
+and by ``exit'' (3230). (The latter is
+more common since most files do not get
+closed explicitly but only implicitly
+when the user program terminates.)
+
+
+\bd
+\item[6649:] If the file is a pipe, reset the
+mode of the pipe and ``wakeup'' any
+process which is waiting for the
+pipe, either for information or
+for space;
+
+\item[6655:] If this is the last process to
+ reference the file, call ``closei''
+ (6672) to handle any special end
+ of file processing for special
+ files and then call ``iput'';
+
+\item[6657:] Decrement the ``file'' entry reference count. If this now zero, the
+ entry is no longer allocated.
+\ed
+
+\sbs{iput (7344)}
+
+
+``closei'', as its last action calls
+``iput''. This routine is in fact called
+from many places, whenever a connection
+to a core ``inode'' is to be severed and
+the reference count decremented.
+
+
+\bd
+\item[7350:] If the reference count is one at
+ this point, the ``inode'' is to be
+ released. While this is happening, it should be locked.
+
+ \item[7352:] If the number of ``links'' to the
+ file is zero (or less) the file
+ is to be deallocated (see below);
+
+\item[7357:] ``iupdat'' (7374) updates the
+ accessed and update times as
+recorded on the disk ``inode'';
+
+\item[7358:] ``prele'' unlocks the ``inode''. Why
+ should it be called here as well
+ as at line 7363?
+\ed
+
+\sbs{Deletion of Files}
+
+
+New files are automatically entered
+into the file directory as permanent
+files as soon as they are ``opened''.
+Subsequent ``closing'' of a file does not
+automatically cause its deletion. As
+was seen at line 7352, deletion will
+occur when the field ``i\_nlink'' of the
+core ``inode'' entry is zero. This field
+is set to one initially by ``maknode''
+(7464) when the file is first created.
+It may be incremented by the system
+call ``link'' (5941) and decremented by
+the system call ``unlink'' (3529).
+
+
+Programs which create temporary ``work
+files'' should remove these files before
+terminating, by executing an ``unlink''
+system call. Note that the ``unlink''
+call does not of itself remove the
+file. This can only happen when the
+reference count (``i\_count'') is about to
+be decremented to zero (7350, 7362).
+
+To minimise the problems associated
+with ``temporary'' files which survive
+program or system crashes, programmers
+should observe the conventions that:
+
+\bd
+\item[(a)] temporary files should be
+ ``unlinked'' immediately after
+ they are opened;
+
+\item[(b)] temporary files should always be
+ placed in the ``tmp'' directory.
+ Unique file names can be generated by incorporating the
+ process's identifying number into the file name (See ``getpid''
+ (3480)).
+\ed
+
+\sbs{Reading and Writing}
+
+It is of interest to work through an
+abbreviated summary of the code which
+is invoked when a user process performs
+a ``read'' system call before examining
+the code in detail.
+
+\begin{verbatim}
+   .... read (f, b, n); /*user program/
+
+                 {trap occurs}
+   2693 trap
+
+                 {system call #3}
+   5711 read ();
+   5713   rdwr (PREAD);
+\end{verbatim}
+
+
+
+Execution of the system call by the
+user process results in the activation
+of ``trap'' running in kernel mode.
+``trap'' recognises system call \#3, and
+calls (via ``trapl'') the routine ``read'',
+which calls ``rdwr''.
+
+\begin{verbatim}
+  5731 rdwr
+
+  5736 fp = getf (u.u_ar0[R0];
+  5743 u.u_base = u.u_arg[0];
+  5744 u.u_count = u.u_arg[1];
+  5745 u.u_segflg = 0;
+  5751 u.u_offset[1] = f2->f offset[1];
+  5752 u.u_offset[0] = fp->f offset[0];
+  5754 readi(fp->f inode);
+  5756 dpadd(fp->f offset,
+              u.u_arg[1]-u.u_count);
+\end{verbatim}
+
+``rdwr'' includes much code which is common to both ``read'' and ``write'' operations. It converts, via ``getf'' (6619),
+the file identification supplied by the
+user process into the address of an
+entry in the ``file'' array.
+
+Note that the first parameter of the
+system call is passed in a different
+way from the remaining two parameters.
+
+
+``u.u\_segflg'' is set to zero to indicate
+that the operation destination is in
+the user address space. After ``readi''
+is called with a parameter which is an
+``inode'' pointer, the final accounting
+is performed by adding the number of
+characters requested for transfer less
+the residual number not transferred
+(left in ``u.u\_count'') to the file
+offset.
+
+\begin{verbatim}
+  6221 readi
+
+  6239 lbn = lshift (u.u_offset, -9);
+  6240 on = u.u_offset[1] & 0777;
+  6241 n = min (512 - on, u.u_count);
+  6248 bn = bmap(ip, lbn);
+  6250 dn = ip->i_dev;
+  6258 bp = bread (dn, bn);
+  6260 iomove (bp, on, n, B READ);
+  6261 brelse (bp);
+
+\end{verbatim}
+
+``readi'' converts the file offset into
+two parts: a logical block number,
+``lbn'', and an index into the block,
+``on''. The number of characters to be
+transferred is the minimum of
+``u.u\_count'' and the number of characters left in the block (in which case
+additional block(s) must be read (not
+shown)) (and the number of characters
+remaining in the file (this case is not
+shown)).
+
+``dn'' is the device number which is
+stored within the ``inode''. ``bn'' is the
+actual block number on the device
+(disk), which is computed by ``bmap''
+(6415) using ``lbn''.
+
+The call on ``bread'' finds the required
+block, copying it into core from disk
+if necessary. ``iomove'' (6364)
+transfers the appropriate characters to
+their destination, and performs
+accounting chores.
+
+
+
+\sbs{rdwr (5731)}
+
+``read'' and ``write'' perform similar
+operations and share much code. The
+two system calls, ``read'' (5711) and
+``write'' (5720), call ``rdwr'' immediately
+to:
+
+\bd
+\item[5736:] Convert the user program file
+ identification to a pointer in
+ the file table;
+
+\item[5739:] Check that the operation (read or
+ write) is in accordance with the
+ mode with which the file was
+ opened;
+
+\item[5743:] Set up various standard locations
+ in ``u'' with the appropriate
+ parameters;
+
+\item[5746:] ``pipes'' get special treatment
+ right from the start!
+
+\item[5755:] Call ``readi'' or ``writei'' as
+ appropriate;
+
+ \item[5756:] Update the file offset by, and
+set the value returned to the
+user program to, the number of
+characters actually transferred.
+\ed
+
+\sbs{readi (6221)}
+
+\bd
+\item[6230:] If no characters are to be
+transferred, do nothing;
+
+\item[6232:] Set the ``inode'' flag to indicate
+that the ``inode'' has been accessed;
+
+\item[6233:] If the file is a character special file, call the appropriate
+ device ``read'' procedure, passing
+ the device identification as
+ parameter;
+
+\item[6238:] Begin a loop to transfer data in
+ amounts up to 512 characters at a
+ time until (6262) either an irrecoverable error condition has
+ been encountered or the requested
+ number of characters has been
+ transferred;
+
+\item[6239:] ``lshift'' (1410) concatenates the
+ two words of the array
+ ``u.u\_offset'', shifts right by
+ nine places, and truncates to 16
+ bits. This defines the ``logical
+block number'' of the file which
+is to be referenced;
+
+\item[6240:] ``on'' is a character offset within
+ the block;
+
+\item[6241:] ``n'' is determined initially as
+the minimum of the number of
+characters beyond ``on'' in the
+block, and the number requested
+for transfer. (Note that ``min''
+(6339) treats its arguments as
+unsigned integers.)
+
+\item[6242:] If the file is not a special
+ block file then ...
+
+\item[6243:] Compare the file offset with the
+ current file size;
+
+\item[6246:] Reset ``n'' as the minimum of the
+ characters requested and the
+ remaining characters in the file;
+
+\item[6248:] Call ``bmap'' to convert the logical block number for the file to
+ a physical block number for its
+ host device. There will be more
+ on ``bmap'' shortly. For now, note
+ that ``bmap'' sets ``rablock'' as a
+ side effect;
+
+\item[6250:] Set ``dn'' as the device identification from the ``inode'';
+
+\item[6251:] If the file is a special block
+ file then ...
+
+\item[6252:] Set ``dn'' from the ``i\_addr'' field
+ of the ``inode'' entry. (Presumably
+ this will nearly always be the
+ same as the ``i\_dev'' field, so why
+ the distinction?)
+
+\item[6253:] Set the ``read ahead block'' to the
+ next physical block;
+
+\item[6255:] If the blocks of the file are
+ apparently being read sequentially then ...
+
+\item[6256:] Call ``breada'' to read the desired
+ block and to initiate reading of
+ the ``read ahead block'';
+
+\item[6258:] else just read the desired block;
+
+\item[6260:] Call ``iomove'' to transfer information from the buffer to the
+ user area;
+
+\item[6261:] Return the buffer to the
+ ``av''-list.
+\ed
+
+
+\sbs{writei}
+
+\bd
+\item[6303:] If less than a full block is
+ being written the previous contents of the buffer must be read
+ so that the appropriate part can
+ be preserved, otherwise just get
+ any available buffer;
+
+\item[6311:] There is no ``write ahead'' facility, but there is a ``delayed
+ write'' for buffers whose final
+ characters have not been changed;
+
+\item[6312:] If the file offset now points
+ beyond the recorded end of file
+ character, the file has obviously
+ grown bigger!
+
+\item[6318:] Why is it necessary/desirable to
+ set the ``IUPD'' flag again? (See
+ line 6285.)
+\ed
+
+
+\sbs{iomove (6364)}
+
+The comment at the beginning of this
+procedure says most of what needs to be
+said. ``copyin'', ``copyout'', ``cpass'' and
+``passc'' may be found at lines 1244,
+1252, 6542 and 6517 respectively.
+
+
+\sbs{bmap (6415)}
+
+A general description of the function
+of ``bmap'' may be found on Page 2 of
+``FILE SYSTEM (V)'' of the UPM.
+
+\bd
+\item[6423:] Files of more than 2**15 blocks
+ (2**24 characters) are not supported;
+
+\item[6427:] Start with the ``small'' file algorithm (file is not greater than
+ eight blocks i.e. 4096 characters);
+
+\item[6431:] If the block number is 8 or more,
+the ``small'' file must converted
+into a large file. Note this is
+a side effect of ``bmap'', and
+should occur only when ``bmap'' has
+been called by ``writei'' (and
+never by ``readi'' -- see line
+6245). Thus all files start life
+as ``small'' files and are never
+explicitly changed to ``large''
+files. Note also that the change
+is irreversible!
+
+\item[6435:] ``alloc'' (6956) allocates a block
+on device ``d'' from the device's
+free list. It then assigns a
+buffer to this block and returns
+a pointer to the buffer header;
+
+\item[6438:] The eight buffer addresses in the
+``i\_addr'' array for the ``inode''
+are copied into the buffer area
+and then erased;
+
+\item[6442:] ``i\_addr[0]'' is set to point to
+ the buffer which is set up for a
+ ``delayed'' write;
+
+\item[6448:] The file is still small. Get the
+next block if necessary;
+
+\item[6456:] Note the setting of ``rablock'';
+\ed
+
+\sbs{Leftovers}
+
+You should investigate the following
+procedures for yourself:
+
+\begin{verbatim}
+   seek  (5861)   statl (6045)
+   sslep (5979)   dup   (6069)
+   fstat (6014)   owner (6791)
+   stat  (6028)   suser (6811)
+\end{verbatim}

@@ -1,0 +1,412 @@
+%
+% The Lion's Commentary, file ch14.tex, version 1.5, 17 May 1994
+%
+{\noindent \Large \bf Section Three}
+
+{\noindent \sf Section Three
+is concerned with basic
+input/output operations between the
+main memory and disk storage.
+
+These operations are fundamental to the
+activities of program swapping and the
+creation and referencing of disk files.
+
+This section also introduces procedures
+for the use and manipulation of the
+large (512 byte) buffers.
+}
+
+\se{Program Swapping}
+
+UNIX, like all time-sharing systems,
+and some multiprogramming systems uses
+``program swapping'' (also called ``rollin/roll-out'')
+ to share the limited
+resource of the main physical memory
+among several processes.
+
+Processes which are suspended may be
+selectively ``swapped out'' by writing
+their data segments (including the ``per
+process data'') into a ``swap area'' on
+disk
+
+The main memory area which was occupied
+can then be reassigned to other
+processes, which quite probably will be
+``swapped in'' from the ``swap area''.
+
+Most of the decisions regarding ``swapping out'', and all the decisions
+regarding ``swapping in'', are made by
+the procedure ``sched''. ``Swapping in'' is
+handled by a direct call (2034) on the
+procedure ``swap'' (5196), whereas ``swapping out'' is handled by a call (2024)
+on ``xswap'' (4368).
+
+For those archaeologists who like to
+ponder the ``bones'' of earlier versions
+of operating systems, it seems that
+originally ``sched'' called ``swap''
+directly to ``swap out'' processes,
+rather than via ``xswap''. The extra procedure (one of several to be found in
+the file ``text.c'') has been necessitated by the implementation of the
+sharable ``text segments''.
+
+It is instructive to estimate how much
+extra code has been necessitated by the
+text segment feature: in ``text.c'' are
+four procedures ``xswap'', ``xalloc'',
+``xfree'' and ``xccdec'', which manipulate
+an array of structures called ``text'',
+which is declared in the file ``text.h''.
+Additional code has also been added to
+``sysl.c'' and ``slp.c''.
+
+
+\sbs{Text Segments}
+
+Text segments are segments which contain only ``pure'' code and data i.e.
+code and data which remain unaltered
+throughout the program execution, so
+that they may be shared amongst several
+processes executing the same program.
+
+The resulting economies in space can be
+quite substantial when many users of
+the system are executing the same program simultaneously e.g. the editor or
+the ``shell''.
+
+Information about text segments must be
+stored in a central location, and hence
+the existence of the ``text'' array. Each
+program which shares a text segment
+keeps a pointer to the corresponding
+text array element in ``u.u\_textp''.
+
+The text segment is stored at the
+beginning of the code file. The first
+program to begin execution causes a
+copy of the text segment to be made in
+the ``swap'' area.
+
+When subsequently no programs are left
+which reference the text segment, the
+resources absorbed by the text segment
+are released. The main memory resource
+is released whenever there are no programs which reference the text segment
+currently in main memory; the ``swap''
+area is released in general whenever
+there are no programs left running
+which reference the text segment.
+
+
+The numbers in each of these states are
+denoted by ``x\_ccount'' and ``x\_count''
+respectively. Decrementing these
+numbers is handled by the routines
+``xccdec'' and ``xfree'' which also take
+care of releasing resources when the
+counts reach zero. (``xccdec'' is called
+whenever a program is swapped out or
+terminates. ``xfree'' is called by ``exit''
+whenever a program terminates.)
+
+\sbs{sched (1940)}
+
+Process \#0 executes ``sched''. When it is
+not waiting for the completion of an
+input/output operation that it has initiated, it spends most of its time
+waiting in one of the following situations:
+
+\bd
+ \item[A. (runout)]
+ None of the processes which are
+ swap\-ped out is ready to run, so
+ that there is nothing to do. The
+ situation may be changed by a call
+ to ``wakeup'', or to ``xswap'' called
+ by either ``newproc'' or ``expand''.
+
+ \item[B. (runin)]
+ There is at least one process
+ swapped out and ready to run, but
+ it hasn't been out more than 3
+ seconds and/or none of the
+ processes presently in main memory
+ is inactive or has been there more
+ than 2 seconds. The situation may
+be changed by the effluxion of
+time as measured by ``clock'' or by
+a call to ``sleep''.
+\ed
+
+\noindent When either of these situations terminate:
+
+\bd
+\item[1958:] With the processor running at
+ priority six, so that the clock
+ can't interrupt and change values
+ of ``p\_time'', a search is made for
+ the process which is ready to run
+ and has been swapped out for the
+ longest time;
+
+\item[1966:] If there is no such process then
+situation A holds;
+
+\item[1976:] Search for a main memory area of
+ adequate size to hold the data
+ segment. If an associated text
+ segment must be present also but
+ is not currently in main memory,
+ the area is increased by the size
+ of the text segment;
+
+\item[1982:] If an area of adequate size is
+ available the program branches to
+ ``found2'' (2031). (Note that the
+ program does not handle the case
+ where there is sufficient space
+ for both text and data segments
+ but in distinct areas of main
+ memory. Would it be worth while
+ to extend the code to cover this
+ possibility?);
+
+\item[1990:] Search for a process which is in
+ main memory, but which is not the
+ scheduler or locked (i.e. already
+ being swapped out), and whose
+ state is ``SWAIT'' or ``SSTOP'' (but
+ {\bf not}\\
+``SSLEEP'') (i.e. the process
+ is waiting for an event of low
+ precedence, or has stopped during
+ tracing (see Chapter Thirteen)).
+ If such a process is found, go to
+ line 2021, to swap the image out.
+
+Note that there seems to be a
+bias here against processes whose
+``proc'' entries are early in the
+``proc'' array;
+
+\item[2003:] If the image to be swapped in has
+ been out less than 3 seconds,
+ then situation B holds;
+
+\item[2005:] Search for the process which is
+ loaded, but is not the scheduler
+ or locked, whose state is ``SRUN''
+ or ``SSLEEP'' (i.e. ready to run,
+ or waiting for an event of high
+ precedence) and which has been in
+ main memory for the longest time;
+
+\item[2013:] If the process image to be
+ swapped out has been in main
+ memory for less than 2 seconds,
+ then situation B holds.
+
+The constant ``2'' here (also the
+``3'' on line 2003) is somewhat
+arbitrary. For some reason the
+programmer has departed from his
+usual practice of naming such
+constants to emphasise their origins;
+
+\item[2022:] The process image is flagged as
+ not loaded and is swapped out
+ using ``xswap'' (4368).
+
+Note that the ``SSWAP'' flag is not
+set here because the process
+swapped out is not the current
+process. (Cf. lines 1907, 2286);
+
+\item[2032:] Read the text segment into main
+ memory if necessary. Note that
+ the arguments for the ``swap'' procedure are:
+	\bi
+	\item an address within the swap area of the disk;
+
+	\item a main memory address (ordinal
+number of a 32 word block);
+
+	\item a size (number of 32 word blocks
+to be transferred);
+
+\item a direction indicator
+(``B\_READ==1'' denotes ``disk to
+main memory'');
+	\ei
+
+\item[2042:] Swap in the data segment and ...
+
+\item[2044:] Release the disk swap area to the
+ available list, record the main
+ memory address, set the ``SLOAD''
+ flag and reset the accumulated
+ time indicator.
+\ed
+
+\sbs{xswap (4368)}
+
+\bd
+\item[4373:] If ``oldsize'' data was not supplied, use the current size of
+the data segment stored in ``u'';
+
+\item[4375:] Find a space in the disk swap
+area for the process's data segment. (Note that the disk swap
+area is allocated in terms of 512
+character blocks);
+
+\item[4378:] ``xccdec'' (4490) is called (unconditionally!) to decrease the
+count, associated with the text
+segment, of the number of ``in
+main memory'' processes which
+reference that text segment. If
+the count becomes zero, the main
+memory area occupied by the text
+segment is simply returned to the
+available space. (There is no
+need to copy it out, since, as we
+shall see, there will be a copy
+already in the disk swap area);
+
+\item[4379:] The ``SLOCK'' flag is set while the
+process is being swapped out.
+This is to prevent ``sched'' from
+attempting to ``swap out'' a process which is already in the process of being ``swapped out''.
+(This can only happen if ``swapping out'' was started initially
+by some routine other than
+``sched'' e.g. by ``expand'');
+
+\item[4382:] The main memory image is released
+ except when ``xswap'' is called by
+ ``newproc'';
+
+\item[4388:] If ``runout'' is set, ``sched'' is
+ waiting for something to ``swap
+ in'', so wake it up.
+\ed
+
+\sbs{xalloc (4433)}
+
+``xalloc'' is called by ``exec'' (3130),
+when a new program is being initiated,
+to handle the allocation of, or linking
+to, the text segment. The argument,
+``ip'', is a pointer to the ``mode'' of the
+code file. At the time of this call,
+``u.u\_arg[1]'' contains the text segment
+size in bytes.
+
+\bd
+\item[4439:] If there is no text segment,
+ return immediately;
+
+\item[4441:] Look through the ``text'' array for
+ both an unused entry and an entry
+ for the text segment. If the
+ latter can be found, do the bookkeeping and go to ``out'' (4474);
+
+\item[4452:] Arrange to copy the text segment
+ into the disk swap area. Initialise the unused text entry, and
+ get space in the disk swap area;
+
+\item[4459:] Change the space occupied by the
+ process to one large enough to
+ contain the ``per process data''
+ area and the text segment;
+
+\item[4460:] The call on ``estabur'' is necessary to set the user mode
+segmentation registers before reading the code file;
+
+\item[4461:] A UNIX process can only initiate
+ one input/output operation at a
+ time. Hence it is possible to
+ store i/o parameters at standard
+ locations in the ``u'' structure,
+ viz. ``u.u\_count'', ``u.u\_offset[ ]'' and
+``u.u\_base'';
+
+
+
+\item[4462:] The octal value 020 (decimal 16)
+ is an offset into the code file;
+
+\item[4463:] Information is to be read into
+the area beginning at location
+zero in the user address space;
+
+\item[4464:] Read the text segment part of the
+code file into the current data
+segment;
+
+\item[4467:] ``Swap out'' the data segment
+(minus the ``per process data'')
+into the disk swap area reserved
+for the text segment;
+
+\item[4473:] ``Shrink'' the data segment -- it is
+ about to be swapped out;
+
+\item[4475:] ``sched'' always ``swaps in'' the
+ text segment before the data segment i.e. there is no mechanism
+ for bringing the text segment
+ into main memory once the data
+ segment is present. If the text
+segment is not in main memory,
+get back into step by ``swapping
+out'' the data segment to disk.
+\ed
+
+It will be noted that the code to handle text segments is very conservative
+whenever the situation starts to get
+complicated. For example, the ``panic''
+(4451) when no more text entries are
+available would seem to be a rather
+extreme reaction. However the strategy
+of being generous with ``text'' array
+space is quite likely to be less expensive than the code needed to do
+``better''. What do you think?
+
+
+\sbs{xfree (4398)}
+
+``xfree'' is called by ``exit'' (3233);
+when a process is being terminated, and
+by ``exec'' (3128), when a process is
+being transmogrified.
+
+\bd
+\item[4402:] Set the text pointer in the
+ ``proc'' entry to ``NULL'';
+
+\item[4403:] Decrement the main memory count
+ and if it is now zero ...
+
+\item[4406:] and if the text segment has not
+ been flagged to be saved, ...
+
+\item[4408:] Abandon the image of the text
+ segment in the disk swap area;
+
+\item[4411:] Call ``iput'' (7344) to decrement
+ the ``inode'' reference count and
+ if necessary delete it.
+\ed
+
+
+``ISVTX'' (5695) is a mask which defines
+the ``sticky bit'' mentioned in section
+``CHMOD(I)'' of the UPM. If this bit is
+set, the disk copy of the text segment
+is allowed to remain in the disk swap
+area even when no programs are running
+which reference it, in the expectation
+that it will be required again shortly.
+This is an efficient device for commonly used programs such as the ``shell''
+or the editor.

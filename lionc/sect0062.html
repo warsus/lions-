@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Rules for List Maintenance</title>
+
+<link href="sect0063.html" title="malloc (2528)" rel="next" />
+<link href="sect0061.html" title="The File ‘malloc.c’" rel="prev" />
+<link href="sect0060.html" title="Two Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0061.html" title="The File ‘malloc.c’"><img alt="Previous: The File ‘malloc.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0063.html" title="malloc (2528)"><img alt="Next: malloc (2528)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0060.html">Two Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Rules for List Maintenance</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000063">5.2 Rules for List Maintenance</h2>
+<dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>Each available area is defined by its size and relative address (reckoned in the units appropriate to the resource); </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>The elements of each list are arranged at all times in order of increasing relative address. Care is taken that no two list elements represent contiguous areas – the alternative course, to merge the two areas into a single larger area is always taken; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>The whole list can be scanned by looking at successive elements of the array, starting with the first, until an element with a zero size is encountered. This last element is a “sentinel” which is not part of the list proper. </p></dd>
+
+</dl><p>The above rules provide a complete specification for “mfree”, and a specification for “malloc” which is complete except in one respect: We need to specify how the resource allocation is actually made when there exists more than one way of performing it. </p><p>The method adopted in “malloc” is one known as “First Fit” for reasons which should become obvious. </p><p>As an illustration of how the resource “map” is maintained, suppose the following three resource areas were available: </p><ul class="itemize">
+<li><p>an area of size 15 beginning at location 47 and ending at location 61; </p></li><li><p>an area of size 13 spanning addresses 27 to 39 inclusive; </p></li><li><p>an area of size 7 beginning at location 65. </p></li>
+</ul><p>Then the “map” would contain: </p><center> <table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Entry</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Size</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Address</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>0 </p></td>
+
+    
+    <td style="text-align:center"><p> 13 </p></td>
+
+    
+    <td style="text-align:center"><p> 27</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>1 </p></td>
+
+    
+    <td style="text-align:center"><p> 15 </p></td>
+
+    
+    <td style="text-align:center"><p> 47</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>2 </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+    
+    <td style="text-align:center"><p> 65</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>3 </p></td>
+
+    
+    <td style="text-align:center"><p> 0 </p></td>
+
+    
+    <td style="text-align:center"><p> ??</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>4 </p></td>
+
+    
+    <td style="text-align:center"><p> ?? </p></td>
+
+    
+    <td style="text-align:center"><p> ??</p></td>
+
+</tr>
+</table> </center><p>If a request for a space of size 7 were received, the area would be allocated starting at location 27, and the “map” would become: </p><center> <table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Entry</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Size</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Address</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>0 </p></td>
+
+    
+    <td style="text-align:center"><p> 6 </p></td>
+
+    
+    <td style="text-align:center"><p> 34</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>1 </p></td>
+
+    
+    <td style="text-align:center"><p> 15 </p></td>
+
+    
+    <td style="text-align:center"><p> 47</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>2 </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+    
+    <td style="text-align:center"><p> 65</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>3 </p></td>
+
+    
+    <td style="text-align:center"><p> 0 </p></td>
+
+    
+    <td style="text-align:center"><p> ??</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>4 </p></td>
+
+    
+    <td style="text-align:center"><p> ?? </p></td>
+
+    
+    <td style="text-align:center"><p> ??</p></td>
+
+</tr>
+</table> </center><p>If the area spanning addresses 40 to 46 inclusive is returned to the available list, the “map” would become: </p><center> <table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Entry</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Size</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">Address</b></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>0 </p></td>
+
+    
+    <td style="text-align:center"><p> 28 </p></td>
+
+    
+    <td style="text-align:center"><p> 34</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>1 </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+    
+    <td style="text-align:center"><p> 65</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>2 </p></td>
+
+    
+    <td style="text-align:center"><p> 0 </p></td>
+
+    
+    <td style="text-align:center"><p> ??</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:center"><p>3 </p></td>
+
+    
+    <td style="text-align:center"><p> ?? </p></td>
+
+    
+    <td style="text-align:center"><p> ??</p></td>
+
+</tr>
+</table> </center><p>Note how the number of elements has actually decreased by one because of amalgamation though the total available resources have of course increased. </p><p>Let us now turn to a consideration of the actual source code. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0061.html" title="The File ‘malloc.c’"><img alt="Previous: The File ‘malloc.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0063.html" title="malloc (2528)"><img alt="Next: malloc (2528)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

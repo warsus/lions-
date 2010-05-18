@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Program Swapping</title>
+
+<link href="sect0102.html" title="Jobs" rel="next" />
+<link href="sect0100.html" title="Interrupts" rel="prev" />
+<link href="sect0098.html" title="Process Management" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0100.html" title="Interrupts"><img alt="Previous: Interrupts" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0102.html" title="Jobs"><img alt="Next: Jobs" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0098.html">Process Management</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Program Swapping</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000102">8.3 Program Swapping</h2>
+<p>In general there will be insufficient main memory for all the process images at once, and the data segments for some of these will have to be “swapped out” i.e. written to disk in a special area designated as the swap area. </p><p>While on disk the process images are relatively inaccessible and certainly unexecutable. The set of process images in main memory must therefore be changed regularly by swapping images in and out. Most decisions regarding swapping are made by the procedure “sched” (1940) which is considered in detail in Chapter Fourteen. </p><p>“sched” is executed by process #0, which after completing its initial tasks, spends its time in a double role: openly as the “scheduler” i.e. a normal kernel process; and surreptitiously as the intermediate process of “swtch” (discussed in Chapter Seven). Since the procedure “sched” never terminates, kernel process #0 never completes its task, and so the question of a user process #0 does not arise. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0100.html" title="Interrupts"><img alt="Previous: Interrupts" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0102.html" title="Jobs"><img alt="Next: Jobs" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

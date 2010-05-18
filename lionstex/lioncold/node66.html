@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Rules for List Maintenance</TITLE>
+<META NAME="description" CONTENT="Rules for List Maintenance">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node67.html">
+<LINK REL="previous" HREF="node65.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node67.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1518"
+  HREF="node67.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1514"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1508"
+  HREF="node65.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1516"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1519"
+  HREF="node67.html">malloc (2528)</A>
+<B> Up:</B> <A NAME="tex2html1515"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1509"
+  HREF="node65.html">The File `malloc.c'</A>
+ &nbsp; <B>  <A NAME="tex2html1517"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00092000000000000000">
+Rules for List Maintenance</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>Each available area is defined
+ by its size and relative address
+ (reckoned in the units appropriate to the resource);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>The elements of each list are
+ arranged at all times in order
+ of increasing relative address.
+ Care is taken that no two list
+ elements represent contiguous
+ areas - the alternative course,
+ to merge the two areas into a
+ single larger area is always
+ taken;
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>The whole list can be scanned by
+ looking at successive elements
+ of the array, starting with the
+ first, until an element with a
+ zero size is encountered. This
+ last element is a ``sentinel''
+ which is not part of the list
+ proper.
+</DD>
+</DL>
+
+<P>
+The above rules provide a complete
+specification for ``mfree'', and a
+specification for ``malloc'' which is
+complete except in one respect:
+We need to specify how the
+resource allocation is actually
+made when there exists more than
+one way of performing it.
+
+<P>
+The method adopted in ``malloc'' is one
+known as ``First Fit'' for reasons which
+should become obvious.
+
+<P>
+As an illustration of how the resource
+``map'' is maintained, suppose the following
+three resource areas were available:
+
+<P>
+
+<UL>
+<LI>an area of size 15 beginning at
+location 47 and ending at location
+61;
+
+<P>
+</LI>
+<LI>an area of size 13 spanning
+addresses 27 to 39 inclusive;
+
+<P>
+</LI>
+<LI>an area of size 7 beginning at
+location 65.
+</LI>
+</UL>
+
+<P>
+Then the ``map'' would contain:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><B>Entry</B></TD>
+<TD ALIGN="CENTER"><B>Size</B></TD>
+<TD ALIGN="CENTER"><B>Address</B></TD>
+</TR>
+<TR><TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">13</TD>
+<TD ALIGN="CENTER">27</TD>
+</TR>
+<TR><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">15</TD>
+<TD ALIGN="CENTER">47</TD>
+</TR>
+<TR><TD ALIGN="CENTER">2</TD>
+<TD ALIGN="CENTER">7</TD>
+<TD ALIGN="CENTER">65</TD>
+</TR>
+<TR><TD ALIGN="CENTER">3</TD>
+<TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">??</TD>
+</TR>
+<TR><TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">??</TD>
+<TD ALIGN="CENTER">??</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+If a request for a space of size 7 were
+received, the area would be allocated
+starting at location 27, and the ``map''
+would become:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><B>Entry</B></TD>
+<TD ALIGN="CENTER"><B>Size</B></TD>
+<TD ALIGN="CENTER"><B>Address</B></TD>
+</TR>
+<TR><TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">6</TD>
+<TD ALIGN="CENTER">34</TD>
+</TR>
+<TR><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">15</TD>
+<TD ALIGN="CENTER">47</TD>
+</TR>
+<TR><TD ALIGN="CENTER">2</TD>
+<TD ALIGN="CENTER">7</TD>
+<TD ALIGN="CENTER">65</TD>
+</TR>
+<TR><TD ALIGN="CENTER">3</TD>
+<TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">??</TD>
+</TR>
+<TR><TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">??</TD>
+<TD ALIGN="CENTER">??</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+If the area spanning addresses 40 to 46
+inclusive is returned to the available
+list, the ``map'' would become:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="CENTER"><B>Entry</B></TD>
+<TD ALIGN="CENTER"><B>Size</B></TD>
+<TD ALIGN="CENTER"><B>Address</B></TD>
+</TR>
+<TR><TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">28</TD>
+<TD ALIGN="CENTER">34</TD>
+</TR>
+<TR><TD ALIGN="CENTER">1</TD>
+<TD ALIGN="CENTER">7</TD>
+<TD ALIGN="CENTER">65</TD>
+</TR>
+<TR><TD ALIGN="CENTER">2</TD>
+<TD ALIGN="CENTER">0</TD>
+<TD ALIGN="CENTER">??</TD>
+</TR>
+<TR><TD ALIGN="CENTER">3</TD>
+<TD ALIGN="CENTER">??</TD>
+<TD ALIGN="CENTER">??</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Note how the number of elements has
+actually decreased by one because of
+amalgamation though the total available
+resources have of course increased.
+
+<P>
+Let us now turn to a consideration of
+the actual source code.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1518"
+  HREF="node67.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1514"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1508"
+  HREF="node65.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1516"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1519"
+  HREF="node67.html">malloc (2528)</A>
+<B> Up:</B> <A NAME="tex2html1515"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1509"
+  HREF="node65.html">The File `malloc.c'</A>
+ &nbsp; <B>  <A NAME="tex2html1517"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

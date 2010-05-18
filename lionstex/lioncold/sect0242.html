@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: wdir (7477)</title>
+
+<link href="sect0243.html" title="maknode (7455)" rel="next" />
+<link href="sect0241.html" title="link (5909)" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0241.html" title="link (5909)"><img alt="Previous: link (5909)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0243.html" title="maknode (7455)"><img alt="Next: maknode (7455)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">wdir (7477)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000243">19.6 wdir (7477)</h2>
+<p>This procedure enters a new name into a directory. It is called by “link” (5940) and “maknode” (7467) with a pointer to a (core) “inode” as parameter. </p><p>The sixteen characters of the directory entry are copied into the structure “u.u_dent”, and written from there into the directory file. (Note that the previous content of “u.u_dent” will have been the name of the last entry in the directory file.) </p><p>The procedure assumes that the directory file has already been searched, that the “inode” for the dlrectory file has already been allocated and that the values of “u.u offset” have been set appropriately. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0241.html" title="link (5909)"><img alt="Previous: link (5909)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0243.html" title="maknode (7455)"><img alt="Next: maknode (7455)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

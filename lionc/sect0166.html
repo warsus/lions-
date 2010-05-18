@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: exit (3219)</title>
+
+<link href="sect0167.html" title="rexit (3205)" rel="next" />
+<link href="sect0165.html" title="grow (4136)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0165.html" title="grow (4136)"><img alt="Previous: grow (4136)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0167.html" title="rexit (3205)"><img alt="Next: rexit (3205)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">exit (3219)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000167">13.18 exit (3219)</h2>
+<p>This procedure is called when a process is to terminate itself. </p><dl class="description">
+
+    <a href="../all.html#line3224" target="source" <dt>3224:</dt></a>
+    <dd><p>Reset the “tracing” flag; </p></dd>
+
+    <a href="../all.html#line3225" target="source" <dt>3225:</dt></a>
+    <dd><p>Set all of the values in the array “u.u_signal” (including “u.u_signal[SIGKILL]”) to one so that no future execution of “issig” will ever be followed by execution of “psig”; </p></dd>
+
+    <a href="../all.html#line3227" target="source" <dt>3227:</dt></a>
+    <dd><p>Call “close” (6643) to close all the files which the process has open. (For the most part, “closing” simply involves decrementing a reference count.); </p></dd>
+
+    <a href="../all.html#line3232" target="source" <dt>3232:</dt></a>
+    <dd><p>Reduce the reference count for the current directory; </p></dd>
+
+    <a href="../all.html#line3233" target="source" <dt>3233:</dt></a>
+    <dd><p>Sever the process’s connection with any text segment; </p></dd>
+
+    <a href="../all.html#line3234" target="source" <dt>3234:</dt></a>
+    <dd><p>A place is needed to store “per process” information until the parent process can look at it. A block (256 words) in the swap area of the disk is a convenient place; </p></dd>
+
+    <a href="../all.html#line3237" target="source" <dt>3237:</dt></a>
+    <dd><p>Find a suitable buffer (256 words) and ... </p></dd>
+
+    <a href="../all.html#line3238" target="source" <dt>3238:</dt></a>
+    <dd><p>Copy the <b class="bf">lower half</b> of the “u” structure into the buffer area; </p></dd>
+
+    <a href="../all.html#line3239" target="source" <dt>3239:</dt></a>
+    <dd><p>Write the buffer into the swap area; </p></dd>
+
+    <a href="../all.html#line3241" target="source" <dt>3241:</dt></a>
+    <dd><p>Enter the core space occupied by the process into the free list. (This space is of course still in use, but the use will terminate before any other process gets to dip into the free list again. This could not be done any sooner, because, as will be seen later, both “getblk” and “bwrite” can call “sleep”, during which all sorts of things might happen. In view of all this, it might be reasonable if the statement </p><center> expand (USIZE); </center><p>were inserted after line 3226.); </p></dd>
+
+    <a href="../all.html#line3243" target="source" <dt>3243:</dt></a>
+    <dd><p>Set the process state to “zombie” (i.e. “a corpse said to be revived by witchcraft”<br />(O.E.D.)); </p></dd>
+
+    <a href="../all.html#line3245" target="source" <dt>3245:</dt></a>
+    <dd><p>The remaining code searches the “proc” array to find the parent process and to wake it up, to make any children “wards of the state”, and, if they have “stopped” for tracing, to release them. Finally the code includes (for this process) a last call on “swtch”. </p></dd>
+
+</dl><p>Before going on to consider tracing, there are two routines which are closely associated with “exit”, which can be conveniently disposed of now. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0165.html" title="grow (4136)"><img alt="Previous: grow (4136)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0167.html" title="rexit (3205)"><img alt="Next: rexit (3205)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

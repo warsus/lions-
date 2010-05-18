@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The Interrupt Vector</title>
+
+<link href="sect0119.html" title="Interrupt Handlers" rel="next" />
+<link href="sect0117.html" title="Hardware Interrupts" rel="prev" />
+<link href="sect0116.html" title="Hardware Interrupts and Traps" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0117.html" title="Hardware Interrupts"><img alt="Previous: Hardware Interrupts" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0119.html" title="Interrupt Handlers"><img alt="Next: Interrupt Handlers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0116.html">Hardware Interrupts and Traps</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The Interrupt Vector</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000119">9.2 The Interrupt Vector</h2>
+<p>For our sample system, the representative peripheral devices chosen are listed in Table 9.1, along with their conventional hardware defined vector locations and priorities. </p><center><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> <b class="bf">vector</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">peripheral</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">interrupt</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">process</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">location</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">device</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">priority</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">priority</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>060 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> teletype input </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p> 4 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p> 4 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>064 </p></td>
+
+    
+    <td style="text-align:left"><p> teletype output </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>070 </p></td>
+
+    
+    <td style="text-align:left"><p> paper tape input </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>074 </p></td>
+
+    
+    <td style="text-align:left"><p> paper tape output </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>100 </p></td>
+
+    
+    <td style="text-align:left"><p> line clock </p></td>
+
+    
+    <td style="text-align:center"><p> 6 </p></td>
+
+    
+    <td style="text-align:center"><p> 6 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>104 </p></td>
+
+    
+    <td style="text-align:left"><p> programmable </p></td>
+
+    
+    <td style="text-align:center"><p> 6 </p></td>
+
+    
+    <td style="text-align:center"><p> 6 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> clock </p></td>
+
+    
+    <td style="text-align:center">&nbsp;</td>
+
+    
+    <td style="text-align:center">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>200 </p></td>
+
+    
+    <td style="text-align:left"><p> line printer </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+    
+    <td style="text-align:center"><p> 4 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>220 </p></td>
+
+    
+    <td style="text-align:left"><p> RK disk drive </p></td>
+
+    
+    <td style="text-align:center"><p> 5 </p></td>
+
+    
+    <td style="text-align:center"><p> 5 </p></td>
+
+</tr>
+</table><p><b class="bf">Table 9.1 Interrupt Vector Locations and Priorities</b> </p></center></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0117.html" title="Hardware Interrupts"><img alt="Previous: Hardware Interrupts" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0119.html" title="Interrupt Handlers"><img alt="Next: Interrupt Handlers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

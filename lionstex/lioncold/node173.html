@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Tracing</TITLE>
+<META NAME="description" CONTENT="Tracing">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node174.html">
+<LINK REL="previous" HREF="node172.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node174.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2878"
+  HREF="node174.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2874"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2868"
+  HREF="node172.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2876"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2879"
+  HREF="node174.html">stop (4016)</A>
+<B> Up:</B> <A NAME="tex2html2875"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2869"
+  HREF="node172.html">wait (3270)</A>
+ &nbsp; <B>  <A NAME="tex2html2877"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001821000000000000000">
+Tracing</A>
+</H2>
+
+<P>
+The tracing facilities are provided
+through a modification and extension of
+the software interrupt facilities.
+Briefly, if a parent process is tracing
+the progress of child process, every
+time the child process encounters a
+software interrupt, the parent process
+is given the opportunity to intervene
+as part of the total response to the
+interrupt.
+
+<P>
+The parent's intervention may involve
+interrogation of values within the
+child process's data areas, including
+the ``per process data area''. Subject to
+certain constraints, the parent process
+may also change values within these
+data areas.
+
+<P>
+The source of the software interrupts
+may be the parent process, the user
+himself (e.g. by entering ``kill''
+commands or ``delete''s through his terminal)
+or the child process itself (e.g.
+instructions or other maladies).
+
+<P>
+The communication between child and
+parent processes is a kind of ritual
+dance:
+
+<P>
+<DL>
+<DT><STRONG>(1)</STRONG></DT>
+<DD>the child experiences a software
+ interrupt and ``stops'';
+
+<P>
+</DD>
+<DT><STRONG>(2)</STRONG></DT>
+<DD>the waiting parent discovers
+ the ``stopped'' child (line 3301), and
+revives. Subsequently ...
+
+<P>
+</DD>
+<DT><STRONG>(3)</STRONG></DT>
+<DD>the parent may execute the
+ ``ptrace'' system call which has
+ the effect of leaving a request
+ message in the system defined
+ structure ``ipc'' (3939) for the
+ child process;
+
+<P>
+</DD>
+<DT><STRONG>(4)</STRONG></DT>
+<DD>the parent then goes to ``sleep''
+ while the child ``wakes up'';
+
+<P>
+</DD>
+<DT><STRONG>(5)</STRONG></DT>
+<DD>the child reads the message in
+``ipc'' and acts upon it (e.g copying
+one of its own values into
+``ipc.ip_data'');
+
+<P>
+</DD>
+<DT><STRONG>(6)</STRONG></DT>
+<DD>the child then goes to ``sleep''
+ while the parent ``wakes up'';
+
+<P>
+</DD>
+<DT><STRONG>(7)</STRONG></DT>
+<DD>the parent inspects the result,
+as recorded in ``ipc'', of the
+operation;
+
+<P>
+</DD>
+<DT><STRONG>(8)</STRONG></DT>
+<DD>steps (3) to (7) may be repeated
+ several times in succession.
+</DD>
+</DL>
+
+<P>
+Finally the parent may allow the child
+to continue its normal execution, possibly without ever knowing that a
+software interrupt had occurred.
+
+<P>
+A discussion of the tracing facility is
+contained in the Section ``PTRACE (II)''
+of the UPM. To the list of functional
+limitations noted in the ``Bugs''
+paragraph, we can add the following comments on efficiency:
+
+<P>
+
+<UL>
+<LI>There should be a mechanism for
+ transferring large blocks (e.g.
+ up to 256 words at a time) of
+ information from the child to
+ the parent (though not necessarily in the reverse direction);
+
+<P>
+</LI>
+<LI>There should be a proper coroutine
+ procedure (analogous to ``swtch'')
+ to allow rapid transfer of control between child and parent.
+</LI>
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2878"
+  HREF="node174.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2874"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2868"
+  HREF="node172.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2876"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2879"
+  HREF="node174.html">stop (4016)</A>
+<B> Up:</B> <A NAME="tex2html2875"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2869"
+  HREF="node172.html">wait (3270)</A>
+ &nbsp; <B>  <A NAME="tex2html2877"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

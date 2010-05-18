@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: start (0612)</title>
+
+<link href="sect0076.html" title="main (1550)" rel="next" />
+<link href="sect0074.html" title="Operator Actions" rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0074.html" title="Operator Actions"><img alt="Previous: Operator Actions" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0076.html" title="main (1550)"><img alt="Next: main (1550)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">start (0612)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000076">6.2 start (0612)</h2>
+<dl class="description">
+
+    <dt>0613:</dt>
+    <dd><p>The “enabled” bit of the memory management status register, SR0, is tested. If this set, the processor will dwell forever in a two instruction loop. This register will normally be cleared when the operator activates the “clear” button on the console before starting the system. </p><p>A number of reasons have been suggested for the necessity for this loop. The most likely is that in the case of a double bus timeout error, the processor will branch to location zero, and in this situation it should not be allowed to go further. </p></dd>
+
+    <dt>0615:</dt>
+    <dd><p>“reset” clears and initialises all the peripheral device control and status registers </p><p><i class="it">The system will now be running in kernel mode with memory management disabled.</i> </p></dd>
+
+    <dt>0619:</dt>
+    <dd><p>KISA0 and KISD0 are the high core addresses of the first pair of kernel mode segmentation registers. The first six kernel descriptor registers are initialised to 077406, which is the description of a full size, 4K word, read/write segment. </p><p>The first six kernel address registers are initialised to 0, 0200, 0400, 0600, 01000 and 01200 respectively. </p><p>As a result the first six kernel segments are initialised (without any reference to the actual size of UNIX) to point to the first six 4K word segments of physical memory. Thus the “kernel to physical address” translation is trivial for kernel addresses in the range 0 to 0137777; </p></dd>
+
+    <dt>0632:</dt>
+    <dd><p>“_end” is a loader pseudo variable which defines the extent of the program code and data area. This value is rounded up to the next multiple of 64 bytes and is stored in the address register for the seventh segment (segment #6). </p><p>Note that the address of this register is stored in “ka6”, so that the content of this register is accessible as “*ka6”; </p></dd>
+
+    <dt>0634:</dt>
+    <dd><p>The corresponding descriptor register is loaded with a value which (since “USIZE” is equal to 16) is the description of a read/write segment which is 16 x 32 = 512 words long. </p><p>The value 007406 is obtained by shifting the octal value 017 eight places to the left and then “or”ing in the value 6; </p></dd>
+
+    <dt>0641:</dt>
+    <dd><p>The eighth segment is mapped into the highest 4K word segment of the physical address space. </p><p>It should be noted that with memory management disabled, the same translation is already in force i.e. addresses in the highest 4K word segment of the 32K program address space are automatically mapped into the highest 4K word segment of the physical address space. </p></dd>
+
+</dl><p>We may note that from this point on, all the kernel mode segmentation registers will remain unchanged with the single exception of the <b class="bf">seventh kernel segmentation address register</b>. </p><p>This register is explicitly manipulated by UNIX to point to a variety of locations in physical memory. Each such location is the beginning of an area 512 words long, known as a “per process data area”. </p><p>The seventh kernel address register is now set to point to the segment which will become the per process data area for process #0. </p><dl class="description">
+
+    <dt>0646:</dt>
+    <dd><p>The stack pointer is set to point to the highest word of the per process data area; </p></dd>
+
+    <dt>0647:</dt>
+    <dd><p>By incrementing the value of SR0 from zero to one, the “memory management enabled” bit is conveniently set. </p></dd>
+
+</dl><p><i class="it">From this point, all program addresses are translated to physical addresses the memory management hardware.</i> </p><dl class="description">
+
+    <dt>0649:</dt>
+    <dd><p>“bss” refers to the second part of the program data area, which is not initialised by the loader (see “A.OUT(V)” in the PM). The lower and upper limits of this area are defined by the loader pseudo variables, “_edata” and “_end” respectively; </p></dd>
+
+    <dt>0668:</dt>
+    <dd><p>The processor status word (PS) is changed to indicate that the “previous mode” was “user mode”. </p><p>This prepares the way for the investigation and initialisation of the areas of physical memory which are not part of the kernel address space. (This involves use of the special instructions “mtpi” and “mfpi” (Move To/From Previous Instruction space) together with some manipulation of the user mode segmentation registers.); </p></dd>
+
+    <dt>0669:</dt>
+    <dd><p>A call is then made to the procedure “main” (1550). </p></dd>
+
+</dl><p>It will be seen later that “main” calls “sched” which never terminates. The need for or use of the last three instructions of “start” (lines 0670, 0671 and 0672) is therefore somewhat enigmatic. The reason will come later. In the meantime you might like to ponder “why?”. What do these lines do anyway? </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0074.html" title="Operator Actions"><img alt="Previous: Operator Actions" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0076.html" title="main (1550)"><img alt="Next: main (1550)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

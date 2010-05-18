@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The File “tty.c”</title>
+
+<link href="sect0312.html" title="flushtty (8252)" rel="next" />
+<link href="sect0310.html" title="klrint (8078)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0310.html" title="klrint (8078)"><img alt="Previous: klrint (8078)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0312.html" title="flushtty (8252)"><img alt="Next: flushtty (8252)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The File “tty.c”</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000312">25 The File “tty.c”</h1>
+<p>In this, the last chapter, the intricacies of interactive terminal handlers are finally unveiled, including: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>the handling of the “erase” and kill characters; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>the conversion of characters during input and output for upper case only terminals; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>the insertion of delays after various special characters such as “carriage return”. </p></dd>
+
+</dl><p>The routines “gtty” (8165), “stty” (8183), “sgtty” 82a1) and “ttystty” (8577) were dealt within the previous chapter. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0312.html">25.1 flushtty (8252)</a>
+   
+</li><li><a href="sect0313.html">25.2 wflushtty (8217)</a>
+   
+</li><li><a href="sect0314.html">25.3 Character Input</a>
+   
+</li><li><a href="sect0315.html">25.4 ttread (8535)</a>
+   
+</li><li><a href="sect0316.html">25.5 canon (8274)</a>
+   
+</li><li><a href="sect0317.html">25.6 Notes</a>
+   
+</li><li><a href="sect0318.html">25.7 ttyinput (8333)</a>
+   
+</li><li><a href="sect0319.html">25.8 Character Output – ttwrite (8550)</a>
+   
+</li><li><a href="sect0320.html">25.9 ttstart</a>
+   
+</li><li><a href="sect0321.html">25.10 ttrstrt (8486)</a>
+   
+</li><li><a href="sect0322.html">25.11 ttyoutput (8373)</a>
+   
+</li><li><a href="sect0323.html">25.12 Terminals with a restricted character set</a>
+   
+</li><li><a href="sect0324.html">25.13 A. The test for ’TTLOWAT’ (Line 8074)</a>
+   
+</li><li><a href="sect0325.html">25.14 B. Inactive Terminals</a>
+   
+</li><li><a href="sect0326.html">25.15 Well, that’s all, folks ...</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0310.html" title="klrint (8078)"><img alt="Previous: klrint (8078)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0312.html" title="flushtty (8252)"><img alt="Next: flushtty (8252)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

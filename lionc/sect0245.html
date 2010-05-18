@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: mknod (5952)</title>
+
+<link href="sect0246.html" title="access (6746)" rel="next" />
+<link href="sect0244.html" title="unlink (3510)" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0244.html" title="unlink (3510)"><img alt="Previous: unlink (3510)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0246.html" title="access (6746)"><img alt="Next: access (6746)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">mknod (5952)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000246">19.9 mknod (5952)</h2>
+<p>This procedure, which implements a system call of the same name, is only executable by the super-user. As explained in the Section “MKNOD(II)” of the UPM, this system call is used to create “inodes” for special files. </p><p>“mknod” also solves the problem of “where do directories come from”? The second parameter passed to “mknod” is used, without modification or restriction to set “i_mode”. (Compare “creat” (5790) and “chmod” (3569)). This is the only way an “inode” can get flagged as a directory, for instance. </p><p>In such cases, the third parameter passed to “mknod” <b class="bf">must</b> be zero. This value is copied into “i_addr[0]” (as is appropriate for special files), and, if non-zero, will be accepted uncritically by “bmap” (6447). It might be prudent to insert a test </p><pre>
+   if (ip-&gt;i_mode &amp; (IFCHR &amp; IFBLK) != 0)
+</pre><p>before line 5969, rather than rely indefinitely on the infallibility of the super-user. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0244.html" title="unlink (3510)"><img alt="Previous: unlink (3510)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0246.html" title="access (6746)"><img alt="Next: access (6746)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

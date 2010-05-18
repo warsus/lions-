@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Priorities</title>
+
+<link href="sect0121.html" title="Interrupt Priorities" rel="next" />
+<link href="sect0119.html" title="Interrupt Handlers" rel="prev" />
+<link href="sect0116.html" title="Hardware Interrupts and Traps" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0119.html" title="Interrupt Handlers"><img alt="Previous: Interrupt Handlers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0121.html" title="Interrupt Priorities"><img alt="Next: Interrupt Priorities" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0116.html">Hardware Interrupts and Traps</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Priorities</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000121">9.4 Priorities</h2>
+<p>An interrupt does not necessarily occur immediately the peripheral device controller requests it, but only when the CPU is ready to accept it. It is usually desirable that a request for a low priority service should not be allowed to interrupt an activity with a higher priority. </p><p>Bits 7 to 5 of the PS determine the processor priority at one of eight levels (labelled zero to seven). Each interrupt also has an associated priority level determined by hardware wiring. An interrupt will be inhibited as long as the processor priority is greater than or equal to the interrupt priority. </p><p>After the interrupt the processor priority will be determined from the PS stored in the vector location and this does not have to be the same as the interrupt priority. Whereas the interrupt priority is determined by hardware, it is possible for the operating system to change the contents of the vector location at any time. </p><p>As a matter of curiosity, it may be noted that the PDP11 hardware restricts the possible interrupt priorities to 4, 5, 6 and 7 i.e. levels 1, 2 and 3 are not supported by the Unibus. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0119.html" title="Interrupt Handlers"><img alt="Previous: Interrupt Handlers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0121.html" title="Interrupt Priorities"><img alt="Next: Interrupt Priorities" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

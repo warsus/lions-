@@ -1,0 +1,578 @@
+%
+% The Lion's Commentary, file ch24.tex, version 1.4, 15 May 1994
+%
+\se{Interactive Terminals}
+
+Our remaining task, to be completed in
+this and the following chapter, is to
+consider the code which controls
+interactive terminals (or ``terminals'',
+for short).
+
+A wide variety of terminals is available and several different types may be
+simultaneously attached to a single
+computer. Distinguishing characteristics for different classes of terminal
+include (besides such non-essential
+features as shape, size and colour):
+
+\bd
+\item[(a)] transmission speed, e.g. 110
+baud for an ASR33 teletype, 300
+baud for a DECwriter, 2400 baud
+or 9600 baud for a Visual
+Display unit (``VD'');
+
+\item[(b)] graphic character set, notably
+the full ASCII graphic set and
+the 64 graphic subset;
+
+\item[(c)] transmission parity: odd, even,
+none or inoperatlve;
+
+\item[(d)] output technique:  serial printer
+or visual display;
+
+\item[(e)] miscellaneous: combined carriage
+return/line feed character, half
+duplex terminal (input characters do not need echoing);
+recognition of tab characters;
+
+\item[(f)] characteristic delays for certain control functions, e.g.
+carriage returns may not be completed within a single character
+transmission time, etc.
+\ed
+
+As well as the wide variety of terminals which are available and in use,
+there is also a variety of hardware
+devices which may be used to interface
+a terminal to a PDP 11 computer. For example:
+
+\noindent\begin{tabular}{ll}\\
+DL11/KL11 & single line, asynchronous\\
+	  & interface; 13 standard\\
+	  & transmission rates between\\
+	  & 40 and 9600 baud;\\
+\\
+DJ11 & 16 line, asynchronous, buffered\\
+	& serial line multiplexer; 11\\
+	& speeds between 75 and 9600 baud,\\
+	& selectable in four line groups;\\
+\\
+DH11 & 16 line, asynchronous, buffered,\\
+	&  serial line multiplexer; 14 speeds,\\
+	& individually selectable; DMA \\
+	& transmission\\
+\end{tabular}
+
+Each of the above interfaces will work
+in full or half duplex mode; handle 5,
+6, 7 or 8 level codes; generate odd,
+even or no parity; and generate a stop
+code of 1, 1.5 or 2 bits.
+
+In addition to the above asynchronous
+interfaces, there are a number of synchronous interfaces, e.g. DQ11.
+
+Each interface has its own control
+characteristics and it requires a
+separate operating system device
+driver. The common code which can be
+shared between these is gathered into a
+single file ``tty.c'', to be found on
+Sheets 81 to 85. A set of common definitions is gathered in the file ``tty.h''
+on Sheet 79.
+
+By way of example, Sheet 80 contains
+the file ``kl.c'', which constitutes the
+device driver for a set of DL11/KL11
+interfaces. This device driver always
+needs to be present, since one KL11
+interface is invariably included in a
+system for the the operator's console
+terminal.
+
+\sbs{The 'tty' Structure (7926)}
+
+An instance of ``tty'' is associated with
+every terminal port to the system (no
+matter what type of hardware interface
+is used). A ``port'' in this context is a
+place to attach a terminal line. Hence
+a DL11 supplies only one port, whereas
+a DJ11 supplies up to sixteen ports.
+
+The ``tty'' structure consists of sixteen
+words and includes:
+
+\noindent\begin{tabular}{lll}\\
+A. & t\_dev & fixed for a particular \\
+   & t\_addr & terminal port;\\
+\\
+B. &  t\_speeds & fixed for a particular \\
+  & t\_erase & terminal. These values may \\
+  & t\_kill & be set by ``stty'' and \\
+  & t\_flags & interrogated by ``gtty''; \\
+ \\
+C. & t\_rawq & list heads for {\bf three} \\
+  & t\_canq & character queues: the \\
+  & t\_outq & so-called ``raw'' input, \\
+ & & ``cooked'' input and the \\
+ & & output queues; \\
+ \\
+D. & t\_state & status information which \\
+  & t\_delct & changes frequently during \\
+  & t\_col & normal processing; \\
+  & t\_char & \\
+\end{tabular}
+
+\begin{center}
+{\large \bf Table 24.1}
+\end{center}
+
+\sbs{ Interactive Terminals}
+
+The reader should study the information
+on Sheet 79 carefully. Certain items
+listed below are not referenced in any
+essential way in the selection of code
+examined here.
+
+\begin{verbatim}
+   t_char    (7940)    NLDELAY   (7974)
+   t_speeds  (7941)    TBDELAY   (7975)
+   HUPCL     (7966)    CRDELAY   (7976)
+   ODDP      (7972)    WOPEN     (7985)
+   EVENP     (7973)    ASLEEP    (7993)
+\end{verbatim}
+
+\sbs{Initialisation}
+
+Initialisation of the ``tty'' structures
+is the responsibility of the various
+``open'' routines in the device drivers,
+for example, ``klopen'' (8023).
+
+The items in Group B of Table 24.1 may
+be changed by a ``stty'' system call.
+The current values may be interrogated
+by a ``gtty'' system call.
+
+A description of these is contained in
+the sections, ``STTY(II)'' and ``GTTY(II)''
+of the UPM. These calls are invoked by
+the ``stty'' shell command which is
+described in the section ``STTY(I)''.
+
+Since the ``stty'' and ``gtty'' system
+calls require a file descriptor as a
+parameter, they can only be applied to
+an ``open'' character special file.
+
+The two system calls share a good deal
+of common code. We will trace the progress of an execution of ``stty'' below
+and leave the tracing of a similar execution of ``gtty'' to the reader.
+
+\sbs{stty (8183)}
+
+This procedure implements the ``stty''
+system call. It copies three words of
+user parameter information into
+``u.u\_arg[..]'' using the parameter supplied as a pointer, and then calls
+``sgtty''.
+
+\sbs{sgtty (8201)}
+
+\bd
+\item[8206:] Get a validated pointer to  a
+``file'' array entry;
+
+\item[8209:] Check that the file is a ``character special'';
+
+\item[8213:] Call the appropriate ``d\_sgtty''
+routine for the device type. (See
+Sheet 46.)
+\ed
+
+Note that the ``d\_sgtty'' routine is
+``nodev'' for the line printer and paper
+tape reader/punch.
+
+\sbs{klsgtty (8090)}
+
+This is an example of a ``d\_sgtty'' routine. It calls ``ttystty'' passing a
+pointer to the appropriate ``tty'' structure as a parameter.
+
+\sbs{tysty (8577)}
+
+A call originating from ``stty'' will
+have a second parameter of zero.
+
+\bd
+\item[8589:] Empty all the queues associated
+with the terminal forthwith. They
+quite likely contain nonsense;
+
+\item[8591:] Reset the speed information (useful in the
+case of a DH11 interface, but of little interest for
+the present selection of code);
+
+Reset the ``erase'' character and
+the ``kill'' character. (``kill''
+here denotes ``throw away the
+current input line''.) Note that
+if these characters are changed
+away from their normal values of
+``\#'' and ``@'' respectively, no
+corresponding changes are made to
+``maptab''. Nor should they!),
+
+\item[8593:] Reset the ``flags'' defining some
+relevant terminal characteristics
+(see Sheet 79):
+
+\noindent\begin{tabular}{lll}\\
+{\bf flag} &  {\bf bit} & {\bf if set ...}\\
+ \\
+XTABS & 1 & the terminal will not interpret \\
+& & horizontal tab characters\\
+& &  correctly; \\
+ \\
+LCASE & 2 & the terminal supports only the \\
+& & 64 character ASCII subset; \\
+ \\
+ECHO & 3 & the terminal is operating in \\
+& & full duplex mode, and input \\
+& & characters must be echoed \\
+& & back; \\
+ \\
+CRMOD & 4 & upon input, a ``carriage \\
+& & return'' is replaced by a \\
+& & ``line feed''; upon output, a\\
+& & ``line feed'' is replaced by a\\
+& & ``carriage return'' and a ``line\\
+& &  feed''; \\
+ \\
+RAW & 5 & input characters are to be \\
+& & sent to the program exactly \\
+& & as received, without ``erase''\\
+& & or``kill'' processing, or\\
+& & adjustment for backslash\\
+& & characters. \\
+\end{tabular}
+
+In addition, the following bits are
+interrogated by ``ttyoutput'' (8373) in
+choosing the delay which should ensue
+after the character indicated is sent,
+before sending the next character:
+
+
+\begin{tabular}{ll}\\
+8,9 & line feed;\\
+10,11 & horizontal tab;\\
+12,13 & carriage return;\\
+14 & vertical tab or form feed.\\
+\end{tabular}
+\ed
+
+\sbs{The DL11/KL11 Terminal Device Handler}
+
+The file ``kl.c'' constitutes the device
+handler for terminals connected to the
+system via DL11/KL11 interfaces. This
+group always has at least one member -- the operator's console terminal. Hence
+this device handler will always be
+present.
+
+Each DL11/KL11 hardware controller provldes an asynchronous, serial interface
+to connect a single terminal to a PDP
+11 system. For more complete details
+regarding this interface the reader
+should consult the ``PDP11 Peripherals
+Handbook''.
+
+\sbs{Device Registers}
+
+Each DL11/RL11 unit has a group of four
+registers occupying four consecutive
+words on the UNIBS. UNIX maps a
+structure of type ``klregs'' (8016) onto
+each register group.
+
+\noindent\begin{tabular}{ll}\\
+\multicolumn{2}{l}{\bf Receiver Status Register (klrcsr)} \\
+bit 7 & {\bf Receiver Done.} (A character has\\
+      & been transferred into the\\
+      & Receiver Data Buffer Register.);\\
+\\
+bit 6 & {\bf Receiver Interrupt Enable.}\\
+      & (When set, an interrupt is\\
+      & caused every time bit 7 is set.);\\
+\\
+bit 1 & {\bf Data terminal ready;}\\
+\\
+bit 0 & {\bf Reader Enable. Write only.}\\
+      & (When set, bit 7 is cleared.).\\
+\end{tabular}
+
+\noindent\begin{tabular}{ll}\\
+\multicolumn{2}{l}{\bf Receiver Data Buffer Register (klrbuf)} \\
+bit 15 & Error indication, when set.\\
+\\
+bits 7-0 & Received character, Read\\
+         & only.\\
+\end{tabular}
+
+\noindent\begin{tabular}{ll}\\
+\multicolumn{2}{l}{\bf Transmitter Status Register (kltcsr)} \\
+bit 7 & {\bf Transmitter ready.} This is\\
+      & cleared when data is loaded\\
+      & into the Transmitter Data\\
+      & Buffer, and is set when the\\
+      & latter is ready to receive\\
+      & another chatacter;\\
+\\
+bit 6 & {\bf Transmitter Interrupt Enable.}\\
+     & (when set, causes an\\
+     & interrupt to be generated\\
+     & whenever bit 7 is set.)\\
+\end{tabular}
+
+\noindent\begin{tabular}{ll}\\
+\multicolumn{2}{l}{\bf Transmitter Data Buffer Register (kltbuf)} \\
+bits 7-0 & Transmitted data. Write only.\\
+\end{tabular}
+
+\sbs{UNIBUS Addresses}
+
+The Receiver Status Register always has
+its lowest address starting on a four
+word boundary. (The addresses which
+follow are all 18 bit octal addresses.)
+
+\noindent\begin{tabular}{lll}\\
+ & {\bf Receiver} & {\bf Transmitter}\\
+ & {\bf Status} & {\bf Status}\\
+Operator's console & 777560 $\rightarrow$ & 777566\\
+\\
+Group Two & 776500 $\rightarrow$ & 776506\\
+	& 776510 $\rightarrow$ & 77656 \\ \cline{2-3}
+	& 776670 $\rightarrow$ & 776676\\
+\\
+Group Three & 775610 $\rightarrow$ & 775616\\
+        & 775620 $\rightarrow$ & 775626 \\ \cline{2-3}
+        & 776170 $\rightarrow$ & 776176\\
+\end{tabular}
+
+Apart from the operator's console
+interface which has its own standard
+UNIBUS location, the interfaces are
+gathered into two groups (for reasons
+which are irrelevant here). Within
+each group, by convention, registers
+are allocated in consecutive locations
+starting at the lowest address.
+
+\sbs{Software Considerations}
+
+``NKL11'' (8011) must be set to define,
+for a particular installation, the
+number of interfaces in the first two
+groups, and ``NDL11'' (8012), the nmber
+in the third group. Any hardware
+alterations which changed the actual
+number of interfaces would have to be
+reflected in the software by changing
+and recomiling ``kl.c'', and relinking
+the operaing system.
+
+It will be seen that ``klopen'' calculates the correct kernel mode address
+(16 bits) for the Receiver Status
+Register for each interface, and this
+is stored (8044) into the the ``t\_addr''
+element of the appropriate ``tty'' structure.
+
+\sbs{Interrupt Vector Addresses}
+
+The vector addresses for the first
+interface are 060 and 064 (for receiver
+and transmitter interrupts, respectively).
+Additional DL11/KL11 interfaces have vector addresses which are
+always at least 0300, and which are
+assigned according to rules which take
+into consideration other interfaces
+which may be present.
+
+The second word of an interrupt doubiet
+is the ``new processor status'' word. The
+five low order bits of this word may be
+chosen arbitrarily, and are in fact
+used to define the minor device number
+(cf. a similar use to distinguish the
+various kinds of ``traps'' -- see Sheet
+05). A masked version of the new processor status word is provided to the
+interrupt handling routines as the
+parameter ``dev'' (see e.g. line 8070).
+
+\sbs{Source Code}
+
+We can now turn to a detailed study of
+the code in the files ``kl.c'' (Sheet 80)
+and ``tty.c'' (Sheets 81 to 85). We
+shall look first at ``opening'' and
+``closing'' terminals as character
+special files and the handling of interrupts. Then in the next chapter we
+shall look at the receipt of data from
+the terminal, and finally transmission
+of data to the terminal.
+
+``klread'' (8062), ``klwrite'' (8066) and
+``klsgtty'' (8090) have already been discussed above.
+
+\sbs{klopen (8023)}
+
+This procedure is called to ``open'' a
+terminal as a character special file.
+This call is usually made by the program ``/etc/init'' for each terminal
+which is to be active in the system.
+Since child processes inherit the open
+files of their parents, it is not usually necessary for other processes to
+``open'' the device again. It will be
+noted that the there is no attempt to
+stop two unrelated processes having the
+terminal as an open file simultaneously.
+
+\bd
+\item[8026:] Check the minor device number;
+
+\item[8030:] Locate the appropriate ``tty''
+structure;
+
+\item[8031:] If the process opening the file
+has no associated controlling
+terminal designate the current
+terminal for this role. (Note
+that the reference stored is the
+address of a ``tty'' structure.):
+
+\item[8033:] Store the terminal device number
+in the ``tty'' structure
+
+\item[8039:] Calculate the address of the
+appropriate set of device registers for the
+terminal and store
+
+\item[8045:] If the terminal is not already
+``open'', do some initialisation of
+the ``tty'' structure ..
+
+\item[8046:] ``t\_state'' is set to show the file
+is ``open'', so that the next three
+lines will not be executed if the
+file is opened a second time,
+possibly undoing the effect of a
+``stty'' system call:
+
+``t\_state'' is also set to show
+``CARR\_ON'' (``carrier on''). This is
+a software flag which shows that
+the terminal is logically
+enabled, regardless of the true
+hardware status of the terminal.
+If ``CARR\_ON'' is reset for a terminal, the system {\bf should} ignore
+all input from the terminal.
+
+(This does not seem to be
+entirely true, and this point
+will be taken up again later.);
+
+\item[8047:] The standard terminal is assumed
+to be unable to interpret horizontal tabs, to support only the
+64 character ASCII subset, to run
+in full duplex mode and to
+require both ``carriage return''
+and ``line feed'' characters to
+provide normal ``new line'' processing. (Could this be a Model
+33 teletype?);
+
+\item[8048:] The ``erase'' and ``kill'' characters
+are set according to the UNIX
+convention;
+
+\item[8051:] The Receiver Control Status
+register is initialised with the
+pattern ``0103'' so that the terminal is made ready, reading is
+enabled and receiver interrupts
+are enabled;
+
+\item[8052:] The Transmitter Control Status
+register is initialised so that
+an interrupt will be generated
+whenever the interface is ready
+to receive another character.
+\ed
+
+Note that the ``open'' routine does not
+distinguish between the cases where the
+file is opened for reading only, or
+writing only, or for both reading and
+writing.
+
+\sbs{klclose (8055)}
+
+\bd
+\item[8057:] Find the address of the appropriate ``tty''
+structure in the array
+of such structures, ``kl11''
+(8015). (This operation may be
+observed in all the procedures in
+the second column of Sheet 80,
+and its relevance should be
+noted.)
+
+\item[8058:] ``wflushtty'' (8217) allows   the
+output queue for the terminal to
+``drain'' and then flushes the
+input queue
+
+\item[8059:] ``t\_state'' is reset so that ``ISOPEN''
+and\\ ``CARR\_ON'' are no longer
+true.
+\ed
+
+\sbs{klxint (8070)}
+
+This procedure is executed in response
+to a transmitter interrupt. It should
+be compared with ``pcpint'' (8739) and
+``lpint'' (8976). Note that the parameter
+``dev'' is a masked version (low order
+five bits preserved) of the ``new processor status'' word in the interrupt
+vector. Provided the vector was properly initialised, the minor device
+number will be properly identified.
+
+The second part of the test on line
+8074 will be discussed at the end of
+the next chapter.
+
+\sbs{klrint (8078)}
+
+This procedure is executed in response
+to a receiver interrupt. It is not so
+readily compared with ``pcrint'' (8719)
+although similarities certainly exist.
+
+\bd
+\item[8083:] Read the input character from the
+Receiver Data Buffer register;
+
+\item[8084:] Enable the receiver for the next
+character;
+
+\item[8085:] The comment says ``hardware
+botch''. Better believe it;
+
+\item[8086:] Pass the character to ``ttyinput''
+to insert it into the appropriate
+``raw'' input queue.
+\ed

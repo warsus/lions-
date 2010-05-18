@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>swtch (2178)</TITLE>
+<META NAME="description" CONTENT="swtch (2178)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node112.html">
+<LINK REL="previous" HREF="node110.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node112.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2091"
+  HREF="node112.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2087"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2081"
+  HREF="node110.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2089"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2092"
+  HREF="node112.html">setpri (2156)</A>
+<B> Up:</B> <A NAME="tex2html2088"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2082"
+  HREF="node110.html">aretu (0734)</A>
+ &nbsp; <B>  <A NAME="tex2html2090"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000129000000000000000">
+swtch (2178)</A>
+</H2>
+
+<P>
+``swtch'' is called by ``trap'' (0770,
+0791), ``sleep'' (2084, 2093), ``expand''
+(2287), ``exit'' (3256), ``stop'' (4027)
+and ``xalloc'' (4480).
+
+<P>
+This procedure is unique in that its
+execution is in three phases which in
+general involve three separate kernel
+processes. The first and third of
+these processes will be called the
+``retiring'' and the ``arising'' processes
+respectively. Process #0 is always the
+intermediate process; it may be the
+``retiring'' or the ``arising'' process as
+well.
+
+<P>
+Note that the only variables used by
+``swtch'' are either registers, or global
+or static (stored globally).
+
+<P>
+<DL>
+<DT><STRONG>2184:</STRONG></DT>
+<DD>The static structure pointer,
+ ``p'', defines a starting point for
+ searching through the ``proc''
+ array to locate the next process
+ to activate. Its use reduces the
+ bias shown to processes entered
+ early in the ``proc'' array. If ``p''
+ is null, set its value to the
+ beginning of the ``proc'' array.
+ This should only occur upon the
+ very first call on ``swtch'';
+
+<P>
+</DD>
+<DT><STRONG>2189:</STRONG></DT>
+<DD>A call on ``savu'' (0725) saves the
+ current values of the environment
+ and stack pointers (r5 and r6);
+
+<P>
+</DD>
+<DT><STRONG>2193:</STRONG></DT>
+<DD>``retu'' (0740) resets r5 and r6,
+ and, most importantly, resets the
+ kernel address register 6 to
+ address the ``scheduler's'' data
+ segment;
+
+<P>
+</DD>
+<DT><STRONG>2195:</STRONG></DT>
+<DD>Phase Two begins:
+
+<P>
+The code from this line to line
+ 2224 is only ever executed by
+ kernel process #0. There are two
+ nested loops, from which there is
+ no exit until a runnable process
+ can be found.
+
+<P>
+At slack periods, the processor
+spends most of its time executing
+line 2220. It is only disturbed
+thence by an interrupt (e.g. from
+the clock);
+
+<P>
+</DD>
+<DT><STRONG>2196:</STRONG></DT>
+<DD>The flag ``runrun'' is reset. (It
+ is used to indicate that a higher
+ priority process than the current
+ process is ready to run. ``swtch''
+ is about to look for the highest
+ priority process.);
+
+<P>
+</DD>
+<DT><STRONG>2224:</STRONG></DT>
+<DD>The priority of the ``arising''
+ process is noted in ``curpri'' (a
+ global variable) for future
+ reference and comparison;
+
+<P>
+</DD>
+<DT><STRONG>2228:</STRONG></DT>
+<DD>Another call on ``retu'' resets r5,
+ r6 and the seventh kernel address
+ register to values appropriate
+ for the ``arising'' process;
+
+<P>
+</DD>
+<DT><STRONG>2229:</STRONG></DT>
+<DD>Phase Three begins:
+
+<P>
+``sureg'' (1739) resets the user
+mode hardware segmentation registers using the stored prototypes
+for the arising process;
+
+<P>
+</DD>
+<DT><STRONG>2230:</STRONG></DT>
+<DD>The comment which begins here is
+ not encouraging. We will return
+ to this point again towards the
+ end of this chapter;
+
+<P>
+</DD>
+<DT><STRONG>2247:</STRONG></DT>
+<DD>If you check, you will find that
+none of the procedures which call
+``swtch'' directly examines the
+value returned here.
+
+<P>
+Only the procedures which call
+``newproc'' which are interested in
+this value, because of the way
+the child process is first
+activated!
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2091"
+  HREF="node112.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2087"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2081"
+  HREF="node110.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2089"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2092"
+  HREF="node112.html">setpri (2156)</A>
+<B> Up:</B> <A NAME="tex2html2088"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2082"
+  HREF="node110.html">aretu (0734)</A>
+ &nbsp; <B>  <A NAME="tex2html2090"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

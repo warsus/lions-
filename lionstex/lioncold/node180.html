@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>sched (1940)</TITLE>
+<META NAME="description" CONTENT="sched (1940)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node181.html">
+<LINK REL="previous" HREF="node179.html">
+<LINK REL="up" HREF="node178.html">
+<LINK REL="next" HREF="node181.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2965"
+  HREF="node181.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2961"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2955"
+  HREF="node179.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2963"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2966"
+  HREF="node181.html">xswap (4368)</A>
+<B> Up:</B> <A NAME="tex2html2962"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2956"
+  HREF="node179.html">Text Segments</A>
+ &nbsp; <B>  <A NAME="tex2html2964"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000192000000000000000">
+sched (1940)</A>
+</H2>
+
+<P>
+Process #0 executes ``sched''. When it is
+not waiting for the completion of an
+input/output operation that it has initiated, it spends most of its time
+waiting in one of the following situations:
+
+<P>
+<DL>
+<DT><STRONG>A. (runout)</STRONG></DT>
+<DD>None of the processes which are
+ swapped out is ready to run, so
+ that there is nothing to do. The
+ situation may be changed by a call
+ to ``wakeup'', or to ``xswap'' called
+ by either ``newproc'' or ``expand''.
+
+<P>
+</DD>
+<DT><STRONG>B. (runin)</STRONG></DT>
+<DD>There is at least one process
+ swapped out and ready to run, but
+ it hasn't been out more than 3
+ seconds and/or none of the
+ processes presently in main memory
+ is inactive or has been there more
+ than 2 seconds. The situation may
+be changed by the effluxion of
+time as measured by ``clock'' or by
+a call to ``sleep''.
+</DD>
+</DL>
+
+<P>
+When either of these situations terminate:
+
+<P>
+<DL>
+<DT><STRONG>1958:</STRONG></DT>
+<DD>With the processor running at
+ priority six, so that the clock
+ can't interrupt and change values
+ of ``p_time'', a search is made for
+ the process which is ready to run
+ and has been swapped out for the
+ longest time;
+
+<P>
+</DD>
+<DT><STRONG>1966:</STRONG></DT>
+<DD>If there is no such process then
+situation A holds;
+
+<P>
+</DD>
+<DT><STRONG>1976:</STRONG></DT>
+<DD>Search for a main memory area of
+ adequate size to hold the data
+ segment. If an associated text
+ segment must be present also but
+ is not currently in main memory,
+ the area is increased by the size
+ of the text segment;
+
+<P>
+</DD>
+<DT><STRONG>1982:</STRONG></DT>
+<DD>If an area of adequate size is
+ available the program branches to
+ ``found2'' (2031). (Note that the
+ program does not handle the case
+ where there is sufficient space
+ for both text and data segments
+ but in distinct areas of main
+ memory. Would it be worth while
+ to extend the code to cover this
+ possibility?);
+
+<P>
+</DD>
+<DT><STRONG>1990:</STRONG></DT>
+<DD>Search for a process which is in
+ main memory, but which is not the
+ scheduler or locked (i.e. already
+ being swapped out), and whose
+ state is ``SWAIT'' or ``SSTOP'' (but
+ <B>not</B>
+<BR>``SSLEEP'') (i.e. the process
+ is waiting for an event of low
+ precedence, or has stopped during
+ tracing (see Chapter Thirteen)).
+ If such a process is found, go to
+ line 2021, to swap the image out.
+
+<P>
+Note that there seems to be a
+bias here against processes whose
+``proc'' entries are early in the
+``proc'' array;
+
+<P>
+</DD>
+<DT><STRONG>2003:</STRONG></DT>
+<DD>If the image to be swapped in has
+ been out less than 3 seconds,
+ then situation B holds;
+
+<P>
+</DD>
+<DT><STRONG>2005:</STRONG></DT>
+<DD>Search for the process which is
+ loaded, but is not the scheduler
+ or locked, whose state is ``SRUN''
+ or ``SSLEEP'' (i.e. ready to run,
+ or waiting for an event of high
+ precedence) and which has been in
+ main memory for the longest time;
+
+<P>
+</DD>
+<DT><STRONG>2013:</STRONG></DT>
+<DD>If the process image to be
+ swapped out has been in main
+ memory for less than 2 seconds,
+ then situation B holds.
+
+<P>
+The constant ``2'' here (also the
+``3'' on line 2003) is somewhat
+arbitrary. For some reason the
+programmer has departed from his
+usual practice of naming such
+constants to emphasise their origins;
+
+<P>
+</DD>
+<DT><STRONG>2022:</STRONG></DT>
+<DD>The process image is flagged as
+ not loaded and is swapped out
+ using ``xswap'' (4368).
+
+<P>
+Note that the ``SSWAP'' flag is not
+set here because the process
+swapped out is not the current
+process. (Cf. lines 1907, 2286);
+
+<P>
+</DD>
+<DT><STRONG>2032:</STRONG></DT>
+<DD>Read the text segment into main
+ memory if necessary. Note that
+ the arguments for the ``swap'' procedure are:
+	
+<UL>
+<LI>an address within the swap area of the disk;
+
+<P>
+</LI>
+<LI>a main memory address (ordinal
+number of a 32 word block);
+
+<P>
+</LI>
+<LI>a size (number of 32 word blocks
+to be transferred);
+
+<P>
+</LI>
+<LI>a direction indicator
+(``B_READ==1'' denotes ``disk to
+main memory'');
+	
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG>2042:</STRONG></DT>
+<DD>Swap in the data segment and ...
+
+<P>
+</DD>
+<DT><STRONG>2044:</STRONG></DT>
+<DD>Release the disk swap area to the
+ available list, record the main
+ memory address, set the ``SLOAD''
+ flag and reset the accumulated
+ time indicator.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2965"
+  HREF="node181.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2961"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2955"
+  HREF="node179.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2963"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2966"
+  HREF="node181.html">xswap (4368)</A>
+<B> Up:</B> <A NAME="tex2html2962"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2956"
+  HREF="node179.html">Text Segments</A>
+ &nbsp; <B>  <A NAME="tex2html2964"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

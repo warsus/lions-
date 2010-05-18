@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The File ‘prf.c’</title>
+
+<link href="sect0067.html" title="printf (2340)" rel="next" />
+<link href="sect0065.html" title="In conclusion ..." rel="prev" />
+<link href="sect0060.html" title="Two Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0065.html" title="In conclusion ..."><img alt="Previous: In conclusion ..." border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0067.html" title="printf (2340)"><img alt="Next: printf (2340)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0060.html">Two Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The File ‘prf.c’</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000067">5.6 The File ‘prf.c’</h2>
+<p>This file is found on Sheets 23 and 24, and contains the following procedures: </p><pre>
+    printf (2340)     panic (2416)
+    printn (2369)     prdev (2433)
+    putchar (2386)    deverror (2447)
+</pre><p>The calling relationship between these procedures is illustrated below: </p><p><br /></p><pre>
+             panic    deverror
+                 |      |
+                 |    prdev
+                 |      |
+                  \    /
+                  printf
+                    |
+                  printn
+                    |
+                  putchar
+</pre></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0065.html" title="In conclusion ..."><img alt="Previous: In conclusion ..." border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0060.html" title="Two Files"><img alt="Up: Two Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0067.html" title="printf (2340)"><img alt="Next: printf (2340)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

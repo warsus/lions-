@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: xswap (4368)</title>
+
+<link href="sect0178.html" title="xalloc (4433)" rel="next" />
+<link href="sect0176.html" title="sched (1940)" rel="prev" />
+<link href="sect0174.html" title="Program Swapping" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0176.html" title="sched (1940)"><img alt="Previous: sched (1940)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0178.html" title="xalloc (4433)"><img alt="Next: xalloc (4433)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0174.html">Program Swapping</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">xswap (4368)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000178">14.3 xswap (4368)</h2>
+<dl class="description">
+
+    <dt>4373:</dt>
+    <dd><p>If “oldsize” data was not supplied, use the current size of the data segment stored in “u”; </p></dd>
+
+    <dt>4375:</dt>
+    <dd><p>Find a space in the disk swap area for the process’s data segment. (Note that the disk swap area is allocated in terms of 512 character blocks); </p></dd>
+
+    <dt>4378:</dt>
+    <dd><p>“xccdec” (4490) is called (unconditionally!) to decrease the count, associated with the text segment, of the number of “in main memory” processes which reference that text segment. If the count becomes zero, the main memory area occupied by the text segment is simply returned to the available space. (There is no need to copy it out, since, as we shall see, there will be a copy already in the disk swap area); </p></dd>
+
+    <dt>4379:</dt>
+    <dd><p>The “SLOCK” flag is set while the process is being swapped out. This is to prevent “sched” from attempting to “swap out” a process which is already in the process of being “swapped out”. (This can only happen if “swapping out” was started initially by some routine other than “sched” e.g. by “expand”); </p></dd>
+
+    <dt>4382:</dt>
+    <dd><p>The main memory image is released except when “xswap” is called by “newproc”; </p></dd>
+
+    <dt>4388:</dt>
+    <dd><p>If “runout” is set, “sched” is waiting for something to “swap in”, so wake it up. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0176.html" title="sched (1940)"><img alt="Previous: sched (1940)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0178.html" title="xalloc (4433)"><img alt="Next: xalloc (4433)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

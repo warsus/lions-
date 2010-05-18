@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The Directory Data Structure</title>
+
+<link href="sect0238.html" title="Directory Files" rel="next" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Previous: File Directories and Directory Files" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0238.html" title="Directory Files"><img alt="Next: Directory Files" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The Directory Data Structure</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000238">19.1 The Directory Data Structure</h2>
+<p>Each file must have at least one name. A file may have more than one distinct name, but the same name may not be shared by tw distinct files, i.e. each name must define a unique file. </p><p>A name may be multipart. When written, the parts or components of the name are separated by slashes (“/”). The order of components within a name is significant i.e. “a/b/c” is different from “a/c/b”. </p><p>If file names are divided into two parts: an initial part or “stem” and a final part or “ending”, then two files whose names have identical stems are usually relate in some way. They may reside on the same disk, they may belong to the same user, etc. Users make initial reference to files by quoting the file name, e.g. in the “open” system call. An important operating sysem function is to decode the name into the corresponding “inode” entry. To do this, UNIX creates and maintains a directory data structure. This structure is equivalent to a directed graph with named edges. </p><p>In its purest form, the graph is a tree i.e. it has a single root node, with exactly one path between the root and any node. More commonly in UNIX (but not so commonly in other operating systems) the graph is a lattice which may be obtained from a tree by coalescing one or more groups of leaves. </p><p>In this case, while there is still only one path between the root and any interior node, thee may be more than one path between the root and a leaf. Leaves are nodes without successors and correspond to data files. Interior nodes are nodes with successors and correspond to directory files. </p><p>The name for a file is obtained from the names of the edges of the path between the root and the node corresponding to the file. (For this reason, the name is often referred to as a “pathname”.) If there are several paths, then the file has several names. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Previous: File Directories and Directory Files" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0238.html" title="Directory Files"><img alt="Next: Directory Files" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

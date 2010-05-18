@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Section One</TITLE>
+<META NAME="description" CONTENT="Section One">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node333.html">
+<LINK REL="previous" HREF="node331.html">
+<LINK REL="up" HREF="node331.html">
+<LINK REL="next" HREF="node333.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4906"
+  HREF="node333.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4902"
+  HREF="node331.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4896"
+  HREF="node331.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4904"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4907"
+  HREF="node333.html">Section Two</A>
+<B> Up:</B> <A NAME="tex2html4903"
+  HREF="node331.html">Suggested Exercises</A>
+<B> Previous:</B> <A NAME="tex2html4897"
+  HREF="node331.html">Suggested Exercises</A>
+ &nbsp; <B>  <A NAME="tex2html4905"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000311000000000000000">
+Section One</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>1.1</STRONG></DT>
+<DD>Devise changes to ``malloc'' (2528)
+to implement the Best Fit algorithm.
+
+<P>
+</DD>
+<DT><STRONG>1.2</STRONG></DT>
+<DD>Rewrite the procedure ``mfree''
+(2556) to render its function more
+easily discernible by the reader.
+
+<P>
+</DD>
+<DT><STRONG>1.3</STRONG></DT>
+<DD>Investigate the adequacy of the
+sizes of the arrays ``coremap'' and
+``swapmap'' (0203, 0204).   How should
+``CMAPSIZ'' and ``SWAPSIZ'' change when
+``NPROC'' is increased?
+
+<P>
+</DD>
+<DT><STRONG>1.4</STRONG></DT>
+<DD>Prove that ``malloc'' and ``mfree''
+jointly solve the memory aliocation
+problem correctly.
+
+<P>
+</DD>
+<DT><STRONG>1.5</STRONG></DT>
+<DD>By monitoring the contents of
+``coremap'', estimate the efficiency with
+which main memory is utilised. Estimate also the cost of compacting ``in
+use areas'' of main memory from time to
+time to reduce memory fragmentation.
+
+<P>
+Hence decide whether it would be
+worthwhile to extend the present memory
+allocation scheme to include memory
+compaction.
+
+<P>
+</DD>
+<DT><STRONG>1.6</STRONG></DT>
+<DD>In setting the first six kernel
+page description registers, UNIX does
+not make use of all the hardware protection features that are available
+e.g. some pages which contain only pure
+text could be made read-only. Devise
+changes to the code to maximise the use
+of the available hardware protection.
+
+<P>
+</DD>
+<DT><STRONG>1.7</STRONG></DT>
+<DD>Compile the program
+
+<P>
+<PRE>
+    char *init ``/etc/init'';
+    main ( ) {
+    execl (init, init, 0);
+    while (1);
+    }
+</PRE>
+
+<P>
+and compare the result with the contents of the array ``icode'' (1516).
+
+<P>
+</DD>
+<DT><STRONG>1.8</STRONG></DT>
+<DD>Investigate the size required for
+kernel mode stack areas. Hence show
+that the 367 word area which is provided is adequate.
+
+<P>
+</DD>
+<DT><STRONG>1.9</STRONG></DT>
+<DD>If main memory consists of several
+independent memory modules and one of
+these, not the last, is down, ``main''
+will not include memory modules beyond
+the one which is down, in the list of
+available space in ``coremap''. Devise
+some simple changes to ``main'' to handle
+this situation. what other parts of the
+system would also need revision?
+
+<P>
+</DD>
+<DT><STRONG>1.10</STRONG></DT>
+<DD>Rewrite the routines ``estabur''
+(1650) and ``sureg'' (1739) so that they
+will work as efficiently as possible on
+the PDP11/40. How often are these routines used in practice? Would it really
+be worthwhile trying to implement your
+improved versions?
+
+<P>
+</DD>
+<DT><STRONG>1.11</STRONG></DT>
+<DD>Investigate the overheads involved
+in initiating a new process. Perform a
+series of measurements for a set of
+different sized programs under different conditions.
+
+<P>
+</DD>
+<DT><STRONG>1.12</STRONG></DT>
+<DD>Evaluate the following scheme
+which is intended by Ken Thompson as
+the basis for a revised scheduling
+algorithm:
+
+<P>
+A number ``p'' is kept for each process, stored as ``p_cpu''.
+``p'' is incremented by one every clock tick that the
+process is found to be executing. ``p''
+therefore accumulates the CPU usage.
+Every second, each value of ``p'' is
+replaced by four fifths of its value
+rounded to the nearest integer. This
+means that ``o'' has values which are
+bounded by zero and the solution of the
+equation  <!-- MATH
+ $k = 0.8*(k + HZ)$
+ -->
+<IMG
+ WIDTH="20" HEIGHT="14" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.png"
+ ALT="$k = 0.8*(k + HZ)$"> i.e.
+4*HZ. Hence if HZ is 50 or 60, and ``p''
+is integerised, ``p'' can be stored in
+one byte.
+
+<P>
+</DD>
+<DT><STRONG>1.13</STRONG></DT>
+<DD>The ``proc'' table is always
+searched via a direct linear search. As
+the table size is increased, the search
+overheads also increase. Survey the
+alternatives for improving the search
+mechanism, when ``NPROC'' is say 300.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4906"
+  HREF="node333.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4902"
+  HREF="node331.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4896"
+  HREF="node331.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4904"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4907"
+  HREF="node333.html">Section Two</A>
+<B> Up:</B> <A NAME="tex2html4903"
+  HREF="node331.html">Suggested Exercises</A>
+<B> Previous:</B> <A NAME="tex2html4897"
+  HREF="node331.html">Suggested Exercises</A>
+ &nbsp; <B>  <A NAME="tex2html4905"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

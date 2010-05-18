@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Getting Started</TITLE>
+<META NAME="description" CONTENT="Getting Started">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node88.html">
+<LINK REL="previous" HREF="node64.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node78.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1648"
+  HREF="node78.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1644"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1638"
+  HREF="node76.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1646"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1649"
+  HREF="node78.html">Operator Actions</A>
+<B> Up:</B> <A NAME="tex2html1645"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html1639"
+  HREF="node76.html">Included Files</A>
+ &nbsp; <B>  <A NAME="tex2html1647"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000100000000000000000">
+Getting Started</A>
+</H1>
+
+<P>
+This chapter considers the sequence of
+events which occur when UNIX is
+``rebooted'' i.e. it is loaded and initiated in an idle machine.
+
+<P>
+A study of the initialisation process
+is of interest in itself, but more
+importantly, it allows a number of
+important features of the system to be
+presented in an orderly manner.
+
+<P>
+The operating system may have to be
+restarted in the aftermath of a system
+crash. It will also have to be restarted frequently for quite ordinary,
+operational reasons, e.g. after an
+overnight shutdown. If we assume the
+latter case, then we can assume that
+all the disk files are intact and that
+no special circumstance needs to be
+recognised or dealt with.
+
+<P>
+In particular, we can assume there is a
+file in the root directory called
+``/unix'', which is the object code for
+the operating system.
+
+<P>
+This file began life as a set of source
+files such as we are investigating.
+These were compiled and linked together
+in the normal way to form a single
+object program file, and stored in the
+root directory.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html1650"
+  HREF="node78.html">Operator Actions</A>
+<LI><A NAME="tex2html1651"
+  HREF="node79.html">start (0612)</A>
+<LI><A NAME="tex2html1652"
+  HREF="node80.html">main (1550)</A>
+<LI><A NAME="tex2html1653"
+  HREF="node81.html">Processes</A>
+<LI><A NAME="tex2html1654"
+  HREF="node82.html">Initialisation of proc[0]</A>
+<LI><A NAME="tex2html1655"
+  HREF="node83.html">The story continues ...</A>
+<LI><A NAME="tex2html1656"
+  HREF="node84.html">sched (1940)</A>
+<LI><A NAME="tex2html1657"
+  HREF="node85.html">sleep (2066)</A>
+<LI><A NAME="tex2html1658"
+  HREF="node86.html">swtch (2178)</A>
+<LI><A NAME="tex2html1659"
+  HREF="node87.html">main revisited</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1648"
+  HREF="node78.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1644"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1638"
+  HREF="node76.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1646"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1649"
+  HREF="node78.html">Operator Actions</A>
+<B> Up:</B> <A NAME="tex2html1645"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html1639"
+  HREF="node76.html">Included Files</A>
+ &nbsp; <B>  <A NAME="tex2html1647"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

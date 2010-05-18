@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>lpoutput (8986)</TITLE>
+<META NAME="description" CONTENT="lpoutput (8986)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node280.html">
+<LINK REL="previous" HREF="node278.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node280.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4232"
+  HREF="node280.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4228"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4222"
+  HREF="node278.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4230"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4233"
+  HREF="node280.html">lpstart (8967)</A>
+<B> Up:</B> <A NAME="tex2html4229"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4223"
+  HREF="node278.html">Notes</A>
+ &nbsp; <B>  <A NAME="tex2html4231"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000274000000000000000">
+lpoutput (8986)</A>
+</H2>
+
+<P>
+This procedure is called with a character to be printed, as a parameter.
+
+<P>
+<DL>
+<DT><STRONG>8988:</STRONG></DT>
+<DD>``lp11.cc'' is a count of the 
+number of characters waiting to be sent to the line
+printer. If this is already large enough
+(``LPHWAT'', 8819), ``sleep'' for a
+while (so as not to flood the
+character buffer pool);
+
+<P>
+</DD>
+<DT><STRONG>8990:</STRONG></DT>
+<DD>Call ``putc'' (0967) to store the
+character in a safe place. (The
+function of ``putc'' and its companion ``getc'' is a major topic to
+be discussed in Chapter Twenty Three.) It should be noted that
+no check is made that ``putc'' was
+successful in storing the character. (There may have been no
+space in the character buffers.)
+In practice there seems to be no
+real problem here, but one can
+wonder.
+
+<P>
+</DD>
+<DT><STRONG>8991:</STRONG></DT>
+<DD>Raise the processor priority
+sufficiently to inhibit the interrupts from the line printer, call
+``lpstart'' and then drop the
+priority again.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

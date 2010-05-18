@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: main (1550)</title>
+
+<link href="sect0077.html" title="Processes" rel="next" />
+<link href="sect0075.html" title="start (0612)" rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0075.html" title="start (0612)"><img alt="Previous: start (0612)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0077.html" title="Processes"><img alt="Next: Processes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">main (1550)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000077">6.3 main (1550)</h2>
+<p>Upon entry to this procedure: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>the processor is running at priority zero, in kernel mode and with the previous mode shown as user mode; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>the kernel mode segmentation registers have been set and the memory management unit has been enabled; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>all the data areas used by the operating system have been initialised; </p></dd>
+
+    <dt>(d)</dt>
+    <dd><p>the stack pointer (SP or r6) points to a word which contains a return address in “start”. </p></dd>
+
+</dl><dl class="description">
+
+    <dt>1559:</dt>
+    <dd><p>The first action of “main” would appear to be redundant, since “updlock” should have already been set to zero as part of the initialisation performed by “start”; </p></dd>
+
+    <dt>1560:</dt>
+    <dd><p>“i” is initialised to the ordinal of the first 32 word block beyond the “per process data area” for process #0; </p></dd>
+
+    <dt>1562:</dt>
+    <dd><p>The first pair of user mode segmentation registers are used to provide a “moving window” into higher areas of the physical memory. </p><p>At each position of the window an attempt is made (using “fuibyte”) to read the first accessible word in the window. If this is not successful, it is assumed that the end of the physical memory has been reached. Otherwise the next 32 word block is initialised to zero (using “clearseg” (0676)) and added to the list of available memory, and the window is advanced by 32 words. </p></dd>
+
+</dl><p>“fuibyte” and “clearseg” are both to be found in “m40.s”, “fuibyte” will normally return a positive value in the range 0 to 255. However, in the exceptional case where the memory location referenced does not respond, the value –1 is returned. The way this is brought about is a little obscure, and will be explained later in Chapter Ten.) </p><dl class="description">
+
+    <dt>1582:</dt>
+    <dd><p>“maxmem” defines the maximum amount of main memory which may be used by a user program. This is the minimum of: </p><ul class="itemize">
+<li><p>the physically available memory (“maxmem”); </p></li><li><p>an installation definable parameter (“MAXMEM”) (0135); </p></li><li><p>the ultimate limit imposed by the PDP11 architecture; </p></li>
+</ul></dd>
+
+    <dt>1583:</dt>
+    <dd><p>“swapmap” defines available space on the swapping disk which may be used when user programs are swapped out of main memory. It is initialised to a single area of size “nswap”, starting at relative address “swplo”. Note that “nswap” and “swplo” are initialised in “conf.c” (lines 4697, 4698); </p></dd>
+
+    <dt>1589:</dt>
+    <dd><p>The significance of this and the next four lines will be discussed shortly; </p></dd>
+
+    <dt>1599:</dt>
+    <dd><p>The design of UNIX assumes the existence of a system clock which interrupts the processor at line frequency (i.e 50 Hz or 60 Hz). </p><p>There are two possible clock types available: a line frequency clock (KW11-L) which has a control register on the Unibus at address 777546, or a programmable, real-time clock (KW11-P) located at address 777540 (lines 1509, 1510). </p><p>UNIX does not presume which clock will be present. It attempts to read the status word for the line frequency clock first. If successful, that clock is initialised and the other (if present) remains unused. If the first attempt is unsuccessful, then the other clock is tried. If both attempts are unsuccessful, there is a call on “panic” which effectively halts the system with an error message to the operator. </p></dd>
+
+</dl><p>Since the absence of a clock will be indicated by a bus timeout error, it is convenient to make the reference via “fuiword”, preceded by the setting of a user mode segmentation register pair (1599, 1600). </p><dl class="description">
+
+    <dt>1607:</dt>
+    <dd><p>Either type of clock is initialised by the statement </p><p>*lks = 0115; </p><p>As a consequence of this action, the clock will interrupt the processor within the next 20 milliseconds. This interrupt may occur at any time, but it will be convenient for this discussion to assume that no interrupt will occur before initialisation is complete; </p></dd>
+
+    <dt>1613:</dt>
+    <dd><p>“cinit” (82l4) initialises the pool of character buffers. See Chapter 23; </p></dd>
+
+    <dt>1614:</dt>
+    <dd><p>“binit” (5055) initialises the pool of large buffers. See Chapter 17; </p></dd>
+
+    <dt>1615:</dt>
+    <dd><p>“iinit” (6922) initialises table entries for the root device. See Chapter Twenty. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0075.html" title="start (0612)"><img alt="Previous: start (0612)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0077.html" title="Processes"><img alt="Next: Processes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

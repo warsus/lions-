@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Interrupt Priorities</title>
+
+<link href="sect0122.html" title="Rules for Interrupt Handlers" rel="next" />
+<link href="sect0120.html" title="Priorities" rel="prev" />
+<link href="sect0116.html" title="Hardware Interrupts and Traps" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0120.html" title="Priorities"><img alt="Previous: Priorities" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0122.html" title="Rules for Interrupt Handlers"><img alt="Next: Rules for Interrupt Handlers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0116.html">Hardware Interrupts and Traps</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Interrupt Priorities</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000122">9.5 Interrupt Priorities</h2>
+<p>In UNIX, interrupt handling routines are initiated at the same priority as the interrupt priority. </p><p>This means that during the handling of the interrupt, a second interrupt from a device of the same priority class will be delayed until the processor priority is reduced, either by the execution of one of the “spl” procedures, which are intended for just this purpose (see lines 1293 to 1315), or by reloading the processor status word e.g. upon returning from the interrupt. </p><p>During interrupt handling, the processor priority may be raised temporarily to protect the integrity of certain operations. For instance, character oriented devices such as the paper tape reader/punch or the line printer interrupt at level four. Their interrupt handlers call “getc” (0930) or “putc” (0967), which raise the processor priority temporarily to level five, while the character buffer queues are manipulated. </p><p>The interrupt handler for the console teletype makes use of a “timeout” facility. This involves a queue which is also manipulated by the clock interrupt handler, which runs at level six. To prevent possible interference, the “timeout” procedure (3835) runs at level seven (the highest possible level). </p><p>Usually it does not make sense to run an interrupt handler at a processor priority lower than the interrupt priority, for this would then risk a second interrupt of the same type, even from the same device, before completion of the processing of the first interrupt. This likely to be at best inconvenient and at worst disastrous. However the clock interrupt handler, which once per second has a lot of extra work to do, does exactly this. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0120.html" title="Priorities"><img alt="Previous: Priorities" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0122.html" title="Rules for Interrupt Handlers"><img alt="Next: Rules for Interrupt Handlers" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>bwrite (4809)</TITLE>
+<META NAME="description" CONTENT="bwrite (4809)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node213.html">
+<LINK REL="previous" HREF="node211.html">
+<LINK REL="up" HREF="node202.html">
+<LINK REL="next" HREF="node213.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3373"
+  HREF="node213.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3369"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3363"
+  HREF="node211.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3371"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3374"
+  HREF="node213.html">bawrite (4856)</A>
+<B> Up:</B> <A NAME="tex2html3370"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3364"
+  HREF="node211.html">breada (4773)</A>
+ &nbsp; <B>  <A NAME="tex2html3372"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002210000000000000000">
+bwrite (4809)</A>
+</H2>
+
+<P>
+This is the standard procedure for
+writing to block devices. It is called
+by ``exit'' (3239), ``bawrite'' (4863),
+``getblk'' (4963), ``bflush'' (5241),
+``free'' (7021), ``update'' (7221) and
+``iupdat'' (7400). N.B. ``writei'' calls
+``bawrite'' (6310)!
+
+<P>
+<DL>
+<DT><STRONG>4820:</STRONG></DT>
+<DD>If the ``B_ASYNC'' flag is not set,
+ the procedure does not return
+ until the i/o operation is completed;
+
+<P>
+</DD>
+<DT><STRONG>4823:</STRONG></DT>
+<DD>If the ``B_ASYNC''  is set, but
+``B DELWRI'' <B>was</B> not set (note
+``flag'' is set at line 4816) call
+``geterror'' (5336) to check on the
+error flag. (If ``B_DELWRI'' was
+set, and there is an error, sending the error indication to the
+right process is ``too hard.'').
+The call (4824) on ``geterror''
+will only report errors related
+to the initiation of the write
+operation.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Resource Allocation</title>
+
+<link href="sect0259.html" title="alloc (6965)" rel="next" />
+<link href="sect0257.html" title="sumount (6144)" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0257.html" title="sumount (6144)"><img alt="Previous: sumount (6144)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0259.html" title="alloc (6965)"><img alt="Next: alloc (6965)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Resource Allocation</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000259">20.11 Resource Allocation</h2>
+<p>Our attention now turns to the management of the resources of an individual FSV (file system volume). </p><p>Storage blocks are allocated from the free list by “alloc” at the request of “bmap”. Storage blocks are returned to the free list by “free” at the behest of “itrunc” (which is called by “core”, “openl” and “iput”). </p><p>Entries in the FSV “inode” tables are made by “ialloc”, which is called by “maknode” and “pipe”. Entries in this table are cancelled by “ifree”, which is called by “iput”. </p><p>The “super block” for the FSV is central to the resource management procedures. The “super block” (5561) contains: </p><ul class="itemize">
+<li><p>size information (total resources available); </p></li><li><p>list of up to 100 available storage blocks; </p></li><li><p>list of up to 100 available “inode” entries; </p></li><li><p>locks to control manipulation of the above lists; </p></li><li><p>flags; </p></li><li><p>current date of last update. </p></li>
+</ul><p>If the list in core of available “inode” entries for the file system volume ever becomes exhausted, then the entire table on the FSV is read and searched to rebuild the list. Conversely if the available “inode” table overflows, additional entries are simply forgotten to be rediscovered later. </p><p>A different strategy is used for the list of available storage blocks. These blocks are arranged in groups of up to one hundred blocks. The first block in each group (except the very first) is used to store the addresses of the blocks belonging to the previous group. Addresses of blocks in the last incomplete group are stored in the “super block”. </p><p>The first entry in the first list of block numbers is zero, which acts as a sentinel. Since the whole list is subject to a LIFO discipline, discovery of a block number of zero in the list signifies that the list is in fact empty. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0257.html" title="sumount (6144)"><img alt="Previous: sumount (6144)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0259.html" title="alloc (6965)"><img alt="Next: alloc (6965)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

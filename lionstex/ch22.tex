@@ -1,0 +1,534 @@
+%
+% The Lion's Commentary, file ch22.tex, version 1.2, 15 May 1994
+%
+{\sf Section Five is the final section: last
+but not least. It is concerned with
+input/output for the slower, character
+oriented peripheral deviees.
+
+Such devices share a common buffer
+pool, which is manipulated by a set of
+standard procedures.
+
+The set of character oriented peripheral devices are exemplified by the
+following:
+
+\bi
+\item KL/DL11 interactive terminal
+\item PC11 paper tape reader/punch
+\item LP11 line printer.
+\ei
+}
+
+\se{Character Oriented Special Files}
+
+Character oriented peripheral devices
+are relatively slow ($<$ 1000 charaeters
+per second) and involve character by
+character transmission of variable
+length, usually short, records.
+
+A device handler (as its name suggests)
+is the software part of the interface
+between a device and the general system. In general, the device handler is
+the only part of the software which
+recognises the idiosyncrasies of a particular device.
+
+As far as possible or reasonable, a
+single device driver is written to
+serve many separate devices of similar
+types, and, where appropriate, several
+such devices simultaneously. The group
+of ``interactive terminals'' (with keyboard input and a serial printer or
+visual display output) can just be
+coerced with difficulty into a single
+device driver, as the reader may judge
+during his perusal of the file ``tty.c''.
+
+The standard UNIX device handlers for
+character devices make use of the procedures ``putc'' and ``getc'' which store
+and retrieve characters into and from a
+standard buffer pool. This will be
+described in more detail in Chapter
+Twenty-Three.
+
+The ``PDP11 Peripherals Handbook'' should
+be consulted for more complete information on the device controller hardware
+and the devices themselves.
+
+\sbs{LP11 Line Printer Driver}
+
+This driver is to be found in the file
+``lp.c'' (Sheets 88, 89). Much of the
+complexity of this driver is contained
+in the proeedure ``lpcanon'' (8879).
+This procedure is involved in the
+proper handling of special characters
+and this is a separate issue from the
+one we wish to study first.
+
+Initially one may ignore ``lpcanon'' by
+assuming that all calls upon it (lines
+8859, 8865, 8875) are simply replaced
+by similar calls upon ``lpoutput''
+(8986). ``lpcanon'' acts as a ``final
+filter'' for characters going to the
+line printer: handling code conversions, special format characters, etc.
+
+\sbs{lpopen (8850)}
+
+When a line printer file is opened, the
+normal calling sequence is followed:
+
+``open'' (5774) calls ``open1'',
+which (5832) calls ``openi'', which
+(6716) calls, in the case of a
+character      special      file,
+``cdevsw[..].d\_open''. In the case
+of the line printer, this latter
+translates (4675) to ``lpopen''.
+
+\bd
+\item[8853:] Take the error exit if either
+another line printer file is
+already open, or if the line
+printer is not ready (e.g the
+power is off, or there is no
+paper, or the printer drum gate
+is open, or the temperature is
+too high, or the operator has
+switched the printer off-line.)
+
+\item[8857:] Set the ``lp11.flag'' to indicate
+that the file is open, the
+printer has a ``form feed'' capability and lines are to be
+indented by eight characters.
+\ed
+
+\sbs{Notes}
+
+\bd
+\item[(a)] ``lp11'' is a seven word structure
+defined beginning at line 8829. The
+first three words of the structure in
+fact constitute a structure of type
+``clist'' (7908). Only the first element
+is explicitly manipulated in ``lp.c''.
+The next two are used implicitly by
+``putc'' and ``getc''.
+
+\item[(b)] ``flag'' is the fourth element of
+the structure. The remaining three elements are
+
+\begin{tabular}{ll} \\
+``mcc'' &      maximum character count\\
+``ccc'' &     current character count\\
+``mlc'' &     maximum line count\\
+\end{tabular}
+
+\bigskip
+
+\item[(c)] The line printer controller has
+two registers on the UNIBUS.
+\ed
+
+\noindent {\large \bf Line Printer Status Register (``lpsr'')}
+
+\bd
+\item[bit 15] Set when an error condition
+exists (see above);
+
+\item[bit 7 ``DONE''] Set when the printer
+controller is ready to receive the next character;
+
+\item[bit 6 ``IENABLE''] Set to allow ``DONE'' or ``Error''
+to cause an interrupt;
+\ed
+
+\noindent {\large \bf Line Printer Data Buffer Register (``lpbuf'')}
+
+Bits 6 through 0 hold the seven bit
+ASCII code for the character to be
+printed. This register is ``write only''.
+
+\bd
+\item[8858:] Set the ``enable interrupts'' bit
+in the line printer status register;
+
+\item[8859:] Send a ``form feed'' (or ``new
+page'') character to the printer,
+to ensure that characters which
+follow will start on a new page.
+(As already noted above, at this
+stage we are ignoring ``lpcanon''
+and assuming line 8859 to be simply ``lpoutput (FORM)''. ``lpcanon''
+does things like suppressing all
+but the first ``form feed'' in a
+string of ``form feed''s and ``new
+line''s, to avoid wasting paper.);
+\ed
+
+\sbs{lpoutput (8986)}
+
+This procedure is called with a character to be printed, as a parameter.
+
+\bd
+\item[8988:] ``lp11.cc'' is a count of the 
+number of characters waiting to be sent to the line
+printer. If this is already large enough
+(``LPHWAT'', 8819), ``sleep'' for a
+while (so as not to flood the
+character buffer pool);
+
+\item[8990:] Call ``putc'' (0967) to store the
+character in a safe place. (The
+function of ``putc'' and its companion ``getc'' is a major topic to
+be discussed in Chapter Twenty Three.) It should be noted that
+no check is made that ``putc'' was
+successful in storing the character. (There may have been no
+space in the character buffers.)
+In practice there seems to be no
+real problem here, but one can
+wonder.
+
+\item[8991:] Raise the processor priority
+sufficiently to inhibit the interrupts from the line printer, call
+``lpstart'' and then drop the
+priority again.
+\ed
+
+\sbs{lpstart (8967)}
+
+While the line printer is ready, and
+while there are still characters stored
+away in the ``safe place'', keep sending
+characters to the printer controller.
+
+The presumption is that while the controller
+is building up a set of characters for a complete line, the ``DONE''
+bit will reset faster than the CP can
+feed characters to the controller.
+
+However once a print cycle has been
+initiated, the ``DONE'' bit will not be
+reset again for a period of the order
+of 100 milliseconds (depending on the
+speed of the printer).
+
+Note that during this series of data
+transfers, interrupts will be inhiblted
+and so ``lpint'' will not be getting into
+the act whenever the ``DONE'' bit is set,
+except possibly once at the very end
+when the processor priority is reduced
+again.
+
+\sbs{lpinit(8976)}
+
+This procedure is called to handle
+interrupts from the line printer. As
+mentioned above, most potential interrupts are ignored by the processor.
+Those interrupts which are accepted by
+the CP will be associated with either
+
+\bd
+\item[(a)] completion of a print cycle; or
+
+\item[(b)] the printer going ready after a
+period during which the ``Error''
+bit was set; or
+
+\item[(c)] the last transfer in a series of
+	character transfers;
+\ed
+
+\bd
+\item[8980:] Start transferring characters
+into the printer buffer again;
+
+\item[8981:] Wakeup the process waiting to
+feed characters to the printer if
+the number of characters waiting
+to be sent is either zero or
+exactly ``LPLWAT'' (8818).
+\ed
+
+This latter condition is somewhat puzzling
+in that it will only {\bf occasionally}
+be satisfied. The intention surely is
+``if the number of characters in the
+list is getting low, start refilling''.
+However if ``lpstart'' carries out a
+series of transfers without interruption (at least by ``lpint'') the number
+of characters could go from a value
+greater than ``LPLWAT'' to one less than
+this without this test ever being made.
+Accordingly the waiting process will
+not be awakened until the list is completely empty.
+The result could be frequently to delay the initiation of the
+next print cycle, and hence to allow
+the printer to run below its rated
+capacity.
+
+One solution to this problem is to
+change entirely the buffering strategy
+for line printers. A less drastic
+change would involve inventing a new
+flag, ``lp11.wflag'' say, replacing lines
+8981, 8982 by something like
+
+\begin{verbatim}
+  if (lp11.cc <= LPLWAT && lp11.wflag)
+  {       wakeup (&lp11);
+          lp11.wflag = 0
+  }
+\end{verbatim}
+
+\noindent and replacing line 8989 by
+
+\begin{verbatim}
+  {       lp11.wflag++;
+          sleep(&lp11, LPRI);
+  }
+\end{verbatim}
+
+\sbs{lpwrite (8870)}
+
+This is the procedure which is invoked
+as a result of the write system call:
+
+``write'' (5722) calls ``rdwr'',
+which (5755) calls ``writei'',
+which        (6287)         calls
+``cdevsw[..].d write'',       which
+translates (4675) to ``lpwrite''.
+
+``lpwrite'' takes the non-null characters
+of a null terminated string recorded in
+the user area, and passes them to
+``lpoutput'' (via ``lpcanon'') one at a
+time.
+
+The list of procedure calls which leads
+to the invocation of this procedure is
+similar to that for ``lpopen''. A ``form
+feed'' character is output to clear the
+current page, and the ``open'' flag is
+reset.
+
+\sbs{Discussion}
+
+``lpwrite'' is called one or more times
+to send a string of characters to the
+printer. In turn it calls ``lpcanon''
+which calls ``lpoutput''. If at any point
+too many characters are stored away,
+the procss will ``sleep'' in ``lpoutput''.
+Sooner or later ``lpoutput'' will continue, will store the character in a
+buffer area, and will then call
+``lpstart'' to send, if possible, a
+string of characters to the printer
+controller.
+
+``lpstart'' is called both when more
+characters are available to be sent,
+and when an interrupt from the printer
+is taken.
+
+The majority of calls on ``lpstart'' will
+in fact achieve nothing. Occasionally
+(usually when the printer has just completed
+a print cycle) ``lpstart'' will be
+able to send a whole string of characters to the printer controller.
+
+\sbs{lpcanon (8879)}
+
+This procedure interprets characters
+being sent to the line printer and make
+various modifications, insertions and
+deletions. It thus functions as a
+filter.
+
+\bd
+\item[8884:] The section of code from here to
+line 8913 is concerned with character translation when the full
+96 character set is not available, and a 64 character set is
+in use.
+
+Since the capabilities of a
+printer do not usually change
+with time, the defined variable
+``CAP'' (8840) must be set once and
+for all (at a particular installation).
+
+The run-time test on (lp11.flag \& CAP)
+could be replaced by a compile-time test on
+(CAP) and if the compiler has its
+``druthers'', if CAP turns out to
+be zero, the whole section of
+code to line 8913 could be compiled down to nothing.
+
+The present code could be said
+to plan ahead for a situation
+where an installation may have
+two or more printers of different
+types. Even so there is a basic
+inconsistency here in the use of
+``CAP'', ``IND'' and ``EJECT'' on the
+one hand, and ``EJLINE'' and ``MAXCOL'' on the other. In fact since
+forms of different sizes are not
+uncommonly used on a single
+printer, the last two should not
+be constants at all, but should
+be dynamically settable.
+
+\item[8885:] Lower case alphabetics are
+translated by the addition of a
+constant, which is conveniently
+defined as ``'A' -- 'a''';
+
+\item[8887:] Certain of the remaining characters are special characters which
+are printed as a similar character with an overprinted minus
+sign, e.g. ``\{'' (8889) is printed as ``\{-'';
+
+\item[8909:] The ``similiar'' character is output
+via a recursive call on
+``lpcanon'', which will increment
+``lp11.ccc'' by one as a side
+effect;
+
+\item[8910:] Decrement the current character
+count (for the same effect as a
+``back space'' character) and ...
+
+\item[8911:] Prepare to output a minus sign;
+
+\item[8915:] The ``switch'' statement beginning here
+extends to line 8963. Certain characters involved in vertical
+and horizontal spacing are given special interpretations
+with delayed actions;
+
+\item[8917:] For a horizontal tab character, round the current character
+count up to the next multiple of eight. Do not output
+any blank characters immediately;
+
+\item[8921:] For a ``form feed'' or ``new line'' character, if:
+
+(a) the printer does not have a ``page
+restore'' capability; or
+
+(b) the current line is not empty; or
+
+(c) some lines have been completed
+since the last ``form feed'' character, then ...
+
+\item[8925:] reset ``lp11.mcc'' to zero;
+
+\item[8926:] Increment the completed line
+count;
+
+\item[8927:] Convert a ``new line'' character to
+a ``form feed'' if sufficient lines
+have been completed on the
+current page, and the printer has
+a ``form feed'' capability;
+
+\item[8929:] Output the character, and if
+was a ``form feed'', reset
+number of completed lines
+zero;
+\ed
+
+\noindent Examination of this code will show
+that:
+
+\bd
+\item[(a)] Any string of ``form feed''s or
+``new line''s which begins with a
+``form feed'', will, if sent to a
+printer with ``form feed'' capability, be reduced to a single
+``form feed'';
+
+\item[(b)] A ``form feed'' character sent to
+a printer without the ``form
+feed'' capability, will cause a
+new line to be started but will
+be passed on otherwise without
+comment.
+\ed
+
+\bd
+\item[8934:] For ``carriage return''s, {\bf and},
+note, ``form feed''s and ``new
+line''s, reset the current character count to zero or eight,
+depending on ``IND'', and return;
+
+\item[8949:] For all other characters ...
+
+\item[8950:] If a string of ``backspace''s (real
+or contrived) and/or ``carriage
+returns'' has been received, output
+a single ``carriage return''
+and reset the maximum character
+count to zero;
+
+\item[8954:] Provided the
+count does not exceed the maximum
+line length, output blank characters to
+bring the maximum character count to the
+current character count. (Perhaps these two
+variables would be more accurately called the
+``actual character count'' and the ``logical character count''.);
+
+\item[8959:] Output the actual character.
+\ed
+
+\sbs{For idle readers: A suggestion}
+
+It will be observed that backspaces for
+overprinting or underscoring characters
+introduce separate print cycles, and
+where these features are in heavy use,
+the effective output rate of the
+printer may be drastically reduced. If
+this is considered a serious problem,
+``lpcanon'' could be rewritten to ensure
+that no more than two print cycles are
+used per line in such cases.
+
+\sbs{PC-11 Paper Tape Reader/Punch Driver}
+
+This driver is to be found in the file
+``pc.c'' on Sheets 86, 87. It is simpler
+than the line printer driver in that
+there is ro routine analogous to
+``lpcanon''. However it is more complicated in that there is both an input
+and an output device which can be
+simultaneously and independently
+active.
+
+A description of the operation of this
+device is inciuded in the document ``The
+UNIX I/O System'' by D. Ritchie. Certain
+special features may be noted:
+
+\bd
+\item[(1)] Only one process may open the file
+for reading at a time, but there is no
+limit on the nmber of writers;
+
+\item[(2)] This routine pays a little more
+attention to error conditions than the
+line printer driver, but the treatment
+is still not exhaustive;
+
+\item[(3)] ``passc'' (8695) knows how many
+characters are required and returns a
+negative valie when ``enough'' is
+reached;
+
+\item[(4)] ``pcclose'' is careful to flush out
+any remaining characters in the input
+queue if and only if it believes the
+device was opened for input.
+\ed

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 6</title>
+
+<link href="sect0036.html" title="Example 7" rel="next" />
+<link href="sect0034.html" title="Example 5" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0034.html" title="Example 5"><img alt="Previous: Example 5" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0036.html" title="Example 7"><img alt="Next: Example 7" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 6</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000036">3.7 Example 6</h2>
+<pre>
+  5336 geterror (abp)
+       struct buf *abp;
+       {
+         register struct buf bp;
+         bp = abp;
+         if (bp-&gt;b flags &amp; B_ERROR)
+           if ((u.u_error=bp-&gt;b_error)==0)
+             u.u_error = EIO;
+       }
+</pre><p>This procedure simply checks if there has been an error, and if the error indicator “u.u_error” has not been set, sets it to a general error indication </p><p>“B_ERROR” has the value 04 (see line 4575) so that, with only one bit set, it can be used as mask to isolate bit number 2. The operator “&amp;” as used in </p><pre>
+    bp-&gt;b_flags &amp; B_ERROR
+</pre><p>is the bitwise logical conjunction (“and”) applied to arithmetic values. </p><p>The above expression is greater than one if bit 2 of the element “b_flags” of the “buf” structure pointed to by “bp”, is set. </p><p>Thus if there has been an error, the expression </p><pre>
+    (u.u_error) = bp-&gt;b_error)
+</pre><p>is evaluated and compared with zero. Now this expression includes an assignment operator “=”. The value of the expression is the value of “u.u_error” <b class="bf">after</b> the value of “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" />b_flags” has been assigned to it. </p><p>This use of an assignment as part of an expression is useful and quite common. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0034.html" title="Example 5"><img alt="Previous: Example 5" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0036.html" title="Example 7"><img alt="Next: Example 7" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

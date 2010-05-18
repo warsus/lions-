@@ -1,0 +1,578 @@
+%
+% The Lion's Commentary, file ch19.tex, version 1.4, 16 May 1994
+%
+\se{File  Directories and Directory Files}
+
+As we have seen, much important  information  about
+individual files is contained in the ``inode'' tables.   If  the
+file  is currently accessible, or being
+accessed, the relevant  information  is
+held  in  the core ``inode'' table.  If a
+file is on  disk  (more  generally,  on
+some  file  system volume) and is not
+currently accessible, then the relevant
+``inode''  table  is  the one recorded on
+the disk (file system volume).
+
+
+Notably absent from the  ``inode''  table
+is any information regarding the ``name''
+of the file.  This  is  stored  in  the
+directory files.
+
+\sbs{The Directory Data Structure}
+
+Each file must have at least one  name.
+A file may have more than one  distinct
+name, but the  same  name  may  not  be
+shared  by  tw  distinct  files,  i.e.
+each name must define a unique file.
+
+
+A name may be multipart.  When written,
+the parts or components of the name are
+separated by slashes (``/'').  The  order
+of components within a name is significant i.e. 
+``a/b/c''  is  different  from ``a/c/b''.
+
+If file  names  are  divided  into  two
+parts:  an initial part or ``stem'' and a
+final part or ``ending'', then two  files
+whose  names  have  identical stems are
+usually relate in some way.  They  may
+reside  on  the  same  disk,  they  may
+belong to the same user, etc.
+Users make initial reference  to  files
+by  quoting  the file name, e.g. in the
+``open''  system  call.    An   important
+operating  sysem function is to decode
+the name into the corresponding ``inode''
+entry.   To  do  this, UNIX creates and
+maintains a directory  data  structure.
+This   structure  is  equivalent  to  a
+directed graph with named edges.
+
+
+In its purest form, the graph is a tree
+i.e.  it  has  a single root node, with
+exactly one path between the  root  and
+any  node.  More  commonly in UNIX (but
+not so commonly in other operating systems) the graph is a lattice  which may
+be obtained from a tree  by  coalescing
+one or more groups of leaves.
+
+In this case, while there is still only
+one path between the root and any interior node, thee may be more  than  one
+path  between  the  root  and  a  leaf.
+Leaves are nodes without successors and
+correspond to  data  files.  Interior
+nodes are  nodes  with  successors  and
+correspond to directory files.
+
+The name for a file  is  obtained  from
+the  names  of  the  edges  of the path
+between   the   root   and   the   node
+corresponding  to  the file.  (For this
+reason, the name is often  referred  to
+as  a ``pathname''.) If there are several
+paths, then the file has several names.
+
+
+\sbs{Directory Files}
+
+A directory file is  in  many  respects
+indistinguishable  from a non-directory
+file.  However it contains  information
+which  is  used in locating other files
+and hence its  contents  are  carefully
+protected,  and  are manipulated by the
+operating system alone.
+
+
+In  every  file,  the  information   is
+stored  as  one  or  more 512 character
+blocks.  Each block of a directory file
+is  divided  into  32  *  16  character
+structures.  Each structure consists of
+a 16 bit ``inode'' table pointer and a 14
+character name.  The ``inode'' pointer is
+to  the  ``inode'' table on the same disk
+or file  system  volume  as  the  files
+which  the  directory references. (More
+on this later.)  An  ``inode''  value  of
+zero defines a null entry in the directory.
+
+The procedures which  reference  directories are:
+
+\begin{verbatim}
+   namei  (7518) search directory
+   link   (5909) create alternate name
+   wdir   (7477) write directory entry
+   unlink (3510) delete name
+\end{verbatim}
+
+\sbs{namei (7518)}
+
+\bd
+\item[7531:] ``u.u\_cdir'' defines the ``inode'' of
+      a process's current directory.  A
+      process  inherits  its   parent's
+      current    directory   at   birth
+      (``newproc'', 1883).   The  current
+      directory  may  be  changed using
+      the ``chdir'' (3538) system call;
+\item[7532:] Note that ``func'' is  a  parameter
+      to  ``namei''  and is always either
+      ``uchar'' (7689) or ``schar'' (7679);
+\item[7534:] ``iget'' (7276) is called to:
+\bi
+\item wait  until  such  time  as   the
+``inode''  corresponding to ``dp'' is
+no longer locked;
+
+\item check that  the  associated  file system is still mounted;
+\item increment the reference count;
+\item lock the ``inode'';
+\ei
+
+\item[7535:] Multiple slashes are  acceptable! (i.e.\\
+ ``////a///b/'' is the same as ``/a/b'');
+
+\item[7537:] Any attempt to replace or  delete
+      the  current working directory or
+      the  root  directory  is  bounced
+      immediately!
+
+\item[7542:] The  label  ``cloop''   marks   the
+      beginning  of a program loop that
+      extends to line 7667.  Each cycle
+      analyses a component of the pathname (i.e. a string terminated by
+      a  null  character or one or more
+      slashes).  Note that a  name  may
+      be  constructed  from  many  different characters (7571);
+
+\item[7550:] The end of the pathname has  been
+      reached  (successfully).   Return
+      the current value of ``dp'';
+
+\item[7563:] ``search''  permission  for  directories  is  coded in the same way
+      as ``execute'' permission for other files;
+
+\item[7570:] Copy the name into a more  accessible  location before attempting
+      to  match  it  with  a  directory
+      entry.    Note  that  a  name  of
+      greater than ``DIRSIZ''  characters
+      is truncated;
+
+\item[7589:] ``u.u\_count'' is set to the  number
+      of entries in the directory;
+
+\item[7592:] The  label  ``eloop''   marks   the
+      beginning of a program loop which
+      extends to line 7647. Each cycle
+      of the loop handles a single
+      directory entry;
+
+\item[7600:] If the directory has been
+      searched (linearly!) without
+      matching the supplied pathname
+      component, then there must be an
+      error unless:
+
+\bd
+     \item[(a)] this is the last component of
+      the pathname, i.e. ``c==`\verb+\+0' '';
+
+      \item[(b)] the file is to be created,
+      i.e. ``flag == 1''; ard
+
+      \item[(c)] the user program has ``write''
+      permission for the directory;
+\ed
+
+\item[7606:] Record the ``inode'' address for
+      the directory for the new file in
+      ``u.u\_pdir'';
+
+\item[7607:] If a suitable slot for a new
+      directory entry has previously
+      been encountered (7642), store
+      the value in ``u.u\_offset[1]'';
+      else set the ``IUPD'' fIag for the
+      ``dp'' designated ``inode'' (but why?);
+
+\item[7622:] When appropriate, read a new
+      block from the directory file
+      (note the use of ``bread'') (why
+      not ``breada''?), after carefully
+      releasing any previously held
+      buffer;
+
+\item[7636:] Copy the eight words of the
+      directory entry into the array
+      ``u.u\_dent''. The reason for copying before comparing is obscure!
+      Can this actually be more efficient? (The reason for copying
+      the whole directory at all is
+      rather perplexing to the author
+      of these notes.);
+
+\item[7645:] This comparison makes efficient
+      use of a single character pointer
+      register variable, ``cp''. The
+      loop would be even more efficient
+      if word by word comparison were
+      used;
+
+\item[7647:] The ``eloop'' cycle is terminated
+      by one of:
+
+\begin{verbatim}
+   return(NULL);    (7610)
+   goto out;        (7605, 7613)
+\end{verbatim}
+
+\noindent a successful match  so  that  the
+branch  to  ``eloop'' (7647) is not
+taken;
+
+\item [7657:] If the  name  is  to  be  deleted
+(``flag==2''),  if the pathname has
+been completed, and if  the  user
+program has ``write'' access to the
+directory, then return a  pointer
+to the directory ``inode'';
+
+Save  the  device  identity  temporarily (why not in the register
+``c''?) and call ``iput''  (7344)  to
+unlock  ``dp'',  to  decrement  the
+reference count on  ``dp''  and  to
+perform  any  consequent processlng;
+
+\item[7664:] Revalidate ``dp'' to point  to  the
+      ``inode'' for the next level file;
+
+\item[7665:] ``dp==NULL''   shouldn't    happen,
+since the directory says the file
+exists!  However  ``inode''   table
+overflows   and  i/o  errors  can
+occur,  and  sometimes  the  file
+system  may  be left in an inconsistent  state  after  a   system
+crash.
+\ed
+
+\sbs{Some Comments}
+
+
+``namei'' is a key procedure which  would
+seem  to  have been written very early,
+to have been  thoroughly  debugged  and
+then  to  have  been  left  essentially
+unchanged.   The   interface    between
+``namei''  and  the rest of the system is
+rather complex,  and  for  that  reason
+alone,  it  would not win the prize for
+``Procedure of the Year''.
+
+
+``namei'' is  called  thirteen  times  by
+twelve different procedures:
+
+\begin{tabular}{llll}\\
+{\bf line} & {\bf routine} & \multicolumn{2}{l}{\bf parameters} \\ \hline
+3034 & exec & uchar & 0 \\
+3543 & chdir & uchar & 0 \\
+5770 & open & uchar & 0 \\
+5914 & link & uchar & 0 \\
+6033 & stat & uchar & 0 \\
+6097 & smount & uchar & 0 \\
+6186 & getmdev & uchar & 0 \\
+6976 & owner & uchar & 0 \\
+\\
+5786 & creat & uchar & 1 \\
+5928 & link & uchar & 1 \\
+5958 & mknod & uchar & 1 \\
+\\
+3515 & unlink & uchar & 2 \\
+\\
+4101 & core & schar & 1 \\
+\end{tabular}
+
+\bigskip
+
+\noindent It will be seen that:
+\bd
+\item[(a)] there are two calls from ``link'';
+
+\item [(b)] the calls can  be  divided  into
+four  categories,  of  which the
+first is by far the largest;
+
+\item[(c)] the  last  two  categories  have
+only one representative each;
+
+\item[(d)] in particular, there is only one
+call   involving   the   routine
+``schar'', which is always  for  a
+file  called  ``core''.  (If  this
+case were handled as  a  special
+case   e.g.   where  the  second
+parameter  had  the  value  ``3'',
+then  the  ``uchar''s  and ``schar''
+could be eliminated.)
+\ed
+
+
+\noindent ``namei'' may terminate in a  variety  of
+ways:
+
+\bd
+\item[(a)]  if there has been an error, then
+     a  ``NULL''  value is returned and
+     the variable ``u.u\_error'' is set.
+
+(Most errors result in a  branch
+to  the  label  ``out''  (7669) so
+that reference  counts  for  the
+inodes are properly maintained
+(7670). This is not necessary if
+the  failure  occurs  in  ``iget''
+(7664).);
+
+
+
+\item[(b)]  if ``flag==2'' (i.e. the  call  is
+     from    ``unlink''),   the   value
+     returned   (in    normal    circumstances)    is   an   ``inode''
+     pointer for the parent directory
+     of the named file (7660);
+
+\item[(c)]  if ``flag==1'' (i.e. the  call  is
+     from   ``creat''   or   ``link''  or
+     ``mknod'', and a  file  is  to  be
+     created  if  it does not already
+     exist) and  if  the  named  file
+     does  not  exist,  then a ``NULL''
+     value  is  returned  (7610).  In
+     this   case  a  pointer  to  the
+     ``inode'' for the directory  which
+     will  point  to the new file, is
+     left in ``u.u\_pdir'' (7606). (Note
+     also    that   in   this   case,
+     ``u.u\_offset''  is  left  pointing
+     either  at  an  empty  directory
+     entry  or  at  the  end  of  the
+     directory file.);
+
+\item[(d)] if  in the remaining cases,  the
+file  exists, an ``inode'' pointer
+for the file is returned (7551).
+The  ``inode''  is  locked and the
+reference count has been  incremented.   A  call  to  ``iput'' is
+needed subsequently to undo both
+these side effects.
+\ed
+
+
+
+\sbs{link (5909)}
+
+This procedure implements a system call
+which enters a new name for an existing
+file  into  the  directory   structure.
+Arguments  to  the  procedure  are  the
+existing and the new names of the file;
+
+\bd
+\item[5914:] Look up the existing file name;
+
+\item[5917:] If the file already has 127  different names, quit in disgust;
+
+\item[5921:] If the existing file turns out to
+      be  a  directory,  then  only the
+      super-user may rename it;
+
+\item[5926:] Unlock the existing file  ``inode''
+      This  is  locked  when  the first
+      call on ``namei''  does  an  ``iget''
+      (7534, 7664).
+
+Under what conditions  would  the
+failure  to  unlock  the  ``inode''
+here be disastrous?  The  chances
+that the existing file would be a
+directory  encountered   in   the
+search  for  the  new  name would
+seem slight, if  not  impossible.
+Most  probably  the relevant circumstance is where the system  is
+attempting  to recreate an alternative file name or alias,  which
+{\bf already} exists;
+
+\item[5927:] Search  the  directory  for   the
+      second  name,  with the intention
+      of creating a new entry;
+
+\item[5930:] There is an  existing  file  with
+      the second name;
+
+\item[5935:] ``u.u\_pdir'' is set as a side effect
+of  the  call  on ``namei'' (5928).
+Check that the directory  resides
+on the same device as the file;
+
+\item[5940:] Write a new directory entry  (see
+      below);
+
+\item[5941:] Increase the ``link'' count for the
+      file.
+\ed
+
+
+\sbs{wdir (7477)}
+
+This procedure enters a new name into a
+directory.   It  is  called  by  ``link''
+(5940)  and  ``maknode''  (7467)  with  a
+pointer  to a (core) ``inode'' as parameter.
+
+
+The sixteen characters of the directory
+entry  are  copied  into  the structure
+``u.u\_dent'', and written from there into
+the directory file. (Note that the previous content of ``u.u\_dent''  will  have
+been  the name of the last entry in the
+directory file.)
+
+
+The procedure assumes that  the  directory  file  has  already been searched,
+that the ``inode'' for the dlrectory file
+has already been allocated and that the
+values of ``u.u offset''  have  been  set
+appropriately.
+
+\sbs{maknode (7455)}
+
+This procedure is  called  from  ``core''
+(4105),   ``creat''  (5790)  and  ``mknod''
+(5966),  after  a  previous   call   on
+``namei'' with a second parameter of one,
+has revealed that no file of the specified name existed.
+
+
+\sbs{unlink (3510)}
+
+This procedure implements a system call
+which  deletes  a  file  name  from the
+directory structure.  (When all  references  to  a file are deleted, the file
+itself will be deleted.)
+
+\bd
+\item[3515:] Search for a file with the specified
+ name,  and  if  it  exists,
+return a pointer to  the  ``inode''
+of  the  immediate  parent directory;
+
+
+\item[3518:] Unlock the parent directory;
+
+\item[3519:] Get an  ``inode''  pointer  to  the
+file itself;
+
+\item[3522:] Unlinking directories is  forbidden, except for super-users;
+
+\item[3528:] Rewrite the directory entry  with
+      the ``inode'' value set to zero;
+
+\item[3529:] Decrement the ``link'' count.
+\ed
+
+
+Note that there is no attempt to reduce
+the size of a directory below its ``high
+water'' mark.
+
+
+\sbs{mknod (5952)}
+
+This procedure, which implements a system call
+of the same name, is only executable by the super-user. As explained
+in  the Section ``MKNOD(II)'' of the UPM,
+this system  call  is  used  to  create
+``inodes'' for special files.
+
+``mknod''  also  solves  the  problem  of
+``where  do directories come from''?  The
+second parameter passed to  ``mknod''  is
+used,  without modification or restriction to set ``i\_mode''.
+(Compare  ``creat'' (5790)  and  ``chmod''  (3569)).  This is
+the only way an ``inode'' can get flagged
+as a directory, for instance.
+
+In  such  cases,  the  third  parameter
+passed  to  ``mknod'' {\bf must} be zero.  This
+value is copied into ``i\_addr[0]'' (as is
+appropriate for special files), and, if
+non-zero, will be accepted uncritically
+by  ``bmap''  (6447). It might be prudent
+to insert a test
+
+\begin{verbatim}
+   if (ip->i_mode & (IFCHR & IFBLK) != 0)
+\end{verbatim}
+
+\noindent before  line  5969,  rather  than  rely
+indefinitely  on  the  infallibility of
+the super-user.
+
+
+\sbs{access (6746)}
+
+This  procedure  is  called  by  ``exec''
+(3041),  ``chdir'' (3552), ``core'' (4109),
+``openl'' (5815,  5817),  ``namei''  (7563,
+7664,  7658) to check access permission
+to  a  file.  The   second   parameter,
+``mode'',  is  equal  to  one of ``IEXEC'',
+``IWRITE'' and ``IREAD'', with octal values
+of 0100, 0200 and 0400 respectively.
+
+\bd
+\item[6753:] ``write'' permission is  denied  if
+      the  file  is  on  a  file system
+      volume which has been mounted  as
+      ``read  only''  or  if  the file is
+      functioning as the  text  segment
+      for an executing program;
+
+\item[6763:] the suer-user may not execute  a
+file unless it is ``executable'' in
+at least one of the  three  ``permission''  groups.  In  any  other
+situation he  is  always  allowed
+access;
+
+\item[6769:] If the user is not the  owner  of
+      the  file, shift ``m'' three places
+      to the right so that  group  permissions will be operative ... If
+      the groups don't match, shift ``m''
+      again;
+
+\item[6774:] Compare ``m'' and the  access  permissions.
+\ed
+
+
+Note that there is an anomaly  here  in
+that  if  a  file has a ``mode'' of 0077,
+the owner cannot reference it  at  all,
+but  everyone  else can. This situation
+could  be  changed  satisfactorily   by
+inserting a statement
+
+\begin{verbatim}
+   m =|  (m |  (m >> 3)) >> 3;
+\end{verbatim}
+
+\noindent after line 6752,  and  replacing  lines
+6764, 6765 by
+
+\begin{verbatim}
+   if (m & IEXEC && (m & ip->i_mode) == 0)
+\end{verbatim}

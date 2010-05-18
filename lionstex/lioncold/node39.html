@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 6</TITLE>
+<META NAME="description" CONTENT="Example 6">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node40.html">
+<LINK REL="previous" HREF="node38.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node40.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1175"
+  HREF="node40.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1171"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1165"
+  HREF="node38.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1173"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1176"
+  HREF="node40.html">Example 7</A>
+<B> Up:</B> <A NAME="tex2html1172"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1166"
+  HREF="node38.html">Example 5</A>
+ &nbsp; <B>  <A NAME="tex2html1174"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00067000000000000000">
+Example 6</A>
+</H2>
+
+<P>
+<PRE>
+  5336 geterror (abp)
+       struct buf *abp;
+       {
+         register struct buf bp;
+         bp = abp;
+         if (bp-&gt;b flags &amp; B_ERROR)
+           if ((u.u_error=bp-&gt;b_error)==0)
+             u.u_error = EIO;
+       }
+</PRE>
+
+<P>
+This procedure simply checks if there
+has been an error, and if the error
+indicator ``u.u_error'' has not been set,
+sets it to a general error indication
+
+<P>
+``B_ERROR'' has the value 04 (see line
+4575) so that, with only one bit set,
+it can be used as mask to isolate bit
+number 2. The operator ``SPMamp;'' as used in
+
+<P>
+<PRE>
+    bp-&gt;b_flags &amp; B_ERROR
+</PRE>
+
+<P>
+is the bitwise logical conjunction
+(``and'') applied to arithmetic values.
+
+<P>
+The above expression is greater than
+one if bit 2 of the element ``b_flags''
+of the ``buf'' structure pointed to by
+``bp'', is set.
+
+<P>
+Thus if there has been an error, the
+expression
+
+<P>
+<PRE>
+    (u.u_error) = bp-&gt;b_error)
+</PRE>
+
+<P>
+is evaluated and compared with zero.
+Now this expression includes an assignment operator ``=''.
+The value of the expression is the value of ``u.u_error''
+<B>after</B> the value of ``bp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">b_flags'' has
+been assigned to it.
+
+<P>
+This use of an assignment as part of an
+expression is useful and quite common.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

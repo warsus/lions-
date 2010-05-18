@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Instruction Set</title>
+
+<link href="sect0018.html" title="Addressing Modes" rel="next" />
+<link href="sect0016.html" title="General Registers" rel="prev" />
+<link href="sect0013.html" title="Fundamentals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0016.html" title="General Registers"><img alt="Previous: General Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0018.html" title="Addressing Modes"><img alt="Next: Addressing Modes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0013.html">Fundamentals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Instruction Set</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000018">2.4 Instruction Set</h2>
+<p>The PDP11 instruction set includes double, single and zero operand instructions. Instruction length is usually one word, with some instructions being extended to two or three words with additional addressing information. </p><p>With single operand instructions, the operand is usually called the “destination”; with double operand instructions, the two operands are called the “source” and “destination”. The various modes of addressing are described later. </p><p>The following instructions have been used in the file “m40.s” i.e. the file of assembly language support routines for use with the 11/40 processor. Note that N, Z, V and C are the condition codes i.e. bits in the processor status word (“ps”), and that these are set as side effects of many instructions besides just “bit”, “cmp” and “tst” (whose stated function is to set the condition codes). </p><dl class="description">
+
+    <dt>adc</dt>
+    <dd><p>Add the contents of the C bit to the destination; </p></dd>
+
+    <dt>add</dt>
+    <dd><p>Add the source to the destination; </p></dd>
+
+    <dt>ash</dt>
+    <dd><p>Shift the contents of the defined register left the number of times specified by the shift count. (A negative value implies a right shift.); </p></dd>
+
+    <dt>ashc</dt>
+    <dd><p>Similar to “ash” except that two registers are involved; </p></dd>
+
+    <dt>asl</dt>
+    <dd><p>Shift all bits one place to the left. Bit 0 becomes 0 and bit 15 is loaded into C; </p></dd>
+
+    <dt>asr</dt>
+    <dd><p>Shift all bits one place to the right. Bit 15 is replicated and bit 0 is loaded into C; </p></dd>
+
+    <dt>beq</dt>
+    <dd><p>Branch if eaual, i.e. if Z = l; </p></dd>
+
+    <dt>bge</dt>
+    <dd><p>Branch if greater than or equal to, i.e. if<br />N = V; </p></dd>
+
+    <dt>bhi</dt>
+    <dd><p>Branch if higher, i.e if C = 0 and Z = 0; </p></dd>
+
+    <dt>bhis</dt>
+    <dd><p>Branch if higher or the same, i.e. if C = 0; </p></dd>
+
+    <dt>bic</dt>
+    <dd><p>Clear each bit to zero in the destination that corresponds to a non-zero bit in the source; </p></dd>
+
+    <dt>bis</dt>
+    <dd><p>Perform an “inclusive or” of source and destination and store the result in the destination; </p></dd>
+
+    <dt>bit</dt>
+    <dd><p>Perform a logical “and” of the source and destination to set the condition codes; </p></dd>
+
+    <dt>ble</dt>
+    <dd><p>Branch if greater than or equal to, i.e if Z = 1 or N = V; </p></dd>
+
+    <dt>blo</dt>
+    <dd><p>Branch if lower (than zero), if C = l; </p></dd>
+
+    <dt>bne</dt>
+    <dd><p>Branch if not equal (to zero), i.e. if Z = 0; </p></dd>
+
+    <dt>br</dt>
+    <dd><p>Branch to a location within the range (. -128,<br />. +127) where “.” is the current location; </p></dd>
+
+    <dt>clc</dt>
+    <dd><p>Clear C; </p></dd>
+
+    <dt>clr</dt>
+    <dd><p>Clear destination to zero; </p></dd>
+
+    <dt>cmp</dt>
+    <dd><p>Compare the source and destination to set the condition codes. N is set if the source value is less than the destination value; </p></dd>
+
+    <dt>dec</dt>
+    <dd><p>Subtract one from the contents of the destination; </p></dd>
+
+    <dt>div</dt>
+    <dd><p>The 32 bit two’s complement integer stored in rn and r(n+l) (where n is even) is divided by the source operand. The quotient is left in rn, and the remainder in r(n+l); </p></dd>
+
+    <dt>inc</dt>
+    <dd><p>Add one to the contents of the destination; </p></dd>
+
+    <dt>jmp</dt>
+    <dd><p>Jump to the destination; </p></dd>
+
+    <dt>jsr</dt>
+    <dd><p>Jump to subroutine. Register values are shuffled as follows: </p><p>pc, rn, –(sp) = dest., pc, rn </p></dd>
+
+    <dt>mfpi</dt>
+    <dd><p>Push onto the current stack the value of the designated word in the “previous” address space; </p></dd>
+
+    <dt>mov</dt>
+    <dd><p>Copy the source value to the destination; </p></dd>
+
+    <dt>mtpi</dt>
+    <dd><p>Pop the current stack and store the value in the designated word in the “previous” address space; </p></dd>
+
+    <dt>mul</dt>
+    <dd><p>Multiply the contents of rn and the source. If n is even, the product is left in rn and r(n+l); </p></dd>
+
+    <dt>reset</dt>
+    <dd><p>Set the INIT line on the Unibus for 10 milliseconds. This will have the effect of reinitialising all the device controllers; </p></dd>
+
+    <dt>ror</dt>
+    <dd><p>Rotate all bits of the destination one place to the right. Bit 0 is loaded into C, and the previous value of C is loaded into bit 15; </p></dd>
+
+    <dt>rts</dt>
+    <dd><p>Return from subroutine. Reload pc from rn, and reload rn from the stack; </p></dd>
+
+    <dt>rtt</dt>
+    <dd><p>Return from interrupt or trap. Reload both pc and ps from the stack; </p></dd>
+
+    <dt>sbc</dt>
+    <dd><p>Subtract the carry bit from the destination; </p></dd>
+
+    <dt>sob</dt>
+    <dd><p>Subtract one from the designated register. If the result is not zero, branch back “offset” words; </p></dd>
+
+    <dt>sub</dt>
+    <dd><p>Subtract the source from the destination; </p></dd>
+
+    <dt>swab</dt>
+    <dd><p>Exchange the high and low order bytes in the destination; </p></dd>
+
+    <dt>tst</dt>
+    <dd><p>Set the condition codes, N and Z, according to the contents of the destination; </p></dd>
+
+    <dt>wait</dt>
+    <dd><p>Idle the processor and release the Unibus until a hardware interrupt occurs. </p></dd>
+
+</dl><p>The “byte” version of the following instructions are used in the file “m40.s”, as well as the “word” versions described above: </p><div class="tabbing">
+<img src="images/img-0003.png" alt="\begin{tabbing} \hspace{2cm} \=  bis \hspace{2cm} \=  inc \\ \&gt;  clr \&gt;  mov \\ \&gt;  cmp \&gt;  tst \\ \end{tabbing}" style="width:&images/img-0003.png-width;&px;; height:&images/img-0003.png-height;&px;" class="tabbing gen" />
+</div></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0016.html" title="General Registers"><img alt="Previous: General Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html" title="Fundamentals"><img alt="Up: Fundamentals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0018.html" title="Addressing Modes"><img alt="Next: Addressing Modes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

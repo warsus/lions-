@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Section Two</TITLE>
+<META NAME="description" CONTENT="Section Two">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node60.html">
+<LINK REL="previous" HREF="node58.html">
+<LINK REL="up" HREF="node51.html">
+<LINK REL="next" HREF="node60.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1424"
+  HREF="node60.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1420"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1414"
+  HREF="node58.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1422"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1425"
+  HREF="node60.html">Section Three</A>
+<B> Up:</B> <A NAME="tex2html1421"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1415"
+  HREF="node58.html">Other Files in Section</A>
+ &nbsp; <B>  <A NAME="tex2html1423"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00078000000000000000">
+Section Two</A>
+</H2>
+
+<P>
+Section Two is concerned with traps,
+hardware interrupts and software interrupts.
+
+<P>
+Traps and hardware interrupts introduce
+sudden switches into the CPU's normal
+instruction execution sequence. This
+provides a mechanism for handling special 
+conditions which occur outside the
+CPU's immediate control.
+
+<P>
+Use is made of this facility as part of
+another mechanism called the ``system
+call'' whereby a user program may execute 
+a ``trap'' instruction to cause a
+trap deliberately and so obtain the
+operating system's attention and assistance.
+
+<P>
+The software interrupt (or ``signal'' is
+a mechanism for communication between
+processes, particularly when there is
+``bad news''.
+
+<P>
+<DL>
+<DT><STRONG>reg.h</STRONG></DT>
+<DD>[Sheet 26; Chapter 10] defines
+a set of constants which are used in
+referencing the previous user mode
+register values when they are stored
+in the kernel stack.
+
+<P>
+</DD>
+<DT><STRONG>trap.c</STRONG></DT>
+<DD>[Sheets 26..28; Chapter 12]
+contains the ``C'' procedure ``trap''
+which recognises and handles traps
+of various kinds.
+
+<P>
+</DD>
+<DT><STRONG>sysent.c</STRONG></DT>
+<DD>[Sheet 29; Chapter 12] contains 
+the declaration and initialisation 
+of the array ``sysent'' which
+is used by ``trap'' to associate the
+appropriate kernel mode routine with
+each system call type.
+
+<P>
+</DD>
+<DT><STRONG>sysl.c</STRONG></DT>
+<DD>[Sheets 30..33; Chapters 12,
+13] contains various routines associated 
+with system calls, including
+``exec'' ``exit'' ``wait'' and ``fork''.
+
+<P>
+</DD>
+<DT><STRONG>sys4.c</STRONG></DT>
+<DD>[Sheets 34..36; Chapters 12,
+13, 19] contains routines for
+``unlink'', ``kill'' and various other
+minor system calls.
+
+<P>
+</DD>
+<DT><STRONG>clock.c</STRONG></DT>
+<DD>[Sheets 37, 38; Chapter 11]
+contains ``clock'' which is the
+handler for clock interrupts, and
+which does much of the incidental
+housekeeping and basic accounting.
+
+<P>
+</DD>
+<DT><STRONG>sig.c</STRONG></DT>
+<DD>[Sheets 39..42; Chapter 13]
+contains the procedures which handle
+``signals'' or ``software interrupts''
+These provide facilities for interprocess 
+communication and tracing.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1424"
+  HREF="node60.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1420"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1414"
+  HREF="node58.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1422"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1425"
+  HREF="node60.html">Section Three</A>
+<B> Up:</B> <A NAME="tex2html1421"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1415"
+  HREF="node58.html">Other Files in Section</A>
+ &nbsp; <B>  <A NAME="tex2html1423"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

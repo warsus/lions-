@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>getc (0930)</TITLE>
+<META NAME="description" CONTENT="getc (0930)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node290.html">
+<LINK REL="previous" HREF="node288.html">
+<LINK REL="up" HREF="node287.html">
+<LINK REL="next" HREF="node290.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4359"
+  HREF="node290.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4355"
+  HREF="node287.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4349"
+  HREF="node288.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4357"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4360"
+  HREF="node290.html">putc (0967)</A>
+<B> Up:</B> <A NAME="tex2html4356"
+  HREF="node287.html">Character Handling</A>
+<B> Previous:</B> <A NAME="tex2html4350"
+  HREF="node288.html">cinit (8234)</A>
+ &nbsp; <B>  <A NAME="tex2html4358"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000282000000000000000">
+getc (0930)</A>
+</H2>
+
+<P>
+This procedure is called by
+
+<P>
+<PRE>
+   flushtty (8258, 8259, 8264)
+   canon    (8292)    pcread  (8688)
+   ttstart  (8520)    pcstart (8714)
+   ttread   (8544)    lpstart (8971)
+   pcclose  (8673)
+</PRE>
+
+<P>
+with a single argument which is the
+address of a ``clist'' structure.
+
+<P>
+<DL>
+<DT><STRONG>0931:</STRONG></DT>
+<DD>Copy the parameter to r1 and save
+the initial processor status word
+and value of r2 on the stack;
+
+<P>
+</DD>
+<DT><STRONG>0934:</STRONG></DT>
+<DD>Set the processor priority to
+five (higher than the interrupt
+priority of a character device);
+
+<P>
+</DD>
+<DT><STRONG>0936:</STRONG></DT>
+<DD>r1 points to the first word of a
+``clist'' structure (i.e. a character count). Move the second word
+of this structure (i.e. a pointer
+to the head character) to r2;
+
+<P>
+</DD>
+<DT><STRONG>0937:</STRONG></DT>
+<DD>If the list is empty (head
+pointer is ``NULL'') go to line 0961;
+
+<P>
+</DD>
+<DT><STRONG>0938:</STRONG></DT>
+<DD>Move the head character to r0 and
+increment r2 as a side effect;
+
+<P>
+</DD>
+<DT><STRONG>0939:</STRONG></DT>
+<DD>Mask r0 to get rid of any
+extended negative sign;
+
+<P>
+</DD>
+<DT><STRONG>0940:</STRONG></DT>
+<DD>Store the updated head pointer
+back in the ``clist'' structure.
+(This may have to be altered
+later.);
+
+<P>
+</DD>
+<DT><STRONG>0941:</STRONG></DT>
+<DD>Decrement the character count and
+if this is still positive, go to
+line 0947;
+
+<P>
+</DD>
+<DT><STRONG>0942:</STRONG></DT>
+<DD>The list is now empty, so reset the head and tail
+character pointers to ``NULL''. Go to line 0952;
+
+<P>
+</DD>
+<DT><STRONG>0947:</STRONG></DT>
+<DD>Look at the three least significant bits of r2. If these are
+non-zero, branch to line 0957
+(and return to the calling routine forthwith);
+
+<P>
+</DD>
+<DT><STRONG>0949:</STRONG></DT>
+<DD>At this point, r2 is pointing at
+the next character position
+beyond the ``cblock''. Move the
+value stored in the first word of
+the ``cblock'' (i.e. at r2 - 8),
+which is the address of the next
+``cblock'' in the list to the head
+pointer in the ``clist''. (Note
+that r1 was incremented as a side
+effect at line 0941):
+
+<P>
+</DD>
+<DT><STRONG>0950:</STRONG></DT>
+<DD>The last value stored needs to
+incremented by two (Consult
+Figures 23.2 and 23.3);
+
+<P>
+</DD>
+<DT><STRONG>0952:</STRONG></DT>
+<DD>At this point, a
+``cblock'' determined by r2 is to be returned to
+``cfreelist''. Either r2 points
+into the ``cblock'' or just beyond
+it. Decrement r2 so that r2 will
+point into the ``cblock'';
+
+<P>
+</DD>
+<DT><STRONG>0953:</STRONG></DT>
+<DD>Reset the three least significant
+bits of r2, leaving a pointer to
+the ``cblock'';
+
+<P>
+</DD>
+<DT><STRONG>0954:</STRONG></DT>
+<DD>Link the ``cblock'' into ``cfreelist'';
+
+<P>
+</DD>
+<DT><STRONG>0957:</STRONG></DT>
+<DD>Restore the values of r2 and PS
+from the stack and return;
+
+<P>
+</DD>
+<DT><STRONG>0961:</STRONG></DT>
+<DD>At this point the list is known
+to be empty because a ``NULL'' head
+pointer was encountered. Make
+sure that the tail pointer is
+``NULL'' also;
+
+<P>
+</DD>
+<DT><STRONG>0962:</STRONG></DT>
+<DD>Move -1 to r0 as the result to be
+returned when the list is empty.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4359"
+  HREF="node290.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4355"
+  HREF="node287.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4349"
+  HREF="node288.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4357"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4360"
+  HREF="node290.html">putc (0967)</A>
+<B> Up:</B> <A NAME="tex2html4356"
+  HREF="node287.html">Character Handling</A>
+<B> Previous:</B> <A NAME="tex2html4350"
+  HREF="node288.html">cinit (8234)</A>
+ &nbsp; <B>  <A NAME="tex2html4358"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: trap (2693)</title>
+
+<link href="sect0138.html" title="Kernel Mode Traps" rel="next" />
+<link href="sect0136.html" title="Traps and System Calls" rel="prev" />
+<link href="sect0136.html" title="Traps and System Calls" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Previous: Traps and System Calls" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0138.html" title="Kernel Mode Traps"><img alt="Next: Kernel Mode Traps" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0136.html">Traps and System Calls</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">trap (2693)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000138">12.1 trap (2693)</h2>
+<p>The way that this procedure is invoked was explored in Chapter Ten. The assembler “trap” routine carries out certain fundamental housekeeping tasks to set up the kernel stack, so that when this procedure is called, everything appears to be kosher. </p><p>The “trap” procedure can operate as though it had been called by another “C” procedure in the normal way with seven parameters </p><center> dev, sp, rl, nps, r0, pc, ps. </center><p>(There is a special consideration which should be mentioned here in passing. Normally all parameters passed to “C” procedures are passed by value. If the procedure subsequently changes the values of the parameters, this will not affect the calling procedure directly. </p><p>However if “trap” or the interrupt handlers change the values of their parameters, the new values will be picked up and reflected back when the “previous mode” registers are restored.) </p><p>The value of “dev” was obtained by capturing the value of the processor status word immediately after the trap and masking out all but the lower five bits. Immediately before this, the processor status word had been set using the prototype contained in the appropriate vector location. </p><p>Thus if the second word of the vector location was “br7+n;” (e.g. line 0516) then the value of “dev” will be n. </p><dl class="description">
+
+    <dt>2698:</dt>
+    <dd><p>“savfp” saves the floating point registers (for the PDP11/40, this is a no-op!); </p></dd>
+
+    <dt>2700:</dt>
+    <dd><p>If the previous mode is “user mode’, the value of “dev” is modified by the addition of the octal value 020 (2662); </p></dd>
+
+    <dt>2701:</dt>
+    <dd><p>The stack address where r0 is stored is noted in “u.u_ar0” for future reference. (Subsequently the various register values can be referenced as “u.u_ar0[Rn]”.); </p></dd>
+
+    <dt>2702:</dt>
+    <dd><p>There is now a multi-way “switch” depending on the value of “dev”. </p></dd>
+
+</dl><p>At this point we can observe that UNIX divides traps into three classes, depending on the prior processor mode and the source of the trap: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>kernel mode; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>user mode, not due to a “trap” instruction; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>user mode, due to a “trap” instruction. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Previous: Traps and System Calls" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Up: Traps and System Calls" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0138.html" title="Kernel Mode Traps"><img alt="Next: Kernel Mode Traps" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

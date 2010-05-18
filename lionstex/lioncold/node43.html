@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 10</TITLE>
+<META NAME="description" CONTENT="Example 10">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node44.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1223"
+  HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1219"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1213"
+  HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1221"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1224"
+  HREF="node44.html">Example 11</A>
+<B> Up:</B> <A NAME="tex2html1220"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1214"
+  HREF="node42.html">Example 9</A>
+ &nbsp; <B>  <A NAME="tex2html1222"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000611000000000000000">
+Example 10</A>
+</H2>
+
+<P>
+Many of the points which have been
+introduced above are collected in the
+following procedure:
+
+<P>
+<PRE>
+  2134 setrun (p)
+       {
+         register struct proc *rp;
+         rp = p;
+         rp-&gt;p_wchan = 0;
+         rp-&gt;p_stat = SRUN;
+         if (rp-&gt;p_pri &lt; curpri)
+           runrun++;
+         if (runout != 0 &amp;&amp;
+             (rp-&gt;p_flag &amp; SLOAD) == 0) {
+            runout = 0;
+            wakeup (&amp;runout);
+         }
+       }
+</PRE>
+
+<P>
+Check your understanding of ``C'' by
+figuring out what this one does.
+
+<P>
+There are two additional features you
+may need to know about:
+
+<P>
+``&amp;SPMamp;'' is the logical conjunction (``and'')
+for relational expressions. (Cf. ``<code>||</code>''
+introduced earlier.)
+
+<P>
+The last statement contains the expression
+
+<P>
+<PRE>
+    &amp;runout
+</PRE>
+
+<P>
+which is syntactically an address variable but semantically just a unique bit
+pattern.
+
+<P>
+This is an example of a device which is
+used throughout UNIX. The programmer
+needed a unique bit pattern for a particular purpose. The exact value did
+not matter as long as it was unique.
+An adequate solution to the problem was
+to use the address of a suitable global
+variable.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

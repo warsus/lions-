@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>lpwrite (8870)</TITLE>
+<META NAME="description" CONTENT="lpwrite (8870)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node283.html">
+<LINK REL="previous" HREF="node281.html">
+<LINK REL="up" HREF="node275.html">
+<LINK REL="next" HREF="node283.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4268"
+  HREF="node283.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4264"
+  HREF="node275.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4258"
+  HREF="node281.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4266"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4269"
+  HREF="node283.html">Discussion</A>
+<B> Up:</B> <A NAME="tex2html4265"
+  HREF="node275.html">Character Oriented Special Files</A>
+<B> Previous:</B> <A NAME="tex2html4259"
+  HREF="node281.html">lpinit(8976)</A>
+ &nbsp; <B>  <A NAME="tex2html4267"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000277000000000000000">
+lpwrite (8870)</A>
+</H2>
+
+<P>
+This is the procedure which is invoked
+as a result of the write system call:
+
+<P>
+``write'' (5722) calls ``rdwr'',
+which (5755) calls ``writei'',
+which        (6287)         calls
+``cdevsw[..].d write'',       which
+translates (4675) to ``lpwrite''.
+
+<P>
+``lpwrite'' takes the non-null characters
+of a null terminated string recorded in
+the user area, and passes them to
+``lpoutput'' (via ``lpcanon'') one at a
+time.
+
+<P>
+The list of procedure calls which leads
+to the invocation of this procedure is
+similar to that for ``lpopen''. A ``form
+feed'' character is output to clear the
+current page, and the ``open'' flag is
+reset.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

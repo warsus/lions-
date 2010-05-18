@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: xalloc (4433)</title>
+
+<link href="sect0179.html" title="xfree (4398)" rel="next" />
+<link href="sect0177.html" title="xswap (4368)" rel="prev" />
+<link href="sect0174.html" title="Program Swapping" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0177.html" title="xswap (4368)"><img alt="Previous: xswap (4368)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0179.html" title="xfree (4398)"><img alt="Next: xfree (4398)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0174.html">Program Swapping</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">xalloc (4433)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000179">14.4 xalloc (4433)</h2>
+<p>“xalloc” is called by “exec” (3130), when a new program is being initiated, to handle the allocation of, or linking to, the text segment. The argument, “ip”, is a pointer to the “mode” of the code file. At the time of this call, “u.u_arg[1]” contains the text segment size in bytes. </p><dl class="description">
+
+    <a href="../all.html#line4439" target="source" <dt>4439:</dt></a>
+    <dd><p>If there is no text segment, return immediately; </p></dd>
+
+    <a href="../all.html#line4441" target="source" <dt>4441:</dt></a>
+    <dd><p>Look through the “text” array for both an unused entry and an entry for the text segment. If the latter can be found, do the bookkeeping and go to “out” (4474); </p></dd>
+
+    <a href="../all.html#line4452" target="source" <dt>4452:</dt></a>
+    <dd><p>Arrange to copy the text segment into the disk swap area. Initialise the unused text entry, and get space in the disk swap area; </p></dd>
+
+    <a href="../all.html#line4459" target="source" <dt>4459:</dt></a>
+    <dd><p>Change the space occupied by the process to one large enough to contain the “per process data” area and the text segment; </p></dd>
+
+    <a href="../all.html#line4460" target="source" <dt>4460:</dt></a>
+    <dd><p>The call on “estabur” is necessary to set the user mode segmentation registers before reading the code file; </p></dd>
+
+    <a href="../all.html#line4461" target="source" <dt>4461:</dt></a>
+    <dd><p>A UNIX process can only initiate one input/output operation at a time. Hence it is possible to store i/o parameters at standard locations in the “u” structure, viz. “u.u_count”, “u.u_offset[ ]” and “u.u_base”; </p></dd>
+
+    <a href="../all.html#line4462" target="source" <dt>4462:</dt></a>
+    <dd><p>The octal value 020 (decimal 16) is an offset into the code file; </p></dd>
+
+    <a href="../all.html#line4463" target="source" <dt>4463:</dt></a>
+    <dd><p>Information is to be read into the area beginning at location zero in the user address space; </p></dd>
+
+    <a href="../all.html#line4464" target="source" <dt>4464:</dt></a>
+    <dd><p>Read the text segment part of the code file into the current data segment; </p></dd>
+
+    <a href="../all.html#line4467" target="source" <dt>4467:</dt></a>
+    <dd><p>“Swap out” the data segment (minus the “per process data”) into the disk swap area reserved for the text segment; </p></dd>
+
+    <a href="../all.html#line4473" target="source" <dt>4473:</dt></a>
+    <dd><p>“Shrink” the data segment – it is about to be swapped out; </p></dd>
+
+    <a href="../all.html#line4475" target="source" <dt>4475:</dt></a>
+    <dd><p>“sched” always “swaps in” the text segment before the data segment i.e. there is no mechanism for bringing the text segment into main memory once the data segment is present. If the text segment is not in main memory, get back into step by “swapping out” the data segment to disk. </p></dd>
+
+</dl><p>It will be noted that the code to handle text segments is very conservative whenever the situation starts to get complicated. For example, the “panic” (4451) when no more text entries are available would seem to be a rather extreme reaction. However the strategy of being generous with “text” array space is quite likely to be less expensive than the code needed to do “better”. What do you think? </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0177.html" title="xswap (4368)"><img alt="Previous: xswap (4368)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0174.html" title="Program Swapping"><img alt="Up: Program Swapping" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0179.html" title="xfree (4398)"><img alt="Next: xfree (4398)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

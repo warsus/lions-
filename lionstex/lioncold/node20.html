@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>General Registers</TITLE>
+<META NAME="description" CONTENT="General Registers">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node21.html">
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html931"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html927"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html921"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html929"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html932"
+  HREF="node21.html">Instruction Set</A>
+<B> Up:</B> <A NAME="tex2html928"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html922"
+  HREF="node19.html">Processor Status Word</A>
+ &nbsp; <B>  <A NAME="tex2html930"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00053000000000000000">
+General Registers</A>
+</H2>
+
+<P>
+The processor incorporates a number of
+sixteen bit registers of which eight
+are accessible at any time as ``general
+registers''. These are known as
+r0, r1, r2, r3, r4, r5, r6 and r7.
+
+<P>
+The first six of the general registers
+are available for use as accumulators,
+address pointers or index registers.
+The convention in UNIX for the use of
+these registers is as follows:
+
+<P>
+<DL>
+<DT><STRONG>r0, r1</STRONG></DT>
+<DD>are used as temporary accumulators
+during expression evaluation, to return results from a
+procedure, and in some cases to
+communicate actual parameters during a procedure call;
+
+<P>
+</DD>
+<DT><STRONG>r2, r3, r4</STRONG></DT>
+<DD>are used for local
+variables during procedure execution.
+Their values are almost
+always stored upon procedure
+entry, and restored upon procedure
+exit;
+
+<P>
+</DD>
+<DT><STRONG>r5</STRONG></DT>
+<DD>is used as the head pointer to
+a ``dynamic chain'' of procedure
+activation records stored in the
+current stack. It is referred to
+as the ``environment pointer''.
+</DD>
+</DL>
+
+<P>
+The last two of the ``general registers''
+do have a special significance and are
+to all intents, ``special purpose'':
+
+<P>
+<DL>
+<DT><STRONG>r6</STRONG></DT>
+<DD>(also known as ``sp'') is used as
+the stack pointer. The PDP11/40
+processor incorporates two
+separate registers which may be
+used as ``sp'', depending on whether
+the processor is in kernel or user
+mode. No other one of the general
+registers is duplicated in this
+way;
+
+<P>
+</DD>
+<DT><STRONG>r7</STRONG></DT>
+<DD>(also known as ``pc'') is used as
+the program  instruction address register.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html931"
+  HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html927"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html921"
+  HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html929"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html932"
+  HREF="node21.html">Instruction Set</A>
+<B> Up:</B> <A NAME="tex2html928"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html922"
+  HREF="node19.html">Processor Status Word</A>
+ &nbsp; <B>  <A NAME="tex2html930"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

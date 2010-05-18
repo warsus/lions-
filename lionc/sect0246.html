@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: access (6746)</title>
+
+<link href="sect0247.html" title="File Systems" rel="next" />
+<link href="sect0245.html" title="mknod (5952)" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0245.html" title="mknod (5952)"><img alt="Previous: mknod (5952)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Next: File Systems" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">access (6746)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000247">19.10 access (6746)</h2>
+<p>This procedure is called by “exec” (3041), “chdir” (3552), “core” (4109), “openl” (5815, 5817), “namei” (7563, 7664, 7658) to check access permission to a file. The second parameter, “mode”, is equal to one of “IEXEC”, “IWRITE” and “IREAD”, with octal values of 0100, 0200 and 0400 respectively. </p><dl class="description">
+
+    <a href="../all.html#line6753" target="source" <dt>6753:</dt></a>
+    <dd><p>“write” permission is denied if the file is on a file system volume which has been mounted as “read only” or if the file is functioning as the text segment for an executing program; </p></dd>
+
+    <a href="../all.html#line6763" target="source" <dt>6763:</dt></a>
+    <dd><p>the suer-user may not execute a file unless it is “executable” in at least one of the three “permission” groups. In any other situation he is always allowed access; </p></dd>
+
+    <a href="../all.html#line6769" target="source" <dt>6769:</dt></a>
+    <dd><p>If the user is not the owner of the file, shift “m” three places to the right so that group permissions will be operative ... If the groups don’t match, shift “m” again; </p></dd>
+
+    <a href="../all.html#line6774" target="source" <dt>6774:</dt></a>
+    <dd><p>Compare “m” and the access permissions. </p></dd>
+
+</dl><p>Note that there is an anomaly here in that if a file has a “mode” of 0077, the owner cannot reference it at all, but everyone else can. This situation could be changed satisfactorily by inserting a statement </p><pre>
+   m =|  (m |  (m &gt;&gt; 3)) &gt;&gt; 3;
+</pre><p>after line 6752, and replacing lines 6764, 6765 by </p><pre>
+   if (m &amp; IEXEC &amp;&amp; (m &amp; ip-&gt;i_mode) == 0)
+</pre></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0245.html" title="mknod (5952)"><img alt="Previous: mknod (5952)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Next: File Systems" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

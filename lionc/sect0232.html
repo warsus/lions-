@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: writei</title>
+
+<link href="sect0233.html" title="iomove (6364)" rel="next" />
+<link href="sect0231.html" title="readi (6221)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0231.html" title="readi (6221)"><img alt="Previous: readi (6221)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0233.html" title="iomove (6364)"><img alt="Next: iomove (6364)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">writei</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000233">18.19 writei</h2>
+<dl class="description">
+
+    <a href="../all.html#line6303" target="source" <dt>6303:</dt></a>
+    <dd><p>If less than a full block is being written the previous contents of the buffer must be read so that the appropriate part can be preserved, otherwise just get any available buffer; </p></dd>
+
+    <a href="../all.html#line6311" target="source" <dt>6311:</dt></a>
+    <dd><p>There is no “write ahead” facility, but there is a “delayed write” for buffers whose final characters have not been changed; </p></dd>
+
+    <a href="../all.html#line6312" target="source" <dt>6312:</dt></a>
+    <dd><p>If the file offset now points beyond the recorded end of file character, the file has obviously grown bigger! </p></dd>
+
+    <a href="../all.html#line6318" target="source" <dt>6318:</dt></a>
+    <dd><p>Why is it necessary/desirable to set the “IUPD” flag again? (See line 6285.) </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0231.html" title="readi (6221)"><img alt="Previous: readi (6221)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0233.html" title="iomove (6364)"><img alt="Next: iomove (6364)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

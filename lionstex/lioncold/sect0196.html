@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: rkintr (5451)</title>
+
+<link href="sect0197.html" title="iodone (5018)" rel="next" />
+<link href="sect0195.html" title="devstart (5096)" rel="prev" />
+<link href="sect0191.html" title="The RK Disk Driver" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0195.html" title="devstart (5096)"><img alt="Previous: devstart (5096)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0191.html" title="The RK Disk Driver"><img alt="Up: The RK Disk Driver" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0197.html" title="iodone (5018)"><img alt="Next: iodone (5018)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0191.html">The RK Disk Driver</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">rkintr (5451)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000197">16.5 rkintr (5451)</h2>
+<p>This procedure is invoked to handle the interrupts which occur when RK disk operations are completed. </p><dl class="description">
+
+    <dt>5455:</dt>
+    <dd><p>Check for a false alarm! </p></dd>
+
+    <dt>5459:</dt>
+    <dd><p>Inspect the error bit; if set ... </p></dd>
+
+    <dt>5460:</dt>
+    <dd><p>Call “deverror” (2447) to display a message on the system console terminal; </p></dd>
+
+    <dt>5461:</dt>
+    <dd><p>Clear the internal registers of the disk controller and ... </p></dd>
+
+    <dt>5462:</dt>
+    <dd><p>Wait till this is completed (usually a few microseconds); </p></dd>
+
+    <dt>5463:</dt>
+    <dd><p>If the operation has been retried less than ten times, call “rkstart” to try again. Otherwise give up and report an error; </p></dd>
+
+    <dt>5469:</dt>
+    <dd><p>Set the “retry” (!) count back to zero, remove the current operation from the “actf” list, and complete the operation by calling “iodone”; </p></dd>
+
+    <dt>5472:</dt>
+    <dd><p>“rkstart” is called unconditionally here. If the call is not necessary (because the “actf” list is empty) “rkstart” will return immediately (5444). </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0195.html" title="devstart (5096)"><img alt="Previous: devstart (5096)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0191.html" title="The RK Disk Driver"><img alt="Up: The RK Disk Driver" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0197.html" title="iodone (5018)"><img alt="Next: iodone (5018)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

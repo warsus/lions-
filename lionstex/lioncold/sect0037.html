@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 8</title>
+
+<link href="sect0038.html" title="Example 9" rel="next" />
+<link href="sect0036.html" title="Example 7" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0036.html" title="Example 7"><img alt="Previous: Example 7" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0038.html" title="Example 9"><img alt="Next: Example 9" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 8</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000038">3.9 Example 8</h2>
+<p>“C” provides a conditional expression. Thus if “a” and “b” are integer variables, </p><pre>
+    (a &gt; b ? a : b)
+</pre><p>is an expression whose value is that of the larger of “a” and “b”. </p><p>However this does not work if “a” and “b” are to be regarded as unsigned integers. Hence there is a use for the procedure </p><pre>
+  6326 max (a, b)
+       char *a, *b;
+       {
+         if (a &gt; b)
+           return(a);
+         return(b);
+       }
+</pre><p>The trick here is that “a” and “b”, having been declared as pointers to characters are treated for comparison purposes as unsigned integers. </p><p>The body of the procedure could have been written as </p><pre>
+    max (a, b)
+    char *a, *b;
+    {
+      if (a &gt; b)
+        return(a);
+      else
+        return(b);
+    }
+</pre><p>but the nature of “return” is such that the “else” is not needed here! </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0036.html" title="Example 7"><img alt="Previous: Example 7" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0038.html" title="Example 9"><img alt="Next: Example 9" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

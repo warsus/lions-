@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Reading and Writing</title>
+
+<link href="sect0230.html" title="rdwr (5731)" rel="next" />
+<link href="sect0228.html" title="Deletion of Files" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0228.html" title="Deletion of Files"><img alt="Previous: Deletion of Files" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0230.html" title="rdwr (5731)"><img alt="Next: rdwr (5731)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Reading and Writing</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000230">18.16 Reading and Writing</h2>
+<p>It is of interest to work through an abbreviated summary of the code which is invoked when a user process performs a “read” system call before examining the code in detail. </p><pre>
+   .... read (f, b, n); /*user program/
+
+                 {trap occurs}
+   2693 trap
+
+                 {system call #3}
+   5711 read ();
+   5713   rdwr (PREAD);
+</pre><p>Execution of the system call by the user process results in the activation of “trap” running in kernel mode. “trap” recognises system call #3, and calls (via “trapl”) the routine “read”, which calls “rdwr”. </p><pre>
+  5731 rdwr
+
+  5736 fp = getf (u.u_ar0[R0];
+  5743 u.u_base = u.u_arg[0];
+  5744 u.u_count = u.u_arg[1];
+  5745 u.u_segflg = 0;
+  5751 u.u_offset[1] = f2-&gt;f offset[1];
+  5752 u.u_offset[0] = fp-&gt;f offset[0];
+  5754 readi(fp-&gt;f inode);
+  5756 dpadd(fp-&gt;f offset,
+              u.u_arg[1]-u.u_count);
+</pre><p>“rdwr” includes much code which is common to both “read” and “write” operations. It converts, via “getf” (6619), the file identification supplied by the user process into the address of an entry in the “file” array. </p><p>Note that the first parameter of the system call is passed in a different way from the remaining two parameters. </p><p>“u.u_segflg” is set to zero to indicate that the operation destination is in the user address space. After “readi” is called with a parameter which is an “inode” pointer, the final accounting is performed by adding the number of characters requested for transfer less the residual number not transferred (left in “u.u_count”) to the file offset. </p><pre>
+  6221 readi
+
+  6239 lbn = lshift (u.u_offset, -9);
+  6240 on = u.u_offset[1] &amp; 0777;
+  6241 n = min (512 - on, u.u_count);
+  6248 bn = bmap(ip, lbn);
+  6250 dn = ip-&gt;i_dev;
+  6258 bp = bread (dn, bn);
+  6260 iomove (bp, on, n, B READ);
+  6261 brelse (bp);
+
+</pre><p>“readi” converts the file offset into two parts: a logical block number, “lbn”, and an index into the block, “on”. The number of characters to be transferred is the minimum of “u.u_count” and the number of characters left in the block (in which case additional block(s) must be read (not shown)) (and the number of characters remaining in the file (this case is not shown)). </p><p>“dn” is the device number which is stored within the “inode”. “bn” is the actual block number on the device (disk), which is computed by “bmap” (6415) using “lbn”. </p><p>The call on “bread” finds the required block, copying it into core from disk if necessary. “iomove” (6364) transfers the appropriate characters to their destination, and performs accounting chores. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0228.html" title="Deletion of Files"><img alt="Previous: Deletion of Files" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0230.html" title="rdwr (5731)"><img alt="Next: rdwr (5731)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

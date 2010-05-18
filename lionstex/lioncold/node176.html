@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ptrace (4164)</TITLE>
+<META NAME="description" CONTENT="ptrace (4164)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node177.html">
+<LINK REL="previous" HREF="node175.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node177.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2914"
+  HREF="node177.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2910"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2904"
+  HREF="node175.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2912"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2915"
+  HREF="node177.html">procxmt (4204)</A>
+<B> Up:</B> <A NAME="tex2html2911"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2905"
+  HREF="node175.html">wait (3270) (continued)</A>
+ &nbsp; <B>  <A NAME="tex2html2913"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001824000000000000000">
+ptrace (4164)</A>
+</H2>
+
+<P>
+This procedure implements the ``ptrace''
+system call, #26.
+
+<P>
+<DL>
+<DT><STRONG>4168:</STRONG></DT>
+<DD>``u.u_arg[2]'' corresponds to the
+ first parameter in the ``C'' program calling sequence. If this is
+ zero, a child process is asking
+ to be traced by its parent, so
+ set the ``STRC'' flag and return.
+</DD>
+</DL>
+
+<P>
+Note that this code handles the only
+explicit action the child process is
+asked to take with respect to tracing.
+There is no real reason why even this
+action should be taken by the child
+process and not by the parent process.
+From a security point of view it is
+most probably desirable that a child
+process should only be traceable if it
+gives its permission. On the other
+hand, if the child asks to be traced
+and is then ignored by the parent, the
+child process may be blocked indefinitely. Perhaps the best solution would
+be for the ``STRC'' flag to be set only
+after explicit action by <B>both</B> the
+parent <B>and</B> the child.
+
+<P>
+<DL>
+<DT><STRONG>4172:</STRONG></DT>
+<DD>Search the ``proc'' table looking
+for a process which: is stopped;
+matches the given process identifying number;
+is a child of the current process;
+
+<P>
+</DD>
+<DT><STRONG>4181:</STRONG></DT>
+<DD>Wait for the ``ipc'' structure to
+ become available if it is currently in use;
+
+<P>
+</DD>
+<DT><STRONG>4183:</STRONG></DT>
+<DD>Copy the parameters into ``ipc'' ...
+
+<P>
+</DD>
+<DT><STRONG>4187:</STRONG></DT>
+<DD>reset the ``SWTED'' flag, and ...
+
+<P>
+</DD>
+<DT><STRONG>4188:</STRONG></DT>
+<DD>return the child to a ``ready to
+run'' state;
+
+<P>
+</DD>
+<DT><STRONG>4189:</STRONG></DT>
+<DD>Sleep until ``ipc.ip_req'' is nonpositive (4212);
+
+<P>
+</DD>
+<DT><STRONG>4191:</STRONG></DT>
+<DD>Extract a value that is to be
+ returned to the parent process,
+ check for errors, unlock ``ipc''
+ and ``wake up'' any processes waiting for  ``ipc''.
+</DD>
+</DL>
+
+<P>
+Note that the ``sleeps'' on lines 4182,
+4190 are for essentially different reasons, and could be differentiated to
+good effect by replacing ``&amp;ipc'' by
+``&amp;ipc.ip_req'' on lines 4190 and 4213.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2914"
+  HREF="node177.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2910"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2904"
+  HREF="node175.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2912"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2915"
+  HREF="node177.html">procxmt (4204)</A>
+<B> Up:</B> <A NAME="tex2html2911"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2905"
+  HREF="node175.html">wait (3270) (continued)</A>
+ &nbsp; <B>  <A NAME="tex2html2913"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

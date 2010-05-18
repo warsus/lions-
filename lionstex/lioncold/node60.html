@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Section Three</TITLE>
+<META NAME="description" CONTENT="Section Three">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node61.html">
+<LINK REL="previous" HREF="node59.html">
+<LINK REL="up" HREF="node51.html">
+<LINK REL="next" HREF="node61.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1436"
+  HREF="node61.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1432"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1426"
+  HREF="node59.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1434"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1437"
+  HREF="node61.html">Section Four</A>
+<B> Up:</B> <A NAME="tex2html1433"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1427"
+  HREF="node59.html">Section Two</A>
+ &nbsp; <B>  <A NAME="tex2html1435"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00079000000000000000">
+Section Three</A>
+</H2>
+
+<P>
+Section Three is concerned with basic
+input/output operations between the
+main memory and disk storage.
+
+<P>
+These operations are fundamental to the
+activities of program swapping and the
+creation and referencing of disk files.
+
+<P>
+This section also introduces procedures
+for the use and manipulation of the
+large (512 byte) buffers.
+
+<P>
+<DL>
+<DT><STRONG>text.h</STRONG></DT>
+<DD>[Sheet 43; Chapter 14]
+defines the ``text'' structure and
+array. One ``text'' structure is used
+to define the status of a shared
+text segment.
+
+<P>
+</DD>
+<DT><STRONG>text.c</STRONG></DT>
+<DD>[Sheets 43, 44; Chapter 14]
+contains the procedures which manage
+the shared text segments.
+
+<P>
+</DD>
+<DT><STRONG>buf.h</STRONG></DT>
+<DD>[Sheet 45; Chapter 15] defines
+the ``buf'' structure and array, the
+structure ``devtab'' and names for
+the values of ``b_error'' All these
+are needed for the management of the
+large (512 byte) buffers.
+
+<P>
+</DD>
+<DT><STRONG>conf.h</STRONG></DT>
+<DD>[Sheet 46; Chapter 15]
+defines the arrays of structures
+``bdevsw'' and ``cdevsw'' which specify
+the device oriented procedures
+needed to carry out logical file
+operations.
+
+<P>
+</DD>
+<DT><STRONG>conf.c</STRONG></DT>
+<DD>[Sheet 46; Chapter 15] is
+generated, like ``low.s'' by the
+``mkconf'' utility to suit the set of
+peripheral devices present at a particular 
+installation. It contains
+the initialisation for the arrays
+``bdevsw'' and ``cdevsw'' which control
+the basic i/o operations.
+
+<P>
+</DD>
+<DT><STRONG>bio.c</STRONG></DT>
+<DD>[Sheets 47..53; Chapters 15,
+16, 17] is the largest file after
+``m40.s'' It contains the procedures
+for manipulation of the large
+buffers, and for basic block
+oriented i/o.
+
+<P>
+</DD>
+<DT><STRONG>rk.c</STRONG></DT>
+<DD>[Sheets 53, 54; Chapter 16] is
+the device driver for the RK11/K05
+disk controller.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1436"
+  HREF="node61.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1432"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1426"
+  HREF="node59.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1434"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1437"
+  HREF="node61.html">Section Four</A>
+<B> Up:</B> <A NAME="tex2html1433"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1427"
+  HREF="node59.html">Section Two</A>
+ &nbsp; <B>  <A NAME="tex2html1435"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Some Comments</TITLE>
+<META NAME="description" CONTENT="Some Comments">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node245.html">
+<LINK REL="previous" HREF="node243.html">
+<LINK REL="up" HREF="node240.html">
+<LINK REL="next" HREF="node245.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3785"
+  HREF="node245.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3781"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3775"
+  HREF="node243.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3783"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3786"
+  HREF="node245.html">link (5909)</A>
+<B> Up:</B> <A NAME="tex2html3782"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3776"
+  HREF="node243.html">namei (7518)</A>
+ &nbsp; <B>  <A NAME="tex2html3784"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000244000000000000000">
+Some Comments</A>
+</H2>
+
+<P>
+``namei'' is a key procedure which  would
+seem  to  have been written very early,
+to have been  thoroughly  debugged  and
+then  to  have  been  left  essentially
+unchanged.   The   interface    between
+``namei''  and  the rest of the system is
+rather complex,  and  for  that  reason
+alone,  it  would not win the prize for
+``Procedure of the Year''.
+
+<P>
+``namei'' is  called  thirteen  times  by
+twelve different procedures:
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>line</B></TD>
+<TD ALIGN="LEFT"><B>routine</B></TD>
+<TD ALIGN="LEFT" COLSPAN=2><B>parameters</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">3034</TD>
+<TD ALIGN="LEFT">exec</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">3543</TD>
+<TD ALIGN="LEFT">chdir</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5770</TD>
+<TD ALIGN="LEFT">open</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5914</TD>
+<TD ALIGN="LEFT">link</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">6033</TD>
+<TD ALIGN="LEFT">stat</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">6097</TD>
+<TD ALIGN="LEFT">smount</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">6186</TD>
+<TD ALIGN="LEFT">getmdev</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">6976</TD>
+<TD ALIGN="LEFT">owner</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">0</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5786</TD>
+<TD ALIGN="LEFT">creat</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">1</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5928</TD>
+<TD ALIGN="LEFT">link</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">1</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5958</TD>
+<TD ALIGN="LEFT">mknod</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">1</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">3515</TD>
+<TD ALIGN="LEFT">unlink</TD>
+<TD ALIGN="LEFT">uchar</TD>
+<TD ALIGN="LEFT">2</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">4101</TD>
+<TD ALIGN="LEFT">core</TD>
+<TD ALIGN="LEFT">schar</TD>
+<TD ALIGN="LEFT">1</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<P><P>
+<BR>
+
+<P>
+It will be seen that:
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>there are two calls from ``link'';
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>the calls can  be  divided  into
+four  categories,  of  which the
+first is by far the largest;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>the  last  two  categories  have
+only one representative each;
+
+<P>
+</DD>
+<DT><STRONG>(d)</STRONG></DT>
+<DD>in particular, there is only one
+call   involving   the   routine
+``schar'', which is always  for  a
+file  called  ``core''.  (If  this
+case were handled as  a  special
+case   e.g.   where  the  second
+parameter  had  the  value  ``3'',
+then  the  ``uchar''s  and ``schar''
+could be eliminated.)
+</DD>
+</DL>
+
+<P>
+``namei'' may terminate in a  variety  of
+ways:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>if there has been an error, then
+     a  ``NULL''  value is returned and
+     the variable ``u.u_error'' is set.
+
+<P>
+(Most errors result in a  branch
+to  the  label  ``out''  (7669) so
+that reference  counts  for  the
+inodes are properly maintained
+(7670). This is not necessary if
+the  failure  occurs  in  ``iget''
+(7664).);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>if ``flag==2'' (i.e. the  call  is
+     from    ``unlink''),   the   value
+     returned   (in    normal    circumstances)    is   an   ``inode''
+     pointer for the parent directory
+     of the named file (7660);
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>if ``flag==1'' (i.e. the  call  is
+     from   ``creat''   or   ``link''  or
+     ``mknod'', and a  file  is  to  be
+     created  if  it does not already
+     exist) and  if  the  named  file
+     does  not  exist,  then a ``NULL''
+     value  is  returned  (7610).  In
+     this   case  a  pointer  to  the
+     ``inode'' for the directory  which
+     will  point  to the new file, is
+     left in ``u.u_pdir'' (7606). (Note
+     also    that   in   this   case,
+     ``u.u_offset''  is  left  pointing
+     either  at  an  empty  directory
+     entry  or  at  the  end  of  the
+     directory file.);
+
+<P>
+</DD>
+<DT><STRONG>(d)</STRONG></DT>
+<DD>if  in the remaining cases,  the
+file  exists, an ``inode'' pointer
+for the file is returned (7551).
+The  ``inode''  is  locked and the
+reference count has been  incremented.   A  call  to  ``iput'' is
+needed subsequently to undo both
+these side effects.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3785"
+  HREF="node245.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3781"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3775"
+  HREF="node243.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3783"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3786"
+  HREF="node245.html">link (5909)</A>
+<B> Up:</B> <A NAME="tex2html3782"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3776"
+  HREF="node243.html">namei (7518)</A>
+ &nbsp; <B>  <A NAME="tex2html3784"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

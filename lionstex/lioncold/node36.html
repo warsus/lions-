@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 3</TITLE>
+<META NAME="description" CONTENT="Example 3">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node37.html">
+<LINK REL="previous" HREF="node35.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node37.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1139"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1135"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1129"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1137"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1140"
+  HREF="node37.html">Example 4</A>
+<B> Up:</B> <A NAME="tex2html1136"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1130"
+  HREF="node35.html">Example 2</A>
+ &nbsp; <B>  <A NAME="tex2html1138"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00064000000000000000">
+Example 3</A>
+</H2>
+
+<P>
+<PRE>
+  6585 bcopy (from, to, count)
+       int *from, *to;
+       {
+        register *a, *b, c;
+        a = from;
+        b = to;
+        c = count;
+        do
+          *b++ = *a++;
+        while (--cc);
+       }
+</PRE>
+
+<P>
+The function of this procedure is very
+simple: it copies a specified number of
+words from one set of consecutive
+locations to another set.
+
+<P>
+There are three parameters. The second
+line
+
+<P>
+<PRE>
+   int *from, *to;
+</PRE>
+
+<P>
+specifies that the first two variables
+are pointers to integers. Since no
+specification is supplied for the third
+parameter, it is assumed to be an
+integer by default.
+
+<P>
+The three local variables, a, b, and c,
+have been assigned to registers,
+because registers are more accessible
+and the object code to reference them
+is shorter. ``a'' and ``b'' are pointers to
+integers and ``c'' is an integer. The
+register declaration could have been
+written more pedantically as
+
+<P>
+<PRE>
+   register int *a, *b, c;
+</PRE>
+
+<P>
+to emphasise the connection with
+integers.
+
+<P>
+The three lines beginning with ``do''
+should be studied carefully. If ``b'' is
+a ``pointer to integer'' type, then
+
+<P>
+<PRE>
+    *b
+</PRE>
+
+<P>
+denotes the integer pointed to. Thus to
+copy the value pointed to by ``a'' to the
+location designated by ``b'', we could
+write
+
+<P>
+<PRE>
+    *b = *a;
+</PRE>
+
+<P>
+If we wrote instead
+
+<P>
+<PRE>
+    b = a;
+</PRE>
+
+<P>
+this would make the value of ``b'' the
+same as the value of ``a'', i.e. ``b'' and
+``a'' would point to the same place.
+Here at least, that is not what is
+required.
+
+<P>
+Having copied the first word from
+source to destination, we need to
+increase the values of ``b'' and ``a'' so
+that the point to the next words of
+their respective sets. This can be done
+by writing
+
+<P>
+<PRE>
+    b = b+1; a = a+1;
+</PRE>
+
+<P>
+but ``C'' provides a shorter notation
+(which is more useful when the variable
+names are longer) viz.
+
+<P>
+<PRE>
+    b++; a++;
+</PRE>
+
+<P>
+Now there is no difference between the
+statements ``b++;'' and ``++b;'' here.
+
+<P>
+However ``b++'' and ``++b'' may be used as
+terms in an expression, in which case
+they are different. In both cases the
+effect of incrementing ``b'' is retained,
+but the value which enters the expression is
+the initial value for ``b++'' and
+the final value for ``++b''.
+
+<P>
+The ``<IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$--$">'' operator obeys the same rules
+as the ``++'' operator, except that it
+decrements by one. Thus ``<IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$--$">c'' enters an
+expression as the value after decrementation.
+
+<P>
+The ``++'' and ``<IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$--$">'' operators are very
+useful, and are used throughout UNIX.
+Occasionally you will have to go back
+to first principles to work out exactly
+what their use implies. Note also
+there is a difference between <TT>*b++</TT> and <TT>(*b)++</TT>.
+
+<P>
+These operators are applicable to
+pointers to structures as well as to
+simple data types. When a pointer
+which has been declared with reference
+to a particular type of structure is
+incremented, the actual value of the
+pointer is incremented by the size of
+the structure.
+
+<P>
+We can now see the meaning of the line
+
+<P>
+<PRE>
+    *b++ = *a++;
+</PRE>
+
+<P>
+The word is copied and the pointers are
+incremented, all in one hit.
+
+<P>
+The line
+
+<P>
+<PRE>
+    while (--c);
+</PRE>
+
+<P>
+delimits the end of the set of statements
+which began after the ``do''. The
+expression in parentheses ``<IMG
+ WIDTH="29" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$--$">c'', is
+evaluated and tested (the value tested
+is the value after decrementation). If
+the value is non-zero, the loop is
+repeated, else it is terminated.
+
+<P>
+Obviously if the initial value for
+``count'' were negative, the loop would
+not terminate properly. If this were a
+serious possibility then the routine
+would have to be modified.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1139"
+  HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1135"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1129"
+  HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1137"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1140"
+  HREF="node37.html">Example 4</A>
+<B> Up:</B> <A NAME="tex2html1136"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1130"
+  HREF="node35.html">Example 2</A>
+ &nbsp; <B>  <A NAME="tex2html1138"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

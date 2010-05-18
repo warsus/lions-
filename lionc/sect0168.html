@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: wait (3270)</title>
+
+<link href="sect0169.html" title="Tracing" rel="next" />
+<link href="sect0167.html" title="rexit (3205)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0167.html" title="rexit (3205)"><img alt="Previous: rexit (3205)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0169.html" title="Tracing"><img alt="Next: Tracing" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">wait (3270)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000169">13.20 wait (3270)</h2>
+<p>For every call on “exit”, there should be a matching call on “wait” by an anxious parent or ancestor. The principal function of the latter procedure, which implements the “wait” system call, is for the parent or ancestor to find and dispose of a “zombie” child. </p><p>“wait” also has a secondary function, to look for children which have “stopped” for tracing (which is the next major topic). </p><dl class="description">
+
+    <a href="../all.html#line3277" target="source" <dt>3277:</dt></a>
+    <dd><p>Search the whole “proc” array looking for child processes. (If none exist, take an error exit (line 3317)); </p></dd>
+
+    <a href="../all.html#line3280" target="source" <dt>3280:</dt></a>
+    <dd><p>If the child is a “zombie”: </p><ul class="itemize">
+<li><p>save the child’s process identifying number, to report back to the parent; </p></li><li><p>read the 256 word record back from the disk swap area, and release the swap space; </p></li><li><p>reinitialise the “proc” array entry; </p></li><li><p>accumulate the various accounting entries; </p><p>save the “u_arg[0]” value also to report back to the parent; </p></li>
+</ul></dd>
+
+    <a href="../all.html#line3300" target="source" <dt>3300:</dt></a>
+    <dd><p>Is the child in a “stopped” state? (If so, wait for the discussion on tracing); </p></dd>
+
+    <a href="../all.html#line3313" target="source" <dt>3313:</dt></a>
+    <dd><p>If one or more children were found but none were “zombies” or “stopped”, “sleep” and then look again. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0167.html" title="rexit (3205)"><img alt="Previous: rexit (3205)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0169.html" title="Tracing"><img alt="Next: Tracing" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

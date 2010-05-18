@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Notes</TITLE>
+<META NAME="description" CONTENT="Notes">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node322.html">
+<LINK REL="previous" HREF="node320.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node322.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4771"
+  HREF="node322.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4767"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4761"
+  HREF="node320.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4769"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4772"
+  HREF="node322.html">ttyinput (8333)</A>
+<B> Up:</B> <A NAME="tex2html4768"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4762"
+  HREF="node320.html">canon (8274)</A>
+ &nbsp; <B>  <A NAME="tex2html4770"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000306000000000000000">
+Notes</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>(A)</STRONG></DT>
+<DD>The reason why ``bp'' starts (8291)
+at the third character of ``canonb'' can
+be found on line 8310.
+
+<P>
+</DD>
+<DT><STRONG>(B)</STRONG></DT>
+<DD>A number of subtleties in
+the handling of backslashes (which the reader
+will no doubt have encountered in his
+practical use of UNIX) are still not
+immediately      apparent.        Since
+``maptab[c]'' is zero for ``c == `<code>\</code>' ''
+(octal value of 134), all backslashes
+get copied into ``canonb''. A single
+backslash will be subsequently overwritten if the following character is
+to be asserted (as in the case of `#'
+or `@' or eot (004), or if the case of
+an alphabetic character is to be
+changed for an upper case only terminal.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: openl (5804)</title>
+
+<link href="sect0223.html" title="open (5763)" rel="next" />
+<link href="sect0221.html" title="creat (5781)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0221.html" title="creat (5781)"><img alt="Previous: creat (5781)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0223.html" title="open (5763)"><img alt="Next: open (5763)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">openl (5804)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000223">18.9 openl (5804)</h2>
+<p>This procedure is called by “open” (5774) and “creat” (5793, 5795), passing values of the third parameter, “trf”, of 0, 2 and 1 respectively. The value 2 represents the case where no file of the desired name already exists. </p><dl class="description">
+
+    <a href="../all.html#line5812" target="source" <dt>5812:</dt></a>
+    <dd><p>The second parameter, “mode”, can take the values 01 (“FREAD”), 02 (“FWRITE”) or 03 (“FREAD <tt>|</tt> FWRITE”) when “trf” is 0, but only 02 otherwise; </p><p>Whete a file of the desired name already exists, check the access permissions for the desired mode(s) of activity via calls on “access” (6746), which may set “u.u_error” as a side-effect; </p></dd>
+
+    <a href="../all.html#line5824" target="source" <dt>5824:</dt></a>
+    <dd><p>If the file is being “created”, eliminate its previous contents via a call on “itrunc” (7414). The code here could be improved by changing the test to “(trf == 1)”. Verify that this would be so. </p></dd>
+
+    <a href="../all.html#line5826" target="source" <dt>5826:</dt></a>
+    <dd><p>“prele” (7882) is used to “unlock” “inodes”. Where, you may ask, did the “inode” get “locked”, and why? </p></dd>
+
+    <a href="../all.html#line5827" target="source" <dt>5827:</dt></a>
+    <dd><p>Note that “falloc” (6847) calls “ufalloc” (6824) as the first thing it does; </p></dd>
+
+    <a href="../all.html#line5831" target="source" <dt>5831:</dt></a>
+    <dd><p>“ufalloc” leaves the user file identifying number “u.u_ar0[R0]”. Why does this statement occur where it does, instead of after line 5834? </p></dd>
+
+    <a href="../all.html#line5832" target="source" <dt>5832:</dt></a>
+    <dd><p>“openi” (6702) is called to call handlers for special files, in cae any device specific actions are required (for disk files there is no action); </p></dd>
+
+    <a href="../all.html#line5839" target="source" <dt>5839:</dt></a>
+    <dd><p>In the case of an error while making the “file” array entry, the “inode” entry is released by a call on “iput”. </p></dd>
+
+</dl><p>It will be seen that responsibility is quite widely distributed. The “file” table entry is initialised by “falloc” and “openl”; the “inode” table entry, by “iget”, “ialloc” and “maknode”. </p><p>Note that “ialloc” clears out the “i_addr” array of a newly allocated “inode” and “itrunc” does the same for a pre-existing “inode”, so that after the “creat” system call, there are no disk blocks associated with the file, now classed as “small”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0221.html" title="creat (5781)"><img alt="Previous: creat (5781)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0223.html" title="open (5763)"><img alt="Next: open (5763)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

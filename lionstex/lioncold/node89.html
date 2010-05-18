@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Process</TITLE>
+<META NAME="description" CONTENT="The Process">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node90.html">
+<LINK REL="previous" HREF="node88.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node90.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1813"
+  HREF="node90.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1809"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1803"
+  HREF="node88.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1811"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1814"
+  HREF="node90.html">The proc Structure (0358)</A>
+<B> Up:</B> <A NAME="tex2html1810"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1804"
+  HREF="node88.html">Processes</A>
+ &nbsp; <B>  <A NAME="tex2html1812"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000111000000000000000">
+The Process</A>
+</H2>
+
+<P>
+Ritchie and Thompson in their paper
+define a ``process'' as the execution of
+an ``image'', where the ``image'' is the
+current state of a pseudo-computer,
+i.e. an abstract data structure, which
+may be represented in either main
+memory or on disk.
+
+<P>
+The process image involves two or three
+physically distinct areas of memory:
+
+<P>
+<DL>
+<DT><STRONG>(1)</STRONG></DT>
+<DD><B>the ``proc'' structure</B>, which is
+ contained within the core
+ resident ``proc'' array and is
+ accessible at all times;
+
+<P>
+</DD>
+<DT><STRONG>(2)</STRONG></DT>
+<DD><B>the data segment</B>, which consists of the ``per process data
+area'', combined with a segment
+containing the user program
+data, (possibly) program text,
+and stack;
+
+<P>
+</DD>
+<DT><STRONG>(3)</STRONG></DT>
+<DD><B>the text segment</B>, which is not
+always present, consists of a
+segment containing only pure
+program text i.e. re-entrant
+code and constant data.
+</DD>
+</DL>
+
+<P>
+Many programs do not have a separate
+text segment. Where one is defined, a
+single copy will be shared among all
+processes which are executions of the
+same particular program.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

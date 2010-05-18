@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>sbreak (3354)</TITLE>
+<META NAME="description" CONTENT="sbreak (3354)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node150.html">
+<LINK REL="previous" HREF="node148.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node150.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2567"
+  HREF="node150.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2563"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2557"
+  HREF="node148.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2565"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2568"
+  HREF="node150.html">The Files `sys2.c' and</A>
+<B> Up:</B> <A NAME="tex2html2564"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2558"
+  HREF="node148.html">fork (3322)</A>
+ &nbsp; <B>  <A NAME="tex2html2566"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000179000000000000000">
+sbreak (3354)</A>
+</H2>
+
+<P>
+This procedure implements system call
+#17 which is described in the Section
+``BREAK (II)'' of the UPM. The comment at
+the head of the procedure has confused
+more than one reader: clearly the identifier
+``break'' is used in ``C'' programs
+(leave an enclosing program loop) in an
+entirely different way from that
+intended here (change the size of the
+program data area).
+
+<P>
+``sbreak'' has clear similarities with
+the procedure ``grow'' (4136) but unlike
+the latter, it is only invoked explicitly and
+may in fact cause a contraction of the data area as well as an
+expansion (depending on the new desired
+size).
+
+<P>
+<DL>
+<DT><STRONG>3364:</STRONG></DT>
+<DD>Calculate the new size for the
+ data area (in 32 word blocks);
+
+<P>
+</DD>
+<DT><STRONG>3371:</STRONG></DT>
+<DD>Check that the new size is consistent with the memory
+segmentation constraints;
+
+<P>
+</DD>
+<DT><STRONG>3376:</STRONG></DT>
+<DD>The area is shrinking. Copy the
+ stack area down into the former
+ data area. Call ``expand'' to trim
+ off the excess;
+
+<P>
+</DD>
+<DT><STRONG>3386:</STRONG></DT>
+<DD>Call ``expand'' to increase the
+ total area. Copy the stack area
+ up into the new part, and clear
+the areas which were formerly
+occupied by the stack.
+</DD>
+</DL>
+
+<P>
+The following procedures which are also
+contained in ``sysl.c'' are described in
+Chapter 13:
+
+<P>
+<PRE>
+  rexit (3205)     wait (3270)
+  exit  (3219)
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2567"
+  HREF="node150.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2563"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2557"
+  HREF="node148.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2565"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2568"
+  HREF="node150.html">The Files `sys2.c' and</A>
+<B> Up:</B> <A NAME="tex2html2564"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2558"
+  HREF="node148.html">fork (3322)</A>
+ &nbsp; <B>  <A NAME="tex2html2566"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

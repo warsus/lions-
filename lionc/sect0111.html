@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: setrun (2134)</title>
+
+<link href="sect0112.html" title="expand (2268)" rel="next" />
+<link href="sect0110.html" title="wakeup (2113)" rel="prev" />
+<link href="sect0098.html" title="Process Management" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0110.html" title="wakeup (2113)"><img alt="Previous: wakeup (2113)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0112.html" title="expand (2268)"><img alt="Next: expand (2268)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0098.html">Process Management</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">setrun (2134)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000112">8.13 setrun (2134)</h2>
+<dl class="description">
+
+    <a href="../all.html#line2140" target="source" <dt>2140:</dt></a>
+    <dd><p>The process status is set to “SRUN”. The process will now be considered by “swtch” and “sched” as a candidate for execution again; </p></dd>
+
+    <a href="../all.html#line2141" target="source" <dt>2141:</dt></a>
+    <dd><p>If the aroused process is more important (lower priority!) than the current process, the rescheduling flag, “runrun” is set for later reference; </p></dd>
+
+    <a href="../all.html#line2143" target="source" <dt>2143:</dt></a>
+    <dd><p>If “sched” is sleeping, waiting for a process to “swap in”, and if the newly aroused process is on disk, wake up “sched”. </p></dd>
+
+</dl><p>Since it turns out that “sched” is the only procedure which calls sleep with “chan” equal to “&amp;runout”, line 2145 could be replaced by the recursive call </p><pre>
+   setrun(&amp;proc[0]);
+</pre><p>or better still, by just </p><pre>
+   rp = &amp;proc[0];
+   goto sr;
+</pre><p>where “sr” is a label to be inserted at the beginning of line 2139. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0110.html" title="wakeup (2113)"><img alt="Previous: wakeup (2113)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0112.html" title="expand (2268)"><img alt="Next: expand (2268)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

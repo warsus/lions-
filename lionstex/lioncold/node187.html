@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The File `conf.h'</TITLE>
+<META NAME="description" CONTENT="The File `conf.h'">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node188.html">
+<LINK REL="previous" HREF="node186.html">
+<LINK REL="up" HREF="node184.html">
+<LINK REL="next" HREF="node188.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3057"
+  HREF="node188.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3053"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3047"
+  HREF="node186.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3055"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3058"
+  HREF="node188.html">The File `conf.c'</A>
+<B> Up:</B> <A NAME="tex2html3054"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3048"
+  HREF="node186.html">devtab (4551)</A>
+ &nbsp; <B>  <A NAME="tex2html3056"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000203000000000000000">
+The File `conf.h'</A>
+</H2>
+
+<P>
+The file ``conf.h'' declares:
+
+<P>
+
+<UL>
+<LI>yet another way to dissect an
+integer into two parts (``d_minor''
+and ``d_major''). Note that
+``d_major'' corresponds to ``hibyte'' (0180);
+
+<P>
+</LI>
+<LI>two arrays of structures;
+
+<P>
+</LI>
+<LI>two integer variables, ``nlkdev''
+and ``nchrdev''.
+</LI>
+</UL>
+
+<P>
+The two arrays of structures, ``bdevsw''
+and ``cdevsw'', are declared but not
+dimensioned or initialised in ``conf.h''.
+The initialisation of these arrays is
+performed in the file ``conf.c''.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

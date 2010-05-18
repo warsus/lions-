@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Traps</title>
+
+<link href="sect0124.html" title="Assembly Language ‘trap’" rel="next" />
+<link href="sect0122.html" title="Rules for Interrupt Handlers" rel="prev" />
+<link href="sect0116.html" title="Hardware Interrupts and Traps" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0122.html" title="Rules for Interrupt Handlers"><img alt="Previous: Rules for Interrupt Handlers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0124.html" title="Assembly Language ‘trap’"><img alt="Next: Assembly Language ‘trap’" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0116.html">Hardware Interrupts and Traps</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Traps</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000124">9.7 Traps</h2>
+<p>“Traps” are like “interrupts” in that they are events which are handled by the same hardware mechanism, and hence by similar software mechanisms. </p><p>“Traps” are unlike “interrupts” in that they occur as the result of events internal to the CPU, rather than externally. (In other systems the terminology “internal interrupt” and “external interrupt” is used to draw this distinction more forcefully.) Traps may occur unexpectedly as the result of hardware or power failures, or predictably and reproducibly, e.g. as the result of executing an illegal instruction or a “trap” instruction. </p><p>“Traps” are always recognised by the CPU immediately. They cannot be delayed in the way low priority interrupts may be. If you like, “traps” have an “interrupt priority” of eight. </p><p>“Trap” instructions may be deliberately inserted in user mode programs to catch the attention of the operating system with a request to perform a specified service. This mechanism is used as part of the facility known as “system calls”. </p><p>Like interrupts, traps result in the reloading of the PC and PS from a vector location, and the saving of the old values of the PC and PS in the current stack. Table 9.2 lists the vector locations for the various “trap” types. </p><center><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> <b class="bf">vector</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">trap type</b> </p></td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">process</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><b class="bf">location</b> </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:center"><p> <b class="bf">priority</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>004 </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> bus timeout </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>010 </p></td>
+
+    
+    <td style="text-align:left"><p> illegal instruction </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>014 </p></td>
+
+    
+    <td style="text-align:left"><p> bpt-trace </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>020 </p></td>
+
+    
+    <td style="text-align:left"><p> iot </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>024 </p></td>
+
+    
+    <td style="text-align:left"><p> power failure </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>030 </p></td>
+
+    
+    <td style="text-align:left"><p> emulator trap instruction </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>034 </p></td>
+
+    
+    <td style="text-align:left"><p> trap instruction </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>114 </p></td>
+
+    
+    <td style="text-align:left"><p> 11/10 parity </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>240 </p></td>
+
+    
+    <td style="text-align:left"><p> programmed interrupt </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>244 </p></td>
+
+    
+    <td style="text-align:left"><p> floating point error </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>250 </p></td>
+
+    
+    <td style="text-align:left"><p> segmentation violation </p></td>
+
+    
+    <td style="text-align:center"><p> 7 </p></td>
+
+</tr>
+</table><p><b class="bf">Table 9.2 Trap Vector Locations and Priorities</b> </p></center><p>The contents of Tables 9.1 and 9.2 should be compared with the file “low.s” on Sheet 05. As noted earlier, this file is generated at each installation (along with the file “conf.c” (sheet 46)), as the product of the utility program “mkconf”, so as to reflect the actual set of peripherals installed. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0122.html" title="Rules for Interrupt Handlers"><img alt="Previous: Rules for Interrupt Handlers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0124.html" title="Assembly Language ‘trap’"><img alt="Next: Assembly Language ‘trap’" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

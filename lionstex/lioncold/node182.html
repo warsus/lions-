@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>xalloc (4433)</TITLE>
+<META NAME="description" CONTENT="xalloc (4433)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node183.html">
+<LINK REL="previous" HREF="node181.html">
+<LINK REL="up" HREF="node178.html">
+<LINK REL="next" HREF="node183.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2989"
+  HREF="node183.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2985"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2979"
+  HREF="node181.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2987"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2990"
+  HREF="node183.html">xfree (4398)</A>
+<B> Up:</B> <A NAME="tex2html2986"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2980"
+  HREF="node181.html">xswap (4368)</A>
+ &nbsp; <B>  <A NAME="tex2html2988"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000194000000000000000">
+xalloc (4433)</A>
+</H2>
+
+<P>
+``xalloc'' is called by ``exec'' (3130),
+when a new program is being initiated,
+to handle the allocation of, or linking
+to, the text segment. The argument,
+``ip'', is a pointer to the ``mode'' of the
+code file. At the time of this call,
+``u.u_arg[1]'' contains the text segment
+size in bytes.
+
+<P>
+<DL>
+<DT><STRONG>4439:</STRONG></DT>
+<DD>If there is no text segment,
+ return immediately;
+
+<P>
+</DD>
+<DT><STRONG>4441:</STRONG></DT>
+<DD>Look through the ``text'' array for
+ both an unused entry and an entry
+ for the text segment. If the
+ latter can be found, do the bookkeeping and go to ``out'' (4474);
+
+<P>
+</DD>
+<DT><STRONG>4452:</STRONG></DT>
+<DD>Arrange to copy the text segment
+ into the disk swap area. Initialise the unused text entry, and
+ get space in the disk swap area;
+
+<P>
+</DD>
+<DT><STRONG>4459:</STRONG></DT>
+<DD>Change the space occupied by the
+ process to one large enough to
+ contain the ``per process data''
+ area and the text segment;
+
+<P>
+</DD>
+<DT><STRONG>4460:</STRONG></DT>
+<DD>The call on ``estabur'' is necessary to set the user mode
+segmentation registers before reading the code file;
+
+<P>
+</DD>
+<DT><STRONG>4461:</STRONG></DT>
+<DD>A UNIX process can only initiate
+ one input/output operation at a
+ time. Hence it is possible to
+ store i/o parameters at standard
+ locations in the ``u'' structure,
+ viz. ``u.u_count'', ``u.u_offset[ ]'' and
+``u.u_base'';
+
+<P>
+</DD>
+<DT><STRONG>4462:</STRONG></DT>
+<DD>The octal value 020 (decimal 16)
+ is an offset into the code file;
+
+<P>
+</DD>
+<DT><STRONG>4463:</STRONG></DT>
+<DD>Information is to be read into
+the area beginning at location
+zero in the user address space;
+
+<P>
+</DD>
+<DT><STRONG>4464:</STRONG></DT>
+<DD>Read the text segment part of the
+code file into the current data
+segment;
+
+<P>
+</DD>
+<DT><STRONG>4467:</STRONG></DT>
+<DD>``Swap out'' the data segment
+(minus the ``per process data'')
+into the disk swap area reserved
+for the text segment;
+
+<P>
+</DD>
+<DT><STRONG>4473:</STRONG></DT>
+<DD>``Shrink'' the data segment - it is
+ about to be swapped out;
+
+<P>
+</DD>
+<DT><STRONG>4475:</STRONG></DT>
+<DD>``sched'' always ``swaps in'' the
+ text segment before the data segment i.e. there is no mechanism
+ for bringing the text segment
+ into main memory once the data
+ segment is present. If the text
+segment is not in main memory,
+get back into step by ``swapping
+out'' the data segment to disk.
+</DD>
+</DL>
+
+<P>
+It will be noted that the code to handle text segments is very conservative
+whenever the situation starts to get
+complicated. For example, the ``panic''
+(4451) when no more text entries are
+available would seem to be a rather
+extreme reaction. However the strategy
+of being generous with ``text'' array
+space is quite likely to be less expensive than the code needed to do
+``better''. What do you think?
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2989"
+  HREF="node183.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2985"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2979"
+  HREF="node181.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2987"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2990"
+  HREF="node183.html">xfree (4398)</A>
+<B> Up:</B> <A NAME="tex2html2986"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2980"
+  HREF="node181.html">xswap (4368)</A>
+ &nbsp; <B>  <A NAME="tex2html2988"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

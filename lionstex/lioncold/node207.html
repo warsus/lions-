@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>getblk (4921)</TITLE>
+<META NAME="description" CONTENT="getblk (4921)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node208.html">
+<LINK REL="previous" HREF="node206.html">
+<LINK REL="up" HREF="node202.html">
+<LINK REL="next" HREF="node208.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3313"
+  HREF="node208.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3309"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3303"
+  HREF="node206.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3311"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3314"
+  HREF="node208.html">brelse (4869)</A>
+<B> Up:</B> <A NAME="tex2html3310"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3304"
+  HREF="node206.html">incore (4899)</A>
+ &nbsp; <B>  <A NAME="tex2html3312"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000225000000000000000">
+getblk (4921)</A>
+</H2>
+
+<P>
+This routine performs the same search
+as ``incore'' but goes further in that if
+the initial search is unsuccessful, a
+buffer is allocated from the ``av''-list
+(available list).
+
+<P>
+By a call on ``notavail'' (4999), the
+buffer is removed from the ``av''-list
+and flagged as ``B_BUSY''.
+
+<P>
+``getblk'' is more suspicious of its
+parameters than ``incore''. It is called
+by
+
+<P>
+<PRE>
+  exec   (3040)        writei (6304)
+  exit   (3237)        iinit  (6928)
+  bread  (4758)        alloc  (6981)
+  breada (4781,4789)   free   (7016)
+  smount (6123)        update (7216)
+</PRE>
+
+<P>
+<DL>
+<DT><STRONG>4940:</STRONG></DT>
+<DD>At this point the required buffer
+ has been located by searching the
+ ``b''-list. Either it is ``B_BUSY''
+ in which case a ``sleep'' must be
+ taken (4943), or else it is
+ appropriated (4948);
+
+<P>
+</DD>
+<DT><STRONG>4953:</STRONG></DT>
+<DD>If the required buffer has not
+been located, and if the
+``av''-list is empty, set the
+``B_WANTED'' flag for the ``av''-list
+and go to ``sleep'' (4955);
+
+<P>
+</DD>
+<DT><STRONG>4960:</STRONG></DT>
+<DD>If the ``av''-list is not empty,
+ select the first member, and if
+ it represents a ``delayed write''
+ arrange to have it written out
+ asynchronously (4962);
+
+<P>
+</DD>
+<DT><STRONG>4966:</STRONG></DT>
+<DD>``B_RELOC'' is a relic! (See 4583);
+
+<P>
+</DD>
+<DT><STRONG>4967:</STRONG></DT>
+<DD>The code from here until 4973
+unconditionally removes the
+buffer from the ``b''-list for its
+current device type and reinserts
+it into the bn-list for the new
+device type. Since this will frequently be a ``no-op'' i.e. the new
+and old device type will be the
+same, it would seem desirable to
+insert a test
+
+<P>
+<PRE>
+ if (bp-&gt;b_dev == dev)
+</PRE>
+
+<P>
+before executing lines 4967 to
+4974.
+
+<P>
+Note the special handling for calls where
+<BR>``dev == NODEV'' (-1).
+(Such calls incidentally are made
+without a second parameter - tut!
+tut! See e.g. 3040.)
+</DD>
+</DL>
+
+<P>
+``bfreelist'' serves as the ``devtab''
+structure for the ``b''-list for ``NODEV''.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3313"
+  HREF="node208.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3309"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3303"
+  HREF="node206.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3311"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3314"
+  HREF="node208.html">brelse (4869)</A>
+<B> Up:</B> <A NAME="tex2html3310"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3304"
+  HREF="node206.html">incore (4899)</A>
+ &nbsp; <B>  <A NAME="tex2html3312"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

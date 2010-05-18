@@ -1,0 +1,144 @@
+%
+% The Lion's Commentary, file ch21.tex, version 1.3, 15 May 1994
+%
+\se{Pipes}
+
+A ``pipe''  is  a  FIFO  character  list,
+which is managed by UNIX as yet another
+variety of file.
+
+
+One group of processes may ``write'' into
+a  ``pipe''  and another group may ``read''
+from the same ``pipe''. Hence ``pipe''s may
+be,  and are used, primarily for interprocess communication.
+
+By  exploiting   the   concept   of   a
+``filter'',  which  is  a  program  which
+reads an input file and  transforms  it
+into  an  output  file,  and  by  using
+``pipes'' to link two or more programs of
+this  type  together,  UNIX  offers its
+users a surprisingly comprehensive  and
+sophisticated set of facilities.
+
+
+\sbs{pipe (7723)}
+
+A ``pipe'' is created as a result of a 
+system call on the ``pipe'' procedure.
+
+\bd
+\item[7728:] Allocate an ``inode'' for the  root device;
+
+\item[7731:] Allocate a ``file'' table entry;
+
+\item[7736:] Remember the ``file''  table  entry
+as  ``r''  and  allocate  a  second
+``file'' table entry;
+
+\item[7744:] Return user file  identifications
+      in R0 and R1;
+
+\item[7746:] Complete  the  entries   in   the
+      ``file''   array  and  the  ``inode''
+      entry.
+\ed
+
+
+\sbs{readp (7758)}
+
+``pipes'' are different from other  files
+in  that  two separate offsets into the
+file are kept -- one for  ``read''  operations 
+and  one for ``write'' operations.
+The ``write'' offset is actually the same
+as the file size.
+
+\bd
+\item[7763:] the parameter passed  to  ``readp''
+      is  a  pointer  to a ``file'' array
+      entry,  from  which  an   ``inode''
+      pointer can be extracted;
+
+\item[7768:] ``plock'' (7862) ensures that  only
+      one  operation  takes  place at a
+      time: either ``read'' or ``write'';
+
+\item[7776:] If a process wishing to write  to
+      a ``pipe'' has been blocked because
+      the pipe was  ``full''  (or  rather
+      because  the  valid  part  of the
+      file had reached the file limit),
+      it will have signified its predicament by  setting  the  ``IWRITE''
+      flag in ``ip-$>$i\_mode'';
+
+\item[7786:] Release the lock before going  to
+      sleep;
+
+\item[7787:] ``i\_count'' is the number  of  file
+      table  entries  pointing  at  the
+      ``inode''. If  this  is  less  than
+      two,  then the group of ``writers''
+      must be extinct;
+
+\item[7789:] A process waiting for input  will
+raise  the ``IREAD'' flag.  Since a
+pipe cannot  be  full  and  empty
+simultaneously,  no more than one
+of the flaqs ``IWRITE'' or  ``IREAD''
+should be set at any one time;
+
+\item[7799:] ``prele''  unlocks  the  file   and
+      ``wakes  up''  any  process waiting
+      for the pipe.
+\ed
+
+\sbs{writep (7805)}
+
+The structure of this procedure  echoes
+that of ``readp'' in many respects.
+
+\bd
+\item[7828:] Note that a ``writer'', which finds
+      that  there are no more ``readers''
+      left, receives a ``signal'' just in
+      case  he  is  not  monitoring the
+      result of his ``write'' operation.
+
+(A  ``reader''  in  the   analogous
+situation receives a zero character count as the  result  of  the
+read,  and  this  is the standard
+end-of-file indication.)
+
+\item[7835:] The ``pipe'' size is not allowed to
+      grow  beyond ``PIPSIZ'' characters.
+      As long as ``PIPSIZ'' (7715) is  no
+      greater  than 4096, the file will
+      not be  converted  to  a  ``large''
+      file.  This  is  highly desirable
+      from  the  viewpoint  of   access
+      efficiency.
+
+(Note that  ``PIPSIZ''  limits  the
+``write''  offset pointer value. If
+the ``read'' offset pointer is  not
+far  behind,  the true content of
+the ``pipe'' may be quite small).
+\ed
+
+
+
+\sbs{plock (7862)}
+
+Lock  the  ``inode''  after  waiting   if
+necessary.  This procedure is called by
+``readp'' (7768) and ``writep'' (7815).
+
+
+\sbs{prele (7882)}
+
+Unlock the ``inode'' and ``wake''
+any waiting processes. This procedure is called
+by several others (especially  ``iput''),
+in addition to ``readp'' and ``writep''.

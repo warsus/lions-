@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: ttstart</title>
+
+<link href="sect0321.html" title="ttrstrt (8486)" rel="next" />
+<link href="sect0319.html" title="Character Output – ttwrite (8550)" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0319.html" title="Character Output – ttwrite (8550)"><img alt="Previous: Character Output – ttwrite (8550)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0321.html" title="ttrstrt (8486)"><img alt="Next: ttrstrt (8486)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">ttstart</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000321">25.9 ttstart</h2>
+<p>This procedure is called whenever it seems reasonable to try and send the next character to the terminal. It often achieves nothing useful. </p><dl class="description">
+
+    <dt>8514:</dt>
+    <dd><p>See the comment on line 8499. This code is not relevant here; </p></dd>
+
+    <dt>8518:</dt>
+    <dd><p>If the controller is not ready (i.e. bit 7 of the transmitter stalus register is not set) or the necessary delay following the preious character has not yet elapsed, do nothing; </p></dd>
+
+    <dt>8520:</dt>
+    <dd><p>Remove a character from the output queue. If “c” is positive, the queue was not empty (as expected) ... </p></dd>
+
+    <dt>8521:</dt>
+    <dd><p>If “c” is less than “0177” it is a character to be transmitted ... </p></dd>
+
+    <dt>8522:</dt>
+    <dd><p>After setting the parity bit from the corresponding element of the array “partab”, write “c” to the transmitter data buffer register to initiate the hardware operation; </p></dd>
+
+    <dt>8524:</dt>
+    <dd><p>Otherwise (“c” <img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
+                                     width:&images/img-0005.png-width;&px;; 
+                                     height:&images/img-0005.png-height;&px;" class="math gen" /> 0177) the character was inserted in the output queue to signal a delay. Call “timeout” (3845) to make an entry in the “callout” list. The result of this will be to initiate an execution of “ttrstrt” (8486) after “c &amp; 0177” clock ticks . It will be seen that “ttrstrt” calls “ttstart” again, and that the manipulation of the “TIMEOUT” flag (8524, 8491) will ensure that if another execution of “ttstart” is initiated in the interim, on behalf of the same terminal, it will (8518) return without doing anything. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0319.html" title="Character Output – ttwrite (8550)"><img alt="Previous: Character Output – ttwrite (8550)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0321.html" title="ttrstrt (8486)"><img alt="Next: ttrstrt (8486)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

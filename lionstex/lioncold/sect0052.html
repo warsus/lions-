@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The First Group of ‘.h’ Files</title>
+
+<link href="sect0053.html" title="Assembly Language Files" rel="next" />
+<link href="sect0051.html" title="Section One" rel="prev" />
+<link href="sect0047.html" title="An Overview" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0051.html" title="Section One"><img alt="Previous: Section One" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0053.html" title="Assembly Language Files"><img alt="Next: Assembly Language Files" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0047.html">An Overview</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The First Group of ‘.h’ Files</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000053">4.5 The First Group of ‘.h’ Files</h2>
+<dl class="description">
+
+    <dt>param.h</dt>
+    <dd><p>[Sheet 01] contains no variable declarations, but many definitions for operating system constants and parameters, and the declarations for three simple structures. The convention will be noted of using “upper case only” for defined constants. </p></dd>
+
+    <dt>systm.h</dt>
+    <dd><p>[Sheet 02; Chapter 19] consists entirely of declarations (with definitions of the structures “callout” and “mount” as side-effects). Note that none of the variables is initialised explicitly, and hence all are initialised to zero. </p><p>The dimensions for the first three arrays are parameters defined in param.h. Hence any file which “includes” “systm.h” must have previously included “param.h”. </p></dd>
+
+    <dt>seg.h</dt>
+    <dd><p>[Sheet 03] contains a few definitions and one declaration, which are used for referencing the segmentation registers. This file could be absorbed into “param.h” and “systm.h” without any real loss. </p></dd>
+
+    <dt>proc.h</dt>
+    <dd><p>[Sheet 03; Chapter 7] contains the important declaration for “proc” which is both a structure type and an array of such structures. Each element of the “proc” structure has a name which begins with “p_” and no other variable is so named. Similar conventions are used for naming the elements of the other structures. </p><p>The sets of values for the first two elements, “p_stat” and “p_flag” have individual names which are define. </p></dd>
+
+    <dt>user.h</dt>
+    <dd><p>[Sheet 04; Chapter 7] contains the declaration for the very important “user” structure, plus a set of defined values for “u_error”. </p><p>Only one instance of the “user” structure is ever accessible at one time. This is referenced under the name “u” and is in the low address part of a 1024 byte area known as the “per process data area”. </p><p>In general the complete “h” files are not analysed in detail later in this text. It is expected that the reader will refer to them from time to time (with increasing familiarity and understanding). </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0051.html" title="Section One"><img alt="Previous: Section One" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0053.html" title="Assembly Language Files"><img alt="Next: Assembly Language Files" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

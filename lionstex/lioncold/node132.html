@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>fuibyte (0814), fuiword (0844)</TITLE>
+<META NAME="description" CONTENT="fuibyte (0814), fuiword (0844)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node133.html">
+<LINK REL="previous" HREF="node131.html">
+<LINK REL="up" HREF="node130.html">
+<LINK REL="next" HREF="node133.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2354"
+  HREF="node133.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2350"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2344"
+  HREF="node131.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2352"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2355"
+  HREF="node133.html">Interrupts</A>
+<B> Up:</B> <A NAME="tex2html2351"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2345"
+  HREF="node131.html">Sources of Traps and</A>
+ &nbsp; <B>  <A NAME="tex2html2353"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000152000000000000000">
+fuibyte (0814), fuiword (0844)</A>
+</H2>
+
+<P>
+``main'' uses both ``fuibyte'' and ``fuiword''.
+Since the former is more complicated in a non-essential way, we leave
+it to the reader, and concentrate on the latter.
+
+<P>
+``fuiword'' is called (1602) when the
+system is running in kernel mode with
+one argument which is an address in
+user address space. The function of the
+routine is to fetch the value of the
+corresponding word and to return it as
+a result (left in r0). However if an
+error occurs, the value -1 is to be
+returned.
+
+<P>
+Note that with ``fuiword'', there is an
+ambiguity which does not occur with
+``fuibyte'', namely a returned value of
+-1 may not necessarily be an error
+indication but the actual value in the
+user space. Convince yourself that for
+the way it is used in ``main'', this does
+not matter.
+
+<P>
+Also the code does not distinguish
+between a ``bus timeout error'' and a
+``segmentation error''.
+
+<P>
+The routine proceeds as follows:
+
+<P>
+<DL>
+<DT><STRONG>0846:</STRONG></DT>
+<DD>The argument is moved to r1;
+
+<P>
+</DD>
+<DT><STRONG>0848:</STRONG></DT>
+<DD>``gword'' is called;
+
+<P>
+</DD>
+<DT><STRONG>0852:</STRONG></DT>
+<DD>The current PS is stored on the
+ stack;
+
+<P>
+</DD>
+<DT><STRONG>0853:</STRONG></DT>
+<DD>The priority level is raised to 7
+ (to disable interrupts);
+
+<P>
+</DD>
+<DT><STRONG>0854:</STRONG></DT>
+<DD>The contents of the location
+ nofault (1466) are saved in the
+ stack;
+
+<P>
+</DD>
+<DT><STRONG>0855:</STRONG></DT>
+<DD>``nofault'' is loaded with
+ address of the routine ``err'';
+
+<P>
+</DD>
+<DT><STRONG>0856:</STRONG></DT>
+<DD>An ``mfpi'' instruction is used to
+ fetch the word from user space.
+</DD>
+</DL>
+
+<P>
+<B>If nothing goes wrong</B> this value will
+ left on the kernel stack.
+
+<P>
+<DL>
+<DT><STRONG>0857:</STRONG></DT>
+<DD>The value is transferred from the
+ stack to r0;
+
+<P>
+</DD>
+<DT><STRONG>0876:</STRONG></DT>
+<DD>The previous values of ``nofault''
+ and PS are restored;
+</DD>
+</DL>
+
+<P>
+<B>Now suppose something does go wrong</B>
+with the ``mfpi'' instruction, and a bus
+time-out does occur.
+
+<P>
+<DL>
+<DT><STRONG>0856:</STRONG></DT>
+<DD>The ``mfpi'' instruction will be
+ aborted. PC will point to the
+ next instruction (0857) and a
+ trap via vector location 4 will
+ occur;
+
+<P>
+</DD>
+<DT><STRONG>0512:</STRONG></DT>
+<DD>The new PC will have the value of
+ ``trap''. The new PS will indicate:
+
+<P>
+present mode = kernel mode
+
+<P>
+previous mode = kernel mode
+
+<P>
+priority = 7;
+
+<P>
+</DD>
+<DT><STRONG>0756:</STRONG></DT>
+<DD>The next instruction executed is
+ the first instruction of ``trap''.
+ This saves the processor status
+ word two words beyond the current
+ ``top of stack''. (This is not
+ relevant here.);
+
+<P>
+</DD>
+<DT><STRONG>0757:</STRONG></DT>
+<DD>``nofault'' contains the address of 
+ ``err'' and is non-zero;
+
+<P>
+</DD>
+<DT><STRONG>0765:</STRONG></DT>
+<DD>Moving 1 to SR0 reinitialises the
+ memory management unit;
+
+<P>
+</DD>
+<DT><STRONG>0766:</STRONG></DT>
+<DD>The contents of ``nofault'' are
+ moved on top of the stack,
+ <B>overwriting</B> the previous contents, which was the return
+ address in ``gword'';
+
+<P>
+</DD>
+<DT><STRONG>0767:</STRONG></DT>
+<DD>The ``rtt'' returns, not to ``gword''
+ but to the first word of ``err'';
+
+<P>
+</DD>
+<DT><STRONG>0880:</STRONG></DT>
+<DD>``err'' restores ``nofault'' and PS,
+ skips the return to ``fuiword'',
+ places -1 in r0, and returns
+ directly to the calling routine.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2354"
+  HREF="node133.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2350"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2344"
+  HREF="node131.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2352"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2355"
+  HREF="node133.html">Interrupts</A>
+<B> Up:</B> <A NAME="tex2html2351"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2345"
+  HREF="node131.html">Sources of Traps and</A>
+ &nbsp; <B>  <A NAME="tex2html2353"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

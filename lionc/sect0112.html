@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: expand (2268)</title>
+
+<link href="sect0113.html" title="swtch revisited" rel="next" />
+<link href="sect0111.html" title="setrun (2134)" rel="prev" />
+<link href="sect0098.html" title="Process Management" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0111.html" title="setrun (2134)"><img alt="Previous: setrun (2134)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0113.html" title="swtch revisited"><img alt="Next: swtch revisited" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0098.html">Process Management</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">expand (2268)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000113">8.14 expand (2268)</h2>
+<p>The comment at the beginning of this procedure (2251) says most of what needs to be said about the procedure, except for the question of “swapping out” when not enough core is available. </p><p>Note that “expand” takes no particular notice of the contents of the user data area or stack area. </p><dl class="description">
+
+    <a href="../all.html#line2277" target="source" <dt>2277:</dt></a>
+    <dd><p>If the expansion is actually a contraction, then trim off the excess from the high address end; </p></dd>
+
+    <a href="../all.html#line2281" target="source" <dt>2281:</dt></a>
+    <dd><p>“savu” stores the values of r5 and r6 in “u.u_rsav”; </p></dd>
+
+    <a href="../all.html#line2283" target="source" <dt>2283:</dt></a>
+    <dd><p>If sufficient main memory is not available ... </p></dd>
+
+    <a href="../all.html#line2284" target="source" <dt>2284:</dt></a>
+    <dd><p>The environment pointer and stack pointer are recorded again in “u.u_ssav”. But note that since no new procedures have been entered, and since there has been no cumulative stack growth, the values recorded are the same as at line 2281; </p></dd>
+
+    <a href="../all.html#line2285" target="source" <dt>2285:</dt></a>
+    <dd><p>“xswap” (4368) copies the core image for the process designated by its first parameter to disk. </p><p>Since the second parameter is non-zero the main memory area occupied by the data segment is returned to the list of available space. </p><p>However the computation continues using the same area in main memory until the next call on “retu” (2193) in “swtch”. </p></dd>
+
+</dl><p>Note also that the call on “savu” at line 2189 in “swtch” stores new values in “u.u_rsav” after the disk image has been made (and therefore serves no useful purpose since the core image has already been officially “abandoned”); </p><dl class="description">
+
+    <a href="../all.html#line2286" target="source" <dt>2286:</dt></a>
+    <dd><p>The “SSWAP” flag is set in the process’s proc array element. (This is not swapped out, so the effect is not lost); </p></dd>
+
+    <a href="../all.html#line2287" target="source" <dt>2287:</dt></a>
+    <dd><p>“swtch” is called, and the process, still running in its old area suspends itself. Since the call on “xswap” will have resulted in the “SLOAD” flag being switched off, there is no way that “swtch” will choose the process for immediate reactivation. </p></dd>
+
+</dl><p>Only after the disk image has been copied back into core again can the process be activated again. The “return” executed by “swtch” is a return to the procedure which called “expand”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0111.html" title="setrun (2134)"><img alt="Previous: setrun (2134)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0113.html" title="swtch revisited"><img alt="Next: swtch revisited" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

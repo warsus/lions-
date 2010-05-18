@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Per Process Data Area</TITLE>
+<META NAME="description" CONTENT="The Per Process Data Area">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node93.html">
+<LINK REL="previous" HREF="node91.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node93.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1849"
+  HREF="node93.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1845"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1839"
+  HREF="node91.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1847"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1850"
+  HREF="node93.html">The Segments</A>
+<B> Up:</B> <A NAME="tex2html1846"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1840"
+  HREF="node91.html">The user Structure (0413)</A>
+ &nbsp; <B>  <A NAME="tex2html1848"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000114000000000000000">
+The Per Process Data Area</A>
+</H2>
+
+<P>
+The ``per process data area'' corresponds
+to the valid part (lower part) of the
+seventh page of the kernel address
+space. It is 1024 bytes long. The lower
+289 bytes are occupied by an instance
+of the ``user'' structure, leaving 367
+words to be used as a kernel mode stack
+area. (Obviously there will be as many
+kernel mode stacks as there are
+processes.)
+
+<P>
+While the processor is in kernel mode,
+the values of r5 and r6, the environment and stack pointers, should remain
+within the range 0140441 to 01437777.
+Transition beyond the upper limit would
+be trapped as a segmentation violation,
+but the lower limit is protected only
+by the integrity of the software. (It
+may be noted that the hardware stack
+limit option is not used by UNIX.)
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

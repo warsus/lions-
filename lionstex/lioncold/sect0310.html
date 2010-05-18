@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: klrint (8078)</title>
+
+<link href="sect0311.html" title="The File “tty.c”" rel="next" />
+<link href="sect0309.html" title="klxint (8070)" rel="prev" />
+<link href="sect0293.html" title="Interactive Terminals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0309.html" title="klxint (8070)"><img alt="Previous: klxint (8070)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Next: The File “tty.c”" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0293.html">Interactive Terminals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">klrint (8078)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000311">24.17 klrint (8078)</h2>
+<p>This procedure is executed in response to a receiver interrupt. It is not so readily compared with “pcrint” (8719) although similarities certainly exist. </p><dl class="description">
+
+    <dt>8083:</dt>
+    <dd><p>Read the input character from the Receiver Data Buffer register; </p></dd>
+
+    <dt>8084:</dt>
+    <dd><p>Enable the receiver for the next character; </p></dd>
+
+    <dt>8085:</dt>
+    <dd><p>The comment says “hardware botch”. Better believe it; </p></dd>
+
+    <dt>8086:</dt>
+    <dd><p>Pass the character to “ttyinput” to insert it into the appropriate “raw” input queue. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0309.html" title="klxint (8070)"><img alt="Previous: klxint (8070)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Next: The File “tty.c”" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

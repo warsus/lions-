@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>smount (6086)</TITLE>
+<META NAME="description" CONTENT="smount (6086)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node257.html">
+<LINK REL="previous" HREF="node255.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node257.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3944"
+  HREF="node257.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3940"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3934"
+  HREF="node255.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3942"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3945"
+  HREF="node257.html">Notes</A>
+<B> Up:</B> <A NAME="tex2html3941"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3935"
+  HREF="node255.html">Mounting</A>
+ &nbsp; <B>  <A NAME="tex2html3943"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000255000000000000000">
+smount (6086)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>6093:</STRONG></DT>
+<DD>``getmdev'' decodes the first argument  to  locate a block oriented
+      access device;
+
+<P>
+</DD>
+<DT><STRONG>6096:</STRONG></DT>
+<DD>``u.u_dirp'' is  reset  preparatory
+to  calling ``namei'' to decode the
+second  file  name.   (Note   that
+``u.u_dirp''  is  set  by ``trap'' to
+``u.u_arg[0]'' (2770);
+
+<P>
+</DD>
+<DT><STRONG>6100:</STRONG></DT>
+<DD>Check that the file named by  the
+      second  parameter  is in a satisfactory condition,  i.e.  no  one
+      else  is  currently accessing the
+      file, and that the file is not  a
+      special  file  (block  or character);
+
+<P>
+</DD>
+<DT><STRONG>6103:</STRONG></DT>
+<DD>Search the ``mount'' table  looking
+  for      an      empty      entry
+  (``mp-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$">m bufp==NULL'') or an  entry
+  already   made  for  the  device.
+  (The ``mount''  data  structure  is
+  defined at line 0272);
+
+<P>
+</DD>
+<DT><STRONG>6111:</STRONG></DT>
+<DD>``smp'' should point to a  suitable
+entry in the ``mount'' table;
+
+<P>
+</DD>
+<DT><STRONG>6113:</STRONG></DT>
+<DD>Perform  the  appropriate  ``open''
+routine, with the device name and
+a read/write flag  as  arguments.
+(As  was  seen  earlier,  for the
+RK05 disk the ``open'' routine is a
+``no-op'');
+
+<P>
+</DD>
+<DT><STRONG>6116:</STRONG></DT>
+<DD>Read block #1 from the device.
+This block is the ``super block'';
+
+<P>
+</DD>
+<DT><STRONG>6124:</STRONG></DT>
+<DD>Copy the ``super block'' into a
+buffer associated with ``NODEV'',
+from the buffer associated with
+``d''. The second buffer will not
+ be released again until the device is unmounted;
+
+<P>
+</DD>
+<DT><STRONG>6130:</STRONG></DT>
+<DD>``ip'' points to  the  ``inode''  for
+the   second  named  file.   This
+``inode''   is   now   flagged   as
+``IMOUNT''.  The  effect of this is
+to force ``iget'' (7292) to  ignore
+the  normal contents of the file,
+while the file system  volume  is
+mounted. (In practice, the second
+file is  an  empty  file  created
+especially for this purpose.)
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3944"
+  HREF="node257.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3940"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3934"
+  HREF="node255.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3942"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3945"
+  HREF="node257.html">Notes</A>
+<B> Up:</B> <A NAME="tex2html3941"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3935"
+  HREF="node255.html">Mounting</A>
+ &nbsp; <B>  <A NAME="tex2html3943"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

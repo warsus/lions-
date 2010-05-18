@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>exec (3020)</TITLE>
+<META NAME="description" CONTENT="exec (3020)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node148.html">
+<LINK REL="previous" HREF="node146.html">
+<LINK REL="up" HREF="node140.html">
+<LINK REL="next" HREF="node148.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2543"
+  HREF="node148.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2539"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2533"
+  HREF="node146.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2541"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2544"
+  HREF="node148.html">fork (3322)</A>
+<B> Up:</B> <A NAME="tex2html2540"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2534"
+  HREF="node146.html">The File `sysl.c'</A>
+ &nbsp; <B>  <A NAME="tex2html2542"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000177000000000000000">
+exec (3020)</A>
+</H2>
+
+<P>
+This system call, #11, changes a process executing
+one program into a process executing a different program.
+See Section ``EXEC(II)'' of the UPM.
+This is the longest and one of the most
+important system calls.
+
+<P>
+<DL>
+<DT><STRONG>3034:</STRONG></DT>
+<DD>``namei'' (6618) (which is discussed in detail in Chapter 19)
+converts the first argument
+(which is a pointer to a character
+ string defining the name of 
+ the new program) into an ``inode''
+ reference. (``inodes'' are essential parts of the file
+ referencing mechanism.);
+
+<P>
+</DD>
+<DT><STRONG>3037:</STRONG></DT>
+<DD>Wait if the number of ``exec''s
+ currently under way is too large
+ (See the comment on line 3011.);
+
+<P>
+</DD>
+<DT><STRONG>3040:</STRONG></DT>
+<DD>``getblk(NODEV)'' results in the
+ allocation of a 512 byte buffer
+ from the pool of buffers. This
+ buffer is used temporarily to
+ store in core, that information
+ which is currently in the user
+ data area, and which is needed to
+ start the new program. Note that
+ the second argument in ``u.u_arg''
+ is a pointer to this information;
+
+<P>
+</DD>
+<DT><STRONG>3041:</STRONG></DT>
+<DD>``access'' returns a non-zero
+result if the file is not executable. The second
+condition examines whether the file is a
+directory or a special character file.
+(It would seem that by making
+this test earlier, e.g. just
+after line 3036, the efficiency
+of the code could be improved.);
+
+<P>
+</DD>
+<DT><STRONG>3052:</STRONG></DT>
+<DD>Copy the set of arguments from
+ the user space into the temporary
+ buffer;
+
+<P>
+</DD>
+<DT><STRONG>3064:</STRONG></DT>
+<DD>If the argument string is too
+large to fit in the buffer, take
+an error exit;
+
+<P>
+</DD>
+<DT><STRONG>3071:</STRONG></DT>
+<DD>If the number of characters in
+the argument string is odd, add
+an extra, null character;
+
+<P>
+</DD>
+<DT><STRONG>3090:</STRONG></DT>
+<DD>The first four words (8 bytes) of
+ the named file are read into
+ ``u.u_arg''. The interpretation of
+ these words is indicated in the
+ comment beginning on line 3076
+ and, more fully, in the section
+ ``A.OUT(V)'' of the UPM.
+
+<P>
+Note the setting of ``u.u_base'',
+``u.u_count'', ``u.u_offset'' and
+``u.u_segflg'' preparatory to the
+read operation;
+
+<P>
+</DD>
+<DT><STRONG>3095:</STRONG></DT>
+<DD>If the text segment is not to be
+protected, add the text area size
+to the data area size, and set the former to
+zero;
+
+<P>
+</DD>
+<DT><STRONG>3105:</STRONG></DT>
+<DD>Check whether the program has a
+``pure'' text area, but the program
+file has already been opened by
+some other program as a data
+file. If so, take the error exit;
+
+<P>
+</DD>
+<DT><STRONG>3127:</STRONG></DT>
+<DD>When this point is reached, the
+ decision to execute the new program is irrevocable i.e. there is
+ no longer the opportunity to
+ return to the original program
+ with an error flag set;
+
+<P>
+</DD>
+<DT><STRONG>3129:</STRONG></DT>
+<DD>``expand'' here actually implies a
+major contraction, to the ``per
+process data'' area only;
+
+<P>
+</DD>
+<DT><STRONG>3130:</STRONG></DT>
+<DD>``xalloc'' takes care of allocating
+(if necessary) and linking to the
+text area;
+
+<P>
+</DD>
+<DT><STRONG>3158:</STRONG></DT>
+<DD>The information stored in the
+ buffer area is copied into the
+ stack in the user data area of
+ the new program;
+
+<P>
+</DD>
+<DT><STRONG>3186:</STRONG></DT>
+<DD>The locations in the kernel stack
+which contain copies of the ``previous'' values of the registers in
+user mode are set to zero, except
+for r6, the stack pointer, which
+was set at line 3155;
+
+<P>
+</DD>
+<DT><STRONG>3194:</STRONG></DT>
+<DD>Decrement the reference count for
+ the ``inode'' structure;
+
+<P>
+</DD>
+<DT><STRONG>3195:</STRONG></DT>
+<DD>Release the temporary buffer;
+
+<P>
+</DD>
+<DT><STRONG>3196:</STRONG></DT>
+<DD>Wake up any other process waiting
+ at line 3037.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2543"
+  HREF="node148.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2539"
+  HREF="node140.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2533"
+  HREF="node146.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2541"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2544"
+  HREF="node148.html">fork (3322)</A>
+<B> Up:</B> <A NAME="tex2html2540"
+  HREF="node140.html">Traps and System Calls</A>
+<B> Previous:</B> <A NAME="tex2html2534"
+  HREF="node146.html">The File `sysl.c'</A>
+ &nbsp; <B>  <A NAME="tex2html2542"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

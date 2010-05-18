@@ -1,0 +1,828 @@
+%
+% The Lion's Commentary, file ch5.tex, version 1.5, 18 May 1994
+%
+\section*{Section One}
+
+{\sf Section One contains many of the global declaration
+files and the assembly language files.
+
+It also comtains a number of files concerned with
+system initialisation and process management.}
+
+
+\se{Two Files}
+
+This chapter is intended to provide a
+gentle introduction to the source code
+by looking at two files in Section One
+which can be isolated reasonably well
+from the rest.
+
+
+The discussion of these files supplements the discussion of Chapter Three
+and includes a number of additional
+comments regarding the syntax and
+semantics of the ``C'' language.
+
+
+\subsection{The File `malloc.c'}
+
+This file is found on Sheet 25 of the
+Source code, and consists of just two
+procedures:
+
+\begin{verbatim}
+   malloc (2528)   mfree (2556)
+\end{verbatim}
+
+
+These are concerned with the allocation
+and subsequent release of two kinds of
+memory resources, namely:
+
+\bd
+\item[main memory] in units of 32 words (64 bytes);
+
+\item[disk swap area] in units of 256 words (512 bytes).
+\ed
+
+For each of these two kinds of
+resource, a list of available areas is
+maintained within a resource ``map''
+(either ``coremap'' or ``swapmap''). A
+pointer to the appropriate resource
+``map'' is always passed to ``malloc'' and
+``mfree'' so that the routines themselves
+do not have to know the kind of
+resource with which they are dealing.
+
+Each of ``coremap'' and ``swapmap'' is an
+array of structures of the type ``map''
+as declared at line 2515. This structure consists of two character pointers
+i.e. two unsigned integers.
+
+The declarations of ``coremap'' and
+``swapmap'' are on lines 0203, 0204.
+Here the ``map'' structure is completely
+ignored -- a regrettable programming
+short-cut which is possible because it
+is not detected by the loader. Thus the
+actual numbers of list elements in
+``coremap'' and ``swapmap'' are ``CMAPSIZ/2''
+and ``SMAPSIZ/2'' respectively.
+
+
+\subsection{Rules for List Maintenance}
+
+\bd
+\item[(a)] Each available area is defined
+ by its size and relative address
+ (reckoned in the units appropriate to the resource);
+
+\item[(b)] The elements of each list are
+ arranged at all times in order
+ of increasing relative address.
+ Care is taken that no two list
+ elements represent contiguous
+ areas -- the alternative course,
+ to merge the two areas into a
+ single larger area is always
+ taken;
+\item[(c)] The whole list can be scanned by
+ looking at successive elements
+ of the array, starting with the
+ first, until an element with a
+ zero size is encountered. This
+ last element is a ``sentinel''
+ which is not part of the list
+ proper.
+\ed
+
+The above rules provide a complete
+specification for ``mfree'', and a
+specification for ``malloc'' which is
+complete except in one respect:
+We need to specify how the
+resource allocation is actually
+made when there exists more than
+one way of performing it.
+
+The method adopted in ``malloc'' is one
+known as ``First Fit'' for reasons which
+should become obvious.
+
+As an illustration of how the resource
+``map'' is maintained, suppose the following
+three resource areas were available:
+
+\bi
+\item an area of size 15 beginning at
+location 47 and ending at location
+61;
+
+\item an area of size 13 spanning
+addresses 27 to 39 inclusive;
+
+\item an area of size 7 beginning at
+location 65.
+\ei
+
+\noindent Then the ``map'' would contain:
+
+\begin{center}
+\begin{tabular}{ccc}
+{\bf Entry} & {\bf Size} & {\bf Address}\\
+0 & 13 & 27\\
+1 & 15 & 47\\
+2 & 7 & 65\\
+3 & 0 & ??\\
+4 & ?? & ??\\
+\end{tabular}
+\end{center}
+
+If a request for a space of size 7 were
+received, the area would be allocated
+starting at location 27, and the ``map''
+would become:
+
+\begin{center}
+\begin{tabular}{ccc}
+{\bf Entry} & {\bf Size} & {\bf Address}\\
+0 & 6 & 34\\
+1 & 15 & 47\\
+2 & 7 & 65\\
+3 & 0 & ??\\
+4 & ?? & ??\\
+\end{tabular}
+\end{center}
+
+If the area spanning addresses 40 to 46
+inclusive is returned to the available
+list, the ``map'' would become:
+
+\begin{center}
+\begin{tabular}{ccc}
+{\bf Entry} & {\bf Size} & {\bf Address}\\
+0 & 28 & 34\\
+1 & 7 & 65\\
+2 & 0 & ??\\
+3 & ?? & ??\\
+\end{tabular}
+\end{center}
+
+Note how the number of elements has
+actually decreased by one because of
+amalgamation though the total available
+resources have of course increased.
+
+Let us now turn to a consideration of
+the actual source code.
+
+
+\subsection{malloc (2528)}
+
+The body of this procedure consists of
+a ``for'' loop to search the ``map'' array
+until either:
+
+\bd
+\item[(a)] the end of the list of available
+ resources is encountered; or
+
+\item[(b)] an area large enough to honour
+ the current request is found;
+\ed
+
+\bd
+\item[2534:] The ``for'' statement initialises
+ ``bp'' to point to the first element
+	of the resource map. At
+ each succeeding iteration ``bp'' is
+ incremented to point to the next
+ ``map'' structure.
+\ed
+
+Note that the continuation condition\\
+``bp-$>$m\_size'' is an expression, which becomes zero with the
+sentinel is referenced. This
+expression could have been written 
+equivalently but more transparently as ``bp-$>$m\_size$>$0''.
+
+Note also that no explicit test for the
+end of the array is made. (It can be
+shown that this latter is not necessary
+provided CMAPSIZ, SMAPSIZ $\ge$ 2 * NPROC !)
+
+\bd
+\item[2535:] If the list element defines an
+ area at least as large as that
+ requested, then ...
+
+\item[2536:] Remember the address of the first
+ unit of the area;
+
+\item[2537:] Increment the address stored in
+ the array element;
+
+\item[2538:] Decrement the size stored in the
+ element and compare the result
+ with zero (i.e. was it an exact
+ fit?);
+
+\item[2539:] In the case of an exact fit, move
+ all the remaining list elements
+ (up to and including the sentinel) down one place.
+
+Note that ``(bp-l)'' points to the
+structure before the one referenced by ``bp'';
+
+\item[2542:] The ``while'' continuation condition does {\bf not}
+test the equality of ``(bp-l)-$>$m\_size'' and\\
+bm-$>$m\_size !
+
+
+The value tested is the value assigned to\\
+``(bp-$>$m\_size'' copied from ``bp-$>$m\_size''.
+
+(You are forgiven for not
+recognising this at once.);
+
+
+\item[2543:] Return the address of the area.
+ This represents the end of the
+ procedure and hence very definitely the end of the ``for'' loop.
+
+Note that a value of zero
+returned means ``no luck'' This is
+based on the assumption that no
+valid area can ever begin at
+location zero.
+\ed
+
+\subsection{mfree (2556)}
+
+This procedure returns the area of size
+``size'' at address ``aa'' to the ``resource map''
+designated by ``mp''. The body of
+the procedure consists of a one line
+``for'' statement, followed by a multiline ``if'' statement.
+
+\bd
+\item[2564:] The semicolon at the end of this
+ line is extremely significant,
+ terminating as it does the empty
+ statement. (It would aid legibility if this character were moved
+ to a line on its own, as is done
+ on line 2394.)
+
+Depending on your point of view,
+this statement demonstrates
+either the power or the obscurity
+of the ``C'' language. Try writing
+equivalent code to this statement
+in another language such as Pascal or PL/1.
+
+Step ``bp'' through the list until
+an element is encountered either
+with an address greater than the
+address of the area being
+returned.
+
+ i.e. not ``bp-$>$m\_addr $\le$ a''
+
+\noindent or which indicates the end of the list
+
+ i.e. not ``bp-$>$m\_size != 0'';
+
+
+\item[2565:] We have now located the element
+ in front of which we should
+ insert the new list element. The
+ question is: Will the list grow
+ larger by one element or will
+ amalgamation keep the number of
+ elements the same or even reduce
+ it by one?
+
+If ``bp $>$ mp'' we are not trying to
+insert at the beginning of the
+list. If\\
+(bp-l)-$>$m\_addr+(bp-l)-$>$m\_size==a
+
+\noindent then the area being return abuts
+the previous element in the list;
+
+\item [2566:] Increase the size of the previous
+list element by the size of the
+area being returned;
+
+\item[2567:] Does the area being returned also
+ abut the next element of the
+ list? If so
+
+\item[2568:] Add the size of the next element
+ of the list to the size of the
+ previous element;
+
+\item[2569:] Move all the remaining list elements (up to the one containing
+ the final zero size) down one
+ place.
+ 
+ Note that if the test on line
+ 2567 fortuitously gives a true
+ result when ``bp-$>$m\_size'' is zero
+ no harm is done;
+
+\item[2576:] This statement is reached if the
+ test on line 2565 failed i.e. the
+ area being returned cannot be
+ amalgamated with the previous
+ element on the list.
+
+ Can it be amalgamated with the
+ next element? Note the check that
+ the next element is not null;
+
+\item[2579:] Provided the area being returned
+ is genuinely non-null (perhaps
+ this test should have been made
+ sooner?) add a new element to the
+ list and push all the remaining
+ elements up one place.
+\ed
+
+
+\subsection{In conclusion ...}
+
+The code for these two procedures has
+been written very tightly. There is
+little, if any, ``fat'' which could be
+removed to improve run time efficiency.
+However it would be possible to write
+these procedures in a more transparent
+fashion.
+
+
+If you feel strongly on this point,
+then as an exercise, you should rewrite
+``mfree'' to make its function more
+easily discernible.
+
+Note also that the correct functioning
+of ``malloc'' and ``mfree'' depends on
+correct initialisation of ``coremap'' and
+``swapmap''. The code to do this occurs
+in the procedure ``main'' at lines 1568,
+1583.
+
+
+\subsection{The File `prf.c'}
+
+This file is found on Sheets 23 and 24,
+and contains the following procedures:
+
+\begin{verbatim}
+    printf (2340)     panic (2416)
+    printn (2369)     prdev (2433)
+    putchar (2386)    deverror (2447)
+\end{verbatim}
+
+The calling relationship between these
+procedures is illustrated below:
+
+\newpage
+\begin{verbatim}
+             panic    deverror
+                 |      |
+                 |    prdev
+                 |      |
+                  \    /
+                  printf
+                    |
+                  printn
+                    |
+                  putchar
+\end{verbatim}
+
+\sbs{printf (2340)}
+
+The procedure ``printf'' provides a
+direct, unsophisticated low-level,
+unbuffered way for the operating system
+to send messages to the system console
+terminal. It is used during initialisation and to report hardware errors or
+the imminent collapse of the system.
+
+
+(These versions of ``printf'' and
+``putchar'' run in kernel mode and are
+similar to, but not the same as, the
+versions invoked by a ``C'' program which
+runs in user mode. The latter versions
+of ``printf'' and ``putchar'' live in the
+library ``/lib/libc.a''. You may still
+find it useful to read the sections
+``PRINTF(III)'' and ``PUTCHAR(III)'' of the
+UPM at this point.)
+
+
+\bd
+\item[2340:] The programmer must have been
+ carried away when he declared all
+ the parameters for this procedure. In fact the procedure
+ body only contains references to
+ ``xl'' and ``fmt''.
+\ed
+
+
+This serves to reveal one of the facts
+of ``C'' programming. The rules for
+matching parameters in procedure calls
+and procedure declarations are not
+enforced, not even with respect to the
+numbers of parameters.
+
+Parameters are placed on the stack in
+{\bf reverse} order. Thus when ``printf'' is
+called ``fmt'' will be nearer to the ``top
+of stack'' than ``xl'', etc.
+
+\begin{verbatim}
+        |   .   |
+        ---------
+        |   .   |
+        ---------
+        |   .   |        stack grows down
+        ---------
+        |   .   |
+        ---------
+        |  x2   |
+        ---------
+        |  xl   |
+        ---------
+        |  fmt  |
+        ---------
+        |   .   |        top of stack
+        ---------
+\end{verbatim}
+
+``xl'' has a higher address then ``fmt''
+but a lower address then ``x2'', because
+stacks grow downwards on the PDP11.
+
+\bd
+\item[2341:] ``fmt'' may be interpreted as a
+ constant character pointer. This
+ declaration is (almost)
+ equivalent to
+
+ ``char *fmt;''
+
+The difference is that here the
+value of ``fmt'' cannot be changed;
+
+\item[2346:] ``adx'' is set to point to ``xl''.
+ The expression ``\&xl'' is the
+ address of ``xl''. Note that since
+ ``xl'' is a stack location, this
+ expression cannot be evaluated at
+ compile time.
+
+(Many of the expressions you will
+find elsewhere involving the
+addresses of variables or arrays
+are effective because they {\bf can} be
+evaluated at compile or load
+time.);
+
+\item[2348:] Extract into the register ``c''
+ successive characters from the
+ format string;
+
+\item[2349:] If ``c'' is not a `\%' then ...
+
+\item[2350:] If ``c'' is a null character
+ (`\verb+\+0'), this indicates the end of
+ the format string in the normal
+ way, and ``printf'' terminates;
+
+\item[2351:] Otherwise call ``putchar'' to send
+ the character to the system console terminal;
+
+\item[2353:] A `\%' character has been seen.
+ Get the next character (it had
+ better not be the `\verb+\+0'!);
+
+\item[2354:] If this character is a `d' or `l'
+ or `o', call ``printn'' passing as
+ parameters the value referenced
+ by ``adx'' and either the value ``8''
+ or ``10'' depending on whether ``c''
+ is `o' or not. (The `d' and `l'
+ codes are clearly equivalent.)
+
+``printn'' expresses the binary
+numbers as a set of digit characters according to the radix 
+supplied as the second parameter;
+
+\item[2356:] If the editing character is `s',
+ then all but the last character
+ of a null terminated string is to
+ be sent to the terminal. ``adx''
+ should point to a character
+ pointer in this case;
+
+\item[2361:] Increment ``adx'' to point to the
+ next word in the stack i.e. to
+ the next parameter passed to
+ ``printf'';
+
+\item[2362:] Go back to line 2347 and continue
+ scanning the format string.
+ Enthusiasts for structured programming will prefer to replace
+ lines 2347 and this by
+ ``while (1) \{'' and ``\}''
+respectively .
+\ed
+
+\sbs{printn (2369)}
+
+This procedure calls itself recursively
+in order to generate the required
+digits in the required order. It might
+be possible to code this procedure more
+efficiently but not more completely.
+(Anyway, in view of the implementation
+of ``putchar'', efficiency is hardly a
+consideration here.)
+
+Suppose n = A*b + B where A = ldiv(n,b)
+and where B = lrem(n,b) satisfies
+$0 \le B < b$. Then in order to display the
+value for n, we need to display the
+value for A followed by the value for B.
+
+
+The latter is easy for b = 8 or 10: it
+consists of a single character. The
+former is easy if A = 0. It is also
+easy if ``printn'' is called recursively.
+Since A $<$ n, the chain of recursive
+calls must terminate.
+
+\bd
+\item[2375:] Arithmetic values corresponding
+ to digits are conveniently converted to their corresponding
+ character representations by the
+ addition of the character `0'.
+\ed
+
+
+The procedures ``ldiv'' and ``lrem'' treat
+their first parameter as an unsigned
+integer (i.e. no sign extension, when a
+16 bit value is extended to a 32 bit
+value before the actual division operation). They may be found beginning on
+lines 1392 and 1400 respectively.
+
+
+\sbs{putchar (2386)}
+
+This procedure transmits to the system
+console the character which was passed
+as a parameter.
+
+It illustrates in a small way the basic
+features of i/o operations on the PDP11
+computer.
+
+\bd
+\item[2391:] ``SW'' is defined on line 0166 as
+ the value ``0177570''. This is the
+kernel address of a read only
+processor register which stores
+the setting of the console switch
+register.
+
+The meaning of the statement is
+clear: get the contents at location 0177570 and see if they are
+zero. The problem is to express
+this in ``C''. The code
+
+if (SW == 0)
+
+would not have conveyed this
+meaning. Clearly ``SW'' is a
+pointer value which should be
+dereferenced. The compiler might
+have been changed to accept
+
+if (SW-$>$ == 0)
+
+but as it stands, this is syntactically incorrect. By inventing a
+dummy structure, with an element
+``integ'' (see line 0175), the programmer has found a satisfactory
+solution to his problem.
+\ed
+
+Several other examples of this programming device will be found in this
+procedure and elsewhere.
+
+
+In hardware terms, the system console
+terminal interface consists of four 16
+bit control registers which are given
+consecutive addresses on the Unibus
+beginning at kernel address 0177560
+(see the declaration for ``KL'' on line
+0165.) For a description of the formats
+and usage of these registers, see
+Chapter Twenty-Four of the ``PDP11 Peripherals Handbook''.
+
+In software terms, this interface is
+the unnamed structure which is defined
+beginning on line 2313, with four elements which name the four control
+registers. It does not matter that the
+structure is unnamed because it is not
+necessary to allocate any instances of
+it (the one we are interested in is
+essentially predefined, at the address
+given by ``KL'').
+
+\bd
+\item[2393:] While bit 7 of the transmitter
+ status register (``XST'') is off,
+ keep doing nothing, because the
+ interface is not ready to accept
+ another character.
+\ed
+
+This is a classic case of ``busy waiting'' where the processor is allowed to
+cycle uselessly through a set of
+instructions until some externally
+defined event occurs. Such waste of
+processing power cannot normally be
+tolerated but this procedure is only
+used in unusual situations.
+
+\bd
+\item[2395:] The need for this statement is
+ tied up with the statement on
+ line 2405;
+
+\item[2397:] Save the current contents of the
+ transmitter status register;
+
+\item[2398:] Clear the transmitter status
+ register preparatory to sending
+ the next character:
+
+\item[2399:] With bit 7 of the control status
+ register reset, move the next
+ character to be transmitted to
+ the transmitter buffer register.
+ This initiates the next output
+ operation;
+
+\item[2400:] A ``new line'' character needs to
+ be accompanied by a ``carriage
+ return'' character and this is
+ accomplished by a recursive call
+ on ``putchar''.
+
+A couple of extra ``delete'' characters are thrown in also to
+allow for any delays in completing the carriage return operation
+at the terminal;
+
+\item[2405:] This call on ``putchar'' with an
+ argument of zero effectively
+ results in a re-execution of
+ lines 2391 to 2394.
+
+(It is very hard to see why the
+programmer chose to use a recursive call here in preference to
+simply repeating lines 2393 and
+2394, since both code efficiency
+and compactness not to mention
+clarity seem to have suffered.);
+
+\item[2406:] Restore the contents of the
+ transmitter status register. In
+ particular if bit 6 was formerly
+ set to enable interrupts then
+ this resets it.
+\ed
+
+
+\sbs{panic (2419)}
+
+This procedure is called from a number
+of locations in the operating system.
+(e.g. line 1605). When circumstances
+exist under which continued operation
+of the system seems undesirable.
+
+
+UNIX does not profess to be a ``fault
+tolerant'' or ``fail soft'' system, and in
+many cases the call on ``panic'' can be
+interpreted as a fairly unsophisticated
+response to a straightforward problem.
+
+However more complicated responses
+require additional code, lots of it,
+and this is contrary to the general
+UNIX philosophy of ``keep it simple''.
+
+\bd
+\item[2419:] The reason for this statement is
+ given in the comment beginning at
+ line 2323;
+
+\item[2420:] ``update'' causes all the large
+ block buffers to be written out.
+ See Chapter Twenty;
+
+\item[2421:] ``printf'' is called with a format
+ string and one parameter, which
+ was passed to ``panic'';
+
+\item[2422:] This ``for'' statement defines an
+ infinite loop in which the only
+ action is a call on the assembly
+ language procedure ``idle'' (1284).
+
+``idle'' drops the processor priority to zero, and performs a
+``wait''. This is a ``do nothing''
+instruction of indefinite duration. It terminates when a
+hardware interrupt occurs.
+
+An infinite set of calls on ``idle'' is
+better than the execution of a ``halt''
+instruction, since any i/o activities
+which were under way can be allowed to
+complete and the system clock can keep
+ticking.
+
+The only way for the operator to
+recover from a ``panic'' is to reinitialise the system, (after taking a core
+dump, if desired).
+\ed
+
+
+\sbs{prdev (2433), deverror (2447)}
+
+These procedures provide warning messages when errors are occurring in i/o
+operations. At this stage, their only
+interest is as examples of the use of
+``printf''.
+
+
+\sbs{Included Files}
+
+It will be noted that whereas the file
+``malloc.c'' contains no request to
+include other files, requests to
+include four separate files are
+included at the beginning of ``prf.c''.
+
+(The observant reader will note that
+these files are presumed to reside one
+level higher in the file hierarchy than
+``prf.c'' itself.)
+
+
+The statement on line 2304 is to be
+understood as if it were replaced by
+the entire contents of the file
+``param.h''. This then supplies definitions for the identifiers ``SW'', ``KL''
+and ``integ'' which occur in ``putchar''.
+
+We noted earlier that declarations for
+``KL'', ``SW'' and ``integ'' occurred on
+lines 0165, 0166 and 0175 respectively,
+but this would have been meaningless,
+if the file ``param.h'' had not been
+``included'' in ``prf.c''.
+
+The files ``buf.h'' and ``conf.h'' have
+been included to provide declarations
+for ``d\_major'', ``d\_minor'', ``b\_dev'' and
+``b\_blkno'', which are used in ``prdev''
+and ``deverror''.
+
+The reason for the inclusion of the
+fourth file, ``seg.h'', is a little
+harder to find. In fact it is not
+necessary as the code stands, and the
+author owes his readers an apology. In
+editing the source code, it seemed like
+a good idea to move the declaration for
+``integ'' from ``seg.h'' to ``param.h''.
+Q.E.D.
+
+Note that the variable ``panicstr''
+(2328) is also global but since it is
+not referenced outside ``prf.c'', its
+declaration has not been placed in any
+``.h'' file.

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The story continues ...</title>
+
+<link href="sect0080.html" title="sched (1940)" rel="next" />
+<link href="sect0078.html" title="Initialisation of proc[0]" rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0078.html" title="Initialisation of proc[0]"><img alt="Previous: Initialisation of proc[0]" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0080.html" title="sched (1940)"><img alt="Next: sched (1940)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The story continues ...</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000080">6.6 The story continues ...</h2>
+<dl class="description">
+
+    <dt>1627:</dt>
+    <dd><p>“newproc” (1826) will be discussed in detail in the next chapter. </p><p>In brief this initialises a second “proc” structure viz. “proc[1]”, and allocates a second “per process data area” in core. This is a copy of the “per process data area” for process #0, exact in all but one respect: the value of “u.u_procp” in the second area is “&amp;proc[1]”. </p><p>We should note here that at line 1889, there is a call on “savu” (0725) which saves the current values of the environment and the stack pointers in “u.u_rsav” before the copy is made. </p><p>Also from line 1918 we can see that the value returned by “newproc” will be zero, so that the statements on lines 1628 to 1635 will not be executed; </p></dd>
+
+    <dt>1637:</dt>
+    <dd><p>A call is made to “sched” (1940) which, it may be observed, contains an infinite loop, so that it never returns! </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0078.html" title="Initialisation of proc[0]"><img alt="Previous: Initialisation of proc[0]" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0080.html" title="sched (1940)"><img alt="Next: sched (1940)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>B. Inactive Terminals</TITLE>
+<META NAME="description" CONTENT="B. Inactive Terminals">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node330.html">
+<LINK REL="previous" HREF="node328.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node330.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4867"
+  HREF="node330.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4863"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4857"
+  HREF="node328.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4865"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4868"
+  HREF="node330.html">Well, that's all, folks</A>
+<B> Up:</B> <A NAME="tex2html4864"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4858"
+  HREF="node328.html">A. The test for</A>
+ &nbsp; <B>  <A NAME="tex2html4866"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0003014000000000000000">
+B. Inactive Terminals</A>
+</H2>
+
+<P>
+When the last special file for a terminal is closed, ``klclose'' (8055) is
+called and resets (8059) the ``ISOPEN''
+and ``CARR_ON'' flags. However the ``read
+enable'' bit of the receiver control
+status register is not reset, so that
+incoming characters may still be
+received and will be stored away (8087)
+in the terminal's ``raw'' input queue by
+``klrint'' (8078), and ``ttyinput'' (8333),
+which do not test the ``CARR_ON'' flag,
+to see if the terminal is logically
+connected.
+
+<P>
+These characters may accumulate for a
+long time and clog up the character
+buffer storage. Only when the ``raw''
+input queue reaches 256 characters
+(``TTYHOG'', 8349) will the contents of
+this queue be thrown away. It does seem
+therefore, that a statement to disable
+reader interrupts should be included in
+``klclose'' before line 8058.
+
+<P>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

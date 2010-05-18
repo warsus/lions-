@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: File Access and Control</title>
+
+<link href="sect0214.html" title="File Characteristics" rel="next" />
+<link href="sect0212.html" title="physio (5259)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0212.html" title="physio (5259)"><img alt="Previous: physio (5259)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0214.html" title="File Characteristics"><img alt="Next: File Characteristics" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">File Access and Control</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000214">18 File Access and Control</h1>
+<p>A large part of every operating system seems to be concerned with data management and file management, and UNIX turns out to be no exception. </p><p>Section Four of the source code contains thirteen files. </p><p>The first four contain common declarations needed by various of the other routines: </p><dl class="description">
+
+    <dt>“file.h”</dt>
+    <dd><p>describes the structure of the “file” array; </p></dd>
+
+    <dt>“filsvs.h”</dt>
+    <dd><p>describes the structure of the “super block” for “mounted” file systems; </p></dd>
+
+    <dt>“ino.h”</dt>
+    <dd><p>describes the structure of “inodes” recorded on “mounted” devices; </p></dd>
+
+    <dt>“inode.h”</dt>
+    <dd><p>describes the structure of the “inode” array; </p></dd>
+
+</dl><p>The next two files, “sys2.c” and “sys3.c” contain code for system calls. (“sys1.c” and “sys4.c” were presented in Section Two). </p><p>Tne next five files, “rdwri.c”, “subr.c”, “fio.c”, “alloc.c” and “iget.c”, together present the principal routines for file management, and provide a link between the i/o oriented system calls and the basic i/o routines. </p><p>The file “nami.c” is concerned with searching directories to convert file pathnames into “inode” references. </p><p>Finally, “pipe.c” is the “device driver” for pipes. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0214.html">18.1 File Characteristics</a>
+   
+</li><li><a href="sect0215.html">18.2 System Calls</a>
+   
+</li><li><a href="sect0216.html">18.3 Control Tables</a>
+   
+</li><li><a href="sect0217.html">18.4 file (5507)</a>
+   
+</li><li><a href="sect0218.html">18.5 inode (5659)</a>
+   
+</li><li><a href="sect0219.html">18.6 Resources Required</a>
+   
+</li><li><a href="sect0220.html">18.7 Opening a File</a>
+   
+</li><li><a href="sect0221.html">18.8 creat (5781)</a>
+   
+</li><li><a href="sect0222.html">18.9 openl (5804)</a>
+   
+</li><li><a href="sect0223.html">18.10 open (5763)</a>
+   
+</li><li><a href="sect0224.html">18.11 openl revisited</a>
+   
+</li><li><a href="sect0225.html">18.12 close (5846)</a>
+   
+</li><li><a href="sect0226.html">18.13 closef (6643)</a>
+   
+</li><li><a href="sect0227.html">18.14 iput (7344)</a>
+   
+</li><li><a href="sect0228.html">18.15 Deletion of Files</a>
+   
+</li><li><a href="sect0229.html">18.16 Reading and Writing</a>
+   
+</li><li><a href="sect0230.html">18.17 rdwr (5731)</a>
+   
+</li><li><a href="sect0231.html">18.18 readi (6221)</a>
+   
+</li><li><a href="sect0232.html">18.19 writei</a>
+   
+</li><li><a href="sect0233.html">18.20 iomove (6364)</a>
+   
+</li><li><a href="sect0234.html">18.21 bmap (6415)</a>
+   
+</li><li><a href="sect0235.html">18.22 Leftovers</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0212.html" title="physio (5259)"><img alt="Previous: physio (5259)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0214.html" title="File Characteristics"><img alt="Next: File Characteristics" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

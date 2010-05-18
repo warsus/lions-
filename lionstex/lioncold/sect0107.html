@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: swtch (2178)</title>
+
+<link href="sect0108.html" title="setpri (2156)" rel="next" />
+<link href="sect0106.html" title="aretu (0734)" rel="prev" />
+<link href="sect0098.html" title="Process Management" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0106.html" title="aretu (0734)"><img alt="Previous: aretu (0734)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0108.html" title="setpri (2156)"><img alt="Next: setpri (2156)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0098.html">Process Management</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">swtch (2178)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000108">8.9 swtch (2178)</h2>
+<p>“swtch” is called by “trap” (0770, 0791), “sleep” (2084, 2093), “expand” (2287), “exit” (3256), “stop” (4027) and “xalloc” (4480). </p><p>This procedure is unique in that its execution is in three phases which in general involve three separate kernel processes. The first and third of these processes will be called the “retiring” and the “arising” processes respectively. Process #0 is always the intermediate process; it may be the “retiring” or the “arising” process as well. </p><p>Note that the only variables used by “swtch” are either registers, or global or static (stored globally). </p><dl class="description">
+
+    <dt>2184:</dt>
+    <dd><p>The static structure pointer, “p”, defines a starting point for searching through the “proc” array to locate the next process to activate. Its use reduces the bias shown to processes entered early in the “proc” array. If “p” is null, set its value to the beginning of the “proc” array. This should only occur upon the very first call on “swtch”; </p></dd>
+
+    <dt>2189:</dt>
+    <dd><p>A call on “savu” (0725) saves the current values of the environment and stack pointers (r5 and r6); </p></dd>
+
+    <dt>2193:</dt>
+    <dd><p>“retu” (0740) resets r5 and r6, and, most importantly, resets the kernel address register 6 to address the “scheduler’s” data segment; </p></dd>
+
+    <dt>2195:</dt>
+    <dd><p>Phase Two begins: </p><p>The code from this line to line 2224 is only ever executed by kernel process #0. There are two nested loops, from which there is no exit until a runnable process can be found. </p><p>At slack periods, the processor spends most of its time executing line 2220. It is only disturbed thence by an interrupt (e.g. from the clock); </p></dd>
+
+    <dt>2196:</dt>
+    <dd><p>The flag “runrun” is reset. (It is used to indicate that a higher priority process than the current process is ready to run. “swtch” is about to look for the highest priority process.); </p></dd>
+
+    <dt>2224:</dt>
+    <dd><p>The priority of the “arising” process is noted in “curpri” (a global variable) for future reference and comparison; </p></dd>
+
+    <dt>2228:</dt>
+    <dd><p>Another call on “retu” resets r5, r6 and the seventh kernel address register to values appropriate for the “arising” process; </p></dd>
+
+    <dt>2229:</dt>
+    <dd><p>Phase Three begins: </p><p>“sureg” (1739) resets the user mode hardware segmentation registers using the stored prototypes for the arising process; </p></dd>
+
+    <dt>2230:</dt>
+    <dd><p>The comment which begins here is not encouraging. We will return to this point again towards the end of this chapter; </p></dd>
+
+    <dt>2247:</dt>
+    <dd><p>If you check, you will find that none of the procedures which call “swtch” directly examines the value returned here. </p><p>Only the procedures which call “newproc” which are interested in this value, because of the way the child process is first activated! </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0106.html" title="aretu (0734)"><img alt="Previous: aretu (0734)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0098.html" title="Process Management"><img alt="Up: Process Management" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0108.html" title="setpri (2156)"><img alt="Next: setpri (2156)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 10</title>
+
+<link href="sect0040.html" title="Example 11" rel="next" />
+<link href="sect0038.html" title="Example 9" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0038.html" title="Example 9"><img alt="Previous: Example 9" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0040.html" title="Example 11"><img alt="Next: Example 11" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 10</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000040">3.11 Example 10</h2>
+<p>Many of the points which have been introduced above are collected in the following procedure: </p><pre>
+  2134 setrun (p)
+       {
+         register struct proc *rp;
+         rp = p;
+         rp-&gt;p_wchan = 0;
+         rp-&gt;p_stat = SRUN;
+         if (rp-&gt;p_pri &lt; curpri)
+           runrun++;
+         if (runout != 0 &amp;&amp;
+             (rp-&gt;p_flag &amp; SLOAD) == 0) {
+            runout = 0;
+            wakeup (&amp;runout);
+         }
+       }
+</pre><p>Check your understanding of “C” by figuring out what this one does. </p><p>There are two additional features you may need to know about: </p><p>“&amp;&amp;” is the logical conjunction (“and”) for relational expressions. (Cf. “<tt>||</tt>” introduced earlier.) </p><p>The last statement contains the expression </p><pre>
+    &amp;runout
+</pre><p>which is syntactically an address variable but semantically just a unique bit pattern. </p><p>This is an example of a device which is used throughout UNIX. The programmer needed a unique bit pattern for a particular purpose. The exact value did not matter as long as it was unique. An adequate solution to the problem was to use the address of a suitable global variable. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0038.html" title="Example 9"><img alt="Previous: Example 9" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0040.html" title="Example 11"><img alt="Next: Example 11" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

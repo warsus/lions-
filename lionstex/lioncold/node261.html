@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>sumount (6144)</TITLE>
+<META NAME="description" CONTENT="sumount (6144)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node262.html">
+<LINK REL="previous" HREF="node260.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node262.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4004"
+  HREF="node262.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4000"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3994"
+  HREF="node260.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4002"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4005"
+  HREF="node262.html">Resource Allocation</A>
+<B> Up:</B> <A NAME="tex2html4001"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3995"
+  HREF="node260.html">update (7201)</A>
+ &nbsp; <B>  <A NAME="tex2html4003"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002510000000000000000">
+sumount (6144)</A>
+</H2>
+
+<P>
+This system call deletes an entry for a
+mounted  device from the ``mount'' table.
+The purpose of this call is  to  ensure
+that  traffic to and from the device is
+terminated properly, before the storage
+device  is  physically removed from the
+access device.
+
+<P>
+<DL>
+<DT><STRONG>6154:</STRONG></DT>
+<DD>Search the ``mount'' table for  the
+      appropriate entry;
+
+<P>
+</DD>
+<DT><STRONG>6161:</STRONG></DT>
+<DD>Search the ``inode'' table for  any
+      outstanding  entries for files on
+      the device. If  any  such  exist,
+      take  an  error  exit, and do not
+      change the ``mount'' table entry;
+
+<P>
+</DD>
+<DT><STRONG>6168:</STRONG></DT>
+<DD>Clear the ``IMOUNT'' flag.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

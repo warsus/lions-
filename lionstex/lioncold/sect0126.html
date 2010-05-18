@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The Assembler “Trap” Routine</title>
+
+<link href="sect0127.html" title="Sources of Traps and Interrupts" rel="next" />
+<link href="sect0125.html" title="Return" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0125.html" title="Return"><img alt="Previous: Return" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0127.html" title="Sources of Traps and Interrupts"><img alt="Next: Sources of Traps and Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The Assembler “Trap” Routine</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000127">10 The Assembler “Trap” Routine</h1>
+<p>The principal purpose of this chapter is to examine the assembly language code in “m40.s” which is involved in the handling of interrupts and traps. </p><p>This code is found between lines 0750 and 0805, and has two entry points, “trap” (0755) and “call” (0766). There are several different and relevant paths through this code and we shall trace some examples of these. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0127.html">10.1 Sources of Traps and Interrupts</a>
+   
+</li><li><a href="sect0128.html">10.2 fuibyte (0814), fuiword (0844)</a>
+   
+</li><li><a href="sect0129.html">10.3 Interrupts</a>
+   
+</li><li><a href="sect0130.html">10.4 call (0776)</a>
+   
+</li><li><a href="sect0131.html">10.5 User Program Traps</a>
+   
+</li><li><a href="sect0132.html">10.6 The Kernel Stack</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0125.html" title="Return"><img alt="Previous: Return" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0127.html" title="Sources of Traps and Interrupts"><img alt="Next: Sources of Traps and Interrupts" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

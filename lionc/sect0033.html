@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 4</title>
+
+<link href="sect0034.html" title="Example 5" rel="next" />
+<link href="sect0032.html" title="Example 3" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0032.html" title="Example 3"><img alt="Previous: Example 3" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0034.html" title="Example 5"><img alt="Next: Example 5" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 4</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000034">3.5 Example 4</h2>
+<pre>
+  6619 getf (f)
+       {
+         register *fp, rf;
+         rf = f;
+         if (rf &lt; 0 || rf &gt;= NOFILE)
+           goto bad;
+         fp = u.u_ofile[rf];
+         if (fp != NULL)
+         return (fp);
+       bad:
+         u.u_error = EBADF;
+         return (NULL);
+       }
+</pre><p>The parameter “f” is a presumed integer, and is copied directly into the register variable “rf”. (This pattern will become so familiar that we will now cease to remark upon it.) </p><p>The three simple relational expressions </p><pre>
+  rf &lt; 0    rf &gt;=NOFILE    fp != NULL
+</pre><p>are each accorded the value one if true, and the value zero if false. The first tests if the value of “rf” is less than zero, the second, if “rf” is greater than the value defined by “NOFILE” and the third, if the value of “fp” is not equal to “NULL” (which is defined to be zero). </p><p>The conditions tested by the “if” statements are the arithmetic expressions contained within parentheses. </p><p>If the expression is greater than zero the test is successful and the following statement is executed. Thus if for instance, “fp” had the value 001375, then </p><pre>
+    fp != NULL
+</pre><p>is true, and as a term in an arithmetic expression, is accorded the value one. This value is greater than zero, and hence the statement </p><pre>
+    return(fp);
+</pre><p>would be executed, to terminate further execution of “getf”, and to return the value of “fp” to the calling procedure as the result of “getf”. </p><p>The expression </p><pre>
+    rf &lt; 0 || rf &gt;= NOFILE
+</pre><p>is the logical disjunction (“or”) of the two simple relational expressions. </p><p>An example of a “goto” statement and associated label will be noted. </p><p>“fp” is assigned a value, which is an <b class="bf">address</b>, from the “rf”-th element of the array of integers “u_ofile”, which is embedded in the structure “u”. </p><p>The procedure “getf” returns a value to its calling procedure. This is either the vale of “fp” (i.e. an address) or “NULL”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0032.html" title="Example 3"><img alt="Previous: Example 3" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0034.html" title="Example 5"><img alt="Next: Example 5" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

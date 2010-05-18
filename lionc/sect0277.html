@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: lpinit(8976)</title>
+
+<link href="sect0278.html" title="lpwrite (8870)" rel="next" />
+<link href="sect0276.html" title="lpstart (8967)" rel="prev" />
+<link href="sect0271.html" title="Character Oriented Special Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0276.html" title="lpstart (8967)"><img alt="Previous: lpstart (8967)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0278.html" title="lpwrite (8870)"><img alt="Next: lpwrite (8870)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0271.html">Character Oriented Special Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">lpinit(8976)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000278">22.6 lpinit(8976)</h2>
+<p>This procedure is called to handle interrupts from the line printer. As mentioned above, most potential interrupts are ignored by the processor. Those interrupts which are accepted by the CP will be associated with either </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>completion of a print cycle; or </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>the printer going ready after a period during which the “Error” bit was set; or </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>the last transfer in a series of character transfers; </p></dd>
+
+</dl><dl class="description">
+
+    <a href="../all.html#line8980" target="source" <dt>8980:</dt></a>
+    <dd><p>Start transferring characters into the printer buffer again; </p></dd>
+
+    <a href="../all.html#line8981" target="source" <dt>8981:</dt></a>
+    <dd><p>Wakeup the process waiting to feed characters to the printer if the number of characters waiting to be sent is either zero or exactly “LPLWAT” (8818). </p></dd>
+
+</dl><p>This latter condition is somewhat puzzling in that it will only <b class="bf">occasionally</b> be satisfied. The intention surely is “if the number of characters in the list is getting low, start refilling”. However if “lpstart” carries out a series of transfers without interruption (at least by “lpint”) the number of characters could go from a value greater than “LPLWAT” to one less than this without this test ever being made. Accordingly the waiting process will not be awakened until the list is completely empty. The result could be frequently to delay the initiation of the next print cycle, and hence to allow the printer to run below its rated capacity. </p><p>One solution to this problem is to change entirely the buffering strategy for line printers. A less drastic change would involve inventing a new flag, “lp11.wflag” say, replacing lines 8981, 8982 by something like </p><pre>
+  if (lp11.cc &lt;= LPLWAT &amp;&amp; lp11.wflag)
+  {       wakeup (&amp;lp11);
+          lp11.wflag = 0
+  }
+</pre><p>and replacing line 8989 by </p><pre>
+  {       lp11.wflag++;
+          sleep(&amp;lp11, LPRI);
+  }
+</pre></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0276.html" title="lpstart (8967)"><img alt="Previous: lpstart (8967)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0271.html" title="Character Oriented Special Files"><img alt="Up: Character Oriented Special Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0278.html" title="lpwrite (8870)"><img alt="Next: lpwrite (8870)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

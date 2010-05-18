@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Character Output – ttwrite (8550)</title>
+
+<link href="sect0320.html" title="ttstart" rel="next" />
+<link href="sect0318.html" title="ttyinput (8333)" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0318.html" title="ttyinput (8333)"><img alt="Previous: ttyinput (8333)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0320.html" title="ttstart"><img alt="Next: ttstart" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Character Output – ttwrite (8550)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000320">25.8 Character Output – ttwrite (8550)</h2>
+<p>This procedure is called via “klwrite” (8067) when output is to be sent to the terminal. </p><dl class="description">
+
+    <dt>8556:</dt>
+    <dd><p>If the terminal is inactive, do nothing; </p></dd>
+
+    <dt>8558:</dt>
+    <dd><p>Loop for each character to be transmitted ... </p></dd>
+
+    <dt>8560:</dt>
+    <dd><p>While there are still an adequate number of characters queued for transmission to the terminal ... </p></dd>
+
+    <dt>8561:</dt>
+    <dd><p>call “ttstart” just in case it is time to send another character to the terminal; </p></dd>
+
+    <dt>8562:</dt>
+    <dd><p>Setting the “ASLEEP” flag here (also in<br />“wflushtty” (8224)) is rather pointless since is is never interrogated and never reset until the file is closed; </p></dd>
+
+    <dt>8563:</dt>
+    <dd><p>Go to sleep. In the meanwhile the interrupt handler will be draining characters from the output queue and sending them down the line to the terminal; </p></dd>
+
+    <dt>8566:</dt>
+    <dd><p>Call “ttyoutput” to insert the character in the output queue and arrange to have it transmitted; </p></dd>
+
+    <dt>8568:</dt>
+    <dd><p>Call “ttstart” again, for luck. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0318.html" title="ttyinput (8333)"><img alt="Previous: ttyinput (8333)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0320.html" title="ttstart"><img alt="Next: ttstart" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

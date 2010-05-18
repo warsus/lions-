@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The user Structure (0413)</TITLE>
+<META NAME="description" CONTENT="The user Structure (0413)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node92.html">
+<LINK REL="previous" HREF="node90.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node92.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1837"
+  HREF="node92.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1833"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1827"
+  HREF="node90.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1835"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1838"
+  HREF="node92.html">The Per Process Data</A>
+<B> Up:</B> <A NAME="tex2html1834"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1828"
+  HREF="node90.html">The proc Structure (0358)</A>
+ &nbsp; <B>  <A NAME="tex2html1836"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000113000000000000000">
+The user Structure (0413)</A>
+</H2>
+
+<P>
+One copy of the ``user'' structure is an
+essential ingredient of each ``per process data area''.
+At any one time there
+is exactly one copy of the ``user''
+structure which is accessible. This
+goes under the name ``u'' and is always
+to be found at kernel address 0140000
+i.e. at the beginning of the seventh
+page of the kernel address space.
+
+<P>
+The ``user'' structure has more elements
+than can be conveniently or usefully
+introduced here. The comment accompanying
+ each declaration on Sheet 04 succinctly suggests the function of each
+element.
+
+<P>
+For the moment you should notice:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>``u_rsav'', ``u_qsav'' , ``u_ssav''
+ which are two word arrays used
+ to store values for r5, r6;
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>``u_procp'' which gives the
+ address of the corresponding
+ ``proc'' structure in the ``proc''
+ array;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>``u_uisa[16]'', ''u_uisd[16]'' which
+ store prototypes for the page
+ address and description registers;
+
+<P>
+</DD>
+<DT><STRONG>(d)</STRONG></DT>
+<DD>``u_tsize'', ``u_dsize'', ``u_ssize''
+ which are the size of the text
+ segment and two parameters
+ defining the size of the data
+ segment, measured in 32 word
+ blocks.
+</DD>
+</DL>
+
+<P>
+The remaining elements are concerned
+with:
+
+<P>
+
+<UL>
+<LI>saving floating point registers
+ (not for the
+<BR>
+PDP11/40);
+
+<P>
+</LI>
+<LI>user identification;
+
+<P>
+</LI>
+<LI>parameters for input/output operations;
+
+<P>
+</LI>
+<LI>file access control;
+
+<P>
+</LI>
+<LI>system call parameters;
+
+<P>
+</LI>
+<LI>accounting information.
+</LI>
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1837"
+  HREF="node92.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1833"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1827"
+  HREF="node90.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1835"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1838"
+  HREF="node92.html">The Per Process Data</A>
+<B> Up:</B> <A NAME="tex2html1834"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1828"
+  HREF="node90.html">The proc Structure (0358)</A>
+ &nbsp; <B>  <A NAME="tex2html1836"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

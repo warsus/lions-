@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: rkstrategy (5389)</title>
+
+<link href="sect0194.html" title="rkaddr (5420)" rel="next" />
+<link href="sect0192.html" title="The file ‘rk.c’" rel="prev" />
+<link href="sect0191.html" title="The RK Disk Driver" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0192.html" title="The file ‘rk.c’"><img alt="Previous: The file ‘rk.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0191.html" title="The RK Disk Driver"><img alt="Up: The RK Disk Driver" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0194.html" title="rkaddr (5420)"><img alt="Next: rkaddr (5420)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0191.html">The RK Disk Driver</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">rkstrategy (5389)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000194">16.2 rkstrategy (5389)</h2>
+<p>The strategy routine is called, e.g. from “swap” (5212), to handle both read and write requests. </p><dl class="description">
+
+    <a href="../all.html#line5397" target="source" <dt>5397:</dt></a>
+    <dd><p>The test and call on “mapalloc” here is a “no-op” except on the PDP11/70 system; </p></dd>
+
+    <a href="../all.html#line5399" target="source" <dt>5399:</dt></a>
+    <dd><p>The code from here to line 5402 appears to be unnecessarily devious! See the discussion of “rkaddr” below. If the block number is too large, set the “B_ERROR” flag and report “completion”; </p></dd>
+
+    <a href="../all.html#line5407" target="source" <dt>5407:</dt></a>
+    <dd><p>Link the buffer into a FIFO list for the controller. The list is singly linked, uses the “av_forw” pointer of the “buf” structures, and has head and tail pointers in “rktab”. Interrupts from disk devices may not be allowed after the first step; </p></dd>
+
+    <a href="../all.html#line5414" target="source" <dt>5414:</dt></a>
+    <dd><p>If the RK controller is not currently active, wake it up via a call on “rkstart” (5440), which checks that there is something to do (5444), flags the controller as busy (5446) and calls “devstart” (5447), passing as parameters: </p><ul class="itemize">
+<li><p>a pointer to the first enqueued buffer header; </p></li><li><p>the address of the RKDA disk address register. (The value passed is in effect 0177412. See lines 5363, 5382.); </p></li><li><p>a “disk address” computed by “rkaddr”; </p></li><li><p>zero (not really important in our discussion, and may be ignored). </p></li>
+</ul></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0192.html" title="The file ‘rk.c’"><img alt="Previous: The file ‘rk.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0191.html" title="The RK Disk Driver"><img alt="Up: The RK Disk Driver" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0194.html" title="rkaddr (5420)"><img alt="Next: rkaddr (5420)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

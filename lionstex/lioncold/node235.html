@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>readi (6221)</TITLE>
+<META NAME="description" CONTENT="readi (6221)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node236.html">
+<LINK REL="previous" HREF="node234.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node236.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3669"
+  HREF="node236.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3665"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3659"
+  HREF="node234.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3667"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3670"
+  HREF="node236.html">writei</A>
+<B> Up:</B> <A NAME="tex2html3666"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3660"
+  HREF="node234.html">rdwr (5731)</A>
+ &nbsp; <B>  <A NAME="tex2html3668"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002318000000000000000">
+readi (6221)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>6230:</STRONG></DT>
+<DD>If no characters are to be
+transferred, do nothing;
+
+<P>
+</DD>
+<DT><STRONG>6232:</STRONG></DT>
+<DD>Set the ``inode'' flag to indicate
+that the ``inode'' has been accessed;
+
+<P>
+</DD>
+<DT><STRONG>6233:</STRONG></DT>
+<DD>If the file is a character special file, call the appropriate
+ device ``read'' procedure, passing
+ the device identification as
+ parameter;
+
+<P>
+</DD>
+<DT><STRONG>6238:</STRONG></DT>
+<DD>Begin a loop to transfer data in
+ amounts up to 512 characters at a
+ time until (6262) either an irrecoverable error condition has
+ been encountered or the requested
+ number of characters has been
+ transferred;
+
+<P>
+</DD>
+<DT><STRONG>6239:</STRONG></DT>
+<DD>``lshift'' (1410) concatenates the
+ two words of the array
+ ``u.u_offset'', shifts right by
+ nine places, and truncates to 16
+ bits. This defines the ``logical
+block number'' of the file which
+is to be referenced;
+
+<P>
+</DD>
+<DT><STRONG>6240:</STRONG></DT>
+<DD>``on'' is a character offset within
+ the block;
+
+<P>
+</DD>
+<DT><STRONG>6241:</STRONG></DT>
+<DD>``n'' is determined initially as
+the minimum of the number of
+characters beyond ``on'' in the
+block, and the number requested
+for transfer. (Note that ``min''
+(6339) treats its arguments as
+unsigned integers.)
+
+<P>
+</DD>
+<DT><STRONG>6242:</STRONG></DT>
+<DD>If the file is not a special
+ block file then ...
+
+<P>
+</DD>
+<DT><STRONG>6243:</STRONG></DT>
+<DD>Compare the file offset with the
+ current file size;
+
+<P>
+</DD>
+<DT><STRONG>6246:</STRONG></DT>
+<DD>Reset ``n'' as the minimum of the
+ characters requested and the
+ remaining characters in the file;
+
+<P>
+</DD>
+<DT><STRONG>6248:</STRONG></DT>
+<DD>Call ``bmap'' to convert the logical block number for the file to
+ a physical block number for its
+ host device. There will be more
+ on ``bmap'' shortly. For now, note
+ that ``bmap'' sets ``rablock'' as a
+ side effect;
+
+<P>
+</DD>
+<DT><STRONG>6250:</STRONG></DT>
+<DD>Set ``dn'' as the device identification from the ``inode'';
+
+<P>
+</DD>
+<DT><STRONG>6251:</STRONG></DT>
+<DD>If the file is a special block
+ file then ...
+
+<P>
+</DD>
+<DT><STRONG>6252:</STRONG></DT>
+<DD>Set ``dn'' from the ``i_addr'' field
+ of the ``inode'' entry. (Presumably
+ this will nearly always be the
+ same as the ``i_dev'' field, so why
+ the distinction?)
+
+<P>
+</DD>
+<DT><STRONG>6253:</STRONG></DT>
+<DD>Set the ``read ahead block'' to the
+ next physical block;
+
+<P>
+</DD>
+<DT><STRONG>6255:</STRONG></DT>
+<DD>If the blocks of the file are
+ apparently being read sequentially then ...
+
+<P>
+</DD>
+<DT><STRONG>6256:</STRONG></DT>
+<DD>Call ``breada'' to read the desired
+ block and to initiate reading of
+ the ``read ahead block'';
+
+<P>
+</DD>
+<DT><STRONG>6258:</STRONG></DT>
+<DD>else just read the desired block;
+
+<P>
+</DD>
+<DT><STRONG>6260:</STRONG></DT>
+<DD>Call ``iomove'' to transfer information from the buffer to the
+ user area;
+
+<P>
+</DD>
+<DT><STRONG>6261:</STRONG></DT>
+<DD>Return the buffer to the
+ ``av''-list.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3669"
+  HREF="node236.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3665"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3659"
+  HREF="node234.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3667"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3670"
+  HREF="node236.html">writei</A>
+<B> Up:</B> <A NAME="tex2html3666"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3660"
+  HREF="node234.html">rdwr (5731)</A>
+ &nbsp; <B>  <A NAME="tex2html3668"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

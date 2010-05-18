@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Traps and System Calls</title>
+
+<link href="sect0137.html" title="trap (2693)" rel="next" />
+<link href="sect0135.html" title="timeout (3845)" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0135.html" title="timeout (3845)"><img alt="Previous: timeout (3845)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0137.html" title="trap (2693)"><img alt="Next: trap (2693)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Traps and System Calls</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000137">12 Traps and System Calls</h1>
+<p>This chapter is concerned with the way the system handles traps in general and system calls in particular. </p><p>There are quite a number of conditions which can cause the processor to “trap”. Many of these are quite clearly error conditions, such as hardware or power failures, and UNIX does not attempt any sophisticated recovery procedures for these. </p><p>The initial focus for our attention is the principal procedure in the file “trap.c”. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0137.html">12.1 trap (2693)</a>
+   
+</li><li><a href="sect0138.html">12.2 Kernel Mode Traps</a>
+   
+</li><li><a href="sect0139.html">12.3 User Mode Traps</a>
+   
+</li><li><a href="sect0140.html">12.4 System Calls</a>
+   
+</li><li><a href="sect0141.html">12.5 System Call Handlers</a>
+   
+</li><li><a href="sect0142.html">12.6 The File ‘sysl.c’</a>
+   
+</li><li><a href="sect0143.html">12.7 exec (3020)</a>
+   
+</li><li><a href="sect0144.html">12.8 fork (3322)</a>
+   
+</li><li><a href="sect0145.html">12.9 sbreak (3354)</a>
+   
+</li><li><a href="sect0146.html">12.10 The Files ‘sys2.c’ and ‘sys3.c’</a>
+   
+</li><li><a href="sect0147.html">12.11 The File ‘sys4.c’</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0135.html" title="timeout (3845)"><img alt="Previous: timeout (3845)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0137.html" title="trap (2693)"><img alt="Next: trap (2693)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

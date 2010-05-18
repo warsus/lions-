@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Character Output - ttwrite (8550)</TITLE>
+<META NAME="description" CONTENT="Character Output - ttwrite (8550)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node324.html">
+<LINK REL="previous" HREF="node322.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node324.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4795"
+  HREF="node324.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4791"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4785"
+  HREF="node322.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4793"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4796"
+  HREF="node324.html">ttstart</A>
+<B> Up:</B> <A NAME="tex2html4792"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4786"
+  HREF="node322.html">ttyinput (8333)</A>
+ &nbsp; <B>  <A NAME="tex2html4794"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000308000000000000000">
+Character Output - ttwrite (8550)</A>
+</H2>
+
+<P>
+This procedure is called via ``klwrite''
+(8067) when output is to be sent to the
+terminal.
+
+<P>
+<DL>
+<DT><STRONG>8556:</STRONG></DT>
+<DD>If the terminal is
+inactive, do nothing;
+
+<P>
+</DD>
+<DT><STRONG>8558:</STRONG></DT>
+<DD>Loop for each character to be
+transmitted ...
+
+<P>
+</DD>
+<DT><STRONG>8560:</STRONG></DT>
+<DD>While there are still an adequate
+number of characters queued for
+transmission to the terminal ...
+
+<P>
+</DD>
+<DT><STRONG>8561:</STRONG></DT>
+<DD>call ``ttstart'' just in case it is
+time to send another character to
+the terminal;
+
+<P>
+</DD>
+<DT><STRONG>8562:</STRONG></DT>
+<DD>Setting the ``ASLEEP'' flag here
+(also in
+<BR>``wflushtty'' (8224)) is
+rather pointless since is is
+never interrogated and never
+reset until the file is closed;
+
+<P>
+</DD>
+<DT><STRONG>8563:</STRONG></DT>
+<DD>Go to sleep. In the meanwhile the
+interrupt handler will be draining characters from the output
+queue and sending them down the
+line to the terminal;
+
+<P>
+</DD>
+<DT><STRONG>8566:</STRONG></DT>
+<DD>Call ``ttyoutput'' to insert the
+character in the output queue and
+arrange to have it transmitted;
+
+<P>
+</DD>
+<DT><STRONG>8568:</STRONG></DT>
+<DD>Call ``ttstart'' again, for luck.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

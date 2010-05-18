@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: free (7000)</title>
+
+<link href="sect0262.html" title="iput (7344)" rel="next" />
+<link href="sect0260.html" title="itrunc (7414)" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0260.html" title="itrunc (7414)"><img alt="Previous: itrunc (7414)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0262.html" title="iput (7344)"><img alt="Next: iput (7344)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">free (7000)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000262">20.14 free (7000)</h2>
+<p>This procedure is called by “itrunc” (7435, 7438, 7442) to reinsert a simple storage block into the available list for a device. </p><dl class="description">
+
+    <dt>7005:</dt>
+    <dd><p>It is not clear why the “s_fmod” flag is set here as well as at the end of the procedure (line 7026). Any suggestions? </p></dd>
+
+    <dt>7006:</dt>
+    <dd><p>Observe the locking protocol; </p></dd>
+
+    <dt>7010:</dt>
+    <dd><p>If no free blocks previously existed for the device, restore the situation by setting up a one element list containing an entry for block #0. This value will subsequently be interpreted as an “end of list” sentinel; </p></dd>
+
+    <dt>7014:</dt>
+    <dd><p>If the available list in the “super block” is already full, it is time to write it out onto the FSV. Set “s_flock”; </p></dd>
+
+    <dt>7016:</dt>
+    <dd><p>Get a buffer, associated with the block now being entered in the free list; </p></dd>
+
+    <dt>7019:</dt>
+    <dd><p>Copy the contents of the super block list, preceded by a count of the number of valid blocks, into the buffer; write the buffer; unset the lock and “wakeup” anybody waiting, </p></dd>
+
+    <dt>7025:</dt>
+    <dd><p>Add the returned block to the available list. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0260.html" title="itrunc (7414)"><img alt="Previous: itrunc (7414)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0262.html" title="iput (7344)"><img alt="Next: iput (7344)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

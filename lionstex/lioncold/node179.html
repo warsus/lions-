@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Text Segments</TITLE>
+<META NAME="description" CONTENT="Text Segments">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node180.html">
+<LINK REL="previous" HREF="node178.html">
+<LINK REL="up" HREF="node178.html">
+<LINK REL="next" HREF="node180.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2953"
+  HREF="node180.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2949"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2943"
+  HREF="node178.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2951"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2954"
+  HREF="node180.html">sched (1940)</A>
+<B> Up:</B> <A NAME="tex2html2950"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2944"
+  HREF="node178.html">Program Swapping</A>
+ &nbsp; <B>  <A NAME="tex2html2952"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000191000000000000000">
+Text Segments</A>
+</H2>
+
+<P>
+Text segments are segments which contain only ``pure'' code and data i.e.
+code and data which remain unaltered
+throughout the program execution, so
+that they may be shared amongst several
+processes executing the same program.
+
+<P>
+The resulting economies in space can be
+quite substantial when many users of
+the system are executing the same program simultaneously e.g. the editor or
+the ``shell''.
+
+<P>
+Information about text segments must be
+stored in a central location, and hence
+the existence of the ``text'' array. Each
+program which shares a text segment
+keeps a pointer to the corresponding
+text array element in ``u.u_textp''.
+
+<P>
+The text segment is stored at the
+beginning of the code file. The first
+program to begin execution causes a
+copy of the text segment to be made in
+the ``swap'' area.
+
+<P>
+When subsequently no programs are left
+which reference the text segment, the
+resources absorbed by the text segment
+are released. The main memory resource
+is released whenever there are no programs which reference the text segment
+currently in main memory; the ``swap''
+area is released in general whenever
+there are no programs left running
+which reference the text segment.
+
+<P>
+The numbers in each of these states are
+denoted by ``x_ccount'' and ``x_count''
+respectively. Decrementing these
+numbers is handled by the routines
+``xccdec'' and ``xfree'' which also take
+care of releasing resources when the
+counts reach zero. (``xccdec'' is called
+whenever a program is swapped out or
+terminates. ``xfree'' is called by ``exit''
+whenever a program terminates.)
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2953"
+  HREF="node180.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2949"
+  HREF="node178.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2943"
+  HREF="node178.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2951"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2954"
+  HREF="node180.html">sched (1940)</A>
+<B> Up:</B> <A NAME="tex2html2950"
+  HREF="node178.html">Program Swapping</A>
+<B> Previous:</B> <A NAME="tex2html2944"
+  HREF="node178.html">Program Swapping</A>
+ &nbsp; <B>  <A NAME="tex2html2952"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

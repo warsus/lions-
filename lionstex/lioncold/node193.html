@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>For the Uninitiated</TITLE>
+<META NAME="description" CONTENT="For the Uninitiated">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node194.html">
+<LINK REL="previous" HREF="node192.html">
+<LINK REL="up" HREF="node184.html">
+<LINK REL="next" HREF="node194.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3129"
+  HREF="node194.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3125"
+  HREF="node184.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3119"
+  HREF="node192.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3127"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3130"
+  HREF="node194.html">Additional Reading</A>
+<B> Up:</B> <A NAME="tex2html3126"
+  HREF="node184.html">Introduction to Basic I/O</A>
+<B> Previous:</B> <A NAME="tex2html3120"
+  HREF="node192.html">Reentrancy</A>
+ &nbsp; <B>  <A NAME="tex2html3128"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000209000000000000000">
+For the Uninitiated</A>
+</H2>
+
+<P>
+We can now return to complete an investigation started
+in Chapter Eight concerning ``aretu'' and ``u.u_ssav'':
+
+<P>
+After setting ``u.u_ssav'' (2284),
+``expand'' calls (2285) ``xswap'',
+which calls (4380) ``swap'',
+which calls (5215) ``sleep'',
+which calls (2084) ``swtch'',
+which <B>resets</B> ``u.u_rsav'' (2189).
+
+<P>
+Thus in fact ``u.u_rsav'' finally gets
+reset to a value appropriate to four
+procedure calls deeper than that for
+``u.u_ssav''.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

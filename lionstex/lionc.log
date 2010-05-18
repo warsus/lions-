@@ -1,0 +1,399 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Arch Linux) (format=latex 2010.1.29)  5 MAY 2010 00:12
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**lionc.tex
+(./lionc.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, german-x-2009-06-19, ngerman-x-2009-06-19, ancientgreek, ibycus, ar
+abic, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutc
+h, esperanto, estonian, farsi, finnish, french, galician, german, ngerman, mono
+greek, greek, hungarian, icelandic, indonesian, interlingua, irish, italian, ku
+rmanji, latin, latvian, lithuanian, mongolian, mongolian2a, bokmal, nynorsk, po
+lish, portuguese, romanian, russian, sanskrit, serbian, slovak, slovenian, span
+ish, swedish, turkish, ukenglish, ukrainian, uppersorbian, welsh, loaded.
+(/usr/share/texmf-dist/tex/latex/base/latex209.def
+File: latex209.def 1998/05/13 v0.52 Standard LaTeX file
+
+
+          Entering LaTeX 2.09 COMPATIBILITY MODE
+ *************************************************************
+    !!WARNING!!    !!WARNING!!    !!WARNING!!    !!WARNING!!   
+ 
+ This mode attempts to provide an emulation of the LaTeX 2.09
+ author environment so that OLD documents can be successfully
+ processed. It should NOT be used for NEW documents!
+ 
+ New documents should use Standard LaTeX conventions and start
+ with the \documentclass command.
+ 
+ Compatibility mode is UNLIKELY TO WORK with LaTeX 2.09 style
+ files that change any internal macros, especially not with
+ those that change the FONT SELECTION or OUTPUT ROUTINES.
+ 
+ Therefore such style files MUST BE UPDATED to use
+          Current Standard LaTeX: LaTeX2e.
+ If you suspect that you may be using such a style file, which
+ is probably very, very old by now, then you should attempt to
+ get it updated by sending a copy of this error message to the
+ author of that file.
+ *************************************************************
+
+\footheight=\dimen102
+\@maxsep=\dimen103
+\@dblmaxsep=\dimen104
+\@cla=\count79
+\@clb=\count80
+\mscount=\count81
+(/usr/share/texmf-dist/tex/latex/base/tracefnt.sty
+Package: tracefnt 1997/05/29 v3.0j Standard LaTeX package (font tracing)
+\tracingfonts=\count82
+LaTeX Info: Redefining \selectfont on input line 101.
+)
+\symbold=\mathgroup4
+\symsans=\mathgroup5
+\symtypewriter=\mathgroup6
+\symitalic=\mathgroup7
+\symsmallcaps=\mathgroup8
+\symslanted=\mathgroup9
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 293.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 294.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 295.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 301.
+LaTeX Info: Redefining \em on input line 311.
+
+(/usr/share/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 375.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 377.
+LaTeX Font Info:    Redeclaring math delimiter \bracevert on input line 379.
+)
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\c@subparagraph=\count88
+\c@figure=\count89
+\c@table=\count90
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+Compatibility mode: definition of \rm ignored.
+Compatibility mode: definition of \sf ignored.
+Compatibility mode: definition of \tt ignored.
+Compatibility mode: definition of \bf ignored.
+Compatibility mode: definition of \it ignored.
+Compatibility mode: definition of \sl ignored.
+Compatibility mode: definition of \sc ignored.
+LaTeX Info: Redefining \cal on input line 506.
+LaTeX Info: Redefining \mit on input line 507.
+\bibindent=\dimen105
+)
+(/usr/share/texmf-dist/tex/latex/fancyhdr/fancyheadings.sty
+Package: fancyheadings 2008/02/04 1.99 Dummy package to call fancyhdr
+
+
+Package fancyheadings Warning: Please stop using fancyheadings!
+(fancyheadings)                Use fancyhdr instead.
+(fancyheadings)                We will call fancyhdr with the very same
+(fancyheadings)                options you passed to fancyheadings.
+(fancyheadings)                
+(fancyheadings)                fancyhdr is 99 percent compatible with
+(fancyheadings)                fancyheadings. The only incompatibility is
+(fancyheadings)                that \headrulewidth and \footrulewidth and
+(fancyheadings)                their \plain... versions are no longer length
+(fancyheadings)                parameters, but normal macros (to be changed
+(fancyheadings)                with \renewcommand rather than \setlength)..
+
+(/usr/share/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip43
+\f@ncyO@elh=\skip44
+\f@ncyO@erh=\skip45
+\f@ncyO@olh=\skip46
+\f@ncyO@orh=\skip47
+\f@ncyO@elf=\skip48
+\f@ncyO@erf=\skip49
+\f@ncyO@olf=\skip50
+\f@ncyO@orf=\skip51
+)) (./lionc.aux
+(./title.aux) (./preface.aux) (./ch1.aux) (./ch2.aux) (./ch3.aux) (./ch4.aux)
+(./ch5.aux) (./ch6.aux) (./ch7.aux) (./ch8.aux) (./ch9.aux) (./ch10.aux)
+(./ch11.aux) (./ch12.aux) (./ch13.aux) (./ch14.aux) (./ch15.aux) (./ch16.aux)
+(./ch17.aux) (./ch18.aux) (./ch19.aux) (./ch20.aux) (./ch21.aux) (./ch22.aux)
+(./ch23.aux) (./ch24.aux) (./ch25.aux) (./ch26.aux))
+\openout1 = `lionc.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+ [1
+
+]
+\openout2 = `title.aux'.
+
+ (./title.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 43.
+
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 43.
+) [2
+
+] (./lionc.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 2.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 2.
+
+(/usr/share/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+) [1
+
+
+] [2] [3] [4] [5] [6])
+\tf@toc=\write3
+\openout3 = `lionc.toc'.
+
+
+[7] [8
+
+]
+\openout2 = `preface.aux'.
+
+ (./preface.tex [9
+
+]) [10]
+\openout2 = `ch1.aux'.
+
+ (./ch1.tex [1
+
+
+
+] [2] [3]) [4]
+\openout2 = `ch2.aux'.
+
+ (./ch2.tex
+[5
+
+
+] [6] [7] [8] [9] [10]) [11]
+\openout2 = `ch3.aux'.
+
+ (./ch3.tex
+Underfull \hbox (badness 10000) in paragraph at lines 39--46
+
+ []
+
+[12
+
+
+] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22]) [23]
+\openout2 = `ch4.aux'.
+
+ (./ch4.tex
+[24
+
+
+] [25] [26] [27]) [28]
+\openout2 = `ch5.aux'.
+
+ (./ch5.tex [29
+
+
+] [30] [31] [32] [33] [34] [35])
+[36]
+\openout2 = `ch6.aux'.
+
+ (./ch6.tex [37
+
+
+] [38] [39] [40] [41]) [42]
+\openout2 = `ch7.aux'.
+
+ (./ch7.tex [43
+
+
+] [44] [45]
+[46] [47] [48]) [49]
+\openout2 = `ch8.aux'.
+
+ (./ch8.tex [50
+
+
+] [51] [52] [53]) [54]
+\openout2 = `ch9.aux'.
+
+ (./ch9.tex [55
+
+
+]
+[56] [57]) [58]
+\openout2 = `ch10.aux'.
+
+ (./ch10.tex [59
+
+
+] [60] [61]) [62]
+\openout2 = `ch11.aux'.
+
+ (./ch11.tex [63
+
+
+] [64])
+[65]
+\openout2 = `ch12.aux'.
+
+ (./ch12.tex [66
+
+
+]
+Missing character: There is no £ in font cmr10!
+ [67] [68] [69] [70]) [71]
+\openout2 = `ch13.aux'.
+
+ (./ch13.tex [72
+
+
+] [73] [74]
+[75] [76] [77]) [78]
+\openout2 = `ch14.aux'.
+
+ (./ch14.tex [79
+
+
+] [80] [81]) [82]
+\openout2 = `ch15.aux'.
+
+ (./ch15.tex [83
+
+
+] [84]
+[85]) [86]
+\openout2 = `ch16.aux'.
+
+ (./ch16.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [87
+
+
+]
+[88]) [89]
+\openout2 = `ch17.aux'.
+
+ (./ch17.tex [90
+
+
+] [91] [92]) [93]
+\openout2 = `ch18.aux'.
+
+ (./ch18.tex [94
+
+
+] [95] [96] [97]
+[98] [99]) [100]
+\openout2 = `ch19.aux'.
+
+ (./ch19.tex [101
+
+
+] [102] [103] [104]) [105]
+\openout2 = `ch20.aux'.
+
+ (./ch20.tex
+[106
+
+
+] [107] [108] [109] [110] [111]) [112]
+\openout2 = `ch21.aux'.
+
+ (./ch21.tex) [113
+
+
+] [114]
+\openout2 = `ch22.aux'.
+
+ (./ch22.tex
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 17.
+
+LaTeX Font Info:    No file OMScmss.fd. on input line 17.
+LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbullet' on input line 17.
+[115
+
+
+] [116] [117] [118]) [119]
+\openout2 = `ch23.aux'.
+
+ (./ch23.tex (./fig23_1.tex) (./fig23_2.tex)
+(./fig23_3.tex
+Underfull \vbox (badness 6332) has occurred while \output is active []
+
+ [120
+
+
+])
+(./fig23_4.tex) [121] [122] [123] [124]) [125]
+\openout2 = `ch24.aux'.
+
+ (./ch24.tex [126
+
+
+] [127] [128]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [129]
+[130]) [131]
+\openout2 = `ch25.aux'.
+
+ (./ch25.tex [132
+
+
+] [133] [134] [135] [136]) [137]
+\openout2 = `ch26.aux'.
+
+ (./ch26.tex
+[138
+
+
+] [139]) [140] (./lionc.aux (./title.aux) (./preface.aux) (./ch1.aux)
+(./ch2.aux) (./ch3.aux) (./ch4.aux) (./ch5.aux) (./ch6.aux) (./ch7.aux)
+(./ch8.aux) (./ch9.aux) (./ch10.aux) (./ch11.aux) (./ch12.aux) (./ch13.aux)
+(./ch14.aux) (./ch15.aux) (./ch16.aux) (./ch17.aux) (./ch18.aux) (./ch19.aux)
+(./ch20.aux) (./ch21.aux) (./ch22.aux) (./ch23.aux) (./ch24.aux) (./ch25.aux)
+(./ch26.aux))
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+ ) 
+Here is how much of TeX's memory you used:
+ 764 strings out of 493848
+ 7871 string characters out of 3154002
+ 66792 words of memory out of 3000000
+ 3874 multiletter control sequences out of 15000+200000
+ 11713 words of font info for 43 fonts, out of 3000000 for 9000
+ 714 hyphenation exceptions out of 8191
+ 30i,11n,45p,240b,407s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on lionc.dvi (152 pages, 696572 bytes).

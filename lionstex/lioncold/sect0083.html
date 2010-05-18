@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: main revisited</title>
+
+<link href="sect0084.html" title="Processes" rel="next" />
+<link href="sect0082.html" title="swtch (2178)" rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0082.html" title="swtch (2178)"><img alt="Previous: swtch (2178)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Next: Processes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">main revisited</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000084">6.10 main revisited</h2>
+<p>The story so far: process #0, having created a copy of itself in the form of process #1, has gone to sleep. As a result process #1 has become the current process and has returned to “main ”with a value of one. Now read on ... </p><dl class="description">
+
+    <dt>1627:</dt>
+    <dd><p>The statements in “main” which are conditional on “newproc” are now executed: </p></dd>
+
+    <dt>1628:</dt>
+    <dd><p>“expand” (2268) finds a new, larger area (from USIZE*32 to (USIZE+1) *32 words) for process #1, and copies the original data area into it. </p><p>In this case, the original user data area consists only of a “per process data area”, with zero length data and stack areas. The original area is released; </p></dd>
+
+    <dt>1629:</dt>
+    <dd><p>“estabur” is used to set the “prototype” segmentation registers which are stored in “u.u_uisa” and “u.u_uisd” for later use by “sureg”. “estabur” calls “sureg” as its last action. </p><p>The parameters for “estabur” are the sizes of the text, data and stack areas plus an indicator to decide whether the text and data areas should be in separate address spaces. (Never true on the PDP11/40.) The sizes are all in units of 32 words; </p></dd>
+
+    <dt>1630:</dt>
+    <dd><p>“copyout” (1252) is an assembler routine which copies an array in kernel space of specified size into a region in user space. Here the array “icode” is copied into an area starting at location zero in user space; </p></dd>
+
+    <dt>1635:</dt>
+    <dd><p>The “return” is not special. From “main” it goes to “start” (0670) where the three last instructions have the effect of causing <i class="it">execution in user mode of the instruction at user mode address zero.</i> i.e. the execution of a copy of the first instruction in “icode”. The instructions subsequently executed are copies also of instructions in “icode”. </p></dd>
+
+</dl><p>AT THIS POINT, THE INITIALISATION OF THE SYSTEM IS COMPLETE. </p><p>Process #1 is running and to all intents and purposes, is a normal process. Its initial form is (almost) that which would come from compilation, loading and execution of the simple, but non-trivial “C” program: </p><pre>
+    char *init "/etc/init";
+    main ( ) {
+    execl (init, init, 0);
+    while (1);
+    }
+</pre><p>The equivalent assembler program is </p><pre>
+           sys exec
+           init
+           initp
+           br   .
+    initp: init
+           0
+    init:  &lt;/etc/init\0&gt;
+</pre><p>If the system call on “exec” fails (e.g. the file “/etc/init” cannot be found) the process falls into a tight loop, and there the processor will stay, except when the occasional clock interrupt occurs. </p><p>A description of the functions performed by “/etc/init” can be found in the section “INIT (VIII)” of the UPM.  </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0082.html" title="swtch (2178)"><img alt="Previous: swtch (2178)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Next: Processes" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

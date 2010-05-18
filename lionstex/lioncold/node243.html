@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>namei (7518)</TITLE>
+<META NAME="description" CONTENT="namei (7518)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node244.html">
+<LINK REL="previous" HREF="node242.html">
+<LINK REL="up" HREF="node240.html">
+<LINK REL="next" HREF="node244.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3773"
+  HREF="node244.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3769"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3763"
+  HREF="node242.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3771"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3774"
+  HREF="node244.html">Some Comments</A>
+<B> Up:</B> <A NAME="tex2html3770"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3764"
+  HREF="node242.html">Directory Files</A>
+ &nbsp; <B>  <A NAME="tex2html3772"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000243000000000000000">
+namei (7518)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>7531:</STRONG></DT>
+<DD>``u.u_cdir'' defines the ``inode'' of
+      a process's current directory.  A
+      process  inherits  its   parent's
+      current    directory   at   birth
+      (``newproc'', 1883).   The  current
+      directory  may  be  changed using
+      the ``chdir'' (3538) system call;
+</DD>
+<DT><STRONG>7532:</STRONG></DT>
+<DD>Note that ``func'' is  a  parameter
+      to  ``namei''  and is always either
+      ``uchar'' (7689) or ``schar'' (7679);
+</DD>
+<DT><STRONG>7534:</STRONG></DT>
+<DD>``iget'' (7276) is called to:
+
+<UL>
+<LI>wait  until  such  time  as   the
+``inode''  corresponding to ``dp'' is
+no longer locked;
+
+<P>
+</LI>
+<LI>check that  the  associated  file system is still mounted;
+</LI>
+<LI>increment the reference count;
+</LI>
+<LI>lock the ``inode'';
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG>7535:</STRONG></DT>
+<DD>Multiple slashes are  acceptable! (i.e.
+<BR> ``////a///b/'' is the same as ``/a/b'');
+
+<P>
+</DD>
+<DT><STRONG>7537:</STRONG></DT>
+<DD>Any attempt to replace or  delete
+      the  current working directory or
+      the  root  directory  is  bounced
+      immediately!
+
+<P>
+</DD>
+<DT><STRONG>7542:</STRONG></DT>
+<DD>The  label  ``cloop''   marks   the
+      beginning  of a program loop that
+      extends to line 7667.  Each cycle
+      analyses a component of the pathname (i.e. a string terminated by
+      a  null  character or one or more
+      slashes).  Note that a  name  may
+      be  constructed  from  many  different characters (7571);
+
+<P>
+</DD>
+<DT><STRONG>7550:</STRONG></DT>
+<DD>The end of the pathname has  been
+      reached  (successfully).   Return
+      the current value of ``dp'';
+
+<P>
+</DD>
+<DT><STRONG>7563:</STRONG></DT>
+<DD>``search''  permission  for  directories  is  coded in the same way
+      as ``execute'' permission for other files;
+
+<P>
+</DD>
+<DT><STRONG>7570:</STRONG></DT>
+<DD>Copy the name into a more  accessible  location before attempting
+      to  match  it  with  a  directory
+      entry.    Note  that  a  name  of
+      greater than ``DIRSIZ''  characters
+      is truncated;
+
+<P>
+</DD>
+<DT><STRONG>7589:</STRONG></DT>
+<DD>``u.u_count'' is set to the  number
+      of entries in the directory;
+
+<P>
+</DD>
+<DT><STRONG>7592:</STRONG></DT>
+<DD>The  label  ``eloop''   marks   the
+      beginning of a program loop which
+      extends to line 7647. Each cycle
+      of the loop handles a single
+      directory entry;
+
+<P>
+</DD>
+<DT><STRONG>7600:</STRONG></DT>
+<DD>If the directory has been
+      searched (linearly!) without
+      matching the supplied pathname
+      component, then there must be an
+      error unless:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>this is the last component of
+      the pathname, i.e. ``c==`<code>\</code>0' '';
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>the file is to be created,
+      i.e. ``flag == 1''; ard
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>the user program has ``write''
+      permission for the directory;
+</DD>
+</DL>
+
+<P>
+</DD>
+<DT><STRONG>7606:</STRONG></DT>
+<DD>Record the ``inode'' address for
+      the directory for the new file in
+      ``u.u_pdir'';
+
+<P>
+</DD>
+<DT><STRONG>7607:</STRONG></DT>
+<DD>If a suitable slot for a new
+      directory entry has previously
+      been encountered (7642), store
+      the value in ``u.u_offset[1]'';
+      else set the ``IUPD'' fIag for the
+      ``dp'' designated ``inode'' (but why?);
+
+<P>
+</DD>
+<DT><STRONG>7622:</STRONG></DT>
+<DD>When appropriate, read a new
+      block from the directory file
+      (note the use of ``bread'') (why
+      not ``breada''?), after carefully
+      releasing any previously held
+      buffer;
+
+<P>
+</DD>
+<DT><STRONG>7636:</STRONG></DT>
+<DD>Copy the eight words of the
+      directory entry into the array
+      ``u.u_dent''. The reason for copying before comparing is obscure!
+      Can this actually be more efficient? (The reason for copying
+      the whole directory at all is
+      rather perplexing to the author
+      of these notes.);
+
+<P>
+</DD>
+<DT><STRONG>7645:</STRONG></DT>
+<DD>This comparison makes efficient
+      use of a single character pointer
+      register variable, ``cp''. The
+      loop would be even more efficient
+      if word by word comparison were
+      used;
+
+<P>
+</DD>
+<DT><STRONG>7647:</STRONG></DT>
+<DD>The ``eloop'' cycle is terminated
+      by one of:
+
+<P>
+<PRE>
+   return(NULL);    (7610)
+   goto out;        (7605, 7613)
+</PRE>
+
+<P>
+a successful match  so  that  the
+branch  to  ``eloop'' (7647) is not
+taken;
+
+<P>
+</DD>
+<DT><STRONG>7657:</STRONG></DT>
+<DD>If the  name  is  to  be  deleted
+(``flag==2''),  if the pathname has
+been completed, and if  the  user
+program has ``write'' access to the
+directory, then return a  pointer
+to the directory ``inode'';
+
+<P>
+Save  the  device  identity  temporarily (why not in the register
+``c''?) and call ``iput''  (7344)  to
+unlock  ``dp'',  to  decrement  the
+reference count on  ``dp''  and  to
+perform  any  consequent processlng;
+
+<P>
+</DD>
+<DT><STRONG>7664:</STRONG></DT>
+<DD>Revalidate ``dp'' to point  to  the
+      ``inode'' for the next level file;
+
+<P>
+</DD>
+<DT><STRONG>7665:</STRONG></DT>
+<DD>``dp==NULL''   shouldn't    happen,
+since the directory says the file
+exists!  However  ``inode''   table
+overflows   and  i/o  errors  can
+occur,  and  sometimes  the  file
+system  may  be left in an inconsistent  state  after  a   system
+crash.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3773"
+  HREF="node244.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3769"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3763"
+  HREF="node242.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3771"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3774"
+  HREF="node244.html">Some Comments</A>
+<B> Up:</B> <A NAME="tex2html3770"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3764"
+  HREF="node242.html">Directory Files</A>
+ &nbsp; <B>  <A NAME="tex2html3772"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

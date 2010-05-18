@@ -1,0 +1,430 @@
+%
+% The Lion's Commentary, file ch1.tex, version 1.3, 18 May 1994
+%
+\setcounter{page}{1}
+\section{Introduction}
+
+``UNIX'' is the name of a time-sharing
+system for PDP11 computers, written by
+Ken Thompson and Dennis Ritchie at Bell
+Laboratories. It was described by them
+in the July, 1974 issue of the ``Communications of the ACM''.
+
+UNIX has proved to be effective, efficient
+and reliable in operation and was
+in use at more than 150 installations
+by the end of 1976.
+
+The amount of effort to write UNIX,
+while not inconsiderable in itself
+(\verb+~+10 man years up to the release of the
+Level Six system) is insignificant when
+compared to other systems. (For
+instance, by 1968, OS/360 was reputed
+to have consumed more then five man
+millennia and TSS/360, another IBM
+operating system, more than one man
+millennium.)
+
+Of course there are systems which are
+easier to understand than UNIX but, it
+may be asserted, these are invariably
+much simpler and more modest in what
+they attempt to achieve. As far as the
+list of features offered to users is
+concerned, UNIX is in the ``big league''.
+In fact it offers many features which
+are notable by their absence from some
+of the well-known major systems.
+
+\subsection{The UNIX Operating System}
+
+The purpose of this document, and its
+companion, the ``UNIX Operating System
+Source Code'', is to present in detail
+that part of the UNIX time-sharing system
+which we choose to call the ``UNIX
+Operating System'', namely the code
+which is permanently resident in the
+main memory during the operation of
+UNIX. This code has the following
+major functions:
+
+\bi
+\item initialisation;
+\item process management;
+\item system calls;
+\item interrupt handling;
+\item input/output operations;
+\item file management.
+\ei
+
+\subsection{Utilities}
+
+The remaining part of UNIX (which is
+much larger!) is composed of a set of
+suitably tailored programs which run as
+``user programs'', and which, for want of
+a better term, may be termed ``utilities''.
+
+Under this heading come a number of
+programs with a very strong symbiotic
+relationship with the operating system
+such as
+
+\bi
+\item the ``shell'' (the command language interpreter)
+
+\item ``/etc/init'' (the terminal configuration controller)
+\ei
+
+\noindent and a number of file system management
+programs such as:
+
+\bt
+\hspace{1cm} \= check \hspace{1cm} \= du \hspace{1.5cm} \= rmdir \\
+\> chmod \> mkdir \> sync \\
+\> clri \> mkfs \> umount \\
+\> df \> mount \> update \\
+\et
+
+It should be pointed out that many of
+the functions carried out by the
+above-named programs are regarded as
+operating system functions in other
+computer systems, and that this certainly
+does contribute significantly to
+the bulk of these other systems as
+compared with the UNIX Operating System
+(in the way we have defined it).
+
+
+Descriptions of the function and use of
+the above programs may be found in the
+``UNIX Programmer's Manual'' (UPM),
+either in Section I (for the commonly
+used programs) or in Section VIII (for
+the programs used only by the System
+Manager).
+
+
+\subsection{Other Documentation}
+
+These notes make frequent reference to
+the ``UNIX Programmer's Manual'' (UPM),
+occasional reference to the ``UNIX
+Documents'' booklet, and constant
+reference to the ``UNIX Operating System
+Source Code''.
+
+All these are relevant to a complete
+understanding of the system. In addition,
+a full study of the assembly
+language routines requires reference to
+the ``PDP11 Processor Handbook'', published
+by Digital Equipment Corporation.
+
+
+\subsection{UNIX Programmer's Manual}
+
+The UPM is divided into eight major
+sections, preceded by a table of contents
+and a KWIC (Key Word In Context)
+index. The latter is mostly very useful but
+is occasionally annoying, as
+some indexed material does not exist,
+and some existing material is not
+indexed.
+
+Within each section of the manual, the
+material is arranged alphabetically by
+subject name. The section number is
+conventionally appended to the subject
+name, since some subjects appear in
+more than one section, e.g. ``CHDIR(I)''
+and ``CHDIR(II)''.
+
+\bd
+\item[Section I] contains commands which
+either are recognised by the
+``shell'' command interpreter, or
+are the names of standard user
+utility programs;
+
+\item[Section II] contains ``system calls''
+which are operating system routines which
+may be invoked from a
+user program to obtain operating
+system service. A study of the
+operating system will render most
+of these quite familiar;
+
+\item[Section III] contains ``subroutines''
+which are library routines which
+may be called from a user program.
+To the ordinary programmer, the
+distinctions between Sections II
+and III often appear somewhat
+arbitrary. Most of Section III is
+irrelevant to the operating system;
+
+\item[Section IV] describes ``special
+files'', which is another name for
+peripheral devices. Some of these
+are relevant, and some merely
+interesting. It depends where you
+are;
+
+\item[Section V] describes ``File Formats
+and Conventions''. A lot of highly
+relevant information is tucked
+away in this section;
+
+\item[Sections VI and VII] describe ``User
+Maintained'' programs and subroutines.
+No UNIXophile will ignore
+these sections, but they are not
+particularly relevant to the
+operating system;
+
+\item[Section VIII] describes ``system
+maintenance'' (software, not
+hardware!). There is lots of useful
+information here, especially
+if you are interested in how a
+UNIX installation is managed.
+\ed
+
+\subsection{UNIX Documents}
+
+This is a somewhat miscellaneous collection
+of essays of varying degrees of
+relevance:
+
+\bi
+\item {\it Setting up UNIX} really belongs in
+Section VIII of the UPM (it's
+relevant);
+
+\item {\it The UNIX Time-sharing System} is an
+updated version of the original
+``Communications of the ACM'' paper.
+It should be re-read at least once
+per month;
+
+\item {\it UNIX for Beginners} is useful if
+your UNIX experience is limited;
+
+\item The tutorials on ``C'' and the editor,
+and the reference manuals for
+``C'' and the assembler are highly
+useful unless you are completely
+expert;
+
+\item {\it The UNIX I/O System} provides a
+good overview of many features of
+the operating system;
+
+\item {\it UNIX Summary} provides a check list
+which will be useful in answering
+the question what does an operating system do?
+\ei
+
+\subsection{UNIX Operating System Source Code}
+
+This is an edited version of the
+operating system as supplied by Bell
+Laboratories.
+
+The code selection presumes a ``model''
+system consisting of:
+
+\bi
+\item PDP11/40 processor;
+\item RK05 disk drives;
+\item LP11 line printer;
+\item PC11 paper tape reader/punch;
+\item KL11 terminal interface.
+\ei
+
+The principal editorial changes to the
+source code are as follows:
+
+\bi
+\item the order of presentation of files
+has been changed;
+
+\item the order of material within
+several files has been changed;
+
+\item to a very limited extent, code has
+been transferred between files
+(with hindsight a lot more of this
+would have been desirable);
+
+\item about 5\% of the lines have been
+shortened in various ways to less
+than 66 characters (by elimination
+of blanks, rearrangement of comments,
+splitting into two lines, etc.);
+
+\item a number of comments consisting of
+a line of underscore characters
+have been introduced, particularly
+at the end of procedures;
+
+\item the size of each file has been
+adjusted to an exact multiple of
+50 lines by padding with blank
+lines;
+\ei
+
+
+The source code has been printed in
+double column format with fifty lines
+per column, giving one hundred lines
+per sheet (or page). Thus there is a
+convenient relationship between line
+numbers and sheet numbers.
+
+A number of summaries have been
+included at the beginning of the Source
+Code volume:
+
+\bi
+\item A {\it Table of Contents} showing files
+in order of appearance, together
+with the Procedures they contain;
+
+\item An {\it alphabetical list} of procedures
+with line numbers;
+
+\item A {\it list of Defined Symbols} with
+their values;
+
+\item A {\it Cross Reference Listing} giving
+the line numbers where each symbol
+is used. (Reserved words in ``C''
+and a number of commonly used symbols
+such as ``p'' and ``u'' have been
+omitted.)
+\ei
+
+\subsection{Source Code Selections}
+
+The source code has been divided into
+five sections, each devoted primarily
+to a single major aspect of the system.
+
+The intention, which has been largely
+achieved, has been to make each section
+sufficiently self-contained so that it
+may be studied as a unit and before its
+successors have been mastered:
+
+\bd
+\item[Section One] deals with system initialisation,
+and process management. It also contains all the
+assembly language routines;
+
+\item[Section Two] deals with interrupts,
+traps, system calls and signals
+(software interrupts);
+
+\item[Section Three] deals primarily with
+disk operations for program swapping and
+basic, block oriented
+input/output. It also deals with
+the manipulation of the pool of
+large buffers;
+
+\item[Section Four] deals with files and
+file systems: their creation,
+maintenance, manipulation and destruction;
+
+\item[Section Five] deals with ``character
+special files'', which is the UNIX
+term for slow speed peripheral
+devices which operate out of a
+common, character oriented, buffer
+pool.
+\ed
+
+The contents of each section is outlined
+in more detail in Chapter Four.
+
+\subsection{Source Code Files}
+
+Each of the five sections just
+described consists of several source
+code files. The name of each file
+includes a suffix which identifies its
+type:
+
+\bd
+\item[``.s''] denotes a file of assembly
+ language statements;
+
+\item[``.c''] denotes a file of executable ``C''
+ language statements;
+
+\item[``.h''] denotes a file of ``C'' language
+ statements which is not for
+ separate compilation, but for
+ inclusion in other ``.c'' files
+ when they are compiled i.e. the
+ ``.h'' files contain global
+ declarations.
+\ed
+
+\subsection{Use of these notes}
+
+These notes, which are intended to supplement
+the comments already present in
+the source code, are not essential for
+understanding the UNIX operating system.
+It is perfectly possible to
+proceed without them, and you should
+attempt to do so as long as you can.
+
+The notes are a crutch, to aid you when
+the going becomes difficult. If you
+attempt to read each file or procedure
+on your own first, your initial progress
+is likely to be slower, but your
+ultimate progress much faster. Reading
+other people's programs is an art which
+should be learnt and practised
+because it is useful!
+
+\subsection{A Note on Programming Standards}
+
+You will find that most of the code in
+UNIX is of a very high standard. Many
+sections which initially seem complex
+and obscure, appear in the light of
+further investigation and reflection,
+to be perfectly obvious and ``the only
+way to fly''.
+
+For this reason, the occasional comments
+in the notes on programming
+style, almost invariably refer to
+apparent lapses from the usual standard
+of near perfection.
+
+What caused these? Sometimes it appears
+that the original code has been patched
+expediently. More than once apparent
+lapses have proved not to be such: the
+``bad'' code has been found in fact to
+incorporate some subtle feature which
+was not at all apparent initially. And
+some allowance is certainly needed for
+occasional human weakness.
+
+But on the whole you will find that the
+authors of UNIX, Ken Thompson and
+Dennis Ritchie, have created a program
+of great strength, integrity and effectiveness,
+which you should admire and seek to emulate.

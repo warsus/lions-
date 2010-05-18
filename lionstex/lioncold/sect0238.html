@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Directory Files</title>
+
+<link href="sect0239.html" title="namei (7518)" rel="next" />
+<link href="sect0237.html" title="The Directory Data Structure" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0237.html" title="The Directory Data Structure"><img alt="Previous: The Directory Data Structure" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0239.html" title="namei (7518)"><img alt="Next: namei (7518)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Directory Files</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000239">19.2 Directory Files</h2>
+<p>A directory file is in many respects indistinguishable from a non-directory file. However it contains information which is used in locating other files and hence its contents are carefully protected, and are manipulated by the operating system alone. </p><p>In every file, the information is stored as one or more 512 character blocks. Each block of a directory file is divided into 32 * 16 character structures. Each structure consists of a 16 bit “inode” table pointer and a 14 character name. The “inode” pointer is to the “inode” table on the same disk or file system volume as the files which the directory references. (More on this later.) An “inode” value of zero defines a null entry in the directory. </p><p>The procedures which reference directories are: </p><pre>
+   namei  (7518) search directory
+   link   (5909) create alternate name
+   wdir   (7477) write directory entry
+   unlink (3510) delete name
+</pre></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0237.html" title="The Directory Data Structure"><img alt="Previous: The Directory Data Structure" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0239.html" title="namei (7518)"><img alt="Next: namei (7518)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

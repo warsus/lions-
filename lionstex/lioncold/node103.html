@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Process Switching</TITLE>
+<META NAME="description" CONTENT="Process Switching">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node104.html">
+<LINK REL="previous" HREF="node102.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node104.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1995"
+  HREF="node104.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1991"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1985"
+  HREF="node102.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1993"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1996"
+  HREF="node104.html">Interrupts</A>
+<B> Up:</B> <A NAME="tex2html1992"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html1986"
+  HREF="node102.html">Process Management</A>
+ &nbsp; <B>  <A NAME="tex2html1994"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000121000000000000000">
+Process Switching</A>
+</H2>
+
+<P>
+An active process may suspend itself
+i.e relinquish the processor, by calling ``swtch'' (2178) which calls ``retu''
+(0740).
+This may be done for example if a process has reached a point beyond which
+it cannot proceed immediately. The process calls ``sleep'' (2066) which calls
+``swtch''.
+
+<P>
+Alternatively a kernel process which is
+ready to revert to user mode will test
+the variable ``runrun'' and if this is
+non-zero, implying that a process with
+a higher precedence is ready to run,
+the kernel process will call ``swtch''.
+
+<P>
+``swtch'' searches the ``proc'' table, for
+entries for which ``p_stat'' equals
+``SRUN'' and the ``SLOAD'' bit is set in
+``p_flag''. From these it selects the
+process for which the value of ``p_pri''
+is a minimum, and transfers control to it.
+
+<P>
+Values for ``p_pri'' are recalculated for
+each process from time to time by use
+of the procedure ``setpri'' (2156). Obviously the algorithm used by ``setpri''
+has a significant influence.
+A process which has called ``sleep'' and
+suspended itself may be returned to the
+``ready to run'' state by another process. This often occurs during the
+handling of interrupts when the process
+handling the interrupt calls ``setrun''
+(2134) either directly or indirectly
+via a call on ``wakeup'' (2113).
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1995"
+  HREF="node104.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1991"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1985"
+  HREF="node102.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1993"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1996"
+  HREF="node104.html">Interrupts</A>
+<B> Up:</B> <A NAME="tex2html1992"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html1986"
+  HREF="node102.html">Process Management</A>
+ &nbsp; <B>  <A NAME="tex2html1994"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

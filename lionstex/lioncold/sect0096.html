@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: sureg (1739)</title>
+
+<link href="sect0097.html" title="newproc (1826)" rel="next" />
+<link href="sect0095.html" title="estabur (1650)" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0095.html" title="estabur (1650)"><img alt="Previous: estabur (1650)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0097.html" title="newproc (1826)"><img alt="Next: newproc (1826)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">sureg (1739)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000097">7.12 sureg (1739)</h2>
+<p>This routine is called by “estabur” (1724), “swtch” (2229) and “expand” (2295), to copy the prototype segmentation registers into the actual hardware segmentation registers. </p><dl class="description">
+
+    <dt>1743:</dt>
+    <dd><p>Get the base address for the data area from the appropriate element of the “proc” array; </p></dd>
+
+    <dt>1744:</dt>
+    <dd><p>The prototype address registers (of which there are only eight for the PDP11/40) are modified by the addition of “a” and stored in the hardware segmentation address registers; </p></dd>
+
+    <dt>1752:</dt>
+    <dd><p>Test if a separate text area has been allocated, and if so, reset “a” to the relative address of the text area to the data area. (Note this value may be negative! Fortunately at this point, addresses are in terms of 32 word blocks.); </p></dd>
+
+    <dt>1754:</dt>
+    <dd><p>The pattern of code now followed is similar to the beginning of the routine, except ... </p></dd>
+
+    <dt>1762:</dt>
+    <dd><p>a rather obscure piece of code adjusts the setting of the address register for segments which are not “writable” i.e. which presumably are text segments. </p></dd>
+
+</dl><p>The code in “estabur” and “sureg” shows evidence of having been developed in several stages and is not as elegant as could be desired. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0095.html" title="estabur (1650)"><img alt="Previous: estabur (1650)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0097.html" title="newproc (1826)"><img alt="Next: newproc (1826)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

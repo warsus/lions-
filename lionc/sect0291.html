@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: maptab (8117)</title>
+
+<link href="sect0292.html" title="partab (7947)" rel="next" />
+<link href="sect0290.html" title="Graphic Character Sets" rel="prev" />
+<link href="sect0283.html" title="Character Handling" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0290.html" title="Graphic Character Sets"><img alt="Previous: Graphic Character Sets" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0292.html" title="partab (7947)"><img alt="Next: partab (7947)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0283.html">Character Handling</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">maptab (8117)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000292">23.8 maptab (8117)</h2>
+<p>This array is used in the translation of character input from a terminal preceded by a single backslash, “<tt>\</tt>”. </p><p>There are three characters, 004 (eot), ‘#’ and ‘@’, which always have special meanings and need to be asserted by a backslash whenever they are to be interpreted literally. These three characters occur in “maptab” in their “natural” locations (i.e. their locations in the ASCII table). Thus for example ‘#’ has code 043 and </p><pre>
+   maptab[043] == 043.
+</pre><p>The other non-null characters in “maptab” are involved in the translation of input characters from “upper case only” devices and do not occur in their “natural” locations but in the location of their equivalent character, e.g. “<tt>\</tt>{” occurs in the natural location for “{”, since “<tt>\</tt>{” will be interpreted as “{”, etc. </p><p>Note the situation regarding alphabetic characters. This is only explicable when it is remembered that the alphabetic characters are all translated to lower case before any backslash is recognised. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0290.html" title="Graphic Character Sets"><img alt="Previous: Graphic Character Sets" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0292.html" title="partab (7947)"><img alt="Next: partab (7947)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

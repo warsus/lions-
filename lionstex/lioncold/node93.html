@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The Segments</TITLE>
+<META NAME="description" CONTENT="The Segments">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node94.html">
+<LINK REL="previous" HREF="node92.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node94.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1861"
+  HREF="node94.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1857"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1851"
+  HREF="node92.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1859"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1862"
+  HREF="node94.html">Execution of an Image</A>
+<B> Up:</B> <A NAME="tex2html1858"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1852"
+  HREF="node92.html">The Per Process Data</A>
+ &nbsp; <B>  <A NAME="tex2html1860"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000115000000000000000">
+The Segments</A>
+</H2>
+
+<P>
+The data segment is allocated as one
+single area of physical memory but consists of three distinct parts:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>a ``per process data area'';
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>a data area for the user program. This may be further
+ divided into areas for program
+ text, initialised data and uninitialised data;
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>a stack for the user program.
+</DD>
+</DL>
+
+<P>
+The size of (a) is always ``USIZE''
+blocks. The sizes of (b) and (c) are given in blocks by ``u.u_dsize'' and
+``u.u_ssize''. (It may be noted in passing
+that the latter two may change during the life of a process.)
+
+<P>
+A separate text segment containing only
+pure text is allocated as one single
+area of physical memory. The internal
+structure of the segment is not important here.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

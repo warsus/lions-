@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: update (7201)</title>
+
+<link href="sect0257.html" title="sumount (6144)" rel="next" />
+<link href="sect0255.html" title="getfs (7167)" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0255.html" title="getfs (7167)"><img alt="Previous: getfs (7167)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0257.html" title="sumount (6144)"><img alt="Next: sumount (6144)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">update (7201)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000257">20.9 update (7201)</h2>
+<p>The function of this procedure, in its broadest terms, is to ensure that information on the file system volumes is kept up to date. The comment for this procedure (beginning on line 7190) describes the three main sub-functions, (in the reverse order!). </p><p>“update” is the whole business of the “sync” system call (3486). This may be invoked via the “sync” shell command. Alternatively there is a standard system program which runs continuously and whose only function is to call “sync” every 30 seconds. (See “UPDATE(VIII)” in the UPM.) </p><p>“update” is called by “sumount” (6150) before a file system volume is unmounted, and by “panic” (2420) as the last action of the system before activity ceases. </p><dl class="description">
+
+    <a href="../all.html#line7207" target="source" <dt>7207:</dt></a>
+    <dd><p>If another execution of “update” is under way, then just return; </p></dd>
+
+    <a href="../all.html#line7210" target="source" <dt>7210:</dt></a>
+    <dd><p>Search the “mount” table; </p></dd>
+
+    <a href="../all.html#line7211" target="source" <dt>7211:</dt></a>
+    <dd><p>For each mounted volume, ... </p></dd>
+
+    <a href="../all.html#line7213" target="source" <dt>7213:</dt></a>
+    <dd><p>Unless the file system has not been recently modified or the “super block” is locked or the volume has been mounted “read only” ... </p></dd>
+
+    <a href="../all.html#line7217" target="source" <dt>7217:</dt></a>
+    <dd><p>Update the “super block”, copy it into a buffer and write the buffer out onto the volume; </p></dd>
+
+    <a href="../all.html#line7223" target="source" <dt>7223:</dt></a>
+    <dd><p>Search the “inode” table, and for each non-null entry, lock the entry and call “iupdat” to update the “inode” entry on the volume if appropriate; </p></dd>
+
+    <a href="../all.html#line7229" target="source" <dt>7229:</dt></a>
+    <dd><p>Allow additional executions of “update” to commence; </p></dd>
+
+    <a href="../all.html#line7230" target="source" <dt>7230:</dt></a>
+    <dd><p>“bflush” (5229) forces out any “delayed write” blocks. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0255.html" title="getfs (7167)"><img alt="Previous: getfs (7167)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0257.html" title="sumount (6144)"><img alt="Next: sumount (6144)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>pipe (7723)</TITLE>
+<META NAME="description" CONTENT="pipe (7723)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node271.html">
+<LINK REL="previous" HREF="node269.html">
+<LINK REL="up" HREF="node269.html">
+<LINK REL="next" HREF="node271.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4115"
+  HREF="node271.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4111"
+  HREF="node269.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4105"
+  HREF="node269.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4113"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4116"
+  HREF="node271.html">readp (7758)</A>
+<B> Up:</B> <A NAME="tex2html4112"
+  HREF="node269.html">Pipes</A>
+<B> Previous:</B> <A NAME="tex2html4106"
+  HREF="node269.html">Pipes</A>
+ &nbsp; <B>  <A NAME="tex2html4114"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000261000000000000000">
+pipe (7723)</A>
+</H2>
+
+<P>
+A ``pipe'' is created as a result of a 
+system call on the ``pipe'' procedure.
+
+<P>
+<DL>
+<DT><STRONG>7728:</STRONG></DT>
+<DD>Allocate an ``inode'' for the  root device;
+
+<P>
+</DD>
+<DT><STRONG>7731:</STRONG></DT>
+<DD>Allocate a ``file'' table entry;
+
+<P>
+</DD>
+<DT><STRONG>7736:</STRONG></DT>
+<DD>Remember the ``file''  table  entry
+as  ``r''  and  allocate  a  second
+``file'' table entry;
+
+<P>
+</DD>
+<DT><STRONG>7744:</STRONG></DT>
+<DD>Return user file  identifications
+      in R0 and R1;
+
+<P>
+</DD>
+<DT><STRONG>7746:</STRONG></DT>
+<DD>Complete  the  entries   in   the
+      ``file''   array  and  the  ``inode''
+      entry.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

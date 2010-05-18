@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Interrupt Priorities</TITLE>
+<META NAME="description" CONTENT="Interrupt Priorities">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node126.html">
+<LINK REL="previous" HREF="node124.html">
+<LINK REL="up" HREF="node120.html">
+<LINK REL="next" HREF="node126.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2266"
+  HREF="node126.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2262"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2256"
+  HREF="node124.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2264"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2267"
+  HREF="node126.html">Rules for Interrupt Handlers</A>
+<B> Up:</B> <A NAME="tex2html2263"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2257"
+  HREF="node124.html">Priorities</A>
+ &nbsp; <B>  <A NAME="tex2html2265"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000145000000000000000">
+Interrupt Priorities</A>
+</H2>
+
+<P>
+In UNIX, interrupt handling routines
+are initiated at the same priority as
+the interrupt priority.
+
+<P>
+This means that during the handling of
+the interrupt, a second interrupt from
+a device of the same priority class
+will be delayed until the processor
+priority is reduced, either by the execution of one of the ``spl'' procedures,
+which are intended for just this purpose (see lines 1293 to 1315), or by
+reloading the processor status word
+e.g. upon returning from the interrupt.
+
+<P>
+During interrupt handling, the processor priority may be raised temporarily
+to protect the integrity of certain
+operations. For instance, character
+oriented devices such as the paper tape
+reader/punch or the line printer interrupt at level four. Their interrupt
+handlers call ``getc'' (0930) or ``putc''
+(0967), which raise the processor
+priority temporarily to level five,
+while the character buffer queues are
+manipulated.
+
+<P>
+The interrupt handler for the console
+teletype makes use of a ``timeout''
+facility. This involves a queue which
+is also manipulated by the clock interrupt handler, which runs at level six.
+To prevent possible interference, the
+``timeout'' procedure (3835) runs at
+level seven (the highest possible
+level).
+
+<P>
+Usually it does not make sense to run
+an interrupt handler at a processor
+priority lower than the interrupt
+priority, for this would then risk a
+second interrupt of the same type, even
+from the same device, before completion
+of the processing of the first interrupt. This likely to be at
+best inconvenient and at worst disastrous. However the clock
+interrupt handler, which
+once per second has a lot of extra work
+to do, does exactly this.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2266"
+  HREF="node126.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2262"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2256"
+  HREF="node124.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2264"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2267"
+  HREF="node126.html">Rules for Interrupt Handlers</A>
+<B> Up:</B> <A NAME="tex2html2263"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2257"
+  HREF="node124.html">Priorities</A>
+ &nbsp; <B>  <A NAME="tex2html2265"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

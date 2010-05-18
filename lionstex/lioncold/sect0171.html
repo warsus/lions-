@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: wait (3270) (continued)</title>
+
+<link href="sect0172.html" title="ptrace (4164)" rel="next" />
+<link href="sect0170.html" title="stop (4016)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0170.html" title="stop (4016)"><img alt="Previous: stop (4016)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0172.html" title="ptrace (4164)"><img alt="Next: ptrace (4164)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">wait (3270) (continued)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000172">13.23 wait (3270) (continued)</h2>
+<dl class="description">
+
+    <dt>3301:</dt>
+    <dd><p>If the child process has “stopped” and ... </p></dd>
+
+    <dt>3302:</dt>
+    <dd><p>If the “SWTED” flag is not set (i.e. the parent hasn’t noticed this child lately) ... </p></dd>
+
+    <dt>3303:</dt>
+    <dd><p>As an “aide-memoire” set the “SWTED” flag. Set “u.u_ar0[R0]”, “u.u_ar0[R1]” so that the child process status word is returned to the parent; </p></dd>
+
+    <dt>3309:</dt>
+    <dd><p>The “SWTED” flag was set. This means that the parent, by performing at least two “waits” in succession without any intervening call on “ptrace”, is not very interested in the child. So reset both the “STRC” and the “SWTED” flags and release the child. (Note the use of “setrun” (not “wakeup”) to complement the call on “swtch” (4027)). </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0170.html" title="stop (4016)"><img alt="Previous: stop (4016)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0172.html" title="ptrace (4164)"><img alt="Next: ptrace (4164)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

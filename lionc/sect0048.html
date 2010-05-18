@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Variable Allocation</title>
+
+<link href="sect0049.html" title="Global Variables" rel="next" />
+<link href="sect0047.html" title="An Overview" rel="prev" />
+<link href="sect0047.html" title="An Overview" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0047.html" title="An Overview"><img alt="Previous: An Overview" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0049.html" title="Global Variables"><img alt="Next: Global Variables" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0047.html">An Overview</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Variable Allocation</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000049">4.1 Variable Allocation</h2>
+<p>The PDP11 architecture allows efficient access to variables whose absolute address is known, or whose address relative to the stack pointer can be determined exactly at compile time. </p><p>There is no hardware support for multiple lexical levels for variable declarations such as are available in block structured languages such as Algol or Pascal. Thus “C” as implemented on the PDP11 supports only two lexical levels: global and local. </p><p>Global variables are allocated statically; local variables are allocated dynamically within the current stack area or in the general registers (r2, r3 and r4 are used in this way). </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0047.html" title="An Overview"><img alt="Previous: An Overview" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0049.html" title="Global Variables"><img alt="Next: Global Variables" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

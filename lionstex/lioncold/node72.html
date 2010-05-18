@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>printn (2369)</TITLE>
+<META NAME="description" CONTENT="printn (2369)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node73.html">
+<LINK REL="previous" HREF="node71.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node73.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1590"
+  HREF="node73.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1586"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1580"
+  HREF="node71.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1588"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1591"
+  HREF="node73.html">putchar (2386)</A>
+<B> Up:</B> <A NAME="tex2html1587"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1581"
+  HREF="node71.html">printf (2340)</A>
+ &nbsp; <B>  <A NAME="tex2html1589"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00098000000000000000">
+printn (2369)</A>
+</H2>
+
+<P>
+This procedure calls itself recursively
+in order to generate the required
+digits in the required order. It might
+be possible to code this procedure more
+efficiently but not more completely.
+(Anyway, in view of the implementation
+of ``putchar'', efficiency is hardly a
+consideration here.)
+
+<P>
+Suppose n = A*b + B where A = ldiv(n,b)
+and where B = lrem(n,b) satisfies
+<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$0 \le B &lt; b$">. Then in order to display the
+value for n, we need to display the
+value for A followed by the value for B.
+
+<P>
+The latter is easy for b = 8 or 10: it
+consists of a single character. The
+former is easy if A = 0. It is also
+easy if ``printn'' is called recursively.
+Since A <IMG
+ WIDTH="63" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$&lt;$"> n, the chain of recursive
+calls must terminate.
+
+<P>
+<DL>
+<DT><STRONG>2375:</STRONG></DT>
+<DD>Arithmetic values corresponding
+ to digits are conveniently converted to their corresponding
+ character representations by the
+ addition of the character `0'.
+</DD>
+</DL>
+
+<P>
+The procedures ``ldiv'' and ``lrem'' treat
+their first parameter as an unsigned
+integer (i.e. no sign extension, when a
+16 bit value is extended to a 32 bit
+value before the actual division operation). They may be found beginning on
+lines 1392 and 1400 respectively.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1590"
+  HREF="node73.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1586"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1580"
+  HREF="node71.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1588"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1591"
+  HREF="node73.html">putchar (2386)</A>
+<B> Up:</B> <A NAME="tex2html1587"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1581"
+  HREF="node71.html">printf (2340)</A>
+ &nbsp; <B>  <A NAME="tex2html1589"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

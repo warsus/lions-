@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>File Systems</TITLE>
+<META NAME="description" CONTENT="File Systems">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node269.html">
+<LINK REL="previous" HREF="node240.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node252.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3867"
+  HREF="node252.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3863"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3857"
+  HREF="node250.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3865"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3868"
+  HREF="node252.html">The `Super Block' (5561)</A>
+<B> Up:</B> <A NAME="tex2html3864"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html3858"
+  HREF="node250.html">access (6746)</A>
+ &nbsp; <B>  <A NAME="tex2html3866"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000250000000000000000">
+File  Systems</A>
+</H1>
+
+<P>
+In most computer systems more than  one
+peripheral  storage  device is used for
+the storage of files. It is now  necessary  to  discuss  a  number of matters
+pertaining to the management by UNIX of
+the whole set of files and file storage
+devices. First, some definitions:
+
+<P>
+<DL>
+<DT><STRONG>file system:</STRONG></DT>
+<DD>an integrated collection  of files with a hierarchical
+system of directories recorded  on
+a  single  block  oriented storage
+device;
+
+<P>
+</DD>
+<DT><STRONG>storage device:</STRONG></DT>
+<DD>a device which can
+store information (especially disk
+pack or DECtape, etc.);
+
+<P>
+</DD>
+<DT><STRONG>access  device:</STRONG></DT>
+<DD>a  mechanism  for
+transferring   information  to  or
+from a storage device;
+
+<P>
+</DD>
+<DT><STRONG>a  storage   device</STRONG></DT>
+<DD>is    only
+<B>accessible</B> if it is inserted in an
+access device.  In this situation
+reference to the storage device is
+made via a reference to the access
+devce;
+
+<P>
+</DD>
+<DT><STRONG>a storage device</STRONG></DT>
+<DD>is acceptable  as
+a <B>file system volume</B> if:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>information   is   recorded   as
+     addressable  blocks of 512 characters  each,   which   can   be
+     independently read or written.
+
+<P>
+(Note  IBM  compatible  magnetic
+tape  does not satisfy this condition.);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>the information recorded  on  the
+     device  satisfies  certain  consistency criteria:
+
+<P>
+block #1 is formatted as a ``super block'' (see below);
+
+<P>
+blocks #2 to #(n+1)  (where n  is
+recorded  in  the ``super block'')
+contain an ``inode''  table  which
+references all files recorded on
+the storage device, and does not
+reference any other files;
+
+<P>
+directory files recorded on  the
+storage  device  reference  all,
+and  only,  files  on  the  same
+storage device, i.e. a file system volume
+constitutes  a  self-contained  set  of files,
+directories and ``inode'' table;
+</DD>
+</DL>
+
+<P>
+</DD>
+<DT><STRONG>a file system volume</STRONG></DT>
+<DD>is mounted if
+the presence of the storage device
+in an access device has been  formally  recognised by the operating
+system.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3869"
+  HREF="node252.html">The `Super Block'  (5561)</A>
+<LI><A NAME="tex2html3870"
+  HREF="node253.html">The 'mount' table (0272)</A>
+<LI><A NAME="tex2html3871"
+  HREF="node254.html">iinit (6922)</A>
+<LI><A NAME="tex2html3872"
+  HREF="node255.html">Mounting</A>
+<LI><A NAME="tex2html3873"
+  HREF="node256.html">smount (6086)</A>
+<LI><A NAME="tex2html3874"
+  HREF="node257.html">Notes</A>
+<LI><A NAME="tex2html3875"
+  HREF="node258.html">iget (7276)</A>
+<LI><A NAME="tex2html3876"
+  HREF="node259.html">getfs (7167)</A>
+<LI><A NAME="tex2html3877"
+  HREF="node260.html">update (7201)</A>
+<LI><A NAME="tex2html3878"
+  HREF="node261.html">sumount (6144)</A>
+<LI><A NAME="tex2html3879"
+  HREF="node262.html">Resource Allocation</A>
+<LI><A NAME="tex2html3880"
+  HREF="node263.html">alloc (6965)</A>
+<LI><A NAME="tex2html3881"
+  HREF="node264.html">itrunc (7414)</A>
+<LI><A NAME="tex2html3882"
+  HREF="node265.html">free (7000)</A>
+<LI><A NAME="tex2html3883"
+  HREF="node266.html">iput (7344)</A>
+<LI><A NAME="tex2html3884"
+  HREF="node267.html">ifree (7134)</A>
+<LI><A NAME="tex2html3885"
+  HREF="node268.html">iupdat (7374)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3867"
+  HREF="node252.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3863"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3857"
+  HREF="node250.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3865"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3868"
+  HREF="node252.html">The `Super Block' (5561)</A>
+<B> Up:</B> <A NAME="tex2html3864"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html3858"
+  HREF="node250.html">access (6746)</A>
+ &nbsp; <B>  <A NAME="tex2html3866"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

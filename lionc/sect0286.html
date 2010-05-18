@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: putc (0967)</title>
+
+<link href="sect0287.html" title="Character Sets" rel="next" />
+<link href="sect0285.html" title="getc (0930)" rel="prev" />
+<link href="sect0283.html" title="Character Handling" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0285.html" title="getc (0930)"><img alt="Previous: getc (0930)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0287.html" title="Character Sets"><img alt="Next: Character Sets" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0283.html">Character Handling</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">putc (0967)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000287">23.3 putc (0967)</h2>
+<p>This procedure is called by </p><pre>
+   canon     (8323)
+   ttyinput  (8355, 8358)
+   ttyoutput (8414, 8478)
+   pcrint    (8730)
+   pcoutput  (8756)
+   lpoutput  (8990)
+</pre><p>with two arguments: a character and the address of a “clist” structure. </p><p>“getc” and “putc” have related functions and the codes for the two procedures are similar in many respects. For this reason the code for “putc” will not be examined in detail, but is left for the reader. </p><p>It should be noted that “putc” can fail if a new “cblock” is needed and “cfreelist” is empty. In this case a non-zero value (line 1002) is returned rather than a zero value (line 0996). </p><p><b class="bf">Note.</b> The procedures “getc” and “putc” discussed here are <b class="bf">NOT</b> directly related to the procedures d1scussed in the Sections “GETC(III)” and “PUTC(III)” of the UPM. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0285.html" title="getc (0930)"><img alt="Previous: getc (0930)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0287.html" title="Character Sets"><img alt="Next: Character Sets" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

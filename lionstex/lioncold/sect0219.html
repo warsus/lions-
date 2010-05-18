@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Resources Required</title>
+
+<link href="sect0220.html" title="Opening a File" rel="next" />
+<link href="sect0218.html" title="inode (5659)" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0218.html" title="inode (5659)"><img alt="Previous: inode (5659)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0220.html" title="Opening a File"><img alt="Next: Opening a File" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Resources Required</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000220">18.6 Resources Required</h2>
+<p>Each file requires the dedication of certain system resources. When a file exists, but is not being referenced in any way, it requires: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>a directory entry (16 characters in a directory file); </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>a disk “inode” entry (32 characters in a table stored on the disk); </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>zero, one or more blocks of disk storage (512 characters each). </p></dd>
+
+</dl><p>In addition if the file is being referenced for some purpose, it requires </p><dl class="description">
+
+    <dt>(d)</dt>
+    <dd><p>a core “inode” entry (32 characters in the “inode” array); </p></dd>
+
+</dl><p>Finally if a user program has “opened” the file for reading or writing, a number of resources are required: </p><dl class="description">
+
+    <dt>(e)</dt>
+    <dd><p>a “file” array entry (8 characters); </p></dd>
+
+    <dt>(f)</dt>
+    <dd><p>an entry in the user program’s “u.u_ofile” array (one word per file, pointing to a “file” array entry); </p></dd>
+
+</dl><p>Mechanisms have to be set up for allocating and deallocating each of these resources in an orderly manner. The following table gives the names of the principal procedures involved: </p><center> <table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> <b class="bf">resource</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">obtain</b> </p></td>
+
+    
+    <td style="text-align:left"><p> <b class="bf">free</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>directory entry </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> namei </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> namei</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>disk “inode” entry </p></td>
+
+    
+    <td style="text-align:left"><p> ialloc </p></td>
+
+    
+    <td style="text-align:left"><p> ifree</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>disk storage block </p></td>
+
+    
+    <td style="text-align:left"><p> alloc </p></td>
+
+    
+    <td style="text-align:left"><p> free</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>core “inode” entry </p></td>
+
+    
+    <td style="text-align:left"><p> iget </p></td>
+
+    
+    <td style="text-align:left"><p> iput</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>“file” table entry </p></td>
+
+    
+    <td style="text-align:left"><p> falloc </p></td>
+
+    
+    <td style="text-align:left"><p> closef</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>“u_ofile” entry </p></td>
+
+    
+    <td style="text-align:left"><p> ufalloc </p></td>
+
+    
+    <td style="text-align:left"><p> close</p></td>
+
+</tr>
+</table> </center></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0218.html" title="inode (5659)"><img alt="Previous: inode (5659)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0220.html" title="Opening a File"><img alt="Next: Opening a File" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

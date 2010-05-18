@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Traps</TITLE>
+<META NAME="description" CONTENT="Traps">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node128.html">
+<LINK REL="previous" HREF="node126.html">
+<LINK REL="up" HREF="node120.html">
+<LINK REL="next" HREF="node128.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2290"
+  HREF="node128.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2286"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2280"
+  HREF="node126.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2288"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2291"
+  HREF="node128.html">Assembly Language `trap'</A>
+<B> Up:</B> <A NAME="tex2html2287"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2281"
+  HREF="node126.html">Rules for Interrupt Handlers</A>
+ &nbsp; <B>  <A NAME="tex2html2289"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000147000000000000000">
+Traps</A>
+</H2>
+
+<P>
+``Traps'' are like ``interrupts'' in that
+they are events which are handled by
+the same hardware mechanism, and hence
+by similar software mechanisms.
+
+<P>
+``Traps'' are unlike ``interrupts'' in that
+they occur as the result of events
+internal to the CPU, rather than externally. (In other systems the
+terminology ``internal interrupt'' and ``external
+interrupt'' is used to draw this distinction more forcefully.) Traps may
+occur unexpectedly as the result of
+hardware or power failures, or predictably and reproducibly, e.g. as the
+result of executing an illegal instruction or a ``trap'' instruction.
+
+<P>
+``Traps'' are always recognised by the
+CPU immediately. They cannot be delayed
+in the way low priority interrupts may
+be. If you like, ``traps'' have an
+``interrupt priority'' of eight.
+
+<P>
+``Trap'' instructions may be deliberately
+inserted in user mode programs to catch
+the attention of the operating system
+with a request to perform a specified
+service. This mechanism is used as part
+of the facility known as ``system
+calls''.
+
+<P>
+Like interrupts, traps result in the
+reloading of the PC and PS from a vector location, and the saving of the old
+values of the PC and PS in the current
+stack. Table 9.2 lists the vector locations for the various ``trap'' types.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>vector</B></TD>
+<TD ALIGN="LEFT"><B>trap type</B></TD>
+<TD ALIGN="CENTER"><B>process</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><B>location</B></TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+<TD ALIGN="CENTER"><B>priority</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">004</TD>
+<TD ALIGN="LEFT">bus timeout</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">010</TD>
+<TD ALIGN="LEFT">illegal instruction</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">014</TD>
+<TD ALIGN="LEFT">bpt-trace</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">020</TD>
+<TD ALIGN="LEFT">iot</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">024</TD>
+<TD ALIGN="LEFT">power failure</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">030</TD>
+<TD ALIGN="LEFT">emulator trap instruction</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">034</TD>
+<TD ALIGN="LEFT">trap instruction</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">114</TD>
+<TD ALIGN="LEFT">11/10 parity</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">240</TD>
+<TD ALIGN="LEFT">programmed interrupt</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">244</TD>
+<TD ALIGN="LEFT">floating point error</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+<TR><TD ALIGN="LEFT">250</TD>
+<TD ALIGN="LEFT">segmentation violation</TD>
+<TD ALIGN="CENTER">7</TD>
+</TR>
+</TABLE>
+</DIV>
+<P><P>
+<BR>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<DIV ALIGN="CENTER"><B>Table 9.2 Trap Vector Locations and Priorities</B>
+
+</DIV>
+
+<P>
+The contents of Tables 9.1 and 9.2
+should be compared with the file
+``low.s'' on Sheet 05. As noted earlier,
+this file is generated at each installation (along with the file ``conf.c''
+(sheet 46)), as the product of the
+utility program ``mkconf'', so as to
+reflect the actual set of peripherals
+installed.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2290"
+  HREF="node128.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2286"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2280"
+  HREF="node126.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2288"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2291"
+  HREF="node128.html">Assembly Language `trap'</A>
+<B> Up:</B> <A NAME="tex2html2287"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2281"
+  HREF="node126.html">Rules for Interrupt Handlers</A>
+ &nbsp; <B>  <A NAME="tex2html2289"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

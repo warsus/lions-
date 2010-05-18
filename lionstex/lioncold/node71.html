@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>printf (2340)</TITLE>
+<META NAME="description" CONTENT="printf (2340)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node72.html">
+<LINK REL="previous" HREF="node70.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node72.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1578"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1574"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1568"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1576"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1579"
+  HREF="node72.html">printn (2369)</A>
+<B> Up:</B> <A NAME="tex2html1575"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1569"
+  HREF="node70.html">The File `prf.c'</A>
+ &nbsp; <B>  <A NAME="tex2html1577"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00097000000000000000">
+printf (2340)</A>
+</H2>
+
+<P>
+The procedure ``printf'' provides a
+direct, unsophisticated low-level,
+unbuffered way for the operating system
+to send messages to the system console
+terminal. It is used during initialisation and to report hardware errors or
+the imminent collapse of the system.
+
+<P>
+(These versions of ``printf'' and
+``putchar'' run in kernel mode and are
+similar to, but not the same as, the
+versions invoked by a ``C'' program which
+runs in user mode. The latter versions
+of ``printf'' and ``putchar'' live in the
+library ``/lib/libc.a''. You may still
+find it useful to read the sections
+``PRINTF(III)'' and ``PUTCHAR(III)'' of the
+UPM at this point.)
+
+<P>
+<DL>
+<DT><STRONG>2340:</STRONG></DT>
+<DD>The programmer must have been
+ carried away when he declared all
+ the parameters for this procedure. In fact the procedure
+ body only contains references to
+ ``xl'' and ``fmt''.
+</DD>
+</DL>
+
+<P>
+This serves to reveal one of the facts
+of ``C'' programming. The rules for
+matching parameters in procedure calls
+and procedure declarations are not
+enforced, not even with respect to the
+numbers of parameters.
+
+<P>
+Parameters are placed on the stack in
+<B>reverse</B> order. Thus when ``printf'' is
+called ``fmt'' will be nearer to the ``top
+of stack'' than ``xl'', etc.
+
+<P>
+<PRE>
+        |   .   |
+        ---------
+        |   .   |
+        ---------
+        |   .   |        stack grows down
+        ---------
+        |   .   |
+        ---------
+        |  x2   |
+        ---------
+        |  xl   |
+        ---------
+        |  fmt  |
+        ---------
+        |   .   |        top of stack
+        ---------
+</PRE>
+
+<P>
+``xl'' has a higher address then ``fmt''
+but a lower address then ``x2'', because
+stacks grow downwards on the PDP11.
+
+<P>
+<DL>
+<DT><STRONG>2341:</STRONG></DT>
+<DD>``fmt'' may be interpreted as a
+ constant character pointer. This
+ declaration is (almost)
+ equivalent to
+
+<P>
+``char *fmt;''
+
+<P>
+The difference is that here the
+value of ``fmt'' cannot be changed;
+
+<P>
+</DD>
+<DT><STRONG>2346:</STRONG></DT>
+<DD>``adx'' is set to point to ``xl''.
+ The expression ``&amp;xl'' is the
+ address of ``xl''. Note that since
+ ``xl'' is a stack location, this
+ expression cannot be evaluated at
+ compile time.
+
+<P>
+(Many of the expressions you will
+find elsewhere involving the
+addresses of variables or arrays
+are effective because they <B>can</B> be
+evaluated at compile or load
+time.);
+
+<P>
+</DD>
+<DT><STRONG>2348:</STRONG></DT>
+<DD>Extract into the register ``c''
+ successive characters from the
+ format string;
+
+<P>
+</DD>
+<DT><STRONG>2349:</STRONG></DT>
+<DD>If ``c'' is not a `%' then ...
+
+<P>
+</DD>
+<DT><STRONG>2350:</STRONG></DT>
+<DD>If ``c'' is a null character
+ (`<code>\</code>0'), this indicates the end of
+ the format string in the normal
+ way, and ``printf'' terminates;
+
+<P>
+</DD>
+<DT><STRONG>2351:</STRONG></DT>
+<DD>Otherwise call ``putchar'' to send
+ the character to the system console terminal;
+
+<P>
+</DD>
+<DT><STRONG>2353:</STRONG></DT>
+<DD>A `%' character has been seen.
+ Get the next character (it had
+ better not be the `<code>\</code>0'!);
+
+<P>
+</DD>
+<DT><STRONG>2354:</STRONG></DT>
+<DD>If this character is a `d' or `l'
+ or `o', call ``printn'' passing as
+ parameters the value referenced
+ by ``adx'' and either the value ``8''
+ or ``10'' depending on whether ``c''
+ is `o' or not. (The `d' and `l'
+ codes are clearly equivalent.)
+
+<P>
+``printn'' expresses the binary
+numbers as a set of digit characters according to the radix 
+supplied as the second parameter;
+
+<P>
+</DD>
+<DT><STRONG>2356:</STRONG></DT>
+<DD>If the editing character is `s',
+ then all but the last character
+ of a null terminated string is to
+ be sent to the terminal. ``adx''
+ should point to a character
+ pointer in this case;
+
+<P>
+</DD>
+<DT><STRONG>2361:</STRONG></DT>
+<DD>Increment ``adx'' to point to the
+ next word in the stack i.e. to
+ the next parameter passed to
+ ``printf'';
+
+<P>
+</DD>
+<DT><STRONG>2362:</STRONG></DT>
+<DD>Go back to line 2347 and continue
+ scanning the format string.
+ Enthusiasts for structured programming will prefer to replace
+ lines 2347 and this by
+ ``while (1) {'' and ``}''
+respectively .
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1578"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1574"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1568"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1576"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1579"
+  HREF="node72.html">printn (2369)</A>
+<B> Up:</B> <A NAME="tex2html1575"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1569"
+  HREF="node70.html">The File `prf.c'</A>
+ &nbsp; <B>  <A NAME="tex2html1577"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

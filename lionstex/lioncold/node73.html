@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>putchar (2386)</TITLE>
+<META NAME="description" CONTENT="putchar (2386)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node74.html">
+<LINK REL="previous" HREF="node72.html">
+<LINK REL="up" HREF="node64.html">
+<LINK REL="next" HREF="node74.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1602"
+  HREF="node74.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1598"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1592"
+  HREF="node72.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1600"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1603"
+  HREF="node74.html">panic (2419)</A>
+<B> Up:</B> <A NAME="tex2html1599"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1593"
+  HREF="node72.html">printn (2369)</A>
+ &nbsp; <B>  <A NAME="tex2html1601"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00099000000000000000">
+putchar (2386)</A>
+</H2>
+
+<P>
+This procedure transmits to the system
+console the character which was passed
+as a parameter.
+
+<P>
+It illustrates in a small way the basic
+features of i/o operations on the PDP11
+computer.
+
+<P>
+<DL>
+<DT><STRONG>2391:</STRONG></DT>
+<DD>``SW'' is defined on line 0166 as
+ the value ``0177570''. This is the
+kernel address of a read only
+processor register which stores
+the setting of the console switch
+register.
+
+<P>
+The meaning of the statement is
+clear: get the contents at location 0177570 and see if they are
+zero. The problem is to express
+this in ``C''. The code
+
+<P>
+if (SW == 0)
+
+<P>
+would not have conveyed this
+meaning. Clearly ``SW'' is a
+pointer value which should be
+dereferenced. The compiler might
+have been changed to accept
+
+<P>
+if (SW-<IMG
+ WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$&gt;$"> == 0)
+
+<P>
+but as it stands, this is syntactically incorrect. By inventing a
+dummy structure, with an element
+``integ'' (see line 0175), the programmer has found a satisfactory
+solution to his problem.
+</DD>
+</DL>
+
+<P>
+Several other examples of this programming device will be found in this
+procedure and elsewhere.
+
+<P>
+In hardware terms, the system console
+terminal interface consists of four 16
+bit control registers which are given
+consecutive addresses on the Unibus
+beginning at kernel address 0177560
+(see the declaration for ``KL'' on line
+0165.) For a description of the formats
+and usage of these registers, see
+Chapter Twenty-Four of the ``PDP11 Peripherals Handbook''.
+
+<P>
+In software terms, this interface is
+the unnamed structure which is defined
+beginning on line 2313, with four elements which name the four control
+registers. It does not matter that the
+structure is unnamed because it is not
+necessary to allocate any instances of
+it (the one we are interested in is
+essentially predefined, at the address
+given by ``KL'').
+
+<P>
+<DL>
+<DT><STRONG>2393:</STRONG></DT>
+<DD>While bit 7 of the transmitter
+ status register (``XST'') is off,
+ keep doing nothing, because the
+ interface is not ready to accept
+ another character.
+</DD>
+</DL>
+
+<P>
+This is a classic case of ``busy waiting'' where the processor is allowed to
+cycle uselessly through a set of
+instructions until some externally
+defined event occurs. Such waste of
+processing power cannot normally be
+tolerated but this procedure is only
+used in unusual situations.
+
+<P>
+<DL>
+<DT><STRONG>2395:</STRONG></DT>
+<DD>The need for this statement is
+ tied up with the statement on
+ line 2405;
+
+<P>
+</DD>
+<DT><STRONG>2397:</STRONG></DT>
+<DD>Save the current contents of the
+ transmitter status register;
+
+<P>
+</DD>
+<DT><STRONG>2398:</STRONG></DT>
+<DD>Clear the transmitter status
+ register preparatory to sending
+ the next character:
+
+<P>
+</DD>
+<DT><STRONG>2399:</STRONG></DT>
+<DD>With bit 7 of the control status
+ register reset, move the next
+ character to be transmitted to
+ the transmitter buffer register.
+ This initiates the next output
+ operation;
+
+<P>
+</DD>
+<DT><STRONG>2400:</STRONG></DT>
+<DD>A ``new line'' character needs to
+ be accompanied by a ``carriage
+ return'' character and this is
+ accomplished by a recursive call
+ on ``putchar''.
+
+<P>
+A couple of extra ``delete'' characters are thrown in also to
+allow for any delays in completing the carriage return operation
+at the terminal;
+
+<P>
+</DD>
+<DT><STRONG>2405:</STRONG></DT>
+<DD>This call on ``putchar'' with an
+ argument of zero effectively
+ results in a re-execution of
+ lines 2391 to 2394.
+
+<P>
+(It is very hard to see why the
+programmer chose to use a recursive call here in preference to
+simply repeating lines 2393 and
+2394, since both code efficiency
+and compactness not to mention
+clarity seem to have suffered.);
+
+<P>
+</DD>
+<DT><STRONG>2406:</STRONG></DT>
+<DD>Restore the contents of the
+ transmitter status register. In
+ particular if bit 6 was formerly
+ set to enable interrupts then
+ this resets it.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1602"
+  HREF="node74.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1598"
+  HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1592"
+  HREF="node72.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1600"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1603"
+  HREF="node74.html">panic (2419)</A>
+<B> Up:</B> <A NAME="tex2html1599"
+  HREF="node64.html">Two Files</A>
+<B> Previous:</B> <A NAME="tex2html1593"
+  HREF="node72.html">printn (2369)</A>
+ &nbsp; <B>  <A NAME="tex2html1601"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

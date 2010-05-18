@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Character Handling</TITLE>
+<META NAME="description" CONTENT="Character Handling">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node297.html">
+<LINK REL="previous" HREF="node275.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node288.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4326"
+  HREF="node288.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4322"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4316"
+  HREF="node286.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4324"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4327"
+  HREF="node288.html">cinit (8234)</A>
+<B> Up:</B> <A NAME="tex2html4323"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html4317"
+  HREF="node286.html">PC-11 Paper Tape Reader/Punch</A>
+ &nbsp; <B>  <A NAME="tex2html4325"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000280000000000000000">
+Character Handling</A>
+</H1>
+
+<P>
+Buffering for character special devices
+is provided via a set of four word
+blocks, each of which provides storage
+for six characters. The prototype
+storage block is ``cblock'' (8140) which
+incorporates a word pointer (to a similar
+structure) along with the six characters.
+
+<P>
+Structures of type ``clist'' (7908) which
+contain a character counter plus a head
+and tail pointer are used as ``headers''
+for lists of blocks of type ``cblock''.
+
+<P>
+``cblock''s which are not in current use
+are linked via their head pointers into
+a list whose head is the pointer
+``cfreelist'' (3149). The head pointer
+for the last element of the list has
+the value ``NULL''.
+
+<P>
+A list of ``cblock''s provides storage
+for a list of characters. The procedure
+``putc'' may be used to add a character
+to the tail of such a list, and ``getc'',
+to remove a character from the head of
+such a list.
+
+<P>
+Figures 23.1 through 23.4 illustrate
+the development of a list as characters
+are deleted and added.
+
+<P>
+<BR>
+<BR>
+ <BR>
+<IMG
+ WIDTH="30" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img11.png"
+ ALT="\begin{picture}(245,155)(40,525)\thicklines
+\put(185,540){\framebox{(}25,140)...
+...ut(140,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm f}}}
+\end{picture}">
+<BR>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<FONT SIZE="+1"><B>Figure 23.1</B></FONT>
+
+</DIV>
+<BR>
+
+<P>
+<BR>
+<BR>
+ <BR>
+<IMG
+ WIDTH="317" HEIGHT="186" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="\begin{picture}(245,155)(40,525)\thicklines
+\put(185,540){\framebox{(}25,140)...
+...t( 48,584){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm 13}}}
+\end{picture}">
+<BR>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<FONT SIZE="+1"><B>Figure 23.2</B></FONT>
+
+</DIV>
+<BR>
+
+<P>
+Initially the list is assumed to contain the fourteen characters
+``efghijklmnopqr''. Note that the head
+and tail pointers point to <B>characters</B>.
+If the first character, ``e'', is removed
+by ``getc'', the situation portrayed in
+Figure 23.1 changes to that of Figure
+23.2. The character count has been
+decremented and the head pointer has
+been advanced by one character position.
+
+<P>
+If a further character, ``f'', is removed
+from the head of the list, the
+situation becomes as in Figure 23.3.
+The character count has been decremented;
+the first ``cblock'' no longer
+contains any useful information and has
+been returned to ``cfreelist''; and the
+head pointer now points to the first
+character in the second ``cblock''.
+
+<P>
+<BR>
+<BR>
+ <BR>
+<IMG
+ WIDTH="317" HEIGHT="186" ALIGN="BOTTOM" BORDER="0"
+ SRC="img13.png"
+ ALT="\begin{picture}(245,155)(40,525)\thicklines
+\put(185,540){\framebox{(}25,140)...
+...t( 48,584){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm 12}}}
+\end{picture}">
+<BR>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<FONT SIZE="+1"><B>Figure 23.3</B></FONT>
+
+</DIV>
+<BR>
+
+<P>
+The question now poses itself: ``how is
+the difference between the first and
+second situations detected so that the
+action taken is always appropriate?'':
+
+<P>
+The answer (if you have not already
+guessed) involves looklng at the value
+of the pointer address modulo 8. Since
+division by eight is easily performed
+on a binary computer, the reason for
+the choice of six characters per
+``cblock'' should now also be apparent.
+
+<P>
+The addition of a character to the list
+is illustrated in the change between
+Figure 23.3  and Figure 23.4.
+
+<P>
+<BR>
+<BR>
+ <BR>
+<IMG
+ WIDTH="317" HEIGHT="186" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="\begin{picture}(305,155)(60,525)\thicklines
+\put(185,540){\framebox{(}25,140)...
+...t( 48,584){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm 13}}}
+\end{picture}">
+<BR>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<FONT SIZE="+1"><B>Figure 23.4</B></FONT>
+
+</DIV>
+<BR>
+
+<P>
+Since the last ``cblock'' ln Figure 23.3
+was full, a new one has been obtained
+from ``cfreelist'' and linked into the
+list of ``cblock''s. The character count
+and tail pointer have been adjusted appropriately.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html4328"
+  HREF="node288.html">cinit (8234)</A>
+<LI><A NAME="tex2html4329"
+  HREF="node289.html">getc (0930)</A>
+<LI><A NAME="tex2html4330"
+  HREF="node290.html">putc (0967)</A>
+<LI><A NAME="tex2html4331"
+  HREF="node291.html">Character Sets</A>
+<LI><A NAME="tex2html4332"
+  HREF="node292.html">Control Characters</A>
+<LI><A NAME="tex2html4333"
+  HREF="node293.html">Graphic Characters</A>
+<LI><A NAME="tex2html4334"
+  HREF="node294.html">Graphic Character Sets</A>
+<LI><A NAME="tex2html4335"
+  HREF="node295.html">maptab (8117)</A>
+<LI><A NAME="tex2html4336"
+  HREF="node296.html">partab (7947)</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4326"
+  HREF="node288.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4322"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4316"
+  HREF="node286.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4324"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4327"
+  HREF="node288.html">cinit (8234)</A>
+<B> Up:</B> <A NAME="tex2html4323"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html4317"
+  HREF="node286.html">PC-11 Paper Tape Reader/Punch</A>
+ &nbsp; <B>  <A NAME="tex2html4325"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

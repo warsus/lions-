@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ttyinput (8333)</TITLE>
+<META NAME="description" CONTENT="ttyinput (8333)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node323.html">
+<LINK REL="previous" HREF="node321.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node323.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4783"
+  HREF="node323.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4779"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4773"
+  HREF="node321.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4781"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4784"
+  HREF="node323.html">Character Output - ttwrite</A>
+<B> Up:</B> <A NAME="tex2html4780"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4774"
+  HREF="node321.html">Notes</A>
+ &nbsp; <B>  <A NAME="tex2html4782"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000307000000000000000">
+ttyinput (8333)</A>
+</H2>
+
+<P>
+``canon'' removes characters from the
+``raw'' input queue. They are put there
+in the first place by ``ttyinput'' which
+is called by ``klrint'' (8087) whenever
+an input character is received from the
+hardware controller.
+
+<P>
+The parameters passed to ``ttyinput'' are
+a character and a reference to a ``tty''
+structure.
+
+<P>
+<DL>
+<DT><STRONG>8342:</STRONG></DT>
+<DD>If the character is a ``carriage
+return'' and the terminal operates
+with a ``carriage return'' only
+(instead of a ``carriage return''
+``line feed'' pair) change the
+character to a ``new line'';
+
+<P>
+</DD>
+<DT><STRONG>8344:</STRONG></DT>
+<DD>If the terminal is not operating
+in ``raw'' mode and the character
+is a ``quit'' or ``delete'' (7958)
+then call ``signal'' (3949) to send
+a software interrupt to every
+process which has the terminal as
+its controlling terminal, flush
+all the queues associated with
+the terminal, and return;
+
+<P>
+</DD>
+<DT><STRONG>8349:</STRONG></DT>
+<DD>If the ``raw'' input queue has
+grown excessively large, flush
+<B>all</B> the queues for the terminal
+and return. (This may seem a
+trifle harsh at first sight but
+it will usually be what is
+required.);
+
+<P>
+</DD>
+<DT><STRONG>8353:</STRONG></DT>
+<DD>If the terminal has a limited
+character set, and the character
+is an upper case alphabetic,
+translate it into lower case;
+
+<P>
+</DD>
+<DT><STRONG>8355:</STRONG></DT>
+<DD>Insert the character into the
+``raw'' input queue;
+
+<P>
+</DD>
+<DT><STRONG>8356:</STRONG></DT>
+<DD>If the terminal is operating in
+``raw'' mode, or the character was
+a ``new line'' or ``eot'' then ...
+
+<P>
+</DD>
+<DT><STRONG>8357:</STRONG></DT>
+<DD>``wakeup'' any process waiting for
+input from the terminal, place a
+delimiter character (all ones)
+also in the ``raw'' queue and
+increment the delimiter count
+Note this is one point where possible failure of ``putc'' (when
+there is no buffer space) is
+explicitly recognised. A failure
+occurring here would explain why
+the test on line 8316 may sometimes succeed.
+
+<P>
+</DD>
+<DT><STRONG>8361:</STRONG></DT>
+<DD>Finally, if the input character
+is to be echoed i.e. the terminal
+is running in full duplex mode,
+insert a copy of the character
+into the output queue, and and
+arrange to have it transmitted
+(``ttstart'') back to the terminal.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4783"
+  HREF="node323.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4779"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4773"
+  HREF="node321.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4781"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4784"
+  HREF="node323.html">Character Output - ttwrite</A>
+<B> Up:</B> <A NAME="tex2html4780"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4774"
+  HREF="node321.html">Notes</A>
+ &nbsp; <B>  <A NAME="tex2html4782"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

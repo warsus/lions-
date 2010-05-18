@@ -1,0 +1,460 @@
+%
+% The Lion's Commentary, file ch17.tex, version 1.5, 16 May 1994
+%
+\se{Buffer Manipulation}
+
+In this chapter we look at the file
+``bio.c'' in detail. It contains most of
+the basic routines used to manipulate
+buffer headers and buffers (4535,
+4720).
+
+
+Individual buffer headers are tagged by
+a device number ``b\_dev'', (4527) and a
+block number ``b\_blkno'', (4531). (Note
+the way in which the latter is declared
+as an unsigned integer.)
+
+Buffer headers may be linked simultaneously into two lists:
+
+\bd
+\item[the ``b''-lists] are lists, one per
+device controller, which link
+together buffers associated with
+that device type;
+
+\item[the ``av''-list] is a list of buffers
+which may be detached from their
+current use and converted to an
+alternate use.
+\ed
+
+Both the ``av''-list and the various
+``b''-lists are doubly linked to facilitate insertion and deletion at any
+point.
+
+\sbs{Flags}
+
+If a buffer is withdrawn temporarily
+from the ``av''-list, then its ``B\_BUSY''
+flag is raised.
+
+If the contents of a buffer correctly
+reflect the information that is or
+should be stored on disk, then the
+``B\_DONE'' flag is raised.
+
+If the ``B\_DELWRI'' flag is raised, the
+contents of the buffer are more up to
+date than the contents of the
+corresponding disk block, and hence the
+buffer must be written out before it
+can be reassigned.
+
+
+\sbs{A Cache-like Memory}
+
+It will be seen that the large buffers
+in UNIX are manipulated in a way which
+is analogous to the operation of
+hardware cache attached to the main
+memory of a computer e.g. the PDP11/70.
+
+Buffers are not assigned to any particular program or file, except for very
+short intervals at a time. In this way
+a relatively small number of buffers
+can be shared effectively amongst a
+large number of programs and files.
+
+Information is left in the buffers
+until the buffer is needed i.e. immediate ``write through'' is avoided if only
+part of the buffer has recently been
+changed. Programs which read or write
+records which are small compared with
+the buffer size are then not penalised
+unduly.
+
+Finally when programs are terminated
+and files are closed, the problems of
+ensuring that the program's buffers are
+flushed properly (problems which have
+plagued other operating systems) have
+largely disappeared.
+
+There is one area of practical concern:
+if the decision ``when to write'' is left
+to the operating system alone, then
+some buffers may not be written out for
+a very long time. Accordingly there is
+a utility program which runs twice per
+minute and forces all such buffers to
+be written out unconditionally. This
+limits the likely amount of damage that
+a sudden system crash may cause.
+
+
+\sbs{clrbuf (5038)}
+
+This routine zeros out the first 256
+words (512 bytes) of the buffer. Note
+that the parameter passed to ``clrbuf''
+is the address of the buffer header.
+``clrbuf'' is called by ``alloc'' (6982).
+
+\sbs{incore (4899)}
+
+This routine searches for a buffer that
+is already assigned to a particular
+(device, block number) pair. It
+searches the circular ``b''-list whose
+head is the ``devtab'' structure for the
+device type. If a buffer is found, the
+address of the buffer header is
+returned. ``incore'' is called by
+``breada'' (4780, 4788).
+
+\sbs{getblk (4921)}
+
+This routine performs the same search
+as ``incore'' but goes further in that if
+the initial search is unsuccessful, a
+buffer is allocated from the ``av''-list
+(available list).
+
+By a call on ``notavail'' (4999), the
+buffer is removed from the ``av''-list
+and flagged as ``B\_BUSY''.
+
+
+
+``getblk'' is more suspicious of its
+parameters than ``incore''. It is called
+by
+
+\begin{verbatim}
+  exec   (3040)        writei (6304)
+  exit   (3237)        iinit  (6928)
+  bread  (4758)        alloc  (6981)
+  breada (4781,4789)   free   (7016)
+  smount (6123)        update (7216)
+\end{verbatim}
+
+
+\bd
+\item[4940:] At this point the required buffer
+ has been located by searching the
+ ``b''-list. Either it is ``B\_BUSY''
+ in which case a ``sleep'' must be
+ taken (4943), or else it is
+ appropriated (4948);
+
+\item[4953:] If the required buffer has not
+been located, and if the
+``av''-list is empty, set the
+``B\_WANTED'' flag for the ``av''-list
+and go to ``sleep'' (4955);
+
+\item[4960:] If the ``av''-list is not empty,
+ select the first member, and if
+ it represents a ``delayed write''
+ arrange to have it written out
+ asynchronously (4962);
+
+\item[4966:] ``B\_RELOC'' is a relic! (See 4583);
+
+\item[4967:] The code from here until 4973
+unconditionally removes the
+buffer from the ``b''-list for its
+current device type and reinserts
+it into the bn-list for the new
+device type. Since this will frequently be a ``no-op'' i.e. the new
+and old device type will be the
+same, it would seem desirable to
+insert a test
+
+\begin{verbatim}
+ if (bp->b_dev == dev)
+\end{verbatim}
+
+\noindent before executing lines 4967 to
+4974.
+
+Note the special handling for calls where\\
+``dev == NODEV'' (--1).
+(Such calls incidentally are made
+without a second parameter - tut!
+tut! See e.g. 3040.)
+\ed
+
+``bfreelist'' serves as the ``devtab''
+structure for the ``b''-list for ``NODEV''.
+
+\sbs{brelse (4869)}
+
+This procedure takes the buffer passed
+as a parameter and links it back into
+the ``av''-list.
+
+Any process which is either waiting for
+the particular buffer or any available
+buffer is woken up.
+
+Note however that since both ``sleeps''
+(4943, 4955) are at the same priority,
+if two processes are waiting -- one for
+the particular buffer and one for any
+buffer -- it will be a toss-up which
+will get it.
+
+By giving the first priority over the
+second (e.g. by biasing by one) the
+race should be resolved more satisfactorily. The disadvantage of such a
+change might be that it could lead to a
+deadlock situation in certain rather
+peculiar circumstances.
+
+If an error has occurred e.g. upon
+reading information into the buffer
+the information in the buffer may be
+incorrect. The assignment on line 4883
+ensures that the information in the
+buffer will not be mistakenly retrieved
+subsequently. The ``B\_ERROR'' flag is
+set e.g. by ``rkstrategy'' (5403) and
+``rkintr'' (5467).
+
+To see how this could occur, consider
+what happens to a buffer when a disk
+i/o operation is completed:
+
+\bd
+\item[5471] ``rkintr'' calls ``iodone'';
+\item[5026] ``iodone'' sets the ``B\_DONE'' flag;
+\item[5028] ``iodone'' calls ``brelse'';
+\item[4387] ``brelse'' resets the ``B\_WANTED'',
+``B\_BUSY'' and ``B\_ASYNC'' flags
+but not the ``B\_DONE'' flag;
+
+. . . . . . . . . . . .
+
+\item[4948] ``getblk'' finds the buffer and
+ calls ``notavail'';
+\item[5010] ``notavail'' sets the ``B\_BUSY'' flag;
+\item[4759] ``bread'' (which called ``getblk'')
+ finds the ``B\_DONE'' flag set and exits.
+\ed
+
+Note that buffer headers are removed
+from the ``av''-list by ``notavail'' and
+are returned by ``brelse''. Buffer
+headers are moved from one ``b''-list to
+another by ``getblk''.
+
+
+\sbs{binit (5055)}
+
+This procedure is called by ``main''
+(1614) to initialise the buffer pool.
+Empty, doubly linked circular lists are
+set up:
+
+\bi
+\item for the ``av''-list (``bfreelist'' is
+ head);
+
+\item the ``b''-list for null devices (``dev
+ == NODEV'') (``bfreelist'' is again
+ head);
+
+\item a ``b''-list for each major device
+ type.
+\ei
+
+\noindent For each buffer:
+
+\bi
+\item the buffer header is linked into the
+ ``b''-list for the device ``NODEV'' (--1);
+
+\item the address of the buffer is set in
+ the header (5067);
+
+\item the buffer flags are set as ``B\_BUSY''
+ (this doesn't seem to be really
+ necessary) (5072);
+
+\item the buffer header is linked into the
+ ``av''-list by a call on ``brelse'' (5073);
+\ei
+
+
+The number of block devices is recorded
+as ``nblkdev''. This is used for checking
+values for ``dev'' in ``getblk'' (4927),
+``getmdev'' (6192) and ``openi'' (6720).
+Inspection of ``bdevsw'' (4656) shows
+that ``nblkdev'' will be set to eight
+whereas the value one is what is really
+required.
+
+This result could be obtained by ``editing'' as follows:
+
+\begin{verbatim}
+    /5084/m/5081/ "nblkdev=i;
+    /5083/m/5077/ "i++
+\end{verbatim}
+
+\sbs{bread (4754)}
+
+This is the standard procedure for
+reading from block devices. It is
+called by:
+
+\begin{verbatim}
+  wait   (3282)      iinit  (6927)
+  breada (4799)      alloc  (6973)
+  statl  (6051)      ialloc (7097)
+  smount (6116)      iget   (7319)
+  readi  (6258)      iupdat (7386)
+  writei (6305)      itrunc (7426, 7431)
+  bmap   (6472,6488) namei  (7625) 
+\end{verbatim}
+
+``getblk'' finds a buffer. If the
+``B\_DONE'' flag is set no i/o is needed.
+
+\sbs{breada (4773)}
+
+This procedure has an additional parameter, as compared with ``bread''. It is
+called only by ``readi'' (6256).
+
+\bd
+\item[4780:] Check if the desired block has
+ already been assigned to a
+ buffer. (It may not yet be
+ available, but at least is it
+ there?);
+
+\item[4781:] If not initiate the necessary
+read operation but don't wait for
+it to finish;
+
+\item[4788:] Look around for the ``read ahead''
+ block. If it is not there, allocate a buffer (4789) but release
+ it (4791) if the buffer is
+ already ready;
+
+\item[4793:] The ``read ahead'' block is not
+ ready, so initiate an asynchronous read operation;
+
+\item[4798:] If a buffer was assigned to the
+ current block call ``bread'' to
+ wrap it up, else...
+
+\item[4800:] Wait for the completion of the
+ operation which was started at
+ line 4785.
+\ed
+
+
+\sbs{bwrite (4809)}
+
+This is the standard procedure for
+writing to block devices. It is called
+by ``exit'' (3239), ``bawrite'' (4863),
+``getblk'' (4963), ``bflush'' (5241),
+``free'' (7021), ``update'' (7221) and
+``iupdat'' (7400). N.B. ``writei'' calls
+``bawrite'' (6310)!
+
+\bd
+\item[4820:] If the ``B\_ASYNC'' flag is not set,
+ the procedure does not return
+ until the i/o operation is completed;
+
+\item[4823:] If the ``B\_ASYNC''  is set, but
+``B DELWRI'' {\bf was} not set (note
+``flag'' is set at line 4816) call
+``geterror'' (5336) to check on the
+error flag. (If ``B\_DELWRI'' was
+set, and there is an error, sending the error indication to the
+right process is ``too hard.'').
+The call (4824) on ``geterror''
+will only report errors related
+to the initiation of the write
+operation.
+\ed
+
+\sbs{bawrite (4856)}
+
+This procedure is called by ``writei''
+(6310) and ``bdwrite'' (4845). ``writei''
+calls either ``bawrite'' or ``bdwrite''
+depending on whether the block to be
+written has been wholly or partially
+filled.
+
+
+\sbs{bdwrite (4836)}
+
+This procedure is called by ``writei''
+(6311) and ``bmap'' (6443, 6449, 6485,
+6500 and 6501 !).
+
+\bd
+\item[4844:] Don't delay the write if the device is a magnetic tape drive ...
+ keep everything in order;
+
+\item[4847:] Set the ``B\_DONE'', ``B\_DELWRI''
+ flags and call ``brelse'' to link
+ the buffer into the ``av''-list.
+\ed
+
+\sbs{bflush (5229)}
+
+This procedure is called by ``update''
+(7201), which is called by ``panic''
+(2420), ``sync'' (3489) and ``sumount''
+(6150).
+
+``bflush'' searches the ``av''-list for
+``delayed write'' blocks and forces them
+to be written out asynchronously.
+
+Note that as ``notavail'' adjusts the
+links of the ``av''-list, the search
+(which runs at processor priority six)
+is reinitiated after each ``delayed
+write'' block is encountered.
+
+Note also that since it happens that
+``bflush'' is only called by ``update''
+with ``dev'' equal to ``NODEV'', line 5238,
+in particular, could be simplified.
+
+
+\sbs{physio (5259)}
+
+This routine is called to handle ``raw''
+input/output i.e. operations which
+ignore the normal 512 character block
+size.
+
+``physio'' is called by ``rkread'' (5476)
+and ``rkwrite'' (5483) which appear as
+entries in the array ``cdevsw'' (4684)
+
+``Raw i/o'' is not an essential feature
+of UNIX. For disk devices it is used
+mainly for copying whole disks and
+checking the integrity of the file system as a whole (see e.g. ICHECK (VIII)
+in the UPM), where it is convenient to
+read whole tracks, rather than single
+blocks, at a time.
+
+Note the declaration of ``strat'' (5261).
+Since the actual parameter used e.g.
+``rkstrategy'' (5389) does not return any
+value, is this form of declaration
+really necessary?

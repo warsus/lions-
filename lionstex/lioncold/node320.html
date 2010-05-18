@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>canon (8274)</TITLE>
+<META NAME="description" CONTENT="canon (8274)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node321.html">
+<LINK REL="previous" HREF="node319.html">
+<LINK REL="up" HREF="node315.html">
+<LINK REL="next" HREF="node321.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4759"
+  HREF="node321.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4755"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4749"
+  HREF="node319.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4757"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4760"
+  HREF="node321.html">Notes</A>
+<B> Up:</B> <A NAME="tex2html4756"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4750"
+  HREF="node319.html">ttread (8535)</A>
+ &nbsp; <B>  <A NAME="tex2html4758"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000305000000000000000">
+canon (8274)</A>
+</H2>
+
+<P>
+This procedure is called by ``ttread''
+(8543) to transfer characters from the
+``raw'' input queue to the ``cooked'' input
+queue (after processing ``erase'' and
+``kill'' characters and, in the case of
+upper case only terminals, processing
+``escaped'' characters, i.e. characters
+preceded by the character `<code>\</code>'). ``canon''
+returns a non-zero value if the
+``cooked'' input queue is no longer
+empty.
+
+<P>
+<DL>
+<DT><STRONG>8284:</STRONG></DT>
+<DD>If the number of delimiters in
+the ``raw'' input queue is zero
+then ...
+
+<P>
+</DD>
+<DT><STRONG>8285:</STRONG></DT>
+<DD>if the terminal is logically
+inactive, then just return;
+
+<P>
+</DD>
+<DT><STRONG>8286:</STRONG></DT>
+<DD>otherwise go to ``sleep''.
+</DD>
+</DL>
+
+<P>
+Note that delimiters in this context
+are characters of all ones (octal value
+is 377) and are inserted by ``ttyinput''
+(8358).
+
+<P>
+<DL>
+<DT><STRONG>8291:</STRONG></DT>
+<DD>Set ``bp'' to point to the third
+character of the work array,
+``canonb'';
+
+<P>
+</DD>
+<DT><STRONG>8292:</STRONG></DT>
+<DD>Begin a loop (extending to line
+8318) which removes one character
+from the ``raw'' queue per cycle;
+
+<P>
+</DD>
+<DT><STRONG>8293:</STRONG></DT>
+<DD>If the character is a delimiter,
+reduce the delimiter count by one
+and exit the loop i.e. go to line
+8319;
+
+<P>
+</DD>
+<DT><STRONG>8297:</STRONG></DT>
+<DD>If the terminal is not operating
+in ``raw'' mode ...
+
+<P>
+</DD>
+<DT><STRONG>8298:</STRONG></DT>
+<DD>If the previous character (note
+the ``bp[-1]'' notation!) was not a
+backslash, `<code>\</code>', execute the code
+from line 8299 to 8307, otherwise
+execute the code beginning at
+line 8309.
+</DD>
+</DL>
+
+<P>
+<B>Previous character was not a backslash</B>
+
+<P>
+<DL>
+<DT><STRONG>8299:</STRONG></DT>
+<DD>If the characters is an ``erase'' and ...
+
+<P>
+</DD>
+<DT><STRONG>8300:</STRONG></DT>
+<DD>if there is at least one charater to
+erase, backup the pointer ``bp'';
+
+<P>
+</DD>
+<DT><STRONG>8302:</STRONG></DT>
+<DD>Start on the next cycle of the loop
+beginning at line 8292;
+
+<P>
+</DD>
+<DT><STRONG>8304:</STRONG></DT>
+<DD>If the character is a ``kill'',
+throw away all the characters
+accumulated for the current line,
+by going back to line 8290;
+
+<P>
+</DD>
+<DT><STRONG>8306:</STRONG></DT>
+<DD>If the character is an ``eot'' (004)
+(usually generated at the terminal as ``control-D''),
+ignore it (and do not put it inot ``canonb'') and
+start on the next cycle;
+
+<P>
+(If this character occurs at
+the beginning of a line, then
+subsequently ``ttread'' (8544) will
+find no characters in the
+``cooked'' input queue i.e. it will
+read a zero length record, which
+then leads to the program receiving the normal ``end of file''
+indication.)
+</DD>
+</DL>
+
+<P>
+<B>Previous character was a backslash</B>
+
+<P>
+<DL>
+<DT><STRONG>8309:</STRONG></DT>
+<DD>If ``maptab[c]'' is non-zero, and either
+<BR>``maptab[c] == c'' or the
+terminal is upper case only, then ...
+
+<P>
+</DD>
+<DT><STRONG>8310:</STRONG></DT>
+<DD>if the last character but one was
+<B>not</B> a backslash (`<code>\</code>'), then
+replace ``c'' by ``maptab[c]'' and
+back up ``bp'' (so that the
+backslash will be erased).
+</DD>
+</DL>
+
+<P>
+<B>Character ready</B>
+
+<P>
+<DL>
+<DT><STRONG>8315:</STRONG></DT>
+<DD>Move ``c'' into the next character
+in ``canonb'', and if this array is
+now full, leave the loop.
+</DD>
+</DL>
+
+<P>
+<B>Line completed</B>
+
+<P>
+<DL>
+<DT><STRONG>8319:</STRONG></DT>
+<DD>At this point, an input line has
+been assembled in the array
+``canonb'';
+
+<P>
+</DD>
+<DT><STRONG>8322:</STRONG></DT>
+<DD>Shift the contents of ``canonb''
+into the ``cooked'' input queue,
+and return a ``successful'' result.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4759"
+  HREF="node321.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4755"
+  HREF="node315.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4749"
+  HREF="node319.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4757"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4760"
+  HREF="node321.html">Notes</A>
+<B> Up:</B> <A NAME="tex2html4756"
+  HREF="node315.html">The File ``tty.c''</A>
+<B> Previous:</B> <A NAME="tex2html4750"
+  HREF="node319.html">ttread (8535)</A>
+ &nbsp; <B>  <A NAME="tex2html4758"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

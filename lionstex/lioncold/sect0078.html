@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Initialisation of proc[0]</title>
+
+<link href="sect0079.html" title="The story continues ..." rel="next" />
+<link href="sect0077.html" title="Processes" rel="prev" />
+<link href="sect0073.html" title="Getting Started" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0077.html" title="Processes"><img alt="Previous: Processes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0079.html" title="The story continues ..."><img alt="Next: The story continues ..." border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0073.html">Getting Started</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Initialisation of proc[0]</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000079">6.5 Initialisation of proc[0]</h2>
+<p>The explicit initialisation of the structure “proc[0]” is performed starting at line 1589. Only four elements are changed from the overall initial value of zero: </p><dl class="description">
+
+    <dt>(a)</dt>
+    <dd><p>“p_stat” is set to “SRUN” which implies that process 0 is “ready to run”; </p></dd>
+
+    <dt>(b)</dt>
+    <dd><p>“p_flag” is set to show both “SLOAD” and “SSYS”. The former implies that the process is to be found in core (it has not been swapped out onto the disk), and the second, that it should never be swapped out; </p></dd>
+
+    <dt>(c)</dt>
+    <dd><p>“p_size” is set to “USIZE”; </p></dd>
+
+    <dt>(d)</dt>
+    <dd><p>“p_addr” is set to the contents of the kernel segmentation address register #6. </p></dd>
+
+</dl><p>It will be seen that process #0 has acquired an area of “USIZE” blocks (exactly the size of a “per process data area”) which begins immediately after the official end (“_end”) of the operating system data area. </p><p>The ordinal number of the first block of this area has been stored for future reference in “p_addr”. This area, which was cleared to zero in “start” (0661), contains a single copy of the user structure called “u”. </p><p>On line 1593, the address of “proc[0]” is stored in “u.u_procp”, i.e. the “proc” structure and the “u” structure are mutually linked. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0077.html" title="Processes"><img alt="Previous: Processes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0073.html" title="Getting Started"><img alt="Up: Getting Started" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0079.html" title="The story continues ..."><img alt="Next: The story continues ..." border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

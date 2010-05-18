@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Software Interrupts</title>
+
+<link href="sect0149.html" title="Anticipation" rel="next" />
+<link href="sect0147.html" title="The File ‘sys4.c’" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0147.html" title="The File ‘sys4.c’"><img alt="Previous: The File ‘sys4.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0149.html" title="Anticipation"><img alt="Next: Anticipation" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Software Interrupts</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000149">13 Software Interrupts</h1>
+<p>The principal concern of this chapter is the content of the file “sig.c”, which appears on Sheets 39 to 42. This file introduces a facility for communication between processes. In particular it provides for the course of one “user mode” process to be interrupted, diverted or terminated by the action of another process or as the result of an error or operator action. </p><p>In this discussion the term “software interrupt” has been deliberately used in place of the term “signal”. This latter has been eschewed because it has obtained connotations in the UNIX milieu which are rather different from the usage of ordinary English. </p><p>UNIX recognises 20 (“NSIG”, line 0113) different types of software interrupts, of which (as the reader may discover for himself by perusal of the the Section “SIGNAL (II)” of the UPM) thirteen have standard names and associations. Interrupt type #0 is interpreted as “no interrupt”. </p><p>Within the “per process data area” of each process is an array, “u.u_signal”, of “NSIG” words. Each word corresponds to a different software interrupt type and defines the action which should be taken if the process encounters that kind of software interrupt: </p><center> <table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> u_signal[n] </p></td>
+
+    
+    <td style="text-align:left"><p> when interrupt #n occurs</p></td>
+
+</tr><tr>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>zero </p></td>
+
+    
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> the process will terminate itself; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>odd non-zero </p></td>
+
+    
+    <td style="text-align:left"><p> the software interrupt is ignored;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>even non-zero </p></td>
+
+    
+    <td style="text-align:left"><p> the value is taken as the address</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> in user space of a procedure which</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> which should be executed</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> forthwith.</p></td>
+
+</tr>
+</table> </center><p>Interrupt type #9 (“SIGKILL”) is especially distinguished because UNIX ensures that “u.u_signal[9]” remains zero until the very end of a process’s existence, so that if a process is ever interrupted for that reason, it will always terminate itself. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0149.html">13.1 Anticipation</a>
+   
+</li><li><a href="sect0150.html">13.2 Causation</a>
+   
+</li><li><a href="sect0151.html">13.3 Effect</a>
+   
+</li><li><a href="sect0152.html">13.4 Tracing</a>
+   
+</li><li><a href="sect0153.html">13.5 Procedures</a>
+   
+</li><li><a href="sect0154.html">13.6 A. Anticipation</a>
+   
+</li><li><a href="sect0155.html">13.7 B. Causation</a>
+   
+</li><li><a href="sect0156.html">13.8 C. Effect</a>
+   
+</li><li><a href="sect0157.html">13.9 D. Tracing</a>
+   
+</li><li><a href="sect0158.html">13.10 ssig (3614)</a>
+   
+</li><li><a href="sect0159.html">13.11 kill (3630)</a>
+   
+</li><li><a href="sect0160.html">13.12 signal (3949)</a>
+   
+</li><li><a href="sect0161.html">13.13 psignal (3963)</a>
+   
+</li><li><a href="sect0162.html">13.14 issig (3991)</a>
+   
+</li><li><a href="sect0163.html">13.15 psig (4043)</a>
+   
+</li><li><a href="sect0164.html">13.16 core (4094)</a>
+   
+</li><li><a href="sect0165.html">13.17 grow (4136)</a>
+   
+</li><li><a href="sect0166.html">13.18 exit (3219)</a>
+   
+</li><li><a href="sect0167.html">13.19 rexit (3205)</a>
+   
+</li><li><a href="sect0168.html">13.20 wait (3270)</a>
+   
+</li><li><a href="sect0169.html">13.21 Tracing</a>
+   
+</li><li><a href="sect0170.html">13.22 stop (4016)</a>
+   
+</li><li><a href="sect0171.html">13.23 wait (3270) (continued)</a>
+   
+</li><li><a href="sect0172.html">13.24 ptrace (4164)</a>
+   
+</li><li><a href="sect0173.html">13.25 procxmt (4204)</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0147.html" title="The File ‘sys4.c’"><img alt="Previous: The File ‘sys4.c’" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0149.html" title="Anticipation"><img alt="Next: Anticipation" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The ‘C’ Preprocessor</title>
+
+<link href="sect0051.html" title="Section One" rel="next" />
+<link href="sect0049.html" title="Global Variables" rel="prev" />
+<link href="sect0047.html" title="An Overview" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0049.html" title="Global Variables"><img alt="Previous: Global Variables" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0051.html" title="Section One"><img alt="Next: Section One" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0047.html">An Overview</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The ‘C’ Preprocessor</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000051">4.3 The ‘C’ Preprocessor</h2>
+<p>If global declarations must be repeated in full in each file (as is required by Fortran, for instance) then the bulk of the program is increased, and modifying a declaration is at best a nuisance, and at worst, highly error-prone. </p><p>These difficulties are avoided in UNIX by use of the preprocessor facility of the “C” compiler. This allows declarations for most global variables to be recorded once only in one of the few “h” files. </p><p>Whenever the declaration for a particular global variable is required the appropriate “h” file can then be “included” in the file being compiled. </p><p>UNIX also uses the “h” files as vehicles for lists of standard definitions for many symbolic names which represent constants and adjustable parameters, and for declaration of some structure types. </p><p>For example, if the file bottle.c contains a procedure “glug” which global variable called “gin” which is declared in the file “box.h” then a statement: </p><pre>
+        #include "box.h"
+</pre><p>must be inserted at the beginning of the file “bottle.c” When the file “bottle.c” is compiled, all declarations in “box.h” are compiled, and since they are found before the beginning of any procedure in “bottle.c” they are flagged as external in the relocatable module which is produced. </p><p>When all the object modules are linked together, a reference to “gin” will be found in every file for which the source included “box.h” All these references will be consistent and the loader will allocate a single space for “gin” and adjust all the references accordingly. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0049.html" title="Global Variables"><img alt="Previous: Global Variables" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0047.html" title="An Overview"><img alt="Up: An Overview" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0051.html" title="Section One"><img alt="Next: Section One" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

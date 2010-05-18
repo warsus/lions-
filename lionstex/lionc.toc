@@ -1,0 +1,329 @@
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {subsection}{\numberline {1.1}The UNIX Operating System}{1}
+\contentsline {subsection}{\numberline {1.2}Utilities}{1}
+\contentsline {subsection}{\numberline {1.3}Other Documentation}{2}
+\contentsline {subsection}{\numberline {1.4}UNIX Programmer's Manual}{2}
+\contentsline {subsection}{\numberline {1.5}UNIX Documents}{2}
+\contentsline {subsection}{\numberline {1.6}UNIX Operating System Source Code}{3}
+\contentsline {subsection}{\numberline {1.7}Source Code Selections}{3}
+\contentsline {subsection}{\numberline {1.8}Source Code Files}{4}
+\contentsline {subsection}{\numberline {1.9}Use of these notes}{4}
+\contentsline {subsection}{\numberline {1.10}A Note on Programming Standards}{4}
+\contentsline {section}{\numberline {2}Fundamentals}{5}
+\contentsline {subsection}{\numberline {2.1}The Processor}{5}
+\contentsline {subsection}{\numberline {2.2}Processor Status Word}{5}
+\contentsline {subsection}{\numberline {2.3}General Registers}{5}
+\contentsline {subsection}{\numberline {2.4}Instruction Set}{6}
+\contentsline {subsection}{\numberline {2.5}Addressing Modes}{7}
+\contentsline {subsection}{\numberline {2.6}Unix Assembler}{9}
+\contentsline {subsection}{\numberline {2.7}Memory Management}{10}
+\contentsline {subsection}{\numberline {2.8}Segmentation Registers.}{10}
+\contentsline {subsection}{\numberline {2.9}Page Description Register}{10}
+\contentsline {subsection}{\numberline {2.10}Memory Allocation}{11}
+\contentsline {subsection}{\numberline {2.11}Memory Management Status Registers}{11}
+\contentsline {subsection}{\numberline {2.12}``i'' and ``d'' Spaces}{11}
+\contentsline {subsection}{\numberline {2.13}Initial Conditions}{11}
+\contentsline {subsection}{\numberline {2.14}Special Device Registers}{11}
+\contentsline {section}{\numberline {3}Reading ``C'' Programs}{12}
+\contentsline {subsection}{\numberline {3.1}Some Selected Examples}{12}
+\contentsline {subsection}{\numberline {3.2}Example 1}{12}
+\contentsline {subsection}{\numberline {3.3}Example 2}{13}
+\contentsline {subsection}{\numberline {3.4}Example 3}{13}
+\contentsline {subsection}{\numberline {3.5}Example 4}{14}
+\contentsline {subsection}{\numberline {3.6}Example 5}{15}
+\contentsline {subsection}{\numberline {3.7}Example 6}{16}
+\contentsline {subsection}{\numberline {3.8}Example 7}{17}
+\contentsline {subsection}{\numberline {3.9}Example 8}{17}
+\contentsline {subsection}{\numberline {3.10}Example 9}{18}
+\contentsline {subsection}{\numberline {3.11}Example 10}{18}
+\contentsline {subsection}{\numberline {3.12}Example 11}{19}
+\contentsline {subsection}{\numberline {3.13}Example 12}{19}
+\contentsline {subsection}{\numberline {3.14}Example 13}{20}
+\contentsline {subsection}{\numberline {3.15}Example 14}{20}
+\contentsline {subsection}{\numberline {3.16}Example 15}{21}
+\contentsline {subsection}{\numberline {3.17}Example 16}{21}
+\contentsline {subsection}{\numberline {3.18}Example 17}{22}
+\contentsline {section}{\numberline {4}An Overview}{24}
+\contentsline {subsection}{\numberline {4.1}Variable Allocation}{24}
+\contentsline {subsection}{\numberline {4.2}Global Variables}{24}
+\contentsline {subsection}{\numberline {4.3}The `C' Preprocessor}{24}
+\contentsline {subsection}{\numberline {4.4}Section One}{25}
+\contentsline {subsection}{\numberline {4.5}The First Group of `.h' Files}{25}
+\contentsline {subsection}{\numberline {4.6}Assembly Language Files}{25}
+\contentsline {subsection}{\numberline {4.7}Other Files in Section One}{26}
+\contentsline {subsection}{\numberline {4.8}Section Two}{26}
+\contentsline {subsection}{\numberline {4.9}Section Three}{26}
+\contentsline {subsection}{\numberline {4.10}Section Four}{27}
+\contentsline {subsection}{\numberline {4.11}Section Five}{27}
+\contentsline {section}{\numberline {5}Two Files}{29}
+\contentsline {subsection}{\numberline {5.1}The File `malloc.c'}{29}
+\contentsline {subsection}{\numberline {5.2}Rules for List Maintenance}{29}
+\contentsline {subsection}{\numberline {5.3}malloc (2528)}{30}
+\contentsline {subsection}{\numberline {5.4}mfree (2556)}{31}
+\contentsline {subsection}{\numberline {5.5}In conclusion ...}{32}
+\contentsline {subsection}{\numberline {5.6}The File `prf.c'}{32}
+\contentsline {subsection}{\numberline {5.7}printf (2340)}{33}
+\contentsline {subsection}{\numberline {5.8}printn (2369)}{34}
+\contentsline {subsection}{\numberline {5.9}putchar (2386)}{34}
+\contentsline {subsection}{\numberline {5.10}panic (2419)}{35}
+\contentsline {subsection}{\numberline {5.11}prdev (2433), deverror (2447)}{36}
+\contentsline {subsection}{\numberline {5.12}Included Files}{36}
+\contentsline {section}{\numberline {6}Getting Started}{37}
+\contentsline {subsection}{\numberline {6.1}Operator Actions}{37}
+\contentsline {subsection}{\numberline {6.2}start (0612)}{37}
+\contentsline {subsection}{\numberline {6.3}main (1550)}{38}
+\contentsline {subsection}{\numberline {6.4}Processes}{40}
+\contentsline {subsection}{\numberline {6.5}Initialisation of proc[0]}{40}
+\contentsline {subsection}{\numberline {6.6}The story continues ...}{40}
+\contentsline {subsection}{\numberline {6.7}sched (1940)}{40}
+\contentsline {subsection}{\numberline {6.8}sleep (2066)}{41}
+\contentsline {subsection}{\numberline {6.9}swtch (2178)}{41}
+\contentsline {subsection}{\numberline {6.10}main revisited}{42}
+\contentsline {section}{\numberline {7}Processes}{43}
+\contentsline {subsection}{\numberline {7.1}The Process}{43}
+\contentsline {subsection}{\numberline {7.2}The proc Structure (0358)}{44}
+\contentsline {subsection}{\numberline {7.3}The user Structure (0413)}{44}
+\contentsline {subsection}{\numberline {7.4}The Per Process Data Area}{45}
+\contentsline {subsection}{\numberline {7.5}The Segments}{45}
+\contentsline {subsection}{\numberline {7.6}Execution of an Image}{45}
+\contentsline {subsection}{\numberline {7.7}Kernel Mode Execution}{45}
+\contentsline {subsection}{\numberline {7.8}User Mode Execution}{45}
+\contentsline {subsection}{\numberline {7.9}An Example}{46}
+\contentsline {subsection}{\numberline {7.10}Setting the Segmentation Registers}{47}
+\contentsline {subsection}{\numberline {7.11}estabur (1650)}{47}
+\contentsline {subsection}{\numberline {7.12}sureg (1739)}{48}
+\contentsline {subsection}{\numberline {7.13}newproc (1826)}{48}
+\contentsline {section}{\numberline {8}Process Management}{50}
+\contentsline {subsection}{\numberline {8.1}Process Switching}{50}
+\contentsline {subsection}{\numberline {8.2}Interrupts}{50}
+\contentsline {subsection}{\numberline {8.3}Program Swapping}{50}
+\contentsline {subsection}{\numberline {8.4}Jobs}{50}
+\contentsline {subsection}{\numberline {8.5}Assembler Procedures}{51}
+\contentsline {subsection}{\numberline {8.6}savu (0725)}{51}
+\contentsline {subsection}{\numberline {8.7}retu (0740)}{51}
+\contentsline {subsection}{\numberline {8.8}aretu (0734)}{51}
+\contentsline {subsection}{\numberline {8.9}swtch (2178)}{51}
+\contentsline {subsection}{\numberline {8.10}setpri (2156)}{52}
+\contentsline {subsection}{\numberline {8.11}sleep (2066)}{52}
+\contentsline {subsection}{\numberline {8.12}wakeup (2113)}{53}
+\contentsline {subsection}{\numberline {8.13}setrun (2134)}{53}
+\contentsline {subsection}{\numberline {8.14}expand (2268)}{53}
+\contentsline {subsection}{\numberline {8.15}swtch revisited}{54}
+\contentsline {subsection}{\numberline {8.16}Critical Sections}{54}
+\contentsline {section}{\numberline {9}Hardware Interrupts and Traps}{55}
+\contentsline {subsection}{\numberline {9.1}Hardware Interrupts}{55}
+\contentsline {subsection}{\numberline {9.2}The Interrupt Vector}{55}
+\contentsline {subsection}{\numberline {9.3}Interrupt Handlers}{56}
+\contentsline {subsection}{\numberline {9.4}Priorities}{56}
+\contentsline {subsection}{\numberline {9.5}Interrupt Priorities}{56}
+\contentsline {subsection}{\numberline {9.6}Rules for Interrupt Handlers}{57}
+\contentsline {subsection}{\numberline {9.7}Traps}{57}
+\contentsline {subsection}{\numberline {9.8}Assembly Language `trap'}{58}
+\contentsline {subsection}{\numberline {9.9}Return}{58}
+\contentsline {section}{\numberline {10}The Assembler ``Trap'' Routine}{59}
+\contentsline {subsection}{\numberline {10.1}Sources of Traps and Interrupts}{59}
+\contentsline {subsection}{\numberline {10.2}fuibyte (0814), fuiword (0844)}{59}
+\contentsline {subsection}{\numberline {10.3}Interrupts}{60}
+\contentsline {subsection}{\numberline {10.4}call (0776)}{60}
+\contentsline {subsection}{\numberline {10.5}User Program Traps}{61}
+\contentsline {subsection}{\numberline {10.6}The Kernel Stack}{61}
+\contentsline {section}{\numberline {11}Clock Interrupts}{63}
+\contentsline {subsection}{\numberline {11.1}clock (3725)}{63}
+\contentsline {subsection}{\numberline {11.2}timeout (3845)}{65}
+\contentsline {section}{\numberline {12}Traps and System Calls}{66}
+\contentsline {subsection}{\numberline {12.1}trap (2693)}{66}
+\contentsline {subsection}{\numberline {12.2}Kernel Mode Traps}{66}
+\contentsline {subsection}{\numberline {12.3}User Mode Traps}{67}
+\contentsline {subsection}{\numberline {12.4}System Calls}{68}
+\contentsline {subsection}{\numberline {12.5}System Call Handlers}{68}
+\contentsline {subsection}{\numberline {12.6}The File `sysl.c'}{69}
+\contentsline {subsection}{\numberline {12.7}exec (3020)}{69}
+\contentsline {subsection}{\numberline {12.8}fork (3322)}{70}
+\contentsline {subsection}{\numberline {12.9}sbreak (3354)}{70}
+\contentsline {subsection}{\numberline {12.10}The Files `sys2.c' and `sys3.c'}{70}
+\contentsline {subsection}{\numberline {12.11}The File `sys4.c'}{70}
+\contentsline {section}{\numberline {13}Software Interrupts}{72}
+\contentsline {subsection}{\numberline {13.1}Anticipation}{72}
+\contentsline {subsection}{\numberline {13.2}Causation}{72}
+\contentsline {subsection}{\numberline {13.3}Effect}{72}
+\contentsline {subsection}{\numberline {13.4}Tracing}{73}
+\contentsline {subsection}{\numberline {13.5}Procedures}{73}
+\contentsline {subsection}{\numberline {13.6}A. Anticipation}{73}
+\contentsline {subsection}{\numberline {13.7}B. Causation}{73}
+\contentsline {subsection}{\numberline {13.8}C. Effect}{73}
+\contentsline {subsection}{\numberline {13.9}D. Tracing}{73}
+\contentsline {subsection}{\numberline {13.10}ssig (3614)}{73}
+\contentsline {subsection}{\numberline {13.11}kill (3630)}{74}
+\contentsline {subsection}{\numberline {13.12}signal (3949)}{74}
+\contentsline {subsection}{\numberline {13.13}psignal (3963)}{74}
+\contentsline {subsection}{\numberline {13.14}issig (3991)}{74}
+\contentsline {subsection}{\numberline {13.15}psig (4043)}{74}
+\contentsline {subsection}{\numberline {13.16}core (4094)}{75}
+\contentsline {subsection}{\numberline {13.17}grow (4136)}{75}
+\contentsline {subsection}{\numberline {13.18}exit (3219)}{75}
+\contentsline {subsection}{\numberline {13.19}rexit (3205)}{76}
+\contentsline {subsection}{\numberline {13.20}wait (3270)}{76}
+\contentsline {subsection}{\numberline {13.21}Tracing}{77}
+\contentsline {subsection}{\numberline {13.22}stop (4016)}{77}
+\contentsline {subsection}{\numberline {13.23}wait (3270) (continued)}{77}
+\contentsline {subsection}{\numberline {13.24}ptrace (4164)}{78}
+\contentsline {subsection}{\numberline {13.25}procxmt (4204)}{78}
+\contentsline {section}{\numberline {14}Program Swapping}{79}
+\contentsline {subsection}{\numberline {14.1}Text Segments}{79}
+\contentsline {subsection}{\numberline {14.2}sched (1940)}{79}
+\contentsline {subsection}{\numberline {14.3}xswap (4368)}{81}
+\contentsline {subsection}{\numberline {14.4}xalloc (4433)}{81}
+\contentsline {subsection}{\numberline {14.5}xfree (4398)}{82}
+\contentsline {section}{\numberline {15}Introduction to Basic I/O}{83}
+\contentsline {subsection}{\numberline {15.1}The File `buf.h'}{83}
+\contentsline {subsection}{\numberline {15.2}devtab (4551)}{83}
+\contentsline {subsection}{\numberline {15.3}The File `conf.h'}{83}
+\contentsline {subsection}{\numberline {15.4}The File `conf.c'}{83}
+\contentsline {subsection}{\numberline {15.5}System Generation}{84}
+\contentsline {subsection}{\numberline {15.6}swap (5196)}{84}
+\contentsline {subsection}{\numberline {15.7}Race Conditions}{85}
+\contentsline {subsection}{\numberline {15.8}Reentrancy}{86}
+\contentsline {subsection}{\numberline {15.9}For the Uninitiated}{86}
+\contentsline {subsection}{\numberline {15.10}Additional Reading}{86}
+\contentsline {section}{\numberline {16}The RK Disk Driver}{87}
+\contentsline {subsection}{\numberline {16.1}The file `rk.c'}{88}
+\contentsline {subsection}{\numberline {16.2}rkstrategy (5389)}{88}
+\contentsline {subsection}{\numberline {16.3}rkaddr (5420)}{89}
+\contentsline {subsection}{\numberline {16.4}devstart (5096)}{89}
+\contentsline {subsection}{\numberline {16.5}rkintr (5451)}{89}
+\contentsline {subsection}{\numberline {16.6}iodone (5018)}{89}
+\contentsline {section}{\numberline {17}Buffer Manipulation}{90}
+\contentsline {subsection}{\numberline {17.1}Flags}{90}
+\contentsline {subsection}{\numberline {17.2}A Cache-like Memory}{90}
+\contentsline {subsection}{\numberline {17.3}clrbuf (5038)}{90}
+\contentsline {subsection}{\numberline {17.4}incore (4899)}{90}
+\contentsline {subsection}{\numberline {17.5}getblk (4921)}{90}
+\contentsline {subsection}{\numberline {17.6}brelse (4869)}{91}
+\contentsline {subsection}{\numberline {17.7}binit (5055)}{92}
+\contentsline {subsection}{\numberline {17.8}bread (4754)}{92}
+\contentsline {subsection}{\numberline {17.9}breada (4773)}{92}
+\contentsline {subsection}{\numberline {17.10}bwrite (4809)}{93}
+\contentsline {subsection}{\numberline {17.11}bawrite (4856)}{93}
+\contentsline {subsection}{\numberline {17.12}bdwrite (4836)}{93}
+\contentsline {subsection}{\numberline {17.13}bflush (5229)}{93}
+\contentsline {subsection}{\numberline {17.14}physio (5259)}{93}
+\contentsline {section}{\numberline {18}File Access and Control}{94}
+\contentsline {subsection}{\numberline {18.1}File Characteristics}{94}
+\contentsline {subsection}{\numberline {18.2}System Calls}{94}
+\contentsline {subsection}{\numberline {18.3}Control Tables}{94}
+\contentsline {subsection}{\numberline {18.4}file (5507)}{95}
+\contentsline {subsection}{\numberline {18.5}inode (5659)}{95}
+\contentsline {subsection}{\numberline {18.6}Resources Required}{95}
+\contentsline {subsection}{\numberline {18.7}Opening a File}{96}
+\contentsline {subsection}{\numberline {18.8}creat (5781)}{96}
+\contentsline {subsection}{\numberline {18.9}openl (5804)}{96}
+\contentsline {subsection}{\numberline {18.10}open (5763)}{96}
+\contentsline {subsection}{\numberline {18.11}openl revisited}{97}
+\contentsline {subsection}{\numberline {18.12}close (5846)}{97}
+\contentsline {subsection}{\numberline {18.13}closef (6643)}{97}
+\contentsline {subsection}{\numberline {18.14}iput (7344)}{97}
+\contentsline {subsection}{\numberline {18.15}Deletion of Files}{97}
+\contentsline {subsection}{\numberline {18.16}Reading and Writing}{98}
+\contentsline {subsection}{\numberline {18.17}rdwr (5731)}{99}
+\contentsline {subsection}{\numberline {18.18}readi (6221)}{99}
+\contentsline {subsection}{\numberline {18.19}writei}{100}
+\contentsline {subsection}{\numberline {18.20}iomove (6364)}{100}
+\contentsline {subsection}{\numberline {18.21}bmap (6415)}{100}
+\contentsline {subsection}{\numberline {18.22}Leftovers}{100}
+\contentsline {section}{\numberline {19}File Directories and Directory Files}{101}
+\contentsline {subsection}{\numberline {19.1}The Directory Data Structure}{101}
+\contentsline {subsection}{\numberline {19.2}Directory Files}{101}
+\contentsline {subsection}{\numberline {19.3}namei (7518)}{101}
+\contentsline {subsection}{\numberline {19.4}Some Comments}{103}
+\contentsline {subsection}{\numberline {19.5}link (5909)}{104}
+\contentsline {subsection}{\numberline {19.6}wdir (7477)}{104}
+\contentsline {subsection}{\numberline {19.7}maknode (7455)}{104}
+\contentsline {subsection}{\numberline {19.8}unlink (3510)}{104}
+\contentsline {subsection}{\numberline {19.9}mknod (5952)}{105}
+\contentsline {subsection}{\numberline {19.10}access (6746)}{105}
+\contentsline {section}{\numberline {20}File Systems}{106}
+\contentsline {subsection}{\numberline {20.1}The `Super Block' (5561)}{106}
+\contentsline {subsection}{\numberline {20.2}The 'mount' table (0272)}{106}
+\contentsline {subsection}{\numberline {20.3}iinit (6922)}{107}
+\contentsline {subsection}{\numberline {20.4}Mounting}{107}
+\contentsline {subsection}{\numberline {20.5}smount (6086)}{107}
+\contentsline {subsection}{\numberline {20.6}Notes}{108}
+\contentsline {subsection}{\numberline {20.7}iget (7276)}{108}
+\contentsline {subsection}{\numberline {20.8}getfs (7167)}{109}
+\contentsline {subsection}{\numberline {20.9}update (7201)}{109}
+\contentsline {subsection}{\numberline {20.10}sumount (6144)}{109}
+\contentsline {subsection}{\numberline {20.11}Resource Allocation}{109}
+\contentsline {subsection}{\numberline {20.12}alloc (6965)}{110}
+\contentsline {subsection}{\numberline {20.13}itrunc (7414)}{110}
+\contentsline {subsection}{\numberline {20.14}free (7000)}{111}
+\contentsline {subsection}{\numberline {20.15}iput (7344)}{111}
+\contentsline {subsection}{\numberline {20.16}ifree (7134)}{111}
+\contentsline {subsection}{\numberline {20.17}iupdat (7374)}{111}
+\contentsline {section}{\numberline {21}Pipes}{113}
+\contentsline {subsection}{\numberline {21.1}pipe (7723)}{113}
+\contentsline {subsection}{\numberline {21.2}readp (7758)}{113}
+\contentsline {subsection}{\numberline {21.3}writep (7805)}{113}
+\contentsline {subsection}{\numberline {21.4}plock (7862)}{114}
+\contentsline {subsection}{\numberline {21.5}prele (7882)}{114}
+\contentsline {section}{\numberline {22}Character Oriented Special Files}{115}
+\contentsline {subsection}{\numberline {22.1}LP11 Line Printer Driver}{115}
+\contentsline {subsection}{\numberline {22.2}lpopen (8850)}{115}
+\contentsline {subsection}{\numberline {22.3}Notes}{115}
+\contentsline {subsection}{\numberline {22.4}lpoutput (8986)}{116}
+\contentsline {subsection}{\numberline {22.5}lpstart (8967)}{116}
+\contentsline {subsection}{\numberline {22.6}lpinit(8976)}{117}
+\contentsline {subsection}{\numberline {22.7}lpwrite (8870)}{117}
+\contentsline {subsection}{\numberline {22.8}Discussion}{117}
+\contentsline {subsection}{\numberline {22.9}lpcanon (8879)}{118}
+\contentsline {subsection}{\numberline {22.10}For idle readers: A suggestion}{119}
+\contentsline {subsection}{\numberline {22.11}PC-11 Paper Tape Reader/Punch Driver}{119}
+\contentsline {section}{\numberline {23}Character Handling}{120}
+\contentsline {subsection}{\numberline {23.1}cinit (8234)}{121}
+\contentsline {subsection}{\numberline {23.2}getc (0930)}{122}
+\contentsline {subsection}{\numberline {23.3}putc (0967)}{122}
+\contentsline {subsection}{\numberline {23.4}Character Sets}{123}
+\contentsline {subsection}{\numberline {23.5}Control Characters}{123}
+\contentsline {subsection}{\numberline {23.6}Graphic Characters}{123}
+\contentsline {subsection}{\numberline {23.7}Graphic Character Sets}{124}
+\contentsline {subsection}{\numberline {23.8}maptab (8117)}{124}
+\contentsline {subsection}{\numberline {23.9}partab (7947)}{124}
+\contentsline {section}{\numberline {24}Interactive Terminals}{126}
+\contentsline {subsection}{\numberline {24.1}The 'tty' Structure (7926)}{126}
+\contentsline {subsection}{\numberline {24.2} Interactive Terminals}{127}
+\contentsline {subsection}{\numberline {24.3}Initialisation}{127}
+\contentsline {subsection}{\numberline {24.4}stty (8183)}{127}
+\contentsline {subsection}{\numberline {24.5}sgtty (8201)}{127}
+\contentsline {subsection}{\numberline {24.6}klsgtty (8090)}{128}
+\contentsline {subsection}{\numberline {24.7}tysty (8577)}{128}
+\contentsline {subsection}{\numberline {24.8}The DL11/KL11 Terminal Device Handler}{128}
+\contentsline {subsection}{\numberline {24.9}Device Registers}{129}
+\contentsline {subsection}{\numberline {24.10}UNIBUS Addresses}{129}
+\contentsline {subsection}{\numberline {24.11}Software Considerations}{130}
+\contentsline {subsection}{\numberline {24.12}Interrupt Vector Addresses}{130}
+\contentsline {subsection}{\numberline {24.13}Source Code}{130}
+\contentsline {subsection}{\numberline {24.14}klopen (8023)}{130}
+\contentsline {subsection}{\numberline {24.15}klclose (8055)}{131}
+\contentsline {subsection}{\numberline {24.16}klxint (8070)}{131}
+\contentsline {subsection}{\numberline {24.17}klrint (8078)}{131}
+\contentsline {section}{\numberline {25}The File ``tty.c''}{132}
+\contentsline {subsection}{\numberline {25.1}flushtty (8252)}{132}
+\contentsline {subsection}{\numberline {25.2}wflushtty (8217)}{132}
+\contentsline {subsection}{\numberline {25.3}Character Input}{132}
+\contentsline {subsection}{\numberline {25.4}ttread (8535)}{132}
+\contentsline {subsection}{\numberline {25.5}canon (8274)}{133}
+\contentsline {subsection}{\numberline {25.6}Notes}{134}
+\contentsline {subsection}{\numberline {25.7}ttyinput (8333)}{134}
+\contentsline {subsection}{\numberline {25.8}Character Output -- ttwrite (8550)}{134}
+\contentsline {subsection}{\numberline {25.9}ttstart}{135}
+\contentsline {subsection}{\numberline {25.10}ttrstrt (8486)}{135}
+\contentsline {subsection}{\numberline {25.11}ttyoutput (8373)}{135}
+\contentsline {subsection}{\numberline {25.12}Terminals with a restricted character set}{135}
+\contentsline {subsection}{\numberline {25.13}A. The test for 'TTLOWAT' (Line 8074)}{136}
+\contentsline {subsection}{\numberline {25.14}B. Inactive Terminals}{136}
+\contentsline {subsection}{\numberline {25.15}Well, that's all, folks ...}{137}
+\contentsline {section}{\numberline {26}Suggested Exercises}{138}
+\contentsline {subsection}{\numberline {26.1}Section One}{138}
+\contentsline {subsection}{\numberline {26.2}Section Two}{139}
+\contentsline {subsection}{\numberline {26.3}Section Three}{139}
+\contentsline {subsection}{\numberline {26.4}Section Four}{139}
+\contentsline {subsection}{\numberline {26.5}General}{140}

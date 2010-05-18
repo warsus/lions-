@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Hardware Interrupts</TITLE>
+<META NAME="description" CONTENT="Hardware Interrupts">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node122.html">
+<LINK REL="previous" HREF="node120.html">
+<LINK REL="up" HREF="node120.html">
+<LINK REL="next" HREF="node122.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2218"
+  HREF="node122.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2214"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2208"
+  HREF="node120.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2216"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2219"
+  HREF="node122.html">The Interrupt Vector</A>
+<B> Up:</B> <A NAME="tex2html2215"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2209"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2217"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000141000000000000000">
+Hardware Interrupts</A>
+</H2>
+
+<P>
+The effect of an interrupt is to divert
+the CPU from whatever it was doing and
+to redirect it to execute another program.
+
+<P>
+During a hardware interrupt:
+
+<P>
+
+<UL>
+<LI>The CPU saves the current processor
+ status word (PS) and the current
+ program count (PC) in its internal registers;
+
+<P>
+</LI>
+<LI>the PC and PS are then reloaded from
+ two consecutive words located in
+ the low area of main memory. The
+ address of the first of these
+ two words is known as the
+ ``<B>vector location</B>'' of the interrupt;
+
+<P>
+</LI>
+<LI>finally the original PC and PS values
+ are stored into the newly
+ current stack. (Whether this is
+ the kernel or user stack depends
+ on the new value of the PS.)
+</LI>
+</UL>
+
+<P>
+Different peripheral devices may have
+different vector locations. The actual
+vector location for a particular device
+is determined by hard wiring, and can
+only be changed with difficulty. Moreover there are well entrenched conventions for choosing vector locations for
+the various devices.
+
+<P>
+Thus after the interrupt has occurred,
+because the PC has been reloaded, the
+source of instructions executed by the
+CPU has been changed. The new source
+should be a procedure associated with
+the peripheral device controller which
+caused the interrupt.
+
+<P>
+Also since the PS has also been
+changed, the processor mode may have
+changed. In UNIX, the initial mode may
+be either ``user'' or ``kernel'', but after
+the interrupt, the mode is always ``kernel''. Recall also that a change in mode
+implies:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>a change in memory mappings.
+(Note that to avoid any confusion, vector locations are
+always interpreted as kernel
+mode addresses.);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>a change in stack pointers.
+ (Recall that the stack pointer,
+SP or r6, is the only special
+register which is replicated for
+each mode. This implies that
+after a mode change, the stack
+pointer value will have changed
+even though it has not been
+reloaded!)
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2218"
+  HREF="node122.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2214"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2208"
+  HREF="node120.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2216"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2219"
+  HREF="node122.html">The Interrupt Vector</A>
+<B> Up:</B> <A NAME="tex2html2215"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2209"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+ &nbsp; <B>  <A NAME="tex2html2217"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

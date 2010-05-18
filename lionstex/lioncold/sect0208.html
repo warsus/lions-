@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: bwrite (4809)</title>
+
+<link href="sect0209.html" title="bawrite (4856)" rel="next" />
+<link href="sect0207.html" title="breada (4773)" rel="prev" />
+<link href="sect0198.html" title="Buffer Manipulation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0207.html" title="breada (4773)"><img alt="Previous: breada (4773)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0209.html" title="bawrite (4856)"><img alt="Next: bawrite (4856)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0198.html">Buffer Manipulation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">bwrite (4809)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000209">17.10 bwrite (4809)</h2>
+<p>This is the standard procedure for writing to block devices. It is called by “exit” (3239), “bawrite” (4863), “getblk” (4963), “bflush” (5241), “free” (7021), “update” (7221) and “iupdat” (7400). N.B. “writei” calls “bawrite” (6310)! </p><dl class="description">
+
+    <dt>4820:</dt>
+    <dd><p>If the “B_ASYNC” flag is not set, the procedure does not return until the i/o operation is completed; </p></dd>
+
+    <dt>4823:</dt>
+    <dd><p>If the “B_ASYNC” is set, but “B DELWRI” <b class="bf">was</b> not set (note “flag” is set at line 4816) call “geterror” (5336) to check on the error flag. (If “B_DELWRI” was set, and there is an error, sending the error indication to the right process is “too hard.”). The call (4824) on “geterror” will only report errors related to the initiation of the write operation. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0207.html" title="breada (4773)"><img alt="Previous: breada (4773)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0209.html" title="bawrite (4856)"><img alt="Next: bawrite (4856)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

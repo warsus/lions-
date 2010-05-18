@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 9</title>
+
+<link href="sect0039.html" title="Example 10" rel="next" />
+<link href="sect0037.html" title="Example 8" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0037.html" title="Example 8"><img alt="Previous: Example 8" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0039.html" title="Example 10"><img alt="Next: Example 10" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 9</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000039">3.10 Example 9</h2>
+<p>Here are two quickies which introduce some different and exotic looking expressions. First: </p><pre>
+  7679 schar()
+       {
+         return *u.u_dirp++ &amp; 0377);
+       }
+</pre><p>where the declaration </p><pre>
+    char *u_dirp;
+</pre><p>is part of the declaration of the structure “u”. </p><p>“u.u_dirp” is a character pointer. Therefore the value of “*u.u_dirp++” is a character. (Incrementation of the pointer occurs as a side effect.) </p><p>When a character is loaded into a sixteen bit register, sign extension may occur. By “and”ing the word with 0377 any extraneous high order bits are eliminated. Thus the result returned is simply a character. </p><p>Note that any integer which begins with a zero (e.g. 0377) is interpreted as an octal integer. </p><p>The second example is: </p><pre>
+  1771 nseg(n)
+       {
+         return ((n+127)&gt;&gt;7);
+       }
+</pre><p>The value returned is n divided by 128 and rounded up to the next highest “integer”. </p><p>Note the use of the right shift operator “<img src="images/img-0008.png" alt="$&gt;&gt;$" style="vertical-align:&images/img-0008.png-depth;&px;; 
+                                     width:&images/img-0008.png-width;&px;; 
+                                     height:&images/img-0008.png-height;&px;" class="math gen" />” in preference to the division operator “/”. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0037.html" title="Example 8"><img alt="Previous: Example 8" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0039.html" title="Example 10"><img alt="Next: Example 10" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

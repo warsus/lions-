@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Interrupt Vector Addresses</TITLE>
+<META NAME="description" CONTENT="Interrupt Vector Addresses">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node310.html">
+<LINK REL="previous" HREF="node308.html">
+<LINK REL="up" HREF="node297.html">
+<LINK REL="next" HREF="node310.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4614"
+  HREF="node310.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4610"
+  HREF="node297.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4604"
+  HREF="node308.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4612"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4615"
+  HREF="node310.html">Source Code</A>
+<B> Up:</B> <A NAME="tex2html4611"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Previous:</B> <A NAME="tex2html4605"
+  HREF="node308.html">Software Considerations</A>
+ &nbsp; <B>  <A NAME="tex2html4613"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002912000000000000000">
+Interrupt Vector Addresses</A>
+</H2>
+
+<P>
+The vector addresses for the first
+interface are 060 and 064 (for receiver
+and transmitter interrupts, respectively).
+Additional DL11/KL11 interfaces have vector addresses which are
+always at least 0300, and which are
+assigned according to rules which take
+into consideration other interfaces
+which may be present.
+
+<P>
+The second word of an interrupt doubiet
+is the ``new processor status'' word. The
+five low order bits of this word may be
+chosen arbitrarily, and are in fact
+used to define the minor device number
+(cf. a similar use to distinguish the
+various kinds of ``traps'' - see Sheet
+05). A masked version of the new processor status word is provided to the
+interrupt handling routines as the
+parameter ``dev'' (see e.g. line 8070).
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

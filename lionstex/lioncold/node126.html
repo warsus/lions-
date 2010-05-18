@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Rules for Interrupt Handlers</TITLE>
+<META NAME="description" CONTENT="Rules for Interrupt Handlers">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node127.html">
+<LINK REL="previous" HREF="node125.html">
+<LINK REL="up" HREF="node120.html">
+<LINK REL="next" HREF="node127.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2278"
+  HREF="node127.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2274"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2268"
+  HREF="node125.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2276"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2279"
+  HREF="node127.html">Traps</A>
+<B> Up:</B> <A NAME="tex2html2275"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2269"
+  HREF="node125.html">Interrupt Priorities</A>
+ &nbsp; <B>  <A NAME="tex2html2277"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000146000000000000000">
+Rules for Interrupt Handlers</A>
+</H2>
+
+<P>
+As discussed above, interrupt handlers
+need to be careful about the manipulation of the processor priority to avoid
+allowing other interrupts to happen
+``too soon''. Likewise care needs to be
+taken that the other interrupts are not
+delayed excessively, lest the performance of the whole system be degraded.
+It is important to note that when an
+interrupt occurs, the process which is
+currently active will very likely not
+be the process which is interested in
+the occurrence. Consider the following
+scenario:
+
+<P>
+User process #m is active and initiates
+an i/o operation. It executes a trap
+instruction and transfers to kernel
+mode. Kernel process #m initiates the
+required operation and then calls
+``sleep'' to suspend itself to await completion of the operation ...
+
+<P>
+Some time later, when some other process, user process #n say, is active,
+the operation is completed and an
+interrupt occurs. Process #n reverts to
+kernel mode, and kernel process #n
+deals with the interrupt, even though
+it may have no interest in or prior
+knowledge of the operation.
+
+<P>
+Usually kernel process #n will include
+waking process #m as part of its
+activity. This will not always be the
+case though, e.g. where an error has
+occurred and the operation is retried.
+
+<P>
+Clearly, the interrupt handler for a
+peripheral device should not made
+references to the current ``u'' structure
+for this is not likely to be the
+appropriate ``u'' structure. (The
+appropriate ``u'' structure could quite
+possibly be inaccessible, if it has
+been temporarily swapped out to the
+disk.)
+
+<P>
+Likewise the interrupt handler should
+not call ``sleep'' because the process
+thus suspended will most likely be some
+innocent process.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2278"
+  HREF="node127.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2274"
+  HREF="node120.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2268"
+  HREF="node125.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2276"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2279"
+  HREF="node127.html">Traps</A>
+<B> Up:</B> <A NAME="tex2html2275"
+  HREF="node120.html">Hardware Interrupts and Traps</A>
+<B> Previous:</B> <A NAME="tex2html2269"
+  HREF="node125.html">Interrupt Priorities</A>
+ &nbsp; <B>  <A NAME="tex2html2277"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,254 @@
+%
+% The Lion's Commentary, file preface.tex, version 1.5, 18 May 1994
+%
+\section*{Preface}
+
+This book is an attempt to explain in
+detail the nucleus of one of the most
+interesting computer operating systems
+to appear in recent years.
+
+It is the UNIX Time-sharing System,
+which runs on the larger models of
+Digital Equipment Corporation's PDP11
+computer system, and was developed by
+Ken Thompson and Dennis Ritchie at Bell
+Laboratories. It was first announced to
+the world in the July, 1974 issue of
+the ``Communications of the ACM''.
+
+Very soon in our experience with UNIX,
+it suggested itself as an interesting
+candidate for formal study by students,
+for the following reasons:
+
+\bi
+\item it runs on a system which is already available to us;
+
+\item it is compact and accessible;
+
+\item it provides an extensive set of very
+ usable facilities;
+
+it is intrinsically interesting, and
+ in fact breaks new ground in a
+ number of areas.
+\ei
+
+Not least amongst the charms and virtues of the UNIX Time-sharing System is
+the compactness of its source code.
+The source code for the permanently
+resident ``nucleus'' of the system when
+only a small number of peripheral devices is represented, is comfortably
+less than 9,000 lines of code.
+
+It has often been suggested that 1,000
+lines of code represents the practical
+limit in size for a program which is to
+be understood and maintained by a single individual.
+Most operating systems either exceed
+this limit by one or even two orders of
+magnitude, or else offer the user a
+very limited set of facilities, i.e.
+either the details of the system are
+inaccessible to all but the most determined, dedicated and long-suffering
+student, or else the system is rather
+specialised and of little intrinsic
+interest.
+
+There seem to be three main approaches
+to teaching Operating Systems.
+First there is the ``{\it general principles}''
+approach, wherein fundamental principles are expounded, and illustrated by
+references to various existing systems,
+(most of which happen to be outside the
+students' immediate experience). This
+is the approach advocated by the COSINE
+Committee, but in our view, many students are not mature or experienced
+enough to profit from it.
+
+The second approach is the ``{\it building
+block}'' approach, wherein the students
+are enabled to synthesize a small scale
+or ``toy'' operating system for themselves. While undoubtedly this can be a
+valuable exercise, if properly organised, it cannot but fail to encompass
+the complexity and sophistication of
+real operating systems, and is usually
+biased towards one aspect of operating
+system design, such as process synchronisation.
+
+The third approach is the ``{\it case study}''
+approach. This is the one originally
+recommended for the Systems Programming
+course in ``Curriculum '68'', the report
+of the ACM Curriculum Committee on Computer Science, published in the March,
+1968 issue of the ``Communications of
+the ACM''.
+
+Ten years ago, this approach, which
+advocates devoting ``most of the course
+to the study of a single system'' was
+unrealistic because the cost of providing adequate student access to a suitable system was simply too high.
+
+Ten years later, the economic picture
+has changed significantly, and the
+costs are no longer a decisive disadvantage if a minicomputer system can be
+the subject of study. The considerable
+advantages of the approach which undertakes a detailed analysis of an existing system are now attainable.
+
+In our opinion, it is highly beneficial
+for students to have the opportunity to
+study a working operating system in all
+its aspects.
+
+Moreover it is undoubtedly good for
+students majoring in Computer Science,
+to be confronted at least once in their
+careers, with the task of reading and
+understanding a program of major dimensions.
+
+In 1976 we adopted UNIX as the subject
+for case study in our courses in
+Operating Systems at the University of
+New South Wales. These notes were
+prepared originally for the assistance
+of students in those courses (6.602B
+and 6.657G).
+
+The courses run for one semester each.
+Before entering either Course, students
+are presumed to have studied the PDP11
+architecture and assembly language, and
+to have had an opportunity to use the
+UNIX operating system during exercises
+for earlier courses.
+
+In general, students seem to find the
+new courses more onerous, but much more
+satisfying than the previous courses
+based on the ``general principles''
+approach of the COSINE Committee.
+
+Some mention needs to be made regarding
+the documentation provided by the
+authors of the UNIX system. As reproduced for use on our campus, this
+comprises two volumes of A4 size paper,
+with a total thickness of 3 cm, and a
+weight of 1250 grams.
+
+A first observation is that the whole
+documentation is not unreasonably transportable in a student's brief case.
+However it must not be assumed that
+this amount of documentation, which is
+written in a fresh, terse, whimsical
+style, is necessarily inadequate.
+
+In fact the second observation (which
+is only made after considerable experience) is that for reference purposes,
+the documentation is remarkably
+comprehensive. However there is plenty
+of scope for additional tutorial
+material, one part of which, it is
+hoped, is satisfied by these notes.
+
+The actual UNIX operating system source
+code is recorded in a separate companion volume entitled ``UNIX Operating
+System Source Code'', which was first
+printed in July, 1976. This is a specially edited selection of code from
+the Level Six version of UNIX, as
+received by us in December, 1975.
+
+During 1976, an initial version of the
+present notes was distributed in
+roneoed form, and only in the latter
+part of the year were the facilities of
+the ``nroff'' text formatting program
+exploited. The opportunity has
+recently been taken to revise and
+``nroff'' the earlier material, to make
+some revisions and corrections, and to
+integrate them into their present form.
+
+A decision had to be made quite early
+regarding the order of presentation of
+the source code. The intention was to
+provide a reasonably logical sequence
+for the student who wanted to learn the
+whole system. With the benefit of
+hindsight, a great many improvements in
+detail are still possible, and it is
+intended that these changes will be
+made in some future edition.
+
+It is our hope that this book will be
+of interest and value to many students
+of the UNIX Time-sharing System.
+Although not prepared primarily for use
+as a reference work, some will wish to
+use it as such. The indices provided at
+the end should go some of the way
+towards satisfying the requirement for
+reference material at this level.
+
+Since these notes refer to proprietary
+material administered by the Western
+Electric Company, they can only be made
+available to licensees of the UNIX
+Time-sharing System and hence are
+unable to be published through more
+usual channels.
+
+Corrections, criticism and suggestions
+for improvement of these notes will be
+very welcome.
+
+\bigskip
+
+{\noindent \large \bf Acknowledgments}
+
+\smallskip
+
+The preparation of these notes has been
+encouraged and supported by many of my
+colleagues and students including David
+Carrington, Doug Crompton, Ian Hayes,
+David Horsfall, Peter Ivanov, Ian Johnstone, Chris Maltby, Dave Milway, John
+O'Brien and Greg Rose.
+
+Pat Mackie and Mary Powter did much of
+the initial typing, and Adele Green has
+assisted greatly in the transfer of the
+notes to ``nroff'' format.
+
+David Millis and the Publications Section of the University of New South
+Wales have assisted greatly with the
+mechanics of publication, and Ian Johnstone and the Australian Graduate
+School of Management provided facilities for the preparation of the final
+draft.
+
+Throughout this project, my wife
+Marianne has given me unfailing moral
+support and much practical support with
+proof-reading.
+
+Finally Ken Thompson and Dennis Ritchie
+started it all.
+
+To all the above, I wish to express my
+sincere thanks.
+
+The co-operation of the ``nroff'' program
+must also be mentioned. Without it,
+these notes could never have been produced in this form. However it has
+yielded some of its more enigmatic
+secrets so reluctantly, that the
+author's gratitude is indeed mixed.
+Certainly ``nroff'' itself must provide a
+fertile field for future practitioners
+of the program documenter's art.
+
+\bt
+\hspace{5cm} \= John Lions \\
+\> Kensington, NSW \\
+\> May, 1977 \\
+\et

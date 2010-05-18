@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The Per Process Data Area</title>
+
+<link href="sect0089.html" title="The Segments" rel="next" />
+<link href="sect0087.html" title="The user Structure (0413)" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0087.html" title="The user Structure (0413)"><img alt="Previous: The user Structure (0413)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0089.html" title="The Segments"><img alt="Next: The Segments" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The Per Process Data Area</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000089">7.4 The Per Process Data Area</h2>
+<p>The “per process data area” corresponds to the valid part (lower part) of the seventh page of the kernel address space. It is 1024 bytes long. The lower 289 bytes are occupied by an instance of the “user” structure, leaving 367 words to be used as a kernel mode stack area. (Obviously there will be as many kernel mode stacks as there are processes.) </p><p>While the processor is in kernel mode, the values of r5 and r6, the environment and stack pointers, should remain within the range 0140441 to 01437777. Transition beyond the upper limit would be trapped as a segmentation violation, but the lower limit is protected only by the integrity of the software. (It may be noted that the hardware stack limit option is not used by UNIX.) </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0087.html" title="The user Structure (0413)"><img alt="Previous: The user Structure (0413)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0089.html" title="The Segments"><img alt="Next: The Segments" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

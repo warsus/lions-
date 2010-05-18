@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: iget (7276)</title>
+
+<link href="sect0255.html" title="getfs (7167)" rel="next" />
+<link href="sect0253.html" title="Notes" rel="prev" />
+<link href="sect0247.html" title="File Systems" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0253.html" title="Notes"><img alt="Previous: Notes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0255.html" title="getfs (7167)"><img alt="Next: getfs (7167)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0247.html">File Systems</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">iget (7276)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000255">20.7 iget (7276)</h2>
+<p>This procedure is called by “main” (1616,1618), “unlink” (3519), “ialloc” (7078) and “namei” (7534, 7664) with two parameters which together uniquely identify a file: a device, and the “inode” number of a file on the device. “iget” returns a reference to an entry in the core “inode” table. </p><p>When “iget” is called, the core “inode” table is searched first to see if an entry already exists for the file in the core “inode” table. If not, then “iget” creates one. </p><dl class="description">
+
+    <dt>7285:</dt>
+    <dd><p>Search the core “inode” table ... </p></dd>
+
+    <dt>7286:</dt>
+    <dd><p>If an entry for the designated file already exists ... </p></dd>
+
+    <dt>7287:</dt>
+    <dd><p>Then if it is locked go to sleep; </p></dd>
+
+    <dt>7290:</dt>
+    <dd><p>Try again. (Note the whole table needs to be searched again from the beginning, because the entry may have vanished!); </p></dd>
+
+    <dt>7292:</dt>
+    <dd><p>If the IMOUNT flag is on ... this is an important possibility for which we will delay the discussion; </p></dd>
+
+    <dt>7302:</dt>
+    <dd><p>If the “IMOUNT” flag is not set, increase the “inode” reference count, set the “ILOCK” flag and return a pointer to the “inode”; </p></dd>
+
+    <dt>7306:</dt>
+    <dd><p>Make a note of the first empty slot in the “inode” table; </p></dd>
+
+    <dt>7309:</dt>
+    <dd><p>If the “inode” table is full, send a message to the operator, and take an error exit; </p></dd>
+
+    <dt>7314:</dt>
+    <dd><p>At this point, a new entry is to be made in the “inode” table; </p></dd>
+
+    <dt>7319:</dt>
+    <dd><p>Read the block which contains the file system volume “inode”. Note the use of “bread” instead of “readi”, the assumption that “inode” information begins in block #2 and the convention that valid “inode” numbers begin at one (not zero); </p></dd>
+
+    <dt>7326:</dt>
+    <dd><p>A read error at this point isn’t very well reported to the rest of the system; </p></dd>
+
+    <dt>7328:</dt>
+    <dd><p>Copy the relevant “inode” information. This code makes implicit use of the contents of the file “ino.h” (Sheet 56), which isn’t referenced explicitly anywhere. </p></dd>
+
+</dl><p>Let us now return to unfinished business: </p><dl class="description">
+
+    <dt>7292:</dt>
+    <dd><p>The “IMOUNT” flag is found to be set. This flag was set by “smount”, when a file system volume was mounted; </p></dd>
+
+    <dt>7293:</dt>
+    <dd><p>Search the “mount” table to find the entry which points to the curent “inode”. (Although searching this table is not a horrendous overhead, it does seem possible that a “back pointer” could be conveniently stored in in the “inode” e.g. in the “i_lastr” field. This would save both time and code space.; </p></dd>
+
+    <dt>7396:</dt>
+    <dd><p>Reset “dev” and “ino” to the mounted device number and the “inode” number of the root directory on the mounted file system volume. Start again. </p></dd>
+
+</dl><p>Clearly, since “iget” is called by “namei” (7534, 7664), this technique allows the whole directory structure on the mounted file system volume to be integrated into the pre-existing directory structure. If we momentarily ignore the possible deviations of directory structures away from tree structures, we have the situation where a leaf of the existing tree is being replaced by an entire subtree. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0253.html" title="Notes"><img alt="Previous: Notes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0247.html" title="File Systems"><img alt="Up: File Systems" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0255.html" title="getfs (7167)"><img alt="Next: getfs (7167)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

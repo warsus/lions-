@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>iupdat (7374)</TITLE>
+<META NAME="description" CONTENT="iupdat (7374)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node267.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node269.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4086"
+  HREF="node269.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4082"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4078"
+  HREF="node267.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4084"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4087"
+  HREF="node269.html">Pipes</A>
+<B> Up:</B> <A NAME="tex2html4083"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4079"
+  HREF="node267.html">ifree (7134)</A>
+ &nbsp; <B>  <A NAME="tex2html4085"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002517000000000000000">
+iupdat (7374)</A>
+</H2>
+
+<P>
+This procedure  is  called  by ``statl''
+(6050),   ``update''  (7226)  and  ``iput''
+(7357) to revise a  particular  ``inode''
+entry  on a FSV. It does nothing if the
+corresponding  core  ``inode''   is   not
+flagged (``IUPD'' or ``IACC'');
+
+<P>
+The ``IUPD'' flag may be set by one of
+
+<P>
+<PRE>
+  unlink (3530)        bmap (6452,6467)
+  chmod  (3570)        itrunc  (7448)
+  chown  (3583)        maknode (7462)
+  link   (5942)        namei   (7609)
+  writei (6285,6318)   pipe    (7751)
+</PRE>
+
+<P>
+The ``IACC'' flag may be set by one of
+
+<P>
+<PRE>
+  readi  (6232)       maknode (7462)
+  writei (6285)       pipe    (7751)
+</PRE>
+
+<P>
+The flags are reset by ``iput'' (7359).
+
+<P>
+<DL>
+<DT><STRONG>7383:</STRONG></DT>
+<DD>Forget it, if the  FSV  has  been
+mounted as ``read only'';
+
+<P>
+</DD>
+<DT><STRONG>7386:</STRONG></DT>
+<DD>Read the appropriate  block  containing  the  FSV  ``inode'' entry.
+      As observed earlier with  respect
+      to  ``iget'',  note  the the use of
+      ``bread'' instead of  ``readi'',  the
+      assumption that the ``inode'' table
+      begins at block #2 and  the  convention    that   valid   ``inode''
+      numbers begin at one;
+
+<P>
+</DD>
+<DT><STRONG>7389:</STRONG></DT>
+<DD>Copy  the  relevant   information
+      from the core ``inode'';
+
+<P>
+</DD>
+<DT><STRONG>7391:</STRONG></DT>
+<DD>If appropriate, update  the  time
+      of last access;
+
+<P>
+</DD>
+<DT><STRONG>7396:</STRONG></DT>
+<DD>If appropriate, update  the  time
+      of last modification;
+
+<P>
+</DD>
+<DT><STRONG>7400:</STRONG></DT>
+<DD>Write the updated block  back  to
+      the FSV.
+</DD>
+</DL>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

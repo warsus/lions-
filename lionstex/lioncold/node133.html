@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Interrupts</TITLE>
+<META NAME="description" CONTENT="Interrupts">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node134.html">
+<LINK REL="previous" HREF="node132.html">
+<LINK REL="up" HREF="node130.html">
+<LINK REL="next" HREF="node134.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2366"
+  HREF="node134.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2362"
+  HREF="node130.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2356"
+  HREF="node132.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2364"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2367"
+  HREF="node134.html">call (0776)</A>
+<B> Up:</B> <A NAME="tex2html2363"
+  HREF="node130.html">The Assembler ``Trap'' Routine</A>
+<B> Previous:</B> <A NAME="tex2html2357"
+  HREF="node132.html">fuibyte (0814), fuiword (0844)</A>
+ &nbsp; <B>  <A NAME="tex2html2365"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000153000000000000000">
+Interrupts</A>
+</H2>
+
+<P>
+Suppose the clock has interrupted the
+processor.
+
+<P>
+Both clock vector locations, 100 and
+104, have the same information. PC is
+set to the address of the location
+labelled ``kwlp'' (0568) and PS is set to
+show:
+
+<P>
+present mode = kernel mode
+
+<P>
+previous mode = kernel or user mode
+
+<P>
+priority = 6
+
+<P>
+Note.
+The PS will contain the true previous mode, regardless of the value
+picked up from the vector location.
+
+<P>
+<DL>
+<DT><STRONG>0570:</STRONG></DT>
+<DD>The vector location contains a
+ new PC value which is the address
+ of the statement labelled ``kwlp''.
+ This instruction is a subroutine
+ call on ``call'' via r0.
+
+<P>
+After the execution of this
+ instruction, r0 is left with the
+ address of the code word after
+ the instruction which contains
+ ``_clock'', i.e. r0 contains <B>the
+ address of the address</B> of the
+ ``clock'' routine in the file
+ ``clock.c'' (3725).
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

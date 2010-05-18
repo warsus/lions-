@@ -1,0 +1,102 @@
+%
+% The Lion's Commentary, file lionc.tex, version 1.3, 18 May 1994
+%
+\documentstyle[twoside,fancyheadings]{article}
+\font\twlrm = cmr10 scaled \magstep1
+
+% Set the page dimensions
+
+\setlength{\textwidth}{16.6cm}
+\setlength{\oddsidemargin}{-0.25cm}
+\setlength{\evensidemargin}{-0.25cm}
+\setlength{\textheight}{24.1cm}
+\setlength{\topmargin}{-1.3cm}
+\setlength{\columnsep}{1cm}
+
+% Shut LaTeX up about overful hboxes
+
+\tolerance=1000
+\hfuzz=15pt
+
+\begin{document}
+
+% I don't feel like typing much....
+
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\bd}{\begin{description}}
+\newcommand{\ed}{\end{description}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\bt}{\begin{tabbing}}
+\newcommand{\et}{\end{tabbing}}
+\newcommand{\se}[1]{\section{#1}}
+\newcommand{\sbs}[1]{\subsection{#1}}
+\newcommand{\ssb}[1]{\subsubsection{#1}}
+
+% Set up the headings for the document
+
+\setlength{\headrulewidth}{0cm}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}}
+\rhead[{\it UNIX 6th Edition Commentary}]{\it \leftmark}
+\lhead[{\it \leftmark}]{\it UNIX 6th Edition Commentary}
+\chead{}
+\lfoot[{\thepage}]{}
+\cfoot{}
+\rfoot[]{\thepage}
+
+% Give the title page
+
+\pagestyle{empty}
+\include{title}
+
+\cleardoublepage			% Blank page for two-up printing
+
+\pagestyle{fancy}
+%\twocolumn
+\pagenumbering{roman}
+
+% Now the table of contents
+
+\tableofcontents
+\cleardoublepage			% Blank page for two-up printing
+
+% And the preface
+
+\include{preface}
+\cleardoublepage			% Blank page for two-up printing
+\pagenumbering{arabic}
+\setcounter{section}{0}
+
+% Then do the chapters
+
+\include{ch1}
+\include{ch2}
+\include{ch3}
+\include{ch4}
+\include{ch5}
+\include{ch6}
+\include{ch7}
+\include{ch8}
+\include{ch9}
+\include{ch10}
+\include{ch11}
+\include{ch12}
+\include{ch13}
+\include{ch14}
+\include{ch15}
+\include{ch16}
+\include{ch17}
+\include{ch18}
+\include{ch19}
+\include{ch20}
+\include{ch21}
+\include{ch22}
+\include{ch23}
+\include{ch24}
+\include{ch25}
+\include{ch26}
+\end{document}

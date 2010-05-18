@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: kill (3630)</title>
+
+<link href="sect0160.html" title="signal (3949)" rel="next" />
+<link href="sect0158.html" title="ssig (3614)" rel="prev" />
+<link href="sect0148.html" title="Software Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0158.html" title="ssig (3614)"><img alt="Previous: ssig (3614)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0160.html" title="signal (3949)"><img alt="Next: signal (3949)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0148.html">Software Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">kill (3630)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000160">13.11 kill (3630)</h2>
+<p>This procedure implements the “kill” system call to cause a specified type of software interrupt to another designated process. </p><dl class="description">
+
+    <dt>3637:</dt>
+    <dd><p>If “a” is non-zero, it is the process identifying number of a process to be interrupted. If “a” is zero, then all processes originating from the same terminal as the current process are to be interrupted; </p></dd>
+
+    <dt>3639:</dt>
+    <dd><p>Consider each entry in the “proc” table in turn and reject it if: it is the current process (3640); it is not the designated process (3642); no particular process was designated (“a” == 0) but it does not have the same controlling terminal or it is one of the two initial processes (3644); the user is not the “super user” and the user identities do not match (3646); </p></dd>
+
+    <dt>3649:</dt>
+    <dd><p>For any process that survives the above tests, call “psignal” to change “p_sig”. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0158.html" title="ssig (3614)"><img alt="Previous: ssig (3614)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0148.html" title="Software Interrupts"><img alt="Up: Software Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0160.html" title="signal (3949)"><img alt="Next: signal (3949)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

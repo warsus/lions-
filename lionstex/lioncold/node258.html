@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>iget (7276)</TITLE>
+<META NAME="description" CONTENT="iget (7276)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node259.html">
+<LINK REL="previous" HREF="node257.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node259.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3968"
+  HREF="node259.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3964"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3958"
+  HREF="node257.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3966"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3969"
+  HREF="node259.html">getfs (7167)</A>
+<B> Up:</B> <A NAME="tex2html3965"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3959"
+  HREF="node257.html">Notes</A>
+ &nbsp; <B>  <A NAME="tex2html3967"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000257000000000000000">
+iget (7276)</A>
+</H2>
+
+<P>
+This  procedure  is  called  by  ``main''
+(1616,1618),  ``unlink'' (3519), ``ialloc''
+(7078) and ``namei''  (7534,  7664)  with
+two  parameters which together uniquely
+identify a  file:  a  device,  and  the
+``inode'' number of a file on the device.
+``iget'' returns a reference to an  entry
+in the core ``inode'' table.
+
+<P>
+When ``iget'' is called, the core ``inode''
+table  is  searched  first to see if an
+entry already exists for  the  file  in
+the  core  ``inode''  table. If not, then
+``iget'' creates one.
+
+<P>
+<DL>
+<DT><STRONG>7285:</STRONG></DT>
+<DD>Search the core ``inode'' table ...
+
+<P>
+</DD>
+<DT><STRONG>7286:</STRONG></DT>
+<DD>If an entry  for  the  designated
+file already exists ...
+
+<P>
+</DD>
+<DT><STRONG>7287:</STRONG></DT>
+<DD>Then if it is locked go to sleep;
+
+<P>
+</DD>
+<DT><STRONG>7290:</STRONG></DT>
+<DD>Try again. (Note the whole  table
+  needs  to  be searched again from
+  the beginning, because the  entry
+  may have vanished!);
+
+<P>
+</DD>
+<DT><STRONG>7292:</STRONG></DT>
+<DD>If the IMOUNT flag  is  on  ...
+this  is an important possibility
+for which we will delay the  discussion;
+
+<P>
+</DD>
+<DT><STRONG>7302:</STRONG></DT>
+<DD>If the ``IMOUNT'' flag is not  set,
+increase  the  ``inode''  reference
+count, set the ``ILOCK''  flag  and
+return a pointer to the ``inode'';
+
+<P>
+</DD>
+<DT><STRONG>7306:</STRONG></DT>
+<DD>Make a note of  the  first  empty
+      slot in the ``inode'' table;
+
+<P>
+</DD>
+<DT><STRONG>7309:</STRONG></DT>
+<DD>If the  ``inode''  table  is  full,
+      send  a  message to the operator,
+      and take an error exit;
+
+<P>
+</DD>
+<DT><STRONG>7314:</STRONG></DT>
+<DD>At this point, a new entry is  to
+      be made in the ``inode'' table;
+
+<P>
+</DD>
+<DT><STRONG>7319:</STRONG></DT>
+<DD>Read the block which contains the
+      file  system volume ``inode''. Note
+      the use  of  ``bread''  instead  of
+      ``readi'',   the   assumption  that
+      ``inode''  information  begins   in
+      block #2  and the convention that
+      valid ``inode''  numbers  begin  at
+      one (not zero);
+
+<P>
+</DD>
+<DT><STRONG>7326:</STRONG></DT>
+<DD>A read error at this point isn't
+      very well reported to the rest of       
+      the system; 
+
+<P>
+</DD>
+<DT><STRONG>7328:</STRONG></DT>
+<DD>Copy the relevant ``inode'' 
+information.  This code makes implicit
+      use of the contents of  the  file
+      ``ino.h''  (Sheet  56), which isn't
+      referenced explicitly anywhere.
+</DD>
+</DL>
+
+<P>
+Let us now return to  unfinished  business:
+
+<P>
+<DL>
+<DT><STRONG>7292:</STRONG></DT>
+<DD>The ``IMOUNT'' flag is found to  be
+      set.   This   flag   was  set  by
+``smount'',  when  a  file   system
+volume was mounted;
+
+<P>
+</DD>
+<DT><STRONG>7293:</STRONG></DT>
+<DD>Search the ``mount'' table to  find
+      the  entry  which  points  to the
+      curent    ``inode''.     (Although
+      searching  this  table  is  not a
+      horrendous overhead, it does seem
+      possible  that  a  ``back pointer''
+      could be conveniently  stored  in
+      in   the   ``inode''  e.g.  in  the
+      ``i_lastr'' field. This would  save
+      both time and code space.;
+
+<P>
+</DD>
+<DT><STRONG>7396:</STRONG></DT>
+<DD>Reset  ``dev''  and  ``ino''  to  the
+      mounted  device  number  and  the
+      ``inode'' number of the root directory  on  the mounted file system
+      volume.  Start again.
+</DD>
+</DL>
+
+<P>
+Clearly,  since  ``iget''  is  called  by
+``namei''  (7534,  7664),  this technique
+allows the whole directory structure on
+the  mounted  file  system volume to be
+integrated into the pre-existing directory   structure.   If  we  momentarily
+ignore  the  possible   deviations   of
+directory  structures  away  from  tree
+structures, we have the situation where
+a  leaf  of  the existing tree is being
+replaced by an entire subtree.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3968"
+  HREF="node259.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3964"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3958"
+  HREF="node257.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3966"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3969"
+  HREF="node259.html">getfs (7167)</A>
+<B> Up:</B> <A NAME="tex2html3965"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3959"
+  HREF="node257.html">Notes</A>
+ &nbsp; <B>  <A NAME="tex2html3967"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

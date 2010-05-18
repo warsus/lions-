@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>estabur (1650)</TITLE>
+<META NAME="description" CONTENT="estabur (1650)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node100.html">
+<LINK REL="previous" HREF="node98.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node100.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1933"
+  HREF="node100.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1929"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1923"
+  HREF="node98.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1931"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1934"
+  HREF="node100.html">sureg (1739)</A>
+<B> Up:</B> <A NAME="tex2html1930"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1924"
+  HREF="node98.html">Setting the Segmentation Registers</A>
+ &nbsp; <B>  <A NAME="tex2html1932"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001111000000000000000">
+estabur (1650)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>1654:</STRONG></DT>
+<DD>Various checks on consistency are
+ performed, to ensure that the
+ requested sizes for the text,
+ data and stack are reasonable.
+
+<P>
+Note that a non-zero value for
+``sep'' implies separate mappings
+for the text area (``i'' space) and
+the data area (``d'' space). This
+is never possible on the
+PDP11/40;
+
+<P>
+</DD>
+<DT><STRONG>1664:</STRONG></DT>
+<DD>``a'' defines the address of a segment relative to an arbitrary
+ base of zero. ``ap'' and ``dp'' point
+ to the set of prototype segmentation address and descriptor
+ registers respectively.
+</DD>
+</DL>
+
+<P>
+The first eight of each of these sets
+are intended to refer to ``i'' space, and
+
+<P>
+<DL>
+<DT><STRONG>1667:</STRONG></DT>
+<DD>``nt'' measures the number of 32
+ word blocks needed for the text
+ segment. If ``nt'' is non-zero,
+ one or more pages must be allocated for this purpose.
+</DD>
+</DL>
+
+<P>
+Where more than one page is allocated,
+all but the last will consist of 128
+blocks (4096 words), and will be read
+only, and will have relative addresses
+starting at zero and increasing successively by 128.
+
+<P>
+<DL>
+<DT><STRONG>1672:</STRONG></DT>
+<DD>If some fraction of a page of
+ text is still to be assigned,
+ allocate the appropriate part of
+ the next page;
+
+<P>
+</DD>
+<DT><STRONG>1677:</STRONG></DT>
+<DD>if ``i'' and ``d'' spaces are being
+ used separately, mark the segmentation registers for the 
+remaining ``i'' pages as null;
+
+<P>
+</DD>
+<DT><STRONG>1682:</STRONG></DT>
+<DD>``a'' is reset because all remaining addresses refer to the data
+area (not the text area) and are
+relative to the beginning of this
+area. The first ``USIZE'' blocks
+of this area are reserved for the
+``per process data area'';
+
+<P>
+</DD>
+<DT><STRONG>1703:</STRONG></DT>
+<DD>The stack area is allocated from
+ the top of the address space
+ towards the lower addresses
+ (``downwards'');
+
+<P>
+</DD>
+<DT><STRONG>1711:</STRONG></DT>
+<DD>If a partial page must be allocated for the stack area, it is
+ the high address art of the page
+ which is valid. (For text and
+ data areas, which grow ``upwards'',
+ it is the lower part of a partial
+ page which is valid.) This
+ requires an extra bit in the
+ descriptor, hence ``ED'' (``expansion downwards'');
+
+<P>
+</DD>
+<DT><STRONG>1714:</STRONG></DT>
+<DD>If separate ``i'' and ``d'' spaces
+ are not used, only the first
+ eight of the sixteen prototype
+ register pairs will have been
+ initialised by this point. In
+ this case, the second eight are
+ copied from the first eight.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1933"
+  HREF="node100.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1929"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1923"
+  HREF="node98.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1931"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1934"
+  HREF="node100.html">sureg (1739)</A>
+<B> Up:</B> <A NAME="tex2html1930"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1924"
+  HREF="node98.html">Setting the Segmentation Registers</A>
+ &nbsp; <B>  <A NAME="tex2html1932"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>wait (3270) (continued)</TITLE>
+<META NAME="description" CONTENT="wait (3270) (continued)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node176.html">
+<LINK REL="previous" HREF="node174.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node176.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2902"
+  HREF="node176.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2898"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2892"
+  HREF="node174.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2900"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2903"
+  HREF="node176.html">ptrace (4164)</A>
+<B> Up:</B> <A NAME="tex2html2899"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2893"
+  HREF="node174.html">stop (4016)</A>
+ &nbsp; <B>  <A NAME="tex2html2901"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001823000000000000000">
+wait (3270) (continued)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>3301:</STRONG></DT>
+<DD>If the child process has
+ ``stopped'' and ...
+
+<P>
+</DD>
+<DT><STRONG>3302:</STRONG></DT>
+<DD>If the ``SWTED'' flag is not set
+ (i.e. the parent hasn't noticed
+ this child lately) ...
+
+<P>
+</DD>
+<DT><STRONG>3303:</STRONG></DT>
+<DD>As an ``aide-memoire'' set the
+ ``SWTED'' flag. Set ``u.u_ar0[R0]'',
+ ``u.u_ar0[R1]'' so that the child
+ process status word is returned
+ to the parent;
+
+<P>
+</DD>
+<DT><STRONG>3309:</STRONG></DT>
+<DD>The ``SWTED'' flag was set. This
+ means that the parent, by performing at least two ``waits'' in
+ succession without any intervening call on ``ptrace'', is not very
+ interested in the child. So
+ reset both the ``STRC'' and the
+ ``SWTED'' flags and release the
+ child. (Note the use of ``setrun''
+ (not ``wakeup'') to complement the
+ call on ``swtch'' (4027)).
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

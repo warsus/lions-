@@ -1,0 +1,325 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Arch Linux) (format=latex 2010.1.29)  3 MAY 2010 01:03
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./images.tex
+(./images.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, german-x-2009-06-19, ngerman-x-2009-06-19, ancientgreek, ibycus, ar
+abic, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutc
+h, esperanto, estonian, farsi, finnish, french, galician, german, ngerman, mono
+greek, greek, hungarian, icelandic, indonesian, interlingua, irish, italian, ku
+rmanji, latin, latvian, lithuanian, mongolian, mongolian2a, bokmal, nynorsk, po
+lish, portuguese, romanian, russian, sanskrit, serbian, slovak, slovenian, span
+ish, swedish, turkish, ukenglish, ukrainian, uppersorbian, welsh, loaded.
+
+(/usr/share/texmf-dist/tex/latex/base/latex209.def
+File: latex209.def 1998/05/13 v0.52 Standard LaTeX file
+
+          Entering LaTeX 2.09 COMPATIBILITY MODE
+ *************************************************************
+    !!WARNING!!    !!WARNING!!    !!WARNING!!    !!WARNING!!   
+ 
+ This mode attempts to provide an emulation of the LaTeX 2.09
+ author environment so that OLD documents can be successfully
+ processed. It should NOT be used for NEW documents!
+ 
+ New documents should use Standard LaTeX conventions and start
+ with the \documentclass command.
+ 
+ Compatibility mode is UNLIKELY TO WORK with LaTeX 2.09 style
+ files that change any internal macros, especially not with
+ those that change the FONT SELECTION or OUTPUT ROUTINES.
+ 
+ Therefore such style files MUST BE UPDATED to use
+          Current Standard LaTeX: LaTeX2e.
+ If you suspect that you may be using such a style file, which
+ is probably very, very old by now, then you should attempt to
+ get it updated by sending a copy of this error message to the
+ author of that file.
+ *************************************************************
+
+\footheight=\dimen102
+\@maxsep=\dimen103
+\@dblmaxsep=\dimen104
+\@cla=\count79
+\@clb=\count80
+\mscount=\count81
+(/usr/share/texmf-dist/tex/latex/base/tracefnt.sty
+Package: tracefnt 1997/05/29 v3.0j Standard LaTeX package (font tracing)
+\tracingfonts=\count82
+LaTeX Info: Redefining \selectfont on input line 101.
+)
+\symbold=\mathgroup4
+\symsans=\mathgroup5
+\symtypewriter=\mathgroup6
+\symitalic=\mathgroup7
+\symsmallcaps=\mathgroup8
+\symslanted=\mathgroup9
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 293.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 294.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 295.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 301.
+LaTeX Info: Redefining \em on input line 311.
+(/usr/share/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 375.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 377.
+LaTeX Font Info:    Redeclaring math delimiter \bracevert on input line 379.
+) (/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\c@subparagraph=\count88
+\c@figure=\count89
+\c@table=\count90
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+Compatibility mode: definition of \rm ignored.
+Compatibility mode: definition of \sf ignored.
+Compatibility mode: definition of \tt ignored.
+Compatibility mode: definition of \bf ignored.
+Compatibility mode: definition of \it ignored.
+Compatibility mode: definition of \sl ignored.
+Compatibility mode: definition of \sc ignored.
+LaTeX Info: Redefining \cal on input line 506.
+LaTeX Info: Redefining \mit on input line 507.
+\bibindent=\dimen105
+) (/usr/share/texmf-dist/tex/latex/fancyhdr/fancyheadings.sty
+Package: fancyheadings 2008/02/04 1.99 Dummy package to call fancyhdr
+
+Package fancyheadings Warning: Please stop using fancyheadings!
+(fancyheadings)                Use fancyhdr instead.
+(fancyheadings)                We will call fancyhdr with the very same
+(fancyheadings)                options you passed to fancyheadings.
+(fancyheadings)                
+(fancyheadings)                fancyhdr is 99 percent compatible with
+(fancyheadings)                fancyheadings. The only incompatibility is
+(fancyheadings)                that \headrulewidth and \footrulewidth and
+(fancyheadings)                their \plain... versions are no longer length
+(fancyheadings)                parameters, but normal macros (to be changed
+(fancyheadings)                with \renewcommand rather than \setlength)..
+
+(/usr/share/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip43
+\f@ncyO@elh=\skip44
+\f@ncyO@erh=\skip45
+\f@ncyO@olh=\skip46
+\f@ncyO@orh=\skip47
+\f@ncyO@elf=\skip48
+\f@ncyO@erf=\skip49
+\f@ncyO@olf=\skip50
+\f@ncyO@orf=\skip51
+)) (/usr/share/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+
+! LaTeX Error: LaTeX2e command \usepackage in LaTeX 2.09 document.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \usepackage
+                [latin1]{inputenc}
+This is a LaTeX 2.09 document, but it contains \usepackage.
+If you want to use the new features of LaTeX2e, your document
+should begin with \documentclass rather than \documentstyle
+
+
+! LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \usepackage[latin1]{
+                         inputenc}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+\sizebox=\box26
+\lthtmlwrite=\write3
+
+! LaTeX Error: Command \selectlanguage already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.132 \providecommand{\selectlanguage}[1]{}
+                                           %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+(./images.aux (/home/nonehaxor/code/lionstex/title.aux) (/home/nonehaxor/code/l
+ionstex/preface.aux) (/home/nonehaxor/code/lionstex/ch1.aux) (/home/nonehaxor/c
+ode/lionstex/ch2.aux) (/home/nonehaxor/code/lionstex/ch3.aux) (/home/nonehaxor/
+code/lionstex/ch4.aux) (/home/nonehaxor/code/lionstex/ch5.aux) (/home/nonehaxor
+/code/lionstex/ch6.aux) (/home/nonehaxor/code/lionstex/ch7.aux) (/home/nonehaxo
+r/code/lionstex/ch8.aux) (/home/nonehaxor/code/lionstex/ch9.aux) (/home/nonehax
+or/code/lionstex/ch10.aux) (/home/nonehaxor/code/lionstex/ch11.aux) (/home/none
+haxor/code/lionstex/ch12.aux) (/home/nonehaxor/code/lionstex/ch13.aux) (/home/n
+onehaxor/code/lionstex/ch14.aux) (/home/nonehaxor/code/lionstex/ch15.aux) (/hom
+e/nonehaxor/code/lionstex/ch16.aux) (/home/nonehaxor/code/lionstex/ch17.aux) (/
+home/nonehaxor/code/lionstex/ch18.aux) (/home/nonehaxor/code/lionstex/ch19.aux)
+(/home/nonehaxor/code/lionstex/ch20.aux) (/home/nonehaxor/code/lionstex/ch21.au
+x) (/home/nonehaxor/code/lionstex/ch22.aux) (/home/nonehaxor/code/lionstex/ch23
+.aux) (/home/nonehaxor/code/lionstex/ch24.aux) (/home/nonehaxor/code/lionstex/c
+h25.aux) (/home/nonehaxor/code/lionstex/ch26.aux))
+\openout1 = `images.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+
+latex2htmlLength hsize=349.0pt
+
+latex2htmlLength vsize=715.72292pt
+
+latex2htmlLength hoffset=0.0pt
+
+latex2htmlLength voffset=0.0pt
+
+latex2htmlLength topmargin=0.0pt
+
+latex2htmlLength topskip=0.00003pt
+
+latex2htmlLength headheight=0.0pt
+
+latex2htmlLength headsep=0.0pt
+
+latex2htmlLength parskip=0.0pt plus 1.0pt
+
+latex2htmlLength oddsidemargin=-7.11317pt
+
+latex2htmlLength evensidemargin=-7.11317pt
+
+[1
+
+
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 231.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 231.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 231.
+(/usr/share/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+l2hSize :tex2html_wrap_inline618:6.95831pt::6.95831pt::8.27783pt.
+[2
+
+]
+l2hSize :tex2html_wrap_inline620:6.95831pt::6.95831pt::8.27783pt.
+[3
+
+
+]
+l2hSize :tex2html_wrap_inline1121:6.95831pt::6.95831pt::16.05563pt.
+[4
+
+
+]
+l2hSize :tex2html_wrap_inline1123:6.95831pt::6.95831pt::16.05563pt.
+[5
+
+
+]
+l2hSize :tex2html_wrap_inline1135:6.95831pt::6.95831pt::16.05563pt.
+[6
+
+
+]
+l2hSize :tex2html_wrap_inline1962:6.95831pt::6.95831pt::8.27783pt.
+[7
+
+
+]
+l2hSize :tex2html_wrap_inline1974:6.95831pt::6.95831pt::8.27783pt.
+[8
+
+
+]
+l2hSize :tex2html_wrap_inline1986:7.44444pt::7.44444pt::44.54495pt.
+[9
+
+
+]
+l2hSize :tex2html_wrap_inline4349:8.64003pt::8.64003pt::24.52782pt.
+[10
+
+
+]
+l2hSize :tex2html_wrap_inline4351:6.45831pt::0.0pt::15.50008pt.
+[11
+
+
+]
+l2hSize :picture6988:122.0398pt::0.0pt::349.0pt.
+[12
+
+
+]
+l2hSize :picture7106:122.0398pt::0.0pt::349.0pt.
+[13
+
+
+]
+l2hSize :picture7227:122.0398pt::0.0pt::349.0pt.
+[14
+
+
+]
+l2hSize :picture7341:122.0398pt::0.0pt::349.0pt.
+[15
+
+
+]
+l2hSize :tex2html_wrap_inline7491:6.45831pt::0.0pt::10.50005pt.
+[16
+
+
+]
+l2hSize :tex2html_wrap_inline7786:6.45831pt::0.0pt::10.50005pt.
+[17
+
+
+]
+l2hSize :tex2html_wrap_inline8412:8.0pt::8.0pt::83.76369pt.
+[18
+
+
+] (./images.aux) ) 
+Here is how much of TeX's memory you used:
+ 694 strings out of 493848
+ 9011 string characters out of 3154002
+ 62145 words of memory out of 3000000
+ 3935 multiletter control sequences out of 15000+200000
+ 9598 words of font info for 36 fonts, out of 3000000 for 9000
+ 714 hyphenation exceptions out of 8191
+ 30i,8n,45p,201b,155s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on images.dvi (18 pages, 5884 bytes).

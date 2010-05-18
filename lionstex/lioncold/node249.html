@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>mknod (5952)</TITLE>
+<META NAME="description" CONTENT="mknod (5952)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node250.html">
+<LINK REL="previous" HREF="node248.html">
+<LINK REL="up" HREF="node240.html">
+<LINK REL="next" HREF="node250.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3845"
+  HREF="node250.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3841"
+  HREF="node240.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3835"
+  HREF="node248.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3843"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3846"
+  HREF="node250.html">access (6746)</A>
+<B> Up:</B> <A NAME="tex2html3842"
+  HREF="node240.html">File Directories and Directory</A>
+<B> Previous:</B> <A NAME="tex2html3836"
+  HREF="node248.html">unlink (3510)</A>
+ &nbsp; <B>  <A NAME="tex2html3844"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000249000000000000000">
+mknod (5952)</A>
+</H2>
+
+<P>
+This procedure, which implements a system call
+of the same name, is only executable by the super-user. As explained
+in  the Section ``MKNOD(II)'' of the UPM,
+this system  call  is  used  to  create
+``inodes'' for special files.
+
+<P>
+``mknod''  also  solves  the  problem  of
+``where  do directories come from''?  The
+second parameter passed to  ``mknod''  is
+used,  without modification or restriction to set ``i_mode''.
+(Compare  ``creat'' (5790)  and  ``chmod''  (3569)).  This is
+the only way an ``inode'' can get flagged
+as a directory, for instance.
+
+<P>
+In  such  cases,  the  third  parameter
+passed  to  ``mknod'' <B>must</B> be zero.  This
+value is copied into ``i_addr[0]'' (as is
+appropriate for special files), and, if
+non-zero, will be accepted uncritically
+by  ``bmap''  (6447). It might be prudent
+to insert a test
+
+<P>
+<PRE>
+   if (ip-&gt;i_mode &amp; (IFCHR &amp; IFBLK) != 0)
+</PRE>
+
+<P>
+before  line  5969,  rather  than  rely
+indefinitely  on  the  infallibility of
+the super-user.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

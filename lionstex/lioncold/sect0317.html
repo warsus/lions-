@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Notes</title>
+
+<link href="sect0318.html" title="ttyinput (8333)" rel="next" />
+<link href="sect0316.html" title="canon (8274)" rel="prev" />
+<link href="sect0311.html" title="The File “tty.c”" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0316.html" title="canon (8274)"><img alt="Previous: canon (8274)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0318.html" title="ttyinput (8333)"><img alt="Next: ttyinput (8333)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0311.html">The File “tty.c”</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Notes</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000318">25.6 Notes</h2>
+<dl class="description">
+
+    <dt>(A)</dt>
+    <dd><p>The reason why “bp” starts (8291) at the third character of “canonb” can be found on line 8310. </p></dd>
+
+    <dt>(B)</dt>
+    <dd><p>A number of subtleties in the handling of backslashes (which the reader will no doubt have encountered in his practical use of UNIX) are still not immediately apparent. Since “maptab[c]” is zero for “c == ‘<tt>\</tt>’ ” (octal value of 134), all backslashes get copied into “canonb”. A single backslash will be subsequently overwritten if the following character is to be asserted (as in the case of ‘#’ or ‘@’ or eot (004), or if the case of an alphabetic character is to be changed for an upper case only terminal. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0316.html" title="canon (8274)"><img alt="Previous: canon (8274)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0311.html" title="The File “tty.c”"><img alt="Up: The File “tty.c”" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0318.html" title="ttyinput (8333)"><img alt="Next: ttyinput (8333)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

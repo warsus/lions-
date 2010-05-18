@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 4</TITLE>
+<META NAME="description" CONTENT="Example 4">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node38.html">
+<LINK REL="previous" HREF="node36.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node38.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1151"
+  HREF="node38.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1147"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1141"
+  HREF="node36.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1149"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1152"
+  HREF="node38.html">Example 5</A>
+<B> Up:</B> <A NAME="tex2html1148"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1142"
+  HREF="node36.html">Example 3</A>
+ &nbsp; <B>  <A NAME="tex2html1150"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00065000000000000000">
+Example 4</A>
+</H2>
+
+<P>
+<PRE>
+  6619 getf (f)
+       {
+         register *fp, rf;
+         rf = f;
+         if (rf &lt; 0 || rf &gt;= NOFILE)
+           goto bad;
+         fp = u.u_ofile[rf];
+         if (fp != NULL)
+         return (fp);
+       bad:
+         u.u_error = EBADF;
+         return (NULL);
+       }
+</PRE>
+
+<P>
+The parameter ``f'' is a presumed
+integer, and is copied directly into
+the register variable ``rf''. (This pattern will become so familiar that we
+will now cease to remark upon it.)
+
+<P>
+The three simple relational expressions
+
+<P>
+<PRE>
+  rf &lt; 0    rf &gt;=NOFILE    fp != NULL
+</PRE>
+
+<P>
+are each accorded the value one if
+true, and the value zero if false. The
+first tests if the value of ``rf'' is
+less than zero, the second, if ``rf'' is
+greater than the value defined by
+``NOFILE'' and the third, if the value of
+``fp'' is not equal to ``NULL'' (which is
+defined to be zero).
+
+<P>
+The conditions tested by the ``if''
+statements are the arithmetic expressions contained within parentheses.
+
+<P>
+If the expression is greater than zero
+the test is successful and the following statement is executed. Thus if for
+instance, ``fp'' had the value 001375,
+then
+
+<P>
+<PRE>
+    fp != NULL
+</PRE>
+
+<P>
+is true, and as a term in an arithmetic
+expression, is accorded the value one.
+This value is greater than zero, and
+hence the statement
+
+<P>
+<PRE>
+    return(fp);
+</PRE>
+
+<P>
+would be executed, to terminate further
+execution of ``getf'', and to return the
+value of ``fp'' to the calling procedure
+as the result of ``getf''.
+
+<P>
+The expression
+
+<P>
+<PRE>
+    rf &lt; 0 || rf &gt;= NOFILE
+</PRE>
+
+<P>
+is the logical disjunction (``or'') of
+the two simple relational expressions.
+
+<P>
+An example of a ``goto'' statement and
+associated label will be noted.
+
+<P>
+``fp'' is assigned a value, which is an
+<B>address</B>, from the ``rf''-th element of
+the array of integers ``u_ofile'', which
+is embedded in the structure ``u''.
+
+<P>
+The procedure ``getf'' returns a value to
+its calling procedure. This is either
+the vale of ``fp'' (i.e. an address) or
+``NULL''.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1151"
+  HREF="node38.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1147"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1141"
+  HREF="node36.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1149"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1152"
+  HREF="node38.html">Example 5</A>
+<B> Up:</B> <A NAME="tex2html1148"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1142"
+  HREF="node36.html">Example 3</A>
+ &nbsp; <B>  <A NAME="tex2html1150"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>stop (4016)</TITLE>
+<META NAME="description" CONTENT="stop (4016)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node175.html">
+<LINK REL="previous" HREF="node173.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node175.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2890"
+  HREF="node175.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2886"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2880"
+  HREF="node173.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2888"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2891"
+  HREF="node175.html">wait (3270) (continued)</A>
+<B> Up:</B> <A NAME="tex2html2887"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2881"
+  HREF="node173.html">Tracing</A>
+ &nbsp; <B>  <A NAME="tex2html2889"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001822000000000000000">
+stop (4016)</A>
+</H2>
+
+<P>
+This procedure is called by ``issig''
+(3999) if the tracing flag (``STRC'',
+0395) is set.
+
+<P>
+<DL>
+<DT><STRONG>4022:</STRONG></DT>
+<DD>If your parent is process 1
+ (i.e. ``/etc/init''), then call
+ ``exit'' (line 4032);
+
+<P>
+</DD>
+<DT><STRONG>4023:</STRONG></DT>
+<DD>Otherwise look through ``proc'' for
+ your parent ... wake him up ...
+ declare yourself ``stopped'' and
+ ... call ``swtch'' (Note do NOT
+ call ``sleep''. Why?);
+
+<P>
+</DD>
+<DT><STRONG>4028:</STRONG></DT>
+<DD>If the tracing flag has been
+ reset, or the result of the procedure ``procxmt'' is true, return
+ to ``issig'';
+
+<P>
+</DD>
+<DT><STRONG>4029:</STRONG></DT>
+<DD>Otherwise start again.
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

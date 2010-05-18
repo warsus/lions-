@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>An Example</TITLE>
+<META NAME="description" CONTENT="An Example">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node98.html">
+<LINK REL="previous" HREF="node96.html">
+<LINK REL="up" HREF="node88.html">
+<LINK REL="next" HREF="node98.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1909"
+  HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1905"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1899"
+  HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1907"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1910"
+  HREF="node98.html">Setting the Segmentation Registers</A>
+<B> Up:</B> <A NAME="tex2html1906"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1900"
+  HREF="node96.html">User Mode Execution</A>
+ &nbsp; <B>  <A NAME="tex2html1908"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000119000000000000000">
+An Example</A>
+</H2>
+
+<P>
+Consider a program on the PDP11/40
+which uses 1.7 pages of text, 3.3 pages
+of data, and 0.7 pages of stack area.
+(Our use of fractions in this example
+is admittedly a little crude.) The set
+of virtual addresses would be divided
+as shown in the following diagram:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">888  s1</TD>
+<TD ALIGN="LEFT">Stack</TD>
+</TR>
+<TR><TD ALIGN="LEFT">888  s1</TD>
+<TD ALIGN="LEFT">area</TD>
+</TR>
+<TR><TD ALIGN="LEFT">888</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">777</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">777</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">777</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">666</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">666</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">666  d4</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">555  d3</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">555  d3</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">555  d3</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">444  d2</TD>
+<TD ALIGN="LEFT">Data</TD>
+</TR>
+<TR><TD ALIGN="LEFT">444  d2</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">444  d2</TD>
+<TD ALIGN="LEFT">area</TD>
+</TR>
+<TR><TD ALIGN="LEFT">333  d1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">333  d1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">333  d1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">222</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">222  t2</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">222  t2</TD>
+<TD ALIGN="LEFT">Text</TD>
+</TR>
+<TR><TD ALIGN="LEFT">111  t1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">111  t1</TD>
+<TD ALIGN="LEFT">area</TD>
+</TR>
+<TR><TD ALIGN="LEFT">111  t1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+<P>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<BR>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<DIV ALIGN="CENTER">Virtual Address Space
+
+</DIV>
+
+<P>
+Two whole pages in the virtual address
+space must be allocated to the text
+segment, even though the physical area
+required is only 1.7 pages.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">222  t2</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">222  t2</TD>
+<TD ALIGN="LEFT">Text</TD>
+</TR>
+<TR><TD ALIGN="LEFT">111  t1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">111  t1</TD>
+<TD ALIGN="LEFT">area</TD>
+</TR>
+<TR><TD ALIGN="LEFT">111  t1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+<P>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<BR>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<DIV ALIGN="CENTER">Text Segment
+
+</DIV>
+
+<P>
+The data and stack areas require the
+dedication of four and one pages of
+virtual address space, and 3.3 and 0.7
+pages of physical memory respectively.
+
+<P>
+The whole data segment requires four
+and one eighth pages of physical
+memory. The extra eighth is for the
+``per process data area'' which
+corresponds (from time to time) to the
+seventh kernel address page.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT">888  s1</TD>
+<TD ALIGN="LEFT">Stack</TD>
+</TR>
+<TR><TD ALIGN="LEFT">888  s1</TD>
+<TD ALIGN="LEFT">area</TD>
+</TR>
+<TR><TD ALIGN="LEFT">666  d4</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">555  d3</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">555  d3</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">555  d3</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">444  d2</TD>
+<TD ALIGN="LEFT">Data</TD>
+</TR>
+<TR><TD ALIGN="LEFT">444  d2</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">444  d2</TD>
+<TD ALIGN="LEFT">area</TD>
+</TR>
+<TR><TD ALIGN="LEFT">333  d1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">333  d1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">333  d1</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="RIGHT" COLSPAN=1>ppda</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+<P>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<BR>
+<DIV ALIGN="CENTER"></DIV>
+<P>
+<DIV ALIGN="CENTER">Data Segment
+
+</DIV>
+
+<P>
+Note the order of the components of the
+data segment, and that there is no
+embedded unused space.
+
+<P>
+The user mode segmentation need to be
+set to reflect the values in the following table, where ``t'', ``d'' denote the
+block numbers of beginning of the text
+and data segments respectively:
+
+<P>
+
+<P>
+<BR>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>Page</B></TD>
+<TD ALIGN="LEFT"><B>Address</B></TD>
+<TD ALIGN="LEFT"><B>Size</B></TD>
+<TD ALIGN="LEFT"><B>Comment</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">1</TD>
+<TD ALIGN="LEFT">t+0</TD>
+<TD ALIGN="LEFT">1.0</TD>
+<TD ALIGN="LEFT">read only</TD>
+</TR>
+<TR><TD ALIGN="LEFT">2</TD>
+<TD ALIGN="LEFT">t+128</TD>
+<TD ALIGN="LEFT">0.7</TD>
+<TD ALIGN="LEFT">read only</TD>
+</TR>
+<TR><TD ALIGN="LEFT">3</TD>
+<TD ALIGN="LEFT">d+16</TD>
+<TD ALIGN="LEFT">1.0</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">4</TD>
+<TD ALIGN="LEFT">d+144</TD>
+<TD ALIGN="LEFT">1.0</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">5</TD>
+<TD ALIGN="LEFT">d+272</TD>
+<TD ALIGN="LEFT">1.0</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">6</TD>
+<TD ALIGN="LEFT">d+400</TD>
+<TD ALIGN="LEFT">0.3</TD>
+<TD ALIGN="LEFT">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">7</TD>
+<TD ALIGN="LEFT">?</TD>
+<TD ALIGN="LEFT">0.0</TD>
+<TD ALIGN="LEFT">not used</TD>
+</TR>
+<TR><TD ALIGN="LEFT">8</TD>
+<TD ALIGN="LEFT">d+400</TD>
+<TD ALIGN="LEFT">0.7</TD>
+<TD ALIGN="LEFT">grows downward</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Note the setting of the eighth address
+register. The address prototypes stored
+in the array ``u.u_uisa'' are obtained by
+setting ``t'' and ``d'' to zero.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1909"
+  HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1905"
+  HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1899"
+  HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1907"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1910"
+  HREF="node98.html">Setting the Segmentation Registers</A>
+<B> Up:</B> <A NAME="tex2html1906"
+  HREF="node88.html">Processes</A>
+<B> Previous:</B> <A NAME="tex2html1900"
+  HREF="node96.html">User Mode Execution</A>
+ &nbsp; <B>  <A NAME="tex2html1908"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

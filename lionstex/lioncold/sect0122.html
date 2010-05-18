@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Rules for Interrupt Handlers</title>
+
+<link href="sect0123.html" title="Traps" rel="next" />
+<link href="sect0121.html" title="Interrupt Priorities" rel="prev" />
+<link href="sect0116.html" title="Hardware Interrupts and Traps" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0121.html" title="Interrupt Priorities"><img alt="Previous: Interrupt Priorities" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0123.html" title="Traps"><img alt="Next: Traps" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0116.html">Hardware Interrupts and Traps</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Rules for Interrupt Handlers</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000123">9.6 Rules for Interrupt Handlers</h2>
+<p>As discussed above, interrupt handlers need to be careful about the manipulation of the processor priority to avoid allowing other interrupts to happen “too soon”. Likewise care needs to be taken that the other interrupts are not delayed excessively, lest the performance of the whole system be degraded. It is important to note that when an interrupt occurs, the process which is currently active will very likely not be the process which is interested in the occurrence. Consider the following scenario: </p><p>User process #m is active and initiates an i/o operation. It executes a trap instruction and transfers to kernel mode. Kernel process #m initiates the required operation and then calls “sleep” to suspend itself to await completion of the operation ... </p><p>Some time later, when some other process, user process #n say, is active, the operation is completed and an interrupt occurs. Process #n reverts to kernel mode, and kernel process #n deals with the interrupt, even though it may have no interest in or prior knowledge of the operation. </p><p>Usually kernel process #n will include waking process #m as part of its activity. This will not always be the case though, e.g. where an error has occurred and the operation is retried. </p><p>Clearly, the interrupt handler for a peripheral device should not made references to the current “u” structure for this is not likely to be the appropriate “u” structure. (The appropriate “u” structure could quite possibly be inaccessible, if it has been temporarily swapped out to the disk.) </p><p>Likewise the interrupt handler should not call “sleep” because the process thus suspended will most likely be some innocent process. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0121.html" title="Interrupt Priorities"><img alt="Previous: Interrupt Priorities" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0116.html" title="Hardware Interrupts and Traps"><img alt="Up: Hardware Interrupts and Traps" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0123.html" title="Traps"><img alt="Next: Traps" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

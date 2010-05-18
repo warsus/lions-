@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: file (5507)</title>
+
+<link href="sect0218.html" title="inode (5659)" rel="next" />
+<link href="sect0216.html" title="Control Tables" rel="prev" />
+<link href="sect0213.html" title="File Access and Control" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0216.html" title="Control Tables"><img alt="Previous: Control Tables" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0218.html" title="inode (5659)"><img alt="Next: inode (5659)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0213.html">File Access and Control</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">file (5507)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000218">18.4 file (5507)</h2>
+<p>The array “file” is defined as an array of structures (also named “file”). </p><p>An element of the “file” array is considered to be unallocated if “f_count” is zero. </p><p>Each “open” or “creat” system call results in the allocation of an element of the “file” array. The address of this element is stored in an element of the calling process’s array “u.u_ofile”. It is the index of the newly allocated element of the latter array which is passed back to the user process. Descendants of a process created by “newproc” inherit the contents of the parent’s “u.u_ofile” array. </p><p>Each element of “file” includes a counter, “f_count”, to determine the number of current processes which reference it. </p><p>“f_count” is incremented by “newproc” (1878), “dup” (6079) and “falloc” (6857); it is decremented by “closef” (6657) and (if the file can’t be opened) by “openl” (5836). </p><p>The “f_flag” (5509) of the “file” element notes whether the file is open for reading and/or writing or whether it is a “pipe” or not. (Further discussion of “pipes” will be deferred till Chapter Twenty-One.) </p><p>The “file” structure also contains a pointer, “f_inode” (5511) to an entry in the “inode” table, and a 32 bit integer, “f_offset” (5512), which is a logical pointer to a character within the file. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0216.html" title="Control Tables"><img alt="Previous: Control Tables" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Up: File Access and Control" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0218.html" title="inode (5659)"><img alt="Next: inode (5659)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

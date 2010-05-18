@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Character Oriented Special Files</TITLE>
+<META NAME="description" CONTENT="Character Oriented Special Files">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node287.html">
+<LINK REL="previous" HREF="node269.html">
+<LINK REL="up" HREF="lionc.html">
+<LINK REL="next" HREF="node276.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4173"
+  HREF="node276.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4169"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4163"
+  HREF="node274.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4171"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4174"
+  HREF="node276.html">LP11 Line Printer Driver</A>
+<B> Up:</B> <A NAME="tex2html4170"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html4164"
+  HREF="node274.html">prele (7882)</A>
+ &nbsp; <B>  <A NAME="tex2html4172"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000270000000000000000">
+Character Oriented Special Files</A>
+</H1>
+
+<P>
+Character oriented peripheral devices
+are relatively slow (<IMG
+ WIDTH="63" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$&lt;$"> 1000 charaeters
+per second) and involve character by
+character transmission of variable
+length, usually short, records.
+
+<P>
+A device handler (as its name suggests)
+is the software part of the interface
+between a device and the general system. In general, the device handler is
+the only part of the software which
+recognises the idiosyncrasies of a particular device.
+
+<P>
+As far as possible or reasonable, a
+single device driver is written to
+serve many separate devices of similar
+types, and, where appropriate, several
+such devices simultaneously. The group
+of ``interactive terminals'' (with keyboard input and a serial printer or
+visual display output) can just be
+coerced with difficulty into a single
+device driver, as the reader may judge
+during his perusal of the file ``tty.c''.
+
+<P>
+The standard UNIX device handlers for
+character devices make use of the procedures ``putc'' and ``getc'' which store
+and retrieve characters into and from a
+standard buffer pool. This will be
+described in more detail in Chapter
+Twenty-Three.
+
+<P>
+The ``PDP11 Peripherals Handbook'' should
+be consulted for more complete information on the device controller hardware
+and the devices themselves.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html4175"
+  HREF="node276.html">LP11 Line Printer Driver</A>
+<LI><A NAME="tex2html4176"
+  HREF="node277.html">lpopen (8850)</A>
+<LI><A NAME="tex2html4177"
+  HREF="node278.html">Notes</A>
+<LI><A NAME="tex2html4178"
+  HREF="node279.html">lpoutput (8986)</A>
+<LI><A NAME="tex2html4179"
+  HREF="node280.html">lpstart (8967)</A>
+<LI><A NAME="tex2html4180"
+  HREF="node281.html">lpinit(8976)</A>
+<LI><A NAME="tex2html4181"
+  HREF="node282.html">lpwrite (8870)</A>
+<LI><A NAME="tex2html4182"
+  HREF="node283.html">Discussion</A>
+<LI><A NAME="tex2html4183"
+  HREF="node284.html">lpcanon (8879)</A>
+<LI><A NAME="tex2html4184"
+  HREF="node285.html">For idle readers: A suggestion</A>
+<LI><A NAME="tex2html4185"
+  HREF="node286.html">PC-11 Paper Tape Reader/Punch Driver</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4173"
+  HREF="node276.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4169"
+  HREF="lionc.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4163"
+  HREF="node274.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4171"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4174"
+  HREF="node276.html">LP11 Line Printer Driver</A>
+<B> Up:</B> <A NAME="tex2html4170"
+  HREF="lionc.html">lionc</A>
+<B> Previous:</B> <A NAME="tex2html4164"
+  HREF="node274.html">prele (7882)</A>
+ &nbsp; <B>  <A NAME="tex2html4172"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

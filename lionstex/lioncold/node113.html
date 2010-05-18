@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>sleep (2066)</TITLE>
+<META NAME="description" CONTENT="sleep (2066)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node114.html">
+<LINK REL="previous" HREF="node112.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node114.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2115"
+  HREF="node114.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2111"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2105"
+  HREF="node112.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2113"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2116"
+  HREF="node114.html">wakeup (2113)</A>
+<B> Up:</B> <A NAME="tex2html2112"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2106"
+  HREF="node112.html">setpri (2156)</A>
+ &nbsp; <B>  <A NAME="tex2html2114"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001211000000000000000">
+sleep (2066)</A>
+</H2>
+
+<P>
+This procedure is called (from nearly
+30 different places in the code) when a
+kernel process chooses to suspend
+itself. There are two parameters:
+
+<P>
+
+<UL>
+<LI>the reason for sleeping;
+
+<P>
+</LI>
+<LI>a priority with which the process
+ will run after being awakened.
+</LI>
+</UL>
+
+<P>
+If this priority is negative the process cannot be aroused from its sleep
+by the arrival of a ``signal''. ``signals''
+are discussed in Chapter Thirteen.
+
+<P>
+<DL>
+<DT><STRONG>2070:</STRONG></DT>
+<DD>The current processor status is
+saved to preserve the incoming
+processor priority and previous
+mode information;
+
+<P>
+</DD>
+<DT><STRONG>2072:</STRONG></DT>
+<DD>If the priority is non-negative,
+a test is made for ``waiting signals'';
+
+<P>
+</DD>
+<DT><STRONG>2075:</STRONG></DT>
+<DD>A small critical section begins
+here, wherein the process status
+is changed and the parameters are
+stored in generally accessible
+locations (viz. within the array ``proc'').
+
+<P>
+This code is critical because the
+same information fields may be
+interrogated and changed by
+``wakeup'' (2113) which is frequently called by interrupt
+handlers;
+
+<P>
+</DD>
+<DT><STRONG>2080:</STRONG></DT>
+<DD>When ``runin'' is non-zero, the
+ scheduler (process #0) is waiting
+ to swap another process into main
+ memory;
+
+<P>
+</DD>
+<DT><STRONG>2084:</STRONG></DT>
+<DD>The call on ``swtch'' represents a
+ delay of unknown extent during
+ which a relevant external event
+ may have occurred. Hence the
+ second test on ``issig'' (2085) is
+ not irrelevant;
+
+<P>
+</DD>
+<DT><STRONG>2087:</STRONG></DT>
+<DD>For negative priority ``sleeps'',
+ where the process typically waits
+ for freeing of system table
+ space, the occurrence of a ``signal'' is not allowed to deflect
+ the course of the activity.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2115"
+  HREF="node114.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2111"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2105"
+  HREF="node112.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2113"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2116"
+  HREF="node114.html">wakeup (2113)</A>
+<B> Up:</B> <A NAME="tex2html2112"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2106"
+  HREF="node112.html">setpri (2156)</A>
+ &nbsp; <B>  <A NAME="tex2html2114"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: getc (0930)</title>
+
+<link href="sect0286.html" title="putc (0967)" rel="next" />
+<link href="sect0284.html" title="cinit (8234)" rel="prev" />
+<link href="sect0283.html" title="Character Handling" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0284.html" title="cinit (8234)"><img alt="Previous: cinit (8234)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0286.html" title="putc (0967)"><img alt="Next: putc (0967)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0283.html">Character Handling</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">getc (0930)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000286">23.2 getc (0930)</h2>
+<p>This procedure is called by </p><pre>
+   flushtty (8258, 8259, 8264)
+   canon    (8292)    pcread  (8688)
+   ttstart  (8520)    pcstart (8714)
+   ttread   (8544)    lpstart (8971)
+   pcclose  (8673)
+</pre><p>with a single argument which is the address of a “clist” structure. </p><dl class="description">
+
+    <a href="../all.html#line0931" target="source" <dt>0931:</dt></a>
+    <dd><p>Copy the parameter to r1 and save the initial processor status word and value of r2 on the stack; </p></dd>
+
+    <a href="../all.html#line0934" target="source" <dt>0934:</dt></a>
+    <dd><p>Set the processor priority to five (higher than the interrupt priority of a character device); </p></dd>
+
+    <a href="../all.html#line0936" target="source" <dt>0936:</dt></a>
+    <dd><p>r1 points to the first word of a “clist” structure (i.e. a character count). Move the second word of this structure (i.e. a pointer to the head character) to r2; </p></dd>
+
+    <a href="../all.html#line0937" target="source" <dt>0937:</dt></a>
+    <dd><p>If the list is empty (head pointer is “NULL”) go to line 0961; </p></dd>
+
+    <a href="../all.html#line0938" target="source" <dt>0938:</dt></a>
+    <dd><p>Move the head character to r0 and increment r2 as a side effect; </p></dd>
+
+    <a href="../all.html#line0939" target="source" <dt>0939:</dt></a>
+    <dd><p>Mask r0 to get rid of any extended negative sign; </p></dd>
+
+    <a href="../all.html#line0940" target="source" <dt>0940:</dt></a>
+    <dd><p>Store the updated head pointer back in the “clist” structure. (This may have to be altered later.); </p></dd>
+
+    <a href="../all.html#line0941" target="source" <dt>0941:</dt></a>
+    <dd><p>Decrement the character count and if this is still positive, go to line 0947; </p></dd>
+
+    <a href="../all.html#line0942" target="source" <dt>0942:</dt></a>
+    <dd><p>The list is now empty, so reset the head and tail character pointers to “NULL”. Go to line 0952; </p></dd>
+
+    <a href="../all.html#line0947" target="source" <dt>0947:</dt></a>
+    <dd><p>Look at the three least significant bits of r2. If these are non-zero, branch to line 0957 (and return to the calling routine forthwith); </p></dd>
+
+    <a href="../all.html#line0949" target="source" <dt>0949:</dt></a>
+    <dd><p>At this point, r2 is pointing at the next character position beyond the “cblock”. Move the value stored in the first word of the “cblock” (i.e. at r2 – 8), which is the address of the next “cblock” in the list to the head pointer in the “clist”. (Note that r1 was incremented as a side effect at line 0941): </p></dd>
+
+    <a href="../all.html#line0950" target="source" <dt>0950:</dt></a>
+    <dd><p>The last value stored needs to incremented by two (Consult Figures 23.2 and 23.3); </p></dd>
+
+    <a href="../all.html#line0952" target="source" <dt>0952:</dt></a>
+    <dd><p>At this point, a “cblock” determined by r2 is to be returned to “cfreelist”. Either r2 points into the “cblock” or just beyond it. Decrement r2 so that r2 will point into the “cblock”; </p></dd>
+
+    <a href="../all.html#line0953" target="source" <dt>0953:</dt></a>
+    <dd><p>Reset the three least significant bits of r2, leaving a pointer to the “cblock”; </p></dd>
+
+    <a href="../all.html#line0954" target="source" <dt>0954:</dt></a>
+    <dd><p>Link the “cblock” into “cfreelist”; </p></dd>
+
+    <a href="../all.html#line0957" target="source" <dt>0957:</dt></a>
+    <dd><p>Restore the values of r2 and PS from the stack and return; </p></dd>
+
+    <a href="../all.html#line0961" target="source" <dt>0961:</dt></a>
+    <dd><p>At this point the list is known to be empty because a “NULL” head pointer was encountered. Make sure that the tail pointer is “NULL” also; </p></dd>
+
+    <a href="../all.html#line0962" target="source" <dt>0962:</dt></a>
+    <dd><p>Move –1 to r0 as the result to be returned when the list is empty. </p></dd>
+
+</dl></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0284.html" title="cinit (8234)"><img alt="Previous: cinit (8234)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0283.html" title="Character Handling"><img alt="Up: Character Handling" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0286.html" title="putc (0967)"><img alt="Next: putc (0967)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

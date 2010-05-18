@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Clock Interrupts</title>
+
+<link href="sect0134.html" title="clock (3725)" rel="next" />
+<link href="sect0132.html" title="The Kernel Stack" rel="prev" />
+<link href="index.html" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0132.html" title="The Kernel Stack"><img alt="Previous: The Kernel Stack" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0134.html" title="clock (3725)"><img alt="Next: clock (3725)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Clock Interrupts</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="a0000000134">11 Clock Interrupts</h1>
+<p>The procedure “clock” (3725) handles interrupts from either the line frequency time clock (type <span style="width:" class="mbox">KW11-L</span>, interrupt vector address 100) or the programmable real-time clock (type KW11-P, interrupt vector address 104). </p><p>UNIX requires that at least one of these should be available. (If both are present, only the line time clock is used.) </p><p>Whichever clock is used, interrupts are generated at line frequency (i.e. with a 50 Hz power supply, every 20 milliseconds). The clock interrupt priority level is six, higher than for any other peripheral device on our typical system, so that there will usually be very little delay in the initiation of “clock” once the interrupt has been requested by the clock controller. </p></div>
+
+<div class="contents section-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="sect0134.html">11.1 clock (3725)</a>
+   
+</li><li><a href="sect0135.html">11.2 timeout (3845)</a>
+   
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0132.html" title="The Kernel Stack"><img alt="Previous: The Kernel Stack" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0134.html" title="clock (3725)"><img alt="Next: clock (3725)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

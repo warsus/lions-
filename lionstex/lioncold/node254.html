@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>iinit (6922)</TITLE>
+<META NAME="description" CONTENT="iinit (6922)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node255.html">
+<LINK REL="previous" HREF="node253.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node255.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3920"
+  HREF="node255.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3916"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3910"
+  HREF="node253.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3918"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3921"
+  HREF="node255.html">Mounting</A>
+<B> Up:</B> <A NAME="tex2html3917"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3911"
+  HREF="node253.html">The 'mount' table (0272)</A>
+ &nbsp; <B>  <A NAME="tex2html3919"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000253000000000000000">
+iinit (6922)</A>
+</H2>
+
+<P>
+This routine is called by ``main'' (1615)
+to initialise the ``mount'' table entry
+for the root device.
+
+<P>
+<DL>
+<DT><STRONG>6926:</STRONG></DT>
+<DD>Call the ``open'' routine for the
+      root device. Note that ``rootdev''
+      is defined in ``conf.c'' (4695);
+
+<P>
+</DD>
+<DT><STRONG>6931:</STRONG></DT>
+<DD>Copy the contents of the root
+      device ``super block'' into a
+      buffer area not associated with
+      any particular device;
+
+<P>
+</DD>
+<DT><STRONG>6933:</STRONG></DT>
+<DD>The zeroeth entry in the ``mount''
+      table is assigned to the root
+      device. Only two of the three
+      elements are explicitly initialised. The third, the ``inode''
+      pointer, will never be referenced;
+
+<P>
+</DD>
+<DT><STRONG>6936:</STRONG></DT>
+<DD>The ``locks'' stored in the ``super
+      block'' are explicitly reset.
+      (These locks may have been set
+      when the ``super block'' was last
+      written onto the file system
+      volume);
+
+<P>
+</DD>
+<DT><STRONG>6938:</STRONG></DT>
+<DD>The root device is mounted
+      in a ``writable'' state;
+
+<P>
+</DD>
+<DT><STRONG>6939:</STRONG></DT>
+<DD>The system sets its idea of the
+      current time and date from the
+      time recorded in the ``super
+      block''. (If the system has been
+      stopped for an appreciable
+      period, the computer operator
+      will need to reset the contents
+      of ``time''.)
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3920"
+  HREF="node255.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3916"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3910"
+  HREF="node253.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3918"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3921"
+  HREF="node255.html">Mounting</A>
+<B> Up:</B> <A NAME="tex2html3917"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3911"
+  HREF="node253.html">The 'mount' table (0272)</A>
+ &nbsp; <B>  <A NAME="tex2html3919"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

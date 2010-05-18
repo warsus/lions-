@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>writep (7805)</TITLE>
+<META NAME="description" CONTENT="writep (7805)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node273.html">
+<LINK REL="previous" HREF="node271.html">
+<LINK REL="up" HREF="node269.html">
+<LINK REL="next" HREF="node273.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4139"
+  HREF="node273.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4135"
+  HREF="node269.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4129"
+  HREF="node271.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4137"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4140"
+  HREF="node273.html">plock (7862)</A>
+<B> Up:</B> <A NAME="tex2html4136"
+  HREF="node269.html">Pipes</A>
+<B> Previous:</B> <A NAME="tex2html4130"
+  HREF="node271.html">readp (7758)</A>
+ &nbsp; <B>  <A NAME="tex2html4138"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000263000000000000000">
+writep (7805)</A>
+</H2>
+
+<P>
+The structure of this procedure  echoes
+that of ``readp'' in many respects.
+
+<P>
+<DL>
+<DT><STRONG>7828:</STRONG></DT>
+<DD>Note that a ``writer'', which finds
+      that  there are no more ``readers''
+      left, receives a ``signal'' just in
+      case  he  is  not  monitoring the
+      result of his ``write'' operation.
+
+<P>
+(A  ``reader''  in  the   analogous
+situation receives a zero character count as the  result  of  the
+read,  and  this  is the standard
+end-of-file indication.)
+
+<P>
+</DD>
+<DT><STRONG>7835:</STRONG></DT>
+<DD>The ``pipe'' size is not allowed to
+      grow  beyond ``PIPSIZ'' characters.
+      As long as ``PIPSIZ'' (7715) is  no
+      greater  than 4096, the file will
+      not be  converted  to  a  ``large''
+      file.  This  is  highly desirable
+      from  the  viewpoint  of   access
+      efficiency.
+
+<P>
+(Note that  ``PIPSIZ''  limits  the
+``write''  offset pointer value. If
+the ``read'' offset pointer is  not
+far  behind,  the true content of
+the ``pipe'' may be quite small).
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

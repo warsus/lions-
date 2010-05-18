@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: Example 15</title>
+
+<link href="sect0045.html" title="Example 16" rel="next" />
+<link href="sect0043.html" title="Example 14" rel="prev" />
+<link href="sect0028.html" title="Reading “C” Programs" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0043.html" title="Example 14"><img alt="Previous: Example 14" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0045.html" title="Example 16"><img alt="Next: Example 16" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0028.html">Reading “C” Programs</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Example 15</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000045">3.16 Example 15</h2>
+<p>The next example is abbreviated from the original: </p><pre>
+  5861 seek ()
+       {
+         int n[2];
+         register *fp, t;
+         fp = getf (u.u_ar0[R0]);
+         ...........
+         t = u.u_arg[1];
+         switch (t) {
+
+         case 1:
+         case 4:
+           n[0] =+ fp-&gt;f_offset[0];
+           dpadd (n, fp-&gt;f_offset[1]);
+           break;
+
+         default:
+           n[0] =+ fp-&gt;f_inode-&gt;i size0 &amp; 0377;
+           dpadd(n,fp-&gt;f_inode-&gt;i_size1);
+
+         case 0:
+         case 3:
+           ;
+         }
+         ...........
+       }
+</pre><p>Note the array declaration for the two word array “n”, and the use of getf (which appeared in Example 4). </p><p>The “switch” statement makes a multiway branch depending on the value of the expression in parentheses. The individual parts have “case labels”: </p><ul class="itemize">
+<li><p>If “t” is one or four, then one set of actions is in order. </p></li><li><p>If “t” is zero or three, nothing is to be done at all. </p></li><li><p>If “t” is anything else, then a set of actions labelled “default” is to be executed. </p></li>
+</ul><p>Note the use of “break” as an escape to the next statement after the end of the “switch” statement. Without the “break”, the normal execution sequence would be followed within the “switch” statement. </p><p>Thus a “break” would normally be required at the end of the “default” actions. It has been omitted safely here because the only remaining cases actually have null actions associated with them. </p><p>The two non-trivial pairs of actions represent the addition of one 32 bit integer to another. The later versions of the “C” compiler will support “long” variables and make this sort of code much easier to write (and read). </p><p>Note also that in the expression </p><pre>
+    fp-&gt;f_inode-&gt;i_size0
+</pre><p>there are two levels of indirection. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0043.html" title="Example 14"><img alt="Previous: Example 14" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0028.html" title="Reading “C” Programs"><img alt="Up: Reading “C” Programs" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0045.html" title="Example 16"><img alt="Next: Example 16" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

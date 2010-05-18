@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: unlink (3510)</title>
+
+<link href="sect0245.html" title="mknod (5952)" rel="next" />
+<link href="sect0243.html" title="maknode (7455)" rel="prev" />
+<link href="sect0236.html" title="File Directories and Directory Files" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0243.html" title="maknode (7455)"><img alt="Previous: maknode (7455)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0245.html" title="mknod (5952)"><img alt="Next: mknod (5952)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0236.html">File Directories and Directory Files</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">unlink (3510)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000245">19.8 unlink (3510)</h2>
+<p>This procedure implements a system call which deletes a file name from the directory structure. (When all references to a file are deleted, the file itself will be deleted.) </p><dl class="description">
+
+    <a href="../all.html#line3515" target="source" <dt>3515:</dt></a>
+    <dd><p>Search for a file with the specified name, and if it exists, return a pointer to the “inode” of the immediate parent directory; </p></dd>
+
+    <a href="../all.html#line3518" target="source" <dt>3518:</dt></a>
+    <dd><p>Unlock the parent directory; </p></dd>
+
+    <a href="../all.html#line3519" target="source" <dt>3519:</dt></a>
+    <dd><p>Get an “inode” pointer to the file itself; </p></dd>
+
+    <a href="../all.html#line3522" target="source" <dt>3522:</dt></a>
+    <dd><p>Unlinking directories is forbidden, except for super-users; </p></dd>
+
+    <a href="../all.html#line3528" target="source" <dt>3528:</dt></a>
+    <dd><p>Rewrite the directory entry with the “inode” value set to zero; </p></dd>
+
+    <a href="../all.html#line3529" target="source" <dt>3529:</dt></a>
+    <dd><p>Decrement the “link” count. </p></dd>
+
+</dl><p>Note that there is no attempt to reduce the size of a directory below its “high water” mark. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0243.html" title="maknode (7455)"><img alt="Previous: maknode (7455)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0236.html" title="File Directories and Directory Files"><img alt="Up: File Directories and Directory Files" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0245.html" title="mknod (5952)"><img alt="Next: mknod (5952)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

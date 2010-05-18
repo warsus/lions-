@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>alloc (6965)</TITLE>
+<META NAME="description" CONTENT="alloc (6965)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node264.html">
+<LINK REL="previous" HREF="node262.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node264.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4028"
+  HREF="node264.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4024"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4018"
+  HREF="node262.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4026"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4029"
+  HREF="node264.html">itrunc (7414)</A>
+<B> Up:</B> <A NAME="tex2html4025"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4019"
+  HREF="node262.html">Resource Allocation</A>
+ &nbsp; <B>  <A NAME="tex2html4027"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0002512000000000000000">
+alloc (6965)</A>
+</H2>
+
+<P>
+This is called by ``bmap'' (6435, 6448,
+6468, 6480, 6497) whenever a new
+storage block is needed to store part
+of a file.
+
+<P>
+<DL>
+<DT><STRONG>6961:</STRONG></DT>
+<DD>Convert knowledge of the device
+      name into a pointer to the ``super
+      block'';
+
+<P>
+</DD>
+<DT><STRONG>6962:</STRONG></DT>
+<DD>If ``s_flock'' is set, the list of
+      available blocks is currently
+      being updated by another process;
+
+<P>
+</DD>
+<DT><STRONG>6967:</STRONG></DT>
+<DD>Obtain the block  number  of  the
+      next available storage block;
+
+<P>
+</DD>
+<DT><STRONG>6968:</STRONG></DT>
+<DD>If the last block number  on  the
+      list  is zero, the entire list is
+      now empty;
+
+<P>
+</DD>
+<DT><STRONG>6970:</STRONG></DT>
+<DD>``badblock''  (7040)  is  used   to
+      check   that   the  block  number
+      obtained from the list seems reasonable;
+
+<P>
+</DD>
+<DT><STRONG>6971:</STRONG></DT>
+<DD>If the list of  available  blocks
+      in   the  ``super  block''  is  now
+      empty,  then   the   block   just
+      located    will    contain    the
+      addresses of the  next  group  of
+
+<P>
+</DD>
+<DT><STRONG>6972:</STRONG></DT>
+<DD>Set ``s_flock'' to delay any  other
+  process from getting a ``no space''
+  indication  before  the  list  of
+  available  blocks  in  the ``super
+  block'' can be replenished;
+
+<P>
+</DD>
+<DT><STRONG>6975:</STRONG></DT>
+<DD>Determine  the  number  of  valid
+entries in the list to be copied;
+
+<P>
+</DD>
+<DT><STRONG>6978:</STRONG></DT>
+<DD>Reset  ``s_flock'',  and   ``wakeup''
+      anyone waiting;
+
+<P>
+</DD>
+<DT><STRONG>6982:</STRONG></DT>
+<DD>Clear  the  buffer  so  that  any
+      information  recorded in the file
+      by default will be all zeros;
+
+<P>
+</DD>
+<DT><STRONG>6983:</STRONG></DT>
+<DD>Set the ``modified'' flag to ensure
+      that  the  ``super  block'' will be
+      written out by ``update'' (7213).
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html4028"
+  HREF="node264.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4024"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4018"
+  HREF="node262.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4026"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4029"
+  HREF="node264.html">itrunc (7414)</A>
+<B> Up:</B> <A NAME="tex2html4025"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html4019"
+  HREF="node262.html">Resource Allocation</A>
+ &nbsp; <B>  <A NAME="tex2html4027"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

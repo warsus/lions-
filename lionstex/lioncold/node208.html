@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>brelse (4869)</TITLE>
+<META NAME="description" CONTENT="brelse (4869)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node209.html">
+<LINK REL="previous" HREF="node207.html">
+<LINK REL="up" HREF="node202.html">
+<LINK REL="next" HREF="node209.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3325"
+  HREF="node209.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3321"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3315"
+  HREF="node207.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3323"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3326"
+  HREF="node209.html">binit (5055)</A>
+<B> Up:</B> <A NAME="tex2html3322"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3316"
+  HREF="node207.html">getblk (4921)</A>
+ &nbsp; <B>  <A NAME="tex2html3324"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000226000000000000000">
+brelse (4869)</A>
+</H2>
+
+<P>
+This procedure takes the buffer passed
+as a parameter and links it back into
+the ``av''-list.
+
+<P>
+Any process which is either waiting for
+the particular buffer or any available
+buffer is woken up.
+
+<P>
+Note however that since both ``sleeps''
+(4943, 4955) are at the same priority,
+if two processes are waiting - one for
+the particular buffer and one for any
+buffer - it will be a toss-up which
+will get it.
+
+<P>
+By giving the first priority over the
+second (e.g. by biasing by one) the
+race should be resolved more satisfactorily. The disadvantage of such a
+change might be that it could lead to a
+deadlock situation in certain rather
+peculiar circumstances.
+
+<P>
+If an error has occurred e.g. upon
+reading information into the buffer
+the information in the buffer may be
+incorrect. The assignment on line 4883
+ensures that the information in the
+buffer will not be mistakenly retrieved
+subsequently. The ``B_ERROR'' flag is
+set e.g. by ``rkstrategy'' (5403) and
+``rkintr'' (5467).
+
+<P>
+To see how this could occur, consider
+what happens to a buffer when a disk
+i/o operation is completed:
+
+<P>
+<DL>
+<DT><STRONG>5471</STRONG></DT>
+<DD>``rkintr'' calls ``iodone'';
+</DD>
+<DT><STRONG>5026</STRONG></DT>
+<DD>``iodone'' sets the ``B_DONE'' flag;
+</DD>
+<DT><STRONG>5028</STRONG></DT>
+<DD>``iodone'' calls ``brelse'';
+</DD>
+<DT><STRONG>4387</STRONG></DT>
+<DD>``brelse'' resets the ``B_WANTED'',
+``B_BUSY'' and ``B_ASYNC'' flags
+but not the ``B_DONE'' flag;
+
+<P>
+. . . . . . . . . . . .
+
+<P>
+</DD>
+<DT><STRONG>4948</STRONG></DT>
+<DD>``getblk'' finds the buffer and
+ calls ``notavail'';
+</DD>
+<DT><STRONG>5010</STRONG></DT>
+<DD>``notavail'' sets the ``B_BUSY'' flag;
+</DD>
+<DT><STRONG>4759</STRONG></DT>
+<DD>``bread'' (which called ``getblk'')
+ finds the ``B_DONE'' flag set and exits.
+</DD>
+</DL>
+
+<P>
+Note that buffer headers are removed
+from the ``av''-list by ``notavail'' and
+are returned by ``brelse''. Buffer
+headers are moved from one ``b''-list to
+another by ``getblk''.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3325"
+  HREF="node209.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3321"
+  HREF="node202.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3315"
+  HREF="node207.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3323"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3326"
+  HREF="node209.html">binit (5055)</A>
+<B> Up:</B> <A NAME="tex2html3322"
+  HREF="node202.html">Buffer Manipulation</A>
+<B> Previous:</B> <A NAME="tex2html3316"
+  HREF="node207.html">getblk (4921)</A>
+ &nbsp; <B>  <A NAME="tex2html3324"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: timeout (3845)</title>
+
+<link href="sect0136.html" title="Traps and System Calls" rel="next" />
+<link href="sect0134.html" title="clock (3725)" rel="prev" />
+<link href="sect0133.html" title="Clock Interrupts" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0134.html" title="clock (3725)"><img alt="Previous: clock (3725)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0133.html" title="Clock Interrupts"><img alt="Up: Clock Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Next: Traps and System Calls" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0133.html">Clock Interrupts</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">timeout (3845)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000136">11.2 timeout (3845)</h2>
+<p>This procedure makes new entries in the “callout” array. In this system it is only called from the routine “ttstart” (8505), passing the procedure “ttrstrt” (3486). Note that “ttrstrt” calls “ttstart”, which may call “timeout”, for a thoroughly incestuous relationship! </p><p>Note also that most of “timeout” runs at priority level seven, to avoid clock interrupts. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0134.html" title="clock (3725)"><img alt="Previous: clock (3725)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0133.html" title="Clock Interrupts"><img alt="Up: Clock Interrupts" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0136.html" title="Traps and System Calls"><img alt="Next: Traps and System Calls" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

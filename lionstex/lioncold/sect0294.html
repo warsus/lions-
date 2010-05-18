@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The ’tty’ Structure (7926)</title>
+
+<link href="sect0295.html" title=" Interactive Terminals" rel="next" />
+<link href="sect0293.html" title="Interactive Terminals" rel="prev" />
+<link href="sect0293.html" title="Interactive Terminals" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Previous: Interactive Terminals" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0295.html" title=" Interactive Terminals"><img alt="Next:  Interactive Terminals" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0293.html">Interactive Terminals</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The ’tty’ Structure (7926)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000295">24.1 The ’tty’ Structure (7926)</h2>
+<p>An instance of “tty” is associated with every terminal port to the system (no matter what type of hardware interface is used). A “port” in this context is a place to attach a terminal line. Hence a DL11 supplies only one port, whereas a DJ11 supplies up to sixteen ports. </p><p>The “tty” structure consists of sixteen words and includes: </p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>A. </p></td>
+
+    
+    <td style="text-align:left"><p> t_dev </p></td>
+
+    
+    <td style="text-align:left"><p> fixed for a particular </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_addr </p></td>
+
+    
+    <td style="text-align:left"><p> terminal port;</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>B. </p></td>
+
+    
+    <td style="text-align:left"><p> t_speeds </p></td>
+
+    
+    <td style="text-align:left"><p> fixed for a particular </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_erase </p></td>
+
+    
+    <td style="text-align:left"><p> terminal. These values may </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_kill </p></td>
+
+    
+    <td style="text-align:left"><p> be set by “stty” and </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_flags </p></td>
+
+    
+    <td style="text-align:left"><p> interrogated by “gtty”; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>C. </p></td>
+
+    
+    <td style="text-align:left"><p> t_rawq </p></td>
+
+    
+    <td style="text-align:left"><p> list heads for <b class="bf">three</b> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_canq </p></td>
+
+    
+    <td style="text-align:left"><p> character queues: the </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_outq </p></td>
+
+    
+    <td style="text-align:left"><p> so-called “raw” input, </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> “cooked” input and the </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> output queues; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>D. </p></td>
+
+    
+    <td style="text-align:left"><p> t_state </p></td>
+
+    
+    <td style="text-align:left"><p> status information which </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_delct </p></td>
+
+    
+    <td style="text-align:left"><p> changes frequently during </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_col </p></td>
+
+    
+    <td style="text-align:left"><p> normal processing; </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> t_char </p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr>
+</table><center> <big class="large"><b class="bf">Table 24.1</b></big> </center></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Previous: Interactive Terminals" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0293.html" title="Interactive Terminals"><img alt="Up: Interactive Terminals" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0295.html" title=" Interactive Terminals"><img alt="Next:  Interactive Terminals" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+%
+% The Lion's Commentary, file ch11.tex, version 1.4, 17 May 1994
+%
+\se{Clock Interrupts}
+
+The procedure ``clock'' (3725) handles
+interrupts from either the line frequency time clock
+(type \mbox{KW11-L}, interrupt vector address 100) or the
+programmable real-time clock (type KW11-P,
+interrupt vector address 104).
+
+UNIX requires that at least one of
+these should be available. (If both are
+present, only the line time clock is
+used.)
+
+Whichever clock is used, interrupts are
+generated at line frequency (i.e. with
+a 50 Hz power supply, every 20 milliseconds).
+The clock interrupt priority level is six, higher than for any
+other peripheral device on our typical
+system, so that there will usually be
+very little delay in the initiation of
+``clock'' once the interrupt has been
+requested by the clock controller.
+
+
+\sbs{clock (3725)}
+
+The function of ``clock'' is one of general housekeeping:
+
+\bi
+\item the display register is updated
+(PDP11/45 and 11/70 only);
+
+\item various accounting values such as
+the time of day, accumulated processing times
+and execution profiles are maintained;
+
+\item processes sleeping for a fixed
+time interval are awakened as per
+schedule;
+
+\item core swapping activity is initiated once per second.
+\ei
+
+``clock'' breaks most of the rules for
+peripheral device handlers: it does
+reference the current ``u'' structure,
+and it also runs at a low priority for
+some of the time. It abbreviates its
+activity if a previous execution has
+not yet completed.
+
+\bd
+\item[3740:] ``display'' is a no-op on the
+ PDP11/40;
+
+\item[3743:] The array ``callout'' (0265) is an
+ array of ``NCALL'' (0143) structures
+of type ``callo'' (0260).
+The ``callo'' structure contains
+three elements: an incremental
+time, an argument and the address
+of a function. When the function
+element is not null, the function
+is to be executed with the supplied
+argument after a specified time.
+
+
+(For the systems under study, the
+only function ever executed in
+this way is ``ttrstrt'' (8486),
+handler. (See Chapter 25.));
+
+\item[3748:] If the first element of the list
+ is null, the whole list is null;
+
+\item[3750:] The ``callout'' list is arranged in
+ the desired order of execution.
+ The time recorded is the number
+of clock ticks between events.
+Unless the first time (the time
+before the next event) is already
+zero, (meaning that the execution
+is already due) this time should
+be decremented by one.
+
+
+If this time has already been
+counted to zero, decrement the
+next time unless it is already
+zero also, etc. i.e. decrement
+the first non-zero time in the
+list. All the leading entries
+with zero times represent operations which are already due. (The
+operations are actually carried
+out a little later.);
+
+\item[3759:] Examine the previous processor
+status word, and if the priority
+was non-zero, bypass the next
+section, which executes those
+operations which are due;
+
+\item[3766:] Reduce the processor priority to
+five (other level six interrupts
+may now occur);
+
+\item[3767:] Search the ``callout'' array looking
+for operations which are due and execute them;
+
+\item[3773:] Move the entries for operations
+which are still not yet due, to
+ the beginning of the array;
+
+\item[3787:] The code from here until line
+3797 is executed, whatever the
+previous processor priority, at
+either priority level five or
+six;
+
+\item[3788:] If the previous mode was ``user
+ mode'', then increment the user
+ time counter, and if an execution
+ profile is being accumulated,
+ call ``incupc'' (a895) to make an
+ entry in a histogram for the user
+ mode program counter (PC).
+
+``incupc'' is written in assembler,
+presumably for efficiency and
+convenience. A description of
+what it does may be found in the
+section ``PROFIL(II)'' of the UPM.
+See also the procedure ``profil''
+(3667);
+
+\item[3792:] If the previous mode was not user
+mode, increment the system (kernel) time counter for the process.
+\ed
+
+The code just described performs the
+basic time accounting for the system.
+Every clock tick results in the incrementing of either ``u.u\_utime'' or
+``u.u\_stime'' for some process. Both
+``u.u\_utime'' and ``u.u\_stime'' are
+initialised to zero in ``fork'' (3322). Their
+values are interrogated in ``wait''
+(3270). The values will go negative
+after 32K ticks (about 10 hours)!
+
+\bd
+\item[3795:] ``p\_cpu'' is used in determining
+ process priorities. It is a character value which is always
+ interpreted as a positive integer
+ (0 to 255). When it is moved to a
+ special register, sign extension
+ occurs so that 255, for instance,
+ becomes like --1. Adding one then
+ leaves a zero result. In this
+ case the value is reduced to --1
+ again, and stored as 255
+ unsigned. Note that in the other
+ places where ``p\_cpu'' is referenced (2161, 3814), the top eight
+ bits are masked off after the
+ value has been transferred to a
+ special register;
+
+\item[3797:] Increment ``lbolt'' and if it
+exceeds ``HZ'', i.e. a second or
+more has elapsed ...
+
+\item[3798:] Then provided the processor was
+ not previously running at a nonzero priority, do a whole lot of
+ housekeeping;
+
+\item[3800:] Decrement ``lbolt'' by ``HZ'';
+
+\item[3801:] Increment the time of day accumulator;
+
+\item[3803:] The events which follow may take
+ some time, but they may reasonably be interrupted to service
+ other peripherals. So the processor priority is dropped below all
+ the device priority levels i.e.
+ below {\bf four}.
+
+However there is now a possibility of another clock interrupt
+before this activation of the
+``clock'' procedure is completed.
+By setting the processor priority
+to {\bf one} rather than to {\bf zero}, a
+second activation of ``clock'' will
+not attempt to execute the code
+from line 3804 on also. Note however that
+to the hardware, priority one is functionally the same
+as priority zero;
+
+\item[3804:] If the current time (measured in
+ seconds) is equal to the value
+ stored in ``tout'', wake all
+ processes which have elected to
+ suspend themselves for a period
+ of time via the ``sleep'' system
+ call i.e. via the procedure
+ ``sslep'' (5979).
+\ed
+
+``tout'' stores the time at which the
+next process is to be awakened. If
+there is more than one such process,
+then the remainder, which will have
+been disturbed, must reset ``tout''
+between them. This mechanism, while
+quite effective, will not be efficient
+if the number of such processes ever
+becomes large.
+
+
+In this situation, a mechanism similar
+to the ``callout'' array (see 3767) would
+need to be provided. (In fact, how difficult would it be to merge the two
+mechanisms? What would be the disadvantages ??);
+
+\bd
+\item[3806:] When the last two bits of
+ ``time[1]'' are zero i.e. every
+ four seconds, reset the scheduling flag ``runrun'' and wake up
+ everything waiting for a ``lightning bolt''. (``lbolt'' represents a
+ general event which is caused
+ every four seconds, to initiate
+ miscellaneous housekeeping. It is
+ used by ``pcopen'' (8648).);
+
+\item[3810:] For all currently defined
+ processes:
+
+increment ``p\_time'' up to a maximum
+of 127 (it is only a character
+variable);
+
+decrement ``p\_cpu'' by ``SCHMAG''
+(3707) but do not allow it to go
+negative. Note that as discussed
+earlier (line 3795) ``p\_cpu'' is
+treated as a positive integer in
+the range 0 to 255;
+
+if the processor priority is currently set
+at a depressed value, recalculate it.
+\ed
+
+
+Note that ``p\_cpu'' enters into the calculation of process priorities,
+``p\_pri'', by ``setpri'' (2156). ``p\_pri''
+is used by ``swtch'' (2209) in choosing
+which process, from among those which
+are in core (``SLOAD'') and ready to run
+(``SRUN''), should next receive the CPU's
+attention.
+
+``p\_time'' is used to measure how long
+(in seconds) a process has been either
+in core or swapped out to disk.
+``p\_time'' is set to zero by ``newproc''
+(1869), by ``sched'' (2047) and by
+``xswap'' (4386). It is used by ``sched''
+(1962, 2009) to determine which
+processes to swap in or out.
+
+\bd
+\item[3820:] If the scheduler is waiting to
+ rearrange things, wake it up.
+ Thus the normal rate for scheduling decisions is once per second;
+
+\item[3824:] If the previous mode before the
+ interrupt was ``user mode'', store
+ the address of ``r0'' in a standard
+ place, and if a ``signal'' has been
+ received for the process, call
+ ``psig'' (4043) for the appropriate
+ action.
+\ed
+
+
+\sbs{timeout (3845)}
+
+This procedure makes new entries in the
+``callout'' array. In this system it is
+only called from the routine ``ttstart''
+(8505), passing the procedure ``ttrstrt''
+(3486). Note that ``ttrstrt'' calls
+``ttstart'', which may call ``timeout'',
+for a thoroughly incestuous relationship!
+
+Note also that most of ``timeout'' runs
+at priority level seven, to avoid clock
+interrupts.
+

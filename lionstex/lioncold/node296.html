@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>partab (7947)</TITLE>
+<META NAME="description" CONTENT="partab (7947)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="previous" HREF="node295.html">
+<LINK REL="up" HREF="node287.html">
+<LINK REL="next" HREF="node297.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html4441"
+  HREF="node297.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html4437"
+  HREF="node287.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html4433"
+  HREF="node295.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html4439"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html4442"
+  HREF="node297.html">Interactive Terminals</A>
+<B> Up:</B> <A NAME="tex2html4438"
+  HREF="node287.html">Character Handling</A>
+<B> Previous:</B> <A NAME="tex2html4434"
+  HREF="node295.html">maptab (8117)</A>
+ &nbsp; <B>  <A NAME="tex2html4440"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000289000000000000000">
+partab (7947)</A>
+</H2>
+
+<P>
+This array consists of 256 characters,
+like ``maptab''. Unfortunately the initialisation of ``partab''
+was omitted from the UNIX Operating System Source Code
+booklet. It is certainly needed, and so
+is given now:
+
+<P>
+<PRE>
+  char partab [] {
+
+0001,0201,0201,0001,0201,0001,0001,0201,
+0202,0004,0003,0205,0005,0206,0201,0001,
+0201,0001,0001,0201,0001,0201,0201,0001,
+0001,0201,0201,0001,0201,0001,0001,0201,
+0200 0000,0000,0200,0000,0200,0200,0000,
+0000 0200,0200 0000,0200,0000,0000,0200,
+0000,0200,0200 0000,0200,0000,0000,0200,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0000,0200,0200,0000,0200,0000,0000,0200,
+0000,0200,0200,0000,0200,0000,0000,0200,
+0200 0000,0000 0200,0000,0200,0200,0000,
+0000 0200,0200 0000,0200,0000,0000,0200,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0200,0000,0000,0200,0000,0200,0200,0000,
+0000,0200,0200,0000,0200,0000,0000,0201
+   };
+</PRE>
+
+<P>
+Each element of ``partab'' is an eight
+bit character, which, with the use of
+appropriate bitmasks (0200 and 0177),
+can be interpreted as a two part structure:
+
+<P>
+<TABLE CELLPADDING=3>
+<TR><TD ALIGN="LEFT">bit 7</TD>
+<TD ALIGN="LEFT">parity bit;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">bits 3-5</TD>
+<TD ALIGN="LEFT">not used. Always zero;</TD>
+</TR>
+<TR><TD ALIGN="LEFT">bits 0-2</TD>
+<TD ALIGN="LEFT">code number.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<P><P>
+<BR>
+
+<P>
+The parity bit is appended to the seven
+bit ASCII code when a character is
+transmitted by the computer, to form an
+eight bit code with even parity.
+
+<P>
+The code number is used by ``ttyoutput''
+(8426) to classify the character into
+one of seven categories for determining
+the delay which should ensue before the
+transmission of the next character.
+(This is particularly important for
+mechanical printers which require time
+for the carriage to return from the end
+of a line, etc.)
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

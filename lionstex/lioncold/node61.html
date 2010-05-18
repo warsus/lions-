@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Section Four</TITLE>
+<META NAME="description" CONTENT="Section Four">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node62.html">
+<LINK REL="previous" HREF="node60.html">
+<LINK REL="up" HREF="node51.html">
+<LINK REL="next" HREF="node62.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1448"
+  HREF="node62.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1444"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1438"
+  HREF="node60.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1446"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1449"
+  HREF="node62.html">Section Five</A>
+<B> Up:</B> <A NAME="tex2html1445"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1439"
+  HREF="node60.html">Section Three</A>
+ &nbsp; <B>  <A NAME="tex2html1447"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000710000000000000000">
+Section Four</A>
+</H2>
+
+<P>
+Section Four is concerned with files
+and file systems.
+
+<P>
+A file system is a set of files and
+associated tables and directories
+organised onto a single storage device
+such as a disk pack.
+
+<P>
+This section covers the means of
+creating and accessing files;
+locating files via directories
+organising and maintaining
+file systems.
+It also includes the code for an exotic
+breed of file called a ``pipe''.
+
+<P>
+<DL>
+<DT><STRONG>file.h</STRONG></DT>
+<DD>[Sheet 55; Chapter 18]
+defines the ``file'' structure and
+array.
+
+<P>
+</DD>
+<DT><STRONG>filsys.h</STRONG></DT>
+<DD>[Sheet 55; Chapter 20]
+defines the ``filsys'' structure which
+is copied to and from the ``super
+block'' on ``mounted'' file systems.
+
+<P>
+</DD>
+<DT><STRONG>ino.h</STRONG></DT>
+<DD>[Sheet 56] describes the
+structure of ``inodes'' as recorded on
+the ``mounted'' devices. Since this
+file is not ``included'' in any other,
+it really exists for information
+only.
+
+<P>
+</DD>
+<DT><STRONG>inode.h</STRONG></DT>
+<DD>[Sheet 56; Chapter 18]
+defines the ``inode'' structure and
+array. ``inodes'' are of fundamental
+importance in managing the accesses
+of processes to files.
+
+<P>
+</DD>
+<DT><STRONG>sys2.c</STRONG></DT>
+<DD>[Sheets 57..59; Chapters 18,
+19] contains a set of routines associated
+with system calls including
+``read'', ``write'', ``creat'', ``open'' and
+``close''
+
+<P>
+</DD>
+<DT><STRONG>sys3.c</STRONG></DT>
+<DD>[Sheets 60, 61; Chapters 19, 20]
+contains a set of routines associated
+with various minor system
+calls.
+
+<P>
+</DD>
+<DT><STRONG>rdwri.c</STRONG></DT>
+<DD>[Sheets 62, 63; Chapter 18]
+contains intermediate level routines
+involved with reading and writing
+files.
+
+<P>
+</DD>
+<DT><STRONG>subr.c</STRONG></DT>
+<DD>[Sheets 64, 65; Chapter 18]
+contains more intermediate level
+routines for i/o, especially ``bmap''
+which translates logical file
+pointers into physical disk
+addresses.
+
+<P>
+</DD>
+<DT><STRONG>fio.c</STRONG></DT>
+<DD>[Sheets 66..6; Chapters 18,
+19] contains intermediate level routines 
+for file opening, closing and
+control of access.
+
+<P>
+</DD>
+<DT><STRONG>alloc.c</STRONG></DT>
+<DD>[Sheets 69..72; Chapter 20]
+contains procedures which manage the
+allocation of entries in the ``inode''
+array and of blocks of disk storage.
+
+<P>
+</DD>
+<DT><STRONG>iget.c</STRONG></DT>
+<DD>[Sheets 72..74; Chapters 18,
+19, 20] contains procedures concerned 
+with referencing and updating
+``inodes''.
+
+<P>
+</DD>
+<DT><STRONG>nami.c</STRONG></DT>
+<DD>[Sheets 75, 76; Chapter 19]
+contains the procedure ``namei'' which
+searches the file directories.
+
+<P>
+</DD>
+<DT><STRONG>pipe.c</STRONG></DT>
+<DD>[Sheets 77, 78; Chapter 21]
+is the ``device driver'' for ``pipes''
+which are a special form of short
+disk file used to transmit information 
+from one process to another.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1448"
+  HREF="node62.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1444"
+  HREF="node51.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1438"
+  HREF="node60.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1446"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1449"
+  HREF="node62.html">Section Five</A>
+<B> Up:</B> <A NAME="tex2html1445"
+  HREF="node51.html">An Overview</A>
+<B> Previous:</B> <A NAME="tex2html1439"
+  HREF="node60.html">Section Three</A>
+ &nbsp; <B>  <A NAME="tex2html1447"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

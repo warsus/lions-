@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Operator Actions</TITLE>
+<META NAME="description" CONTENT="Operator Actions">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node79.html">
+<LINK REL="previous" HREF="node77.html">
+<LINK REL="up" HREF="node77.html">
+<LINK REL="next" HREF="node79.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1670"
+  HREF="node79.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1666"
+  HREF="node77.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1660"
+  HREF="node77.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1668"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1671"
+  HREF="node79.html">start (0612)</A>
+<B> Up:</B> <A NAME="tex2html1667"
+  HREF="node77.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html1661"
+  HREF="node77.html">Getting Started</A>
+ &nbsp; <B>  <A NAME="tex2html1669"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000101000000000000000">
+Operator Actions</A>
+</H2>
+
+<P>
+Reinitialisation requires operator
+action at the processor console. The
+operator must:
+
+<P>
+
+<UL>
+<LI>stop the processor by setting the
+``enable/halt'' switch to ``halt'';
+
+<P>
+</LI>
+<LI>set the switch register with the
+address of the hardware bootstrap
+loader program;
+
+<P>
+</LI>
+<LI>depress and release the `` load address'' switch;
+
+<P>
+</LI>
+<LI>move the ``enable/halt'' switch to
+``enable'';
+
+<P>
+</LI>
+<LI>depress and release the ``start''
+switch.
+</LI>
+</UL>
+
+<P>
+This activates the bootstrap program
+which is permanently recorded in a ROM
+in the processor.
+
+<P>
+The bootstrap loader program loads a
+larger loader program (from block #0 of
+the system disk), which looks for and
+loads a file called ``/unix'' into the
+low part of memory.
+
+<P>
+It then transfers control to the
+instruction loaded at address zero.
+
+<P>
+Address zero is occupied by a branch
+instruction (line 0508), which branches
+to location 000040, which contains a
+jump instruction (line 0522), which
+jumps to the instruction labelled
+``start'' in the file ``m40.s'' (line
+0612).
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

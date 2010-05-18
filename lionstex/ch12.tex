@@ -1,0 +1,620 @@
+%
+% The Lion's Commentary, file ch12.tex, version 1.5, 17 May 1994
+%
+\se{Traps and System Calls}
+
+This chapter is concerned with the way
+the system handles traps in general and
+system calls in particular.
+
+There are quite a number of conditions
+which can cause the processor to
+``trap''. Many of these are quite
+clearly error conditions, such as
+hardware or power failures, and UNIX
+does not attempt any sophisticated
+recovery procedures for these.
+
+The initial focus for our attention is
+the principal procedure in the file
+``trap.c''.
+
+\sbs{trap (2693)}
+
+The way that this procedure is invoked
+was explored in Chapter Ten. The
+assembler ``trap'' routine carries out
+certain fundamental housekeeping tasks
+to set up the kernel stack, so that
+when this procedure is called, everything appears to be kosher.
+
+The ``trap'' procedure can operate as
+though it had been called by another
+``C'' procedure in the normal way with
+seven parameters
+
+\begin{center}
+ dev, sp, rl, nps, r0, pc, ps.
+\end{center}
+
+(There is a special consideration which
+should be mentioned here in passing.
+Normally all parameters passed to ``C''
+procedures are passed by value. If the
+procedure subsequently changes the
+values of the parameters, this will not
+affect the calling procedure directly.
+
+However if ``trap'' or the interrupt
+handlers change the values of their
+parameters, the new values will be
+picked up and reflected back when the
+``previous mode'' registers are
+restored.)
+
+The value of ``dev'' was obtained by capturing the value of the processor
+status word immediately after the trap
+and masking out all but the lower five
+bits. Immediately before this, the processor status word had been set using
+the prototype contained in the
+appropriate vector location.
+
+Thus if the second word of the vector
+location was ``br7+n;'' (e.g. line 0516)
+then the value of ``dev'' will be n.
+
+\bd
+\item[2698:] ``savfp'' saves the floating point
+ registers (for the PDP11/40, this
+ is a no-op!);
+
+\item[2700:] If the previous mode is ``user
+ mode', the value of ``dev'' is
+ modified by the addition of the
+ octal value 020 (2662);
+
+\item[2701:] The stack address where r0 is
+ stored is noted in ``u.u\_ar0'' for
+ future reference. (Subsequently
+the various register values can
+be referenced as ``u.u\_ar0[Rn]''.);
+
+\item[2702:] There is now a multi-way ``switch''
+ depending on the value of ``dev''.
+\ed
+
+At this point we can observe that UNIX
+divides traps into three classes,
+depending on the prior processor mode
+and the source of the trap:
+
+\bd
+\item[(a)] kernel mode;
+
+\item[(b)] user mode, not due to a ``trap''
+ instruction;
+
+\item[(c)] user mode, due to a ``trap''
+ instruction.
+\ed
+
+
+\sbs{Kernel Mode Traps}
+
+The trap is unexpected and with one
+exception, the reaction is to ``panic''.
+The code executed is the ``default'' of
+the ``switch'' statement:
+
+\bd
+\item[2716:] Print:
+
+\bi
+\item the current value of the seventh
+kernel segment address register
+(i.e. the address of the current
+per process data area);
+
+\item the address of ``ps'' (which is in
+the kernel stack); and
+
+\item the trap type number;
+\ei
+
+\item[2719:] ``panic'', with no return.
+\ed
+
+Floating point operations are only used
+by programs, and not by the operating
+system. Since such operations on the
+PDP11/45 and 11/70 are handled asynchronously, it is possible that when a
+floating point exception occurs, the
+processor may have already switched to
+kernel mode to handle an interrupt.
+
+Thus a kernel mode floating point
+exception trap can be expected occasionally and is the concern of the
+current user program.
+
+\bd
+\item[2793:] Call ``psignal'' (3963) to set a
+ flag to show that a floating
+ point exception has occurred;
+
+\item[2794:] Return.
+\ed
+
+This raises an interesting question: ``Why are the kernel mode
+and user mode floating point
+exceptions handled slightly di£ferently?''
+
+
+\sbs{User Mode Traps}
+
+Consider first of all a trap which is
+not generated as the result of the execution of a ``trap instruction''. This
+is regarded as a probable error for
+which the operating system makes no
+provision apart from the possibility of
+a ``core dump''. However the use program
+itself may have anticipated it and provided for it.
+
+The way this provision is made and
+implemented is the subject of the next
+chapter. At this stage, the principal
+requirement is to ``signal'' that the
+trap has occurred.
+
+\bd
+\item[2721:] A bus error has occurred while
+ the system is in user mode. Set
+ ``i'' to the value ``SIGBUS'' (0123);
+
+\item[2723:] The ``break'' causes a branch out
+ of the ``switch'' statement to line
+ 2818;
+
+\item[2733:] Apart from the one special case
+noted, the treatment of illegal
+instructions is the same at this
+level as for bus errors;
+
+\item[2739:]
+\item[2743:]
+\item[2747:]
+\item[2796:] Cf. the comment for line 2721.
+\ed
+
+
+Note that cases ``4+USER'' (power fail)
+and\\
+``7+USER'' (programmed interrupt) are
+handled by the ``default'' case (line
+2715).
+
+\bd
+\item[2810:] This represents a case where
+ operating system assistance is
+ required to extend the user mode
+ stack area.
+
+The assembler routine ``backup''
+(1012) is used to reconstruct the
+situation that existed before
+execution of the instruction that
+caused the trap.
+
+``grow'' (4136) is used to do the
+actual extension.
+\ed
+
+The procedure ``backup'' is non-trivial
+and its comprehension involves a careful consideration of various aspects of
+the PDP11 architecture. It has been
+left for the interested reader to pursue privately.
+
+As noted for the PDP11/40, ``backup'' may
+not always succeed because the processor does not save enough information to
+resolve all possibilities.
+
+\bd
+\item[218:] Call ``psignal'' (3963) to set the
+ appropriate ``signal''. (Note that
+ this statement is only reached
+ from those cases of the ``switch''
+ which included a ``break'' statement.);
+
+\item[2821:] ``issig'' checks if a ``signal'' has
+ been sent to the user program,
+ either just now or at some earlier time and has not yet been
+ attended to;
+
+\item[2822:] ``psig'' performs the appropriate
+ actions. (Both ``issig'' and ``psig''
+ are discussed in detail in the
+ next chapter.);
+
+\item[2823:] Recalculate the priority for the
+ current process.
+\ed
+
+\sbs{System Calls}
+
+
+User mode programs use ``trap'' instructions as part of the ``system call''
+mechanism to call upon the operating
+system for assistance.
+
+Since there are many possible ``versions'' of the ``trap'' instruction, the
+type of assistance requested can be and
+is encoded as part of the ``trap''
+instruction.
+
+
+Parameters which are part of a system
+call may be passed from the user program in different ways:
+
+\bd
+\item[(a)] via the special register r0;
+
+\item[(b)] as a set of words embedded in
+ the program string following the
+ ``trap'' instruction;
+
+\item[(c)] as a set of words in the
+ program's data area. (This is
+ the ``indirect'' call.)
+\ed
+
+
+Indirect calls have a higher overhead
+than direct system calls. Indirect
+calls are needed when the parameters
+are data dependent and cannot be determined at compile time.
+
+Indirect calls may sometimes be avoided
+if there is only one data dependent
+parameter, which is passed via r0. In
+choosing which parameters should be
+passed via r0, the system designers
+have presumably been guided by their
+own experience, since the pattern
+doesn't satisfy the law of least astonishment.
+
+The ``C'' compiler does not give special
+recognition to system calls, but treats
+them in the same way as other procedures. When the loader comes to
+resolve undetermined references, it
+satisfies these with library routines
+which contain the actual ``trap''
+instructions.
+
+\bd
+\item[2752:] The error indicators are reset;
+
+\item[2754:] The user mode instruction which
+ caused the trap is retrieved and
+ all but the least significant six
+ bits are masked off. The result
+ is used to select an entry from
+ the array of structures,
+``sysent''. The address of the
+selected entry is stored in
+``callp'';
+
+
+\item[2755:] The ``zeroeth'' system call is the
+``indirect'' system call, in which
+the parameter passed is actually
+the address in the user program
+data space of a system call
+parameter sequence.
+\ed
+
+Note the separate uses of ``fuword'' and
+``fuiword''. The distinction between
+these is unimportant on the PDP11/40,
+but is most important on machines with
+separate ``i'' and ``d'' address spaces;
+
+\bd
+\item[2760:] ``i=077'' simulates a call on the
+very last system call (2975),
+which results in a call on
+``nosys'' (2855), which results in
+an error condition which will
+usually be fatal for the user
+mode program;
+
+\item[2762:]
+\item[2765:] The number of arguments specified
+in ``sysent'' is the actual number
+provided by the user programmer,
+or that number less one if one
+argument is transferred via r0.
+The arguments are copied from the
+user data or instruction area
+into the five element array
+``u.u\_arg''. (From ``sysent'' (Sheet
+29) it would seem that four elements would have been sufficient
+for ``u\_area[ ]'' -- is this an
+allowance for future inflation?);
+
+\item[2770:] The value of the first argument
+is copied into ``u.u\_dirp'', which
+seems to function mainly as a
+convenient temporary storage
+location;
+
+\item[2771:] ``trapl'' is called with the
+ address of the desired system
+ routine. Note the comment beginning on line 2828;
+
+\item[2776:] When an error occurs, the ``c-bit''
+in the old processor status word
+is set (see line 2658) and the
+error number is returned via r0.
+\ed
+
+\sbs{System Call Handlers}
+
+The full set of system calls may be
+reviewed in the file ``sysent.c'' on
+Sheet 29, but more relevantly, these
+are discussed in full detail in Section
+II of the UPM.
+
+The procedures which handle the system
+calls are found mostly in the files
+``sysl.c'', sys2.c``, sys3.c'' and
+``sys4.c''.
+
+Two important ``trivial'' procedures are
+``nullsys'' (2855) and ``nosys'' (2864)
+which are found in the file ``trap.c''.
+
+
+\sbs{The File `sysl.c'}
+
+This file contains the procedures for
+five system calls, of which three will
+be considered now, and two (``rexit'' and
+``wait'') will be deferred to the next
+chapter.
+
+The first procedure in this file, and 
+also the first system call we have
+encountered, is ``exec''.
+
+\sbs{exec (3020)}
+
+This system call, \#11, changes a process executing
+one program into a process executing a different program.
+See Section ``EXEC(II)'' of the UPM.
+This is the longest and one of the most
+important system calls.
+
+\bd
+\item[3034:] ``namei'' (6618) (which is discussed in detail in Chapter 19)
+converts the first argument
+(which is a pointer to a character
+ string defining the name of 
+ the new program) into an ``inode''
+ reference. (``inodes'' are essential parts of the file
+ referencing mechanism.);
+
+\item[3037:] Wait if the number of ``exec''s
+ currently under way is too large
+ (See the comment on line 3011.);
+
+\item[3040:] ``getblk(NODEV)'' results in the
+ allocation of a 512 byte buffer
+ from the pool of buffers. This
+ buffer is used temporarily to
+ store in core, that information
+ which is currently in the user
+ data area, and which is needed to
+ start the new program. Note that
+ the second argument in ``u.u\_arg''
+ is a pointer to this information;
+
+\item[3041:] ``access'' returns a non-zero
+result if the file is not executable. The second
+condition examines whether the file is a
+directory or a special character file.
+(It would seem that by making
+this test earlier, e.g. just
+after line 3036, the efficiency
+of the code could be improved.);
+
+\item[3052:] Copy the set of arguments from
+ the user space into the temporary
+ buffer;
+
+\item[3064:] If the argument string is too
+large to fit in the buffer, take
+an error exit;
+
+\item[3071:] If the number of characters in
+the argument string is odd, add
+an extra, null character;
+
+\item[3090:] The first four words (8 bytes) of
+ the named file are read into
+ ``u.u\_arg''. The interpretation of
+ these words is indicated in the
+ comment beginning on line 3076
+ and, more fully, in the section
+ ``A.OUT(V)'' of the UPM.
+
+Note the setting of ``u.u\_base'',
+``u.u\_count'', ``u.u\_offset'' and
+``u.u\_segflg'' preparatory to the
+read operation;
+
+\item[3095:] If the text segment is not to be
+protected, add the text area size
+to the data area size, and set the former to
+zero;
+
+\item[3105:] Check whether the program has a
+``pure'' text area, but the program
+file has already been opened by
+some other program as a data
+file. If so, take the error exit;
+
+\item[3127:] When this point is reached, the
+ decision to execute the new program is irrevocable i.e. there is
+ no longer the opportunity to
+ return to the original program
+ with an error flag set;
+
+\item[3129:] ``expand'' here actually implies a
+major contraction, to the ``per
+process data'' area only;
+
+\item[3130:] ``xalloc'' takes care of allocating
+(if necessary) and linking to the
+text area;
+
+\item[3158:] The information stored in the
+ buffer area is copied into the
+ stack in the user data area of
+ the new program;
+
+\item[3186:] The locations in the kernel stack
+which contain copies of the ``previous'' values of the registers in
+user mode are set to zero, except
+for r6, the stack pointer, which
+was set at line 3155;
+
+\item[3194:] Decrement the reference count for
+ the ``inode'' structure;
+
+\item[3195:] Release the temporary buffer;
+
+\item[3196:] Wake up any other process waiting
+ at line 3037.
+\ed
+
+
+\sbs{fork (3322)}
+
+A call on ``exec'' is frequently preceded
+by a call on ``fork''. Most of the work
+for ``fork'' is done by ``newproc'' (1826),
+but before the latter is called, ``fork''
+makes an independent search for a slot
+in the ``proc'' array, and remembers the
+place as ``p2'' (3327).
+
+``newproc'' also searches ``proc'' but
+independently. Presumably it always
+locates the same empty slot as ``fork'',
+since it does not report the value
+back. (Why is there no confusion on
+this point?)
+
+\bd
+\item[3335:] For the new process, ``fork''
+returns the value of the parent's
+process identification, and initialises various accounting
+parameters;
+
+\item[3344:] For the parent process, ``fork''
+returns the value of the child's
+process identification, and {\bf skips}
+the user mode program counter by
+one word.
+\ed
+
+\noindent Note that the values finally returned
+to a ``C'' program are slightly different
+from the above. Refer to the section
+FORK(II) of the UPM.
+
+\sbs{sbreak (3354)}
+
+This procedure implements system call
+\#17 which is described in the Section
+``BREAK (II)'' of the UPM. The comment at
+the head of the procedure has confused
+more than one reader: clearly the identifier
+``break'' is used in ``C'' programs
+(leave an enclosing program loop) in an
+entirely different way from that
+intended here (change the size of the
+program data area).
+
+``sbreak'' has clear similarities with
+the procedure ``grow'' (4136) but unlike
+the latter, it is only invoked explicitly and
+may in fact cause a contraction of the data area as well as an
+expansion (depending on the new desired
+size).
+
+\bd
+\item[3364:] Calculate the new size for the
+ data area (in 32 word blocks);
+
+\item[3371:] Check that the new size is consistent with the memory
+segmentation constraints;
+
+\item[3376:] The area is shrinking. Copy the
+ stack area down into the former
+ data area. Call ``expand'' to trim
+ off the excess;
+
+\item[3386:] Call ``expand'' to increase the
+ total area. Copy the stack area
+ up into the new part, and clear
+the areas which were formerly
+occupied by the stack.
+\ed
+
+The following procedures which are also
+contained in ``sysl.c'' are described in
+Chapter 13:
+
+\begin{verbatim}
+  rexit (3205)     wait (3270)
+  exit  (3219)
+\end{verbatim}
+
+\sbs{The Files `sys2.c' and `sys3.c'}
+
+``sys2.c'' and ``sys3.c'' are mainly concerned with the file system and
+input/output, and they have been
+relegated to Section Four of the
+operating system source code.
+
+
+\sbs{The File `sys4.c'}
+
+All the procedures in this file implement system calls.
+The following procedures are described in Chapter 13:
+
+\begin{verbatim}
+    ssig (3614)     kill (3630)
+\end{verbatim}
+
+The following procedures are straightforward and have been left for the
+amusement and edification of the reader:
+
+\begin{verbatim}
+    getswit (3413) sync (3486)
+    gtime (3420)   getgid (3472)
+    stime (3428)   getpid (3480)
+    setuid (3439)  nice (3493)
+    getuid (3452)  times (3656)
+    setgid (3460)  profil (3667)
+\end{verbatim}
+
+The following procedures which are concerned with file systems, are described
+later:
+
+\begin{verbatim}
+    unlink (3510)   chown (3575)
+    chdir (3538)    smdate (3595)
+    chmod (3560)
+\end{verbatim}

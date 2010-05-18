@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The Process</title>
+
+<link href="sect0086.html" title="The proc Structure (0358)" rel="next" />
+<link href="sect0084.html" title="Processes" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0084.html" title="Processes"><img alt="Previous: Processes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0086.html" title="The proc Structure (0358)"><img alt="Next: The proc Structure (0358)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The Process</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000086">7.1 The Process</h2>
+<p>Ritchie and Thompson in their paper define a “process” as the execution of an “image”, where the “image” is the current state of a pseudo-computer, i.e. an abstract data structure, which may be represented in either main memory or on disk. </p><p>The process image involves two or three physically distinct areas of memory: </p><dl class="description">
+
+    <dt>(1)</dt>
+    <dd><p><b class="bf">the “proc” structure</b>, which is contained within the core resident “proc” array and is accessible at all times; </p></dd>
+
+    <dt>(2)</dt>
+    <dd><p><b class="bf">the data segment</b>, which consists of the “per process data area”, combined with a segment containing the user program data, (possibly) program text, and stack; </p></dd>
+
+    <dt>(3)</dt>
+    <dd><p><b class="bf">the text segment</b>, which is not always present, consists of a segment containing only pure program text i.e. re-entrant code and constant data. </p></dd>
+
+</dl><p>Many programs do not have a separate text segment. Where one is defined, a single copy will be shared among all processes which are executions of the same particular program. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0084.html" title="Processes"><img alt="Previous: Processes" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0086.html" title="The proc Structure (0358)"><img alt="Next: The proc Structure (0358)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

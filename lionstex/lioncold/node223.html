@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Resources Required</TITLE>
+<META NAME="description" CONTENT="Resources Required">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node224.html">
+<LINK REL="previous" HREF="node222.html">
+<LINK REL="up" HREF="node217.html">
+<LINK REL="next" HREF="node224.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3525"
+  HREF="node224.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3521"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3515"
+  HREF="node222.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3523"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3526"
+  HREF="node224.html">Opening a File</A>
+<B> Up:</B> <A NAME="tex2html3522"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3516"
+  HREF="node222.html">inode (5659)</A>
+ &nbsp; <B>  <A NAME="tex2html3524"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000236000000000000000">
+Resources Required</A>
+</H2>
+
+<P>
+Each file requires the dedication of
+certain system resources. When a file
+exists, but is not being referenced in
+any way, it requires:
+
+<P>
+<DL>
+<DT><STRONG>(a)</STRONG></DT>
+<DD>a directory entry (16 characters
+ in a directory file);
+
+<P>
+</DD>
+<DT><STRONG>(b)</STRONG></DT>
+<DD>a disk ``inode'' entry (32 characters in a table stored on the
+disk);
+
+<P>
+</DD>
+<DT><STRONG>(c)</STRONG></DT>
+<DD>zero, one or more blocks of disk
+ storage (512 characters each).
+</DD>
+</DL>
+
+<P>
+In addition if the file is being referenced for some purpose, it requires
+
+<P>
+<DL>
+<DT><STRONG>(d)</STRONG></DT>
+<DD>a core ``inode'' entry (32 characters in the ``inode'' array);
+</DD>
+</DL>
+
+<P>
+Finally if a user program has ``opened''
+the file for reading or writing, a
+number of resources are required:
+
+<P>
+<DL>
+<DT><STRONG>(e)</STRONG></DT>
+<DD>a ``file'' array entry (8 characters);
+
+<P>
+</DD>
+<DT><STRONG>(f)</STRONG></DT>
+<DD>an entry in the user program's
+``u.u_ofile'' array (one word per
+file, pointing to a ``file'' array
+entry);
+</DD>
+</DL>
+
+<P>
+Mechanisms have to be set up for allocating and deallocating each of these
+resources in an orderly manner. The
+following table gives the names of the
+principal procedures involved:
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT"><B>resource</B></TD>
+<TD ALIGN="LEFT"><B>obtain</B></TD>
+<TD ALIGN="LEFT"><B>free</B></TD>
+</TR>
+<TR><TD ALIGN="LEFT">directory entry</TD>
+<TD ALIGN="LEFT">namei</TD>
+<TD ALIGN="LEFT">namei</TD>
+</TR>
+<TR><TD ALIGN="LEFT">disk ``inode'' entry</TD>
+<TD ALIGN="LEFT">ialloc</TD>
+<TD ALIGN="LEFT">ifree</TD>
+</TR>
+<TR><TD ALIGN="LEFT">disk storage block</TD>
+<TD ALIGN="LEFT">alloc</TD>
+<TD ALIGN="LEFT">free</TD>
+</TR>
+<TR><TD ALIGN="LEFT">core ``inode'' entry</TD>
+<TD ALIGN="LEFT">iget</TD>
+<TD ALIGN="LEFT">iput</TD>
+</TR>
+<TR><TD ALIGN="LEFT">``file'' table entry</TD>
+<TD ALIGN="LEFT">falloc</TD>
+<TD ALIGN="LEFT">closef</TD>
+</TR>
+<TR><TD ALIGN="LEFT">``u_ofile'' entry</TD>
+<TD ALIGN="LEFT">ufalloc</TD>
+<TD ALIGN="LEFT">close</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html3525"
+  HREF="node224.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3521"
+  HREF="node217.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3515"
+  HREF="node222.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3523"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3526"
+  HREF="node224.html">Opening a File</A>
+<B> Up:</B> <A NAME="tex2html3522"
+  HREF="node217.html">File Access and Control</A>
+<B> Previous:</B> <A NAME="tex2html3516"
+  HREF="node222.html">inode (5659)</A>
+ &nbsp; <B>  <A NAME="tex2html3524"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

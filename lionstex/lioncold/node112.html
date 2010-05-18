@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>setpri (2156)</TITLE>
+<META NAME="description" CONTENT="setpri (2156)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node113.html">
+<LINK REL="previous" HREF="node111.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node113.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2103"
+  HREF="node113.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2099"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2093"
+  HREF="node111.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2101"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2104"
+  HREF="node113.html">sleep (2066)</A>
+<B> Up:</B> <A NAME="tex2html2100"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2094"
+  HREF="node111.html">swtch (2178)</A>
+ &nbsp; <B>  <A NAME="tex2html2102"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001210000000000000000">
+setpri (2156)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>2161:</STRONG></DT>
+<DD>Process priorities are calculated
+ according to the formula
+
+<P>
+<PRE><TT>
+priority = min(127,
+<BR>(time used + PUSER + p_nice))
+<BR>
+</TT></PRE>
+
+<P>
+where
+<DL>
+<DT><STRONG>(1)</STRONG></DT>
+<DD>time used = accumulated central
+ processor time (usually since the
+ process was last swapped in),
+ measured in clock ticks divided
+ by 16 i.e. thirds of a second.
+ (More on this later when we discuss the clock interrupt.);
+
+<P>
+</DD>
+<DT><STRONG>(2)</STRONG></DT>
+<DD>PUSER == 100;
+
+<P>
+</DD>
+<DT><STRONG>(3)</STRONG></DT>
+<DD>``p_nice'' is a parameter used to
+ bias the process priority. It is
+ normally positive and hence
+ reduces the process's effective
+ precedence.
+</DD>
+</DL>
+</DD>
+</DL>
+
+<P>
+Note the somewhat confusing convention
+in UNIX that the lower the priority,
+the higher the precedence. Thus a
+priority of -10 beats a priority of 100
+every time.
+
+<P>
+<DL>
+<DT><STRONG>2165:</STRONG></DT>
+<DD>Set the rescheduling flag if the
+ process, whose priority has just
+ been recalculated, has less precedence than the current process.
+</DD>
+</DL>
+
+<P>
+The sense of the test on line 2165 is
+surprising, especially when it is compared with line 2141. We leave it to
+the reader to satisfy himself that this
+is not an error. (Hint: look at the
+parameters for the calls on ``setpri''.)
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2103"
+  HREF="node113.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2099"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2093"
+  HREF="node111.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2101"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2104"
+  HREF="node113.html">sleep (2066)</A>
+<B> Up:</B> <A NAME="tex2html2100"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2094"
+  HREF="node111.html">swtch (2178)</A>
+ &nbsp; <B>  <A NAME="tex2html2102"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

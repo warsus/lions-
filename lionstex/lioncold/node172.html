@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>wait (3270)</TITLE>
+<META NAME="description" CONTENT="wait (3270)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node173.html">
+<LINK REL="previous" HREF="node171.html">
+<LINK REL="up" HREF="node152.html">
+<LINK REL="next" HREF="node173.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2866"
+  HREF="node173.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2862"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2856"
+  HREF="node171.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2864"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2867"
+  HREF="node173.html">Tracing</A>
+<B> Up:</B> <A NAME="tex2html2863"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2857"
+  HREF="node171.html">rexit (3205)</A>
+ &nbsp; <B>  <A NAME="tex2html2865"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001820000000000000000">
+wait (3270)</A>
+</H2>
+
+<P>
+For every call on ``exit'', there should
+be a matching call on ``wait'' by an
+anxious parent or ancestor. The principal
+function of the latter procedure, which
+implements the ``wait'' system call, is
+for the parent or ancestor to find and
+dispose of a ``zombie'' child.
+
+<P>
+``wait'' also has a secondary function,
+to look for children which have
+``stopped'' for tracing (which is the
+next major topic).
+
+<P>
+<DL>
+<DT><STRONG>3277:</STRONG></DT>
+<DD>Search the whole ``proc'' array
+ looking for child processes. (If
+none exist, take an error exit (line 3317));
+</DD>
+<DT><STRONG>3280:</STRONG></DT>
+<DD>If the child is a ``zombie'':
+
+<P>
+
+<UL>
+<LI>save the child's process identifying number, to report back to
+the parent;
+
+<P>
+</LI>
+<LI>read the 256 word record back from the disk swap area, and release
+the swap space;
+
+<P>
+</LI>
+<LI>reinitialise the ``proc'' array entry;
+
+<P>
+</LI>
+<LI>accumulate the various accounting entries;
+
+<P>
+save the ``u_arg[0]'' value also to
+report back to the parent;
+</LI>
+</UL>
+
+<P>
+</DD>
+<DT><STRONG>3300:</STRONG></DT>
+<DD>Is the child in a ``stopped''
+ state? (If so, wait for the discussion on tracing);
+
+<P>
+</DD>
+<DT><STRONG>3313:</STRONG></DT>
+<DD>If one or more children were
+ found but none were ``zombies'' or
+ ``stopped'', ``sleep'' and then look
+ again.
+</DD>
+</DL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html2866"
+  HREF="node173.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2862"
+  HREF="node152.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2856"
+  HREF="node171.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2864"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2867"
+  HREF="node173.html">Tracing</A>
+<B> Up:</B> <A NAME="tex2html2863"
+  HREF="node152.html">Software Interrupts</A>
+<B> Previous:</B> <A NAME="tex2html2857"
+  HREF="node171.html">rexit (3205)</A>
+ &nbsp; <B>  <A NAME="tex2html2865"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

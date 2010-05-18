@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: The proc Structure (0358)</title>
+
+<link href="sect0087.html" title="The user Structure (0413)" rel="next" />
+<link href="sect0085.html" title="The Process" rel="prev" />
+<link href="sect0084.html" title="Processes" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0085.html" title="The Process"><img alt="Previous: The Process" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0087.html" title="The user Structure (0413)"><img alt="Next: The user Structure (0413)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0084.html">Processes</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">The proc Structure (0358)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000087">7.2 The proc Structure (0358)</h2>
+<p>This structure, which is permanently resident in main memory, contains fifteen elements, of which eight are characters, six are integers, and one a pointer to an integer. Each element represents information that must be accessible at any time, especially when the main part of the process image has been swapped out to disk: </p><ul class="itemize">
+<li><p>“p_stat” may take one of seven values which define seven mutually exclusive states. See lines 0381 to 0387; </p></li><li><p>“p_flag” is an amalgam of six one bit flags which may be set independently. See lines 0391 to 0396; </p></li><li><p>“p_addr” is the address of the data segment: </p><ul class="itemize">
+<li><p>If the data segment is in main memory this is a block number; </p></li><li><p>otherwise, if the data segment has been swapped out, this is a disk record number; </p></li>
+</ul></li><li><p>“p_size” is the size of the data segment, measured in blocks; </p></li><li><p>“p_pri” is the current process priority. This may be recalculated from time to time as a function of “p_nice”, “p_cpu” and “p_time”; </p></li><li><p>“p_pid”, “p_ppid” are numbers which uniquely identify a process and its parent; </p></li><li><p>“p_sig”, “p_uid”, “p_ttyp” are involved with external communication i.e. with messages or “signals” from outside the process’s normal domain; </p></li><li><p>“p_wchan” identifies, for a “sleeping” process (“p_stat” equals either “SSLEEP” or “SWAIT”), the reason for sleeping; </p></li><li><p>“p_textp” is either null or a pointer to an entry in the “text” array (4306), which contains vital statistics regarding the text segment. </p></li>
+</ul></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0085.html" title="The Process"><img alt="Previous: The Process" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0084.html" title="Processes"><img alt="Up: Processes" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0087.html" title="The user Structure (0413)"><img alt="Next: The user Structure (0413)" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

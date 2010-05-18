@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title>: physio (5259)</title>
+
+<link href="sect0213.html" title="File Access and Control" rel="next" />
+<link href="sect0211.html" title="bflush (5229)" rel="prev" />
+<link href="sect0198.html" title="Buffer Manipulation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0211.html" title="bflush (5229)"><img alt="Previous: bflush (5229)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Next: File Access and Control" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html"></a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0198.html">Buffer Manipulation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">physio (5259)</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000213">17.14 physio (5259)</h2>
+<p>This routine is called to handle “raw” input/output i.e. operations which ignore the normal 512 character block size. </p><p>“physio” is called by “rkread” (5476) and “rkwrite” (5483) which appear as entries in the array “cdevsw” (4684) </p><p>“Raw i/o” is not an essential feature of UNIX. For disk devices it is used mainly for copying whole disks and checking the integrity of the file system as a whole (see e.g. ICHECK (VIII) in the UPM), where it is convenient to read whole tracks, rather than single blocks, at a time. </p><p>Note the declaration of “strat” (5261). Since the actual parameter used e.g. “rkstrategy” (5389) does not return any value, is this form of declaration really necessary?  <big class="xlarge">Section Four</big> </p><p><p>Section Four is concerned with files and file systems. </p><p>A file system is a set of files and associated tables and directories organised onto a single storage device such as a disk pack. </p><p>This section covers the means of creating and accessing files, locating files via directories, and organising and maintaining file systems. </p><p>It also includes the code for an exotic breed of file called a “pipe”. </p> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0211.html" title="bflush (5229)"><img alt="Previous: bflush (5229)" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0198.html" title="Buffer Manipulation"><img alt="Up: Buffer Manipulation" border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0213.html" title="File Access and Control"><img alt="Next: File Access and Control" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">&nbsp;</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

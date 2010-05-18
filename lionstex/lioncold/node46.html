@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 13</TITLE>
+<META NAME="description" CONTENT="Example 13">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node47.html">
+<LINK REL="previous" HREF="node45.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node47.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1259"
+  HREF="node47.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1255"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1249"
+  HREF="node45.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1257"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1260"
+  HREF="node47.html">Example 14</A>
+<B> Up:</B> <A NAME="tex2html1256"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1250"
+  HREF="node45.html">Example 12</A>
+ &nbsp; <B>  <A NAME="tex2html1258"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000614000000000000000">
+Example 13</A>
+</H2>
+
+<P>
+<PRE>
+  3949 signal (tp, sig)
+       {
+         register struct proc *p;
+         for (p=proc;p&lt;&amp;proc[NPROC];p++)
+           if (p-&gt;p ttyp == tp)
+             psignal (p,sig);
+       }
+</PRE>
+
+<P>
+In this example of the ``for'' statement,
+the pointer variable ``p'' is stepped
+through each element of the array
+``proc'' in turn.
+
+<P>
+Actually the original code had
+
+<P>
+<PRE>
+   for (p=&amp;proc[0];p&lt;&amp;proc[NPROC];p++)
+</PRE>
+
+<P>
+but it wouldn't fit on the line! As
+noted earlier, the use of ``proc'' as an
+alternative to the expression
+``&amp;proc[0]'' is acceptable in this context.
+
+<P>
+This kind of ``for'' statement is almost
+a cliche in UNIX so you had better
+learn to recognise it. Read it as
+
+<P>
+
+<P>
+<BR>
+
+<P>
+<I>for p = each process in turn</I>
+
+<P>
+
+<P>
+<BR>
+
+<P>
+Note that ``proc[NPROC]'' is the address
+of the (NPROC+1)-th element of the
+array (which does not of course exist)
+i.e. it is the first location beyond
+the end of the array.
+
+<P>
+At the risk of overkill we would point
+out again that whereas in the previous
+example
+
+<P>
+<PRE>
+    i++;
+</PRE>
+
+<P>
+meant add one to the integer ``i'', here
+
+<P>
+<PRE>
+    p++;
+</PRE>
+
+<P>
+means ``skip p to point to the next structure''.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

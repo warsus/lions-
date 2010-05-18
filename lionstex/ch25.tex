@@ -1,0 +1,648 @@
+%
+% The Lion's Commentary, file ch25.tex, version 1.4, 18 May 1994
+%
+\se{The File ``tty.c''}
+
+In this, the last chapter, the intricacies of interactive terminal handlers
+are finally unveiled, including:
+
+\bd
+\item[(a)] the handling of the ``erase'' and
+kill characters;
+
+\item[(b)] the conversion of characters
+during input and output for
+upper case only terminals;
+
+\item[(c)] the insertion of delays after
+various special characters such
+as ``carriage return''.
+\ed
+
+The routines ``gtty'' (8165), ``stty''
+(8183), ``sgtty'' 82a1) and ``ttystty''
+(8577) were dealt within the previous
+chapter.
+
+\sbs{flushtty (8252)}
+
+The purpose of this procedure is to
+``normalise'' the queries associated with
+a particular terminal. Its effect is
+to terminate transmission to the
+terminal forthwith and to throw away any
+accumulated input characters.
+
+\bd
+\item[8258:] Throw away everything in the
+``cooked'' input queue;
+
+\item[8259:] ditto for the output queue;
+
+\item[8260:] Wakeup any process waiting to
+extract a character from the
+``raw'' input queue;
+
+\item[8261:] ditto for the output queue;
+
+\item[8263:] Raise the processor priority to
+prevent an interrupt from the
+terminal while ...
+
+\item[8264:] the ``raw'' input queue is flushed,
+
+\item[8265:] the ``delimiter count'' is properly
+set to zero.
+\ed
+
+\noindent ``flushtty'' is called by ``wflushtty''
+(see below) and ``ttyinput'' (8346, 8350)
+when either:
+
+\bd
+\item[(a)] the terminal is not operating in
+``raw'' mode and a ``quit'' or
+``delete'' character is received
+from the terminal; or
+
+\item[(b)] the ``raw'' input queue has grown
+unreasonably large (presumably
+because no process is reading
+input from the terminal);
+\ed
+
+\sbs{wflushtty (8217)}
+
+This procedure waits until the queue of
+characters for a terminal is empty
+(because they've all been sent!) and
+then calls ``flushtty'' to clean up the
+input queues.
+
+``wflushtty'' is called (3053) by
+``klclose''. This does not happen very
+often -- in fact only when all files
+referencing the terminal are closed
+i.e. usually only when the user logs
+off.
+
+It is also called by ``ttystty'' (8589)
+just before the terminal environment
+parameters are adjusted.
+
+\sbs{Character Input} 
+
+For a program requesting input from a
+terminal, there is a chain of procedure
+calls which extends to ``ttread'' ...
+
+\sbs{ttread (8535)}
+
+\bd
+\item[8541:] Check that the terminal is
+{\bf logically} active;
+
+\item[8543:] If there are characters in the
+``cooked'' input queue {\bf or} a call on
+``canon'' (8274) is successful ...
+
+\item[8544:] transfer characters from the
+``cooked'' input queue until either
+it is empty or enough characters
+have been transferred to suit the
+user's requirements.
+\ed
+
+\sbs{canon (8274)}
+
+This procedure is called by ``ttread''
+(8543) to transfer characters from the
+``raw'' input queue to the ``cooked'' input
+queue (after processing ``erase'' and
+``kill'' characters and, in the case of
+upper case only terminals, processing
+``escaped'' characters, i.e. characters
+preceded by the character `\verb+\+'). ``canon''
+returns a non-zero value if the
+``cooked'' input queue is no longer
+empty.
+
+\bd
+\item[8284:] If the number of delimiters in
+the ``raw'' input queue is zero
+then ...
+
+\item[8285:] if the terminal is logically
+inactive, then just return;
+
+\item[8286:] otherwise go to ``sleep''.
+\ed
+
+\noindent Note that delimiters in this context
+are characters of all ones (octal value
+is 377) and are inserted by ``ttyinput''
+(8358).
+
+\bd
+\item[8291:] Set ``bp'' to point to the third
+character of the work array,
+``canonb'';
+
+\item[8292:] Begin a loop (extending to line
+8318) which removes one character
+from the ``raw'' queue per cycle;
+
+\item[8293:] If the character is a delimiter,
+reduce the delimiter count by one
+and exit the loop i.e. go to line
+8319;
+
+\item[8297:] If the terminal is not operating
+in ``raw'' mode ...
+
+\item[8298:] If the previous character (note
+the ``bp[--1]'' notation!) was not a
+backslash, `\verb+\+', execute the code
+from line 8299 to 8307, otherwise
+execute the code beginning at
+line 8309.
+\ed
+
+\noindent {\bf Previous character was not a backslash}
+
+\bd
+\item[8299:] If the characters is an ``erase'' and ...
+
+\item[8300:] if there is at least one charater to
+erase, backup the pointer ``bp'';
+
+\item[8302:] Start on the next cycle of the loop
+beginning at line 8292;
+
+\item[8304:] If the character is a ``kill'',
+throw away all the characters
+accumulated for the current line,
+by going back to line 8290;
+
+\item[8306:] If the character is an ``eot'' (004)
+(usually generated at the terminal as ``control-D''),
+ignore it (and do not put it inot ``canonb'') and
+start on the next cycle;
+
+(If this character occurs at
+the beginning of a line, then
+subsequently ``ttread'' (8544) will
+find no characters in the
+``cooked'' input queue i.e. it will
+read a zero length record, which
+then leads to the program receiving the normal ``end of file''
+indication.)
+\ed
+
+\noindent{\bf Previous character was a backslash}
+
+\bd
+\item[8309:] If ``maptab[c]'' is non-zero, and either\\
+``maptab[c] == c'' or the
+terminal is upper case only, then ...
+
+\item[8310:] if the last character but one was
+{\bf not} a backslash (`\verb+\+'), then
+replace ``c'' by ``maptab[c]'' and
+back up ``bp'' (so that the
+backslash will be erased).
+\ed
+
+\noindent{\bf Character ready}
+
+\bd
+\item[8315:] Move ``c'' into the next character
+in ``canonb'', and if this array is
+now full, leave the loop.
+\ed
+
+\noindent{\bf Line completed}
+
+\bd
+\item[8319:] At this point, an input line has
+been assembled in the array
+``canonb'';
+
+\item[8322:] Shift the contents of ``canonb''
+into the ``cooked'' input queue,
+and return a ``successful'' result.
+\ed
+
+\sbs{Notes}
+
+\bd
+\item[(A)] The reason why ``bp'' starts (8291)
+at the third character of ``canonb'' can
+be found on line 8310.
+
+\item[(B)] A number of subtleties in
+the handling of backslashes (which the reader
+will no doubt have encountered in his
+practical use of UNIX) are still not
+immediately      apparent.        Since
+``maptab[c]'' is zero for ``c == `\verb+\+' ''
+(octal value of 134), all backslashes
+get copied into ``canonb''. A single
+backslash will be subsequently overwritten if the following character is
+to be asserted (as in the case of `\#'
+or `@' or eot (004), or if the case of
+an alphabetic character is to be
+changed for an upper case only terminal.
+\ed
+
+\sbs{ttyinput (8333)}
+
+``canon'' removes characters from the
+``raw'' input queue. They are put there
+in the first place by ``ttyinput'' which
+is called by ``klrint'' (8087) whenever
+an input character is received from the
+hardware controller.
+
+The parameters passed to ``ttyinput'' are
+a character and a reference to a ``tty''
+structure.
+
+\bd
+\item[8342:] If the character is a ``carriage
+return'' and the terminal operates
+with a ``carriage return'' only
+(instead of a ``carriage return''
+``line feed'' pair) change the
+character to a ``new line'';
+
+\item[8344:] If the terminal is not operating
+in ``raw'' mode and the character
+is a ``quit'' or ``delete'' (7958)
+then call ``signal'' (3949) to send
+a software interrupt to every
+process which has the terminal as
+its controlling terminal, flush
+all the queues associated with
+the terminal, and return;
+
+\item[8349:] If the ``raw'' input queue has
+grown excessively large, flush
+{\bf all} the queues for the terminal
+and return. (This may seem a
+trifle harsh at first sight but
+it will usually be what is
+required.);
+
+\item[8353:] If the terminal has a limited
+character set, and the character
+is an upper case alphabetic,
+translate it into lower case;
+
+\item[8355:] Insert the character into the
+``raw'' input queue;
+
+\item[8356:] If the terminal is operating in
+``raw'' mode, or the character was
+a ``new line'' or ``eot'' then ...
+
+\item[8357:] ``wakeup'' any process waiting for
+input from the terminal, place a
+delimiter character (all ones)
+also in the ``raw'' queue and
+increment the delimiter count
+Note this is one point where possible failure of ``putc'' (when
+there is no buffer space) is
+explicitly recognised. A failure
+occurring here would explain why
+the test on line 8316 may sometimes succeed.
+
+\item[8361:] Finally, if the input character
+is to be echoed i.e. the terminal
+is running in full duplex mode,
+insert a copy of the character
+into the output queue, and and
+arrange to have it transmitted
+(``ttstart'') back to the terminal.
+\ed
+
+\sbs{Character Output -- ttwrite (8550)}
+
+This procedure is called via ``klwrite''
+(8067) when output is to be sent to the
+terminal.
+
+\bd
+\item[8556:] If the terminal is
+inactive, do nothing;
+
+\item[8558:] Loop for each character to be
+transmitted ...
+
+\item[8560:] While there are still an adequate
+number of characters queued for
+transmission to the terminal ...
+
+\item[8561:] call ``ttstart'' just in case it is
+time to send another character to
+the terminal;
+
+\item[8562:] Setting the ``ASLEEP'' flag here
+(also in\\
+``wflushtty'' (8224)) is
+rather pointless since is is
+never interrogated and never
+reset until the file is closed;
+
+\item[8563:] Go to sleep. In the meanwhile the
+interrupt handler will be draining characters from the output
+queue and sending them down the
+line to the terminal;
+
+\item[8566:] Call ``ttyoutput'' to insert the
+character in the output queue and
+arrange to have it transmitted;
+
+\item[8568:] Call ``ttstart'' again, for luck.
+\ed
+
+\sbs{ttstart}
+
+This procedure is called whenever it
+seems reasonable to try and send the
+next character to the terminal. It
+often achieves nothing useful.
+
+\bd
+\item[8514:] See the comment on line 8499.
+This code is not relevant here;
+
+\item[8518:] If the controller is not ready
+(i.e. bit 7 of the transmitter
+stalus register is not set) or
+the necessary delay following the
+preious character has not yet
+elapsed, do nothing;
+
+\item[8520:] Remove a character from the output queue. If ``c'' is positive,
+the queue was not empty (as
+expected) ...
+
+\item[8521:] If ``c'' is less than ``0177'' it is
+a character to be transmitted ...
+
+\item[8522:] After setting the parity bit from
+the corresponding element of the
+array ``partab'', write ``c'' to the
+transmitter data buffer register
+to initiate the hardware operation;
+
+\item[8524:] Otherwise (``c'' $>$ 0177)
+the character was inserted in the output
+queue to signal a delay. Call
+``timeout'' (3845) to make an entry
+in the ``callout'' list. The
+result of this will be to initiate an execution of ``ttrstrt''
+(8486) after ``c \& 0177'' clock
+ticks . It will be seen that
+``ttrstrt'' calls ``ttstart'' again,
+and that the manipulation of the ``TIMEOUT''
+flag (8524, 8491) will
+ensure that if another execution
+of ``ttstart'' is initiated in the
+interim, on behalf of the same
+terminal, it will (8518) return
+without doing anything.
+\ed
+
+\sbs{ttrstrt (8486)}
+
+See the comment above for line 8524.
+
+\sbs{ttyoutput (8373)}
+
+This procedure has more comments in the
+source code and hence requires less
+explanation than some others. Note the
+use of recursion (8392) to generate a
+string of blanks in place of a tab
+character. Other recursive calls are
+on lines 8403 and 8413.
+
+\sbs{Terminals with a restricted character set}
+
+\bd
+\item[8400:] ``colp'' points to a string of
+pairs of characters. If the character to be output matches the
+second character of any of these
+pairs, the charactcr is replaced
+by a backslash followed by the first character of the pair;
+
+\item[8407:] Lower case alphabetics are converted to upper case alphabetics
+by the addition of a constant.
+\ed
+
+\noindent Note. The conversion here should be
+compared wth the handling of the
+reverse problem on input. Here we have
+an algorithm which clearly trades space
+(no table analogue to ``maptab'') for
+time (a serial search through the
+string on line 8400). A space conserving
+approach could be adopted in
+``canon'' but the problem is rather more
+complicated there.
+
+\bd
+\item[8414:] Insert the character into the
+output queue. If perchance,
+``putc'' fails for lack of buffer
+space, don't worry about inserting any subsequent delay, or
+updating the system's idea of the
+current printing column;
+
+\item[8423:] Set ``colp'' to point to the
+``t\_col'' character of the ``tty''
+structure, i.e. ``*colp'' has a
+value which is the ordinal number
+of the column which has just been
+printed;
+
+\item[8424:] Set ``ctype'' to the element of
+``partab'' corresponding to the
+output character ``c'';
+
+
+\item[8426:] Mask out the significant bits of
+``ctype'' and use the result as the
+``switch'' index;
+
+\item[8428:] (Case 0) The common situation!
+Increment ``t\_col'';
+
+\item[8431:] (Case 1) Non-printing characters.
+This group consists of the first,
+third and fourth octet of the
+ASCII character set, plus ``so''
+(016), ``si'' (017) and ``del''
+(0177). Don't increment ``t\_col'';
+
+\item[8434:] (Case 2) Backspace. Decrement
+``t\_col'' unless it is already
+zero;
+
+\item[8439:] (Case 3) Newline. Obviously
+``t\_col'' should be set to zero.
+The main problem is to calculate
+the delay which should ensue
+before another character is sent.
+
+For a Model 37 teletype, this
+depends on how far the print
+mechanism has progressed across
+the page. The value chosen is at
+least a tenth of a second (six
+clock ticks) and may be as much
+as ((132/16) + 3)/60 =   0.19
+seconds.
+
+For a VT05, the delay is 0.1
+second. For a DECwriter it is
+zero because the terminal
+incorporates buffer storage and
+has a double speed ``catch up''
+print mode;
+
+\item[8451:] (Case 4) Horizontal tab. Assign
+the value of bits 10, 11 of
+``t\_flags'' to ``ctype'';
+
+\item[8453:] For the only non-trivial case
+recognised\\
+(``c'' ==  1 or Model 37
+teletype), calculate the the
+number of positions to the next
+tab stop (via the obscure calculation of line 8454). If this
+turns out to be four columns or
+less, take it as zero;
+
+\item[8458:] Round ``*colp'' (i.e. the value
+pointed to by ``colp''!) to the
+next multiple of 8 less one;
+
+\item[8459:] Increment ``*colp'' to be an exact
+multiple of eight;
+
+\item[8462:] (Case 5) Vertical Motion. If bit
+14 is set in ``t\_flags'', make the
+delay as long as possible, i.e.
+0177 or 127 clock ticks, i.e.
+just over two seconds;
+
+\item[8467:] (Case 6) Carriage Return. Assign
+the value of bits 12, 13 of
+``t\_flags'' to ``ctype'';
+
+\item[8469:] For the first class, allow a
+delay of five clock ticks;
+
+\item[8472:] For the second class, allow a
+delay of ten clock ticks;
+
+\item[8475:] Set the ``*colp'' (the last column
+printed) to zero.
+\ed
+
+Before leaving the file ``tty.c'', there
+are two matters which deserve further
+examination.
+
+\sbs{A. The test for 'TTLOWAT' (Line 8074)}
+
+On line 8074 in ``klxint'', a test is
+made whether to restart any processes
+waiting to send output to the terminal.
+The test is successful if the number of
+characters is zero or if it is equal to
+``TTLOWAT''.
+
+If the number of characters is between
+these values, no ``wakeup'' is performed
+until the queue is completely empty,
+with the strong likelihood that there
+will then be a hiatus in the flow of
+output to the terminal. Since temporary interruptions to the flow of
+output are quite frequently observed in
+practice and represent a source of
+occasional irritation if nothing more,
+one may reasonably enquire ``is there
+any way the character count can get
+from being greater than ``TTLOWAT'' to
+below it, without this being detected
+at line 8074?''
+
+Quite clearly there is, since each call
+on ``ttstart'' can decrement the queue
+size, and only one such call is followed by the test. Thus if the call on
+``ttstart'' from one of ``ttrstrt'' (8492)
+or ``ttwrite'' (8568) happens to cross
+the boundary, a delay will result. The
+probability that this will happen is
+small, but finite and hence the event
+is likely to be observed in any reasonably long output sequence.
+
+There are two other situations in which
+``ttstart'' is called which seem to be
+satisfactory. At ``ttwrite'' (8561) the
+queue is at its maximum extent; and at
+``ttyinput'' (8363) there is a preceding
+call on ``ttyoutput'' which usually (but
+not invariably!) will have added a
+character to the output queue.
+
+\sbs{B. Inactive Terminals}
+
+When the last special file for a terminal is closed, ``klclose'' (8055) is
+called and resets (8059) the ``ISOPEN''
+and ``CARR\_ON'' flags. However the ``read
+enable'' bit of the receiver control
+status register is not reset, so that
+incoming characters may still be
+received and will be stored away (8087)
+in the terminal's ``raw'' input queue by
+``klrint'' (8078), and ``ttyinput'' (8333),
+which do not test the ``CARR\_ON'' flag,
+to see if the terminal is logically
+connected.
+
+These characters may accumulate for a
+long time and clog up the character
+buffer storage. Only when the ``raw''
+input queue reaches 256 characters
+(``TTYHOG'', 8349) will the contents of
+this queue be thrown away. It does seem
+therefore, that a statement to disable
+reader interrupts should be included in
+``klclose'' before line 8058.
+
+\newpage
+\vfill
+
+\sbs{Well, that's all, folks ...}
+
+Now that you, oh long-suffering,
+exhausted reader have reached this
+point, you will have no trouble in
+disposing of the last remaining file,
+``mem.c'' (Sheet 90). And on this note,
+we end this discussion of the UNIX
+Operating System Source Code.
+
+Of course there are lots more device
+drivers for your patient examination,
+and in truth the whole UNIX Timesharing System Source Code has hardly
+been scratched. So this is not really
+
+\begin{center}
+{\bf \large THE END}
+\end{center}

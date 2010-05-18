@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Example 12</TITLE>
+<META NAME="description" CONTENT="Example 12">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node46.html">
+<LINK REL="previous" HREF="node44.html">
+<LINK REL="up" HREF="node32.html">
+<LINK REL="next" HREF="node46.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1247"
+  HREF="node46.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1243"
+  HREF="node32.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1237"
+  HREF="node44.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1245"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1248"
+  HREF="node46.html">Example 13</A>
+<B> Up:</B> <A NAME="tex2html1244"
+  HREF="node32.html">Reading ``C'' Programs</A>
+<B> Previous:</B> <A NAME="tex2html1238"
+  HREF="node44.html">Example 11</A>
+ &nbsp; <B>  <A NAME="tex2html1246"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000613000000000000000">
+Example 12</A>
+</H2>
+
+<P>
+<PRE>
+  6824 ufalloc ()
+       {
+         register i;
+         for (i=0; i&lt;NOFILE; i++)
+           if (u.u_ofile[i]==NULL) {
+             u.u_ar0[R0] = i;
+             return (i);
+           }
+         u.u_error = EMFILE;
+         return (-1);
+       }
+</PRE>
+
+<P>
+This example introduces the ``for''
+statement, which has a very general
+syntax making it both powerful and compact.
+
+<P>
+The structure of the ``for'' statement is
+adequately described on page 10 of the
+``C Tutorial'', and that description is
+not repeated here.
+
+<P>
+The Algol equivalent of the above ``for''
+statement would be
+
+<P>
+<PRE>
+   for i:=1 step 1 until NOFILE-1 do
+</PRE>
+
+<P>
+The power of the ``for'' statement in ``C''
+derives from the great freedom the programmer
+has in choosing what to include
+between the parentheses. Certainly
+there is nothing which restricts the
+calculations to integers, as the next
+example will demonstrate.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Notes</TITLE>
+<META NAME="description" CONTENT="Notes">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node258.html">
+<LINK REL="previous" HREF="node256.html">
+<LINK REL="up" HREF="node251.html">
+<LINK REL="next" HREF="node258.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html3956"
+  HREF="node258.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html3952"
+  HREF="node251.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html3946"
+  HREF="node256.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html3954"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html3957"
+  HREF="node258.html">iget (7276)</A>
+<B> Up:</B> <A NAME="tex2html3953"
+  HREF="node251.html">File Systems</A>
+<B> Previous:</B> <A NAME="tex2html3947"
+  HREF="node256.html">smount (6086)</A>
+ &nbsp; <B>  <A NAME="tex2html3955"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000256000000000000000">
+Notes</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>1.</STRONG></DT>
+<DD>The ``read/write'' status of a mounted
+device  depends  only on the parameters
+provided to ``smount''.   No  attempt  is
+made to sense the hardware ``read/write''
+status. Thus if a disk is readied  with
+``write  protect'' on, but is not mounted
+``read only'', then the system will  complain vigorously.
+
+<P>
+</DD>
+<DT><STRONG>2.</STRONG></DT>
+<DD>The ``mount'' procedure does not carry
+out  any  kind of label checking on the
+``mounted'' file system volume.  This  is
+reasonable  in  a  situation where file
+system volumes are  rarely  rearranged.
+However in situations where volumes are
+mounted and remounted frequently,  some
+means  of  verifying  that  the correct
+volume  has  been  mounted  would  seem
+desirable.   (Further,  if a file system
+volume contains sensitive  information,
+it  may  be  desirable  to include some
+form of password  protection  as  well.
+There  is  room  in  the  ``super block''
+(5575) for the storage of a name and an
+encrypted password.)
+</DD>
+</DL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

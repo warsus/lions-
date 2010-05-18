@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Addressing Modes</TITLE>
+<META NAME="description" CONTENT="Addressing Modes">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node21.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node23.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html955"
+  HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html951"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html945"
+  HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html953"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html956"
+  HREF="node23.html">Unix Assembler</A>
+<B> Up:</B> <A NAME="tex2html952"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html946"
+  HREF="node21.html">Instruction Set</A>
+ &nbsp; <B>  <A NAME="tex2html954"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00055000000000000000">
+Addressing Modes</A>
+</H2>
+
+<P>
+Much of the novelty and complexity of
+the PDP11 instruction set lies in the
+variety of addressing modes which may
+be used for defining the source and
+destination operands.
+
+<P>
+The addressing modes which are used in
+``m40.s'' are described below.
+
+<P>
+<DL>
+<DT><STRONG>Register Mode:</STRONG></DT>
+<DD>The operand resides in
+one of the general registers, e.g.
+
+<P>
+<PRE>
+    clr r0
+    mov rl,r0
+    add r4,r2
+</PRE>
+
+<P>
+In the following modes, the designated
+register contains an address value
+which is used to locate the operand.
+
+<P>
+</DD>
+<DT><STRONG>Register Deferred Mode:</STRONG></DT>
+<DD>The register
+contains the address of the operand,
+e.g.
+
+<P>
+<PRE>
+    inc (rl)
+    asr (sp)
+    add (r2),rl
+</PRE>
+
+<P>
+</DD>
+<DT><STRONG>Autoincrement Mode:</STRONG></DT>
+<DD>The register contains
+the address of the operand. As a
+side effect, the register is incremented
+after the operation, e.g.
+
+<P>
+<PRE>
+    clr  (rl)+
+    mfpi (r0)+
+    mov  (r1)+,r0
+    mov  r2,(r0)+
+    cmp (sp)+,(sp)+
+</PRE>
+
+<P>
+</DD>
+<DT><STRONG>Autodecrement Mode:</STRONG></DT>
+<DD>The register is
+decremented and then 
+operand, e.g.
+
+<P>
+<PRE>
+    inc -(r0)
+    mov -(r1),r2
+    mov (r0)+,-(sp)
+    clr -(sp)
+</PRE>
+
+<P>
+</DD>
+<DT><STRONG>Index Mode:</STRONG></DT>
+<DD>The register contains a
+value which is added to a sixteen bit
+word following the instruction to form
+the operand address, e.g.
+
+<P>
+<PRE>
+    clr  2(r0)
+    movb 6(sp),(sp)
+    movb _reloc(r0),r0
+    mov  -10(r2),(rl)
+</PRE>
+
+<P>
+Depending on your viewpoint, in this
+mode the register is either an index
+register or a base register. The
+latter case actually predominates in
+``m40.s''. The third example above is
+actually one of the few uses of a
+register as an index register. (Note
+that ``_reloc'' is an acceptable variable
+name.)
+
+<P>
+There are two addressing modes whose
+use is limited to the following two
+examples:
+
+<P>
+<PRE>
+    jsr pc,(r0)+
+    jmp *0f(r0)
+</PRE>
+
+<P>
+The first example involves the use of
+the ``<I>autoincrement deferred</I>'' mode.
+(This occurs in the routine ``call'' on
+lines 0785, 0799.) The address of a
+routine intended for execution is to be
+found in the word addressed by r0, i.e.
+two levels of indirection are involved.
+The fact that r0 is incremented as a
+side effect is not relevant in this
+usage.
+
+<P>
+The second example (which occurs on
+lines 1055, 1066) is an instance of the
+``<I>index deferred</I>'' mode. The destination
+of the ``jump'' is the content of the
+word whose address is labelled by ``0f''
+<I>plus</I> the value of r0 (a small positive
+integer). This is a standard way to
+implement a multi-way switch.
+
+<P>
+The following two modes use the program
+counter as the designated register to
+achieve certain special effects.
+
+<P>
+</DD>
+<DT><STRONG>Immediate Mode:</STRONG></DT>
+<DD>This is the pc autoincrement
+mode. The operand is thus
+extracted from the program string, i.e.
+it becomes an immediate operand, e.g.
+
+<P>
+<PRE>
+    add $2,r0
+    add $2,(rl)
+    bic $17,r0
+    mov $KISA0,r0
+    mov $77406,(rl)+
+</PRE>
+
+<P>
+</DD>
+<DT><STRONG>Relative Mode:</STRONG></DT>
+<DD>This is the pc index
+mode. The address relative to the
+current program counter value is
+extracted from the program string and
+added to the pc value to form the absolute
+address of the operand, e.g.
+
+<P>
+<PRE>
+    bic $340,PS
+    bit $l,SSR0
+    inc SSR0
+    mov (sp),KISA6
+</PRE>
+</DD>
+</DL>
+
+<P>
+It may be noted that each of the modes
+``index'', ``index deferred'', ``immediate''
+and ``relative'' extends the instruction
+size by one word.
+
+<P>
+The existence of the ``autoincrement''
+and ``autodecrement'' modes, together
+with the special attributes of r6, make
+it conveniently possible to store many
+operands in a stack, or LIFO list,
+which grows downwards in memory. There
+are a number of advantages which flow
+from this: code string lengths are
+shorter and it is easier to write
+position independent code.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html955"
+  HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html951"
+  HREF="node17.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html945"
+  HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html953"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html956"
+  HREF="node23.html">Unix Assembler</A>
+<B> Up:</B> <A NAME="tex2html952"
+  HREF="node17.html">Fundamentals</A>
+<B> Previous:</B> <A NAME="tex2html946"
+  HREF="node21.html">Instruction Set</A>
+ &nbsp; <B>  <A NAME="tex2html954"
+  HREF="node4.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>

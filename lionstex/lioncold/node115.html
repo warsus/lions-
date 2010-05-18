@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>setrun (2134)</TITLE>
+<META NAME="description" CONTENT="setrun (2134)">
+<META NAME="keywords" CONTENT="lionc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="lionc.css">
+
+<LINK REL="next" HREF="node116.html">
+<LINK REL="previous" HREF="node114.html">
+<LINK REL="up" HREF="node102.html">
+<LINK REL="next" HREF="node116.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2139"
+  HREF="node116.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/lib/latex2html/icons/next.png"></A> 
+<A NAME="tex2html2135"
+  HREF="node102.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up.png"></A> 
+<A NAME="tex2html2129"
+  HREF="node114.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html2137"
+  HREF="node4.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/lib/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html2140"
+  HREF="node116.html">expand (2268)</A>
+<B> Up:</B> <A NAME="tex2html2136"
+  HREF="node102.html">Process Management</A>
+<B> Previous:</B> <A NAME="tex2html2130"
+  HREF="node114.html">wakeup (2113)</A>
+ &nbsp; <B>  <A NAME="tex2html2138"
+  HREF="node4.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0001213000000000000000">
+setrun (2134)</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>2140:</STRONG></DT>
+<DD>The process status is set to
+ ``SRUN''. The process will now be
+ considered by ``swtch'' and ``sched''
+ as a candidate for execution
+ again;
+
+<P>
+</DD>
+<DT><STRONG>2141:</STRONG></DT>
+<DD>If the aroused process is more
+important (lower priority!) than
+the current process, the
+rescheduling flag, ``runrun'' is
+set for later reference;
+
+<P>
+</DD>
+<DT><STRONG>2143:</STRONG></DT>
+<DD>If ``sched'' is sleeping, waiting
+for a process to ``swap in'', and
+if the newly aroused process is
+on disk, wake up ``sched''.
+</DD>
+</DL>
+
+<P>
+Since it turns out that ``sched'' is the
+only procedure which calls sleep with
+``chan'' equal to ``&amp;runout'', line 2145
+could be replaced by the recursive call
+
+<P>
+<PRE>
+   setrun(&amp;proc[0]);
+</PRE>
+
+<P>
+or better still, by just
+
+<P>
+<PRE>
+   rp = &amp;proc[0];
+   goto sr;
+</PRE>
+
+<P>
+where ``sr'' is a label to be inserted at
+the beginning of line 2139.
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2010-05-03
+</ADDRESS>
+</BODY>
+</HTML>
