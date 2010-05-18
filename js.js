@@ -7,7 +7,7 @@ $(document).ready(function() {
 	$("frameset").attr(alignment,"80%,20%")
     });
     $("*").keydown(function(e) {
-	console.log("fsdfsd" + e.which);
+//	console.log("fsdfsd" + e.which);
 	if(e.which == 65){
 	    $("frameset").attr(alignment,"100%,0%")
 	}
