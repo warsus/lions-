@@ -1,0 +1,60 @@
+
+<html>
+<head>
+<title>proc.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line350">0350: </a><font color="#800000">/*</font>
+<a name="line351">0351: </a><font color="#800000"> * One structure allocated per active</font>
+<a name="line352">0352: </a><font color="#800000"> * process. It contains all data needed</font>
+<a name="line353">0353: </a><font color="#800000"> * about the process while the</font>
+<a name="line354">0354: </a><font color="#800000"> * process may be swapped out.</font>
+<a name="line355">0355: </a><font color="#800000"> * Other per process data (user.h)</font>
+<a name="line356">0356: </a><font color="#800000"> * is swapped with the process.</font>
+<a name="line357">0357: </a><font color="#800000"> */</font>
+<a name="line358">0358: </a><font color="#000000">struct</font>  proc
+<a name="line359">0359: </a>{
+<a name="line360">0360: </a>        char    p_stat;
+<a name="line361">0361: </a>        char    p_flag;
+<a name="line362">0362: </a>        char    p_pri;          <font color="#800000">/* priority, negative is high */</font>
+<a name="line363">0363: </a>        char    p_sig;          <font color="#800000">/* signal number sent to this process */</font>
+<a name="line364">0364: </a>        char    p_uid;          <font color="#800000">/* user id, used to direct tty signals */</font>
+<a name="line365">0365: </a>        char    p_time;         <font color="#800000">/* resident time for scheduling */</font>
+<a name="line366">0366: </a>        char    p_cpu;          <font color="#800000">/* cpu usage for scheduling */</font>
+<a name="line367">0367: </a>        char    p_nice;         <font color="#800000">/* nice for scheduling */</font>
+<a name="line368">0368: </a>        int     p_ttyp;         <font color="#800000">/* controlling tty */</font>
+<a name="line369">0369: </a>        int     p_pid;          <font color="#800000">/* unique process id */</font>
+<a name="line370">0370: </a>        int     p_ppid;         <font color="#800000">/* process id of parent */</font>
+<a name="line371">0371: </a>        int     p_addr;         <font color="#800000">/* address of swappable image */</font>
+<a name="line372">0372: </a>        int     p_size;         <font color="#800000">/* size of swappable image (*64 bytes) */</font>
+<a name="line373">0373: </a>        int     p_wchan;        <font color="#800000">/* event process is awaiting */</font>
+<a name="line374">0374: </a>        int     *p_textp;       <font color="#800000">/* pointer to text structure */</font>
+<a name="line375">0375: </a>
+<a name="line376">0376: </a>} proc[NPROC];
+<a name="line377">0377: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line378">0378: </a>
+<a name="line379">0379: </a><font color="#800000">/* stat codes */</font>
+<a name="line380">0380: </a>
+<a name="line381">0381: </a>
+<a name="line382">0382: </a><font color="#000000">#define SSLEEP  1               </font><font color="#800000">/* sleeping on high priority */</font><font color="#000000"></font>
+<a name="line383">0383: </a><font color="#000000">#define SWAIT   2               </font><font color="#800000">/* sleeping on low priority */</font><font color="#000000"></font>
+<a name="line384">0384: </a><font color="#000000">#define SRUN    3               </font><font color="#800000">/* running */</font><font color="#000000"></font>
+<a name="line385">0385: </a><font color="#000000">#define SIDL    4               </font><font color="#800000">/* intermediate state in process creation */</font><font color="#000000"></font>
+<a name="line386">0386: </a><font color="#000000">#define SZOMB   5               </font><font color="#800000">/* intermediate state in process termination */</font><font color="#000000"></font>
+<a name="line387">0387: </a><font color="#000000">#define SSTOP   6               </font><font color="#800000">/* process being traced */</font><font color="#000000"></font>
+<a name="line388">0388: </a>
+<a name="line389">0389: </a><font color="#800000">/* flag codes */</font>
+<a name="line390">0390: </a>
+<a name="line391">0391: </a><font color="#000000">#define SLOAD   01              </font><font color="#800000">/* in core */</font><font color="#000000"></font>
+<a name="line392">0392: </a><font color="#000000">#define SSYS    02              </font><font color="#800000">/* scheduling process */</font><font color="#000000"></font>
+<a name="line393">0393: </a><font color="#000000">#define SLOCK   04              </font><font color="#800000">/* process cannot be swapped */</font><font color="#000000"></font>
+<a name="line394">0394: </a><font color="#000000">#define SSWAP   010             </font><font color="#800000">/* process is being swapped out */</font><font color="#000000"></font>
+<a name="line395">0395: </a><font color="#000000">#define STRC    020             </font><font color="#800000">/* process is being traced */</font><font color="#000000"></font>
+<a name="line396">0396: </a><font color="#000000">#define SWTED   040             </font><font color="#800000">/* another tracing flag */</font><font color="#000000"></font>
+</pre>
+</body>
+
+</html>

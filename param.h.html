@@ -1,0 +1,102 @@
+
+<html>
+<head>
+<title>param.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line100">0100: </a><font color="#800000">/* fundamental constants: cannot be changed */</font>
+<a name="line101">0101: </a>
+<a name="line102">0102: </a>
+<a name="line103">0103: </a><font color="#000000">#define USIZE   16              </font><font color="#800000">/* size of user block (*64) */</font><font color="#000000"></font>
+<a name="line104">0104: </a><font color="#000000">#define NULL    0</font>
+<a name="line105">0105: </a><font color="#000000">#define NODEV   (-1)</font>
+<a name="line106">0106: </a><font color="#000000">#define ROOTINO 1               </font><font color="#800000">/* i number of all roots */</font><font color="#000000"></font>
+<a name="line107">0107: </a><font color="#000000">#define DIRSIZ  14              </font><font color="#800000">/* max characters per directory */</font><font color="#000000"></font>
+<a name="line108">0108: </a>
+<a name="line109">0109: </a>
+<a name="line110">0110: </a><font color="#800000">/* signals: dont change */</font>
+<a name="line111">0111: </a>
+<a name="line112">0112: </a>
+<a name="line113">0113: </a><font color="#000000">#define NSIG    20</font>
+<a name="line114">0114: </a><font color="#000000">#define         SIGHUP  1       </font><font color="#800000">/* hangup */</font><font color="#000000"></font>
+<a name="line115">0115: </a><font color="#000000">#define         SIGINT  2       </font><font color="#800000">/* interrupt (rubout) */</font><font color="#000000"></font>
+<a name="line116">0116: </a><font color="#000000">#define         SIGQIT  3       </font><font color="#800000">/* quit (FS) */</font><font color="#000000"></font>
+<a name="line117">0117: </a><font color="#000000">#define         SIGINS  4       </font><font color="#800000">/* illegal instruction */</font><font color="#000000"></font>
+<a name="line118">0118: </a><font color="#000000">#define         SIGTRC  5       </font><font color="#800000">/* trace or breakpoint */</font><font color="#000000"></font>
+<a name="line119">0119: </a><font color="#000000">#define         SIGIOT  6       </font><font color="#800000">/* iot */</font><font color="#000000"></font>
+<a name="line120">0120: </a><font color="#000000">#define         SIGEMT  7       </font><font color="#800000">/* emt */</font><font color="#000000"></font>
+<a name="line121">0121: </a><font color="#000000">#define         SIGFPT  8       </font><font color="#800000">/* floating exception */</font><font color="#000000"></font>
+<a name="line122">0122: </a><font color="#000000">#define         SIGKIL  9       </font><font color="#800000">/* kill */</font><font color="#000000"></font>
+<a name="line123">0123: </a><font color="#000000">#define         SIGBUS  10      </font><font color="#800000">/* bus error */</font><font color="#000000"></font>
+<a name="line124">0124: </a><font color="#000000">#define         SIGSEG  11      </font><font color="#800000">/* segmentation violation */</font><font color="#000000"></font>
+<a name="line125">0125: </a><font color="#000000">#define         SIGSYS  12      </font><font color="#800000">/* sys */</font><font color="#000000"></font>
+<a name="line126">0126: </a><font color="#000000">#define         SIGPIPE 13      </font><font color="#800000">/* end of pipe */</font><font color="#000000"></font>
+<a name="line127">0127: </a>
+<a name="line128">0128: </a><font color="#800000">/* tunable variables */</font>
+<a name="line129">0129: </a>
+<a name="line130">0130: </a><font color="#000000">#define NBUF    15              </font><font color="#800000">/* size of buffer cache */</font><font color="#000000"></font>
+<a name="line131">0131: </a><font color="#000000">#define NINODE  100             </font><font color="#800000">/* number of in core inodes */</font><font color="#000000"></font>
+<a name="line132">0132: </a><font color="#000000">#define NFILE   100             </font><font color="#800000">/* number of in core file structures */</font><font color="#000000"></font>
+<a name="line133">0133: </a><font color="#000000">#define NMOUNT  5               </font><font color="#800000">/* number of mountable file systems */</font><font color="#000000"></font>
+<a name="line134">0134: </a><font color="#000000">#define NEXEC   3               </font><font color="#800000">/* number of simultaneous exec's */</font><font color="#000000"></font>
+<a name="line135">0135: </a><font color="#000000">#define MAXMEM  (64*32)         </font><font color="#800000">/* max core per process </font>
+<a name="line136">0136: </a><font color="#800000">                                                - first # is Kw */</font>
+<a name="line137">0137: </a><font color="#000000">#define SSIZE   20              </font><font color="#800000">/* initial stack size (*64 bytes) */</font><font color="#000000"></font>
+<a name="line138">0138: </a><font color="#000000">#define SINCR   20              </font><font color="#800000">/* increment of stack (*64 bytes) */</font><font color="#000000"></font>
+<a name="line139">0139: </a><font color="#000000">#define NOFILE  15              </font><font color="#800000">/* max open files per process */</font><font color="#000000"></font>
+<a name="line140">0140: </a><font color="#000000">#define CANBSIZ 256             </font><font color="#800000">/* max size of typewriter line */</font><font color="#000000"></font>
+<a name="line141">0141: </a><font color="#000000">#define CMAPSIZ 100             </font><font color="#800000">/* size of core allocation area */</font><font color="#000000"></font>
+<a name="line142">0142: </a><font color="#000000">#define SMAPSIZ 100             </font><font color="#800000">/* size of swap allocation area */</font><font color="#000000"></font>
+<a name="line143">0143: </a><font color="#000000">#define NCALL   20              </font><font color="#800000">/* max simultaneous time callouts */</font><font color="#000000"></font>
+<a name="line144">0144: </a><font color="#000000">#define NPROC   50              </font><font color="#800000">/* max number of processes */</font><font color="#000000"></font>
+<a name="line145">0145: </a><font color="#000000">#define NTEXT   40              </font><font color="#800000">/* max number of pure texts */</font><font color="#000000"></font>
+<a name="line146">0146: </a><font color="#000000">#define NCLIST  100             </font><font color="#800000">/* max total clist size */</font><font color="#000000"></font>
+<a name="line147">0147: </a><font color="#000000">#define HZ      60              </font><font color="#800000">/* Ticks/second of the clock */</font><font color="#000000"></font>
+<a name="line148">0148: </a>
+<a name="line149">0149: </a>
+<a name="line150">0150: </a>
+<a name="line151">0151: </a><font color="#800000">/* priorities: probably should not be altered too much */</font>
+<a name="line152">0152: </a>
+<a name="line153">0153: </a>
+<a name="line154">0154: </a><font color="#000000">#define PSWP    -100</font>
+<a name="line155">0155: </a><font color="#000000">#define PINOD   -90</font>
+<a name="line156">0156: </a><font color="#000000">#define PRIBIO  -50</font>
+<a name="line157">0157: </a><font color="#000000">#define PPIPE   1</font>
+<a name="line158">0158: </a><font color="#000000">#define PWAIT   40</font>
+<a name="line159">0159: </a><font color="#000000">#define PSLEP   90</font>
+<a name="line160">0160: </a><font color="#000000">#define PUSER   100</font>
+<a name="line161">0161: </a>
+<a name="line162">0162: </a><font color="#800000">/* Certain processor registers */</font>
+<a name="line163">0163: </a>
+<a name="line164">0164: </a><font color="#000000">#define PS      0177776</font>
+<a name="line165">0165: </a><font color="#000000">#define KL      0177560</font>
+<a name="line166">0166: </a><font color="#000000">#define SW      0177570</font>
+<a name="line167">0167: </a>
+<a name="line168">0168: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line169">0169: </a>
+<a name="line170">0170: </a><font color="#800000">/* structure to access : */</font>
+<a name="line171">0171: </a>
+<a name="line172">0172: </a>
+<a name="line173">0173: </a>   <font color="#800000">/* an integer */</font>
+<a name="line174">0174: </a>
+<a name="line175">0175: </a><font color="#000000">struct</font> {   int   integ;   };
+<a name="line176">0176: </a>
+<a name="line177">0177: </a>
+<a name="line178">0178: </a>   <font color="#800000">/* an integer in bytes */</font>
+<a name="line179">0179: </a>
+<a name="line180">0180: </a><font color="#000000">struct</font> {   char lobyte;   char hibyte;   };
+<a name="line181">0181: </a>
+<a name="line182">0182: </a>
+<a name="line183">0183: </a>   <font color="#800000">/* a sequence of integers */</font>
+<a name="line184">0184: </a>
+<a name="line185">0185: </a><font color="#000000">struct</font> {   int   r[];   };
+<a name="line186">0186: </a>
+<a name="line187">0187: </a>
+<a name="line188">0188: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>

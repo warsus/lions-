@@ -1,0 +1,280 @@
+
+<html>
+<head>
+<title>fio.c</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line6600">6600: </a><font color="#000000">#</font>
+<a name="line6601">6601: </a><font color="#800000">/*</font>
+<a name="line6602">6602: </a><font color="#800000"> */</font>
+<a name="line6603">6603: </a>
+<a name="line6604">6604: </a><font color="#000000">#include "../param.h"</font>
+<a name="line6605">6605: </a><font color="#000000">#include "../user.h"</font>
+<a name="line6606">6606: </a><font color="#000000">#include "../filsys.h"</font>
+<a name="line6607">6607: </a><font color="#000000">#include "../file.h"</font>
+<a name="line6608">6608: </a><font color="#000000">#include "../conf.h"</font>
+<a name="line6609">6609: </a><font color="#000000">#include "../inode.h"</font>
+<a name="line6610">6610: </a><font color="#000000">#include "../reg.h"</font>
+<a name="line6611">6611: </a>
+<a name="line6612">6612: </a><font color="#800000">/*</font>
+<a name="line6613">6613: </a><font color="#800000"> * Convert a user supplied</font>
+<a name="line6614">6614: </a><font color="#800000"> * file descriptor into a pointer</font>
+<a name="line6615">6615: </a><font color="#800000"> * to a file structure.</font>
+<a name="line6616">6616: </a><font color="#800000"> * Only task is to check range</font>
+<a name="line6617">6617: </a><font color="#800000"> * of the descriptor.</font>
+<a name="line6618">6618: </a><font color="#800000"> */</font>
+<a name="line6619">6619: </a><font color="#000000"><a name="etf"></a>getf(f)</font>
+<a name="line6620">6620: </a>{
+<a name="line6621">6621: </a>        register *fp, rf;
+<a name="line6622">6622: </a>
+<a name="line6623">6623: </a>        rf = f;
+<a name="line6624">6624: </a>        <font color="#000000">if</font>(rf&lt;0 || rf&gt;=NOFILE)
+<a name="line6625">6625: </a>                <font color="#000000">goto</font> bad;
+<a name="line6626">6626: </a>        fp = u.u_ofile[rf];
+<a name="line6627">6627: </a>        <font color="#000000">if</font>(fp != NULL)
+<a name="line6628">6628: </a>                <font color="#000000">return</font>(fp);
+<a name="line6629">6629: </a><font color="#000000">bad:</font>
+<a name="line6630">6630: </a>        u.u_error = EBADF;
+<a name="line6631">6631: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6632">6632: </a>}
+<a name="line6633">6633: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6634">6634: </a>
+<a name="line6635">6635: </a><font color="#800000">/*</font>
+<a name="line6636">6636: </a><font color="#800000"> * Internal form of close.</font>
+<a name="line6637">6637: </a><font color="#800000"> * Decrement reference count on</font>
+<a name="line6638">6638: </a><font color="#800000"> * file structure and call closei</font>
+<a name="line6639">6639: </a><font color="#800000"> * on last closef.</font>
+<a name="line6640">6640: </a><font color="#800000"> * Also make sure the pipe protocol</font>
+<a name="line6641">6641: </a><font color="#800000"> * does not constipate.</font>
+<a name="line6642">6642: </a><font color="#800000"> */</font>
+<a name="line6643">6643: </a><font color="#000000"><a name="losef"></a>closef(fp)</font>
+<a name="line6644">6644: </a>int *fp;
+<a name="line6645">6645: </a>{
+<a name="line6646">6646: </a>        register *rfp, *ip;
+<a name="line6647">6647: </a>
+<a name="line6648">6648: </a>        rfp = fp;
+<a name="line6649">6649: </a>        <font color="#000000">if</font>(rfp-&gt;f_flag&amp;FPIPE) {
+<a name="line6650">6650: </a>                ip = rfp-&gt;f_inode;
+<a name="line6651">6651: </a>                ip-&gt;i_mode =&amp; ~(IREAD|IWRITE);
+<a name="line6652">6652: </a>                wakeup(ip+1);
+<a name="line6653">6653: </a>                wakeup(ip+2);
+<a name="line6654">6654: </a>        }
+<a name="line6655">6655: </a>        <font color="#000000">if</font>(rfp-&gt;f_count &lt;= 1)
+<a name="line6656">6656: </a>                closei(rfp-&gt;f_inode, rfp-&gt;f_flag&amp;FWRITE);
+<a name="line6657">6657: </a>        rfp-&gt;f_count--;
+<a name="line6658">6658: </a>}
+<a name="line6659">6659: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6660">6660: </a>
+<a name="line6661">6661: </a><font color="#800000">/*</font>
+<a name="line6662">6662: </a><font color="#800000"> * Decrement reference count on an</font>
+<a name="line6663">6663: </a><font color="#800000"> * inode due to the removal of a</font>
+<a name="line6664">6664: </a><font color="#800000"> * referencing file structure.</font>
+<a name="line6665">6665: </a><font color="#800000"> * On the last closei, switchout</font>
+<a name="line6666">6666: </a><font color="#800000"> * to the close entry point of special</font>
+<a name="line6667">6667: </a><font color="#800000"> * device handler.</font>
+<a name="line6668">6668: </a><font color="#800000"> * Note that the handler gets called</font>
+<a name="line6669">6669: </a><font color="#800000"> * on every open and only on the last</font>
+<a name="line6670">6670: </a><font color="#800000"> * close.</font>
+<a name="line6671">6671: </a><font color="#800000"> */</font>
+<a name="line6672">6672: </a><font color="#000000"><a name="losei"></a>closei(ip, rw)</font>
+<a name="line6673">6673: </a>int *ip;
+<a name="line6674">6674: </a>{
+<a name="line6675">6675: </a>        register *rip;
+<a name="line6676">6676: </a>        register dev, maj;
+<a name="line6677">6677: </a>
+<a name="line6678">6678: </a>        rip = ip;
+<a name="line6679">6679: </a>        dev = rip-&gt;i_addr[0];
+<a name="line6680">6680: </a>        maj = rip-&gt;i_addr[0].d_major;
+<a name="line6681">6681: </a>        <font color="#000000">if</font>(rip-&gt;i_count &lt;= 1)
+<a name="line6682">6682: </a>        <font color="#000000">switch</font>(rip-&gt;i_mode&amp;IFMT) {
+<a name="line6683">6683: </a>
+<a name="line6684">6684: </a>        <font color="#000000">case</font> IFCHR:
+<a name="line6685">6685: </a>                (*cdevsw[maj].d_close)(dev, rw);
+<a name="line6686">6686: </a>                <font color="#000000">break</font>;
+<a name="line6687">6687: </a>
+<a name="line6688">6688: </a>        <font color="#000000">case</font> IFBLK:
+<a name="line6689">6689: </a>                (*bdevsw[maj].d_close)(dev, rw);
+<a name="line6690">6690: </a>        }
+<a name="line6691">6691: </a>        iput(rip);
+<a name="line6692">6692: </a>}
+<a name="line6693">6693: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6694">6694: </a>
+<a name="line6695">6695: </a><font color="#800000">/*</font>
+<a name="line6696">6696: </a><font color="#800000"> * openi called to allow handler</font>
+<a name="line6697">6697: </a><font color="#800000"> * of special files to initialize and</font>
+<a name="line6698">6698: </a><font color="#800000"> * validate before actual IO.</font>
+<a name="line6699">6699: </a><font color="#800000"> * Called on all sorts of opens</font>
+<a name="line6700">6700: </a><font color="#800000"> * and also on mount.</font>
+<a name="line6701">6701: </a><font color="#800000"> */</font>
+<a name="line6702">6702: </a><font color="#000000"><a name="peni"></a>openi(ip, rw)</font>
+<a name="line6703">6703: </a>int *ip;
+<a name="line6704">6704: </a>{
+<a name="line6705">6705: </a>        register *rip;
+<a name="line6706">6706: </a>        register dev, maj;
+<a name="line6707">6707: </a>
+<a name="line6708">6708: </a>        rip = ip;
+<a name="line6709">6709: </a>        dev = rip-&gt;i_addr[0];
+<a name="line6710">6710: </a>        maj = rip-&gt;i_addr[0].d_major;
+<a name="line6711">6711: </a>        <font color="#000000">switch</font>(rip-&gt;i_mode&amp;IFMT) {
+<a name="line6712">6712: </a>
+<a name="line6713">6713: </a>        <font color="#000000">case</font> IFCHR:
+<a name="line6714">6714: </a>                <font color="#000000">if</font>(maj &gt;= nchrdev)
+<a name="line6715">6715: </a>                        <font color="#000000">goto</font> bad;
+<a name="line6716">6716: </a>                (*cdevsw[maj].d_open)(dev, rw);
+<a name="line6717">6717: </a>                <font color="#000000">break</font>;
+<a name="line6718">6718: </a>
+<a name="line6719">6719: </a>        <font color="#000000">case</font> IFBLK:
+<a name="line6720">6720: </a>                <font color="#000000">if</font>(maj &gt;= nblkdev)
+<a name="line6721">6721: </a>                        <font color="#000000">goto</font> bad;
+<a name="line6722">6722: </a>                (*bdevsw[maj].d_open)(dev, rw);
+<a name="line6723">6723: </a>        }
+<a name="line6724">6724: </a>        <font color="#000000">return</font>;
+<a name="line6725">6725: </a>
+<a name="line6726">6726: </a><font color="#000000">bad:</font>
+<a name="line6727">6727: </a>        u.u_error = ENXIO;
+<a name="line6728">6728: </a>}
+<a name="line6729">6729: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6730">6730: </a>
+<a name="line6731">6731: </a><font color="#800000">/*</font>
+<a name="line6732">6732: </a><font color="#800000"> * Check mode permission on inode pointer.</font>
+<a name="line6733">6733: </a><font color="#800000"> * Mode is READ, WRITE or EXEC.</font>
+<a name="line6734">6734: </a><font color="#800000"> * In the case of WRITE, the</font>
+<a name="line6735">6735: </a><font color="#800000"> * read-only status of the file</font>
+<a name="line6736">6736: </a><font color="#800000"> * system is checked.</font>
+<a name="line6737">6737: </a><font color="#800000"> * Also in WRITE, prototype text</font>
+<a name="line6738">6738: </a><font color="#800000"> * segments cannot be written.</font>
+<a name="line6739">6739: </a><font color="#800000"> * The mode is shifted to select</font>
+<a name="line6740">6740: </a><font color="#800000"> * the owner/group/other fields.</font>
+<a name="line6741">6741: </a><font color="#800000"> * The super user is granted all</font>
+<a name="line6742">6742: </a><font color="#800000"> * permissions except for EXEC where</font>
+<a name="line6743">6743: </a><font color="#800000"> * at least one of the EXEC bits must</font>
+<a name="line6744">6744: </a><font color="#800000"> * be on.</font>
+<a name="line6745">6745: </a><font color="#800000"> */</font>
+<a name="line6746">6746: </a><font color="#000000"><a name="ccess"></a>access(aip, mode)</font>
+<a name="line6747">6747: </a>int *aip;
+<a name="line6748">6748: </a>{
+<a name="line6749">6749: </a>        register *ip, m;
+<a name="line6750">6750: </a>
+<a name="line6751">6751: </a>        ip = aip;
+<a name="line6752">6752: </a>        m = mode;
+<a name="line6753">6753: </a>        <font color="#000000">if</font>(m == IWRITE) {
+<a name="line6754">6754: </a>                <font color="#000000">if</font>(getfs(ip-&gt;i_dev)-&gt;s_ronly != 0) {
+<a name="line6755">6755: </a>                        u.u_error = EROFS;
+<a name="line6756">6756: </a>                        <font color="#000000">return</font>(1);
+<a name="line6757">6757: </a>                }
+<a name="line6758">6758: </a>                <font color="#000000">if</font>(ip-&gt;i_flag &amp; ITEXT) {
+<a name="line6759">6759: </a>                        u.u_error = ETXTBSY;
+<a name="line6760">6760: </a>                        <font color="#000000">return</font>(1);
+<a name="line6761">6761: </a>                }
+<a name="line6762">6762: </a>        }
+<a name="line6763">6763: </a>        <font color="#000000">if</font>(u.u_uid == 0) {
+<a name="line6764">6764: </a>                <font color="#000000">if</font>(m == IEXEC &amp;&amp; (ip-&gt;i_mode &amp; 
+<a name="line6765">6765: </a>                        (IEXEC | (IEXEC&gt;&gt;3) | (IEXEC&gt;&gt;6))) == 0)
+<a name="line6766">6766: </a>                                <font color="#000000">goto</font> bad;
+<a name="line6767">6767: </a>                <font color="#000000">return</font>(0);
+<a name="line6768">6768: </a>        }
+<a name="line6769">6769: </a>        <font color="#000000">if</font>(u.u_uid != ip-&gt;i_uid) {
+<a name="line6770">6770: </a>                m =&gt;&gt; 3;
+<a name="line6771">6771: </a>                <font color="#000000">if</font>(u.u_gid != ip-&gt;i_gid)
+<a name="line6772">6772: </a>                        m =&gt;&gt; 3;
+<a name="line6773">6773: </a>        }
+<a name="line6774">6774: </a>        <font color="#000000">if</font>((ip-&gt;i_mode&amp;m) != 0)
+<a name="line6775">6775: </a>                <font color="#000000">return</font>(0);
+<a name="line6776">6776: </a>
+<a name="line6777">6777: </a><font color="#000000">bad:</font>
+<a name="line6778">6778: </a>        u.u_error = EACCES;
+<a name="line6779">6779: </a>        <font color="#000000">return</font>(1);
+<a name="line6780">6780: </a>}
+<a name="line6781">6781: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6782">6782: </a>
+<a name="line6783">6783: </a><font color="#800000">/*</font>
+<a name="line6784">6784: </a><font color="#800000"> * Look up a pathname and test if</font>
+<a name="line6785">6785: </a><font color="#800000"> * the resultant inode is owned by the</font>
+<a name="line6786">6786: </a><font color="#800000"> * current user.</font>
+<a name="line6787">6787: </a><font color="#800000"> * If not, try for super-user.</font>
+<a name="line6788">6788: </a><font color="#800000"> * If permission is granted,</font>
+<a name="line6789">6789: </a><font color="#800000"> * return inode pointer.</font>
+<a name="line6790">6790: </a><font color="#800000"> */</font>
+<a name="line6791">6791: </a><font color="#000000"><a name="wner"></a>owner()</font>
+<a name="line6792">6792: </a>{
+<a name="line6793">6793: </a>        register <font color="#000000">struct inode</font> *ip;
+<a name="line6794">6794: </a>        extern uchar();
+<a name="line6795">6795: </a>
+<a name="line6796">6796: </a>        <font color="#000000">if</font> ((ip = namei(uchar, 0)) == NULL)
+<a name="line6797">6797: </a>                <font color="#000000">return</font>(NULL);
+<a name="line6798">6798: </a>        <font color="#000000">if</font>(u.u_uid == ip-&gt;i_uid)
+<a name="line6799">6799: </a>                <font color="#000000">return</font>(ip);
+<a name="line6800">6800: </a>        <font color="#000000">if</font> (suser())
+<a name="line6801">6801: </a>                <font color="#000000">return</font>(ip);
+<a name="line6802">6802: </a>        iput(ip);
+<a name="line6803">6803: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6804">6804: </a>}
+<a name="line6805">6805: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6806">6806: </a>
+<a name="line6807">6807: </a><font color="#800000">/*</font>
+<a name="line6808">6808: </a><font color="#800000"> * Test if the current user is the</font>
+<a name="line6809">6809: </a><font color="#800000"> * super user.</font>
+<a name="line6810">6810: </a><font color="#800000"> */</font>
+<a name="line6811">6811: </a><font color="#000000"><a name="user"></a>suser()</font>
+<a name="line6812">6812: </a>{
+<a name="line6813">6813: </a>
+<a name="line6814">6814: </a>        <font color="#000000">if</font>(u.u_uid == 0)
+<a name="line6815">6815: </a>                <font color="#000000">return</font>(1);
+<a name="line6816">6816: </a>        u.u_error = EPERM;
+<a name="line6817">6817: </a>        <font color="#000000">return</font>(0);
+<a name="line6818">6818: </a>}
+<a name="line6819">6819: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6820">6820: </a>
+<a name="line6821">6821: </a><font color="#800000">/*</font>
+<a name="line6822">6822: </a><font color="#800000"> * Allocate a user file descriptor.</font>
+<a name="line6823">6823: </a><font color="#800000"> */</font>
+<a name="line6824">6824: </a><font color="#000000"><a name="falloc"></a>ufalloc()</font>
+<a name="line6825">6825: </a>{
+<a name="line6826">6826: </a>        register i;
+<a name="line6827">6827: </a>
+<a name="line6828">6828: </a>        <font color="#000000">for</font> (i=0; i&lt;NOFILE; i++)
+<a name="line6829">6829: </a>                <font color="#000000">if</font> (u.u_ofile[i] == NULL) {
+<a name="line6830">6830: </a>                        u.u_ar0[R0] = i;
+<a name="line6831">6831: </a>                        <font color="#000000">return</font>(i);
+<a name="line6832">6832: </a>                }
+<a name="line6833">6833: </a>        u.u_error = EMFILE;
+<a name="line6834">6834: </a>        <font color="#000000">return</font>(-1);
+<a name="line6835">6835: </a>}
+<a name="line6836">6836: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6837">6837: </a>
+<a name="line6838">6838: </a><font color="#800000">/*</font>
+<a name="line6839">6839: </a><font color="#800000"> * Allocate a user file descriptor</font>
+<a name="line6840">6840: </a><font color="#800000"> * and a file structure.</font>
+<a name="line6841">6841: </a><font color="#800000"> * Initialize the descriptor</font>
+<a name="line6842">6842: </a><font color="#800000"> * to point at the file structure.</font>
+<a name="line6843">6843: </a><font color="#800000"> *</font>
+<a name="line6844">6844: </a><font color="#800000"> * no file -- if there are no available</font>
+<a name="line6845">6845: </a><font color="#800000"> *      file structures.</font>
+<a name="line6846">6846: </a><font color="#800000"> */</font>
+<a name="line6847">6847: </a><font color="#000000"><a name="alloc"></a>falloc()</font>
+<a name="line6848">6848: </a>{
+<a name="line6849">6849: </a>        register <font color="#000000">struct file</font> *fp;
+<a name="line6850">6850: </a>        register i;
+<a name="line6851">6851: </a>
+<a name="line6852">6852: </a>        <font color="#000000">if</font> ((i = ufalloc()) &lt; 0)
+<a name="line6853">6853: </a>                <font color="#000000">return</font>(NULL);
+<a name="line6854">6854: </a>        <font color="#000000">for</font> (fp = &amp;file[0]; fp &lt; &amp;file[NFILE]; fp++)
+<a name="line6855">6855: </a>                <font color="#000000">if</font> (fp-&gt;f_count==0) {
+<a name="line6856">6856: </a>                        u.u_ofile[i] = fp;
+<a name="line6857">6857: </a>                        fp-&gt;f_count++;
+<a name="line6858">6858: </a>                        fp-&gt;f_offset[0] = 0;
+<a name="line6859">6859: </a>                        fp-&gt;f_offset[1] = 0;
+<a name="line6860">6860: </a>                        <font color="#000000">return</font>(fp);
+<a name="line6861">6861: </a>                }
+<a name="line6862">6862: </a>        printf(<font color="#000000">"no file\n"</font>);
+<a name="line6863">6863: </a>        u.u_error = ENFILE;
+<a name="line6864">6864: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6865">6865: </a>}
+<a name="line6866">6866: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>
