@@ -1,4 +1,527 @@
+<html>
+<head>
+<title>param.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
 
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line0100">0100: </a><font color="#800000">/* fundamental constants: cannot be changed */</font>
+<pre width="80"><a name="line0100">0100: </a><font color="#800000">/* fundamental constants: cannot be changed */</font>
+<a name="line0101">0101: </a>
+<a name="line0101">0101: </a>
+<a name="line0102">0102: </a>
+<a name="line0102">0102: </a>
+<a name="line0103">0103: </a><font color="#000000">#define USIZE   16              </font><font color="#800000">/* size of user block (*64) */</font><font color="#000000"></font>
+<a name="line0103">0103: </a><font color="#000000">#define USIZE   16              </font><font color="#800000">/* size of user block (*64) */</font><font color="#000000"></font>
+<a name="line0104">0104: </a><font color="#000000">#define NULL    0</font>
+<a name="line0104">0104: </a><font color="#000000">#define NULL    0</font>
+<a name="line0105">0105: </a><font color="#000000">#define NODEV   (-1)</font>
+<a name="line0105">0105: </a><font color="#000000">#define NODEV   (-1)</font>
+<a name="line0106">0106: </a><font color="#000000">#define ROOTINO 1               </font><font color="#800000">/* i number of all roots */</font><font color="#000000"></font>
+<a name="line0106">0106: </a><font color="#000000">#define ROOTINO 1               </font><font color="#800000">/* i number of all roots */</font><font color="#000000"></font>
+<a name="line0107">0107: </a><font color="#000000">#define DIRSIZ  14              </font><font color="#800000">/* max characters per directory */</font><font color="#000000"></font>
+<a name="line0107">0107: </a><font color="#000000">#define DIRSIZ  14              </font><font color="#800000">/* max characters per directory */</font><font color="#000000"></font>
+<a name="line0108">0108: </a>
+<a name="line0108">0108: </a>
+<a name="line0109">0109: </a>
+<a name="line0109">0109: </a>
+<a name="line0110">0110: </a><font color="#800000">/* signals: dont change */</font>
+<a name="line0110">0110: </a><font color="#800000">/* signals: dont change */</font>
+<a name="line0111">0111: </a>
+<a name="line0111">0111: </a>
+<a name="line0112">0112: </a>
+<a name="line0112">0112: </a>
+<a name="line0113">0113: </a><font color="#000000">#define NSIG    20</font>
+<a name="line0113">0113: </a><font color="#000000">#define NSIG    20</font>
+<a name="line0114">0114: </a><font color="#000000">#define         SIGHUP  1       </font><font color="#800000">/* hangup */</font><font color="#000000"></font>
+<a name="line0114">0114: </a><font color="#000000">#define         SIGHUP  1       </font><font color="#800000">/* hangup */</font><font color="#000000"></font>
+<a name="line0115">0115: </a><font color="#000000">#define         SIGINT  2       </font><font color="#800000">/* interrupt (rubout) */</font><font color="#000000"></font>
+<a name="line0115">0115: </a><font color="#000000">#define         SIGINT  2       </font><font color="#800000">/* interrupt (rubout) */</font><font color="#000000"></font>
+<a name="line0116">0116: </a><font color="#000000">#define         SIGQIT  3       </font><font color="#800000">/* quit (FS) */</font><font color="#000000"></font>
+<a name="line0116">0116: </a><font color="#000000">#define         SIGQIT  3       </font><font color="#800000">/* quit (FS) */</font><font color="#000000"></font>
+<a name="line0117">0117: </a><font color="#000000">#define         SIGINS  4       </font><font color="#800000">/* illegal instruction */</font><font color="#000000"></font>
+<a name="line0117">0117: </a><font color="#000000">#define         SIGINS  4       </font><font color="#800000">/* illegal instruction */</font><font color="#000000"></font>
+<a name="line0118">0118: </a><font color="#000000">#define         SIGTRC  5       </font><font color="#800000">/* trace or breakpoint */</font><font color="#000000"></font>
+<a name="line0118">0118: </a><font color="#000000">#define         SIGTRC  5       </font><font color="#800000">/* trace or breakpoint */</font><font color="#000000"></font>
+<a name="line0119">0119: </a><font color="#000000">#define         SIGIOT  6       </font><font color="#800000">/* iot */</font><font color="#000000"></font>
+<a name="line0119">0119: </a><font color="#000000">#define         SIGIOT  6       </font><font color="#800000">/* iot */</font><font color="#000000"></font>
+<a name="line0120">0120: </a><font color="#000000">#define         SIGEMT  7       </font><font color="#800000">/* emt */</font><font color="#000000"></font>
+<a name="line0120">0120: </a><font color="#000000">#define         SIGEMT  7       </font><font color="#800000">/* emt */</font><font color="#000000"></font>
+<a name="line0121">0121: </a><font color="#000000">#define         SIGFPT  8       </font><font color="#800000">/* floating exception */</font><font color="#000000"></font>
+<a name="line0121">0121: </a><font color="#000000">#define         SIGFPT  8       </font><font color="#800000">/* floating exception */</font><font color="#000000"></font>
+<a name="line0122">0122: </a><font color="#000000">#define         SIGKIL  9       </font><font color="#800000">/* kill */</font><font color="#000000"></font>
+<a name="line0122">0122: </a><font color="#000000">#define         SIGKIL  9       </font><font color="#800000">/* kill */</font><font color="#000000"></font>
+<a name="line0123">0123: </a><font color="#000000">#define         SIGBUS  10      </font><font color="#800000">/* bus error */</font><font color="#000000"></font>
+<a name="line0123">0123: </a><font color="#000000">#define         SIGBUS  10      </font><font color="#800000">/* bus error */</font><font color="#000000"></font>
+<a name="line0124">0124: </a><font color="#000000">#define         SIGSEG  11      </font><font color="#800000">/* segmentation violation */</font><font color="#000000"></font>
+<a name="line0124">0124: </a><font color="#000000">#define         SIGSEG  11      </font><font color="#800000">/* segmentation violation */</font><font color="#000000"></font>
+<a name="line0125">0125: </a><font color="#000000">#define         SIGSYS  12      </font><font color="#800000">/* sys */</font><font color="#000000"></font>
+<a name="line0125">0125: </a><font color="#000000">#define         SIGSYS  12      </font><font color="#800000">/* sys */</font><font color="#000000"></font>
+<a name="line0126">0126: </a><font color="#000000">#define         SIGPIPE 13      </font><font color="#800000">/* end of pipe */</font><font color="#000000"></font>
+<a name="line0126">0126: </a><font color="#000000">#define         SIGPIPE 13      </font><font color="#800000">/* end of pipe */</font><font color="#000000"></font>
+<a name="line0127">0127: </a>
+<a name="line0127">0127: </a>
+<a name="line0128">0128: </a><font color="#800000">/* tunable variables */</font>
+<a name="line0128">0128: </a><font color="#800000">/* tunable variables */</font>
+<a name="line0129">0129: </a>
+<a name="line0129">0129: </a>
+<a name="line0130">0130: </a><font color="#000000">#define NBUF    15              </font><font color="#800000">/* size of buffer cache */</font><font color="#000000"></font>
+<a name="line0130">0130: </a><font color="#000000">#define NBUF    15              </font><font color="#800000">/* size of buffer cache */</font><font color="#000000"></font>
+<a name="line0131">0131: </a><font color="#000000">#define NINODE  100             </font><font color="#800000">/* number of in core inodes */</font><font color="#000000"></font>
+<a name="line0131">0131: </a><font color="#000000">#define NINODE  100             </font><font color="#800000">/* number of in core inodes */</font><font color="#000000"></font>
+<a name="line0132">0132: </a><font color="#000000">#define NFILE   100             </font><font color="#800000">/* number of in core file structures */</font><font color="#000000"></font>
+<a name="line0132">0132: </a><font color="#000000">#define NFILE   100             </font><font color="#800000">/* number of in core file structures */</font><font color="#000000"></font>
+<a name="line0133">0133: </a><font color="#000000">#define NMOUNT  5               </font><font color="#800000">/* number of mountable file systems */</font><font color="#000000"></font>
+<a name="line0133">0133: </a><font color="#000000">#define NMOUNT  5               </font><font color="#800000">/* number of mountable file systems */</font><font color="#000000"></font>
+<a name="line0134">0134: </a><font color="#000000">#define NEXEC   3               </font><font color="#800000">/* number of simultaneous exec's */</font><font color="#000000"></font>
+<a name="line0134">0134: </a><font color="#000000">#define NEXEC   3               </font><font color="#800000">/* number of simultaneous exec's */</font><font color="#000000"></font>
+<a name="line0135">0135: </a><font color="#000000">#define MAXMEM  (64*32)         </font><font color="#800000">/* max core per process </font>
+<a name="line0135">0135: </a><font color="#000000">#define MAXMEM  (64*32)         </font><font color="#800000">/* max core per process </font>
+<a name="line0136">0136: </a><font color="#800000">                                                - first # is Kw */</font>
+<a name="line0136">0136: </a><font color="#800000">                                                - first # is Kw */</font>
+<a name="line0137">0137: </a><font color="#000000">#define SSIZE   20              </font><font color="#800000">/* initial stack size (*64 bytes) */</font><font color="#000000"></font>
+<a name="line0137">0137: </a><font color="#000000">#define SSIZE   20              </font><font color="#800000">/* initial stack size (*64 bytes) */</font><font color="#000000"></font>
+<a name="line0138">0138: </a><font color="#000000">#define SINCR   20              </font><font color="#800000">/* increment of stack (*64 bytes) */</font><font color="#000000"></font>
+<a name="line0138">0138: </a><font color="#000000">#define SINCR   20              </font><font color="#800000">/* increment of stack (*64 bytes) */</font><font color="#000000"></font>
+<a name="line0139">0139: </a><font color="#000000">#define NOFILE  15              </font><font color="#800000">/* max open files per process */</font><font color="#000000"></font>
+<a name="line0139">0139: </a><font color="#000000">#define NOFILE  15              </font><font color="#800000">/* max open files per process */</font><font color="#000000"></font>
+<a name="line0140">0140: </a><font color="#000000">#define CANBSIZ 256             </font><font color="#800000">/* max size of typewriter line */</font><font color="#000000"></font>
+<a name="line0140">0140: </a><font color="#000000">#define CANBSIZ 256             </font><font color="#800000">/* max size of typewriter line */</font><font color="#000000"></font>
+<a name="line0141">0141: </a><font color="#000000">#define CMAPSIZ 100             </font><font color="#800000">/* size of core allocation area */</font><font color="#000000"></font>
+<a name="line0141">0141: </a><font color="#000000">#define CMAPSIZ 100             </font><font color="#800000">/* size of core allocation area */</font><font color="#000000"></font>
+<a name="line0142">0142: </a><font color="#000000">#define SMAPSIZ 100             </font><font color="#800000">/* size of swap allocation area */</font><font color="#000000"></font>
+<a name="line0142">0142: </a><font color="#000000">#define SMAPSIZ 100             </font><font color="#800000">/* size of swap allocation area */</font><font color="#000000"></font>
+<a name="line0143">0143: </a><font color="#000000">#define NCALL   20              </font><font color="#800000">/* max simultaneous time callouts */</font><font color="#000000"></font>
+<a name="line0143">0143: </a><font color="#000000">#define NCALL   20              </font><font color="#800000">/* max simultaneous time callouts */</font><font color="#000000"></font>
+<a name="line0144">0144: </a><font color="#000000">#define NPROC   50              </font><font color="#800000">/* max number of processes */</font><font color="#000000"></font>
+<a name="line0144">0144: </a><font color="#000000">#define NPROC   50              </font><font color="#800000">/* max number of processes */</font><font color="#000000"></font>
+<a name="line0145">0145: </a><font color="#000000">#define NTEXT   40              </font><font color="#800000">/* max number of pure texts */</font><font color="#000000"></font>
+<a name="line0145">0145: </a><font color="#000000">#define NTEXT   40              </font><font color="#800000">/* max number of pure texts */</font><font color="#000000"></font>
+<a name="line0146">0146: </a><font color="#000000">#define NCLIST  100             </font><font color="#800000">/* max total clist size */</font><font color="#000000"></font>
+<a name="line0146">0146: </a><font color="#000000">#define NCLIST  100             </font><font color="#800000">/* max total clist size */</font><font color="#000000"></font>
+<a name="line0147">0147: </a><font color="#000000">#define HZ      60              </font><font color="#800000">/* Ticks/second of the clock */</font><font color="#000000"></font>
+<a name="line0147">0147: </a><font color="#000000">#define HZ      60              </font><font color="#800000">/* Ticks/second of the clock */</font><font color="#000000"></font>
+<a name="line0148">0148: </a>
+<a name="line0148">0148: </a>
+<a name="line0149">0149: </a>
+<a name="line0149">0149: </a>
+<a name="line0150">0150: </a>
+<a name="line0150">0150: </a>
+<a name="line0151">0151: </a><font color="#800000">/* priorities: probably should not be altered too much */</font>
+<a name="line0151">0151: </a><font color="#800000">/* priorities: probably should not be altered too much */</font>
+<a name="line0152">0152: </a>
+<a name="line0152">0152: </a>
+<a name="line0153">0153: </a>
+<a name="line0153">0153: </a>
+<a name="line0154">0154: </a><font color="#000000">#define PSWP    -100</font>
+<a name="line0154">0154: </a><font color="#000000">#define PSWP    -100</font>
+<a name="line0155">0155: </a><font color="#000000">#define PINOD   -90</font>
+<a name="line0155">0155: </a><font color="#000000">#define PINOD   -90</font>
+<a name="line0156">0156: </a><font color="#000000">#define PRIBIO  -50</font>
+<a name="line0156">0156: </a><font color="#000000">#define PRIBIO  -50</font>
+<a name="line0157">0157: </a><font color="#000000">#define PPIPE   1</font>
+<a name="line0157">0157: </a><font color="#000000">#define PPIPE   1</font>
+<a name="line0158">0158: </a><font color="#000000">#define PWAIT   40</font>
+<a name="line0158">0158: </a><font color="#000000">#define PWAIT   40</font>
+<a name="line0159">0159: </a><font color="#000000">#define PSLEP   90</font>
+<a name="line0159">0159: </a><font color="#000000">#define PSLEP   90</font>
+<a name="line0160">0160: </a><font color="#000000">#define PUSER   100</font>
+<a name="line0160">0160: </a><font color="#000000">#define PUSER   100</font>
+<a name="line0161">0161: </a>
+<a name="line0161">0161: </a>
+<a name="line0162">0162: </a><font color="#800000">/* Certain processor registers */</font>
+<a name="line0162">0162: </a><font color="#800000">/* Certain processor registers */</font>
+<a name="line0163">0163: </a>
+<a name="line0163">0163: </a>
+<a name="line0164">0164: </a><font color="#000000">#define PS      0177776</font>
+<a name="line0164">0164: </a><font color="#000000">#define PS      0177776</font>
+<a name="line0165">0165: </a><font color="#000000">#define KL      0177560</font>
+<a name="line0165">0165: </a><font color="#000000">#define KL      0177560</font>
+<a name="line0166">0166: </a><font color="#000000">#define SW      0177570</font>
+<a name="line0166">0166: </a><font color="#000000">#define SW      0177570</font>
+<a name="line0167">0167: </a>
+<a name="line0167">0167: </a>
+<a name="line0168">0168: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0168">0168: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0169">0169: </a>
+<a name="line0169">0169: </a>
+<a name="line0170">0170: </a><font color="#800000">/* structure to access : */</font>
+<a name="line0170">0170: </a><font color="#800000">/* structure to access : */</font>
+<a name="line0171">0171: </a>
+<a name="line0171">0171: </a>
+<a name="line0172">0172: </a>
+<a name="line0172">0172: </a>
+<a name="line0173">0173: </a>   <font color="#800000">/* an integer */</font>
+<a name="line0173">0173: </a>   <font color="#800000">/* an integer */</font>
+<a name="line0174">0174: </a>
+<a name="line0174">0174: </a>
+<a name="line0175">0175: </a><font color="#000000">struct</font> {   int   integ;   };
+<a name="line0175">0175: </a><font color="#000000">struct</font> {   int   integ;   };
+<a name="line0176">0176: </a>
+<a name="line0176">0176: </a>
+<a name="line0177">0177: </a>
+<a name="line0177">0177: </a>
+<a name="line0178">0178: </a>   <font color="#800000">/* an integer in bytes */</font>
+<a name="line0178">0178: </a>   <font color="#800000">/* an integer in bytes */</font>
+<a name="line0179">0179: </a>
+<a name="line0179">0179: </a>
+<a name="line0180">0180: </a><font color="#000000">struct</font> {   char lobyte;   char hibyte;   };
+<a name="line0180">0180: </a><font color="#000000">struct</font> {   char lobyte;   char hibyte;   };
+<a name="line0181">0181: </a>
+<a name="line0181">0181: </a>
+<a name="line0182">0182: </a>
+<a name="line0182">0182: </a>
+<a name="line0183">0183: </a>   <font color="#800000">/* a sequence of integers */</font>
+<a name="line0183">0183: </a>   <font color="#800000">/* a sequence of integers */</font>
+<a name="line0184">0184: </a>
+<a name="line0184">0184: </a>
+<a name="line0185">0185: </a><font color="#000000">struct</font> {   int   r[];   };
+<a name="line0185">0185: </a><font color="#000000">struct</font> {   int   r[];   };
+<a name="line0186">0186: </a>
+<a name="line0186">0186: </a>
+<a name="line0187">0187: </a>
+<a name="line0187">0187: </a>
+<a name="line0188">0188: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0188">0188: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>
+
+<html>
+<head>
+<title>systm.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line0200">0200: </a><font color="#800000">/* Random set of variables used by more than one routine. */</font>
+<pre width="80"><a name="line0200">0200: </a><font color="#800000">/* Random set of variables used by more than one routine. */</font>
+<a name="line0201">0201: </a>
+<a name="line0201">0201: </a>
+<a name="line0202">0202: </a>char    canonb[CANBSIZ];        <font color="#800000">/* buffer for erase and kill (#@) */</font>
+<a name="line0202">0202: </a>char    canonb[CANBSIZ];        <font color="#800000">/* buffer for erase and kill (#@) */</font>
+<a name="line0203">0203: </a>int     coremap[CMAPSIZ];       <font color="#800000">/* space for core allocation */</font>
+<a name="line0203">0203: </a>int     coremap[CMAPSIZ];       <font color="#800000">/* space for core allocation */</font>
+<a name="line0204">0204: </a>int     swapmap[SMAPSIZ];       <font color="#800000">/* space for swap allocation */</font>
+<a name="line0204">0204: </a>int     swapmap[SMAPSIZ];       <font color="#800000">/* space for swap allocation */</font>
+<a name="line0205">0205: </a>
+<a name="line0205">0205: </a>
+<a name="line0206">0206: </a>int     *rootdir;               <font color="#800000">/* pointer to inode of root directory */</font>
+<a name="line0206">0206: </a>int     *rootdir;               <font color="#800000">/* pointer to inode of root directory */</font>
+<a name="line0207">0207: </a>
+<a name="line0207">0207: </a>
+<a name="line0208">0208: </a>int     cputype;                <font color="#800000">/* type of cpu =40, 45, or 70 */</font>
+<a name="line0208">0208: </a>int     cputype;                <font color="#800000">/* type of cpu =40, 45, or 70 */</font>
+<a name="line0209">0209: </a>
+<a name="line0209">0209: </a>
+<a name="line0210">0210: </a>int     execnt;                 <font color="#800000">/* number of processes in exec */</font>
+<a name="line0210">0210: </a>int     execnt;                 <font color="#800000">/* number of processes in exec */</font>
+<a name="line0211">0211: </a>
+<a name="line0211">0211: </a>
+<a name="line0212">0212: </a>int     lbolt;                  <font color="#800000">/* time of day in 60th not in time */</font>
+<a name="line0212">0212: </a>int     lbolt;                  <font color="#800000">/* time of day in 60th not in time */</font>
+<a name="line0213">0213: </a>int     time[2];                <font color="#800000">/* time in sec from 1970 */</font>
+<a name="line0213">0213: </a>int     time[2];                <font color="#800000">/* time in sec from 1970 */</font>
+<a name="line0214">0214: </a>int     tout[2];                <font color="#800000">/* time of day of next sleep */</font>
+<a name="line0214">0214: </a>int     tout[2];                <font color="#800000">/* time of day of next sleep */</font>
+<a name="line0215">0215: </a>
+<a name="line0215">0215: </a>
+<a name="line0216">0216: </a>int     mpid;                   <font color="#800000">/* generic for unique process id's */</font>
+<a name="line0216">0216: </a>int     mpid;                   <font color="#800000">/* generic for unique process id's */</font>
+<a name="line0217">0217: </a>
+<a name="line0217">0217: </a>
+<a name="line0218">0218: </a>char    runin;                  <font color="#800000">/* scheduling flag */</font>
+<a name="line0218">0218: </a>char    runin;                  <font color="#800000">/* scheduling flag */</font>
+<a name="line0219">0219: </a>char    runout;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line0219">0219: </a>char    runout;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line0220">0220: </a>char    runrun;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line0220">0220: </a>char    runrun;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line0221">0221: </a>
+<a name="line0221">0221: </a>
+<a name="line0222">0222: </a>char    curpri;                 <font color="#800000">/* more scheduling */</font>
+<a name="line0222">0222: </a>char    curpri;                 <font color="#800000">/* more scheduling */</font>
+<a name="line0223">0223: </a>
+<a name="line0223">0223: </a>
+<a name="line0224">0224: </a>int     maxmem;                 <font color="#800000">/* actual max memory per process */</font>
+<a name="line0224">0224: </a>int     maxmem;                 <font color="#800000">/* actual max memory per process */</font>
+<a name="line0225">0225: </a>
+<a name="line0225">0225: </a>
+<a name="line0226">0226: </a>int     *lks;                   <font color="#800000">/* pointer to clock device */</font>
+<a name="line0226">0226: </a>int     *lks;                   <font color="#800000">/* pointer to clock device */</font>
+<a name="line0227">0227: </a>
+<a name="line0227">0227: </a>
+<a name="line0228">0228: </a>int     rootdev;                <font color="#800000">/* dev of root see conf.c */</font>
+<a name="line0228">0228: </a>int     rootdev;                <font color="#800000">/* dev of root see conf.c */</font>
+<a name="line0229">0229: </a>int     swapdev;                <font color="#800000">/* dev of swap see conf.c */</font>
+<a name="line0229">0229: </a>int     swapdev;                <font color="#800000">/* dev of swap see conf.c */</font>
+<a name="line0230">0230: </a>
+<a name="line0230">0230: </a>
+<a name="line0231">0231: </a>int     swplo;                  <font color="#800000">/* block number of swap space */</font>
+<a name="line0231">0231: </a>int     swplo;                  <font color="#800000">/* block number of swap space */</font>
+<a name="line0232">0232: </a>int     nswap;                  <font color="#800000">/* size of swap space */</font>
+<a name="line0232">0232: </a>int     nswap;                  <font color="#800000">/* size of swap space */</font>
+<a name="line0233">0233: </a>
+<a name="line0233">0233: </a>
+<a name="line0234">0234: </a>int     updlock;                <font color="#800000">/* lock for sync */</font>
+<a name="line0234">0234: </a>int     updlock;                <font color="#800000">/* lock for sync */</font>
+<a name="line0235">0235: </a>int     rablock;                <font color="#800000">/* block to be read ahead */</font>
+<a name="line0235">0235: </a>int     rablock;                <font color="#800000">/* block to be read ahead */</font>
+<a name="line0236">0236: </a>
+<a name="line0236">0236: </a>
+<a name="line0237">0237: </a>char    regloc[];               <font color="#800000">/* locs. of saved user registers (trap.c) */</font>
+<a name="line0237">0237: </a>char    regloc[];               <font color="#800000">/* locs. of saved user registers (trap.c) */</font>
+<a name="line0238">0238: </a>
+<a name="line0238">0238: </a>
+<a name="line0239">0239: </a>
+<a name="line0239">0239: </a>
+<a name="line0240">0240: </a>
+<a name="line0240">0240: </a>
+<a name="line0241">0241: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0241">0241: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0242">0242: </a>
+<a name="line0242">0242: </a>
+<a name="line0243">0243: </a>
+<a name="line0243">0243: </a>
+<a name="line0244">0244: </a>
+<a name="line0244">0244: </a>
+<a name="line0245">0245: </a>
+<a name="line0245">0245: </a>
+<a name="line0246">0246: </a>
+<a name="line0246">0246: </a>
+<a name="line0247">0247: </a>
+<a name="line0247">0247: </a>
+<a name="line0248">0248: </a>
+<a name="line0248">0248: </a>
+<a name="line0249">0249: </a>
+<a name="line0249">0249: </a>
+<a name="line0250">0250: </a>
+<a name="line0250">0250: </a>
+<a name="line0251">0251: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0251">0251: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0252">0252: </a>
+<a name="line0252">0252: </a>
+<a name="line0253">0253: </a><font color="#800000">/* The callout structure is for a routine</font>
+<a name="line0253">0253: </a><font color="#800000">/* The callout structure is for a routine</font>
+<a name="line0254">0254: </a><font color="#800000"> * arranging to be called by the clock interrupt</font>
+<a name="line0254">0254: </a><font color="#800000"> * arranging to be called by the clock interrupt</font>
+<a name="line0255">0255: </a><font color="#800000"> * (clock.c) with a specified argument,</font>
+<a name="line0255">0255: </a><font color="#800000"> * (clock.c) with a specified argument,</font>
+<a name="line0256">0256: </a><font color="#800000"> * within a specified amount of time.</font>
+<a name="line0256">0256: </a><font color="#800000"> * within a specified amount of time.</font>
+<a name="line0257">0257: </a><font color="#800000"> * It is used, for example, to time tab delays</font>
+<a name="line0257">0257: </a><font color="#800000"> * It is used, for example, to time tab delays</font>
+<a name="line0258">0258: </a><font color="#800000"> * on teletypes. */</font>
+<a name="line0258">0258: </a><font color="#800000"> * on teletypes. */</font>
+<a name="line0259">0259: </a>
+<a name="line0259">0259: </a>
+<a name="line0260">0260: </a><font color="#000000">struct</font>  callo
+<a name="line0260">0260: </a><font color="#000000">struct</font>  callo
+<a name="line0261">0261: </a>{
+<a name="line0261">0261: </a>{
+<a name="line0262">0262: </a>        int     c_time;         <font color="#800000">/* incremental time */</font>
+<a name="line0262">0262: </a>        int     c_time;         <font color="#800000">/* incremental time */</font>
+<a name="line0263">0263: </a>        int     c_arg;          <font color="#800000">/* argument to routine */</font>
+<a name="line0263">0263: </a>        int     c_arg;          <font color="#800000">/* argument to routine */</font>
+<a name="line0264">0264: </a>        int     (*c_func)();    <font color="#800000">/* routine */</font>
+<a name="line0264">0264: </a>        int     (*c_func)();    <font color="#800000">/* routine */</font>
+<a name="line0265">0265: </a>} callout[NCALL];
+<a name="line0265">0265: </a>} callout[NCALL];
+<a name="line0266">0266: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0266">0266: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0267">0267: </a>
+<a name="line0267">0267: </a>
+<a name="line0268">0268: </a><font color="#800000">/* Mount structure.</font>
+<a name="line0268">0268: </a><font color="#800000">/* Mount structure.</font>
+<a name="line0269">0269: </a><font color="#800000"> * One allocated on every mount. Used to find the super block.</font>
+<a name="line0269">0269: </a><font color="#800000"> * One allocated on every mount. Used to find the super block.</font>
+<a name="line0270">0270: </a><font color="#800000"> */</font>
+<a name="line0270">0270: </a><font color="#800000"> */</font>
+<a name="line0271">0271: </a>
+<a name="line0271">0271: </a>
+<a name="line0272">0272: </a><font color="#000000">struct</font>  mount
+<a name="line0272">0272: </a><font color="#000000">struct</font>  mount
+<a name="line0273">0273: </a>{
+<a name="line0273">0273: </a>{
+<a name="line0274">0274: </a>        int     m_dev;          <font color="#800000">/* device mounted */</font>
+<a name="line0274">0274: </a>        int     m_dev;          <font color="#800000">/* device mounted */</font>
+<a name="line0275">0275: </a>        int     *m_bufp;        <font color="#800000">/* pointer to superblock */</font>
+<a name="line0275">0275: </a>        int     *m_bufp;        <font color="#800000">/* pointer to superblock */</font>
+<a name="line0276">0276: </a>        int     *m_inodp;       <font color="#800000">/* pointer to mounted on inode */</font>
+<a name="line0276">0276: </a>        int     *m_inodp;       <font color="#800000">/* pointer to mounted on inode */</font>
+<a name="line0277">0277: </a>} mount[NMOUNT];
+<a name="line0277">0277: </a>} mount[NMOUNT];
+<a name="line0278">0278: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0278">0278: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>
+
+<html>
+<head>
+<title>seg.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line0300">0300: </a>
+<pre width="80"><a name="line0300">0300: </a>
+<a name="line0301">0301: </a><font color="#800000">/* KT-11 addresses and bits */</font>
+<a name="line0301">0301: </a><font color="#800000">/* KT-11 addresses and bits */</font>
+<a name="line0302">0302: </a>
+<a name="line0302">0302: </a>
+<a name="line0303">0303: </a><font color="#000000">#define UISD    0177600         </font><font color="#800000">/* first user I-space descriptor register */</font><font color="#000000"></font>
+<a name="line0303">0303: </a><font color="#000000">#define UISD    0177600         </font><font color="#800000">/* first user I-space descriptor register */</font><font color="#000000"></font>
+<a name="line0304">0304: </a>
+<a name="line0304">0304: </a>
+<a name="line0305">0305: </a><font color="#000000">#define UISA    0177640         </font><font color="#800000">/* first user I-space address register */</font><font color="#000000"></font>
+<a name="line0305">0305: </a><font color="#000000">#define UISA    0177640         </font><font color="#800000">/* first user I-space address register */</font><font color="#000000"></font>
+<a name="line0306">0306: </a>
+<a name="line0306">0306: </a>
+<a name="line0307">0307: </a><font color="#000000">#define UDSA    0177660         </font><font color="#800000">/* first user D-space address register */</font><font color="#000000"></font>
+<a name="line0307">0307: </a><font color="#000000">#define UDSA    0177660         </font><font color="#800000">/* first user D-space address register */</font><font color="#000000"></font>
+<a name="line0308">0308: </a>
+<a name="line0308">0308: </a>
+<a name="line0309">0309: </a>
+<a name="line0309">0309: </a>
+<a name="line0310">0310: </a><font color="#000000">#define UBMAP   0170200         </font><font color="#800000">/* address to access 11/70 UNIBUS map */</font><font color="#000000"></font>
+<a name="line0310">0310: </a><font color="#000000">#define UBMAP   0170200         </font><font color="#800000">/* address to access 11/70 UNIBUS map */</font><font color="#000000"></font>
+<a name="line0311">0311: </a>
+<a name="line0311">0311: </a>
+<a name="line0312">0312: </a><font color="#000000">#define RO      02              </font><font color="#800000">/* access abilities */</font><font color="#000000"></font>
+<a name="line0312">0312: </a><font color="#000000">#define RO      02              </font><font color="#800000">/* access abilities */</font><font color="#000000"></font>
+<a name="line0313">0313: </a><font color="#000000">#define WO      04</font>
+<a name="line0313">0313: </a><font color="#000000">#define WO      04</font>
+<a name="line0314">0314: </a><font color="#000000">#define RW      06</font>
+<a name="line0314">0314: </a><font color="#000000">#define RW      06</font>
+<a name="line0315">0315: </a><font color="#000000">#define ED      010             </font><font color="#800000">/* extend direction */</font><font color="#000000"></font>
+<a name="line0315">0315: </a><font color="#000000">#define ED      010             </font><font color="#800000">/* extend direction */</font><font color="#000000"></font>
+<a name="line0316">0316: </a>
+<a name="line0316">0316: </a>
+<a name="line0317">0317: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0317">0317: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0318">0318: </a>
+<a name="line0318">0318: </a>
+<a name="line0319">0319: </a>int     *ka6;           <font color="#800000">/* 11/40 KISA6; 11/45 KDSA6 */</font>
+<a name="line0319">0319: </a>int     *ka6;           <font color="#800000">/* 11/40 KISA6; 11/45 KDSA6 */</font>
+</pre>
+</body>
+
+</html>
+
+<html>
+<head>
+<title>proc.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line0350">0350: </a><font color="#800000">/*</font>
+<pre width="80"><a name="line0350">0350: </a><font color="#800000">/*</font>
+<a name="line0351">0351: </a><font color="#800000"> * One structure allocated per active</font>
+<a name="line0351">0351: </a><font color="#800000"> * One structure allocated per active</font>
+<a name="line0352">0352: </a><font color="#800000"> * process. It contains all data needed</font>
+<a name="line0352">0352: </a><font color="#800000"> * process. It contains all data needed</font>
+<a name="line0353">0353: </a><font color="#800000"> * about the process while the</font>
+<a name="line0353">0353: </a><font color="#800000"> * about the process while the</font>
+<a name="line0354">0354: </a><font color="#800000"> * process may be swapped out.</font>
+<a name="line0354">0354: </a><font color="#800000"> * process may be swapped out.</font>
+<a name="line0355">0355: </a><font color="#800000"> * Other per process data (user.h)</font>
+<a name="line0355">0355: </a><font color="#800000"> * Other per process data (user.h)</font>
+<a name="line0356">0356: </a><font color="#800000"> * is swapped with the process.</font>
+<a name="line0356">0356: </a><font color="#800000"> * is swapped with the process.</font>
+<a name="line0357">0357: </a><font color="#800000"> */</font>
+<a name="line0357">0357: </a><font color="#800000"> */</font>
+<a name="line0358">0358: </a><font color="#000000">struct</font>  proc
+<a name="line0358">0358: </a><font color="#000000">struct</font>  proc
+<a name="line0359">0359: </a>{
+<a name="line0359">0359: </a>{
+<a name="line0360">0360: </a>        char    p_stat;
+<a name="line0360">0360: </a>        char    p_stat;
+<a name="line0361">0361: </a>        char    p_flag;
+<a name="line0361">0361: </a>        char    p_flag;
+<a name="line0362">0362: </a>        char    p_pri;          <font color="#800000">/* priority, negative is high */</font>
+<a name="line0362">0362: </a>        char    p_pri;          <font color="#800000">/* priority, negative is high */</font>
+<a name="line0363">0363: </a>        char    p_sig;          <font color="#800000">/* signal number sent to this process */</font>
+<a name="line0363">0363: </a>        char    p_sig;          <font color="#800000">/* signal number sent to this process */</font>
+<a name="line0364">0364: </a>        char    p_uid;          <font color="#800000">/* user id, used to direct tty signals */</font>
+<a name="line0364">0364: </a>        char    p_uid;          <font color="#800000">/* user id, used to direct tty signals */</font>
+<a name="line0365">0365: </a>        char    p_time;         <font color="#800000">/* resident time for scheduling */</font>
+<a name="line0365">0365: </a>        char    p_time;         <font color="#800000">/* resident time for scheduling */</font>
+<a name="line0366">0366: </a>        char    p_cpu;          <font color="#800000">/* cpu usage for scheduling */</font>
+<a name="line0366">0366: </a>        char    p_cpu;          <font color="#800000">/* cpu usage for scheduling */</font>
+<a name="line0367">0367: </a>        char    p_nice;         <font color="#800000">/* nice for scheduling */</font>
+<a name="line0367">0367: </a>        char    p_nice;         <font color="#800000">/* nice for scheduling */</font>
+<a name="line0368">0368: </a>        int     p_ttyp;         <font color="#800000">/* controlling tty */</font>
+<a name="line0368">0368: </a>        int     p_ttyp;         <font color="#800000">/* controlling tty */</font>
+<a name="line0369">0369: </a>        int     p_pid;          <font color="#800000">/* unique process id */</font>
+<a name="line0369">0369: </a>        int     p_pid;          <font color="#800000">/* unique process id */</font>
+<a name="line0370">0370: </a>        int     p_ppid;         <font color="#800000">/* process id of parent */</font>
+<a name="line0370">0370: </a>        int     p_ppid;         <font color="#800000">/* process id of parent */</font>
+<a name="line0371">0371: </a>        int     p_addr;         <font color="#800000">/* address of swappable image */</font>
+<a name="line0371">0371: </a>        int     p_addr;         <font color="#800000">/* address of swappable image */</font>
+<a name="line0372">0372: </a>        int     p_size;         <font color="#800000">/* size of swappable image (*64 bytes) */</font>
+<a name="line0372">0372: </a>        int     p_size;         <font color="#800000">/* size of swappable image (*64 bytes) */</font>
+<a name="line0373">0373: </a>        int     p_wchan;        <font color="#800000">/* event process is awaiting */</font>
+<a name="line0373">0373: </a>        int     p_wchan;        <font color="#800000">/* event process is awaiting */</font>
+<a name="line0374">0374: </a>        int     *p_textp;       <font color="#800000">/* pointer to text structure */</font>
+<a name="line0374">0374: </a>        int     *p_textp;       <font color="#800000">/* pointer to text structure */</font>
+<a name="line0375">0375: </a>
+<a name="line0375">0375: </a>
+<a name="line0376">0376: </a>} proc[NPROC];
+<a name="line0376">0376: </a>} proc[NPROC];
+<a name="line0377">0377: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0377">0377: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0378">0378: </a>
+<a name="line0378">0378: </a>
+<a name="line0379">0379: </a><font color="#800000">/* stat codes */</font>
+<a name="line0379">0379: </a><font color="#800000">/* stat codes */</font>
+<a name="line0380">0380: </a>
+<a name="line0380">0380: </a>
+<a name="line0381">0381: </a>
+<a name="line0381">0381: </a>
+<a name="line0382">0382: </a><font color="#000000">#define SSLEEP  1               </font><font color="#800000">/* sleeping on high priority */</font><font color="#000000"></font>
+<a name="line0382">0382: </a><font color="#000000">#define SSLEEP  1               </font><font color="#800000">/* sleeping on high priority */</font><font color="#000000"></font>
+<a name="line0383">0383: </a><font color="#000000">#define SWAIT   2               </font><font color="#800000">/* sleeping on low priority */</font><font color="#000000"></font>
+<a name="line0383">0383: </a><font color="#000000">#define SWAIT   2               </font><font color="#800000">/* sleeping on low priority */</font><font color="#000000"></font>
+<a name="line0384">0384: </a><font color="#000000">#define SRUN    3               </font><font color="#800000">/* running */</font><font color="#000000"></font>
+<a name="line0384">0384: </a><font color="#000000">#define SRUN    3               </font><font color="#800000">/* running */</font><font color="#000000"></font>
+<a name="line0385">0385: </a><font color="#000000">#define SIDL    4               </font><font color="#800000">/* intermediate state in process creation */</font><font color="#000000"></font>
+<a name="line0385">0385: </a><font color="#000000">#define SIDL    4               </font><font color="#800000">/* intermediate state in process creation */</font><font color="#000000"></font>
+<a name="line0386">0386: </a><font color="#000000">#define SZOMB   5               </font><font color="#800000">/* intermediate state in process termination */</font><font color="#000000"></font>
+<a name="line0386">0386: </a><font color="#000000">#define SZOMB   5               </font><font color="#800000">/* intermediate state in process termination */</font><font color="#000000"></font>
+<a name="line0387">0387: </a><font color="#000000">#define SSTOP   6               </font><font color="#800000">/* process being traced */</font><font color="#000000"></font>
+<a name="line0387">0387: </a><font color="#000000">#define SSTOP   6               </font><font color="#800000">/* process being traced */</font><font color="#000000"></font>
+<a name="line0388">0388: </a>
+<a name="line0388">0388: </a>
+<a name="line0389">0389: </a><font color="#800000">/* flag codes */</font>
+<a name="line0389">0389: </a><font color="#800000">/* flag codes */</font>
+<a name="line0390">0390: </a>
+<a name="line0390">0390: </a>
+<a name="line0391">0391: </a><font color="#000000">#define SLOAD   01              </font><font color="#800000">/* in core */</font><font color="#000000"></font>
+<a name="line0391">0391: </a><font color="#000000">#define SLOAD   01              </font><font color="#800000">/* in core */</font><font color="#000000"></font>
+<a name="line0392">0392: </a><font color="#000000">#define SSYS    02              </font><font color="#800000">/* scheduling process */</font><font color="#000000"></font>
+<a name="line0392">0392: </a><font color="#000000">#define SSYS    02              </font><font color="#800000">/* scheduling process */</font><font color="#000000"></font>
+<a name="line0393">0393: </a><font color="#000000">#define SLOCK   04              </font><font color="#800000">/* process cannot be swapped */</font><font color="#000000"></font>
+<a name="line0393">0393: </a><font color="#000000">#define SLOCK   04              </font><font color="#800000">/* process cannot be swapped */</font><font color="#000000"></font>
+<a name="line0394">0394: </a><font color="#000000">#define SSWAP   010             </font><font color="#800000">/* process is being swapped out */</font><font color="#000000"></font>
+<a name="line0394">0394: </a><font color="#000000">#define SSWAP   010             </font><font color="#800000">/* process is being swapped out */</font><font color="#000000"></font>
+<a name="line0395">0395: </a><font color="#000000">#define STRC    020             </font><font color="#800000">/* process is being traced */</font><font color="#000000"></font>
+<a name="line0395">0395: </a><font color="#000000">#define STRC    020             </font><font color="#800000">/* process is being traced */</font><font color="#000000"></font>
+<a name="line0396">0396: </a><font color="#000000">#define SWTED   040             </font><font color="#800000">/* another tracing flag */</font><font color="#000000"></font>
+<a name="line0396">0396: </a><font color="#000000">#define SWTED   040             </font><font color="#800000">/* another tracing flag */</font><font color="#000000"></font>
+</pre>
+</body>
+
+</html>
+
+
+>>>>>>> gh-pages
 <html>
 <head>
 <title>user.h</title>
@@ -7,6 +530,7 @@
 </head>
 
 <body bgcolor="#FFFFFF">
+<<<<<<< HEAD
 <pre width="80"><a name="line400">0400: </a><font color="#800000">/*</font>
 <a name="line401">0401: </a><font color="#800000"> * The user structure.</font>
 <a name="line402">0402: </a><font color="#800000"> * One allocated per process.</font>
@@ -104,6 +628,202 @@
 <a name="line494">0494: </a><font color="#000000">#define EROFS   30</font>
 <a name="line495">0495: </a><font color="#000000">#define EMLINK  31</font>
 <a name="line496">0496: </a><font color="#000000">#define EPIPE   32</font>
+=======
+<pre width="80"><a name="line0400">0400: </a><font color="#800000">/*</font>
+<pre width="80"><a name="line0400">0400: </a><font color="#800000">/*</font>
+<a name="line0401">0401: </a><font color="#800000"> * The user structure.</font>
+<a name="line0401">0401: </a><font color="#800000"> * The user structure.</font>
+<a name="line0402">0402: </a><font color="#800000"> * One allocated per process.</font>
+<a name="line0402">0402: </a><font color="#800000"> * One allocated per process.</font>
+<a name="line0403">0403: </a><font color="#800000"> * Contains all per process data</font>
+<a name="line0403">0403: </a><font color="#800000"> * Contains all per process data</font>
+<a name="line0404">0404: </a><font color="#800000"> * that doesn't need to be referenced</font>
+<a name="line0404">0404: </a><font color="#800000"> * that doesn't need to be referenced</font>
+<a name="line0405">0405: </a><font color="#800000"> * while the process is swapped.</font>
+<a name="line0405">0405: </a><font color="#800000"> * while the process is swapped.</font>
+<a name="line0406">0406: </a><font color="#800000"> * The user block is USIZE*64 bytes</font>
+<a name="line0406">0406: </a><font color="#800000"> * The user block is USIZE*64 bytes</font>
+<a name="line0407">0407: </a><font color="#800000"> * long; resides at virtual kernel</font>
+<a name="line0407">0407: </a><font color="#800000"> * long; resides at virtual kernel</font>
+<a name="line0408">0408: </a><font color="#800000"> * loc 140000; contains the system</font>
+<a name="line0408">0408: </a><font color="#800000"> * loc 140000; contains the system</font>
+<a name="line0409">0409: </a><font color="#800000"> * stack per user; is cross referenced</font>
+<a name="line0409">0409: </a><font color="#800000"> * stack per user; is cross referenced</font>
+<a name="line0410">0410: </a><font color="#800000"> * with the proc structure for the</font>
+<a name="line0410">0410: </a><font color="#800000"> * with the proc structure for the</font>
+<a name="line0411">0411: </a><font color="#800000"> * same process.</font>
+<a name="line0411">0411: </a><font color="#800000"> * same process.</font>
+<a name="line0412">0412: </a><font color="#800000"> */</font>
+<a name="line0412">0412: </a><font color="#800000"> */</font>
+<a name="line0413">0413: </a><font color="#000000"><a name="user"></a>struct user</font>
+<a name="line0413">0413: </a><font color="#000000"><a name="user"></a>struct user</font>
+<a name="line0414">0414: </a>{
+<a name="line0414">0414: </a>{
+<a name="line0415">0415: </a>        int     u_rsav[2];              <font color="#800000">/* save r5,r6 when exchanging stacks */</font>
+<a name="line0415">0415: </a>        int     u_rsav[2];              <font color="#800000">/* save r5,r6 when exchanging stacks */</font>
+<a name="line0416">0416: </a>        int     u_fsav[25];             <font color="#800000">/* save fp registers */</font>
+<a name="line0416">0416: </a>        int     u_fsav[25];             <font color="#800000">/* save fp registers */</font>
+<a name="line0417">0417: </a>                                        <font color="#800000">/* rsav and fsav must be first in structure */</font>
+<a name="line0417">0417: </a>                                        <font color="#800000">/* rsav and fsav must be first in structure */</font>
+<a name="line0418">0418: </a>        char    u_segflg;               <font color="#800000">/* flag for IO; user or kernel space */</font>
+<a name="line0418">0418: </a>        char    u_segflg;               <font color="#800000">/* flag for IO; user or kernel space */</font>
+<a name="line0419">0419: </a>        char    u_error;                <font color="#800000">/* return error code */</font>
+<a name="line0419">0419: </a>        char    u_error;                <font color="#800000">/* return error code */</font>
+<a name="line0420">0420: </a>        char    u_uid;                  <font color="#800000">/* effective user id */</font>
+<a name="line0420">0420: </a>        char    u_uid;                  <font color="#800000">/* effective user id */</font>
+<a name="line0421">0421: </a>        char    u_gid;                  <font color="#800000">/* effective group id */</font>
+<a name="line0421">0421: </a>        char    u_gid;                  <font color="#800000">/* effective group id */</font>
+<a name="line0422">0422: </a>        char    u_ruid;                 <font color="#800000">/* real user id */</font>
+<a name="line0422">0422: </a>        char    u_ruid;                 <font color="#800000">/* real user id */</font>
+<a name="line0423">0423: </a>        char    u_rgid;                 <font color="#800000">/* real group id */</font>
+<a name="line0423">0423: </a>        char    u_rgid;                 <font color="#800000">/* real group id */</font>
+<a name="line0424">0424: </a>        int     u_procp;                <font color="#800000">/* pointer to proc structure */</font>
+<a name="line0424">0424: </a>        int     u_procp;                <font color="#800000">/* pointer to proc structure */</font>
+<a name="line0425">0425: </a>        char    *u_base;                <font color="#800000">/* base address for IO */</font>
+<a name="line0425">0425: </a>        char    *u_base;                <font color="#800000">/* base address for IO */</font>
+<a name="line0426">0426: </a>        char    *u_count;               <font color="#800000">/* bytes remaining for IO */</font>
+<a name="line0426">0426: </a>        char    *u_count;               <font color="#800000">/* bytes remaining for IO */</font>
+<a name="line0427">0427: </a>        char    *u_offset[2];           <font color="#800000">/* offset in file for IO */</font>
+<a name="line0427">0427: </a>        char    *u_offset[2];           <font color="#800000">/* offset in file for IO */</font>
+<a name="line0428">0428: </a>        int     *u_cdir;                <font color="#800000">/* pointer to inode of current directory */</font>
+<a name="line0428">0428: </a>        int     *u_cdir;                <font color="#800000">/* pointer to inode of current directory */</font>
+<a name="line0429">0429: </a>        char    u_dbuf[DIRSIZ];         <font color="#800000">/* current pathname component */</font>
+<a name="line0429">0429: </a>        char    u_dbuf[DIRSIZ];         <font color="#800000">/* current pathname component */</font>
+<a name="line0430">0430: </a>        char    *u_dirp;                <font color="#800000">/* current pointer to inode */</font>
+<a name="line0430">0430: </a>        char    *u_dirp;                <font color="#800000">/* current pointer to inode */</font>
+<a name="line0431">0431: </a>        <font color="#000000">struct</font>  {                       <font color="#800000">/* current directory entry */</font>
+<a name="line0431">0431: </a>        <font color="#000000">struct</font>  {                       <font color="#800000">/* current directory entry */</font>
+<a name="line0432">0432: </a>                int     u_ino;
+<a name="line0432">0432: </a>                int     u_ino;
+<a name="line0433">0433: </a>                char    u_name[DIRSIZ];
+<a name="line0433">0433: </a>                char    u_name[DIRSIZ];
+<a name="line0434">0434: </a>        } u_dent;
+<a name="line0434">0434: </a>        } u_dent;
+<a name="line0435">0435: </a>        int     *u_pdir;                <font color="#800000">/* inode of parent directory of dirp */</font>
+<a name="line0435">0435: </a>        int     *u_pdir;                <font color="#800000">/* inode of parent directory of dirp */</font>
+<a name="line0436">0436: </a>        int     u_uisa[16];             <font color="#800000">/* prototype of segmentation addresses */</font>
+<a name="line0436">0436: </a>        int     u_uisa[16];             <font color="#800000">/* prototype of segmentation addresses */</font>
+<a name="line0437">0437: </a>        int     u_uisd[16];             <font color="#800000">/* prototype of segmentation descriptors */</font>
+<a name="line0437">0437: </a>        int     u_uisd[16];             <font color="#800000">/* prototype of segmentation descriptors */</font>
+<a name="line0438">0438: </a>        int     u_ofile[NOFILE];        <font color="#800000">/* pointers to file structures of open files */</font>
+<a name="line0438">0438: </a>        int     u_ofile[NOFILE];        <font color="#800000">/* pointers to file structures of open files */</font>
+<a name="line0439">0439: </a>        int     u_arg[5];               <font color="#800000">/* arguments to current system call */</font>
+<a name="line0439">0439: </a>        int     u_arg[5];               <font color="#800000">/* arguments to current system call */</font>
+<a name="line0440">0440: </a>        int     u_tsize;                <font color="#800000">/* text size (*64) */</font>
+<a name="line0440">0440: </a>        int     u_tsize;                <font color="#800000">/* text size (*64) */</font>
+<a name="line0441">0441: </a>        int     u_dsize;                <font color="#800000">/* data size (*64) */</font>
+<a name="line0441">0441: </a>        int     u_dsize;                <font color="#800000">/* data size (*64) */</font>
+<a name="line0442">0442: </a>        int     u_ssize;                <font color="#800000">/* stack size (*64) */</font>
+<a name="line0442">0442: </a>        int     u_ssize;                <font color="#800000">/* stack size (*64) */</font>
+<a name="line0443">0443: </a>        int     u_sep;                  <font color="#800000">/* flag for I and D separation */</font>
+<a name="line0443">0443: </a>        int     u_sep;                  <font color="#800000">/* flag for I and D separation */</font>
+<a name="line0444">0444: </a>        int     u_qsav[2];              <font color="#800000">/* label variable for quits and interrupts */</font>
+<a name="line0444">0444: </a>        int     u_qsav[2];              <font color="#800000">/* label variable for quits and interrupts */</font>
+<a name="line0445">0445: </a>        int     u_ssav[2];              <font color="#800000">/* label variable for swapping */</font>
+<a name="line0445">0445: </a>        int     u_ssav[2];              <font color="#800000">/* label variable for swapping */</font>
+<a name="line0446">0446: </a>        int     u_signal[NSIG];         <font color="#800000">/* disposition of signals */</font>
+<a name="line0446">0446: </a>        int     u_signal[NSIG];         <font color="#800000">/* disposition of signals */</font>
+<a name="line0447">0447: </a>        int     u_utime;                <font color="#800000">/* this process user time */</font>
+<a name="line0447">0447: </a>        int     u_utime;                <font color="#800000">/* this process user time */</font>
+<a name="line0448">0448: </a>        int     u_stime;                <font color="#800000">/* this process system time */</font>
+<a name="line0448">0448: </a>        int     u_stime;                <font color="#800000">/* this process system time */</font>
+<a name="line0449">0449: </a>        int     u_cutime[2];            <font color="#800000">/* sum of childs' utimes */</font>
+<a name="line0449">0449: </a>        int     u_cutime[2];            <font color="#800000">/* sum of childs' utimes */</font>
+<a name="line0450">0450: </a>        int     u_cstime[2];            <font color="#800000">/* sum of childs' stimes */</font>
+<a name="line0450">0450: </a>        int     u_cstime[2];            <font color="#800000">/* sum of childs' stimes */</font>
+<a name="line0451">0451: </a>        int     *u_ar0;                 <font color="#800000">/* address of users saved R0 */</font>
+<a name="line0451">0451: </a>        int     *u_ar0;                 <font color="#800000">/* address of users saved R0 */</font>
+<a name="line0452">0452: </a>        int     u_prof[4];              <font color="#800000">/* profile arguments */</font>
+<a name="line0452">0452: </a>        int     u_prof[4];              <font color="#800000">/* profile arguments */</font>
+<a name="line0453">0453: </a>        char    u_intflg;               <font color="#800000">/* catch intr from sys */</font>
+<a name="line0453">0453: </a>        char    u_intflg;               <font color="#800000">/* catch intr from sys */</font>
+<a name="line0454">0454: </a>                                        <font color="#800000">/* kernel stack per user</font>
+<a name="line0454">0454: </a>                                        <font color="#800000">/* kernel stack per user</font>
+<a name="line0455">0455: </a><font color="#800000">                                         * extends from u + USIZE*64</font>
+<a name="line0455">0455: </a><font color="#800000">                                         * extends from u + USIZE*64</font>
+<a name="line0456">0456: </a><font color="#800000">                                         * backward not to reach here</font>
+<a name="line0456">0456: </a><font color="#800000">                                         * backward not to reach here</font>
+<a name="line0457">0457: </a><font color="#800000">                                         */</font>
+<a name="line0457">0457: </a><font color="#800000">                                         */</font>
+<a name="line0458">0458: </a>} u;
+<a name="line0458">0458: </a>} u;
+<a name="line0459">0459: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0459">0459: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0460">0460: </a>
+<a name="line0460">0460: </a>
+<a name="line0461">0461: </a><font color="#800000">/* u_error codes */</font>
+<a name="line0461">0461: </a><font color="#800000">/* u_error codes */</font>
+<a name="line0462">0462: </a>
+<a name="line0462">0462: </a>
+<a name="line0463">0463: </a>
+<a name="line0463">0463: </a>
+<a name="line0464">0464: </a>
+<a name="line0464">0464: </a>
+<a name="line0465">0465: </a><font color="#000000">#define EFAULT  106</font>
+<a name="line0465">0465: </a><font color="#000000">#define EFAULT  106</font>
+<a name="line0466">0466: </a><font color="#000000">#define EPERM   1</font>
+<a name="line0466">0466: </a><font color="#000000">#define EPERM   1</font>
+<a name="line0467">0467: </a><font color="#000000">#define ENOENT  2</font>
+<a name="line0467">0467: </a><font color="#000000">#define ENOENT  2</font>
+<a name="line0468">0468: </a><font color="#000000">#define ESRCH   3</font>
+<a name="line0468">0468: </a><font color="#000000">#define ESRCH   3</font>
+<a name="line0469">0469: </a><font color="#000000">#define EINTR   4</font>
+<a name="line0469">0469: </a><font color="#000000">#define EINTR   4</font>
+<a name="line0470">0470: </a><font color="#000000">#define EIO     5</font>
+<a name="line0470">0470: </a><font color="#000000">#define EIO     5</font>
+<a name="line0471">0471: </a><font color="#000000">#define ENXIO   6</font>
+<a name="line0471">0471: </a><font color="#000000">#define ENXIO   6</font>
+<a name="line0472">0472: </a><font color="#000000">#define E2BIG   7</font>
+<a name="line0472">0472: </a><font color="#000000">#define E2BIG   7</font>
+<a name="line0473">0473: </a><font color="#000000">#define ENOEXEC 8</font>
+<a name="line0473">0473: </a><font color="#000000">#define ENOEXEC 8</font>
+<a name="line0474">0474: </a><font color="#000000">#define EBADF   9</font>
+<a name="line0474">0474: </a><font color="#000000">#define EBADF   9</font>
+<a name="line0475">0475: </a><font color="#000000">#define ECHILD  10</font>
+<a name="line0475">0475: </a><font color="#000000">#define ECHILD  10</font>
+<a name="line0476">0476: </a><font color="#000000">#define EAGAIN  11</font>
+<a name="line0476">0476: </a><font color="#000000">#define EAGAIN  11</font>
+<a name="line0477">0477: </a><font color="#000000">#define ENOMEM  12</font>
+<a name="line0477">0477: </a><font color="#000000">#define ENOMEM  12</font>
+<a name="line0478">0478: </a><font color="#000000">#define EACCES  13</font>
+<a name="line0478">0478: </a><font color="#000000">#define EACCES  13</font>
+<a name="line0479">0479: </a><font color="#000000">#define ENOTBLK 15</font>
+<a name="line0479">0479: </a><font color="#000000">#define ENOTBLK 15</font>
+<a name="line0480">0480: </a><font color="#000000">#define EBUSY   16</font>
+<a name="line0480">0480: </a><font color="#000000">#define EBUSY   16</font>
+<a name="line0481">0481: </a><font color="#000000">#define EEXIST  17</font>
+<a name="line0481">0481: </a><font color="#000000">#define EEXIST  17</font>
+<a name="line0482">0482: </a><font color="#000000">#define EXDEV   18</font>
+<a name="line0482">0482: </a><font color="#000000">#define EXDEV   18</font>
+<a name="line0483">0483: </a><font color="#000000">#define ENODEV  19</font>
+<a name="line0483">0483: </a><font color="#000000">#define ENODEV  19</font>
+<a name="line0484">0484: </a><font color="#000000">#define ENOTDIR 20</font>
+<a name="line0484">0484: </a><font color="#000000">#define ENOTDIR 20</font>
+<a name="line0485">0485: </a><font color="#000000">#define EISDIR  21</font>
+<a name="line0485">0485: </a><font color="#000000">#define EISDIR  21</font>
+<a name="line0486">0486: </a><font color="#000000">#define EINVAL  22</font>
+<a name="line0486">0486: </a><font color="#000000">#define EINVAL  22</font>
+<a name="line0487">0487: </a><font color="#000000">#define ENFILE  23</font>
+<a name="line0487">0487: </a><font color="#000000">#define ENFILE  23</font>
+<a name="line0488">0488: </a><font color="#000000">#define EMFILE  24</font>
+<a name="line0488">0488: </a><font color="#000000">#define EMFILE  24</font>
+<a name="line0489">0489: </a><font color="#000000">#define ENOTTY  25</font>
+<a name="line0489">0489: </a><font color="#000000">#define ENOTTY  25</font>
+<a name="line0490">0490: </a><font color="#000000">#define ETXTBSY 26</font>
+<a name="line0490">0490: </a><font color="#000000">#define ETXTBSY 26</font>
+<a name="line0491">0491: </a><font color="#000000">#define EFBIG   27</font>
+<a name="line0491">0491: </a><font color="#000000">#define EFBIG   27</font>
+<a name="line0492">0492: </a><font color="#000000">#define ENOSPC  28</font>
+<a name="line0492">0492: </a><font color="#000000">#define ENOSPC  28</font>
+<a name="line0493">0493: </a><font color="#000000">#define ESPIPE  29</font>
+<a name="line0493">0493: </a><font color="#000000">#define ESPIPE  29</font>
+<a name="line0494">0494: </a><font color="#000000">#define EROFS   30</font>
+<a name="line0494">0494: </a><font color="#000000">#define EROFS   30</font>
+<a name="line0495">0495: </a><font color="#000000">#define EMLINK  31</font>
+<a name="line0495">0495: </a><font color="#000000">#define EMLINK  31</font>
+<a name="line0496">0496: </a><font color="#000000">#define EPIPE   32</font>
+<a name="line0496">0496: </a><font color="#000000">#define EPIPE   32</font>
+>>>>>>> gh-pages
 </pre>
 </body>
 
@@ -117,6 +837,7 @@
 </head>
 
 <body bgcolor="#FFFFFF">
+<<<<<<< HEAD
 <pre width="80"><a name="line500">0500: </a>/ low core
 <a name="line501">0501: </a>
 <a name="line502">0502: </a>br4 = 200
@@ -195,6 +916,164 @@
 <a name="line575">0575: </a>
 <a name="line576">0576: </a>.globl  _rkintr
 <a name="line577">0577: </a><font color="#000000">rkio:</font>   jsr     r0,call; _rkintr
+=======
+<pre width="80"><a name="line0500">0500: </a>/ low core
+<pre width="80"><a name="line0500">0500: </a>/ low core
+<a name="line0501">0501: </a>
+<a name="line0501">0501: </a>
+<a name="line0502">0502: </a>br4 = 200
+<a name="line0502">0502: </a>br4 = 200
+<a name="line0503">0503: </a>br5 = 240
+<a name="line0503">0503: </a>br5 = 240
+<a name="line0504">0504: </a>br6 = 300
+<a name="line0504">0504: </a>br6 = 300
+<a name="line0505">0505: </a>br7 = 340
+<a name="line0505">0505: </a>br7 = 340
+<a name="line0506">0506: </a>
+<a name="line0506">0506: </a>
+<a name="line0507">0507: </a>. = 0^.
+<a name="line0507">0507: </a>. = 0^.
+<a name="line0508">0508: </a>        br      1f
+<a name="line0508">0508: </a>        br      1f
+<a name="line0509">0509: </a>        4
+<a name="line0509">0509: </a>        4
+<a name="line0510">0510: </a>
+<a name="line0510">0510: </a>
+<a name="line0511">0511: </a>/ trap vectors
+<a name="line0511">0511: </a>/ trap vectors
+<a name="line0512">0512: </a>        trap; br7+0.            / bus error
+<a name="line0512">0512: </a>        trap; br7+0.            / bus error
+<a name="line0513">0513: </a>        trap; br7+1.            / illegal instruction
+<a name="line0513">0513: </a>        trap; br7+1.            / illegal instruction
+<a name="line0514">0514: </a>        trap; br7+2.            / bpt-trace trap
+<a name="line0514">0514: </a>        trap; br7+2.            / bpt-trace trap
+<a name="line0515">0515: </a>        trap; br7+3.            / iot trap
+<a name="line0515">0515: </a>        trap; br7+3.            / iot trap
+<a name="line0516">0516: </a>        trap; br7+4.            / power fail
+<a name="line0516">0516: </a>        trap; br7+4.            / power fail
+<a name="line0517">0517: </a>        trap; br7+5.            / emulator trap
+<a name="line0517">0517: </a>        trap; br7+5.            / emulator trap
+<a name="line0518">0518: </a>        trap; br7+6.            / system entry
+<a name="line0518">0518: </a>        trap; br7+6.            / system entry
+<a name="line0519">0519: </a>
+<a name="line0519">0519: </a>
+<a name="line0520">0520: </a>. = 40^.
+<a name="line0520">0520: </a>. = 40^.
+<a name="line0521">0521: </a>.globl  start, dump
+<a name="line0521">0521: </a>.globl  start, dump
+<a name="line0522">0522: </a>1:      jmp     start
+<a name="line0522">0522: </a>1:      jmp     start
+<a name="line0523">0523: </a>        jmp     dump
+<a name="line0523">0523: </a>        jmp     dump
+<a name="line0524">0524: </a>
+<a name="line0524">0524: </a>
+<a name="line0525">0525: </a>. = 60^.
+<a name="line0525">0525: </a>. = 60^.
+<a name="line0526">0526: </a>        klin; br4
+<a name="line0526">0526: </a>        klin; br4
+<a name="line0527">0527: </a>        klou; br4
+<a name="line0527">0527: </a>        klou; br4
+<a name="line0528">0528: </a>
+<a name="line0528">0528: </a>
+<a name="line0529">0529: </a>. = 70^.
+<a name="line0529">0529: </a>. = 70^.
+<a name="line0530">0530: </a>        pcin; br4
+<a name="line0530">0530: </a>        pcin; br4
+<a name="line0531">0531: </a>        pcou; br4
+<a name="line0531">0531: </a>        pcou; br4
+<a name="line0532">0532: </a>
+<a name="line0532">0532: </a>
+<a name="line0533">0533: </a>. = 100^.
+<a name="line0533">0533: </a>. = 100^.
+<a name="line0534">0534: </a>        kwlp; br6
+<a name="line0534">0534: </a>        kwlp; br6
+<a name="line0535">0535: </a>        kwlp; br6
+<a name="line0535">0535: </a>        kwlp; br6
+<a name="line0536">0536: </a>
+<a name="line0536">0536: </a>
+<a name="line0537">0537: </a>. = 114^.
+<a name="line0537">0537: </a>. = 114^.
+<a name="line0538">0538: </a>        trap; br7+7.            / 11/70 parity
+<a name="line0538">0538: </a>        trap; br7+7.            / 11/70 parity
+<a name="line0539">0539: </a>
+<a name="line0539">0539: </a>
+<a name="line0540">0540: </a>. = 200^.
+<a name="line0540">0540: </a>. = 200^.
+<a name="line0541">0541: </a>        lpou; br4
+<a name="line0541">0541: </a>        lpou; br4
+<a name="line0542">0542: </a>
+<a name="line0542">0542: </a>
+<a name="line0543">0543: </a>. = 220^.
+<a name="line0543">0543: </a>. = 220^.
+<a name="line0544">0544: </a>        rkio; br5
+<a name="line0544">0544: </a>        rkio; br5
+<a name="line0545">0545: </a>
+<a name="line0545">0545: </a>
+<a name="line0546">0546: </a>. = 240^.
+<a name="line0546">0546: </a>. = 240^.
+<a name="line0547">0547: </a>        trap; br7+7.            / programmed interrupt
+<a name="line0547">0547: </a>        trap; br7+7.            / programmed interrupt
+<a name="line0548">0548: </a>        trap; br7+8.            / floating point
+<a name="line0548">0548: </a>        trap; br7+8.            / floating point
+<a name="line0549">0549: </a>        trap; br7+9.            / segmentation violation
+<a name="line0549">0549: </a>        trap; br7+9.            / segmentation violation
+<a name="line0550">0550: </a>
+<a name="line0550">0550: </a>
+<a name="line0551">0551: </a>//////////////////////////////////////////////////////
+<a name="line0551">0551: </a>//////////////////////////////////////////////////////
+<a name="line0552">0552: </a>/               interface code to C
+<a name="line0552">0552: </a>/               interface code to C
+<a name="line0553">0553: </a>//////////////////////////////////////////////////////
+<a name="line0553">0553: </a>//////////////////////////////////////////////////////
+<a name="line0554">0554: </a>
+<a name="line0554">0554: </a>
+<a name="line0555">0555: </a>.globl  call, trap
+<a name="line0555">0555: </a>.globl  call, trap
+<a name="line0556">0556: </a>
+<a name="line0556">0556: </a>
+<a name="line0557">0557: </a>.globl  _klrint
+<a name="line0557">0557: </a>.globl  _klrint
+<a name="line0558">0558: </a><font color="#000000">klin:</font>   jsr     r0,call; _klrint
+<a name="line0558">0558: </a><font color="#000000">klin:</font>   jsr     r0,call; _klrint
+<a name="line0559">0559: </a>
+<a name="line0559">0559: </a>
+<a name="line0560">0560: </a>.globl  _klxint
+<a name="line0560">0560: </a>.globl  _klxint
+<a name="line0561">0561: </a><font color="#000000">klou:</font>   jsr     r0,call; _klxint
+<a name="line0561">0561: </a><font color="#000000">klou:</font>   jsr     r0,call; _klxint
+<a name="line0562">0562: </a>
+<a name="line0562">0562: </a>
+<a name="line0563">0563: </a>.globl  _pcrint
+<a name="line0563">0563: </a>.globl  _pcrint
+<a name="line0564">0564: </a><font color="#000000">pcin:</font>   jsr     r0,call; _pcrint
+<a name="line0564">0564: </a><font color="#000000">pcin:</font>   jsr     r0,call; _pcrint
+<a name="line0565">0565: </a>
+<a name="line0565">0565: </a>
+<a name="line0566">0566: </a>.globl  _pcpint
+<a name="line0566">0566: </a>.globl  _pcpint
+<a name="line0567">0567: </a><font color="#000000">pcou:</font>   jsr     r0,call; _pcpint
+<a name="line0567">0567: </a><font color="#000000">pcou:</font>   jsr     r0,call; _pcpint
+<a name="line0568">0568: </a>
+<a name="line0568">0568: </a>
+<a name="line0569">0569: </a>.globl  _clock
+<a name="line0569">0569: </a>.globl  _clock
+<a name="line0570">0570: </a><font color="#000000">kwlp:</font>   jsr     r0,call; _clock
+<a name="line0570">0570: </a><font color="#000000">kwlp:</font>   jsr     r0,call; _clock
+<a name="line0571">0571: </a>
+<a name="line0571">0571: </a>
+<a name="line0572">0572: </a>
+<a name="line0572">0572: </a>
+<a name="line0573">0573: </a>.globl  _lpintr
+<a name="line0573">0573: </a>.globl  _lpintr
+<a name="line0574">0574: </a><font color="#000000">lpou:</font>   jsr     r0,call; _lpintr
+<a name="line0574">0574: </a><font color="#000000">lpou:</font>   jsr     r0,call; _lpintr
+<a name="line0575">0575: </a>
+<a name="line0575">0575: </a>
+<a name="line0576">0576: </a>.globl  _rkintr
+<a name="line0576">0576: </a>.globl  _rkintr
+<a name="line0577">0577: </a><font color="#000000">rkio:</font>   jsr     r0,call; _rkintr
+<a name="line0577">0577: </a><font color="#000000">rkio:</font>   jsr     r0,call; _rkintr
+>>>>>>> gh-pages
 </pre>
 </body>
 
@@ -208,6 +1087,7 @@
 </head>
 
 <body bgcolor="#FFFFFF">
+<<<<<<< HEAD
 <pre width="80"><a name="line600">0600: </a>/ machine language assist
 <a name="line601">0601: </a>/ <font color="#000000">for</font> 11/40
 <a name="line602">0602: </a>
@@ -608,6 +1488,808 @@
 <a name="line997">0997: </a>        mov     (sp)+,r3
 <a name="line998">0998: </a>        mov     (sp)+,r2
 <a name="line999">0999: </a>        mov     (sp)+,PS
+=======
+<pre width="80"><a name="line0600">0600: </a>/ machine language assist
+<pre width="80"><a name="line0600">0600: </a>/ machine language assist
+<a name="line0601">0601: </a>/ <font color="#000000">for</font> 11/40
+<a name="line0601">0601: </a>/ <font color="#000000">for</font> 11/40
+<a name="line0602">0602: </a>
+<a name="line0602">0602: </a>
+<a name="line0603">0603: </a>/ non-UNIX instructions
+<a name="line0603">0603: </a>/ non-UNIX instructions
+<a name="line0604">0604: </a>mfpi    = 6500^tst
+<a name="line0604">0604: </a>mfpi    = 6500^tst
+<a name="line0605">0605: </a>mtpi    = 6600^tst
+<a name="line0605">0605: </a>mtpi    = 6600^tst
+<a name="line0606">0606: </a>wait    = 1
+<a name="line0606">0606: </a>wait    = 1
+<a name="line0607">0607: </a>rtt     = 6
+<a name="line0607">0607: </a>rtt     = 6
+<a name="line0608">0608: </a>reset   = 5
+<a name="line0608">0608: </a>reset   = 5
+<a name="line0609">0609: </a>
+<a name="line0609">0609: </a>
+<a name="line0610">0610: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0610">0610: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0611">0611: </a>.globl  start, _end, _edata, _main
+<a name="line0611">0611: </a>.globl  start, _end, _edata, _main
+<a name="line0612">0612: </a><font color="#000000">start:</font>
+<a name="line0612">0612: </a><font color="#000000">start:</font>
+<a name="line0613">0613: </a>        bit     $1,SSR0
+<a name="line0613">0613: </a>        bit     $1,SSR0
+<a name="line0614">0614: </a>        bne     start                   / loop <font color="#000000">if</font> restart
+<a name="line0614">0614: </a>        bne     start                   / loop <font color="#000000">if</font> restart
+<a name="line0615">0615: </a>        reset
+<a name="line0615">0615: </a>        reset
+<a name="line0616">0616: </a>
+<a name="line0616">0616: </a>
+<a name="line0617">0617: </a>/ initialize systems segments
+<a name="line0617">0617: </a>/ initialize systems segments
+<a name="line0618">0618: </a>
+<a name="line0618">0618: </a>
+<a name="line0619">0619: </a>        mov     $KISA0,r0
+<a name="line0619">0619: </a>        mov     $KISA0,r0
+<a name="line0620">0620: </a>        mov     $KISD0,r1
+<a name="line0620">0620: </a>        mov     $KISD0,r1
+<a name="line0621">0621: </a>        mov     $200,r4
+<a name="line0621">0621: </a>        mov     $200,r4
+<a name="line0622">0622: </a>        clr     r2
+<a name="line0622">0622: </a>        clr     r2
+<a name="line0623">0623: </a>        mov     $6,r3
+<a name="line0623">0623: </a>        mov     $6,r3
+<a name="line0624">0624: </a>1:
+<a name="line0624">0624: </a>1:
+<a name="line0625">0625: </a>        mov     r2,(r0)+
+<a name="line0625">0625: </a>        mov     r2,(r0)+
+<a name="line0626">0626: </a>        mov     $77406,(r1)+            / 4k rw
+<a name="line0626">0626: </a>        mov     $77406,(r1)+            / 4k rw
+<a name="line0627">0627: </a>        add     r4,r2
+<a name="line0627">0627: </a>        add     r4,r2
+<a name="line0628">0628: </a>        sob     r3,1b
+<a name="line0628">0628: </a>        sob     r3,1b
+<a name="line0629">0629: </a>
+<a name="line0629">0629: </a>
+<a name="line0630">0630: </a>/ initialize user segment
+<a name="line0630">0630: </a>/ initialize user segment
+<a name="line0631">0631: </a>
+<a name="line0631">0631: </a>
+<a name="line0632">0632: </a>        mov     $_end+63.,r2
+<a name="line0632">0632: </a>        mov     $_end+63.,r2
+<a name="line0633">0633: </a>        ash     $-6,r2
+<a name="line0633">0633: </a>        ash     $-6,r2
+<a name="line0634">0634: </a>        bic     $!1777,r2
+<a name="line0634">0634: </a>        bic     $!1777,r2
+<a name="line0635">0635: </a>        mov     r2,(r0)+                / ksr6 = sysu
+<a name="line0635">0635: </a>        mov     r2,(r0)+                / ksr6 = sysu
+<a name="line0636">0636: </a>        mov     $usize-1\&lt;8|6,(r1)+
+<a name="line0636">0636: </a>        mov     $usize-1\&lt;8|6,(r1)+
+<a name="line0637">0637: </a>
+<a name="line0637">0637: </a>
+<a name="line0638">0638: </a>/ initialize io segment
+<a name="line0638">0638: </a>/ initialize io segment
+<a name="line0639">0639: </a>/ set up counts on supervisor segments
+<a name="line0639">0639: </a>/ set up counts on supervisor segments
+<a name="line0640">0640: </a>
+<a name="line0640">0640: </a>
+<a name="line0641">0641: </a>        mov     $IO,(r0)+
+<a name="line0641">0641: </a>        mov     $IO,(r0)+
+<a name="line0642">0642: </a>        mov     $77406,(r1)+            / rw 4k
+<a name="line0642">0642: </a>        mov     $77406,(r1)+            / rw 4k
+<a name="line0643">0643: </a>
+<a name="line0643">0643: </a>
+<a name="line0644">0644: </a>/ get a sp and start segmentation
+<a name="line0644">0644: </a>/ get a sp and start segmentation
+<a name="line0645">0645: </a>
+<a name="line0645">0645: </a>
+<a name="line0646">0646: </a>        mov     $_u+[usize*64.],sp
+<a name="line0646">0646: </a>        mov     $_u+[usize*64.],sp
+<a name="line0647">0647: </a>        inc     SSR0
+<a name="line0647">0647: </a>        inc     SSR0
+<a name="line0648">0648: </a>
+<a name="line0648">0648: </a>
+<a name="line0649">0649: </a>/ clear bss
+<a name="line0649">0649: </a>/ clear bss
+<a name="line0650">0650: </a>
+<a name="line0650">0650: </a>
+<a name="line0651">0651: </a>        mov     $_edata,r0
+<a name="line0651">0651: </a>        mov     $_edata,r0
+<a name="line0652">0652: </a>1:
+<a name="line0652">0652: </a>1:
+<a name="line0653">0653: </a>        clr     (r0)+
+<a name="line0653">0653: </a>        clr     (r0)+
+<a name="line0654">0654: </a>        cmp     r0,$_end
+<a name="line0654">0654: </a>        cmp     r0,$_end
+<a name="line0655">0655: </a>        blo     1b
+<a name="line0655">0655: </a>        blo     1b
+<a name="line0656">0656: </a>
+<a name="line0656">0656: </a>
+<a name="line0657">0657: </a>/ clear user block
+<a name="line0657">0657: </a>/ clear user block
+<a name="line0658">0658: </a>
+<a name="line0658">0658: </a>
+<a name="line0659">0659: </a>        mov     $_u,r0
+<a name="line0659">0659: </a>        mov     $_u,r0
+<a name="line0660">0660: </a>1:
+<a name="line0660">0660: </a>1:
+<a name="line0661">0661: </a>        clr     (r0)+
+<a name="line0661">0661: </a>        clr     (r0)+
+<a name="line0662">0662: </a>        cmp     r0,$_u+[usize*64.]
+<a name="line0662">0662: </a>        cmp     r0,$_u+[usize*64.]
+<a name="line0663">0663: </a>        blo     1b
+<a name="line0663">0663: </a>        blo     1b
+<a name="line0664">0664: </a>
+<a name="line0664">0664: </a>
+<a name="line0665">0665: </a>/ set up previous mode and call main
+<a name="line0665">0665: </a>/ set up previous mode and call main
+<a name="line0666">0666: </a>/ on <font color="#000000">return</font>, enter user mode at 0R
+<a name="line0666">0666: </a>/ on <font color="#000000">return</font>, enter user mode at 0R
+<a name="line0667">0667: </a>
+<a name="line0667">0667: </a>
+<a name="line0668">0668: </a>        mov     $30000,PS
+<a name="line0668">0668: </a>        mov     $30000,PS
+<a name="line0669">0669: </a>        jsr     pc,_main
+<a name="line0669">0669: </a>        jsr     pc,_main
+<a name="line0670">0670: </a>        mov     $170000,-(sp)
+<a name="line0670">0670: </a>        mov     $170000,-(sp)
+<a name="line0671">0671: </a>        clr     -(sp)
+<a name="line0671">0671: </a>        clr     -(sp)
+<a name="line0672">0672: </a>        rtt
+<a name="line0672">0672: </a>        rtt
+<a name="line0673">0673: </a>
+<a name="line0673">0673: </a>
+<a name="line0674">0674: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0674">0674: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0675">0675: </a>.globl  _clearseg
+<a name="line0675">0675: </a>.globl  _clearseg
+<a name="line0676">0676: </a><font color="#000000">_clearseg:</font>
+<a name="line0676">0676: </a><font color="#000000">_clearseg:</font>
+<a name="line0677">0677: </a>        mov     PS,-(sp)
+<a name="line0677">0677: </a>        mov     PS,-(sp)
+<a name="line0678">0678: </a>        mov     UISA0,-(sp)
+<a name="line0678">0678: </a>        mov     UISA0,-(sp)
+<a name="line0679">0679: </a>        mov     $30340,PS
+<a name="line0679">0679: </a>        mov     $30340,PS
+<a name="line0680">0680: </a>        mov     6(sp),UISA0
+<a name="line0680">0680: </a>        mov     6(sp),UISA0
+<a name="line0681">0681: </a>        mov     UISD0,-(sp)
+<a name="line0681">0681: </a>        mov     UISD0,-(sp)
+<a name="line0682">0682: </a>        mov     $6,UISD0
+<a name="line0682">0682: </a>        mov     $6,UISD0
+<a name="line0683">0683: </a>        clr     r0
+<a name="line0683">0683: </a>        clr     r0
+<a name="line0684">0684: </a>        mov     $32.,r1
+<a name="line0684">0684: </a>        mov     $32.,r1
+<a name="line0685">0685: </a>1:
+<a name="line0685">0685: </a>1:
+<a name="line0686">0686: </a>        clr     -(sp)
+<a name="line0686">0686: </a>        clr     -(sp)
+<a name="line0687">0687: </a>        mtpi    (r0)+
+<a name="line0687">0687: </a>        mtpi    (r0)+
+<a name="line0688">0688: </a>        sob     r1,1b
+<a name="line0688">0688: </a>        sob     r1,1b
+<a name="line0689">0689: </a>        mov     (sp)+,UISD0
+<a name="line0689">0689: </a>        mov     (sp)+,UISD0
+<a name="line0690">0690: </a>        mov     (sp)+,UISA0
+<a name="line0690">0690: </a>        mov     (sp)+,UISA0
+<a name="line0691">0691: </a>        mov     (sp)+,PS
+<a name="line0691">0691: </a>        mov     (sp)+,PS
+<a name="line0692">0692: </a>        rts     pc
+<a name="line0692">0692: </a>        rts     pc
+<a name="line0693">0693: </a>
+<a name="line0693">0693: </a>
+<a name="line0694">0694: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0694">0694: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0695">0695: </a>.globl  _copyseg
+<a name="line0695">0695: </a>.globl  _copyseg
+<a name="line0696">0696: </a><font color="#000000">_copyseg:</font>
+<a name="line0696">0696: </a><font color="#000000">_copyseg:</font>
+<a name="line0697">0697: </a>        mov     PS,-(sp)
+<a name="line0697">0697: </a>        mov     PS,-(sp)
+<a name="line0698">0698: </a>        mov     UISA0,-(sp)
+<a name="line0698">0698: </a>        mov     UISA0,-(sp)
+<a name="line0699">0699: </a>        mov     UISA1,-(sp)
+<a name="line0699">0699: </a>        mov     UISA1,-(sp)
+<a name="line0700">0700: </a>        mov     $30340,PS
+<a name="line0700">0700: </a>        mov     $30340,PS
+<a name="line0701">0701: </a>        mov     10(sp),UISA0
+<a name="line0701">0701: </a>        mov     10(sp),UISA0
+<a name="line0702">0702: </a>        mov     12(sp),UISA1
+<a name="line0702">0702: </a>        mov     12(sp),UISA1
+<a name="line0703">0703: </a>        mov     UISD0,-(sp)
+<a name="line0703">0703: </a>        mov     UISD0,-(sp)
+<a name="line0704">0704: </a>        mov     UISD1,-(sp)
+<a name="line0704">0704: </a>        mov     UISD1,-(sp)
+<a name="line0705">0705: </a>        mov     $6,UISD0
+<a name="line0705">0705: </a>        mov     $6,UISD0
+<a name="line0706">0706: </a>        mov     $6,UISD1
+<a name="line0706">0706: </a>        mov     $6,UISD1
+<a name="line0707">0707: </a>        mov     r2,-(sp)
+<a name="line0707">0707: </a>        mov     r2,-(sp)
+<a name="line0708">0708: </a>        clr     r0
+<a name="line0708">0708: </a>        clr     r0
+<a name="line0709">0709: </a>        mov     $8192.,r1
+<a name="line0709">0709: </a>        mov     $8192.,r1
+<a name="line0710">0710: </a>        mov     $32.,r2
+<a name="line0710">0710: </a>        mov     $32.,r2
+<a name="line0711">0711: </a>1:
+<a name="line0711">0711: </a>1:
+<a name="line0712">0712: </a>        mfpi    (r0)+
+<a name="line0712">0712: </a>        mfpi    (r0)+
+<a name="line0713">0713: </a>        mtpi    (r1)+
+<a name="line0713">0713: </a>        mtpi    (r1)+
+<a name="line0714">0714: </a>        sob     r2,1b
+<a name="line0714">0714: </a>        sob     r2,1b
+<a name="line0715">0715: </a>        mov     (sp)+,r2
+<a name="line0715">0715: </a>        mov     (sp)+,r2
+<a name="line0716">0716: </a>        mov     (sp)+,UISD1
+<a name="line0716">0716: </a>        mov     (sp)+,UISD1
+<a name="line0717">0717: </a>        mov     (sp)+,UISD0
+<a name="line0717">0717: </a>        mov     (sp)+,UISD0
+<a name="line0718">0718: </a>        mov     (sp)+,UISA1
+<a name="line0718">0718: </a>        mov     (sp)+,UISA1
+<a name="line0719">0719: </a>        mov     (sp)+,UISA0
+<a name="line0719">0719: </a>        mov     (sp)+,UISA0
+<a name="line0720">0720: </a>        mov     (sp)+,PS
+<a name="line0720">0720: </a>        mov     (sp)+,PS
+<a name="line0721">0721: </a>        rts     pc
+<a name="line0721">0721: </a>        rts     pc
+<a name="line0722">0722: </a>
+<a name="line0722">0722: </a>
+<a name="line0723">0723: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0723">0723: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0724">0724: </a>.globl  _savu, _retu, _aretu
+<a name="line0724">0724: </a>.globl  _savu, _retu, _aretu
+<a name="line0725">0725: </a><font color="#000000">_savu:</font>
+<a name="line0725">0725: </a><font color="#000000">_savu:</font>
+<a name="line0726">0726: </a>        bis     $340,PS
+<a name="line0726">0726: </a>        bis     $340,PS
+<a name="line0727">0727: </a>        mov     (sp)+,r1
+<a name="line0727">0727: </a>        mov     (sp)+,r1
+<a name="line0728">0728: </a>        mov     (sp),r0
+<a name="line0728">0728: </a>        mov     (sp),r0
+<a name="line0729">0729: </a>        mov     sp,(r0)+
+<a name="line0729">0729: </a>        mov     sp,(r0)+
+<a name="line0730">0730: </a>        mov     r5,(r0)+
+<a name="line0730">0730: </a>        mov     r5,(r0)+
+<a name="line0731">0731: </a>        bic     $340,PS
+<a name="line0731">0731: </a>        bic     $340,PS
+<a name="line0732">0732: </a>        jmp     (r1)
+<a name="line0732">0732: </a>        jmp     (r1)
+<a name="line0733">0733: </a>
+<a name="line0733">0733: </a>
+<a name="line0734">0734: </a><font color="#000000">_aretu:</font>
+<a name="line0734">0734: </a><font color="#000000">_aretu:</font>
+<a name="line0735">0735: </a>        bis     $340,PS
+<a name="line0735">0735: </a>        bis     $340,PS
+<a name="line0736">0736: </a>        mov     (sp)+,r1
+<a name="line0736">0736: </a>        mov     (sp)+,r1
+<a name="line0737">0737: </a>        mov     (sp),r0
+<a name="line0737">0737: </a>        mov     (sp),r0
+<a name="line0738">0738: </a>        br      1f
+<a name="line0738">0738: </a>        br      1f
+<a name="line0739">0739: </a>
+<a name="line0739">0739: </a>
+<a name="line0740">0740: </a><font color="#000000">_retu:</font>
+<a name="line0740">0740: </a><font color="#000000">_retu:</font>
+<a name="line0741">0741: </a>        bis     $340,PS
+<a name="line0741">0741: </a>        bis     $340,PS
+<a name="line0742">0742: </a>        mov     (sp)+,r1
+<a name="line0742">0742: </a>        mov     (sp)+,r1
+<a name="line0743">0743: </a>        mov     (sp),KISA6
+<a name="line0743">0743: </a>        mov     (sp),KISA6
+<a name="line0744">0744: </a>        mov     $_u,r0
+<a name="line0744">0744: </a>        mov     $_u,r0
+<a name="line0745">0745: </a>1:
+<a name="line0745">0745: </a>1:
+<a name="line0746">0746: </a>        mov     (r0)+,sp
+<a name="line0746">0746: </a>        mov     (r0)+,sp
+<a name="line0747">0747: </a>        mov     (r0)+,r5
+<a name="line0747">0747: </a>        mov     (r0)+,r5
+<a name="line0748">0748: </a>        bic     $340,PS
+<a name="line0748">0748: </a>        bic     $340,PS
+<a name="line0749">0749: </a>        jmp     (r1)
+<a name="line0749">0749: </a>        jmp     (r1)
+<a name="line0750">0750: </a>
+<a name="line0750">0750: </a>
+<a name="line0751">0751: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0751">0751: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0752">0752: </a>.globl  trap, call
+<a name="line0752">0752: </a>.globl  trap, call
+<a name="line0753">0753: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0753">0753: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0754">0754: </a>.globl  _trap
+<a name="line0754">0754: </a>.globl  _trap
+<a name="line0755">0755: </a><font color="#000000">trap:</font>
+<a name="line0755">0755: </a><font color="#000000">trap:</font>
+<a name="line0756">0756: </a>        mov     PS,-4(sp)
+<a name="line0756">0756: </a>        mov     PS,-4(sp)
+<a name="line0757">0757: </a>        tst     nofault
+<a name="line0757">0757: </a>        tst     nofault
+<a name="line0758">0758: </a>        bne     1f
+<a name="line0758">0758: </a>        bne     1f
+<a name="line0759">0759: </a>        mov     SSR0,ssr
+<a name="line0759">0759: </a>        mov     SSR0,ssr
+<a name="line0760">0760: </a>        mov     SSR2,ssr+4
+<a name="line0760">0760: </a>        mov     SSR2,ssr+4
+<a name="line0761">0761: </a>        mov     $1,SSR0
+<a name="line0761">0761: </a>        mov     $1,SSR0
+<a name="line0762">0762: </a>        jsr     r0,call1; _trap
+<a name="line0762">0762: </a>        jsr     r0,call1; _trap
+<a name="line0763">0763: </a>        / no <font color="#000000">return</font>
+<a name="line0763">0763: </a>        / no <font color="#000000">return</font>
+<a name="line0764">0764: </a>1:
+<a name="line0764">0764: </a>1:
+<a name="line0765">0765: </a>        mov     $1,SSR0
+<a name="line0765">0765: </a>        mov     $1,SSR0
+<a name="line0766">0766: </a>        mov     nofault,(sp)
+<a name="line0766">0766: </a>        mov     nofault,(sp)
+<a name="line0767">0767: </a>        rtt
+<a name="line0767">0767: </a>        rtt
+<a name="line0768">0768: </a>
+<a name="line0768">0768: </a>
+<a name="line0769">0769: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0769">0769: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0770">0770: </a>.globl  _runrun, _swtch
+<a name="line0770">0770: </a>.globl  _runrun, _swtch
+<a name="line0771">0771: </a><font color="#000000">call1:</font>
+<a name="line0771">0771: </a><font color="#000000">call1:</font>
+<a name="line0772">0772: </a>        tst     -(sp)
+<a name="line0772">0772: </a>        tst     -(sp)
+<a name="line0773">0773: </a>        bic     $340,PS
+<a name="line0773">0773: </a>        bic     $340,PS
+<a name="line0774">0774: </a>        br      1f
+<a name="line0774">0774: </a>        br      1f
+<a name="line0775">0775: </a>
+<a name="line0775">0775: </a>
+<a name="line0776">0776: </a><font color="#000000">call:</font>
+<a name="line0776">0776: </a><font color="#000000">call:</font>
+<a name="line0777">0777: </a>        mov     PS,-(sp)
+<a name="line0777">0777: </a>        mov     PS,-(sp)
+<a name="line0778">0778: </a>1:
+<a name="line0778">0778: </a>1:
+<a name="line0779">0779: </a>        mov     r1,-(sp)
+<a name="line0779">0779: </a>        mov     r1,-(sp)
+<a name="line0780">0780: </a>        mfpi    sp
+<a name="line0780">0780: </a>        mfpi    sp
+<a name="line0781">0781: </a>        mov     4(sp),-(sp)
+<a name="line0781">0781: </a>        mov     4(sp),-(sp)
+<a name="line0782">0782: </a>        bic     $!37,(sp)
+<a name="line0782">0782: </a>        bic     $!37,(sp)
+<a name="line0783">0783: </a>        bit     $30000,PS
+<a name="line0783">0783: </a>        bit     $30000,PS
+<a name="line0784">0784: </a>        beq     1f
+<a name="line0784">0784: </a>        beq     1f
+<a name="line0785">0785: </a>        jsr     pc,*(r0)+
+<a name="line0785">0785: </a>        jsr     pc,*(r0)+
+<a name="line0786">0786: </a>2:
+<a name="line0786">0786: </a>2:
+<a name="line0787">0787: </a>        bis     $340,PS
+<a name="line0787">0787: </a>        bis     $340,PS
+<a name="line0788">0788: </a>        tstb    _runrun
+<a name="line0788">0788: </a>        tstb    _runrun
+<a name="line0789">0789: </a>        beq     2f
+<a name="line0789">0789: </a>        beq     2f
+<a name="line0790">0790: </a>        bic     $340,PS
+<a name="line0790">0790: </a>        bic     $340,PS
+<a name="line0791">0791: </a>        jsr     pc,_swtch
+<a name="line0791">0791: </a>        jsr     pc,_swtch
+<a name="line0792">0792: </a>        br      2b
+<a name="line0792">0792: </a>        br      2b
+<a name="line0793">0793: </a>2:
+<a name="line0793">0793: </a>2:
+<a name="line0794">0794: </a>        tst     (sp)+
+<a name="line0794">0794: </a>        tst     (sp)+
+<a name="line0795">0795: </a>        mtpi    sp
+<a name="line0795">0795: </a>        mtpi    sp
+<a name="line0796">0796: </a>        br      2f
+<a name="line0796">0796: </a>        br      2f
+<a name="line0797">0797: </a>1:
+<a name="line0797">0797: </a>1:
+<a name="line0798">0798: </a>        bis     $30000,PS
+<a name="line0798">0798: </a>        bis     $30000,PS
+<a name="line0799">0799: </a>        jsr     pc,*(r0)+
+<a name="line0799">0799: </a>        jsr     pc,*(r0)+
+<a name="line0800">0800: </a>        cmp     (sp)+,(sp)+
+<a name="line0800">0800: </a>        cmp     (sp)+,(sp)+
+<a name="line0801">0801: </a>2:
+<a name="line0801">0801: </a>2:
+<a name="line0802">0802: </a>        mov     (sp)+,r1
+<a name="line0802">0802: </a>        mov     (sp)+,r1
+<a name="line0803">0803: </a>        tst     (sp)+
+<a name="line0803">0803: </a>        tst     (sp)+
+<a name="line0804">0804: </a>        mov     (sp)+,r0
+<a name="line0804">0804: </a>        mov     (sp)+,r0
+<a name="line0805">0805: </a>        rtt
+<a name="line0805">0805: </a>        rtt
+<a name="line0806">0806: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0806">0806: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0807">0807: </a>.globl  _fubyte, _subyte
+<a name="line0807">0807: </a>.globl  _fubyte, _subyte
+<a name="line0808">0808: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0808">0808: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0809">0809: </a>.globl  _fuibyte, _suibyte
+<a name="line0809">0809: </a>.globl  _fuibyte, _suibyte
+<a name="line0810">0810: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0810">0810: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0811">0811: </a>.globl  _fuword, _suword
+<a name="line0811">0811: </a>.globl  _fuword, _suword
+<a name="line0812">0812: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0812">0812: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0813">0813: </a>.globl  _fuiword, _suiword
+<a name="line0813">0813: </a>.globl  _fuiword, _suiword
+<a name="line0814">0814: </a><font color="#000000">_fuibyte:</font>
+<a name="line0814">0814: </a><font color="#000000">_fuibyte:</font>
+<a name="line0815">0815: </a><font color="#000000">_fubyte:</font>
+<a name="line0815">0815: </a><font color="#000000">_fubyte:</font>
+<a name="line0816">0816: </a>        mov     2(sp),r1
+<a name="line0816">0816: </a>        mov     2(sp),r1
+<a name="line0817">0817: </a>        bic     $1,r1
+<a name="line0817">0817: </a>        bic     $1,r1
+<a name="line0818">0818: </a>        jsr     pc,gword
+<a name="line0818">0818: </a>        jsr     pc,gword
+<a name="line0819">0819: </a>        cmp     r1,2(sp)
+<a name="line0819">0819: </a>        cmp     r1,2(sp)
+<a name="line0820">0820: </a>        beq     1f
+<a name="line0820">0820: </a>        beq     1f
+<a name="line0821">0821: </a>        swab    r0
+<a name="line0821">0821: </a>        swab    r0
+<a name="line0822">0822: </a>1:
+<a name="line0822">0822: </a>1:
+<a name="line0823">0823: </a>        bic     $!377,r0
+<a name="line0823">0823: </a>        bic     $!377,r0
+<a name="line0824">0824: </a>        rts     pc
+<a name="line0824">0824: </a>        rts     pc
+<a name="line0825">0825: </a>
+<a name="line0825">0825: </a>
+<a name="line0826">0826: </a><font color="#000000">_suibyte:</font>
+<a name="line0826">0826: </a><font color="#000000">_suibyte:</font>
+<a name="line0827">0827: </a><font color="#000000">_subyte:</font>
+<a name="line0827">0827: </a><font color="#000000">_subyte:</font>
+<a name="line0828">0828: </a>        mov     2(sp),r1
+<a name="line0828">0828: </a>        mov     2(sp),r1
+<a name="line0829">0829: </a>        bic     $1,r1
+<a name="line0829">0829: </a>        bic     $1,r1
+<a name="line0830">0830: </a>        jsr     pc,gword
+<a name="line0830">0830: </a>        jsr     pc,gword
+<a name="line0831">0831: </a>        mov     r0,-(sp)
+<a name="line0831">0831: </a>        mov     r0,-(sp)
+<a name="line0832">0832: </a>        cmp     r1,4(sp)
+<a name="line0832">0832: </a>        cmp     r1,4(sp)
+<a name="line0833">0833: </a>        beq     1f
+<a name="line0833">0833: </a>        beq     1f
+<a name="line0834">0834: </a>        movb    6(sp),1(sp)
+<a name="line0834">0834: </a>        movb    6(sp),1(sp)
+<a name="line0835">0835: </a>        br      2f
+<a name="line0835">0835: </a>        br      2f
+<a name="line0836">0836: </a>1:
+<a name="line0836">0836: </a>1:
+<a name="line0837">0837: </a>        movb    6(sp),(sp)
+<a name="line0837">0837: </a>        movb    6(sp),(sp)
+<a name="line0838">0838: </a>2:
+<a name="line0838">0838: </a>2:
+<a name="line0839">0839: </a>        mov     (sp)+,r0
+<a name="line0839">0839: </a>        mov     (sp)+,r0
+<a name="line0840">0840: </a>        jsr     pc,pword
+<a name="line0840">0840: </a>        jsr     pc,pword
+<a name="line0841">0841: </a>        clr     r0
+<a name="line0841">0841: </a>        clr     r0
+<a name="line0842">0842: </a>        rts     pc
+<a name="line0842">0842: </a>        rts     pc
+<a name="line0843">0843: </a>
+<a name="line0843">0843: </a>
+<a name="line0844">0844: </a><font color="#000000">_fuiword:</font>
+<a name="line0844">0844: </a><font color="#000000">_fuiword:</font>
+<a name="line0845">0845: </a><font color="#000000">_fuword:</font>
+<a name="line0845">0845: </a><font color="#000000">_fuword:</font>
+<a name="line0846">0846: </a>        mov     2(sp),r1
+<a name="line0846">0846: </a>        mov     2(sp),r1
+<a name="line0847">0847: </a><font color="#000000">fuword:</font>
+<a name="line0847">0847: </a><font color="#000000">fuword:</font>
+<a name="line0848">0848: </a>        jsr     pc,gword
+<a name="line0848">0848: </a>        jsr     pc,gword
+<a name="line0849">0849: </a>        rts     pc
+<a name="line0849">0849: </a>        rts     pc
+<a name="line0850">0850: </a>
+<a name="line0850">0850: </a>
+<a name="line0851">0851: </a><font color="#000000">gword:</font>
+<a name="line0851">0851: </a><font color="#000000">gword:</font>
+<a name="line0852">0852: </a>        mov     PS,-(sp)
+<a name="line0852">0852: </a>        mov     PS,-(sp)
+<a name="line0853">0853: </a>        bis     $340,PS
+<a name="line0853">0853: </a>        bis     $340,PS
+<a name="line0854">0854: </a>        mov     nofault,-(sp)
+<a name="line0854">0854: </a>        mov     nofault,-(sp)
+<a name="line0855">0855: </a>        mov     $err,nofault
+<a name="line0855">0855: </a>        mov     $err,nofault
+<a name="line0856">0856: </a>        mfpi    (r1)
+<a name="line0856">0856: </a>        mfpi    (r1)
+<a name="line0857">0857: </a>        mov     (sp)+,r0
+<a name="line0857">0857: </a>        mov     (sp)+,r0
+<a name="line0858">0858: </a>        br      1f
+<a name="line0858">0858: </a>        br      1f
+<a name="line0859">0859: </a>
+<a name="line0859">0859: </a>
+<a name="line0860">0860: </a><font color="#000000">_suiword:</font>
+<a name="line0860">0860: </a><font color="#000000">_suiword:</font>
+<a name="line0861">0861: </a><font color="#000000">_suword:</font>
+<a name="line0861">0861: </a><font color="#000000">_suword:</font>
+<a name="line0862">0862: </a>        mov     2(sp),r1
+<a name="line0862">0862: </a>        mov     2(sp),r1
+<a name="line0863">0863: </a>        mov     4(sp),r0
+<a name="line0863">0863: </a>        mov     4(sp),r0
+<a name="line0864">0864: </a><font color="#000000">suword:</font>
+<a name="line0864">0864: </a><font color="#000000">suword:</font>
+<a name="line0865">0865: </a>        jsr     pc,pword
+<a name="line0865">0865: </a>        jsr     pc,pword
+<a name="line0866">0866: </a>        rts     pc
+<a name="line0866">0866: </a>        rts     pc
+<a name="line0867">0867: </a>
+<a name="line0867">0867: </a>
+<a name="line0868">0868: </a><font color="#000000">pword:</font>
+<a name="line0868">0868: </a><font color="#000000">pword:</font>
+<a name="line0869">0869: </a>        mov     PS,-(sp)
+<a name="line0869">0869: </a>        mov     PS,-(sp)
+<a name="line0870">0870: </a>        bis     $340,PS
+<a name="line0870">0870: </a>        bis     $340,PS
+<a name="line0871">0871: </a>        mov     nofault,-(sp)
+<a name="line0871">0871: </a>        mov     nofault,-(sp)
+<a name="line0872">0872: </a>        mov     $err,nofault
+<a name="line0872">0872: </a>        mov     $err,nofault
+<a name="line0873">0873: </a>        mov     r0,-(sp)
+<a name="line0873">0873: </a>        mov     r0,-(sp)
+<a name="line0874">0874: </a>        mtpi    (r1)
+<a name="line0874">0874: </a>        mtpi    (r1)
+<a name="line0875">0875: </a>1:
+<a name="line0875">0875: </a>1:
+<a name="line0876">0876: </a>        mov     (sp)+,nofault
+<a name="line0876">0876: </a>        mov     (sp)+,nofault
+<a name="line0877">0877: </a>        mov     (sp)+,PS
+<a name="line0877">0877: </a>        mov     (sp)+,PS
+<a name="line0878">0878: </a>        rts     pc
+<a name="line0878">0878: </a>        rts     pc
+<a name="line0879">0879: </a>
+<a name="line0879">0879: </a>
+<a name="line0880">0880: </a><font color="#000000">err:</font>
+<a name="line0880">0880: </a><font color="#000000">err:</font>
+<a name="line0881">0881: </a>        mov     (sp)+,nofault
+<a name="line0881">0881: </a>        mov     (sp)+,nofault
+<a name="line0882">0882: </a>        mov     (sp)+,PS
+<a name="line0882">0882: </a>        mov     (sp)+,PS
+<a name="line0883">0883: </a>        tst     (sp)+
+<a name="line0883">0883: </a>        tst     (sp)+
+<a name="line0884">0884: </a>        mov     $-1,r0
+<a name="line0884">0884: </a>        mov     $-1,r0
+<a name="line0885">0885: </a>        rts     pc
+<a name="line0885">0885: </a>        rts     pc
+<a name="line0886">0886: </a>
+<a name="line0886">0886: </a>
+<a name="line0887">0887: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0887">0887: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0888">0888: </a>.globl  _savfp, _display
+<a name="line0888">0888: </a>.globl  _savfp, _display
+<a name="line0889">0889: </a><font color="#000000">_savfp:</font>
+<a name="line0889">0889: </a><font color="#000000">_savfp:</font>
+<a name="line0890">0890: </a><font color="#000000">_display:</font>
+<a name="line0890">0890: </a><font color="#000000">_display:</font>
+<a name="line0891">0891: </a>        rts     pc
+<a name="line0891">0891: </a>        rts     pc
+<a name="line0892">0892: </a>
+<a name="line0892">0892: </a>
+<a name="line0893">0893: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0893">0893: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0894">0894: </a>.globl  _incupc
+<a name="line0894">0894: </a>.globl  _incupc
+<a name="line0895">0895: </a><font color="#000000">_incupc:</font>
+<a name="line0895">0895: </a><font color="#000000">_incupc:</font>
+<a name="line0896">0896: </a>        mov     r2,-(sp)
+<a name="line0896">0896: </a>        mov     r2,-(sp)
+<a name="line0897">0897: </a>        mov     6(sp),r2        / base of prof with base,leng,off,scale
+<a name="line0897">0897: </a>        mov     6(sp),r2        / base of prof with base,leng,off,scale
+<a name="line0898">0898: </a>        mov     4(sp),r0        / pc
+<a name="line0898">0898: </a>        mov     4(sp),r0        / pc
+<a name="line0899">0899: </a>        sub     4(r2),r0        / offset
+<a name="line0899">0899: </a>        sub     4(r2),r0        / offset
+<a name="line0900">0900: </a>        clc
+<a name="line0900">0900: </a>        clc
+<a name="line0901">0901: </a>        ror     r0
+<a name="line0901">0901: </a>        ror     r0
+<a name="line0902">0902: </a>        mul     6(r2),r0        / scale
+<a name="line0902">0902: </a>        mul     6(r2),r0        / scale
+<a name="line0903">0903: </a>        ashc    $-14.,r0
+<a name="line0903">0903: </a>        ashc    $-14.,r0
+<a name="line0904">0904: </a>        inc     r1
+<a name="line0904">0904: </a>        inc     r1
+<a name="line0905">0905: </a>        bic     $1,r1
+<a name="line0905">0905: </a>        bic     $1,r1
+<a name="line0906">0906: </a>        cmp     r1,2(r2)        / length
+<a name="line0906">0906: </a>        cmp     r1,2(r2)        / length
+<a name="line0907">0907: </a>        bhis    1f
+<a name="line0907">0907: </a>        bhis    1f
+<a name="line0908">0908: </a>        add     (r2),r1         / base
+<a name="line0908">0908: </a>        add     (r2),r1         / base
+<a name="line0909">0909: </a>        mov     nofault,-(sp)
+<a name="line0909">0909: </a>        mov     nofault,-(sp)
+<a name="line0910">0910: </a>        mov     $2f,nofault
+<a name="line0910">0910: </a>        mov     $2f,nofault
+<a name="line0911">0911: </a>        mfpi    (r1)
+<a name="line0911">0911: </a>        mfpi    (r1)
+<a name="line0912">0912: </a>        inc     (sp)
+<a name="line0912">0912: </a>        inc     (sp)
+<a name="line0913">0913: </a>        mtpi    (r1)
+<a name="line0913">0913: </a>        mtpi    (r1)
+<a name="line0914">0914: </a>        br      3f
+<a name="line0914">0914: </a>        br      3f
+<a name="line0915">0915: </a>2:
+<a name="line0915">0915: </a>2:
+<a name="line0916">0916: </a>        clr     6(r2)
+<a name="line0916">0916: </a>        clr     6(r2)
+<a name="line0917">0917: </a>3:
+<a name="line0917">0917: </a>3:
+<a name="line0918">0918: </a>        mov     (sp)+,nofault
+<a name="line0918">0918: </a>        mov     (sp)+,nofault
+<a name="line0919">0919: </a>1:
+<a name="line0919">0919: </a>1:
+<a name="line0920">0920: </a>        mov     (sp)+,r2
+<a name="line0920">0920: </a>        mov     (sp)+,r2
+<a name="line0921">0921: </a>        rts     pc
+<a name="line0921">0921: </a>        rts     pc
+<a name="line0922">0922: </a>
+<a name="line0922">0922: </a>
+<a name="line0923">0923: </a>/ Character list get/put
+<a name="line0923">0923: </a>/ Character list get/put
+<a name="line0924">0924: </a>
+<a name="line0924">0924: </a>
+<a name="line0925">0925: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0925">0925: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0926">0926: </a>.globl  _getc, _putc
+<a name="line0926">0926: </a>.globl  _getc, _putc
+<a name="line0927">0927: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0927">0927: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line0928">0928: </a>.globl  _cfreelist
+<a name="line0928">0928: </a>.globl  _cfreelist
+<a name="line0929">0929: </a>
+<a name="line0929">0929: </a>
+<a name="line0930">0930: </a><font color="#000000">_getc:</font>
+<a name="line0930">0930: </a><font color="#000000">_getc:</font>
+<a name="line0931">0931: </a>        mov     2(sp),r1
+<a name="line0931">0931: </a>        mov     2(sp),r1
+<a name="line0932">0932: </a>        mov     PS,-(sp)
+<a name="line0932">0932: </a>        mov     PS,-(sp)
+<a name="line0933">0933: </a>        mov     r2,-(sp)
+<a name="line0933">0933: </a>        mov     r2,-(sp)
+<a name="line0934">0934: </a>        bis     $340,PS
+<a name="line0934">0934: </a>        bis     $340,PS
+<a name="line0935">0935: </a>        bic     $100,PS         / spl 5
+<a name="line0935">0935: </a>        bic     $100,PS         / spl 5
+<a name="line0936">0936: </a>        mov     2(r1),r2        / first ptr
+<a name="line0936">0936: </a>        mov     2(r1),r2        / first ptr
+<a name="line0937">0937: </a>        beq     9f              / empty
+<a name="line0937">0937: </a>        beq     9f              / empty
+<a name="line0938">0938: </a>        movb    (r2)+,r0        / character
+<a name="line0938">0938: </a>        movb    (r2)+,r0        / character
+<a name="line0939">0939: </a>        bic     $!377,r0
+<a name="line0939">0939: </a>        bic     $!377,r0
+<a name="line0940">0940: </a>        mov     r2,2(r1)
+<a name="line0940">0940: </a>        mov     r2,2(r1)
+<a name="line0941">0941: </a>        dec     (r1)+           / count
+<a name="line0941">0941: </a>        dec     (r1)+           / count
+<a name="line0942">0942: </a>        bne     1f
+<a name="line0942">0942: </a>        bne     1f
+<a name="line0943">0943: </a>        clr     (r1)+
+<a name="line0943">0943: </a>        clr     (r1)+
+<a name="line0944">0944: </a>        clr     (r1)+           / last block
+<a name="line0944">0944: </a>        clr     (r1)+           / last block
+<a name="line0945">0945: </a>        br      2f
+<a name="line0945">0945: </a>        br      2f
+<a name="line0946">0946: </a>1:
+<a name="line0946">0946: </a>1:
+<a name="line0947">0947: </a>        bit     $7,r2
+<a name="line0947">0947: </a>        bit     $7,r2
+<a name="line0948">0948: </a>        bne     3f
+<a name="line0948">0948: </a>        bne     3f
+<a name="line0949">0949: </a>        mov     -10(r2),(r1)    / next block
+<a name="line0949">0949: </a>        mov     -10(r2),(r1)    / next block
+<a name="line0950">0950: </a>        add     $2,(r1)
+<a name="line0950">0950: </a>        add     $2,(r1)
+<a name="line0951">0951: </a>2:
+<a name="line0951">0951: </a>2:
+<a name="line0952">0952: </a>        dec     r2
+<a name="line0952">0952: </a>        dec     r2
+<a name="line0953">0953: </a>        bic     $7,r2
+<a name="line0953">0953: </a>        bic     $7,r2
+<a name="line0954">0954: </a>        mov     _cfreelist,(r2)
+<a name="line0954">0954: </a>        mov     _cfreelist,(r2)
+<a name="line0955">0955: </a>        mov     r2,_cfreelist
+<a name="line0955">0955: </a>        mov     r2,_cfreelist
+<a name="line0956">0956: </a>3:
+<a name="line0956">0956: </a>3:
+<a name="line0957">0957: </a>        mov     (sp)+,r2
+<a name="line0957">0957: </a>        mov     (sp)+,r2
+<a name="line0958">0958: </a>        mov     (sp)+,PS
+<a name="line0958">0958: </a>        mov     (sp)+,PS
+<a name="line0959">0959: </a>        rts     pc
+<a name="line0959">0959: </a>        rts     pc
+<a name="line0960">0960: </a>9:
+<a name="line0960">0960: </a>9:
+<a name="line0961">0961: </a>        clr     4(r1)
+<a name="line0961">0961: </a>        clr     4(r1)
+<a name="line0962">0962: </a>        mov     $-1,r0
+<a name="line0962">0962: </a>        mov     $-1,r0
+<a name="line0963">0963: </a>        mov     (sp)+,r2
+<a name="line0963">0963: </a>        mov     (sp)+,r2
+<a name="line0964">0964: </a>        mov     (sp)+,PS
+<a name="line0964">0964: </a>        mov     (sp)+,PS
+<a name="line0965">0965: </a>        rts     pc
+<a name="line0965">0965: </a>        rts     pc
+<a name="line0966">0966: </a>
+<a name="line0966">0966: </a>
+<a name="line0967">0967: </a><font color="#000000">_putc:</font>
+<a name="line0967">0967: </a><font color="#000000">_putc:</font>
+<a name="line0968">0968: </a>        mov     2(sp),r0
+<a name="line0968">0968: </a>        mov     2(sp),r0
+<a name="line0969">0969: </a>        mov     4(sp),r1
+<a name="line0969">0969: </a>        mov     4(sp),r1
+<a name="line0970">0970: </a>        mov     PS,-(sp)
+<a name="line0970">0970: </a>        mov     PS,-(sp)
+<a name="line0971">0971: </a>        mov     r2,-(sp)
+<a name="line0971">0971: </a>        mov     r2,-(sp)
+<a name="line0972">0972: </a>        mov     r3,-(sp)
+<a name="line0972">0972: </a>        mov     r3,-(sp)
+<a name="line0973">0973: </a>        bis     $340,PS
+<a name="line0973">0973: </a>        bis     $340,PS
+<a name="line0974">0974: </a>        bic     $100,PS         / spl 5
+<a name="line0974">0974: </a>        bic     $100,PS         / spl 5
+<a name="line0975">0975: </a>        mov     4(r1),r2        / last ptr
+<a name="line0975">0975: </a>        mov     4(r1),r2        / last ptr
+<a name="line0976">0976: </a>        bne     1f
+<a name="line0976">0976: </a>        bne     1f
+<a name="line0977">0977: </a>        mov     _cfreelist,r2
+<a name="line0977">0977: </a>        mov     _cfreelist,r2
+<a name="line0978">0978: </a>        beq     9f
+<a name="line0978">0978: </a>        beq     9f
+<a name="line0979">0979: </a>        mov     (r2),_cfreelist
+<a name="line0979">0979: </a>        mov     (r2),_cfreelist
+<a name="line0980">0980: </a>        clr     (r2)+
+<a name="line0980">0980: </a>        clr     (r2)+
+<a name="line0981">0981: </a>        mov     r2,2(r1)        / first ptr
+<a name="line0981">0981: </a>        mov     r2,2(r1)        / first ptr
+<a name="line0982">0982: </a>        br      2f
+<a name="line0982">0982: </a>        br      2f
+<a name="line0983">0983: </a>1:
+<a name="line0983">0983: </a>1:
+<a name="line0984">0984: </a>        bit     $7,r2
+<a name="line0984">0984: </a>        bit     $7,r2
+<a name="line0985">0985: </a>        bne     2f
+<a name="line0985">0985: </a>        bne     2f
+<a name="line0986">0986: </a>        mov     _cfreelist,r3
+<a name="line0986">0986: </a>        mov     _cfreelist,r3
+<a name="line0987">0987: </a>        beq     9f
+<a name="line0987">0987: </a>        beq     9f
+<a name="line0988">0988: </a>        mov     (r3),_cfreelist
+<a name="line0988">0988: </a>        mov     (r3),_cfreelist
+<a name="line0989">0989: </a>        mov     r3,-10(r2)
+<a name="line0989">0989: </a>        mov     r3,-10(r2)
+<a name="line0990">0990: </a>        mov     r3,r2
+<a name="line0990">0990: </a>        mov     r3,r2
+<a name="line0991">0991: </a>        clr     (r2)+
+<a name="line0991">0991: </a>        clr     (r2)+
+<a name="line0992">0992: </a>2:
+<a name="line0992">0992: </a>2:
+<a name="line0993">0993: </a>        movb    r0,(r2)+
+<a name="line0993">0993: </a>        movb    r0,(r2)+
+<a name="line0994">0994: </a>        mov     r2,4(r1)
+<a name="line0994">0994: </a>        mov     r2,4(r1)
+<a name="line0995">0995: </a>        inc     (r1)            / count
+<a name="line0995">0995: </a>        inc     (r1)            / count
+<a name="line0996">0996: </a>        clr     r0
+<a name="line0996">0996: </a>        clr     r0
+<a name="line0997">0997: </a>        mov     (sp)+,r3
+<a name="line0997">0997: </a>        mov     (sp)+,r3
+<a name="line0998">0998: </a>        mov     (sp)+,r2
+<a name="line0998">0998: </a>        mov     (sp)+,r2
+<a name="line0999">0999: </a>        mov     (sp)+,PS
+<a name="line0999">0999: </a>        mov     (sp)+,PS
+>>>>>>> gh-pages
 <a name="line1000">1000: </a>        rts     pc
 <a name="line1001">1001: </a>9:
 <a name="line1002">1002: </a>        mov     pc,r0
@@ -6143,6 +7825,7 @@
 </head>
 
 
+<<<<<<< HEAD
 6600: #
 6601: /*
 6602:  */
@@ -6414,6 +8097,288 @@
 
 
 
+=======
+
+<html>
+<head>
+<title>fio.c</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line6600">6600: </a><font color="#000000">#</font>
+<a name="line6601">6601: </a><font color="#800000">/*</font>
+<a name="line6602">6602: </a><font color="#800000"> */</font>
+<a name="line6603">6603: </a>
+<a name="line6604">6604: </a><font color="#000000">#include "../param.h"</font>
+<a name="line6605">6605: </a><font color="#000000">#include "../user.h"</font>
+<a name="line6606">6606: </a><font color="#000000">#include "../filsys.h"</font>
+<a name="line6607">6607: </a><font color="#000000">#include "../file.h"</font>
+<a name="line6608">6608: </a><font color="#000000">#include "../conf.h"</font>
+<a name="line6609">6609: </a><font color="#000000">#include "../inode.h"</font>
+<a name="line6610">6610: </a><font color="#000000">#include "../reg.h"</font>
+<a name="line6611">6611: </a>
+<a name="line6612">6612: </a><font color="#800000">/*</font>
+<a name="line6613">6613: </a><font color="#800000"> * Convert a user supplied</font>
+<a name="line6614">6614: </a><font color="#800000"> * file descriptor into a pointer</font>
+<a name="line6615">6615: </a><font color="#800000"> * to a file structure.</font>
+<a name="line6616">6616: </a><font color="#800000"> * Only task is to check range</font>
+<a name="line6617">6617: </a><font color="#800000"> * of the descriptor.</font>
+<a name="line6618">6618: </a><font color="#800000"> */</font>
+<a name="line6619">6619: </a><font color="#000000"><a name="etf"></a>getf(f)</font>
+<a name="line6620">6620: </a>{
+<a name="line6621">6621: </a>        register *fp, rf;
+<a name="line6622">6622: </a>
+<a name="line6623">6623: </a>        rf = f;
+<a name="line6624">6624: </a>        <font color="#000000">if</font>(rf&lt;0 || rf&gt;=NOFILE)
+<a name="line6625">6625: </a>                <font color="#000000">goto</font> bad;
+<a name="line6626">6626: </a>        fp = u.u_ofile[rf];
+<a name="line6627">6627: </a>        <font color="#000000">if</font>(fp != NULL)
+<a name="line6628">6628: </a>                <font color="#000000">return</font>(fp);
+<a name="line6629">6629: </a><font color="#000000">bad:</font>
+<a name="line6630">6630: </a>        u.u_error = EBADF;
+<a name="line6631">6631: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6632">6632: </a>}
+<a name="line6633">6633: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6634">6634: </a>
+<a name="line6635">6635: </a><font color="#800000">/*</font>
+<a name="line6636">6636: </a><font color="#800000"> * Internal form of close.</font>
+<a name="line6637">6637: </a><font color="#800000"> * Decrement reference count on</font>
+<a name="line6638">6638: </a><font color="#800000"> * file structure and call closei</font>
+<a name="line6639">6639: </a><font color="#800000"> * on last closef.</font>
+<a name="line6640">6640: </a><font color="#800000"> * Also make sure the pipe protocol</font>
+<a name="line6641">6641: </a><font color="#800000"> * does not constipate.</font>
+<a name="line6642">6642: </a><font color="#800000"> */</font>
+<a name="line6643">6643: </a><font color="#000000"><a name="losef"></a>closef(fp)</font>
+<a name="line6644">6644: </a>int *fp;
+<a name="line6645">6645: </a>{
+<a name="line6646">6646: </a>        register *rfp, *ip;
+<a name="line6647">6647: </a>
+<a name="line6648">6648: </a>        rfp = fp;
+<a name="line6649">6649: </a>        <font color="#000000">if</font>(rfp-&gt;f_flag&amp;FPIPE) {
+<a name="line6650">6650: </a>                ip = rfp-&gt;f_inode;
+<a name="line6651">6651: </a>                ip-&gt;i_mode =&amp; ~(IREAD|IWRITE);
+<a name="line6652">6652: </a>                wakeup(ip+1);
+<a name="line6653">6653: </a>                wakeup(ip+2);
+<a name="line6654">6654: </a>        }
+<a name="line6655">6655: </a>        <font color="#000000">if</font>(rfp-&gt;f_count &lt;= 1)
+<a name="line6656">6656: </a>                closei(rfp-&gt;f_inode, rfp-&gt;f_flag&amp;FWRITE);
+<a name="line6657">6657: </a>        rfp-&gt;f_count--;
+<a name="line6658">6658: </a>}
+<a name="line6659">6659: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6660">6660: </a>
+<a name="line6661">6661: </a><font color="#800000">/*</font>
+<a name="line6662">6662: </a><font color="#800000"> * Decrement reference count on an</font>
+<a name="line6663">6663: </a><font color="#800000"> * inode due to the removal of a</font>
+<a name="line6664">6664: </a><font color="#800000"> * referencing file structure.</font>
+<a name="line6665">6665: </a><font color="#800000"> * On the last closei, switchout</font>
+<a name="line6666">6666: </a><font color="#800000"> * to the close entry point of special</font>
+<a name="line6667">6667: </a><font color="#800000"> * device handler.</font>
+<a name="line6668">6668: </a><font color="#800000"> * Note that the handler gets called</font>
+<a name="line6669">6669: </a><font color="#800000"> * on every open and only on the last</font>
+<a name="line6670">6670: </a><font color="#800000"> * close.</font>
+<a name="line6671">6671: </a><font color="#800000"> */</font>
+<a name="line6672">6672: </a><font color="#000000"><a name="losei"></a>closei(ip, rw)</font>
+<a name="line6673">6673: </a>int *ip;
+<a name="line6674">6674: </a>{
+<a name="line6675">6675: </a>        register *rip;
+<a name="line6676">6676: </a>        register dev, maj;
+<a name="line6677">6677: </a>
+<a name="line6678">6678: </a>        rip = ip;
+<a name="line6679">6679: </a>        dev = rip-&gt;i_addr[0];
+<a name="line6680">6680: </a>        maj = rip-&gt;i_addr[0].d_major;
+<a name="line6681">6681: </a>        <font color="#000000">if</font>(rip-&gt;i_count &lt;= 1)
+<a name="line6682">6682: </a>        <font color="#000000">switch</font>(rip-&gt;i_mode&amp;IFMT) {
+<a name="line6683">6683: </a>
+<a name="line6684">6684: </a>        <font color="#000000">case</font> IFCHR:
+<a name="line6685">6685: </a>                (*cdevsw[maj].d_close)(dev, rw);
+<a name="line6686">6686: </a>                <font color="#000000">break</font>;
+<a name="line6687">6687: </a>
+<a name="line6688">6688: </a>        <font color="#000000">case</font> IFBLK:
+<a name="line6689">6689: </a>                (*bdevsw[maj].d_close)(dev, rw);
+<a name="line6690">6690: </a>        }
+<a name="line6691">6691: </a>        iput(rip);
+<a name="line6692">6692: </a>}
+<a name="line6693">6693: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6694">6694: </a>
+<a name="line6695">6695: </a><font color="#800000">/*</font>
+<a name="line6696">6696: </a><font color="#800000"> * openi called to allow handler</font>
+<a name="line6697">6697: </a><font color="#800000"> * of special files to initialize and</font>
+<a name="line6698">6698: </a><font color="#800000"> * validate before actual IO.</font>
+<a name="line6699">6699: </a><font color="#800000"> * Called on all sorts of opens</font>
+<a name="line6700">6700: </a><font color="#800000"> * and also on mount.</font>
+<a name="line6701">6701: </a><font color="#800000"> */</font>
+<a name="line6702">6702: </a><font color="#000000"><a name="peni"></a>openi(ip, rw)</font>
+<a name="line6703">6703: </a>int *ip;
+<a name="line6704">6704: </a>{
+<a name="line6705">6705: </a>        register *rip;
+<a name="line6706">6706: </a>        register dev, maj;
+<a name="line6707">6707: </a>
+<a name="line6708">6708: </a>        rip = ip;
+<a name="line6709">6709: </a>        dev = rip-&gt;i_addr[0];
+<a name="line6710">6710: </a>        maj = rip-&gt;i_addr[0].d_major;
+<a name="line6711">6711: </a>        <font color="#000000">switch</font>(rip-&gt;i_mode&amp;IFMT) {
+<a name="line6712">6712: </a>
+<a name="line6713">6713: </a>        <font color="#000000">case</font> IFCHR:
+<a name="line6714">6714: </a>                <font color="#000000">if</font>(maj &gt;= nchrdev)
+<a name="line6715">6715: </a>                        <font color="#000000">goto</font> bad;
+<a name="line6716">6716: </a>                (*cdevsw[maj].d_open)(dev, rw);
+<a name="line6717">6717: </a>                <font color="#000000">break</font>;
+<a name="line6718">6718: </a>
+<a name="line6719">6719: </a>        <font color="#000000">case</font> IFBLK:
+<a name="line6720">6720: </a>                <font color="#000000">if</font>(maj &gt;= nblkdev)
+<a name="line6721">6721: </a>                        <font color="#000000">goto</font> bad;
+<a name="line6722">6722: </a>                (*bdevsw[maj].d_open)(dev, rw);
+<a name="line6723">6723: </a>        }
+<a name="line6724">6724: </a>        <font color="#000000">return</font>;
+<a name="line6725">6725: </a>
+<a name="line6726">6726: </a><font color="#000000">bad:</font>
+<a name="line6727">6727: </a>        u.u_error = ENXIO;
+<a name="line6728">6728: </a>}
+<a name="line6729">6729: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6730">6730: </a>
+<a name="line6731">6731: </a><font color="#800000">/*</font>
+<a name="line6732">6732: </a><font color="#800000"> * Check mode permission on inode pointer.</font>
+<a name="line6733">6733: </a><font color="#800000"> * Mode is READ, WRITE or EXEC.</font>
+<a name="line6734">6734: </a><font color="#800000"> * In the case of WRITE, the</font>
+<a name="line6735">6735: </a><font color="#800000"> * read-only status of the file</font>
+<a name="line6736">6736: </a><font color="#800000"> * system is checked.</font>
+<a name="line6737">6737: </a><font color="#800000"> * Also in WRITE, prototype text</font>
+<a name="line6738">6738: </a><font color="#800000"> * segments cannot be written.</font>
+<a name="line6739">6739: </a><font color="#800000"> * The mode is shifted to select</font>
+<a name="line6740">6740: </a><font color="#800000"> * the owner/group/other fields.</font>
+<a name="line6741">6741: </a><font color="#800000"> * The super user is granted all</font>
+<a name="line6742">6742: </a><font color="#800000"> * permissions except for EXEC where</font>
+<a name="line6743">6743: </a><font color="#800000"> * at least one of the EXEC bits must</font>
+<a name="line6744">6744: </a><font color="#800000"> * be on.</font>
+<a name="line6745">6745: </a><font color="#800000"> */</font>
+<a name="line6746">6746: </a><font color="#000000"><a name="ccess"></a>access(aip, mode)</font>
+<a name="line6747">6747: </a>int *aip;
+<a name="line6748">6748: </a>{
+<a name="line6749">6749: </a>        register *ip, m;
+<a name="line6750">6750: </a>
+<a name="line6751">6751: </a>        ip = aip;
+<a name="line6752">6752: </a>        m = mode;
+<a name="line6753">6753: </a>        <font color="#000000">if</font>(m == IWRITE) {
+<a name="line6754">6754: </a>                <font color="#000000">if</font>(getfs(ip-&gt;i_dev)-&gt;s_ronly != 0) {
+<a name="line6755">6755: </a>                        u.u_error = EROFS;
+<a name="line6756">6756: </a>                        <font color="#000000">return</font>(1);
+<a name="line6757">6757: </a>                }
+<a name="line6758">6758: </a>                <font color="#000000">if</font>(ip-&gt;i_flag &amp; ITEXT) {
+<a name="line6759">6759: </a>                        u.u_error = ETXTBSY;
+<a name="line6760">6760: </a>                        <font color="#000000">return</font>(1);
+<a name="line6761">6761: </a>                }
+<a name="line6762">6762: </a>        }
+<a name="line6763">6763: </a>        <font color="#000000">if</font>(u.u_uid == 0) {
+<a name="line6764">6764: </a>                <font color="#000000">if</font>(m == IEXEC &amp;&amp; (ip-&gt;i_mode &amp; 
+<a name="line6765">6765: </a>                        (IEXEC | (IEXEC&gt;&gt;3) | (IEXEC&gt;&gt;6))) == 0)
+<a name="line6766">6766: </a>                                <font color="#000000">goto</font> bad;
+<a name="line6767">6767: </a>                <font color="#000000">return</font>(0);
+<a name="line6768">6768: </a>        }
+<a name="line6769">6769: </a>        <font color="#000000">if</font>(u.u_uid != ip-&gt;i_uid) {
+<a name="line6770">6770: </a>                m =&gt;&gt; 3;
+<a name="line6771">6771: </a>                <font color="#000000">if</font>(u.u_gid != ip-&gt;i_gid)
+<a name="line6772">6772: </a>                        m =&gt;&gt; 3;
+<a name="line6773">6773: </a>        }
+<a name="line6774">6774: </a>        <font color="#000000">if</font>((ip-&gt;i_mode&amp;m) != 0)
+<a name="line6775">6775: </a>                <font color="#000000">return</font>(0);
+<a name="line6776">6776: </a>
+<a name="line6777">6777: </a><font color="#000000">bad:</font>
+<a name="line6778">6778: </a>        u.u_error = EACCES;
+<a name="line6779">6779: </a>        <font color="#000000">return</font>(1);
+<a name="line6780">6780: </a>}
+<a name="line6781">6781: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6782">6782: </a>
+<a name="line6783">6783: </a><font color="#800000">/*</font>
+<a name="line6784">6784: </a><font color="#800000"> * Look up a pathname and test if</font>
+<a name="line6785">6785: </a><font color="#800000"> * the resultant inode is owned by the</font>
+<a name="line6786">6786: </a><font color="#800000"> * current user.</font>
+<a name="line6787">6787: </a><font color="#800000"> * If not, try for super-user.</font>
+<a name="line6788">6788: </a><font color="#800000"> * If permission is granted,</font>
+<a name="line6789">6789: </a><font color="#800000"> * return inode pointer.</font>
+<a name="line6790">6790: </a><font color="#800000"> */</font>
+<a name="line6791">6791: </a><font color="#000000"><a name="wner"></a>owner()</font>
+<a name="line6792">6792: </a>{
+<a name="line6793">6793: </a>        register <font color="#000000">struct inode</font> *ip;
+<a name="line6794">6794: </a>        extern uchar();
+<a name="line6795">6795: </a>
+<a name="line6796">6796: </a>        <font color="#000000">if</font> ((ip = namei(uchar, 0)) == NULL)
+<a name="line6797">6797: </a>                <font color="#000000">return</font>(NULL);
+<a name="line6798">6798: </a>        <font color="#000000">if</font>(u.u_uid == ip-&gt;i_uid)
+<a name="line6799">6799: </a>                <font color="#000000">return</font>(ip);
+<a name="line6800">6800: </a>        <font color="#000000">if</font> (suser())
+<a name="line6801">6801: </a>                <font color="#000000">return</font>(ip);
+<a name="line6802">6802: </a>        iput(ip);
+<a name="line6803">6803: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6804">6804: </a>}
+<a name="line6805">6805: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6806">6806: </a>
+<a name="line6807">6807: </a><font color="#800000">/*</font>
+<a name="line6808">6808: </a><font color="#800000"> * Test if the current user is the</font>
+<a name="line6809">6809: </a><font color="#800000"> * super user.</font>
+<a name="line6810">6810: </a><font color="#800000"> */</font>
+<a name="line6811">6811: </a><font color="#000000"><a name="user"></a>suser()</font>
+<a name="line6812">6812: </a>{
+<a name="line6813">6813: </a>
+<a name="line6814">6814: </a>        <font color="#000000">if</font>(u.u_uid == 0)
+<a name="line6815">6815: </a>                <font color="#000000">return</font>(1);
+<a name="line6816">6816: </a>        u.u_error = EPERM;
+<a name="line6817">6817: </a>        <font color="#000000">return</font>(0);
+<a name="line6818">6818: </a>}
+<a name="line6819">6819: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6820">6820: </a>
+<a name="line6821">6821: </a><font color="#800000">/*</font>
+<a name="line6822">6822: </a><font color="#800000"> * Allocate a user file descriptor.</font>
+<a name="line6823">6823: </a><font color="#800000"> */</font>
+<a name="line6824">6824: </a><font color="#000000"><a name="falloc"></a>ufalloc()</font>
+<a name="line6825">6825: </a>{
+<a name="line6826">6826: </a>        register i;
+<a name="line6827">6827: </a>
+<a name="line6828">6828: </a>        <font color="#000000">for</font> (i=0; i&lt;NOFILE; i++)
+<a name="line6829">6829: </a>                <font color="#000000">if</font> (u.u_ofile[i] == NULL) {
+<a name="line6830">6830: </a>                        u.u_ar0[R0] = i;
+<a name="line6831">6831: </a>                        <font color="#000000">return</font>(i);
+<a name="line6832">6832: </a>                }
+<a name="line6833">6833: </a>        u.u_error = EMFILE;
+<a name="line6834">6834: </a>        <font color="#000000">return</font>(-1);
+<a name="line6835">6835: </a>}
+<a name="line6836">6836: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line6837">6837: </a>
+<a name="line6838">6838: </a><font color="#800000">/*</font>
+<a name="line6839">6839: </a><font color="#800000"> * Allocate a user file descriptor</font>
+<a name="line6840">6840: </a><font color="#800000"> * and a file structure.</font>
+<a name="line6841">6841: </a><font color="#800000"> * Initialize the descriptor</font>
+<a name="line6842">6842: </a><font color="#800000"> * to point at the file structure.</font>
+<a name="line6843">6843: </a><font color="#800000"> *</font>
+<a name="line6844">6844: </a><font color="#800000"> * no file -- if there are no available</font>
+<a name="line6845">6845: </a><font color="#800000"> *      file structures.</font>
+<a name="line6846">6846: </a><font color="#800000"> */</font>
+<a name="line6847">6847: </a><font color="#000000"><a name="alloc"></a>falloc()</font>
+<a name="line6848">6848: </a>{
+<a name="line6849">6849: </a>        register <font color="#000000">struct file</font> *fp;
+<a name="line6850">6850: </a>        register i;
+<a name="line6851">6851: </a>
+<a name="line6852">6852: </a>        <font color="#000000">if</font> ((i = ufalloc()) &lt; 0)
+<a name="line6853">6853: </a>                <font color="#000000">return</font>(NULL);
+<a name="line6854">6854: </a>        <font color="#000000">for</font> (fp = &amp;file[0]; fp &lt; &amp;file[NFILE]; fp++)
+<a name="line6855">6855: </a>                <font color="#000000">if</font> (fp-&gt;f_count==0) {
+<a name="line6856">6856: </a>                        u.u_ofile[i] = fp;
+<a name="line6857">6857: </a>                        fp-&gt;f_count++;
+<a name="line6858">6858: </a>                        fp-&gt;f_offset[0] = 0;
+<a name="line6859">6859: </a>                        fp-&gt;f_offset[1] = 0;
+<a name="line6860">6860: </a>                        <font color="#000000">return</font>(fp);
+<a name="line6861">6861: </a>                }
+<a name="line6862">6862: </a>        printf(<font color="#000000">"no file\n"</font>);
+<a name="line6863">6863: </a>        u.u_error = ENFILE;
+<a name="line6864">6864: </a>        <font color="#000000">return</font>(NULL);
+<a name="line6865">6865: </a>}
+<a name="line6866">6866: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>
+>>>>>>> gh-pages
 
 <html>
 <head>

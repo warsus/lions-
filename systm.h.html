@@ -1,0 +1,92 @@
+
+<html>
+<head>
+<title>systm.h</title>
+<meta name="generator" content="c2html 0.9.5">
+<meta name="date" content="2003-04-13T09:21:55+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+<pre width="80"><a name="line200">0200: </a><font color="#800000">/* Random set of variables used by more than one routine. */</font>
+<a name="line201">0201: </a>
+<a name="line202">0202: </a>char    canonb[CANBSIZ];        <font color="#800000">/* buffer for erase and kill (#@) */</font>
+<a name="line203">0203: </a>int     coremap[CMAPSIZ];       <font color="#800000">/* space for core allocation */</font>
+<a name="line204">0204: </a>int     swapmap[SMAPSIZ];       <font color="#800000">/* space for swap allocation */</font>
+<a name="line205">0205: </a>
+<a name="line206">0206: </a>int     *rootdir;               <font color="#800000">/* pointer to inode of root directory */</font>
+<a name="line207">0207: </a>
+<a name="line208">0208: </a>int     cputype;                <font color="#800000">/* type of cpu =40, 45, or 70 */</font>
+<a name="line209">0209: </a>
+<a name="line210">0210: </a>int     execnt;                 <font color="#800000">/* number of processes in exec */</font>
+<a name="line211">0211: </a>
+<a name="line212">0212: </a>int     lbolt;                  <font color="#800000">/* time of day in 60th not in time */</font>
+<a name="line213">0213: </a>int     time[2];                <font color="#800000">/* time in sec from 1970 */</font>
+<a name="line214">0214: </a>int     tout[2];                <font color="#800000">/* time of day of next sleep */</font>
+<a name="line215">0215: </a>
+<a name="line216">0216: </a>int     mpid;                   <font color="#800000">/* generic for unique process id's */</font>
+<a name="line217">0217: </a>
+<a name="line218">0218: </a>char    runin;                  <font color="#800000">/* scheduling flag */</font>
+<a name="line219">0219: </a>char    runout;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line220">0220: </a>char    runrun;                 <font color="#800000">/* scheduling flag */</font>
+<a name="line221">0221: </a>
+<a name="line222">0222: </a>char    curpri;                 <font color="#800000">/* more scheduling */</font>
+<a name="line223">0223: </a>
+<a name="line224">0224: </a>int     maxmem;                 <font color="#800000">/* actual max memory per process */</font>
+<a name="line225">0225: </a>
+<a name="line226">0226: </a>int     *lks;                   <font color="#800000">/* pointer to clock device */</font>
+<a name="line227">0227: </a>
+<a name="line228">0228: </a>int     rootdev;                <font color="#800000">/* dev of root see conf.c */</font>
+<a name="line229">0229: </a>int     swapdev;                <font color="#800000">/* dev of swap see conf.c */</font>
+<a name="line230">0230: </a>
+<a name="line231">0231: </a>int     swplo;                  <font color="#800000">/* block number of swap space */</font>
+<a name="line232">0232: </a>int     nswap;                  <font color="#800000">/* size of swap space */</font>
+<a name="line233">0233: </a>
+<a name="line234">0234: </a>int     updlock;                <font color="#800000">/* lock for sync */</font>
+<a name="line235">0235: </a>int     rablock;                <font color="#800000">/* block to be read ahead */</font>
+<a name="line236">0236: </a>
+<a name="line237">0237: </a>char    regloc[];               <font color="#800000">/* locs. of saved user registers (trap.c) */</font>
+<a name="line238">0238: </a>
+<a name="line239">0239: </a>
+<a name="line240">0240: </a>
+<a name="line241">0241: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line242">0242: </a>
+<a name="line243">0243: </a>
+<a name="line244">0244: </a>
+<a name="line245">0245: </a>
+<a name="line246">0246: </a>
+<a name="line247">0247: </a>
+<a name="line248">0248: </a>
+<a name="line249">0249: </a>
+<a name="line250">0250: </a>
+<a name="line251">0251: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line252">0252: </a>
+<a name="line253">0253: </a><font color="#800000">/* The callout structure is for a routine</font>
+<a name="line254">0254: </a><font color="#800000"> * arranging to be called by the clock interrupt</font>
+<a name="line255">0255: </a><font color="#800000"> * (clock.c) with a specified argument,</font>
+<a name="line256">0256: </a><font color="#800000"> * within a specified amount of time.</font>
+<a name="line257">0257: </a><font color="#800000"> * It is used, for example, to time tab delays</font>
+<a name="line258">0258: </a><font color="#800000"> * on teletypes. */</font>
+<a name="line259">0259: </a>
+<a name="line260">0260: </a><font color="#000000">struct</font>  callo
+<a name="line261">0261: </a>{
+<a name="line262">0262: </a>        int     c_time;         <font color="#800000">/* incremental time */</font>
+<a name="line263">0263: </a>        int     c_arg;          <font color="#800000">/* argument to routine */</font>
+<a name="line264">0264: </a>        int     (*c_func)();    <font color="#800000">/* routine */</font>
+<a name="line265">0265: </a>} callout[NCALL];
+<a name="line266">0266: </a><font color="#800000">/* ---------------------------       */</font>
+<a name="line267">0267: </a>
+<a name="line268">0268: </a><font color="#800000">/* Mount structure.</font>
+<a name="line269">0269: </a><font color="#800000"> * One allocated on every mount. Used to find the super block.</font>
+<a name="line270">0270: </a><font color="#800000"> */</font>
+<a name="line271">0271: </a>
+<a name="line272">0272: </a><font color="#000000">struct</font>  mount
+<a name="line273">0273: </a>{
+<a name="line274">0274: </a>        int     m_dev;          <font color="#800000">/* device mounted */</font>
+<a name="line275">0275: </a>        int     *m_bufp;        <font color="#800000">/* pointer to superblock */</font>
+<a name="line276">0276: </a>        int     *m_inodp;       <font color="#800000">/* pointer to mounted on inode */</font>
+<a name="line277">0277: </a>} mount[NMOUNT];
+<a name="line278">0278: </a><font color="#800000">/* ---------------------------       */</font>
+</pre>
+</body>
+
+</html>
