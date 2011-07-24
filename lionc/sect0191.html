@@ -48,8 +48,8 @@
 
 <div><h1 id="a0000000192">16 The RK Disk Driver</h1>
 <p>The RK disk storage system employs a removable disk cartridge containing a single disk, which is mounted inside a drive with moving read/write heads. </p><p>The device designated RK11-D consists of a disk controller together with a single drive. Additional drives, designated RK05, up to a total of seven, may be added to a single RK11-D. </p><p>A requirement for more than eight drives would require an additional controller with a different set of UNIBUS addresses. Also the code in the file “rk.c” would have to be modified to handle the case of two or more controllers. This case is most unlikely because requirements for large amounts of on-line disk storage will be more economically provided otherwise e.g. by the RP04 disk system. </p><center> <div class="tabbing">
-<img src="images/img-0015.png" alt="\begin{tabbing}  Cartridge \=  capacity: \=  1,228,800 words\\ \&gt;  (4800 512 byte records)\\ Surfaces/cartridge: \&gt;  \&gt;  2\\ Tracks/surface: \&gt;  \&gt; 200 (plus 3 spare)\\ Sectors/Track: \&gt;  \&gt;  12\\ Words/Sector: \&gt;  \&gt;  256\\ Recording density: \&gt;  \&gt;  2040 bpi maximum\\ Rotation speed: \&gt;  \&gt;  1500 rpm\\ Half revolution: \&gt;  \&gt;  20 msecs\\ Track positioning:\\ \&gt;  10 msecs (one track)\\ \&gt;  50 msecs (average)\\ \&gt;  85 msecs (worst case)\\ Interrupt Vector Address: 220\\ Priority Level: \&gt;  \&gt;  5\\ \end{tabbing}" style="width:&images/img-0015.png-width;&px;; height:&images/img-0015.png-height;&px;" class="tabbing gen" />
-</div> </center><table class="tabular" cellspacing="0">
+<img src="images/img-0015.png" alt="\begin{tabbing}  Cartridge \=  capacity: \=  1,228,800 words\\ \&gt;  (4800 512 byte records)\\ Surfaces/cartridge: \&gt;  \&gt;  2\\ Tracks/surface: \&gt;  \&gt; 200 (plus 3 spare)\\ Sectors/Track: \&gt;  \&gt;  12\\ Words/Sector: \&gt;  \&gt;  256\\ Recording density: \&gt;  \&gt;  2040 bpi maximum\\ Rotation speed: \&gt;  \&gt;  1500 rpm\\ Half revolution: \&gt;  \&gt;  20 msecs\\ Track positioning:\\ \&gt;  10 msecs (one track)\\ \&gt;  50 msecs (average)\\ \&gt;  85 msecs (worst case)\\ Interrupt Vector Address: 220\\ Priority Level: \&gt;  \&gt;  5\\ \end{tabbing}" style="width:23px; height:12px" class="tabbing gen" />
+</div> </center><table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -133,7 +133,7 @@
     <td style="text-align:left"><p> 777416 </p></td>
 
 </tr>
-</table><center> Table 16.1 RK Vital Statistics </center><p>The average total access time is 70 milllseconds. With multi-drive subsystems, seeking by one drive may be overlapped with reading or writing by another drive. However this feature is not used by UNIX because of bugs which existed at one time in the hardware controller. </p><p>In initiating a data transfer, RKDA, RRBA and RKC are set, and then RKCS is set. Upon completion, status information is available in RKCS, RRER and RKDS. When an error occurs, UNIX simply calls “deverror” (2447) to display RKER and RKDS on the system console, without any attempt at analysis. An operation is repeated up to ten times before an error is reported by the device driver. </p><p>The register formats which are described fully in the “PDP11 Peripherals Handbook” are reflected in the program code at several points. The following summaries suffice to describe the features used by UNIX: </p><table class="tabular" cellspacing="0">
+</table><center> Table 16.1 RK Vital Statistics </center><p>The average total access time is 70 milllseconds. With multi-drive subsystems, seeking by one drive may be overlapped with reading or writing by another drive. However this feature is not used by UNIX because of bugs which existed at one time in the hardware controller. </p><p>In initiating a data transfer, RKDA, RRBA and RKC are set, and then RKCS is set. Upon completion, status information is available in RKCS, RRER and RKDS. When an error occurs, UNIX simply calls “deverror” (2447) to display RKER and RKDS on the system console, without any attempt at analysis. An operation is repeated up to ten times before an error is reported by the device driver. </p><p>The register formats which are described fully in the “PDP11 Peripherals Handbook” are reflected in the program code at several points. The following summaries suffice to describe the features used by UNIX: </p><table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -329,7 +329,7 @@
     <td style="border-bottom-width:1px; border-bottom-color:black; border-bottom-style:solid; text-align:center" colspan="2"><p><b class="bf">Word Count Register (RKWC)</b></p></td>
 
 </tr>
-</table><p>Contains the twos complement of the number of words to be transferred. </p><table class="tabular" cellspacing="0">
+</table><p>Contains the twos complement of the number of words to be transferred. </p><table cellspacing="0" class="tabular">
 <tr>
 
     

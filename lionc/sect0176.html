@@ -55,7 +55,7 @@
 <p>Process #0 executes “sched”. When it is not waiting for the completion of an input/output operation that it has initiated, it spends most of its time waiting in one of the following situations: </p><dl class="description">
 
     <dt>A. (runout)</dt>
-    <dd><p>None of the processes which are swap­ped out is ready to run, so that there is nothing to do. The situation may be changed by a call to “wakeup”, or to “xswap” called by either “newproc” or “expand”. </p></dd>
+    <dd><p>None of the processes which are swapped out is ready to run, so that there is nothing to do. The situation may be changed by a call to “wakeup”, or to “xswap” called by either “newproc” or “expand”. </p></dd>
 
     <dt>B. (runin)</dt>
     <dd><p>There is at least one process swapped out and ready to run, but it hasn’t been out more than 3 seconds and/or none of the processes presently in main memory is inactive or has been there more than 2 seconds. The situation may be changed by the effluxion of time as measured by “clock” or by a call to “sleep”. </p></dd>

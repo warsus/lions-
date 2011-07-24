@@ -52,7 +52,7 @@
 </div>
 
 <div><h2 id="a0000000094">7.9 An Example</h2>
-<p>Consider a program on the PDP11/40 which uses 1.7 pages of text, 3.3 pages of data, and 0.7 pages of stack area. (Our use of fractions in this example is admittedly a little crude.) The set of virtual addresses would be divided as shown in the following diagram: </p><center><table class="tabular" cellspacing="0">
+<p>Consider a program on the PDP11/40 which uses 1.7 pages of text, 3.3 pages of data, and 0.7 pages of stack area. (Our use of fractions in this example is admittedly a little crude.) The set of virtual addresses would be divided as shown in the following diagram: </p><center><table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -246,7 +246,7 @@
     <td style="text-align:left">&nbsp;</td>
 
 </tr>
-</table><p>Virtual Address Space </p></center><p>Two whole pages in the virtual address space must be allocated to the text segment, even though the physical area required is only 1.7 pages. </p><center><table class="tabular" cellspacing="0">
+</table><p>Virtual Address Space </p></center><p>Two whole pages in the virtual address space must be allocated to the text segment, even though the physical area required is only 1.7 pages. </p><center><table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -288,7 +288,7 @@
     <td style="text-align:left">&nbsp;</td>
 
 </tr>
-</table><p>Text Segment </p></center><p>The data and stack areas require the dedication of four and one pages of virtual address space, and 3.3 and 0.7 pages of physical memory respectively. </p><p>The whole data segment requires four and one eighth pages of physical memory. The extra eighth is for the “per process data area” which corresponds (from time to time) to the seventh kernel address page. </p><center><table class="tabular" cellspacing="0">
+</table><p>Text Segment </p></center><p>The data and stack areas require the dedication of four and one pages of virtual address space, and 3.3 and 0.7 pages of physical memory respectively. </p><p>The whole data segment requires four and one eighth pages of physical memory. The extra eighth is for the “per process data area” which corresponds (from time to time) to the seventh kernel address page. </p><center><table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -394,7 +394,7 @@
     <td style="text-align:left">&nbsp;</td>
 
 </tr>
-</table><p>Data Segment </p></center><p>Note the order of the components of the data segment, and that there is no embedded unused space. </p><p>The user mode segmentation need to be set to reflect the values in the following table, where “t”, “d” denote the block numbers of beginning of the text and data segments respectively: </p><table class="tabular" cellspacing="0">
+</table><p>Data Segment </p></center><p>Note the order of the components of the data segment, and that there is no embedded unused space. </p><p>The user mode segmentation need to be set to reflect the values in the following table, where “t”, “d” denote the block numbers of beginning of the text and data segments respectively: </p><table cellspacing="0" class="tabular">
 <tr>
 
     

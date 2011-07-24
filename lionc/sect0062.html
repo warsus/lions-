@@ -65,7 +65,7 @@
 
 </dl><p>The above rules provide a complete specification for “mfree”, and a specification for “malloc” which is complete except in one respect: We need to specify how the resource allocation is actually made when there exists more than one way of performing it. </p><p>The method adopted in “malloc” is one known as “First Fit” for reasons which should become obvious. </p><p>As an illustration of how the resource “map” is maintained, suppose the following three resource areas were available: </p><ul class="itemize">
 <li><p>an area of size 15 beginning at location 47 and ending at location 61; </p></li><li><p>an area of size 13 spanning addresses 27 to 39 inclusive; </p></li><li><p>an area of size 7 beginning at location 65. </p></li>
-</ul><p>Then the “map” would contain: </p><center> <table class="tabular" cellspacing="0">
+</ul><p>Then the “map” would contain: </p><center> <table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -133,7 +133,7 @@
     <td style="text-align:center"><p> ??</p></td>
 
 </tr>
-</table> </center><p>If a request for a space of size 7 were received, the area would be allocated starting at location 27, and the “map” would become: </p><center> <table class="tabular" cellspacing="0">
+</table> </center><p>If a request for a space of size 7 were received, the area would be allocated starting at location 27, and the “map” would become: </p><center> <table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -201,7 +201,7 @@
     <td style="text-align:center"><p> ??</p></td>
 
 </tr>
-</table> </center><p>If the area spanning addresses 40 to 46 inclusive is returned to the available list, the “map” would become: </p><center> <table class="tabular" cellspacing="0">
+</table> </center><p>If the area spanning addresses 40 to 46 inclusive is returned to the available list, the “map” would become: </p><center> <table cellspacing="0" class="tabular">
 <tr>
 
     

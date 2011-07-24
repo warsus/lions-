@@ -85,17 +85,17 @@
     <dd><p>Try to find an area in main memory in which to create the new data segment; </p></dd>
 
     <a href="../all.html#line1902" target="source" <dt>1902:</dt></a>
-    <dd><p>If there is no suitable area in main memory, the new copy will have to be made on disk. The next section of code should be analysed carefully because of the inconsistency introduced at line 1891 i.e.<br />u.u_procp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" />p_addr != *ka6 </p></dd>
+    <dd><p>If there is no suitable area in main memory, the new copy will have to be made on disk. The next section of code should be analysed carefully because of the inconsistency introduced at line 1891 i.e.<br />u.u_procp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" />p_addr != *ka6 </p></dd>
 
     <a href="../all.html#line1903" target="source" <dt>1903:</dt></a>
     <dd><p>Mark the current process as “SIDL” to head off temporarily any further attempt to swap it out (i.e. initiated by “sched” (1940)); </p></dd>
 
     <a href="../all.html#line1904" target="source" <dt>1904:</dt></a>
-    <dd><p>Make the new “proc” entry consistent, i.e set rpp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" />p_addr = *ka6; </p></dd>
+    <dd><p>Make the new “proc” entry consistent, i.e set rpp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" />p_addr = *ka6; </p></dd>
 
     <a href="../all.html#line1905" target="source" <dt>1905:</dt></a>
     <dd><p>Save the current values of the environment and stack pointers in “u.u_ssav”; </p></dd>

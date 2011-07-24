@@ -55,22 +55,22 @@
 <p>This procedure returns the area of size “size” at address “aa” to the “resource map” designated by “mp”. The body of the procedure consists of a one line “for” statement, followed by a multiline “if” statement. </p><dl class="description">
 
     <a href="../all.html#line2564" target="source" <dt>2564:</dt></a>
-    <dd><p>The semicolon at the end of this line is extremely significant, terminating as it does the empty statement. (It would aid legibility if this character were moved to a line on its own, as is done on line 2394.) </p><p>Depending on your point of view, this statement demonstrates either the power or the obscurity of the “C” language. Try writing equivalent code to this statement in another language such as Pascal or PL/1. </p><p>Step “bp” through the list until an element is encountered either with an address greater than the address of the area being returned. </p><p>i.e. not “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" />m_addr <img src="images/img-0010.png" alt="$\le $" style="vertical-align:&images/img-0010.png-depth;&px;; 
-                                     width:&images/img-0010.png-width;&px;; 
-                                     height:&images/img-0010.png-height;&px;" class="math gen" /> a” </p><p>or which indicates the end of the list </p><p>i.e. not “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" />m_size != 0”; </p></dd>
+    <dd><p>The semicolon at the end of this line is extremely significant, terminating as it does the empty statement. (It would aid legibility if this character were moved to a line on its own, as is done on line 2394.) </p><p>Depending on your point of view, this statement demonstrates either the power or the obscurity of the “C” language. Try writing equivalent code to this statement in another language such as Pascal or PL/1. </p><p>Step “bp” through the list until an element is encountered either with an address greater than the address of the area being returned. </p><p>i.e. not “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" />m_addr <img src="images/img-0010.png" alt="$\le $" style="vertical-align:-2px; 
+                                     width:11px; 
+                                     height:13px" class="math gen" /> a” </p><p>or which indicates the end of the list </p><p>i.e. not “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" />m_size != 0”; </p></dd>
 
     <a href="../all.html#line2565" target="source" <dt>2565:</dt></a>
-    <dd><p>We have now located the element in front of which we should insert the new list element. The question is: Will the list grow larger by one element or will amalgamation keep the number of elements the same or even reduce it by one? </p><p>If “bp <img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" /> mp” we are not trying to insert at the beginning of the list. If<br />(bp-l)-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" />m_addr+(bp-l)-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" />m_size==a </p><p>then the area being return abuts the previous element in the list; </p></dd>
+    <dd><p>We have now located the element in front of which we should insert the new list element. The question is: Will the list grow larger by one element or will amalgamation keep the number of elements the same or even reduce it by one? </p><p>If “bp <img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" /> mp” we are not trying to insert at the beginning of the list. If<br />(bp-l)-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" />m_addr+(bp-l)-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" />m_size==a </p><p>then the area being return abuts the previous element in the list; </p></dd>
 
     <a href="../all.html#line2566" target="source" <dt>2566:</dt></a>
     <dd><p>Increase the size of the previous list element by the size of the area being returned; </p></dd>
@@ -82,9 +82,9 @@
     <dd><p>Add the size of the next element of the list to the size of the previous element; </p></dd>
 
     <a href="../all.html#line2569" target="source" <dt>2569:</dt></a>
-    <dd><p>Move all the remaining list elements (up to the one containing the final zero size) down one place. </p><p>Note that if the test on line 2567 fortuitously gives a true result when “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:&images/img-0005.png-depth;&px;; 
-                                     width:&images/img-0005.png-width;&px;; 
-                                     height:&images/img-0005.png-height;&px;" class="math gen" />m_size” is zero no harm is done; </p></dd>
+    <dd><p>Move all the remaining list elements (up to the one containing the final zero size) down one place. </p><p>Note that if the test on line 2567 fortuitously gives a true result when “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:9px" class="math gen" />m_size” is zero no harm is done; </p></dd>
 
     <a href="../all.html#line2576" target="source" <dt>2576:</dt></a>
     <dd><p>This statement is reached if the test on line 2565 failed i.e. the area being returned cannot be amalgamated with the previous element on the list. </p><p>Can it be amalgamated with the next element? Note the check that the next element is not null; </p></dd>
