@@ -94,9 +94,9 @@
     <dd><p>Investigate the overheads involved in initiating a new process. Perform a series of measurements for a set of different sized programs under different conditions. </p></dd>
 
     <dt>1.12</dt>
-    <dd><p>Evaluate the following scheme which is intended by Ken Thompson as the basis for a revised scheduling algorithm: </p><p>A number “p” is kept for each process, stored as “p_cpu”. “p” is incremented by one every clock tick that the process is found to be executing. “p” therefore accumulates the CPU usage. Every second, each value of “p” is replaced by four fifths of its value rounded to the nearest integer. This means that “o” has values which are bounded by zero and the solution of the equation <img src="images/img-0022.png" alt="$k = 0.8*(k + HZ)$" style="vertical-align:0px; 
-                                     width:15px; 
-                                     height:9px" class="math gen" /> i.e. 4*HZ. Hence if HZ is 50 or 60, and “p” is integerised, “p” can be stored in one byte. </p></dd>
+    <dd><p>Evaluate the following scheme which is intended by Ken Thompson as the basis for a revised scheduling algorithm: </p><p>A number “p” is kept for each process, stored as “p_cpu”. “p” is incremented by one every clock tick that the process is found to be executing. “p” therefore accumulates the CPU usage. Every second, each value of “p” is replaced by four fifths of its value rounded to the nearest integer. This means that “o” has values which are bounded by zero and the solution of the equation <img src="images/img-0022.png" alt="$k = 0.8*(k + HZ)$" style="vertical-align:-4px; 
+                                     width:129px; 
+                                     height:16px" class="math gen" /> i.e. 4*HZ. Hence if HZ is 50 or 60, and “p” is integerised, “p” can be stored in one byte. </p></dd>
 
     <dt>1.13</dt>
     <dd><p>The “proc” table is always searched via a direct linear search. As the table size is increased, the search overheads also increase. Survey the alternatives for improving the search mechanism, when “NPROC” is say 300. </p></dd>

@@ -89,11 +89,11 @@
 
     <a href="../all.html#line0788" target="source" <dt>0788:</dt></a>
     <dd><p>After the specialised interrupt routine (in this case “clock”) returns, a check (“runrun <img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" /> 0”) is made to see if any process of higher priority than the current process is ready to run. If the decision is to allow the current process to continue, then it is important that it be not interrupted as it restores its registers prior to the “return from interrupt” instruction. Hence before the test, the processor priority is raised to seven (line 0787), thus ensuring that no more interrupts occur until user mode is resumed. (Another interrupt may occur immediately thereafter, however.) </p></dd>
 
 </dl><p>If “runrun <img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" /> 0”, then another, higher priority, process is waiting. The processor priority is reset to 0, allowing any pending interrupt to be taken. A call is then made to “swtch” (2178), to allow the higher priority process to proceed. When the process returns from “swtch”, the program loops back to repeat the test. </p><p>The above discussion obviously extends to all interrupts. The only part which relates specifically to the clock interrupt is the call on the specialised routine “clock”. </p></div>
 
 

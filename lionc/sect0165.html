@@ -55,13 +55,13 @@
 <p>The parameter, “sp”, of this procedure defines the address of a word which should be included in the user mode stack. </p><dl class="description">
 
     <a href="../all.html#line4141" target="source" <dt>4141:</dt></a>
-    <dd><p>If the stack already extends far enough, simply return with a zero value. </p><p>Note that this test relies on the idiosyncrasies of 2’s complement arithmetic, and if both </p><center> <tt>|</tt>sp<tt>|</tt> <img src="images/img-0013.png" alt="$&gt; 2^{15}$" style="vertical-align:-57px; 
-                                     width:354px; 
-                                     height:38px" class="math gen" /> </center><p>and </p><center> <tt>|</tt>u.u_size <img src="images/img-0014.png" alt="$* 64$" style="vertical-align:0px; 
-                                     width:37px; 
-                                     height:14px" class="math gen" /><tt>|</tt> <img src="images/img-0013.png" alt="$&gt; 2^{15}$" style="vertical-align:-57px; 
-                                     width:354px; 
-                                     height:38px" class="math gen" /> </center><p>the decision to extend the stack may be taken wrongly at this juncture; </p></dd>
+    <dd><p>If the stack already extends far enough, simply return with a zero value. </p><p>Note that this test relies on the idiosyncrasies of 2’s complement arithmetic, and if both </p><center> <tt>|</tt>sp<tt>|</tt> <img src="images/img-0013.png" alt="$&gt; 2^{15}$" style="vertical-align:0px; 
+                                     width:35px; 
+                                     height:14px" class="math gen" /> </center><p>and </p><center> <tt>|</tt>u.u_size <img src="images/img-0014.png" alt="$* 64$" style="vertical-align:0px; 
+                                     width:22px; 
+                                     height:11px" class="math gen" /><tt>|</tt> <img src="images/img-0013.png" alt="$&gt; 2^{15}$" style="vertical-align:0px; 
+                                     width:35px; 
+                                     height:14px" class="math gen" /> </center><p>the decision to extend the stack may be taken wrongly at this juncture; </p></dd>
 
     <a href="../all.html#line4143" target="source" <dt>4143:</dt></a>
     <dd><p>Calculate the stack size increment needed to include the new stack point plus a 20*32 word margin; </p></dd>

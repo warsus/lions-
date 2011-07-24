@@ -64,7 +64,7 @@
 </pre><p>The second last statement is interesting because it could have been written as </p><pre>
    rbp-&gt;b_flags = rbp-&gt;b_flags | B_ASYNC;
 </pre><p>In this statement the bit mask “B ASYNC” is “or”ed into “rbp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" />b_flags”. The symbol “<tt>|</tt>” is the logical disjunction for arithmetic values. </p><p>This is an example of a very useful construction in UNIX, which can save the programmer much labour. If “O” is any binary operator, then </p><pre>
     x = x O a;
 </pre><p>where “a” is an expression, can be rewritten more succinctly as </p><pre>

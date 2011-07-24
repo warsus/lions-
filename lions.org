@@ -1,2 +1,7 @@
-* TODO Fix arrows (->) in html
-Plastex puts "<" instead of ">"
+* DONE Fix images 
+CLOSED: [2011-07-24 Sun 23:07]
+plastex generates one more image than it should.
+every image is off by one.
+See [[file:lionc/images.tex][images.tex]].
+The first image generated is 15pt which only occurs 
+Fix: Removed \tolerance and \hfuxx macros from lionsc.tex preamble, which confused plastex.

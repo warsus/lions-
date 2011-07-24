@@ -66,14 +66,14 @@
     <dd><p>The “for” statement initialises “bp” to point to the first element of the resource map. At each succeeding iteration “bp” is incremented to point to the next “map” structure. </p></dd>
 
 </dl><p>Note that the continuation condition<br />“bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" />m_size” is an expression, which becomes zero with the sentinel is referenced. This expression could have been written equivalently but more transparently as “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" />m_size<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
-                                     height:9px" class="math gen" />0”. </p><p>Note also that no explicit test for the end of the array is made. (It can be shown that this latter is not necessary provided CMAPSIZ, SMAPSIZ <img src="images/img-0009.png" alt="$\ge $" style="vertical-align:0px; 
-                                     width:24px; 
-                                     height:10px" class="math gen" /> 2 * NPROC !) </p><dl class="description">
+                                     width:10px; 
+                                     height:9px" class="math gen" />0”. </p><p>Note also that no explicit test for the end of the array is made. (It can be shown that this latter is not necessary provided CMAPSIZ, SMAPSIZ <img src="images/img-0009.png" alt="$\ge $" style="vertical-align:-2px; 
+                                     width:10px; 
+                                     height:12px" class="math gen" /> 2 * NPROC !) </p><dl class="description">
 
     <a href="../all.html#line2535" target="source" <dt>2535:</dt></a>
     <dd><p>If the list element defines an area at least as large as that requested, then ... </p></dd>
@@ -92,13 +92,13 @@
 
     <a href="../all.html#line2542" target="source" <dt>2542:</dt></a>
     <dd><p>The “while” continuation condition does <b class="bf">not</b> test the equality of “(bp-l)-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" />m_size” and<br />bm-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" />m_size ! </p><p>The value tested is the value assigned to<br />“(bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" />m_size” copied from “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
-                                     width:11px; 
+                                     width:10px; 
                                      height:9px" class="math gen" />m_size”. </p><p>(You are forgiven for not recognising this at once.); </p></dd>
 
     <a href="../all.html#line2543" target="source" <dt>2543:</dt></a>

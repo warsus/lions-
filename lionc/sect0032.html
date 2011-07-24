@@ -78,19 +78,19 @@
     b = b+1; a = a+1;
 </pre><p>but “C” provides a shorter notation (which is more useful when the variable names are longer) viz. </p><pre>
     b++; a++;
-</pre><p>Now there is no difference between the statements “b++;” and “++b;” here. </p><p>However “b++” and “++b” may be used as terms in an expression, in which case they are different. In both cases the effect of incrementing “b” is retained, but the value which enters the expression is the initial value for “b++” and the final value for “++b”. </p><p>The “<img src="images/img-0007.png" alt="$–$" style="vertical-align:-1px; 
-                                     width:24px; 
-                                     height:12px" class="math gen" />” operator obeys the same rules as the “++” operator, except that it decrements by one. Thus “<img src="images/img-0007.png" alt="$–$" style="vertical-align:-1px; 
-                                     width:24px; 
-                                     height:12px" class="math gen" />c” enters an expression as the value after decrementation. </p><p>The “++” and “<img src="images/img-0007.png" alt="$–$" style="vertical-align:-1px; 
-                                     width:24px; 
-                                     height:12px" class="math gen" />” operators are very useful, and are used throughout UNIX. Occasionally you will have to go back to first principles to work out exactly what their use implies. Note also there is a difference between <tt class="tt">*b++</tt> and <tt class="tt">(*b)++</tt>. </p><p>These operators are applicable to pointers to structures as well as to simple data types. When a pointer which has been declared with reference to a particular type of structure is incremented, the actual value of the pointer is incremented by the size of the structure. </p><p>We can now see the meaning of the line </p><pre>
+</pre><p>Now there is no difference between the statements “b++;” and “++b;” here. </p><p>However “b++” and “++b” may be used as terms in an expression, in which case they are different. In both cases the effect of incrementing “b” is retained, but the value which enters the expression is the initial value for “b++” and the final value for “++b”. </p><p>The “<img src="images/img-0007.png" alt="$–$" style="vertical-align:3px; 
+                                     width:22px; 
+                                     height:2px" class="math gen" />” operator obeys the same rules as the “++” operator, except that it decrements by one. Thus “<img src="images/img-0007.png" alt="$–$" style="vertical-align:3px; 
+                                     width:22px; 
+                                     height:2px" class="math gen" />c” enters an expression as the value after decrementation. </p><p>The “++” and “<img src="images/img-0007.png" alt="$–$" style="vertical-align:3px; 
+                                     width:22px; 
+                                     height:2px" class="math gen" />” operators are very useful, and are used throughout UNIX. Occasionally you will have to go back to first principles to work out exactly what their use implies. Note also there is a difference between <tt class="tt">*b++</tt> and <tt class="tt">(*b)++</tt>. </p><p>These operators are applicable to pointers to structures as well as to simple data types. When a pointer which has been declared with reference to a particular type of structure is incremented, the actual value of the pointer is incremented by the size of the structure. </p><p>We can now see the meaning of the line </p><pre>
     *b++ = *a++;
 </pre><p>The word is copied and the pointers are incremented, all in one hit. </p><p>The line </p><pre>
     while (--c);
-</pre><p>delimits the end of the set of statements which began after the “do”. The expression in parentheses “<img src="images/img-0007.png" alt="$–$" style="vertical-align:-1px; 
-                                     width:24px; 
-                                     height:12px" class="math gen" />c”, is evaluated and tested (the value tested is the value after decrementation). If the value is non-zero, the loop is repeated, else it is terminated. </p><p>Obviously if the initial value for “count” were negative, the loop would not terminate properly. If this were a serious possibility then the routine would have to be modified. </p></div>
+</pre><p>delimits the end of the set of statements which began after the “do”. The expression in parentheses “<img src="images/img-0007.png" alt="$–$" style="vertical-align:3px; 
+                                     width:22px; 
+                                     height:2px" class="math gen" />c”, is evaluated and tested (the value tested is the value after decrementation). If the value is non-zero, the loop is repeated, else it is terminated. </p><p>Obviously if the initial value for “count” were negative, the loop would not terminate properly. If this were a serious possibility then the routine would have to be modified. </p></div>
 
 
 
