@@ -279,7 +279,7 @@
     <td style="text-align:left"><p> old r2 </p></td>
 
 </tr>
-</table><p>Figure 10.1 </p></center><p>Columns (2) and (3) give the positions of stack words relative to the positions in the stack of the words labelled “r0” and “tpc” respectively. </p><p>Columns (1) and (2) define (or explain) the contents of the file “reg.h” (Sheet 26). </p><p>“dev”, “sp”, “r1”, “nps” “r0”, “pc” and “ps” in that order are the names of the parameters used in the declaration of the procedures “trap” (2693) and “clock” (3725). </p><p>Note that just before entry to “trap” (“C” version) or the other interrupt handling routines, the values for the registers r2, r3, r4 and r5 have not yet been saved in the stack. This is performed by a call on “csv” (lg20) which is automatically included by the “C” compiler at the beginning of every compiled procedure. The form of the call on “csv” is equivalent to the assembler instruction </p><pre>
+</table><p>Figure 10.1 </p></center><p>Columns (2) and (3) give the positions of stack words relative to the positions in the stack of the words labelled “r0” and “tpc” respectively. </p><p>Columns (1) and (2) define (or explain) the contents of the file “reg.h” (Sheet 26). </p><p>“dev”, “sp”, “r1”, “nps” “r0”, “pc” and “ps” in that order are the names of the parameters used in the declaration of the procedures “trap” (<a target="source" href="../all.html#line2693">2693</a>) and “clock” (<a target="source" href="../all.html#line3725">3725</a>). </p><p>Note that just before entry to “trap” (“C” version) or the other interrupt handling routines, the values for the registers r2, r3, r4 and r5 have not yet been saved in the stack. This is performed by a call on “csv” (lg20) which is automatically included by the “C” compiler at the beginning of every compiled procedure. The form of the call on “csv” is equivalent to the assembler instruction </p><pre>
    jsr r5,csv
 </pre><p>This saves the current value of r5 on the stack and replaces it by the address of the next instruction in the “C” procedure. </p><dl class="description">
 
@@ -289,7 +289,7 @@
     <a href="../all.html#line1422" target="source" <dt>1422:</dt></a>
     <dd><p>the current value of the stack pointer is copied into r5. </p></dd>
 
-</dl><p>Note that at this point, r5 points to a stack location containing the previous value of r5 i.e. it points to the beginning of a chain of pointers, one per procedure, which “thread” the stack. When a “C” procedure exits, it actually returns to “cret” (1430) where the value of r5 is used to restore the stack and r2, r3 and r4 to their earlier condition (i.e. as they were immediately prior to entering the procedure). For this reason r5 is often called the <b class="bf">environment pointer</b>.  </p></div>
+</dl><p>Note that at this point, r5 points to a stack location containing the previous value of r5 i.e. it points to the beginning of a chain of pointers, one per procedure, which “thread” the stack. When a “C” procedure exits, it actually returns to “cret” (<a target="source" href="../all.html#line1430">1430</a>) where the value of r5 is used to restore the stack and r2, r3 and r4 to their earlier condition (i.e. as they were immediately prior to entering the procedure). For this reason r5 is often called the <b class="bf">environment pointer</b>.  </p></div>
 
 
 

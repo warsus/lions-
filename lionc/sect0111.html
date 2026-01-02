@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: setrun (2134)</title>
+<title>: setrun (<a target="source" href="../all.html#line2134">2134</a>)</title>
 
 <link href="sect0112.html" title="expand (2268)" rel="next" />
 <link href="sect0110.html" title="wakeup (2113)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">setrun (2134)</b>
+<b class="current">setrun (<a target="source" href="../all.html#line2134">2134</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000112">8.13 setrun (2134)</h2>
+<div><h2 id="a0000000112">8.13 setrun (<a target="source" href="../all.html#line2134">2134</a>)</h2>
 <dl class="description">
 
     <a href="../all.html#line2140" target="source" <dt>2140:</dt></a>
@@ -63,12 +63,12 @@
     <a href="../all.html#line2143" target="source" <dt>2143:</dt></a>
     <dd><p>If “sched” is sleeping, waiting for a process to “swap in”, and if the newly aroused process is on disk, wake up “sched”. </p></dd>
 
-</dl><p>Since it turns out that “sched” is the only procedure which calls sleep with “chan” equal to “&amp;runout”, line 2145 could be replaced by the recursive call </p><pre>
+</dl><p>Since it turns out that “sched” is the only procedure which calls sleep with “chan” equal to “&amp;runout”, line <a target="source" href="../all.html#line2145">2145</a> could be replaced by the recursive call </p><pre>
    setrun(&amp;proc[0]);
 </pre><p>or better still, by just </p><pre>
    rp = &amp;proc[0];
    goto sr;
-</pre><p>where “sr” is a label to be inserted at the beginning of line 2139. </p></div>
+</pre><p>where “sr” is a label to be inserted at the beginning of line <a target="source" href="../all.html#line2139">2139</a>. </p></div>
 
 
 

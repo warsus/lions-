@@ -67,7 +67,7 @@
 </tr><tr>
 
     
-    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>3034 </p></td>
+	<td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p><a target="source" href="../all.html#line3034">3034</a></p></td>
 
     
     <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> exec </p></td>
@@ -81,7 +81,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>3543 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line3543">3543</a></p></td>
 
     
     <td style="text-align:left"><p> chdir </p></td>
@@ -95,7 +95,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>5770 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line5770">5770</a></p></td>
 
     
     <td style="text-align:left"><p> open </p></td>
@@ -109,7 +109,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>5914 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line5914">5914</a></p></td>
 
     
     <td style="text-align:left"><p> link </p></td>
@@ -123,7 +123,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>6033 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line6033">6033</a></p></td>
 
     
     <td style="text-align:left"><p> stat </p></td>
@@ -137,7 +137,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>6097 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line6097">6097</a></p></td>
 
     
     <td style="text-align:left"><p> smount </p></td>
@@ -151,7 +151,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>6186 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line6186">6186</a></p></td>
 
     
     <td style="text-align:left"><p> getmdev </p></td>
@@ -165,7 +165,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>6976 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line6976">6976</a></p></td>
 
     
     <td style="text-align:left"><p> owner </p></td>
@@ -179,7 +179,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>5786 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line5786">5786</a></p></td>
 
     
     <td style="text-align:left"><p> creat </p></td>
@@ -193,7 +193,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>5928 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line5928">5928</a></p></td>
 
     
     <td style="text-align:left"><p> link </p></td>
@@ -207,7 +207,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>5958 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line5958">5958</a></p></td>
 
     
     <td style="text-align:left"><p> mknod </p></td>
@@ -221,7 +221,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>3515 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line3515">3515</a></p></td>
 
     
     <td style="text-align:left"><p> unlink </p></td>
@@ -235,7 +235,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p>4101 </p></td>
+	<td style="text-align:left"><p><a target="source" href="../all.html#line4101">4101</a></p></td>
 
     
     <td style="text-align:left"><p> core </p></td>
@@ -264,16 +264,16 @@
 </dl><p>“namei” may terminate in a variety of ways: </p><dl class="description">
 
     <dt>(a)</dt>
-    <dd><p>if there has been an error, then a “NULL” value is returned and the variable “u.u_error” is set. </p><p>(Most errors result in a branch to the label “out” (7669) so that reference counts for the inodes are properly maintained (7670). This is not necessary if the failure occurs in “iget” (7664).); </p></dd>
+    <dd><p>if there has been an error, then a “NULL” value is returned and the variable “u.u_error” is set. </p><p>(Most errors result in a branch to the label “out” (<a target="source" href="../all.html#line7669">7669</a>) so that reference counts for the inodes are properly maintained (<a target="source" href="../all.html#line7670">7670</a>). This is not necessary if the failure occurs in “iget” (<a target="source" href="../all.html#line7664">7664</a>).); </p></dd>
 
     <dt>(b)</dt>
-    <dd><p>if “flag==2” (i.e. the call is from “unlink”), the value returned (in normal circumstances) is an “inode” pointer for the parent directory of the named file (7660); </p></dd>
+    <dd><p>if “flag==2” (i.e. the call is from “unlink”), the value returned (in normal circumstances) is an “inode” pointer for the parent directory of the named file (<a target="source" href="../all.html#line7660">7660</a>); </p></dd>
 
     <dt>(c)</dt>
-    <dd><p>if “flag==1” (i.e. the call is from “creat” or “link” or “mknod”, and a file is to be created if it does not already exist) and if the named file does not exist, then a “NULL” value is returned (7610). In this case a pointer to the “inode” for the directory which will point to the new file, is left in “u.u_pdir” (7606). (Note also that in this case, “u.u_offset” is left pointing either at an empty directory entry or at the end of the directory file.); </p></dd>
+    <dd><p>if “flag==1” (i.e. the call is from “creat” or “link” or “mknod”, and a file is to be created if it does not already exist) and if the named file does not exist, then a “NULL” value is returned (<a target="source" href="../all.html#line7610">7610</a>). In this case a pointer to the “inode” for the directory which will point to the new file, is left in “u.u_pdir” (<a target="source" href="../all.html#line7606">7606</a>). (Note also that in this case, “u.u_offset” is left pointing either at an empty directory entry or at the end of the directory file.); </p></dd>
 
     <dt>(d)</dt>
-    <dd><p>if in the remaining cases, the file exists, an “inode” pointer for the file is returned (7551). The “inode” is locked and the reference count has been incremented. A call to “iput” is needed subsequently to undo both these side effects. </p></dd>
+    <dd><p>if in the remaining cases, the file exists, an “inode” pointer for the file is returned (<a target="source" href="../all.html#line7551">7551</a>). The “inode” is locked and the reference count has been incremented. A call to “iput” is needed subsequently to undo both these side effects. </p></dd>
 
 </dl></div>
 

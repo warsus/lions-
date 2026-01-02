@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: main (1550)</title>
+<title>: main (<a target="source" href="../all.html#line1550">1550</a>)</title>
 
 <link href="sect0077.html" title="Processes" rel="next" />
 <link href="sect0075.html" title="start (0612)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">main (1550)</b>
+<b class="current">main (<a target="source" href="../all.html#line1550">1550</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000077">6.3 main (1550)</h2>
+<div><h2 id="a0000000077">6.3 main (<a target="source" href="../all.html#line1550">1550</a>)</h2>
 <p>Upon entry to this procedure: </p><dl class="description">
 
     <dt>(a)</dt>
@@ -75,25 +75,25 @@
     <dd><p>“i” is initialised to the ordinal of the first 32 word block beyond the “per process data area” for process #0; </p></dd>
 
     <a href="../all.html#line1562" target="source" <dt>1562:</dt></a>
-    <dd><p>The first pair of user mode segmentation registers are used to provide a “moving window” into higher areas of the physical memory. </p><p>At each position of the window an attempt is made (using “fuibyte”) to read the first accessible word in the window. If this is not successful, it is assumed that the end of the physical memory has been reached. Otherwise the next 32 word block is initialised to zero (using “clearseg” (0676)) and added to the list of available memory, and the window is advanced by 32 words. </p></dd>
+    <dd><p>The first pair of user mode segmentation registers are used to provide a “moving window” into higher areas of the physical memory. </p><p>At each position of the window an attempt is made (using “fuibyte”) to read the first accessible word in the window. If this is not successful, it is assumed that the end of the physical memory has been reached. Otherwise the next 32 word block is initialised to zero (using “clearseg” (<a target="source" href="../all.html#line0676">0676</a>)) and added to the list of available memory, and the window is advanced by 32 words. </p></dd>
 
 </dl><p>“fuibyte” and “clearseg” are both to be found in “m40.s”, “fuibyte” will normally return a positive value in the range 0 to 255. However, in the exceptional case where the memory location referenced does not respond, the value –1 is returned. The way this is brought about is a little obscure, and will be explained later in Chapter Ten.) </p><dl class="description">
 
     <a href="../all.html#line1582" target="source" <dt>1582:</dt></a>
     <dd><p>“maxmem” defines the maximum amount of main memory which may be used by a user program. This is the minimum of: </p><ul class="itemize">
-<li><p>the physically available memory (“maxmem”); </p></li><li><p>an installation definable parameter (“MAXMEM”) (0135); </p></li><li><p>the ultimate limit imposed by the PDP11 architecture; </p></li>
+<li><p>the physically available memory (“maxmem”); </p></li><li><p>an installation definable parameter (“MAXMEM”) (<a target="source" href="../all.html#line0135">0135</a>); </p></li><li><p>the ultimate limit imposed by the PDP11 architecture; </p></li>
 </ul></dd>
 
     <a href="../all.html#line1583" target="source" <dt>1583:</dt></a>
-    <dd><p>“swapmap” defines available space on the swapping disk which may be used when user programs are swapped out of main memory. It is initialised to a single area of size “nswap”, starting at relative address “swplo”. Note that “nswap” and “swplo” are initialised in “conf.c” (lines 4697, 4698); </p></dd>
+    <dd><p>“swapmap” defines available space on the swapping disk which may be used when user programs are swapped out of main memory. It is initialised to a single area of size “nswap”, starting at relative address “swplo”. Note that “nswap” and “swplo” are initialised in “conf.c” (lines <a target="source" href="../all.html#line4697">4697</a>, <a target="source" href="../all.html#line4698">4698</a>); </p></dd>
 
     <a href="../all.html#line1589" target="source" <dt>1589:</dt></a>
     <dd><p>The significance of this and the next four lines will be discussed shortly; </p></dd>
 
     <a href="../all.html#line1599" target="source" <dt>1599:</dt></a>
-    <dd><p>The design of UNIX assumes the existence of a system clock which interrupts the processor at line frequency (i.e 50 Hz or 60 Hz). </p><p>There are two possible clock types available: a line frequency clock (KW11-L) which has a control register on the Unibus at address 777546, or a programmable, real-time clock (KW11-P) located at address 777540 (lines 1509, 1510). </p><p>UNIX does not presume which clock will be present. It attempts to read the status word for the line frequency clock first. If successful, that clock is initialised and the other (if present) remains unused. If the first attempt is unsuccessful, then the other clock is tried. If both attempts are unsuccessful, there is a call on “panic” which effectively halts the system with an error message to the operator. </p></dd>
+    <dd><p>The design of UNIX assumes the existence of a system clock which interrupts the processor at line frequency (i.e 50 Hz or 60 Hz). </p><p>There are two possible clock types available: a line frequency clock (KW11-L) which has a control register on the Unibus at address 777546, or a programmable, real-time clock (KW11-P) located at address 777540 (lines <a target="source" href="../all.html#line1509">1509</a>, <a target="source" href="../all.html#line1510">1510</a>). </p><p>UNIX does not presume which clock will be present. It attempts to read the status word for the line frequency clock first. If successful, that clock is initialised and the other (if present) remains unused. If the first attempt is unsuccessful, then the other clock is tried. If both attempts are unsuccessful, there is a call on “panic” which effectively halts the system with an error message to the operator. </p></dd>
 
-</dl><p>Since the absence of a clock will be indicated by a bus timeout error, it is convenient to make the reference via “fuiword”, preceded by the setting of a user mode segmentation register pair (1599, 1600). </p><dl class="description">
+</dl><p>Since the absence of a clock will be indicated by a bus timeout error, it is convenient to make the reference via “fuiword”, preceded by the setting of a user mode segmentation register pair (<a target="source" href="../all.html#line1599">1599</a>, <a target="source" href="../all.html#line1600">1600</a>). </p><dl class="description">
 
     <a href="../all.html#line1607" target="source" <dt>1607:</dt></a>
     <dd><p>Either type of clock is initialised by the statement </p><p>*lks = 0115; </p><p>As a consequence of this action, the clock will interrupt the processor within the next 20 milliseconds. This interrupt may occur at any time, but it will be convenient for this discussion to assume that no interrupt will occur before initialisation is complete; </p></dd>
@@ -102,10 +102,10 @@
     <dd><p>“cinit” (82l4) initialises the pool of character buffers. See Chapter 23; </p></dd>
 
     <a href="../all.html#line1614" target="source" <dt>1614:</dt></a>
-    <dd><p>“binit” (5055) initialises the pool of large buffers. See Chapter 17; </p></dd>
+    <dd><p>“binit” (<a target="source" href="../all.html#line5055">5055</a>) initialises the pool of large buffers. See Chapter 17; </p></dd>
 
     <a href="../all.html#line1615" target="source" <dt>1615:</dt></a>
-    <dd><p>“iinit” (6922) initialises table entries for the root device. See Chapter Twenty. </p></dd>
+    <dd><p>“iinit” (<a target="source" href="../all.html#line6922">6922</a>) initialises table entries for the root device. See Chapter Twenty. </p></dd>
 
 </dl></div>
 

@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: bwrite (4809)</title>
+<title>: bwrite (<a target="source" href="../all.html#line4809">4809</a>)</title>
 
 <link href="sect0209.html" title="bawrite (4856)" rel="next" />
 <link href="sect0207.html" title="breada (4773)" rel="prev" />
@@ -45,20 +45,20 @@
 </span><span>
 
 <span>
-<b class="current">bwrite (4809)</b>
+<b class="current">bwrite (<a target="source" href="../all.html#line4809">4809</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000209">17.10 bwrite (4809)</h2>
-<p>This is the standard procedure for writing to block devices. It is called by “exit” (3239), “bawrite” (4863), “getblk” (4963), “bflush” (5241), “free” (7021), “update” (7221) and “iupdat” (7400). N.B. “writei” calls “bawrite” (6310)! </p><dl class="description">
+<div><h2 id="a0000000209">17.10 bwrite (<a target="source" href="../all.html#line4809">4809</a>)</h2>
+<p>This is the standard procedure for writing to block devices. It is called by “exit” (<a target="source" href="../all.html#line3239">3239</a>), “bawrite” (<a target="source" href="../all.html#line4863">4863</a>), “getblk” (<a target="source" href="../all.html#line4963">4963</a>), “bflush” (<a target="source" href="../all.html#line5241">5241</a>), “free” (<a target="source" href="../all.html#line7021">7021</a>), “update” (<a target="source" href="../all.html#line7221">7221</a>) and “iupdat” (<a target="source" href="../all.html#line7400">7400</a>). N.B. “writei” calls “bawrite” (<a target="source" href="../all.html#line6310">6310</a>)! </p><dl class="description">
 
     <a href="../all.html#line4820" target="source" <dt>4820:</dt></a>
     <dd><p>If the “B_ASYNC” flag is not set, the procedure does not return until the i/o operation is completed; </p></dd>
 
     <a href="../all.html#line4823" target="source" <dt>4823:</dt></a>
-    <dd><p>If the “B_ASYNC” is set, but “B DELWRI” <b class="bf">was</b> not set (note “flag” is set at line 4816) call “geterror” (5336) to check on the error flag. (If “B_DELWRI” was set, and there is an error, sending the error indication to the right process is “too hard.”). The call (4824) on “geterror” will only report errors related to the initiation of the write operation. </p></dd>
+    <dd><p>If the “B_ASYNC” is set, but “B DELWRI” <b class="bf">was</b> not set (note “flag” is set at line <a target="source" href="../all.html#line4816">4816</a>) call “geterror” (<a target="source" href="../all.html#line5336">5336</a>) to check on the error flag. (If “B_DELWRI” was set, and there is an error, sending the error indication to the right process is “too hard.”). The call (<a target="source" href="../all.html#line4824">4824</a>) on “geterror” will only report errors related to the initiation of the write operation. </p></dd>
 
 </dl></div>
 

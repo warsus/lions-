@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: printn (2369)</title>
+<title>: printn (<a target="source" href="../all.html#line2369">2369</a>)</title>
 
 <link href="sect0069.html" title="putchar (2386)" rel="next" />
 <link href="sect0067.html" title="printf (2340)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">printn (2369)</b>
+<b class="current">printn (<a target="source" href="../all.html#line2369">2369</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000069">5.8 printn (2369)</h2>
+<div><h2 id="a0000000069">5.8 printn (<a target="source" href="../all.html#line2369">2369</a>)</h2>
 <p>This procedure calls itself recursively in order to generate the required digits in the required order. It might be possible to code this procedure more efficiently but not more completely. (Anyway, in view of the implementation of “putchar”, efficiency is hardly a consideration here.) </p><p>Suppose n = A*b + B where A = ldiv(n,b) and where B = lrem(n,b) satisfies <img src="images/img-0011.png" alt="$0 \le B &lt; b$" style="vertical-align:-2px; 
                                      width:69px; 
                                      height:13px" class="math gen" />. Then in order to display the value for n, we need to display the value for A followed by the value for B. </p><p>The latter is easy for b = 8 or 10: it consists of a single character. The former is easy if A = 0. It is also easy if “printn” is called recursively. Since A <img src="images/img-0004.png" alt="$&lt;$" style="vertical-align:0px; 
@@ -61,7 +61,7 @@
     <a href="../all.html#line2375" target="source" <dt>2375:</dt></a>
     <dd><p>Arithmetic values corresponding to digits are conveniently converted to their corresponding character representations by the addition of the character ‘0’. </p></dd>
 
-</dl><p>The procedures “ldiv” and “lrem” treat their first parameter as an unsigned integer (i.e. no sign extension, when a 16 bit value is extended to a 32 bit value before the actual division operation). They may be found beginning on lines 1392 and 1400 respectively. </p></div>
+</dl><p>The procedures “ldiv” and “lrem” treat their first parameter as an unsigned integer (i.e. no sign extension, when a 16 bit value is extended to a 32 bit value before the actual division operation). They may be found beginning on lines <a target="source" href="../all.html#line1392">1392</a> and <a target="source" href="../all.html#line1400">1400</a> respectively. </p></div>
 
 
 

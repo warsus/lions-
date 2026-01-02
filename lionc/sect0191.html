@@ -133,7 +133,7 @@
     <td style="text-align:left"><p> 777416 </p></td>
 
 </tr>
-</table><center> Table 16.1 RK Vital Statistics </center><p>The average total access time is 70 milllseconds. With multi-drive subsystems, seeking by one drive may be overlapped with reading or writing by another drive. However this feature is not used by UNIX because of bugs which existed at one time in the hardware controller. </p><p>In initiating a data transfer, RKDA, RRBA and RKC are set, and then RKCS is set. Upon completion, status information is available in RKCS, RRER and RKDS. When an error occurs, UNIX simply calls “deverror” (2447) to display RKER and RKDS on the system console, without any attempt at analysis. An operation is repeated up to ten times before an error is reported by the device driver. </p><p>The register formats which are described fully in the “PDP11 Peripherals Handbook” are reflected in the program code at several points. The following summaries suffice to describe the features used by UNIX: </p><table cellspacing="0" class="tabular">
+</table><center> Table 16.1 RK Vital Statistics </center><p>The average total access time is 70 milllseconds. With multi-drive subsystems, seeking by one drive may be overlapped with reading or writing by another drive. However this feature is not used by UNIX because of bugs which existed at one time in the hardware controller. </p><p>In initiating a data transfer, RKDA, RRBA and RKC are set, and then RKCS is set. Upon completion, status information is available in RKCS, RRER and RKDS. When an error occurs, UNIX simply calls “deverror” (<a target="source" href="../all.html#line2447">2447</a>) to display RKER and RKDS on the system console, without any attempt at analysis. An operation is repeated up to ten times before an error is reported by the device driver. </p><p>The register formats which are described fully in the “PDP11 Peripherals Handbook” are reflected in the program code at several points. The following summaries suffice to describe the features used by UNIX: </p><table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -382,15 +382,15 @@
 <ul>
 <li><a href="sect0192.html">16.1 The file ‘rk.c’</a>
    
-</li><li><a href="sect0193.html">16.2 rkstrategy (5389)</a>
+</li><li><a href="sect0193.html">16.2 rkstrategy (<a target="source" href="../all.html#line5389">5389</a>)</a>
    
-</li><li><a href="sect0194.html">16.3 rkaddr (5420)</a>
+</li><li><a href="sect0194.html">16.3 rkaddr (<a target="source" href="../all.html#line5420">5420</a>)</a>
    
-</li><li><a href="sect0195.html">16.4 devstart (5096)</a>
+</li><li><a href="sect0195.html">16.4 devstart (<a target="source" href="../all.html#line5096">5096</a>)</a>
    
-</li><li><a href="sect0196.html">16.5 rkintr (5451)</a>
+</li><li><a href="sect0196.html">16.5 rkintr (<a target="source" href="../all.html#line5451">5451</a>)</a>
    
-</li><li><a href="sect0197.html">16.6 iodone (5018)</a>
+</li><li><a href="sect0197.html">16.6 iodone (<a target="source" href="../all.html#line5018">5018</a>)</a>
    
 </li>
 

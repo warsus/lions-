@@ -52,12 +52,12 @@
 </div>
 
 <div><h2 id="a0000000182">15.1 The File ‘buf.h’</h2>
-<p>This file declares two structures called “buf” (4520) and “devtab” (4551). Instances of the structure “buf” are declared as ’bfreelist (4567) and as the array “buf” (!) (4535) with “NBUF” elements. </p><p>The structure “buf” is possibly misnamed because it is in fact a <b class="bf">buffer header</b> (or buffer control block). The buffer areas proper are allocated separately and declared (4720) as </p><pre>
+<p>This file declares two structures called “buf” (<a target="source" href="../all.html#line4520">4520</a>) and “devtab” (<a target="source" href="../all.html#line4551">4551</a>). Instances of the structure “buf” are declared as ’bfreelist (<a target="source" href="../all.html#line4567">4567</a>) and as the array “buf” (!) (<a target="source" href="../all.html#line4535">4535</a>) with “NBUF” elements. </p><p>The structure “buf” is possibly misnamed because it is in fact a <b class="bf">buffer header</b> (or buffer control block). The buffer areas proper are allocated separately and declared (<a target="source" href="../all.html#line4720">4720</a>) as </p><pre>
    ``char buffers [NBUF] [514];''
-</pre><p>Pointers from the “buf” array to the “buffers” array are set up by the procedure “binit”. </p><p>Other instances of the structure “buf” are declared as “swbuf” (4721) and “rrkbuf” (5387). No 514 character buffer areas are associated with “bfreelist” or “swbuf” or “rrkbuf”. </p><p>The “buf” structure may be divided into three parts: </p><dl class="description">
+</pre><p>Pointers from the “buf” array to the “buffers” array are set up by the procedure “binit”. </p><p>Other instances of the structure “buf” are declared as “swbuf” (<a target="source" href="../all.html#line4721">4721</a>) and “rrkbuf” (<a target="source" href="../all.html#line5387">5387</a>). No 514 character buffer areas are associated with “bfreelist” or “swbuf” or “rrkbuf”. </p><p>The “buf” structure may be divided into three parts: </p><dl class="description">
 
     <dt>(a) flags</dt>
-    <dd><p>These convey status information and are contained within a single word. Masks for setting these flags are defined as “B_WRITE”, “B_READ” etc. in lines 4572 to 4586. </p></dd>
+    <dd><p>These convey status information and are contained within a single word. Masks for setting these flags are defined as “B_WRITE”, “B_READ” etc. in lines <a target="source" href="../all.html#line4572">4572</a> to <a target="source" href="../all.html#line4586">4586</a>. </p></dd>
 
     <dt>(b) list pointer</dt>
     <dd><p>Forward and backward pointers for two doubly linked lists, which we shall refer to as the “b”-list and the “av”-list. </p></dd>

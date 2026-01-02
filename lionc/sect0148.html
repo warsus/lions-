@@ -47,7 +47,7 @@
 </div>
 
 <div><h1 id="a0000000149">13 Software Interrupts</h1>
-<p>The principal concern of this chapter is the content of the file “sig.c”, which appears on Sheets 39 to 42. This file introduces a facility for communication between processes. In particular it provides for the course of one “user mode” process to be interrupted, diverted or terminated by the action of another process or as the result of an error or operator action. </p><p>In this discussion the term “software interrupt” has been deliberately used in place of the term “signal”. This latter has been eschewed because it has obtained connotations in the UNIX milieu which are rather different from the usage of ordinary English. </p><p>UNIX recognises 20 (“NSIG”, line 0113) different types of software interrupts, of which (as the reader may discover for himself by perusal of the the Section “SIGNAL (II)” of the UPM) thirteen have standard names and associations. Interrupt type #0 is interpreted as “no interrupt”. </p><p>Within the “per process data area” of each process is an array, “u.u_signal”, of “NSIG” words. Each word corresponds to a different software interrupt type and defines the action which should be taken if the process encounters that kind of software interrupt: </p><center> <table cellspacing="0" class="tabular">
+<p>The principal concern of this chapter is the content of the file “sig.c”, which appears on Sheets 39 to 42. This file introduces a facility for communication between processes. In particular it provides for the course of one “user mode” process to be interrupted, diverted or terminated by the action of another process or as the result of an error or operator action. </p><p>In this discussion the term “software interrupt” has been deliberately used in place of the term “signal”. This latter has been eschewed because it has obtained connotations in the UNIX milieu which are rather different from the usage of ordinary English. </p><p>UNIX recognises 20 (“NSIG”, line <a target="source" href="../all.html#line0113">0113</a>) different types of software interrupts, of which (as the reader may discover for himself by perusal of the the Section “SIGNAL (II)” of the UPM) thirteen have standard names and associations. Interrupt type #0 is interpreted as “no interrupt”. </p><p>Within the “per process data area” of each process is an array, “u.u_signal”, of “NSIG” words. Each word corresponds to a different software interrupt type and defines the action which should be taken if the process encounters that kind of software interrupt: </p><center> <table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -127,37 +127,37 @@
    
 </li><li><a href="sect0157.html">13.9 D. Tracing</a>
    
-</li><li><a href="sect0158.html">13.10 ssig (3614)</a>
+</li><li><a href="sect0158.html">13.10 ssig (<a target="source" href="../all.html#line3614">3614</a>)</a>
    
-</li><li><a href="sect0159.html">13.11 kill (3630)</a>
+</li><li><a href="sect0159.html">13.11 kill (<a target="source" href="../all.html#line3630">3630</a>)</a>
    
-</li><li><a href="sect0160.html">13.12 signal (3949)</a>
+</li><li><a href="sect0160.html">13.12 signal (<a target="source" href="../all.html#line3949">3949</a>)</a>
    
-</li><li><a href="sect0161.html">13.13 psignal (3963)</a>
+</li><li><a href="sect0161.html">13.13 psignal (<a target="source" href="../all.html#line3963">3963</a>)</a>
    
-</li><li><a href="sect0162.html">13.14 issig (3991)</a>
+</li><li><a href="sect0162.html">13.14 issig (<a target="source" href="../all.html#line3991">3991</a>)</a>
    
-</li><li><a href="sect0163.html">13.15 psig (4043)</a>
+</li><li><a href="sect0163.html">13.15 psig (<a target="source" href="../all.html#line4043">4043</a>)</a>
    
-</li><li><a href="sect0164.html">13.16 core (4094)</a>
+</li><li><a href="sect0164.html">13.16 core (<a target="source" href="../all.html#line4094">4094</a>)</a>
    
-</li><li><a href="sect0165.html">13.17 grow (4136)</a>
+</li><li><a href="sect0165.html">13.17 grow (<a target="source" href="../all.html#line4136">4136</a>)</a>
    
-</li><li><a href="sect0166.html">13.18 exit (3219)</a>
+</li><li><a href="sect0166.html">13.18 exit (<a target="source" href="../all.html#line3219">3219</a>)</a>
    
-</li><li><a href="sect0167.html">13.19 rexit (3205)</a>
+</li><li><a href="sect0167.html">13.19 rexit (<a target="source" href="../all.html#line3205">3205</a>)</a>
    
-</li><li><a href="sect0168.html">13.20 wait (3270)</a>
+</li><li><a href="sect0168.html">13.20 wait (<a target="source" href="../all.html#line3270">3270</a>)</a>
    
 </li><li><a href="sect0169.html">13.21 Tracing</a>
    
-</li><li><a href="sect0170.html">13.22 stop (4016)</a>
+</li><li><a href="sect0170.html">13.22 stop (<a target="source" href="../all.html#line4016">4016</a>)</a>
    
-</li><li><a href="sect0171.html">13.23 wait (3270) (continued)</a>
+</li><li><a href="sect0171.html">13.23 wait (<a target="source" href="../all.html#line3270">3270</a>) (continued)</a>
    
-</li><li><a href="sect0172.html">13.24 ptrace (4164)</a>
+</li><li><a href="sect0172.html">13.24 ptrace (<a target="source" href="../all.html#line4164">4164</a>)</a>
    
-</li><li><a href="sect0173.html">13.25 procxmt (4204)</a>
+</li><li><a href="sect0173.html">13.25 procxmt (<a target="source" href="../all.html#line4204">4204</a>)</a>
    
 </li>
 

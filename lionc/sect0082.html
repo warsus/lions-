@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: swtch (2178)</title>
+<title>: swtch (<a target="source" href="../all.html#line2178">2178</a>)</title>
 
 <link href="sect0083.html" title="main revisited" rel="next" />
 <link href="sect0081.html" title="sleep (2066)" rel="prev" />
@@ -45,17 +45,17 @@
 </span><span>
 
 <span>
-<b class="current">swtch (2178)</b>
+<b class="current">swtch (<a target="source" href="../all.html#line2178">2178</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000083">6.9 swtch (2178)</h2>
+<div><h2 id="a0000000083">6.9 swtch (<a target="source" href="../all.html#line2178">2178</a>)</h2>
 <dl class="description">
 
     <a href="../all.html#line2184" target="source" <dt>2184:</dt></a>
-    <dd><p>“p” is a static variable (2180), which means that its value is initialised to zero (1566) and is preserved between calls. For the very first call on “swtch”, “p” is set to point to “proc[0]”; </p></dd>
+    <dd><p>“p” is a static variable (<a target="source" href="../all.html#line2180">2180</a>), which means that its value is initialised to zero (<a target="source" href="../all.html#line1566">1566</a>) and is preserved between calls. For the very first call on “swtch”, “p” is set to point to “proc[0]”; </p></dd>
 
     <a href="../all.html#line2189" target="source" <dt>2189:</dt></a>
     <dd><p>“savu” is called to save the stack pointer and the environment pointer for the current process in “u.u_rsav”; </p></dd>
@@ -72,7 +72,7 @@
     <dd><p>Since “p” is not “NULL”, the idle loop is not entered; </p></dd>
 
     <a href="../all.html#line2228" target="source" <dt>2228:</dt></a>
-    <dd><p>“retu” (0740) causes a coroutine jump to process #1 which becomes the current process. </p><p>What is process #1 ? It is a copy of process #0, made at a previous stage of the latter’s existence. </p></dd>
+    <dd><p>“retu” (<a target="source" href="../all.html#line0740">0740</a>) causes a coroutine jump to process #1 which becomes the current process. </p><p>What is process #1 ? It is a copy of process #0, made at a previous stage of the latter’s existence. </p></dd>
 
 </dl><p>This call on “retu” was not preceded by a call on “savu” because the necessary information has in fact been saved already. (Where?) </p><dl class="description">
 
@@ -82,7 +82,7 @@
 </dl><p>The very first call on “sureg” copies zeroes and serves no real purpose. </p><dl class="description">
 
     <a href="../all.html#line2240" target="source" <dt>2240:</dt></a>
-    <dd><p>The “SSWAP” flag is not set, so that this enigmatic (2239) section can be ignored for now; </p></dd>
+    <dd><p>The “SSWAP” flag is not set, so that this enigmatic (<a target="source" href="../all.html#line2239">2239</a>) section can be ignored for now; </p></dd>
 
     <a href="../all.html#line2247" target="source" <dt>2247:</dt></a>
     <dd><p>Finally “swtch” returns with a value of “1”. But where does the “return” return to? <b class="bf">Not to “sleep” !</b> </p></dd>

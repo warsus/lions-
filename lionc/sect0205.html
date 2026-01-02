@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: binit (5055)</title>
+<title>: binit (<a target="source" href="../all.html#line5055">5055</a>)</title>
 
 <link href="sect0206.html" title="bread (4754)" rel="next" />
 <link href="sect0204.html" title="brelse (4869)" rel="prev" />
@@ -45,18 +45,18 @@
 </span><span>
 
 <span>
-<b class="current">binit (5055)</b>
+<b class="current">binit (<a target="source" href="../all.html#line5055">5055</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000206">17.7 binit (5055)</h2>
-<p>This procedure is called by “main” (1614) to initialise the buffer pool. Empty, doubly linked circular lists are set up: </p><ul class="itemize">
+<div><h2 id="a0000000206">17.7 binit (<a target="source" href="../all.html#line5055">5055</a>)</h2>
+<p>This procedure is called by “main” (<a target="source" href="../all.html#line1614">1614</a>) to initialise the buffer pool. Empty, doubly linked circular lists are set up: </p><ul class="itemize">
 <li><p>for the “av”-list (“bfreelist” is head); </p></li><li><p>the “b”-list for null devices (“dev == NODEV”) (“bfreelist” is again head); </p></li><li><p>a “b”-list for each major device type. </p></li>
 </ul><p>For each buffer: </p><ul class="itemize">
-<li><p>the buffer header is linked into the “b”-list for the device “NODEV” (–1); </p></li><li><p>the address of the buffer is set in the header (5067); </p></li><li><p>the buffer flags are set as “B_BUSY” (this doesn’t seem to be really necessary) (5072); </p></li><li><p>the buffer header is linked into the “av”-list by a call on “brelse” (5073); </p></li>
-</ul><p>The number of block devices is recorded as “nblkdev”. This is used for checking values for “dev” in “getblk” (4927), “getmdev” (6192) and “openi” (6720). Inspection of “bdevsw” (4656) shows that “nblkdev” will be set to eight whereas the value one is what is really required. </p><p>This result could be obtained by “editing” as follows: </p><pre>
+<li><p>the buffer header is linked into the “b”-list for the device “NODEV” (–1); </p></li><li><p>the address of the buffer is set in the header (<a target="source" href="../all.html#line5067">5067</a>); </p></li><li><p>the buffer flags are set as “B_BUSY” (this doesn’t seem to be really necessary) (<a target="source" href="../all.html#line5072">5072</a>); </p></li><li><p>the buffer header is linked into the “av”-list by a call on “brelse” (<a target="source" href="../all.html#line5073">5073</a>); </p></li>
+</ul><p>The number of block devices is recorded as “nblkdev”. This is used for checking values for “dev” in “getblk” (<a target="source" href="../all.html#line4927">4927</a>), “getmdev” (<a target="source" href="../all.html#line6192">6192</a>) and “openi” (<a target="source" href="../all.html#line6720">6720</a>). Inspection of “bdevsw” (<a target="source" href="../all.html#line4656">4656</a>) shows that “nblkdev” will be set to eight whereas the value one is what is really required. </p><p>This result could be obtained by “editing” as follows: </p><pre>
     /5084/m/5081/ "nblkdev=i;
     /5083/m/5077/ "i++
 </pre></div>

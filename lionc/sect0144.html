@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: fork (3322)</title>
+<title>: fork (<a target="source" href="../all.html#line3322">3322</a>)</title>
 
 <link href="sect0145.html" title="sbreak (3354)" rel="next" />
 <link href="sect0143.html" title="exec (3020)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">fork (3322)</b>
+<b class="current">fork (<a target="source" href="../all.html#line3322">3322</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000145">12.8 fork (3322)</h2>
-<p>A call on “exec” is frequently preceded by a call on “fork”. Most of the work for “fork” is done by “newproc” (1826), but before the latter is called, “fork” makes an independent search for a slot in the “proc” array, and remembers the place as “p2” (3327). </p><p>“newproc” also searches “proc” but independently. Presumably it always locates the same empty slot as “fork”, since it does not report the value back. (Why is there no confusion on this point?) </p><dl class="description">
+<div><h2 id="a0000000145">12.8 fork (<a target="source" href="../all.html#line3322">3322</a>)</h2>
+<p>A call on “exec” is frequently preceded by a call on “fork”. Most of the work for “fork” is done by “newproc” (<a target="source" href="../all.html#line1826">1826</a>), but before the latter is called, “fork” makes an independent search for a slot in the “proc” array, and remembers the place as “p2” (<a target="source" href="../all.html#line3327">3327</a>). </p><p>“newproc” also searches “proc” but independently. Presumably it always locates the same empty slot as “fork”, since it does not report the value back. (Why is there no confusion on this point?) </p><dl class="description">
 
     <a href="../all.html#line3335" target="source" <dt>3335:</dt></a>
     <dd><p>For the new process, “fork” returns the value of the parent’s process identification, and initialises various accounting parameters; </p></dd>

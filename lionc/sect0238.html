@@ -53,10 +53,10 @@
 
 <div><h2 id="a0000000239">19.2 Directory Files</h2>
 <p>A directory file is in many respects indistinguishable from a non-directory file. However it contains information which is used in locating other files and hence its contents are carefully protected, and are manipulated by the operating system alone. </p><p>In every file, the information is stored as one or more 512 character blocks. Each block of a directory file is divided into 32 * 16 character structures. Each structure consists of a 16 bit “inode” table pointer and a 14 character name. The “inode” pointer is to the “inode” table on the same disk or file system volume as the files which the directory references. (More on this later.) An “inode” value of zero defines a null entry in the directory. </p><p>The procedures which reference directories are: </p><pre>
-   namei  (7518) search directory
-   link   (5909) create alternate name
-   wdir   (7477) write directory entry
-   unlink (3510) delete name
+   namei  (<a target="source" href="../all.html#line7518">7518</a>) search directory
+   link   (<a target="source" href="../all.html#line5909">5909</a>) create alternate name
+   wdir   (<a target="source" href="../all.html#line7477">7477</a>) write directory entry
+   unlink (<a target="source" href="../all.html#line3510">3510</a>) delete name
 </pre></div>
 
 

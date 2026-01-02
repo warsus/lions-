@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: mfree (2556)</title>
+<title>: mfree (<a target="source" href="../all.html#line2556">2556</a>)</title>
 
 <link href="sect0065.html" title="In conclusion ..." rel="next" />
 <link href="sect0063.html" title="malloc (2528)" rel="prev" />
@@ -45,17 +45,17 @@
 </span><span>
 
 <span>
-<b class="current">mfree (2556)</b>
+<b class="current">mfree (<a target="source" href="../all.html#line2556">2556</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000065">5.4 mfree (2556)</h2>
+<div><h2 id="a0000000065">5.4 mfree (<a target="source" href="../all.html#line2556">2556</a>)</h2>
 <p>This procedure returns the area of size “size” at address “aa” to the “resource map” designated by “mp”. The body of the procedure consists of a one line “for” statement, followed by a multiline “if” statement. </p><dl class="description">
 
     <a href="../all.html#line2564" target="source" <dt>2564:</dt></a>
-    <dd><p>The semicolon at the end of this line is extremely significant, terminating as it does the empty statement. (It would aid legibility if this character were moved to a line on its own, as is done on line 2394.) </p><p>Depending on your point of view, this statement demonstrates either the power or the obscurity of the “C” language. Try writing equivalent code to this statement in another language such as Pascal or PL/1. </p><p>Step “bp” through the list until an element is encountered either with an address greater than the address of the area being returned. </p><p>i.e. not “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+    <dd><p>The semicolon at the end of this line is extremely significant, terminating as it does the empty statement. (It would aid legibility if this character were moved to a line on its own, as is done on line <a target="source" href="../all.html#line2394">2394</a>.) </p><p>Depending on your point of view, this statement demonstrates either the power or the obscurity of the “C” language. Try writing equivalent code to this statement in another language such as Pascal or PL/1. </p><p>Step “bp” through the list until an element is encountered either with an address greater than the address of the area being returned. </p><p>i.e. not “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
                                      width:10px; 
                                      height:9px" class="math gen" />m_addr <img src="images/img-0010.png" alt="$\le $" style="vertical-align:-2px; 
                                      width:10px; 
@@ -82,12 +82,12 @@
     <dd><p>Add the size of the next element of the list to the size of the previous element; </p></dd>
 
     <a href="../all.html#line2569" target="source" <dt>2569:</dt></a>
-    <dd><p>Move all the remaining list elements (up to the one containing the final zero size) down one place. </p><p>Note that if the test on line 2567 fortuitously gives a true result when “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+    <dd><p>Move all the remaining list elements (up to the one containing the final zero size) down one place. </p><p>Note that if the test on line <a target="source" href="../all.html#line2567">2567</a> fortuitously gives a true result when “bp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
                                      width:10px; 
                                      height:9px" class="math gen" />m_size” is zero no harm is done; </p></dd>
 
     <a href="../all.html#line2576" target="source" <dt>2576:</dt></a>
-    <dd><p>This statement is reached if the test on line 2565 failed i.e. the area being returned cannot be amalgamated with the previous element on the list. </p><p>Can it be amalgamated with the next element? Note the check that the next element is not null; </p></dd>
+    <dd><p>This statement is reached if the test on line <a target="source" href="../all.html#line2565">2565</a> failed i.e. the area being returned cannot be amalgamated with the previous element on the list. </p><p>Can it be amalgamated with the next element? Note the check that the next element is not null; </p></dd>
 
     <a href="../all.html#line2579" target="source" <dt>2579:</dt></a>
     <dd><p>Provided the area being returned is genuinely non-null (perhaps this test should have been made sooner?) add a new element to the list and push all the remaining elements up one place. </p></dd>

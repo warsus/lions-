@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: fuibyte (0814), fuiword (0844)</title>
+<title>: fuibyte (<a target="source" href="../all.html#line0814">0814</a>), fuiword (<a target="source" href="../all.html#line0844">0844</a>)</title>
 
 <link href="sect0129.html" title="Interrupts" rel="next" />
 <link href="sect0127.html" title="Sources of Traps and Interrupts" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">fuibyte (0814), fuiword (0844)</b>
+<b class="current">fuibyte (<a target="source" href="../all.html#line0814">0814</a>), fuiword (<a target="source" href="../all.html#line0844">0844</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000129">10.2 fuibyte (0814), fuiword (0844)</h2>
-<p>“main” uses both “fuibyte” and “fuiword”. Since the former is more complicated in a non-essential way, we leave it to the reader, and concentrate on the latter. </p><p>“fuiword” is called (1602) when the system is running in kernel mode with one argument which is an address in user address space. The function of the routine is to fetch the value of the corresponding word and to return it as a result (left in r0). However if an error occurs, the value –1 is to be returned. </p><p>Note that with “fuiword”, there is an ambiguity which does not occur with “fuibyte”, namely a returned value of –1 may not necessarily be an error indication but the actual value in the user space. Convince yourself that for the way it is used in “main”, this does not matter. </p><p>Also the code does not distinguish between a “bus timeout error” and a “segmentation error”. </p><p>The routine proceeds as follows: </p><dl class="description">
+<div><h2 id="a0000000129">10.2 fuibyte (<a target="source" href="../all.html#line0814">0814</a>), fuiword (<a target="source" href="../all.html#line0844">0844</a>)</h2>
+<p>“main” uses both “fuibyte” and “fuiword”. Since the former is more complicated in a non-essential way, we leave it to the reader, and concentrate on the latter. </p><p>“fuiword” is called (<a target="source" href="../all.html#line1602">1602</a>) when the system is running in kernel mode with one argument which is an address in user address space. The function of the routine is to fetch the value of the corresponding word and to return it as a result (left in r0). However if an error occurs, the value –1 is to be returned. </p><p>Note that with “fuiword”, there is an ambiguity which does not occur with “fuibyte”, namely a returned value of –1 may not necessarily be an error indication but the actual value in the user space. Convince yourself that for the way it is used in “main”, this does not matter. </p><p>Also the code does not distinguish between a “bus timeout error” and a “segmentation error”. </p><p>The routine proceeds as follows: </p><dl class="description">
 
     <a href="../all.html#line0846" target="source" <dt>0846:</dt></a>
     <dd><p>The argument is moved to r1; </p></dd>
@@ -67,7 +67,7 @@
     <dd><p>The priority level is raised to 7 (to disable interrupts); </p></dd>
 
     <a href="../all.html#line0854" target="source" <dt>0854:</dt></a>
-    <dd><p>The contents of the location nofault (1466) are saved in the stack; </p></dd>
+    <dd><p>The contents of the location nofault (<a target="source" href="../all.html#line1466">1466</a>) are saved in the stack; </p></dd>
 
     <a href="../all.html#line0855" target="source" <dt>0855:</dt></a>
     <dd><p>“nofault” is loaded with address of the routine “err”; </p></dd>
@@ -86,7 +86,7 @@
 </dl><p><b class="bf">Now suppose something does go wrong</b> with the “mfpi” instruction, and a bus time-out does occur. </p><dl class="description">
 
     <a href="../all.html#line0856" target="source" <dt>0856:</dt></a>
-    <dd><p>The “mfpi” instruction will be aborted. PC will point to the next instruction (0857) and a trap via vector location 4 will occur; </p></dd>
+    <dd><p>The “mfpi” instruction will be aborted. PC will point to the next instruction (<a target="source" href="../all.html#line0857">0857</a>) and a trap via vector location 4 will occur; </p></dd>
 
     <a href="../all.html#line0512" target="source" <dt>0512:</dt></a>
     <dd><p>The new PC will have the value of “trap”. The new PS will indicate: </p><p>present mode = kernel mode </p><p>previous mode = kernel mode </p><p>priority = 7; </p></dd>

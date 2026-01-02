@@ -47,19 +47,19 @@
 </div>
 
 <div><h1 id="a0000000175">14 Program Swapping</h1>
-<p>UNIX, like all time-sharing systems, and some multiprogramming systems uses “program swapping” (also called “rollin/roll-out”) to share the limited resource of the main physical memory among several processes. </p><p>Processes which are suspended may be selectively “swapped out” by writing their data segments (including the “per process data”) into a “swap area” on disk </p><p>The main memory area which was occupied can then be reassigned to other processes, which quite probably will be “swapped in” from the “swap area”. </p><p>Most of the decisions regarding “swapping out”, and all the decisions regarding “swapping in”, are made by the procedure “sched”. “Swapping in” is handled by a direct call (2034) on the procedure “swap” (5196), whereas “swapping out” is handled by a call (2024) on “xswap” (4368). </p><p>For those archaeologists who like to ponder the “bones” of earlier versions of operating systems, it seems that originally “sched” called “swap” directly to “swap out” processes, rather than via “xswap”. The extra procedure (one of several to be found in the file “text.c”) has been necessitated by the implementation of the sharable “text segments”. </p><p>It is instructive to estimate how much extra code has been necessitated by the text segment feature: in “text.c” are four procedures “xswap”, “xalloc”, “xfree” and “xccdec”, which manipulate an array of structures called “text”, which is declared in the file “text.h”. Additional code has also been added to “sysl.c” and “slp.c”. </p></div>
+<p>UNIX, like all time-sharing systems, and some multiprogramming systems uses “program swapping” (also called “rollin/roll-out”) to share the limited resource of the main physical memory among several processes. </p><p>Processes which are suspended may be selectively “swapped out” by writing their data segments (including the “per process data”) into a “swap area” on disk </p><p>The main memory area which was occupied can then be reassigned to other processes, which quite probably will be “swapped in” from the “swap area”. </p><p>Most of the decisions regarding “swapping out”, and all the decisions regarding “swapping in”, are made by the procedure “sched”. “Swapping in” is handled by a direct call (<a target="source" href="../all.html#line2034">2034</a>) on the procedure “swap” (<a target="source" href="../all.html#line5196">5196</a>), whereas “swapping out” is handled by a call (<a target="source" href="../all.html#line2024">2024</a>) on “xswap” (<a target="source" href="../all.html#line4368">4368</a>). </p><p>For those archaeologists who like to ponder the “bones” of earlier versions of operating systems, it seems that originally “sched” called “swap” directly to “swap out” processes, rather than via “xswap”. The extra procedure (one of several to be found in the file “text.c”) has been necessitated by the implementation of the sharable “text segments”. </p><p>It is instructive to estimate how much extra code has been necessitated by the text segment feature: in “text.c” are four procedures “xswap”, “xalloc”, “xfree” and “xccdec”, which manipulate an array of structures called “text”, which is declared in the file “text.h”. Additional code has also been added to “sysl.c” and “slp.c”. </p></div>
 
 <div class="contents section-contents"><!--<strong>Subsections</strong>-->
 <ul>
 <li><a href="sect0175.html">14.1 Text Segments</a>
    
-</li><li><a href="sect0176.html">14.2 sched (1940)</a>
+</li><li><a href="sect0176.html">14.2 sched (<a target="source" href="../all.html#line1940">1940</a>)</a>
    
-</li><li><a href="sect0177.html">14.3 xswap (4368)</a>
+</li><li><a href="sect0177.html">14.3 xswap (<a target="source" href="../all.html#line4368">4368</a>)</a>
    
-</li><li><a href="sect0178.html">14.4 xalloc (4433)</a>
+</li><li><a href="sect0178.html">14.4 xalloc (<a target="source" href="../all.html#line4433">4433</a>)</a>
    
-</li><li><a href="sect0179.html">14.5 xfree (4398)</a>
+</li><li><a href="sect0179.html">14.5 xfree (<a target="source" href="../all.html#line4398">4398</a>)</a>
    
 </li>
 

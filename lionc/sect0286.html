@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: putc (0967)</title>
+<title>: putc (<a target="source" href="../all.html#line0967">0967</a>)</title>
 
 <link href="sect0287.html" title="Character Sets" rel="next" />
 <link href="sect0285.html" title="getc (0930)" rel="prev" />
@@ -45,21 +45,21 @@
 </span><span>
 
 <span>
-<b class="current">putc (0967)</b>
+<b class="current">putc (<a target="source" href="../all.html#line0967">0967</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000287">23.3 putc (0967)</h2>
+<div><h2 id="a0000000287">23.3 putc (<a target="source" href="../all.html#line0967">0967</a>)</h2>
 <p>This procedure is called by </p><pre>
-   canon     (8323)
-   ttyinput  (8355, 8358)
-   ttyoutput (8414, 8478)
-   pcrint    (8730)
-   pcoutput  (8756)
-   lpoutput  (8990)
-</pre><p>with two arguments: a character and the address of a “clist” structure. </p><p>“getc” and “putc” have related functions and the codes for the two procedures are similar in many respects. For this reason the code for “putc” will not be examined in detail, but is left for the reader. </p><p>It should be noted that “putc” can fail if a new “cblock” is needed and “cfreelist” is empty. In this case a non-zero value (line 1002) is returned rather than a zero value (line 0996). </p><p><b class="bf">Note.</b> The procedures “getc” and “putc” discussed here are <b class="bf">NOT</b> directly related to the procedures d1scussed in the Sections “GETC(III)” and “PUTC(III)” of the UPM. </p></div>
+   canon     (<a target="source" href="../all.html#line8323">8323</a>)
+   ttyinput  (<a target="source" href="../all.html#line8355">8355</a>, <a target="source" href="../all.html#line8358">8358</a>)
+   ttyoutput (<a target="source" href="../all.html#line8414">8414</a>, <a target="source" href="../all.html#line8478">8478</a>)
+   pcrint    (<a target="source" href="../all.html#line8730">8730</a>)
+   pcoutput  (<a target="source" href="../all.html#line8756">8756</a>)
+   lpoutput  (<a target="source" href="../all.html#line8990">8990</a>)
+</pre><p>with two arguments: a character and the address of a “clist” structure. </p><p>“getc” and “putc” have related functions and the codes for the two procedures are similar in many respects. For this reason the code for “putc” will not be examined in detail, but is left for the reader. </p><p>It should be noted that “putc” can fail if a new “cblock” is needed and “cfreelist” is empty. In this case a non-zero value (line <a target="source" href="../all.html#line1002">1002</a>) is returned rather than a zero value (line <a target="source" href="../all.html#line0996">0996</a>). </p><p><b class="bf">Note.</b> The procedures “getc” and “putc” discussed here are <b class="bf">NOT</b> directly related to the procedures d1scussed in the Sections “GETC(III)” and “PUTC(III)” of the UPM. </p></div>
 
 
 

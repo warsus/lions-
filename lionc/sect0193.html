@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: rkstrategy (5389)</title>
+<title>: rkstrategy (<a target="source" href="../all.html#line5389">5389</a>)</title>
 
 <link href="sect0194.html" title="rkaddr (5420)" rel="next" />
 <link href="sect0192.html" title="The file ‘rk.c’" rel="prev" />
@@ -45,27 +45,27 @@
 </span><span>
 
 <span>
-<b class="current">rkstrategy (5389)</b>
+<b class="current">rkstrategy (<a target="source" href="../all.html#line5389">5389</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000194">16.2 rkstrategy (5389)</h2>
-<p>The strategy routine is called, e.g. from “swap” (5212), to handle both read and write requests. </p><dl class="description">
+<div><h2 id="a0000000194">16.2 rkstrategy (<a target="source" href="../all.html#line5389">5389</a>)</h2>
+<p>The strategy routine is called, e.g. from “swap” (<a target="source" href="../all.html#line5212">5212</a>), to handle both read and write requests. </p><dl class="description">
 
     <a href="../all.html#line5397" target="source" <dt>5397:</dt></a>
     <dd><p>The test and call on “mapalloc” here is a “no-op” except on the PDP11/70 system; </p></dd>
 
     <a href="../all.html#line5399" target="source" <dt>5399:</dt></a>
-    <dd><p>The code from here to line 5402 appears to be unnecessarily devious! See the discussion of “rkaddr” below. If the block number is too large, set the “B_ERROR” flag and report “completion”; </p></dd>
+    <dd><p>The code from here to line <a target="source" href="../all.html#line5402">5402</a> appears to be unnecessarily devious! See the discussion of “rkaddr” below. If the block number is too large, set the “B_ERROR” flag and report “completion”; </p></dd>
 
     <a href="../all.html#line5407" target="source" <dt>5407:</dt></a>
     <dd><p>Link the buffer into a FIFO list for the controller. The list is singly linked, uses the “av_forw” pointer of the “buf” structures, and has head and tail pointers in “rktab”. Interrupts from disk devices may not be allowed after the first step; </p></dd>
 
     <a href="../all.html#line5414" target="source" <dt>5414:</dt></a>
-    <dd><p>If the RK controller is not currently active, wake it up via a call on “rkstart” (5440), which checks that there is something to do (5444), flags the controller as busy (5446) and calls “devstart” (5447), passing as parameters: </p><ul class="itemize">
-<li><p>a pointer to the first enqueued buffer header; </p></li><li><p>the address of the RKDA disk address register. (The value passed is in effect 0177412. See lines 5363, 5382.); </p></li><li><p>a “disk address” computed by “rkaddr”; </p></li><li><p>zero (not really important in our discussion, and may be ignored). </p></li>
+    <dd><p>If the RK controller is not currently active, wake it up via a call on “rkstart” (<a target="source" href="../all.html#line5440">5440</a>), which checks that there is something to do (<a target="source" href="../all.html#line5444">5444</a>), flags the controller as busy (<a target="source" href="../all.html#line5446">5446</a>) and calls “devstart” (<a target="source" href="../all.html#line5447">5447</a>), passing as parameters: </p><ul class="itemize">
+<li><p>a pointer to the first enqueued buffer header; </p></li><li><p>the address of the RKDA disk address register. (The value passed is in effect 0177412. See lines <a target="source" href="../all.html#line5363">5363</a>, <a target="source" href="../all.html#line5382">5382</a>.); </p></li><li><p>a “disk address” computed by “rkaddr”; </p></li><li><p>zero (not really important in our discussion, and may be ignored). </p></li>
 </ul></dd>
 
 </dl></div>

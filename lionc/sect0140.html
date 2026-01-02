@@ -77,7 +77,7 @@
 </dl><p>Note the separate uses of “fuword” and “fuiword”. The distinction between these is unimportant on the PDP11/40, but is most important on machines with separate “i” and “d” address spaces; </p><dl class="description">
 
     <a href="../all.html#line2760" target="source" <dt>2760:</dt></a>
-    <dd><p>“i=077” simulates a call on the very last system call (2975), which results in a call on “nosys” (2855), which results in an error condition which will usually be fatal for the user mode program; </p></dd>
+    <dd><p>“i=077” simulates a call on the very last system call (<a target="source" href="../all.html#line2975">2975</a>), which results in a call on “nosys” (<a target="source" href="../all.html#line2855">2855</a>), which results in an error condition which will usually be fatal for the user mode program; </p></dd>
 
     <a href="../all.html#line2762" target="source" <dt>2762:</dt></a>
     <dd></dd>
@@ -89,10 +89,10 @@
     <dd><p>The value of the first argument is copied into “u.u_dirp”, which seems to function mainly as a convenient temporary storage location; </p></dd>
 
     <a href="../all.html#line2771" target="source" <dt>2771:</dt></a>
-    <dd><p>“trapl” is called with the address of the desired system routine. Note the comment beginning on line 2828; </p></dd>
+    <dd><p>“trapl” is called with the address of the desired system routine. Note the comment beginning on line <a target="source" href="../all.html#line2828">2828</a>; </p></dd>
 
     <a href="../all.html#line2776" target="source" <dt>2776:</dt></a>
-    <dd><p>When an error occurs, the “c-bit” in the old processor status word is set (see line 2658) and the error number is returned via r0. </p></dd>
+    <dd><p>When an error occurs, the “c-bit” in the old processor status word is set (see line <a target="source" href="../all.html#line2658">2658</a>) and the error number is returned via r0. </p></dd>
 
 </dl></div>
 

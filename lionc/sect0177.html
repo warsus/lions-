@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: xswap (4368)</title>
+<title>: xswap (<a target="source" href="../all.html#line4368">4368</a>)</title>
 
 <link href="sect0178.html" title="xalloc (4433)" rel="next" />
 <link href="sect0176.html" title="sched (1940)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">xswap (4368)</b>
+<b class="current">xswap (<a target="source" href="../all.html#line4368">4368</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000178">14.3 xswap (4368)</h2>
+<div><h2 id="a0000000178">14.3 xswap (<a target="source" href="../all.html#line4368">4368</a>)</h2>
 <dl class="description">
 
     <a href="../all.html#line4373" target="source" <dt>4373:</dt></a>
@@ -61,7 +61,7 @@
     <dd><p>Find a space in the disk swap area for the process’s data segment. (Note that the disk swap area is allocated in terms of 512 character blocks); </p></dd>
 
     <a href="../all.html#line4378" target="source" <dt>4378:</dt></a>
-    <dd><p>“xccdec” (4490) is called (unconditionally!) to decrease the count, associated with the text segment, of the number of “in main memory” processes which reference that text segment. If the count becomes zero, the main memory area occupied by the text segment is simply returned to the available space. (There is no need to copy it out, since, as we shall see, there will be a copy already in the disk swap area); </p></dd>
+    <dd><p>“xccdec” (<a target="source" href="../all.html#line4490">4490</a>) is called (unconditionally!) to decrease the count, associated with the text segment, of the number of “in main memory” processes which reference that text segment. If the count becomes zero, the main memory area occupied by the text segment is simply returned to the available space. (There is no need to copy it out, since, as we shall see, there will be a copy already in the disk swap area); </p></dd>
 
     <a href="../all.html#line4379" target="source" <dt>4379:</dt></a>
     <dd><p>The “SLOCK” flag is set while the process is being swapped out. This is to prevent “sched” from attempting to “swap out” a process which is already in the process of being “swapped out”. (This can only happen if “swapping out” was started initially by some routine other than “sched” e.g. by “expand”); </p></dd>

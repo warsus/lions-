@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: exec (3020)</title>
+<title>: exec (<a target="source" href="../all.html#line3020">3020</a>)</title>
 
 <link href="sect0144.html" title="fork (3322)" rel="next" />
 <link href="sect0142.html" title="The File ‘sysl.c’" rel="prev" />
@@ -45,26 +45,26 @@
 </span><span>
 
 <span>
-<b class="current">exec (3020)</b>
+<b class="current">exec (<a target="source" href="../all.html#line3020">3020</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000144">12.7 exec (3020)</h2>
+<div><h2 id="a0000000144">12.7 exec (<a target="source" href="../all.html#line3020">3020</a>)</h2>
 <p>This system call, #11, changes a process executing one program into a process executing a different program. See Section “EXEC(II)” of the UPM. This is the longest and one of the most important system calls. </p><dl class="description">
 
     <a href="../all.html#line3034" target="source" <dt>3034:</dt></a>
-    <dd><p>“namei” (6618) (which is discussed in detail in Chapter 19) converts the first argument (which is a pointer to a character string defining the name of the new program) into an “inode” reference. (“inodes” are essential parts of the file referencing mechanism.); </p></dd>
+    <dd><p>“namei” (<a target="source" href="../all.html#line6618">6618</a>) (which is discussed in detail in Chapter 19) converts the first argument (which is a pointer to a character string defining the name of the new program) into an “inode” reference. (“inodes” are essential parts of the file referencing mechanism.); </p></dd>
 
     <a href="../all.html#line3037" target="source" <dt>3037:</dt></a>
-    <dd><p>Wait if the number of “exec”s currently under way is too large (See the comment on line 3011.); </p></dd>
+    <dd><p>Wait if the number of “exec”s currently under way is too large (See the comment on line <a target="source" href="../all.html#line3011">3011</a>.); </p></dd>
 
     <a href="../all.html#line3040" target="source" <dt>3040:</dt></a>
     <dd><p>“getblk(NODEV)” results in the allocation of a 512 byte buffer from the pool of buffers. This buffer is used temporarily to store in core, that information which is currently in the user data area, and which is needed to start the new program. Note that the second argument in “u.u_arg” is a pointer to this information; </p></dd>
 
     <a href="../all.html#line3041" target="source" <dt>3041:</dt></a>
-    <dd><p>“access” returns a non-zero result if the file is not executable. The second condition examines whether the file is a directory or a special character file. (It would seem that by making this test earlier, e.g. just after line 3036, the efficiency of the code could be improved.); </p></dd>
+    <dd><p>“access” returns a non-zero result if the file is not executable. The second condition examines whether the file is a directory or a special character file. (It would seem that by making this test earlier, e.g. just after line <a target="source" href="../all.html#line3036">3036</a>, the efficiency of the code could be improved.); </p></dd>
 
     <a href="../all.html#line3052" target="source" <dt>3052:</dt></a>
     <dd><p>Copy the set of arguments from the user space into the temporary buffer; </p></dd>
@@ -76,7 +76,7 @@
     <dd><p>If the number of characters in the argument string is odd, add an extra, null character; </p></dd>
 
     <a href="../all.html#line3090" target="source" <dt>3090:</dt></a>
-    <dd><p>The first four words (8 bytes) of the named file are read into “u.u_arg”. The interpretation of these words is indicated in the comment beginning on line 3076 and, more fully, in the section “A.OUT(V)” of the UPM. </p><p>Note the setting of “u.u_base”, “u.u_count”, “u.u_offset” and “u.u_segflg” preparatory to the read operation; </p></dd>
+    <dd><p>The first four words (8 bytes) of the named file are read into “u.u_arg”. The interpretation of these words is indicated in the comment beginning on line <a target="source" href="../all.html#line3076">3076</a> and, more fully, in the section “A.OUT(V)” of the UPM. </p><p>Note the setting of “u.u_base”, “u.u_count”, “u.u_offset” and “u.u_segflg” preparatory to the read operation; </p></dd>
 
     <a href="../all.html#line3095" target="source" <dt>3095:</dt></a>
     <dd><p>If the text segment is not to be protected, add the text area size to the data area size, and set the former to zero; </p></dd>
@@ -97,7 +97,7 @@
     <dd><p>The information stored in the buffer area is copied into the stack in the user data area of the new program; </p></dd>
 
     <a href="../all.html#line3186" target="source" <dt>3186:</dt></a>
-    <dd><p>The locations in the kernel stack which contain copies of the “previous” values of the registers in user mode are set to zero, except for r6, the stack pointer, which was set at line 3155; </p></dd>
+    <dd><p>The locations in the kernel stack which contain copies of the “previous” values of the registers in user mode are set to zero, except for r6, the stack pointer, which was set at line <a target="source" href="../all.html#line3155">3155</a>; </p></dd>
 
     <a href="../all.html#line3194" target="source" <dt>3194:</dt></a>
     <dd><p>Decrement the reference count for the “inode” structure; </p></dd>
@@ -106,7 +106,7 @@
     <dd><p>Release the temporary buffer; </p></dd>
 
     <a href="../all.html#line3196" target="source" <dt>3196:</dt></a>
-    <dd><p>Wake up any other process waiting at line 3037. </p></dd>
+    <dd><p>Wake up any other process waiting at line <a target="source" href="../all.html#line3037">3037</a>. </p></dd>
 
 </dl></div>
 

@@ -55,7 +55,7 @@
 <p>This procedure is called whenever it seems reasonable to try and send the next character to the terminal. It often achieves nothing useful. </p><dl class="description">
 
     <a href="../all.html#line8514" target="source" <dt>8514:</dt></a>
-    <dd><p>See the comment on line 8499. This code is not relevant here; </p></dd>
+    <dd><p>See the comment on line <a target="source" href="../all.html#line8499">8499</a>. This code is not relevant here; </p></dd>
 
     <a href="../all.html#line8518" target="source" <dt>8518:</dt></a>
     <dd><p>If the controller is not ready (i.e. bit 7 of the transmitter stalus register is not set) or the necessary delay following the preious character has not yet elapsed, do nothing; </p></dd>
@@ -72,7 +72,7 @@
     <a href="../all.html#line8524" target="source" <dt>8524:</dt></a>
     <dd><p>Otherwise (“c” <img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
                                      width:10px; 
-                                     height:9px" class="math gen" /> 0177) the character was inserted in the output queue to signal a delay. Call “timeout” (3845) to make an entry in the “callout” list. The result of this will be to initiate an execution of “ttrstrt” (8486) after “c &amp; 0177” clock ticks . It will be seen that “ttrstrt” calls “ttstart” again, and that the manipulation of the “TIMEOUT” flag (8524, 8491) will ensure that if another execution of “ttstart” is initiated in the interim, on behalf of the same terminal, it will (8518) return without doing anything. </p></dd>
+                                     height:9px" class="math gen" /> 0177) the character was inserted in the output queue to signal a delay. Call “timeout” (<a target="source" href="../all.html#line3845">3845</a>) to make an entry in the “callout” list. The result of this will be to initiate an execution of “ttrstrt” (<a target="source" href="../all.html#line8486">8486</a>) after “c &amp; 0177” clock ticks . It will be seen that “ttrstrt” calls “ttstart” again, and that the manipulation of the “TIMEOUT” flag (<a target="source" href="../all.html#line8524">8524</a>, <a target="source" href="../all.html#line8491">8491</a>) will ensure that if another execution of “ttstart” is initiated in the interim, on behalf of the same terminal, it will (<a target="source" href="../all.html#line8518">8518</a>) return without doing anything. </p></dd>
 
 </dl></div>
 

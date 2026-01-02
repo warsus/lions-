@@ -58,16 +58,16 @@
     <dd><p>The statements in “main” which are conditional on “newproc” are now executed: </p></dd>
 
     <a href="../all.html#line1628" target="source" <dt>1628:</dt></a>
-    <dd><p>“expand” (2268) finds a new, larger area (from USIZE*32 to (USIZE+1) *32 words) for process #1, and copies the original data area into it. </p><p>In this case, the original user data area consists only of a “per process data area”, with zero length data and stack areas. The original area is released; </p></dd>
+    <dd><p>“expand” (<a target="source" href="../all.html#line2268">2268</a>) finds a new, larger area (from USIZE*32 to (USIZE+1) *32 words) for process #1, and copies the original data area into it. </p><p>In this case, the original user data area consists only of a “per process data area”, with zero length data and stack areas. The original area is released; </p></dd>
 
     <a href="../all.html#line1629" target="source" <dt>1629:</dt></a>
     <dd><p>“estabur” is used to set the “prototype” segmentation registers which are stored in “u.u_uisa” and “u.u_uisd” for later use by “sureg”. “estabur” calls “sureg” as its last action. </p><p>The parameters for “estabur” are the sizes of the text, data and stack areas plus an indicator to decide whether the text and data areas should be in separate address spaces. (Never true on the PDP11/40.) The sizes are all in units of 32 words; </p></dd>
 
     <a href="../all.html#line1630" target="source" <dt>1630:</dt></a>
-    <dd><p>“copyout” (1252) is an assembler routine which copies an array in kernel space of specified size into a region in user space. Here the array “icode” is copied into an area starting at location zero in user space; </p></dd>
+    <dd><p>“copyout” (<a target="source" href="../all.html#line1252">1252</a>) is an assembler routine which copies an array in kernel space of specified size into a region in user space. Here the array “icode” is copied into an area starting at location zero in user space; </p></dd>
 
     <a href="../all.html#line1635" target="source" <dt>1635:</dt></a>
-    <dd><p>The “return” is not special. From “main” it goes to “start” (0670) where the three last instructions have the effect of causing <i class="it">execution in user mode of the instruction at user mode address zero.</i> i.e. the execution of a copy of the first instruction in “icode”. The instructions subsequently executed are copies also of instructions in “icode”. </p></dd>
+    <dd><p>The “return” is not special. From “main” it goes to “start” (<a target="source" href="../all.html#line0670">0670</a>) where the three last instructions have the effect of causing <i class="it">execution in user mode of the instruction at user mode address zero.</i> i.e. the execution of a copy of the first instruction in “icode”. The instructions subsequently executed are copies also of instructions in “icode”. </p></dd>
 
 </dl><p>AT THIS POINT, THE INITIALISATION OF THE SYSTEM IS COMPLETE. </p><p>Process #1 is running and to all intents and purposes, is a normal process. Its initial form is (almost) that which would come from compilation, loading and execution of the simple, but non-trivial “C” program: </p><pre>
     char *init "/etc/init";

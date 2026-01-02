@@ -60,7 +60,7 @@
     <a href="../all.html#line8407" target="source" <dt>8407:</dt></a>
     <dd><p>Lower case alphabetics are converted to upper case alphabetics by the addition of a constant. </p></dd>
 
-</dl><p>Note. The conversion here should be compared wth the handling of the reverse problem on input. Here we have an algorithm which clearly trades space (no table analogue to “maptab”) for time (a serial search through the string on line 8400). A space conserving approach could be adopted in “canon” but the problem is rather more complicated there. </p><dl class="description">
+</dl><p>Note. The conversion here should be compared wth the handling of the reverse problem on input. Here we have an algorithm which clearly trades space (no table analogue to “maptab”) for time (a serial search through the string on line <a target="source" href="../all.html#line8400">8400</a>). A space conserving approach could be adopted in “canon” but the problem is rather more complicated there. </p><dl class="description">
 
     <a href="../all.html#line8414" target="source" <dt>8414:</dt></a>
     <dd><p>Insert the character into the output queue. If perchance, “putc” fails for lack of buffer space, don’t worry about inserting any subsequent delay, or updating the system’s idea of the current printing column; </p></dd>
@@ -78,7 +78,7 @@
     <dd><p>(Case 0) The common situation! Increment “t_col”; </p></dd>
 
     <a href="../all.html#line8431" target="source" <dt>8431:</dt></a>
-    <dd><p>(Case 1) Non-printing characters. This group consists of the first, third and fourth octet of the ASCII character set, plus “so” (016), “si” (017) and “del” (0177). Don’t increment “t_col”; </p></dd>
+    <dd><p>(Case 1) Non-printing characters. This group consists of the first, third and fourth octet of the ASCII character set, plus “so” (016), “si” (017) and “del” (<a target="source" href="../all.html#line0177">0177</a>). Don’t increment “t_col”; </p></dd>
 
     <a href="../all.html#line8434" target="source" <dt>8434:</dt></a>
     <dd><p>(Case 2) Backspace. Decrement “t_col” unless it is already zero; </p></dd>
@@ -90,7 +90,7 @@
     <dd><p>(Case 4) Horizontal tab. Assign the value of bits 10, 11 of “t_flags” to “ctype”; </p></dd>
 
     <a href="../all.html#line8453" target="source" <dt>8453:</dt></a>
-    <dd><p>For the only non-trivial case recognised<br />(“c” == 1 or Model 37 teletype), calculate the the number of positions to the next tab stop (via the obscure calculation of line 8454). If this turns out to be four columns or less, take it as zero; </p></dd>
+    <dd><p>For the only non-trivial case recognised<br />(“c” == 1 or Model 37 teletype), calculate the the number of positions to the next tab stop (via the obscure calculation of line <a target="source" href="../all.html#line8454">8454</a>). If this turns out to be four columns or less, take it as zero; </p></dd>
 
     <a href="../all.html#line8458" target="source" <dt>8458:</dt></a>
     <dd><p>Round “*colp” (i.e. the value pointed to by “colp”!) to the next multiple of 8 less one; </p></dd>

@@ -55,7 +55,7 @@
 <p>The “system call” mechanism which enables user mode programs to call on the operating system for assistance, involves the execution by the user mode program of one of 256 versions of the “trap” instruction. (The “version” is the value of the low order byte of the instruction word.) </p><dl class="description">
 
     <a href="../all.html#line0518" target="source" <dt>0518:</dt></a>
-    <dd><p>Execution of the trap instruction in a user mode program causes a trap to occur to vector location 34 which causes the PC to be loaded with the value of the label “trap” (lines 0512, 0755). A new PS is set which indicates </p><p>present mode = kernel mode </p><p>previous mode = user mode </p><p>priority = 7 </p></dd>
+    <dd><p>Execution of the trap instruction in a user mode program causes a trap to occur to vector location 34 which causes the PC to be loaded with the value of the label “trap” (lines <a target="source" href="../all.html#line0512">0512</a>, <a target="source" href="../all.html#line0755">0755</a>). A new PS is set which indicates </p><p>present mode = kernel mode </p><p>previous mode = user mode </p><p>priority = 7 </p></dd>
 
     <a href="../all.html#line0756" target="source" <dt>0756:</dt></a>
     <dd><p>The next instruction executed is the first instruction of “trap”. This saves the processor status word in the stack two words beyond the current “top of stack”. </p><p>It is important to save the PS as soon as possible, before it can be changed, since it contains information defining the type of trap that occurred. The somewhat unconventional destination of the “move” is to provide compatibility with the handling of interrupts, so that the same code can be used further on; </p></dd>
@@ -67,7 +67,7 @@
     <dd><p>The memory management status registers are stored just in case they will be needed, and the memory management unit is reinitialised; </p></dd>
 
     <a href="../all.html#line0762" target="source" <dt>0762:</dt></a>
-    <dd><p>A subroutine entry is made to “call” using r0. (This neatly stores the old value of r0 in the stack, but not a return address. The new value is the address of the address of the routine to be entered next (in this case the “trap” routine in the file “trap.c” (2693)); </p></dd>
+    <dd><p>A subroutine entry is made to “call” using r0. (This neatly stores the old value of r0 in the stack, but not a return address. The new value is the address of the address of the routine to be entered next (in this case the “trap” routine in the file “trap.c” (<a target="source" href="../all.html#line2693">2693</a>)); </p></dd>
 
     <a href="../all.html#line0772" target="source" <dt>0772:</dt></a>
     <dd><p>The stack pointer is adjusted to point to the location which already contains the copy of PS; </p></dd>

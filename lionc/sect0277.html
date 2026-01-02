@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: lpinit(8976)</title>
+<title>: lpinit(<a target="source" href="../all.html#line8976">8976</a>)</title>
 
 <link href="sect0278.html" title="lpwrite (8870)" rel="next" />
 <link href="sect0276.html" title="lpstart (8967)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">lpinit(8976)</b>
+<b class="current">lpinit(<a target="source" href="../all.html#line8976">8976</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000278">22.6 lpinit(8976)</h2>
+<div><h2 id="a0000000278">22.6 lpinit(<a target="source" href="../all.html#line8976">8976</a>)</h2>
 <p>This procedure is called to handle interrupts from the line printer. As mentioned above, most potential interrupts are ignored by the processor. Those interrupts which are accepted by the CP will be associated with either </p><dl class="description">
 
     <dt>(a)</dt>
@@ -69,14 +69,14 @@
     <dd><p>Start transferring characters into the printer buffer again; </p></dd>
 
     <a href="../all.html#line8981" target="source" <dt>8981:</dt></a>
-    <dd><p>Wakeup the process waiting to feed characters to the printer if the number of characters waiting to be sent is either zero or exactly “LPLWAT” (8818). </p></dd>
+    <dd><p>Wakeup the process waiting to feed characters to the printer if the number of characters waiting to be sent is either zero or exactly “LPLWAT” (<a target="source" href="../all.html#line8818">8818</a>). </p></dd>
 
-</dl><p>This latter condition is somewhat puzzling in that it will only <b class="bf">occasionally</b> be satisfied. The intention surely is “if the number of characters in the list is getting low, start refilling”. However if “lpstart” carries out a series of transfers without interruption (at least by “lpint”) the number of characters could go from a value greater than “LPLWAT” to one less than this without this test ever being made. Accordingly the waiting process will not be awakened until the list is completely empty. The result could be frequently to delay the initiation of the next print cycle, and hence to allow the printer to run below its rated capacity. </p><p>One solution to this problem is to change entirely the buffering strategy for line printers. A less drastic change would involve inventing a new flag, “lp11.wflag” say, replacing lines 8981, 8982 by something like </p><pre>
+</dl><p>This latter condition is somewhat puzzling in that it will only <b class="bf">occasionally</b> be satisfied. The intention surely is “if the number of characters in the list is getting low, start refilling”. However if “lpstart” carries out a series of transfers without interruption (at least by “lpint”) the number of characters could go from a value greater than “LPLWAT” to one less than this without this test ever being made. Accordingly the waiting process will not be awakened until the list is completely empty. The result could be frequently to delay the initiation of the next print cycle, and hence to allow the printer to run below its rated capacity. </p><p>One solution to this problem is to change entirely the buffering strategy for line printers. A less drastic change would involve inventing a new flag, “lp11.wflag” say, replacing lines <a target="source" href="../all.html#line8981">8981</a>, <a target="source" href="../all.html#line8982">8982</a> by something like </p><pre>
   if (lp11.cc &lt;= LPLWAT &amp;&amp; lp11.wflag)
   {       wakeup (&amp;lp11);
           lp11.wflag = 0
   }
-</pre><p>and replacing line 8989 by </p><pre>
+</pre><p>and replacing line <a target="source" href="../all.html#line8989">8989</a> by </p><pre>
   {       lp11.wflag++;
           sleep(&amp;lp11, LPRI);
   }

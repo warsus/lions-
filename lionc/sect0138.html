@@ -65,12 +65,12 @@
 </dl><p>Floating point operations are only used by programs, and not by the operating system. Since such operations on the PDP11/45 and 11/70 are handled asynchronously, it is possible that when a floating point exception occurs, the processor may have already switched to kernel mode to handle an interrupt. </p><p>Thus a kernel mode floating point exception trap can be expected occasionally and is the concern of the current user program. </p><dl class="description">
 
     <a href="../all.html#line2793" target="source" <dt>2793:</dt></a>
-    <dd><p>Call “psignal” (3963) to set a flag to show that a floating point exception has occurred; </p></dd>
+    <dd><p>Call “psignal” (<a target="source" href="../all.html#line3963">3963</a>) to set a flag to show that a floating point exception has occurred; </p></dd>
 
     <a href="../all.html#line2794" target="source" <dt>2794:</dt></a>
     <dd><p>Return. </p></dd>
 
-</dl><p>This raises an interesting question: “Why are the kernel mode and user mode floating point exceptions handled slightly di�ferently?” </p></div>
+</dl><p>This raises an interesting question: “Why are the kernel mode and user mode floating point exceptions handled slightly differently?” </p></div>
 
 
 

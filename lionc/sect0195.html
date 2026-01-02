@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: devstart (5096)</title>
+<title>: devstart (<a target="source" href="../all.html#line5096">5096</a>)</title>
 
 <link href="sect0196.html" title="rkintr (5451)" rel="next" />
 <link href="sect0194.html" title="rkaddr (5420)" rel="prev" />
@@ -45,16 +45,16 @@
 </span><span>
 
 <span>
-<b class="current">devstart (5096)</b>
+<b class="current">devstart (<a target="source" href="../all.html#line5096">5096</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000196">16.4 devstart (5096)</h2>
+<div><h2 id="a0000000196">16.4 devstart (<a target="source" href="../all.html#line5096">5096</a>)</h2>
 <p>This procedure when called for the RK disk loads appropriate values into the registers RKDA, RKBA, RKWC and RKCS in succession. Only the last value needs to be computed at this stage. </p><p>The calculation, though messy in appearance, is straight forward. Note that “hbcom” is zero and “rbp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
                                      width:10px; 
-                                     height:9px" class="math gen" />b_xmem” contains the two high order bits of the physical core address. The loading of RKCS initialises the disk controller i.e. the operation is now entirely under the control of the hardware. </p><p>“devstart” returns to “rkstart” (5448), which returns to “rkstrategy” (5416), which resets the processor priority and returns to “swap” (5213), which ... </p></div>
+                                     height:9px" class="math gen" />b_xmem” contains the two high order bits of the physical core address. The loading of RKCS initialises the disk controller i.e. the operation is now entirely under the control of the hardware. </p><p>“devstart” returns to “rkstart” (<a target="source" href="../all.html#line5448">5448</a>), which returns to “rkstrategy” (<a target="source" href="../all.html#line5416">5416</a>), which resets the processor priority and returns to “swap” (<a target="source" href="../all.html#line5213">5213</a>), which ... </p></div>
 
 
 

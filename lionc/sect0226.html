@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: closef (6643)</title>
+<title>: closef (<a target="source" href="../all.html#line6643">6643</a>)</title>
 
 <link href="sect0227.html" title="iput (7344)" rel="next" />
 <link href="sect0225.html" title="close (5846)" rel="prev" />
@@ -45,20 +45,20 @@
 </span><span>
 
 <span>
-<b class="current">closef (6643)</b>
+<b class="current">closef (<a target="source" href="../all.html#line6643">6643</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000227">18.13 closef (6643)</h2>
-<p>“closef” is called by “close” (5854) and by “exit” (3230). (The latter is more common since most files do not get closed explicitly but only implicitly when the user program terminates.) </p><dl class="description">
+<div><h2 id="a0000000227">18.13 closef (<a target="source" href="../all.html#line6643">6643</a>)</h2>
+<p>“closef” is called by “close” (<a target="source" href="../all.html#line5854">5854</a>) and by “exit” (<a target="source" href="../all.html#line3230">3230</a>). (The latter is more common since most files do not get closed explicitly but only implicitly when the user program terminates.) </p><dl class="description">
 
     <a href="../all.html#line6649" target="source" <dt>6649:</dt></a>
     <dd><p>If the file is a pipe, reset the mode of the pipe and “wakeup” any process which is waiting for the pipe, either for information or for space; </p></dd>
 
     <a href="../all.html#line6655" target="source" <dt>6655:</dt></a>
-    <dd><p>If this is the last process to reference the file, call “closei” (6672) to handle any special end of file processing for special files and then call “iput”; </p></dd>
+    <dd><p>If this is the last process to reference the file, call “closei” (<a target="source" href="../all.html#line6672">6672</a>) to handle any special end of file processing for special files and then call “iput”; </p></dd>
 
     <a href="../all.html#line6657" target="source" <dt>6657:</dt></a>
     <dd><p>Decrement the “file” entry reference count. If this now zero, the entry is no longer allocated. </p></dd>

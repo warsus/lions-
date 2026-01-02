@@ -52,7 +52,7 @@
 </div>
 
 <div><h2 id="a0000000079">6.5 Initialisation of proc[0]</h2>
-<p>The explicit initialisation of the structure “proc[0]” is performed starting at line 1589. Only four elements are changed from the overall initial value of zero: </p><dl class="description">
+<p>The explicit initialisation of the structure “proc[0]” is performed starting at line <a target="source" href="../all.html#line1589">1589</a>. Only four elements are changed from the overall initial value of zero: </p><dl class="description">
 
     <dt>(a)</dt>
     <dd><p>“p_stat” is set to “SRUN” which implies that process 0 is “ready to run”; </p></dd>
@@ -66,7 +66,7 @@
     <dt>(d)</dt>
     <dd><p>“p_addr” is set to the contents of the kernel segmentation address register #6. </p></dd>
 
-</dl><p>It will be seen that process #0 has acquired an area of “USIZE” blocks (exactly the size of a “per process data area”) which begins immediately after the official end (“_end”) of the operating system data area. </p><p>The ordinal number of the first block of this area has been stored for future reference in “p_addr”. This area, which was cleared to zero in “start” (0661), contains a single copy of the user structure called “u”. </p><p>On line 1593, the address of “proc[0]” is stored in “u.u_procp”, i.e. the “proc” structure and the “u” structure are mutually linked. </p></div>
+</dl><p>It will be seen that process #0 has acquired an area of “USIZE” blocks (exactly the size of a “per process data area”) which begins immediately after the official end (“_end”) of the operating system data area. </p><p>The ordinal number of the first block of this area has been stored for future reference in “p_addr”. This area, which was cleared to zero in “start” (<a target="source" href="../all.html#line0661">0661</a>), contains a single copy of the user structure called “u”. </p><p>On line <a target="source" href="../all.html#line1593">1593</a>, the address of “proc[0]” is stored in “u.u_procp”, i.e. the “proc” structure and the “u” structure are mutually linked. </p></div>
 
 
 

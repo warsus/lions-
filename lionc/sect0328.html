@@ -55,13 +55,13 @@
 <dl class="description">
 
     <dt>1.1</dt>
-    <dd><p>Devise changes to “malloc” (2528) to implement the Best Fit algorithm. </p></dd>
+    <dd><p>Devise changes to “malloc” (<a target="source" href="../all.html#line2528">2528</a>) to implement the Best Fit algorithm. </p></dd>
 
     <dt>1.2</dt>
-    <dd><p>Rewrite the procedure “mfree” (2556) to render its function more easily discernible by the reader. </p></dd>
+    <dd><p>Rewrite the procedure “mfree” (<a target="source" href="../all.html#line2556">2556</a>) to render its function more easily discernible by the reader. </p></dd>
 
     <dt>1.3</dt>
-    <dd><p>Investigate the adequacy of the sizes of the arrays “coremap” and “swapmap” (0203, 0204). How should “CMAPSIZ” and “SWAPSIZ” change when “NPROC” is increased? </p></dd>
+    <dd><p>Investigate the adequacy of the sizes of the arrays “coremap” and “swapmap” (<a target="source" href="../all.html#line0203">0203</a>, <a target="source" href="../all.html#line0204">0204</a>). How should “CMAPSIZ” and “SWAPSIZ” change when “NPROC” is increased? </p></dd>
 
     <dt>1.4</dt>
     <dd><p>Prove that “malloc” and “mfree” jointly solve the memory aliocation problem correctly. </p></dd>
@@ -79,7 +79,7 @@
     execl (init, init, 0);
     while (1);
     }
-</pre><p>and compare the result with the contents of the array “icode” (1516). </p></dd>
+</pre><p>and compare the result with the contents of the array “icode” (<a target="source" href="../all.html#line1516">1516</a>). </p></dd>
 
     <dt>1.8</dt>
     <dd><p>Investigate the size required for kernel mode stack areas. Hence show that the 367 word area which is provided is adequate. </p></dd>
@@ -88,7 +88,7 @@
     <dd><p>If main memory consists of several independent memory modules and one of these, not the last, is down, “main” will not include memory modules beyond the one which is down, in the list of available space in “coremap”. Devise some simple changes to “main” to handle this situation. what other parts of the system would also need revision? </p></dd>
 
     <dt>1.10</dt>
-    <dd><p>Rewrite the routines “estabur” (1650) and “sureg” (1739) so that they will work as efficiently as possible on the PDP11/40. How often are these routines used in practice? Would it really be worthwhile trying to implement your improved versions? </p></dd>
+    <dd><p>Rewrite the routines “estabur” (<a target="source" href="../all.html#line1650">1650</a>) and “sureg” (<a target="source" href="../all.html#line1739">1739</a>) so that they will work as efficiently as possible on the PDP11/40. How often are these routines used in practice? Would it really be worthwhile trying to implement your improved versions? </p></dd>
 
     <dt>1.11</dt>
     <dd><p>Investigate the overheads involved in initiating a new process. Perform a series of measurements for a set of different sized programs under different conditions. </p></dd>

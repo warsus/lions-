@@ -73,7 +73,7 @@
   5754 readi(fp-&gt;f inode);
   5756 dpadd(fp-&gt;f offset,
               u.u_arg[1]-u.u_count);
-</pre><p>“rdwr” includes much code which is common to both “read” and “write” operations. It converts, via “getf” (6619), the file identification supplied by the user process into the address of an entry in the “file” array. </p><p>Note that the first parameter of the system call is passed in a different way from the remaining two parameters. </p><p>“u.u_segflg” is set to zero to indicate that the operation destination is in the user address space. After “readi” is called with a parameter which is an “inode” pointer, the final accounting is performed by adding the number of characters requested for transfer less the residual number not transferred (left in “u.u_count”) to the file offset. </p><pre>
+</pre><p>“rdwr” includes much code which is common to both “read” and “write” operations. It converts, via “getf” (<a target="source" href="../all.html#line6619">6619</a>), the file identification supplied by the user process into the address of an entry in the “file” array. </p><p>Note that the first parameter of the system call is passed in a different way from the remaining two parameters. </p><p>“u.u_segflg” is set to zero to indicate that the operation destination is in the user address space. After “readi” is called with a parameter which is an “inode” pointer, the final accounting is performed by adding the number of characters requested for transfer less the residual number not transferred (left in “u.u_count”) to the file offset. </p><pre>
   6221 readi
 
   6239 lbn = lshift (u.u_offset, -9);
@@ -85,7 +85,7 @@
   6260 iomove (bp, on, n, B READ);
   6261 brelse (bp);
 
-</pre><p>“readi” converts the file offset into two parts: a logical block number, “lbn”, and an index into the block, “on”. The number of characters to be transferred is the minimum of “u.u_count” and the number of characters left in the block (in which case additional block(s) must be read (not shown)) (and the number of characters remaining in the file (this case is not shown)). </p><p>“dn” is the device number which is stored within the “inode”. “bn” is the actual block number on the device (disk), which is computed by “bmap” (6415) using “lbn”. </p><p>The call on “bread” finds the required block, copying it into core from disk if necessary. “iomove” (6364) transfers the appropriate characters to their destination, and performs accounting chores. </p></div>
+</pre><p>“readi” converts the file offset into two parts: a logical block number, “lbn”, and an index into the block, “on”. The number of characters to be transferred is the minimum of “u.u_count” and the number of characters left in the block (in which case additional block(s) must be read (not shown)) (and the number of characters remaining in the file (this case is not shown)). </p><p>“dn” is the device number which is stored within the “inode”. “bn” is the actual block number on the device (disk), which is computed by “bmap” (<a target="source" href="../all.html#line6415">6415</a>) using “lbn”. </p><p>The call on “bread” finds the required block, copying it into core from disk if necessary. “iomove” (<a target="source" href="../all.html#line6364">6364</a>) transfers the appropriate characters to their destination, and performs accounting chores. </p></div>
 
 
 

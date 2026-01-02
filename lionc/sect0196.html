@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: rkintr (5451)</title>
+<title>: rkintr (<a target="source" href="../all.html#line5451">5451</a>)</title>
 
 <link href="sect0197.html" title="iodone (5018)" rel="next" />
 <link href="sect0195.html" title="devstart (5096)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">rkintr (5451)</b>
+<b class="current">rkintr (<a target="source" href="../all.html#line5451">5451</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000197">16.5 rkintr (5451)</h2>
+<div><h2 id="a0000000197">16.5 rkintr (<a target="source" href="../all.html#line5451">5451</a>)</h2>
 <p>This procedure is invoked to handle the interrupts which occur when RK disk operations are completed. </p><dl class="description">
 
     <a href="../all.html#line5455" target="source" <dt>5455:</dt></a>
@@ -61,7 +61,7 @@
     <dd><p>Inspect the error bit; if set ... </p></dd>
 
     <a href="../all.html#line5460" target="source" <dt>5460:</dt></a>
-    <dd><p>Call “deverror” (2447) to display a message on the system console terminal; </p></dd>
+    <dd><p>Call “deverror” (<a target="source" href="../all.html#line2447">2447</a>) to display a message on the system console terminal; </p></dd>
 
     <a href="../all.html#line5461" target="source" <dt>5461:</dt></a>
     <dd><p>Clear the internal registers of the disk controller and ... </p></dd>
@@ -76,7 +76,7 @@
     <dd><p>Set the “retry” (!) count back to zero, remove the current operation from the “actf” list, and complete the operation by calling “iodone”; </p></dd>
 
     <a href="../all.html#line5472" target="source" <dt>5472:</dt></a>
-    <dd><p>“rkstart” is called unconditionally here. If the call is not necessary (because the “actf” list is empty) “rkstart” will return immediately (5444). </p></dd>
+    <dd><p>“rkstart” is called unconditionally here. If the call is not necessary (because the “actf” list is empty) “rkstart” will return immediately (<a target="source" href="../all.html#line5444">5444</a>). </p></dd>
 
 </dl></div>
 

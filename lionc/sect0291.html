@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: maptab (8117)</title>
+<title>: maptab (<a target="source" href="../all.html#line8117">8117</a>)</title>
 
 <link href="sect0292.html" title="partab (7947)" rel="next" />
 <link href="sect0290.html" title="Graphic Character Sets" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">maptab (8117)</b>
+<b class="current">maptab (<a target="source" href="../all.html#line8117">8117</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000292">23.8 maptab (8117)</h2>
+<div><h2 id="a0000000292">23.8 maptab (<a target="source" href="../all.html#line8117">8117</a>)</h2>
 <p>This array is used in the translation of character input from a terminal preceded by a single backslash, “<tt>\</tt>”. </p><p>There are three characters, 004 (eot), ‘#’ and ‘@’, which always have special meanings and need to be asserted by a backslash whenever they are to be interpreted literally. These three characters occur in “maptab” in their “natural” locations (i.e. their locations in the ASCII table). Thus for example ‘#’ has code 043 and </p><pre>
    maptab[043] == 043.
 </pre><p>The other non-null characters in “maptab” are involved in the translation of input characters from “upper case only” devices and do not occur in their “natural” locations but in the location of their equivalent character, e.g. “<tt>\</tt>{” occurs in the natural location for “{”, since “<tt>\</tt>{” will be interpreted as “{”, etc. </p><p>Note the situation regarding alphabetic characters. This is only explicable when it is remembered that the alphabetic characters are all translated to lower case before any backslash is recognised. </p></div>

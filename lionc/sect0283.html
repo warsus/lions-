@@ -47,7 +47,7 @@
 </div>
 
 <div><h1 id="a0000000284">23 Character Handling</h1>
-<p>Buffering for character special devices is provided via a set of four word blocks, each of which provides storage for six characters. The prototype storage block is “cblock” (8140) which incorporates a word pointer (to a similar structure) along with the six characters. </p><p>Structures of type “clist” (7908) which contain a character counter plus a head and tail pointer are used as “headers” for lists of blocks of type “cblock”. </p><p>“cblock”s which are not in current use are linked via their head pointers into a list whose head is the pointer “cfreelist” (3149). The head pointer for the last element of the list has the value “NULL”. </p><p>A list of “cblock”s provides storage for a list of characters. The procedure “putc” may be used to add a character to the tail of such a list, and “getc”, to remove a character from the head of such a list. </p><p>Figures 23.1 through 23.4 illustrate the development of a list as characters are deleted and added. </p><div class="picture">
+<p>Buffering for character special devices is provided via a set of four word blocks, each of which provides storage for six characters. The prototype storage block is “cblock” (<a target="source" href="../all.html#line8140">8140</a>) which incorporates a word pointer (to a similar structure) along with the six characters. </p><p>Structures of type “clist” (<a target="source" href="../all.html#line7908">7908</a>) which contain a character counter plus a head and tail pointer are used as “headers” for lists of blocks of type “cblock”. </p><p>“cblock”s which are not in current use are linked via their head pointers into a list whose head is the pointer “cfreelist” (<a target="source" href="../all.html#line3149">3149</a>). The head pointer for the last element of the list has the value “NULL”. </p><p>A list of “cblock”s provides storage for a list of characters. The procedure “putc” may be used to add a character to the tail of such a list, and “getc”, to remove a character from the head of such a list. </p><p>Figures 23.1 through 23.4 illustrate the development of a list as characters are deleted and added. </p><div class="picture">
 <img src="images/img-0016.png" alt="\begin{picture}(245,155)(40,525) \thicklines \put(185,540){\framebox(25,140){}} \put(195,650){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm g}}} \put(195,629){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm h}}} \put(195,608){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm i}}} \put(195,587){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm j}}} \put(195,566){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm k}}} \put(195,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm l}}} \put(240,540){\framebox(25,140){}} \put(250,629){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm n}}} \put(250,608){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm o}}} \put(250,587){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm p}}} \put(250,566){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm q}}} \put(250,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm r}}} \put(247,650){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm m}}} \put( 40,540){\framebox(60,60){}} \put( 90,570){\vector( 1, 0){ 40}} \put(130,540){\framebox(25,140){}} \put(140,670){\vector( 1, 0){ 45}} \put(195,670){\vector( 1, 0){ 45}} \put( 90,550){\line( 0,-1){ 25}} \put( 90,525){\line( 1, 0){195}} \put(285,525){\line( 0, 1){ 25}} \put(285,550){\vector(-1, 0){ 20}} \put( 48,584){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm 14}}} \put( 49,564){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm head}}} \put( 49,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm tail}}} \put(140,566){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm e}}} \put(140,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm f}}} \end{picture}" style="width:387px; height:246px" class="picture gen" />
 </div><center> <big class="large"><b class="bf">Figure 23.1</b></big> </center><div class="picture">
 <img src="images/img-0017.png" alt="\begin{picture}(245,155)(40,525) \thicklines \put(185,540){\framebox(25,140){}} \put(195,650){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm g}}} \put(195,629){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm h}}} \put(195,608){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm i}}} \put(195,587){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm j}}} \put(195,566){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm k}}} \put(195,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm l}}} \put(240,540){\framebox(25,140){}} \put(250,629){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm n}}} \put(250,608){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm o}}} \put(250,587){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm p}}} \put(250,566){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm q}}} \put(250,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm r}}} \put(247,650){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm m}}} \put( 40,540){\framebox(60,60){}} \put( 90,570){\vector( 3,-1){ 40.500}} \put(130,540){\framebox(25,140){}} \put(140,670){\vector( 1, 0){ 45}} \put(195,670){\vector( 1, 0){ 45}} \put( 90,550){\line( 0,-1){ 25}} \put( 90,525){\line( 1, 0){195}} \put(285,525){\line( 0, 1){ 25}} \put(285,550){\vector(-1, 0){ 20}} \put( 49,564){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm head}}} \put( 49,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm tail}}} \put(140,545){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm f}}} \put( 48,584){\makebox(0,0)[lb]{\raisebox{0pt}[0pt][0pt]{\twlrm 13}}} \end{picture}" style="width:387px; height:246px" class="picture gen" />
@@ -59,11 +59,11 @@
 
 <div class="contents section-contents"><!--<strong>Subsections</strong>-->
 <ul>
-<li><a href="sect0284.html">23.1 cinit (8234)</a>
+<li><a href="sect0284.html">23.1 cinit (<a target="source" href="../all.html#line8234">8234</a>)</a>
    
-</li><li><a href="sect0285.html">23.2 getc (0930)</a>
+</li><li><a href="sect0285.html">23.2 getc (<a target="source" href="../all.html#line0930">0930</a>)</a>
    
-</li><li><a href="sect0286.html">23.3 putc (0967)</a>
+</li><li><a href="sect0286.html">23.3 putc (<a target="source" href="../all.html#line0967">0967</a>)</a>
    
 </li><li><a href="sect0287.html">23.4 Character Sets</a>
    
@@ -73,9 +73,9 @@
    
 </li><li><a href="sect0290.html">23.7 Graphic Character Sets</a>
    
-</li><li><a href="sect0291.html">23.8 maptab (8117)</a>
+</li><li><a href="sect0291.html">23.8 maptab (<a target="source" href="../all.html#line8117">8117</a>)</a>
    
-</li><li><a href="sect0292.html">23.9 partab (7947)</a>
+</li><li><a href="sect0292.html">23.9 partab (<a target="source" href="../all.html#line7947">7947</a>)</a>
    
 </li>
 

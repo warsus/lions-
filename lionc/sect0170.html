@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: stop (4016)</title>
+<title>: stop (<a target="source" href="../all.html#line4016">4016</a>)</title>
 
 <link href="sect0171.html" title="wait (3270) (continued)" rel="next" />
 <link href="sect0169.html" title="Tracing" rel="prev" />
@@ -45,17 +45,17 @@
 </span><span>
 
 <span>
-<b class="current">stop (4016)</b>
+<b class="current">stop (<a target="source" href="../all.html#line4016">4016</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000171">13.22 stop (4016)</h2>
-<p>This procedure is called by “issig” (3999) if the tracing flag (“STRC”, 0395) is set. </p><dl class="description">
+<div><h2 id="a0000000171">13.22 stop (<a target="source" href="../all.html#line4016">4016</a>)</h2>
+<p>This procedure is called by “issig” (<a target="source" href="../all.html#line3999">3999</a>) if the tracing flag (“STRC”, 0395) is set. </p><dl class="description">
 
     <a href="../all.html#line4022" target="source" <dt>4022:</dt></a>
-    <dd><p>If your parent is process 1 (i.e. “/etc/init”), then call “exit” (line 4032); </p></dd>
+    <dd><p>If your parent is process 1 (i.e. “/etc/init”), then call “exit” (line <a target="source" href="../all.html#line4032">4032</a>); </p></dd>
 
     <a href="../all.html#line4023" target="source" <dt>4023:</dt></a>
     <dd><p>Otherwise look through “proc” for your parent ... wake him up ... declare yourself “stopped” and ... call “swtch” (Note do NOT call “sleep”. Why?); </p></dd>

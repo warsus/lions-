@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: xfree (4398)</title>
+<title>: xfree (<a target="source" href="../all.html#line4398">4398</a>)</title>
 
 <link href="sect0180.html" title="Introduction to Basic I/O" rel="next" />
 <link href="sect0178.html" title="xalloc (4433)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">xfree (4398)</b>
+<b class="current">xfree (<a target="source" href="../all.html#line4398">4398</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000180">14.5 xfree (4398)</h2>
-<p>“xfree” is called by “exit” (3233); when a process is being terminated, and by “exec” (3128), when a process is being transmogrified. </p><dl class="description">
+<div><h2 id="a0000000180">14.5 xfree (<a target="source" href="../all.html#line4398">4398</a>)</h2>
+<p>“xfree” is called by “exit” (<a target="source" href="../all.html#line3233">3233</a>); when a process is being terminated, and by “exec” (<a target="source" href="../all.html#line3128">3128</a>), when a process is being transmogrified. </p><dl class="description">
 
     <a href="../all.html#line4402" target="source" <dt>4402:</dt></a>
     <dd><p>Set the text pointer in the “proc” entry to “NULL”; </p></dd>
@@ -67,9 +67,9 @@
     <dd><p>Abandon the image of the text segment in the disk swap area; </p></dd>
 
     <a href="../all.html#line4411" target="source" <dt>4411:</dt></a>
-    <dd><p>Call “iput” (7344) to decrement the “inode” reference count and if necessary delete it. </p></dd>
+    <dd><p>Call “iput” (<a target="source" href="../all.html#line7344">7344</a>) to decrement the “inode” reference count and if necessary delete it. </p></dd>
 
-</dl><p>“ISVTX” (5695) is a mask which defines the “sticky bit” mentioned in section “CHMOD(I)” of the UPM. If this bit is set, the disk copy of the text segment is allowed to remain in the disk swap area even when no programs are running which reference it, in the expectation that it will be required again shortly. This is an efficient device for commonly used programs such as the “shell” or the editor.  </p></div>
+</dl><p>“ISVTX” (<a target="source" href="../all.html#line5695">5695</a>) is a mask which defines the “sticky bit” mentioned in section “CHMOD(I)” of the UPM. If this bit is set, the disk copy of the text segment is allowed to remain in the disk swap area even when no programs are running which reference it, in the expectation that it will be required again shortly. This is an efficient device for commonly used programs such as the “shell” or the editor.  </p></div>
 
 
 

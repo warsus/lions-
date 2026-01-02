@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: The ’mount’ table (0272)</title>
+<title>: The ’mount’ table (<a target="source" href="../all.html#line0272">0272</a>)</title>
 
 <link href="sect0250.html" title="iinit (6922)" rel="next" />
 <link href="sect0248.html" title="The ‘Super Block’ (5561)" rel="prev" />
@@ -45,31 +45,31 @@
 </span><span>
 
 <span>
-<b class="current">The ’mount’ table (0272)</b>
+<b class="current">The ’mount’ table (<a target="source" href="../all.html#line0272">0272</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000250">20.2 The ’mount’ table (0272)</h2>
+<div><h2 id="a0000000250">20.2 The ’mount’ table (<a target="source" href="../all.html#line0272">0272</a>)</h2>
 <p>The “mount” table contained an entry for each mounted file system volume. Each entry defines the device on which the file system volume is mounted, a pointer to the buffer which stores the “super block” for the device, and an “inode” pointer. The table is referenced as follows: </p><dl class="description">
 
-    <dt>iinit (6922)</dt>
-    <dd><p>which is called by “main” (1615), makes an entry for the root device; </p></dd>
+    <dt>iinit (<a target="source" href="../all.html#line6922">6922</a>)</dt>
+    <dd><p>which is called by “main” (<a target="source" href="../all.html#line1615">1615</a>), makes an entry for the root device; </p></dd>
 
-    <dt>smount (6086)</dt>
+    <dt>smount (<a target="source" href="../all.html#line6086">6086</a>)</dt>
     <dd><p>is a system call which makes entries for additional devices; </p></dd>
 
-    <dt>iget (7276)</dt>
+    <dt>iget (<a target="source" href="../all.html#line7276">7276</a>)</dt>
     <dd><p>searches the “mount” table if it encounters an “inode” with the ‘IMOUNT’ flag set; </p></dd>
 
-    <dt>getfs (7167)</dt>
+    <dt>getfs (<a target="source" href="../all.html#line7167">7167</a>)</dt>
     <dd><p>searches the “mount” table to find and return a pointer to the “super block” for a particular device; </p></dd>
 
-    <dt>update (7201)</dt>
+    <dt>update (<a target="source" href="../all.html#line7201">7201</a>)</dt>
     <dd><p>is called periodically and searches the “mount” table to locate information which should be written from core tables into the tables maintained on the file system volumes; </p></dd>
 
-    <dt>sumount (6144)</dt>
+    <dt>sumount (<a target="source" href="../all.html#line6144">6144</a>)</dt>
     <dd><p>is a system call which deletes entries from the table. </p></dd>
 
 </dl></div>

@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: ttyinput (8333)</title>
+<title>: ttyinput (<a target="source" href="../all.html#line8333">8333</a>)</title>
 
 <link href="sect0319.html" title="Character Output – ttwrite (8550)" rel="next" />
 <link href="sect0317.html" title="Notes" rel="prev" />
@@ -45,20 +45,20 @@
 </span><span>
 
 <span>
-<b class="current">ttyinput (8333)</b>
+<b class="current">ttyinput (<a target="source" href="../all.html#line8333">8333</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000319">25.7 ttyinput (8333)</h2>
-<p>“canon” removes characters from the “raw” input queue. They are put there in the first place by “ttyinput” which is called by “klrint” (8087) whenever an input character is received from the hardware controller. </p><p>The parameters passed to “ttyinput” are a character and a reference to a “tty” structure. </p><dl class="description">
+<div><h2 id="a0000000319">25.7 ttyinput (<a target="source" href="../all.html#line8333">8333</a>)</h2>
+<p>“canon” removes characters from the “raw” input queue. They are put there in the first place by “ttyinput” which is called by “klrint” (<a target="source" href="../all.html#line8087">8087</a>) whenever an input character is received from the hardware controller. </p><p>The parameters passed to “ttyinput” are a character and a reference to a “tty” structure. </p><dl class="description">
 
     <a href="../all.html#line8342" target="source" <dt>8342:</dt></a>
     <dd><p>If the character is a “carriage return” and the terminal operates with a “carriage return” only (instead of a “carriage return” “line feed” pair) change the character to a “new line”; </p></dd>
 
     <a href="../all.html#line8344" target="source" <dt>8344:</dt></a>
-    <dd><p>If the terminal is not operating in “raw” mode and the character is a “quit” or “delete” (7958) then call “signal” (3949) to send a software interrupt to every process which has the terminal as its controlling terminal, flush all the queues associated with the terminal, and return; </p></dd>
+    <dd><p>If the terminal is not operating in “raw” mode and the character is a “quit” or “delete” (<a target="source" href="../all.html#line7958">7958</a>) then call “signal” (<a target="source" href="../all.html#line3949">3949</a>) to send a software interrupt to every process which has the terminal as its controlling terminal, flush all the queues associated with the terminal, and return; </p></dd>
 
     <a href="../all.html#line8349" target="source" <dt>8349:</dt></a>
     <dd><p>If the “raw” input queue has grown excessively large, flush <b class="bf">all</b> the queues for the terminal and return. (This may seem a trifle harsh at first sight but it will usually be what is required.); </p></dd>
@@ -73,7 +73,7 @@
     <dd><p>If the terminal is operating in “raw” mode, or the character was a “new line” or “eot” then ... </p></dd>
 
     <a href="../all.html#line8357" target="source" <dt>8357:</dt></a>
-    <dd><p>“wakeup” any process waiting for input from the terminal, place a delimiter character (all ones) also in the “raw” queue and increment the delimiter count Note this is one point where possible failure of “putc” (when there is no buffer space) is explicitly recognised. A failure occurring here would explain why the test on line 8316 may sometimes succeed. </p></dd>
+    <dd><p>“wakeup” any process waiting for input from the terminal, place a delimiter character (all ones) also in the “raw” queue and increment the delimiter count Note this is one point where possible failure of “putc” (when there is no buffer space) is explicitly recognised. A failure occurring here would explain why the test on line <a target="source" href="../all.html#line8316">8316</a> may sometimes succeed. </p></dd>
 
     <a href="../all.html#line8361" target="source" <dt>8361:</dt></a>
     <dd><p>Finally, if the input character is to be echoed i.e. the terminal is running in full duplex mode, insert a copy of the character into the output queue, and and arrange to have it transmitted (“ttstart”) back to the terminal. </p></dd>

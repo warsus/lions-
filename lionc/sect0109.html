@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: sleep (2066)</title>
+<title>: sleep (<a target="source" href="../all.html#line2066">2066</a>)</title>
 
 <link href="sect0110.html" title="wakeup (2113)" rel="next" />
 <link href="sect0108.html" title="setpri (2156)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">sleep (2066)</b>
+<b class="current">sleep (<a target="source" href="../all.html#line2066">2066</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000110">8.11 sleep (2066)</h2>
+<div><h2 id="a0000000110">8.11 sleep (<a target="source" href="../all.html#line2066">2066</a>)</h2>
 <p>This procedure is called (from nearly 30 different places in the code) when a kernel process chooses to suspend itself. There are two parameters: </p><ul class="itemize">
 <li><p>the reason for sleeping; </p></li><li><p>a priority with which the process will run after being awakened. </p></li>
 </ul><p>If this priority is negative the process cannot be aroused from its sleep by the arrival of a “signal”. “signals” are discussed in Chapter Thirteen. </p><dl class="description">
@@ -63,13 +63,13 @@
     <dd><p>If the priority is non-negative, a test is made for “waiting signals”; </p></dd>
 
     <a href="../all.html#line2075" target="source" <dt>2075:</dt></a>
-    <dd><p>A small critical section begins here, wherein the process status is changed and the parameters are stored in generally accessible locations (viz. within the array “proc”). </p><p>This code is critical because the same information fields may be interrogated and changed by “wakeup” (2113) which is frequently called by interrupt handlers; </p></dd>
+    <dd><p>A small critical section begins here, wherein the process status is changed and the parameters are stored in generally accessible locations (viz. within the array “proc”). </p><p>This code is critical because the same information fields may be interrogated and changed by “wakeup” (<a target="source" href="../all.html#line2113">2113</a>) which is frequently called by interrupt handlers; </p></dd>
 
     <a href="../all.html#line2080" target="source" <dt>2080:</dt></a>
     <dd><p>When “runin” is non-zero, the scheduler (process #0) is waiting to swap another process into main memory; </p></dd>
 
     <a href="../all.html#line2084" target="source" <dt>2084:</dt></a>
-    <dd><p>The call on “swtch” represents a delay of unknown extent during which a relevant external event may have occurred. Hence the second test on “issig” (2085) is not irrelevant; </p></dd>
+    <dd><p>The call on “swtch” represents a delay of unknown extent during which a relevant external event may have occurred. Hence the second test on “issig” (<a target="source" href="../all.html#line2085">2085</a>) is not irrelevant; </p></dd>
 
     <a href="../all.html#line2087" target="source" <dt>2087:</dt></a>
     <dd><p>For negative priority “sleeps”, where the process typically waits for freeing of system table space, the occurrence of a “signal” is not allowed to deflect the course of the activity. </p></dd>

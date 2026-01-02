@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: getc (0930)</title>
+<title>: getc (<a target="source" href="../all.html#line0930">0930</a>)</title>
 
 <link href="sect0286.html" title="putc (0967)" rel="next" />
 <link href="sect0284.html" title="cinit (8234)" rel="prev" />
@@ -45,19 +45,19 @@
 </span><span>
 
 <span>
-<b class="current">getc (0930)</b>
+<b class="current">getc (<a target="source" href="../all.html#line0930">0930</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000286">23.2 getc (0930)</h2>
+<div><h2 id="a0000000286">23.2 getc (<a target="source" href="../all.html#line0930">0930</a>)</h2>
 <p>This procedure is called by </p><pre>
-   flushtty (8258, 8259, 8264)
-   canon    (8292)    pcread  (8688)
-   ttstart  (8520)    pcstart (8714)
-   ttread   (8544)    lpstart (8971)
-   pcclose  (8673)
+   flushtty (<a target="source" href="../all.html#line8258">8258</a>, <a target="source" href="../all.html#line8259">8259</a>, <a target="source" href="../all.html#line8264">8264</a>)
+   canon    (<a target="source" href="../all.html#line8292">8292</a>)    pcread  (<a target="source" href="../all.html#line8688">8688</a>)
+   ttstart  (<a target="source" href="../all.html#line8520">8520</a>)    pcstart (<a target="source" href="../all.html#line8714">8714</a>)
+   ttread   (<a target="source" href="../all.html#line8544">8544</a>)    lpstart (<a target="source" href="../all.html#line8971">8971</a>)
+   pcclose  (<a target="source" href="../all.html#line8673">8673</a>)
 </pre><p>with a single argument which is the address of a “clist” structure. </p><dl class="description">
 
     <a href="../all.html#line0931" target="source" <dt>0931:</dt></a>
@@ -70,7 +70,7 @@
     <dd><p>r1 points to the first word of a “clist” structure (i.e. a character count). Move the second word of this structure (i.e. a pointer to the head character) to r2; </p></dd>
 
     <a href="../all.html#line0937" target="source" <dt>0937:</dt></a>
-    <dd><p>If the list is empty (head pointer is “NULL”) go to line 0961; </p></dd>
+    <dd><p>If the list is empty (head pointer is “NULL”) go to line <a target="source" href="../all.html#line0961">0961</a>; </p></dd>
 
     <a href="../all.html#line0938" target="source" <dt>0938:</dt></a>
     <dd><p>Move the head character to r0 and increment r2 as a side effect; </p></dd>
@@ -82,16 +82,16 @@
     <dd><p>Store the updated head pointer back in the “clist” structure. (This may have to be altered later.); </p></dd>
 
     <a href="../all.html#line0941" target="source" <dt>0941:</dt></a>
-    <dd><p>Decrement the character count and if this is still positive, go to line 0947; </p></dd>
+    <dd><p>Decrement the character count and if this is still positive, go to line <a target="source" href="../all.html#line0947">0947</a>; </p></dd>
 
     <a href="../all.html#line0942" target="source" <dt>0942:</dt></a>
-    <dd><p>The list is now empty, so reset the head and tail character pointers to “NULL”. Go to line 0952; </p></dd>
+    <dd><p>The list is now empty, so reset the head and tail character pointers to “NULL”. Go to line <a target="source" href="../all.html#line0952">0952</a>; </p></dd>
 
     <a href="../all.html#line0947" target="source" <dt>0947:</dt></a>
-    <dd><p>Look at the three least significant bits of r2. If these are non-zero, branch to line 0957 (and return to the calling routine forthwith); </p></dd>
+    <dd><p>Look at the three least significant bits of r2. If these are non-zero, branch to line <a target="source" href="../all.html#line0957">0957</a> (and return to the calling routine forthwith); </p></dd>
 
     <a href="../all.html#line0949" target="source" <dt>0949:</dt></a>
-    <dd><p>At this point, r2 is pointing at the next character position beyond the “cblock”. Move the value stored in the first word of the “cblock” (i.e. at r2 – 8), which is the address of the next “cblock” in the list to the head pointer in the “clist”. (Note that r1 was incremented as a side effect at line 0941): </p></dd>
+    <dd><p>At this point, r2 is pointing at the next character position beyond the “cblock”. Move the value stored in the first word of the “cblock” (i.e. at r2 – 8), which is the address of the next “cblock” in the list to the head pointer in the “clist”. (Note that r1 was incremented as a side effect at line <a target="source" href="../all.html#line0941">0941</a>): </p></dd>
 
     <a href="../all.html#line0950" target="source" <dt>0950:</dt></a>
     <dd><p>The last value stored needs to incremented by two (Consult Figures 23.2 and 23.3); </p></dd>

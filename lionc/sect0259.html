@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: alloc (6965)</title>
+<title>: alloc (<a target="source" href="../all.html#line6965">6965</a>)</title>
 
 <link href="sect0260.html" title="itrunc (7414)" rel="next" />
 <link href="sect0258.html" title="Resource Allocation" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">alloc (6965)</b>
+<b class="current">alloc (<a target="source" href="../all.html#line6965">6965</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000260">20.12 alloc (6965)</h2>
-<p>This is called by “bmap” (6435, 6448, 6468, 6480, 6497) whenever a new storage block is needed to store part of a file. </p><dl class="description">
+<div><h2 id="a0000000260">20.12 alloc (<a target="source" href="../all.html#line6965">6965</a>)</h2>
+	<p>This is called by “bmap” (<a target="source" href="../all.html#line6435">6435</a>, <a target="source" href="../all.html#line6448">6448</a>, <a target="source" href="../all.html#line6468">6468</a>, <a target="source" href="../all.html#line6480">6480</a>, <a target="source" href="../all.html#line6497">6497</a>) whenever a new storage block is needed to store part of a file. </p><dl class="description">
 
     <a href="../all.html#line6961" target="source" <dt>6961:</dt></a>
     <dd><p>Convert knowledge of the device name into a pointer to the “super block”; </p></dd>
@@ -67,7 +67,7 @@
     <dd><p>If the last block number on the list is zero, the entire list is now empty; </p></dd>
 
     <a href="../all.html#line6970" target="source" <dt>6970:</dt></a>
-    <dd><p>“badblock” (7040) is used to check that the block number obtained from the list seems reasonable; </p></dd>
+    <dd><p>“badblock” (<a target="source" href="../all.html#line7040">7040</a>) is used to check that the block number obtained from the list seems reasonable; </p></dd>
 
     <a href="../all.html#line6971" target="source" <dt>6971:</dt></a>
     <dd><p>If the list of available blocks in the “super block” is now empty, then the block just located will contain the addresses of the next group of </p></dd>
@@ -85,7 +85,7 @@
     <dd><p>Clear the buffer so that any information recorded in the file by default will be all zeros; </p></dd>
 
     <a href="../all.html#line6983" target="source" <dt>6983:</dt></a>
-    <dd><p>Set the “modified” flag to ensure that the “super block” will be written out by “update” (7213). </p></dd>
+    <dd><p>Set the “modified” flag to ensure that the “super block” will be written out by “update” (<a target="source" href="../all.html#line7213">7213</a>). </p></dd>
 
 </dl></div>
 

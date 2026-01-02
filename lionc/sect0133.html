@@ -47,13 +47,13 @@
 </div>
 
 <div><h1 id="a0000000134">11 Clock Interrupts</h1>
-<p>The procedure “clock” (3725) handles interrupts from either the line frequency time clock (type <span style="width:" class="mbox">KW11-L</span>, interrupt vector address 100) or the programmable real-time clock (type KW11-P, interrupt vector address 104). </p><p>UNIX requires that at least one of these should be available. (If both are present, only the line time clock is used.) </p><p>Whichever clock is used, interrupts are generated at line frequency (i.e. with a 50 Hz power supply, every 20 milliseconds). The clock interrupt priority level is six, higher than for any other peripheral device on our typical system, so that there will usually be very little delay in the initiation of “clock” once the interrupt has been requested by the clock controller. </p></div>
+<p>The procedure “clock” (<a target="source" href="../all.html#line3725">3725</a>) handles interrupts from either the line frequency time clock (type <span style="width:" class="mbox">KW11-L</span>, interrupt vector address 100) or the programmable real-time clock (type KW11-P, interrupt vector address 104). </p><p>UNIX requires that at least one of these should be available. (If both are present, only the line time clock is used.) </p><p>Whichever clock is used, interrupts are generated at line frequency (i.e. with a 50 Hz power supply, every 20 milliseconds). The clock interrupt priority level is six, higher than for any other peripheral device on our typical system, so that there will usually be very little delay in the initiation of “clock” once the interrupt has been requested by the clock controller. </p></div>
 
 <div class="contents section-contents"><!--<strong>Subsections</strong>-->
 <ul>
-<li><a href="sect0134.html">11.1 clock (3725)</a>
+<li><a href="sect0134.html">11.1 clock (<a target="source" href="../all.html#line3725">3725</a>)</a>
    
-</li><li><a href="sect0135.html">11.2 timeout (3845)</a>
+</li><li><a href="sect0135.html">11.2 timeout (<a target="source" href="../all.html#line3845">3845</a>)</a>
    
 </li>
 

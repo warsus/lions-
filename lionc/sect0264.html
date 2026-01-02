@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: iupdat (7374)</title>
+<title>: iupdat (<a target="source" href="../all.html#line7374">7374</a>)</title>
 
 <link href="sect0265.html" title="Pipes" rel="next" />
 <link href="sect0263.html" title="ifree (7134)" rel="prev" />
@@ -45,23 +45,23 @@
 </span><span>
 
 <span>
-<b class="current">iupdat (7374)</b>
+<b class="current">iupdat (<a target="source" href="../all.html#line7374">7374</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000265">20.17 iupdat (7374)</h2>
-<p>This procedure is called by “statl” (6050), “update” (7226) and “iput” (7357) to revise a particular “inode” entry on a FSV. It does nothing if the corresponding core “inode” is not flagged (“IUPD” or “IACC”); </p><p>The “IUPD” flag may be set by one of </p><pre>
-  unlink (3530)        bmap (6452,6467)
-  chmod  (3570)        itrunc  (7448)
-  chown  (3583)        maknode (7462)
-  link   (5942)        namei   (7609)
-  writei (6285,6318)   pipe    (7751)
+<div><h2 id="a0000000265">20.17 iupdat (<a target="source" href="../all.html#line7374">7374</a>)</h2>
+<p>This procedure is called by “statl” (<a target="source" href="../all.html#line6050">6050</a>), “update” (<a target="source" href="../all.html#line7226">7226</a>) and “iput” (<a target="source" href="../all.html#line7357">7357</a>) to revise a particular “inode” entry on a FSV. It does nothing if the corresponding core “inode” is not flagged (“IUPD” or “IACC”); </p><p>The “IUPD” flag may be set by one of </p><pre>
+  unlink (<a target="source" href="../all.html#line3530">3530</a>)        bmap (<a target="source" href="../all.html#line6452">6452</a>,<a target="source" href="../all.html#line6467">6467</a>)
+  chmod  (<a target="source" href="../all.html#line3570">3570</a>)        itrunc  (<a target="source" href="../all.html#line7448">7448</a>)
+  chown  (<a target="source" href="../all.html#line3583">3583</a>)        maknode (<a target="source" href="../all.html#line7462">7462</a>)
+  link   (<a target="source" href="../all.html#line5942">5942</a>)        namei   (<a target="source" href="../all.html#line7609">7609</a>)
+  writei (<a target="source" href="../all.html#line6285">6285</a>,<a target="source" href="../all.html#line6318">6318</a>)   pipe    (<a target="source" href="../all.html#line7751">7751</a>)
 </pre><p>The “IACC” flag may be set by one of </p><pre>
-  readi  (6232)       maknode (7462)
-  writei (6285)       pipe    (7751)
-</pre><p>The flags are reset by “iput” (7359). </p><dl class="description">
+  readi  (<a target="source" href="../all.html#line6232">6232</a>)       maknode (<a target="source" href="../all.html#line7462">7462</a>)
+  writei (<a target="source" href="../all.html#line6285">6285</a>)       pipe    (<a target="source" href="../all.html#line7751">7751</a>)
+</pre><p>The flags are reset by “iput” (<a target="source" href="../all.html#line7359">7359</a>). </p><dl class="description">
 
     <a href="../all.html#line7383" target="source" <dt>7383:</dt></a>
     <dd><p>Forget it, if the FSV has been mounted as “read only”; </p></dd>

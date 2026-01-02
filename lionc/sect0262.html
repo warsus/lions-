@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: iput (7344)</title>
+<title>: iput (<a target="source" href="../all.html#line7344">7344</a>)</title>
 
 <link href="sect0263.html" title="ifree (7134)" rel="next" />
 <link href="sect0261.html" title="free (7000)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">iput (7344)</b>
+<b class="current">iput (<a target="source" href="../all.html#line7344">7344</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000263">20.15 iput (7344)</h2>
-<p>This procedure is one of the most popular in UNIX (called from nearly thirty different places) and its use will have already been frequently observed. </p><p>In essence it simply decrements the reference count for the “inode” passed as a parameter, and then calls “prele” (7882) to reset the “inode” lock and to perform any necessary “wakeup”s. </p><p>“iput” has an important side effect. If the reference count is going to be reduced to zero, then a release of resources is indicated. This may be simply the core “inode”, or both that and the file itself, if the number of links is also zero. </p></div>
+<div><h2 id="a0000000263">20.15 iput (<a target="source" href="../all.html#line7344">7344</a>)</h2>
+<p>This procedure is one of the most popular in UNIX (called from nearly thirty different places) and its use will have already been frequently observed. </p><p>In essence it simply decrements the reference count for the “inode” passed as a parameter, and then calls “prele” (<a target="source" href="../all.html#line7882">7882</a>) to reset the “inode” lock and to perform any necessary “wakeup”s. </p><p>“iput” has an important side effect. If the reference count is going to be reduced to zero, then a release of resources is indicated. This may be simply the core “inode”, or both that and the file itself, if the number of links is also zero. </p></div>
 
 
 

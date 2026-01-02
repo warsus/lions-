@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: getblk (4921)</title>
+<title>: getblk (<a target="source" href="../all.html#line4921">4921</a>)</title>
 
 <link href="sect0204.html" title="brelse (4869)" rel="next" />
 <link href="sect0202.html" title="incore (4899)" rel="prev" />
@@ -45,29 +45,29 @@
 </span><span>
 
 <span>
-<b class="current">getblk (4921)</b>
+<b class="current">getblk (<a target="source" href="../all.html#line4921">4921</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000204">17.5 getblk (4921)</h2>
-<p>This routine performs the same search as “incore” but goes further in that if the initial search is unsuccessful, a buffer is allocated from the “av”-list (available list). </p><p>By a call on “notavail” (4999), the buffer is removed from the “av”-list and flagged as “B_BUSY”. </p><p>“getblk” is more suspicious of its parameters than “incore”. It is called by </p><pre>
-  exec   (3040)        writei (6304)
-  exit   (3237)        iinit  (6928)
-  bread  (4758)        alloc  (6981)
-  breada (4781,4789)   free   (7016)
-  smount (6123)        update (7216)
+<div><h2 id="a0000000204">17.5 getblk (<a target="source" href="../all.html#line4921">4921</a>)</h2>
+<p>This routine performs the same search as “incore” but goes further in that if the initial search is unsuccessful, a buffer is allocated from the “av”-list (available list). </p><p>By a call on “notavail” (<a target="source" href="../all.html#line4999">4999</a>), the buffer is removed from the “av”-list and flagged as “B_BUSY”. </p><p>“getblk” is more suspicious of its parameters than “incore”. It is called by </p><pre>
+  exec   (<a target="source" href="../all.html#line3040">3040</a>)        writei (<a target="source" href="../all.html#line6304">6304</a>)
+  exit   (<a target="source" href="../all.html#line3237">3237</a>)        iinit  (<a target="source" href="../all.html#line6928">6928</a>)
+  bread  (<a target="source" href="../all.html#line4758">4758</a>)        alloc  (<a target="source" href="../all.html#line6981">6981</a>)
+  breada (<a target="source" href="../all.html#line4781">4781</a>,<a target="source" href="../all.html#line4789">4789</a>)   free   (<a target="source" href="../all.html#line7016">7016</a>)
+  smount (<a target="source" href="../all.html#line6123">6123</a>)        update (<a target="source" href="../all.html#line7216">7216</a>)
 </pre><dl class="description">
 
     <a href="../all.html#line4940" target="source" <dt>4940:</dt></a>
-    <dd><p>At this point the required buffer has been located by searching the “b”-list. Either it is “B_BUSY” in which case a “sleep” must be taken (4943), or else it is appropriated (4948); </p></dd>
+    <dd><p>At this point the required buffer has been located by searching the “b”-list. Either it is “B_BUSY” in which case a “sleep” must be taken (<a target="source" href="../all.html#line4943">4943</a>), or else it is appropriated (<a target="source" href="../all.html#line4948">4948</a>); </p></dd>
 
     <a href="../all.html#line4953" target="source" <dt>4953:</dt></a>
-    <dd><p>If the required buffer has not been located, and if the “av”-list is empty, set the “B_WANTED” flag for the “av”-list and go to “sleep” (4955); </p></dd>
+    <dd><p>If the required buffer has not been located, and if the “av”-list is empty, set the “B_WANTED” flag for the “av”-list and go to “sleep” (<a target="source" href="../all.html#line4955">4955</a>); </p></dd>
 
     <a href="../all.html#line4960" target="source" <dt>4960:</dt></a>
-    <dd><p>If the “av”-list is not empty, select the first member, and if it represents a “delayed write” arrange to have it written out asynchronously (4962); </p></dd>
+    <dd><p>If the “av”-list is not empty, select the first member, and if it represents a “delayed write” arrange to have it written out asynchronously (<a target="source" href="../all.html#line4962">4962</a>); </p></dd>
 
     <a href="../all.html#line4966" target="source" <dt>4966:</dt></a>
     <dd><p>“B_RELOC” is a relic! (See 4583); </p></dd>
@@ -75,7 +75,7 @@
     <a href="../all.html#line4967" target="source" <dt>4967:</dt></a>
     <dd><p>The code from here until 4973 unconditionally removes the buffer from the “b”-list for its current device type and reinserts it into the bn-list for the new device type. Since this will frequently be a “no-op” i.e. the new and old device type will be the same, it would seem desirable to insert a test </p><pre>
  if (bp-&gt;b_dev == dev)
-</pre><p>before executing lines 4967 to 4974. </p><p>Note the special handling for calls where<br />“dev == NODEV” (–1). (Such calls incidentally are made without a second parameter - tut! tut! See e.g. 3040.) </p></dd>
+</pre><p>before executing lines <a target="source" href="../all.html#line4967">4967</a> to <a target="source" href="../all.html#line4974">4974</a>. </p><p>Note the special handling for calls where<br />“dev == NODEV” (–1). (Such calls incidentally are made without a second parameter - tut! tut! See e.g. 3040.) </p></dd>
 
 </dl><p>“bfreelist” serves as the “devtab” structure for the “b”-list for “NODEV”. </p></div>
 

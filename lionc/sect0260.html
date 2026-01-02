@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: itrunc (7414)</title>
+<title>: itrunc (<a target="source" href="../all.html#line7414">7414</a>)</title>
 
 <link href="sect0261.html" title="free (7000)" rel="next" />
 <link href="sect0259.html" title="alloc (6965)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">itrunc (7414)</b>
+<b class="current">itrunc (<a target="source" href="../all.html#line7414">7414</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000261">20.13 itrunc (7414)</h2>
-<p>This procedure is called by “core” (4112), “openl” (5825) and “iput” (7353). In the first two cases, the contents of the “file” are about to be replaced. In the third case, the file is about to be abandoned. </p><dl class="description">
+<div><h2 id="a0000000261">20.13 itrunc (<a target="source" href="../all.html#line7414">7414</a>)</h2>
+<p>This procedure is called by “core” (<a target="source" href="../all.html#line4112">4112</a>), “openl” (<a target="source" href="../all.html#line5825">5825</a>) and “iput” (<a target="source" href="../all.html#line7353">7353</a>). In the first two cases, the contents of the “file” are about to be replaced. In the third case, the file is about to be abandoned. </p><dl class="description">
 
     <a href="../all.html#line7421" target="source" <dt>7421:</dt></a>
     <dd><p>If the file is a character or block special file then there is nothing to do; </p></dd>
@@ -64,13 +64,13 @@
     <dd><p>If the file is large, then an indirect fetch is needed. (A double indirect fetch is needed for blocks numbered seven and higher.); </p></dd>
 
     <a href="../all.html#line7427" target="source" <dt>7427:</dt></a>
-    <dd><p>Reference all <b class="bf">257</b> elements of the buffer in reverse order. (Note this seems to be the only place where characters #512, #513 of the buffer area are referenced. Since they will presumably contain zero, they will contribute nothing to the calculation. Hence if “510” were substituted for “512” here, and again on line 7432, a general improvement all round would result (?)); </p></dd>
+    <dd><p>Reference all <b class="bf">257</b> elements of the buffer in reverse order. (Note this seems to be the only place where characters #512, #513 of the buffer area are referenced. Since they will presumably contain zero, they will contribute nothing to the calculation. Hence if “510” were substituted for “512” here, and again on line <a target="source" href="../all.html#line7432">7432</a>, a general improvement all round would result (?)); </p></dd>
 
     <a href="../all.html#line7438" target="source" <dt>7438:</dt></a>
     <dd><p>“free” returns an individual block to the available list; </p></dd>
 
     <a href="../all.html#line7439" target="source" <dt>7439:</dt></a>
-    <dd><p>This is the end of the “for” statement commencing on line 7427. (Likewise the statement which begins at 7432 ends at 7435.); </p></dd>
+    <dd><p>This is the end of the “for” statement commencing on line <a target="source" href="../all.html#line7427">7427</a>. (Likewise the statement which begins at 7432 ends at 7435.); </p></dd>
 
     <a href="../all.html#line7443" target="source" <dt>7443:</dt></a>
     <dd><p>Clear the entry in “i_addr[ ]”; </p></dd>

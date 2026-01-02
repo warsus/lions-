@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: exit (3219)</title>
+<title>: exit (<a target="source" href="../all.html#line3219">3219</a>)</title>
 
 <link href="sect0167.html" title="rexit (3205)" rel="next" />
 <link href="sect0165.html" title="grow (4136)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">exit (3219)</b>
+<b class="current">exit (<a target="source" href="../all.html#line3219">3219</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000167">13.18 exit (3219)</h2>
+<div><h2 id="a0000000167">13.18 exit (<a target="source" href="../all.html#line3219">3219</a>)</h2>
 <p>This procedure is called when a process is to terminate itself. </p><dl class="description">
 
     <a href="../all.html#line3224" target="source" <dt>3224:</dt></a>
@@ -61,7 +61,7 @@
     <dd><p>Set all of the values in the array “u.u_signal” (including “u.u_signal[SIGKILL]”) to one so that no future execution of “issig” will ever be followed by execution of “psig”; </p></dd>
 
     <a href="../all.html#line3227" target="source" <dt>3227:</dt></a>
-    <dd><p>Call “close” (6643) to close all the files which the process has open. (For the most part, “closing” simply involves decrementing a reference count.); </p></dd>
+    <dd><p>Call “close” (<a target="source" href="../all.html#line6643">6643</a>) to close all the files which the process has open. (For the most part, “closing” simply involves decrementing a reference count.); </p></dd>
 
     <a href="../all.html#line3232" target="source" <dt>3232:</dt></a>
     <dd><p>Reduce the reference count for the current directory; </p></dd>
@@ -82,7 +82,7 @@
     <dd><p>Write the buffer into the swap area; </p></dd>
 
     <a href="../all.html#line3241" target="source" <dt>3241:</dt></a>
-    <dd><p>Enter the core space occupied by the process into the free list. (This space is of course still in use, but the use will terminate before any other process gets to dip into the free list again. This could not be done any sooner, because, as will be seen later, both “getblk” and “bwrite” can call “sleep”, during which all sorts of things might happen. In view of all this, it might be reasonable if the statement </p><center> expand (USIZE); </center><p>were inserted after line 3226.); </p></dd>
+    <dd><p>Enter the core space occupied by the process into the free list. (This space is of course still in use, but the use will terminate before any other process gets to dip into the free list again. This could not be done any sooner, because, as will be seen later, both “getblk” and “bwrite” can call “sleep”, during which all sorts of things might happen. In view of all this, it might be reasonable if the statement </p><center> expand (USIZE); </center><p>were inserted after line <a target="source" href="../all.html#line3226">3226</a>.); </p></dd>
 
     <a href="../all.html#line3243" target="source" <dt>3243:</dt></a>
     <dd><p>Set the process state to “zombie” (i.e. “a corpse said to be revived by witchcraft”<br />(O.E.D.)); </p></dd>

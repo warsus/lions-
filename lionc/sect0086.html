@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: The proc Structure (0358)</title>
+<title>: The proc Structure (<a target="source" href="../all.html#line0358">0358</a>)</title>
 
 <link href="sect0087.html" title="The user Structure (0413)" rel="next" />
 <link href="sect0085.html" title="The Process" rel="prev" />
@@ -45,17 +45,17 @@
 </span><span>
 
 <span>
-<b class="current">The proc Structure (0358)</b>
+<b class="current">The proc Structure (<a target="source" href="../all.html#line0358">0358</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000087">7.2 The proc Structure (0358)</h2>
+<div><h2 id="a0000000087">7.2 The proc Structure (<a target="source" href="../all.html#line0358">0358</a>)</h2>
 <p>This structure, which is permanently resident in main memory, contains fifteen elements, of which eight are characters, six are integers, and one a pointer to an integer. Each element represents information that must be accessible at any time, especially when the main part of the process image has been swapped out to disk: </p><ul class="itemize">
-<li><p>“p_stat” may take one of seven values which define seven mutually exclusive states. See lines 0381 to 0387; </p></li><li><p>“p_flag” is an amalgam of six one bit flags which may be set independently. See lines 0391 to 0396; </p></li><li><p>“p_addr” is the address of the data segment: </p><ul class="itemize">
+<li><p>“p_stat” may take one of seven values which define seven mutually exclusive states. See lines <a target="source" href="../all.html#line0381">0381</a> to <a target="source" href="../all.html#line0387">0387</a>; </p></li><li><p>“p_flag” is an amalgam of six one bit flags which may be set independently. See lines <a target="source" href="../all.html#line0391">0391</a> to <a target="source" href="../all.html#line0396">0396</a>; </p></li><li><p>“p_addr” is the address of the data segment: </p><ul class="itemize">
 <li><p>If the data segment is in main memory this is a block number; </p></li><li><p>otherwise, if the data segment has been swapped out, this is a disk record number; </p></li>
-</ul></li><li><p>“p_size” is the size of the data segment, measured in blocks; </p></li><li><p>“p_pri” is the current process priority. This may be recalculated from time to time as a function of “p_nice”, “p_cpu” and “p_time”; </p></li><li><p>“p_pid”, “p_ppid” are numbers which uniquely identify a process and its parent; </p></li><li><p>“p_sig”, “p_uid”, “p_ttyp” are involved with external communication i.e. with messages or “signals” from outside the process’s normal domain; </p></li><li><p>“p_wchan” identifies, for a “sleeping” process (“p_stat” equals either “SSLEEP” or “SWAIT”), the reason for sleeping; </p></li><li><p>“p_textp” is either null or a pointer to an entry in the “text” array (4306), which contains vital statistics regarding the text segment. </p></li>
+</ul></li><li><p>“p_size” is the size of the data segment, measured in blocks; </p></li><li><p>“p_pri” is the current process priority. This may be recalculated from time to time as a function of “p_nice”, “p_cpu” and “p_time”; </p></li><li><p>“p_pid”, “p_ppid” are numbers which uniquely identify a process and its parent; </p></li><li><p>“p_sig”, “p_uid”, “p_ttyp” are involved with external communication i.e. with messages or “signals” from outside the process’s normal domain; </p></li><li><p>“p_wchan” identifies, for a “sleeping” process (“p_stat” equals either “SSLEEP” or “SWAIT”), the reason for sleeping; </p></li><li><p>“p_textp” is either null or a pointer to an entry in the “text” array (<a target="source" href="../all.html#line4306">4306</a>), which contains vital statistics regarding the text segment. </p></li>
 </ul></div>
 
 

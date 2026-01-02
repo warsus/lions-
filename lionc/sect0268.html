@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: writep (7805)</title>
+<title>: writep (<a target="source" href="../all.html#line7805">7805</a>)</title>
 
 <link href="sect0269.html" title="plock (7862)" rel="next" />
 <link href="sect0267.html" title="readp (7758)" rel="prev" />
@@ -45,20 +45,20 @@
 </span><span>
 
 <span>
-<b class="current">writep (7805)</b>
+<b class="current">writep (<a target="source" href="../all.html#line7805">7805</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000269">21.3 writep (7805)</h2>
+<div><h2 id="a0000000269">21.3 writep (<a target="source" href="../all.html#line7805">7805</a>)</h2>
 <p>The structure of this procedure echoes that of “readp” in many respects. </p><dl class="description">
 
     <a href="../all.html#line7828" target="source" <dt>7828:</dt></a>
     <dd><p>Note that a “writer”, which finds that there are no more “readers” left, receives a “signal” just in case he is not monitoring the result of his “write” operation. </p><p>(A “reader” in the analogous situation receives a zero character count as the result of the read, and this is the standard end-of-file indication.) </p></dd>
 
     <a href="../all.html#line7835" target="source" <dt>7835:</dt></a>
-    <dd><p>The “pipe” size is not allowed to grow beyond “PIPSIZ” characters. As long as “PIPSIZ” (7715) is no greater than 4096, the file will not be converted to a “large” file. This is highly desirable from the viewpoint of access efficiency. </p><p>(Note that “PIPSIZ” limits the “write” offset pointer value. If the “read” offset pointer is not far behind, the true content of the “pipe” may be quite small). </p></dd>
+    <dd><p>The “pipe” size is not allowed to grow beyond “PIPSIZ” characters. As long as “PIPSIZ” (<a target="source" href="../all.html#line7715">7715</a>) is no greater than 4096, the file will not be converted to a “large” file. This is highly desirable from the viewpoint of access efficiency. </p><p>(Note that “PIPSIZ” limits the “write” offset pointer value. If the “read” offset pointer is not far behind, the true content of the “pipe” may be quite small). </p></dd>
 
 </dl></div>
 

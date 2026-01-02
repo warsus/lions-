@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: putchar (2386)</title>
+<title>: putchar (<a target="source" href="../all.html#line2386">2386</a>)</title>
 
 <link href="sect0070.html" title="panic (2419)" rel="next" />
 <link href="sect0068.html" title="printn (2369)" rel="prev" />
@@ -45,21 +45,21 @@
 </span><span>
 
 <span>
-<b class="current">putchar (2386)</b>
+<b class="current">putchar (<a target="source" href="../all.html#line2386">2386</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000070">5.9 putchar (2386)</h2>
+<div><h2 id="a0000000070">5.9 putchar (<a target="source" href="../all.html#line2386">2386</a>)</h2>
 <p>This procedure transmits to the system console the character which was passed as a parameter. </p><p>It illustrates in a small way the basic features of i/o operations on the PDP11 computer. </p><dl class="description">
 
     <a href="../all.html#line2391" target="source" <dt>2391:</dt></a>
-    <dd><p>“SW” is defined on line 0166 as the value “0177570”. This is the kernel address of a read only processor register which stores the setting of the console switch register. </p><p>The meaning of the statement is clear: get the contents at location 0177570 and see if they are zero. The problem is to express this in “C”. The code </p><p>if (SW == 0) </p><p>would not have conveyed this meaning. Clearly “SW” is a pointer value which should be dereferenced. The compiler might have been changed to accept </p><p>if (SW-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+    <dd><p>“SW” is defined on line <a target="source" href="../all.html#line0166">0166</a> as the value “0177570”. This is the kernel address of a read only processor register which stores the setting of the console switch register. </p><p>The meaning of the statement is clear: get the contents at location 0177570 and see if they are zero. The problem is to express this in “C”. The code </p><p>if (SW == 0) </p><p>would not have conveyed this meaning. Clearly “SW” is a pointer value which should be dereferenced. The compiler might have been changed to accept </p><p>if (SW-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
                                      width:10px; 
-                                     height:9px" class="math gen" /> == 0) </p><p>but as it stands, this is syntactically incorrect. By inventing a dummy structure, with an element “integ” (see line 0175), the programmer has found a satisfactory solution to his problem. </p></dd>
+                                     height:9px" class="math gen" /> == 0) </p><p>but as it stands, this is syntactically incorrect. By inventing a dummy structure, with an element “integ” (see line <a target="source" href="../all.html#line0175">0175</a>), the programmer has found a satisfactory solution to his problem. </p></dd>
 
-</dl><p>Several other examples of this programming device will be found in this procedure and elsewhere. </p><p>In hardware terms, the system console terminal interface consists of four 16 bit control registers which are given consecutive addresses on the Unibus beginning at kernel address 0177560 (see the declaration for “KL” on line 0165.) For a description of the formats and usage of these registers, see Chapter Twenty-Four of the “PDP11 Peripherals Handbook”. </p><p>In software terms, this interface is the unnamed structure which is defined beginning on line 2313, with four elements which name the four control registers. It does not matter that the structure is unnamed because it is not necessary to allocate any instances of it (the one we are interested in is essentially predefined, at the address given by “KL”). </p><dl class="description">
+</dl><p>Several other examples of this programming device will be found in this procedure and elsewhere. </p><p>In hardware terms, the system console terminal interface consists of four 16 bit control registers which are given consecutive addresses on the Unibus beginning at kernel address 0177560 (see the declaration for “KL” on line <a target="source" href="../all.html#line0165">0165</a>.) For a description of the formats and usage of these registers, see Chapter Twenty-Four of the “PDP11 Peripherals Handbook”. </p><p>In software terms, this interface is the unnamed structure which is defined beginning on line <a target="source" href="../all.html#line2313">2313</a>, with four elements which name the four control registers. It does not matter that the structure is unnamed because it is not necessary to allocate any instances of it (the one we are interested in is essentially predefined, at the address given by “KL”). </p><dl class="description">
 
     <a href="../all.html#line2393" target="source" <dt>2393:</dt></a>
     <dd><p>While bit 7 of the transmitter status register (“XST”) is off, keep doing nothing, because the interface is not ready to accept another character. </p></dd>
@@ -67,7 +67,7 @@
 </dl><p>This is a classic case of “busy waiting” where the processor is allowed to cycle uselessly through a set of instructions until some externally defined event occurs. Such waste of processing power cannot normally be tolerated but this procedure is only used in unusual situations. </p><dl class="description">
 
     <a href="../all.html#line2395" target="source" <dt>2395:</dt></a>
-    <dd><p>The need for this statement is tied up with the statement on line 2405; </p></dd>
+    <dd><p>The need for this statement is tied up with the statement on line <a target="source" href="../all.html#line2405">2405</a>; </p></dd>
 
     <a href="../all.html#line2397" target="source" <dt>2397:</dt></a>
     <dd><p>Save the current contents of the transmitter status register; </p></dd>
@@ -82,7 +82,7 @@
     <dd><p>A “new line” character needs to be accompanied by a “carriage return” character and this is accomplished by a recursive call on “putchar”. </p><p>A couple of extra “delete” characters are thrown in also to allow for any delays in completing the carriage return operation at the terminal; </p></dd>
 
     <a href="../all.html#line2405" target="source" <dt>2405:</dt></a>
-    <dd><p>This call on “putchar” with an argument of zero effectively results in a re-execution of lines 2391 to 2394. </p><p>(It is very hard to see why the programmer chose to use a recursive call here in preference to simply repeating lines 2393 and 2394, since both code efficiency and compactness not to mention clarity seem to have suffered.); </p></dd>
+    <dd><p>This call on “putchar” with an argument of zero effectively results in a re-execution of lines <a target="source" href="../all.html#line2391">2391</a> to <a target="source" href="../all.html#line2394">2394</a>. </p><p>(It is very hard to see why the programmer chose to use a recursive call here in preference to simply repeating lines <a target="source" href="../all.html#line2393">2393</a> and <a target="source" href="../all.html#line2394">2394</a>, since both code efficiency and compactness not to mention clarity seem to have suffered.); </p></dd>
 
     <a href="../all.html#line2406" target="source" <dt>2406:</dt></a>
     <dd><p>Restore the contents of the transmitter status register. In particular if bit 6 was formerly set to enable interrupts then this resets it. </p></dd>
