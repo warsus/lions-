@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: canon (8274)</title>
+<title>: canon (<a target="source" href="../all.html#line8274">8274</a>)</title>
 
 <link href="sect0317.html" title="Notes" rel="next" />
 <link href="sect0315.html" title="ttread (8535)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">canon (8274)</b>
+<b class="current">canon (<a target="source" href="../all.html#line8274">8274</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000317">25.5 canon (8274)</h2>
-<p>This procedure is called by “ttread” (8543) to transfer characters from the “raw” input queue to the “cooked” input queue (after processing “erase” and “kill” characters and, in the case of upper case only terminals, processing “escaped” characters, i.e. characters preceded by the character ‘<tt>\</tt>’). “canon” returns a non-zero value if the “cooked” input queue is no longer empty. </p><dl class="description">
+<div><h2 id="a0000000317">25.5 canon (<a target="source" href="../all.html#line8274">8274</a>)</h2>
+<p>This procedure is called by “ttread” (<a target="source" href="../all.html#line8543">8543</a>) to transfer characters from the “raw” input queue to the “cooked” input queue (after processing “erase” and “kill” characters and, in the case of upper case only terminals, processing “escaped” characters, i.e. characters preceded by the character ‘<tt>\</tt>’). “canon” returns a non-zero value if the “cooked” input queue is no longer empty. </p><dl class="description">
 
     <a href="../all.html#line8284" target="source" <dt>8284:</dt></a>
     <dd><p>If the number of delimiters in the “raw” input queue is zero then ... </p></dd>
@@ -63,22 +63,22 @@
     <a href="../all.html#line8286" target="source" <dt>8286:</dt></a>
     <dd><p>otherwise go to “sleep”. </p></dd>
 
-</dl><p>Note that delimiters in this context are characters of all ones (octal value is 377) and are inserted by “ttyinput” (8358). </p><dl class="description">
+</dl><p>Note that delimiters in this context are characters of all ones (octal value is 377) and are inserted by “ttyinput” (<a target="source" href="../all.html#line8358">8358</a>). </p><dl class="description">
 
     <a href="../all.html#line8291" target="source" <dt>8291:</dt></a>
     <dd><p>Set “bp” to point to the third character of the work array, “canonb”; </p></dd>
 
     <a href="../all.html#line8292" target="source" <dt>8292:</dt></a>
-    <dd><p>Begin a loop (extending to line 8318) which removes one character from the “raw” queue per cycle; </p></dd>
+    <dd><p>Begin a loop (extending to line <a target="source" href="../all.html#line8318">8318</a>) which removes one character from the “raw” queue per cycle; </p></dd>
 
     <a href="../all.html#line8293" target="source" <dt>8293:</dt></a>
-    <dd><p>If the character is a delimiter, reduce the delimiter count by one and exit the loop i.e. go to line 8319; </p></dd>
+    <dd><p>If the character is a delimiter, reduce the delimiter count by one and exit the loop i.e. go to line <a target="source" href="../all.html#line8319">8319</a>; </p></dd>
 
     <a href="../all.html#line8297" target="source" <dt>8297:</dt></a>
     <dd><p>If the terminal is not operating in “raw” mode ... </p></dd>
 
     <a href="../all.html#line8298" target="source" <dt>8298:</dt></a>
-    <dd><p>If the previous character (note the “bp[–1]” notation!) was not a backslash, ‘<tt>\</tt>’, execute the code from line 8299 to 8307, otherwise execute the code beginning at line 8309. </p></dd>
+    <dd><p>If the previous character (note the “bp[–1]” notation!) was not a backslash, ‘<tt>\</tt>’, execute the code from line <a target="source" href="../all.html#line8299">8299</a> to 8307, otherwise execute the code beginning at line <a target="source" href="../all.html#line8309">8309</a>. </p></dd>
 
 </dl><p><b class="bf">Previous character was not a backslash</b> </p><dl class="description">
 
@@ -89,13 +89,13 @@
     <dd><p>if there is at least one charater to erase, backup the pointer “bp”; </p></dd>
 
     <a href="../all.html#line8302" target="source" <dt>8302:</dt></a>
-    <dd><p>Start on the next cycle of the loop beginning at line 8292; </p></dd>
+    <dd><p>Start on the next cycle of the loop beginning at line <a target="source" href="../all.html#line8292">8292</a>; </p></dd>
 
     <a href="../all.html#line8304" target="source" <dt>8304:</dt></a>
-    <dd><p>If the character is a “kill”, throw away all the characters accumulated for the current line, by going back to line 8290; </p></dd>
+    <dd><p>If the character is a “kill”, throw away all the characters accumulated for the current line, by going back to line <a target="source" href="../all.html#line8290">8290</a>; </p></dd>
 
     <a href="../all.html#line8306" target="source" <dt>8306:</dt></a>
-    <dd><p>If the character is an “eot” (004) (usually generated at the terminal as “control-D”), ignore it (and do not put it inot “canonb”) and start on the next cycle; </p><p>(If this character occurs at the beginning of a line, then subsequently “ttread” (8544) will find no characters in the “cooked” input queue i.e. it will read a zero length record, which then leads to the program receiving the normal “end of file” indication.) </p></dd>
+    <dd><p>If the character is an “eot” (004) (usually generated at the terminal as “control-D”), ignore it (and do not put it inot “canonb”) and start on the next cycle; </p><p>(If this character occurs at the beginning of a line, then subsequently “ttread” (<a target="source" href="../all.html#line8544">8544</a>) will find no characters in the “cooked” input queue i.e. it will read a zero length record, which then leads to the program receiving the normal “end of file” indication.) </p></dd>
 
 </dl><p><b class="bf">Previous character was a backslash</b> </p><dl class="description">
 

@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: mknod (5952)</title>
+<title>: mknod (<a target="source" href="../all.html#line5952">5952</a>)</title>
 
 <link href="sect0246.html" title="access (6746)" rel="next" />
 <link href="sect0244.html" title="unlink (3510)" rel="prev" />
@@ -45,16 +45,16 @@
 </span><span>
 
 <span>
-<b class="current">mknod (5952)</b>
+<b class="current">mknod (<a target="source" href="../all.html#line5952">5952</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000246">19.9 mknod (5952)</h2>
-<p>This procedure, which implements a system call of the same name, is only executable by the super-user. As explained in the Section “MKNOD(II)” of the UPM, this system call is used to create “inodes” for special files. </p><p>“mknod” also solves the problem of “where do directories come from”? The second parameter passed to “mknod” is used, without modification or restriction to set “i_mode”. (Compare “creat” (5790) and “chmod” (3569)). This is the only way an “inode” can get flagged as a directory, for instance. </p><p>In such cases, the third parameter passed to “mknod” <b class="bf">must</b> be zero. This value is copied into “i_addr[0]” (as is appropriate for special files), and, if non-zero, will be accepted uncritically by “bmap” (6447). It might be prudent to insert a test </p><pre>
+<div><h2 id="a0000000246">19.9 mknod (<a target="source" href="../all.html#line5952">5952</a>)</h2>
+<p>This procedure, which implements a system call of the same name, is only executable by the super-user. As explained in the Section “MKNOD(II)” of the UPM, this system call is used to create “inodes” for special files. </p><p>“mknod” also solves the problem of “where do directories come from”? The second parameter passed to “mknod” is used, without modification or restriction to set “i_mode”. (Compare “creat” (<a target="source" href="../all.html#line5790">5790</a>) and “chmod” (<a target="source" href="../all.html#line3569">3569</a>)). This is the only way an “inode” can get flagged as a directory, for instance. </p><p>In such cases, the third parameter passed to “mknod” <b class="bf">must</b> be zero. This value is copied into “i_addr[0]” (as is appropriate for special files), and, if non-zero, will be accepted uncritically by “bmap” (<a target="source" href="../all.html#line6447">6447</a>). It might be prudent to insert a test </p><pre>
    if (ip-&gt;i_mode &amp; (IFCHR &amp; IFBLK) != 0)
-</pre><p>before line 5969, rather than rely indefinitely on the infallibility of the super-user. </p></div>
+</pre><p>before line <a target="source" href="../all.html#line5969">5969</a>, rather than rely indefinitely on the infallibility of the super-user. </p></div>
 
 
 

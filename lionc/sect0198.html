@@ -47,7 +47,7 @@
 </div>
 
 <div><h1 id="a0000000199">17 Buffer Manipulation</h1>
-<p>In this chapter we look at the file “bio.c” in detail. It contains most of the basic routines used to manipulate buffer headers and buffers (4535, 4720). </p><p>Individual buffer headers are tagged by a device number “b_dev”, (4527) and a block number “b_blkno”, (4531). (Note the way in which the latter is declared as an unsigned integer.) </p><p>Buffer headers may be linked simultaneously into two lists: </p><dl class="description">
+<p>In this chapter we look at the file “bio.c” in detail. It contains most of the basic routines used to manipulate buffer headers and buffers (<a target="source" href="../all.html#line4535">4535</a>, <a target="source" href="../all.html#line4720">4720</a>). </p><p>Individual buffer headers are tagged by a device number “b_dev”, (<a target="source" href="../all.html#line4527">4527</a>) and a block number “b_blkno”, (<a target="source" href="../all.html#line4531">4531</a>). (Note the way in which the latter is declared as an unsigned integer.) </p><p>Buffer headers may be linked simultaneously into two lists: </p><dl class="description">
 
     <dt>the “b”-lists</dt>
     <dd><p>are lists, one per device controller, which link together buffers associated with that device type; </p></dd>
@@ -63,29 +63,29 @@
    
 </li><li><a href="sect0200.html">17.2 A Cache-like Memory</a>
    
-</li><li><a href="sect0201.html">17.3 clrbuf (5038)</a>
+</li><li><a href="sect0201.html">17.3 clrbuf (<a target="source" href="../all.html#line5038">5038</a>)</a>
    
-</li><li><a href="sect0202.html">17.4 incore (4899)</a>
+</li><li><a href="sect0202.html">17.4 incore (<a target="source" href="../all.html#line4899">4899</a>)</a>
    
-</li><li><a href="sect0203.html">17.5 getblk (4921)</a>
+</li><li><a href="sect0203.html">17.5 getblk (<a target="source" href="../all.html#line4921">4921</a>)</a>
    
-</li><li><a href="sect0204.html">17.6 brelse (4869)</a>
+</li><li><a href="sect0204.html">17.6 brelse (<a target="source" href="../all.html#line4869">4869</a>)</a>
    
-</li><li><a href="sect0205.html">17.7 binit (5055)</a>
+</li><li><a href="sect0205.html">17.7 binit (<a target="source" href="../all.html#line5055">5055</a>)</a>
    
-</li><li><a href="sect0206.html">17.8 bread (4754)</a>
+</li><li><a href="sect0206.html">17.8 bread (<a target="source" href="../all.html#line4754">4754</a>)</a>
    
-</li><li><a href="sect0207.html">17.9 breada (4773)</a>
+</li><li><a href="sect0207.html">17.9 breada (<a target="source" href="../all.html#line4773">4773</a>)</a>
    
-</li><li><a href="sect0208.html">17.10 bwrite (4809)</a>
+</li><li><a href="sect0208.html">17.10 bwrite (<a target="source" href="../all.html#line4809">4809</a>)</a>
    
-</li><li><a href="sect0209.html">17.11 bawrite (4856)</a>
+</li><li><a href="sect0209.html">17.11 bawrite (<a target="source" href="../all.html#line4856">4856</a>)</a>
    
-</li><li><a href="sect0210.html">17.12 bdwrite (4836)</a>
+</li><li><a href="sect0210.html">17.12 bdwrite (<a target="source" href="../all.html#line4836">4836</a>)</a>
    
-</li><li><a href="sect0211.html">17.13 bflush (5229)</a>
+</li><li><a href="sect0211.html">17.13 bflush (<a target="source" href="../all.html#line5229">5229</a>)</a>
    
-</li><li><a href="sect0212.html">17.14 physio (5259)</a>
+</li><li><a href="sect0212.html">17.14 physio (<a target="source" href="../all.html#line5259">5259</a>)</a>
    
 </li>
 

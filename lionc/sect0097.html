@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: newproc (1826)</title>
+<title>: newproc (<a target="source" href="../all.html#line1826">1826</a>)</title>
 
 <link href="sect0098.html" title="Process Management" rel="next" />
 <link href="sect0096.html" title="sureg (1739)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">newproc (1826)</b>
+<b class="current">newproc (<a target="source" href="../all.html#line1826">1826</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000098">7.13 newproc (1826)</h2>
+<div><h2 id="a0000000098">7.13 newproc (<a target="source" href="../all.html#line1826">1826</a>)</h2>
 <p>It is now time to take a good look at the procedure which creates new processes as (almost exact) replicas of their creators. </p><dl class="description">
 
     <a href="../all.html#line1841" target="source" <dt>1841:</dt></a>
@@ -76,7 +76,7 @@
     <dd><p>Increment the reference count for the parent’s current directory; </p></dd>
 
     <a href="../all.html#line1889" target="source" <dt>1889:</dt></a>
-    <dd><p>Save the current values of the environment and stack pointers in “u.u_rsav”. “savu” is an assembler routine defined at line 0725; </p></dd>
+    <dd><p>Save the current values of the environment and stack pointers in “u.u_rsav”. “savu” is an assembler routine defined at line <a target="source" href="../all.html#line0725">0725</a>; </p></dd>
 
     <a href="../all.html#line1890" target="source" <dt>1890:</dt></a>
     <dd><p>Restore the values of “rip” and “rpp”. Temporarily change the value of “u.u_procp” from the value appropriate to the current process to the value appropriate to the new process; </p></dd>
@@ -85,12 +85,12 @@
     <dd><p>Try to find an area in main memory in which to create the new data segment; </p></dd>
 
     <a href="../all.html#line1902" target="source" <dt>1902:</dt></a>
-    <dd><p>If there is no suitable area in main memory, the new copy will have to be made on disk. The next section of code should be analysed carefully because of the inconsistency introduced at line 1891 i.e.<br />u.u_procp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
+    <dd><p>If there is no suitable area in main memory, the new copy will have to be made on disk. The next section of code should be analysed carefully because of the inconsistency introduced at line <a target="source" href="../all.html#line1891">1891</a> i.e.<br />u.u_procp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
                                      width:10px; 
                                      height:9px" class="math gen" />p_addr != *ka6 </p></dd>
 
     <a href="../all.html#line1903" target="source" <dt>1903:</dt></a>
-    <dd><p>Mark the current process as “SIDL” to head off temporarily any further attempt to swap it out (i.e. initiated by “sched” (1940)); </p></dd>
+    <dd><p>Mark the current process as “SIDL” to head off temporarily any further attempt to swap it out (i.e. initiated by “sched” (<a target="source" href="../all.html#line1940">1940</a>)); </p></dd>
 
     <a href="../all.html#line1904" target="source" <dt>1904:</dt></a>
     <dd><p>Make the new “proc” entry consistent, i.e set rpp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
@@ -101,7 +101,7 @@
     <dd><p>Save the current values of the environment and stack pointers in “u.u_ssav”; </p></dd>
 
     <a href="../all.html#line1906" target="source" <dt>1906:</dt></a>
-    <dd><p>Call “xswap” (4368) to copy the data segment into the disk swap area. Because the second parameter is zero, the main memory area will not be released; </p></dd>
+    <dd><p>Call “xswap” (<a target="source" href="../all.html#line4368">4368</a>) to copy the data segment into the disk swap area. Because the second parameter is zero, the main memory area will not be released; </p></dd>
 
     <a href="../all.html#line1907" target="source" <dt>1907:</dt></a>
     <dd><p>Mark the new process as “swapped out”; </p></dd>
@@ -118,7 +118,7 @@
     <a href="../all.html#line1918" target="source" <dt>1918:</dt></a>
     <dd><p>Return with a value of zero. </p></dd>
 
-</dl><p>Obviously “newproc” on its own is not sufficient to produce an interesting and varied set of processes. The procedure “exec” (3020) which is discussed in Chapter Twelve provides the necessary additional facility: the means for a process to change its character, to be reincarnated.  </p></div>
+</dl><p>Obviously “newproc” on its own is not sufficient to produce an interesting and varied set of processes. The procedure “exec” (<a target="source" href="../all.html#line3020">3020</a>) which is discussed in Chapter Twelve provides the necessary additional facility: the means for a process to change its character, to be reincarnated.  </p></div>
 
 
 

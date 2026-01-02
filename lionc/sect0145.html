@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: sbreak (3354)</title>
+<title>: sbreak (<a target="source" href="../all.html#line3354">3354</a>)</title>
 
 <link href="sect0146.html" title="The Files ‘sys2.c’ and ‘sys3.c’" rel="next" />
 <link href="sect0144.html" title="fork (3322)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">sbreak (3354)</b>
+<b class="current">sbreak (<a target="source" href="../all.html#line3354">3354</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000146">12.9 sbreak (3354)</h2>
-<p>This procedure implements system call #17 which is described in the Section “BREAK (II)” of the UPM. The comment at the head of the procedure has confused more than one reader: clearly the identifier “break” is used in “C” programs (leave an enclosing program loop) in an entirely different way from that intended here (change the size of the program data area). </p><p>“sbreak” has clear similarities with the procedure “grow” (4136) but unlike the latter, it is only invoked explicitly and may in fact cause a contraction of the data area as well as an expansion (depending on the new desired size). </p><dl class="description">
+<div><h2 id="a0000000146">12.9 sbreak (<a target="source" href="../all.html#line3354">3354</a>)</h2>
+<p>This procedure implements system call #17 which is described in the Section “BREAK (II)” of the UPM. The comment at the head of the procedure has confused more than one reader: clearly the identifier “break” is used in “C” programs (leave an enclosing program loop) in an entirely different way from that intended here (change the size of the program data area). </p><p>“sbreak” has clear similarities with the procedure “grow” (<a target="source" href="../all.html#line4136">4136</a>) but unlike the latter, it is only invoked explicitly and may in fact cause a contraction of the data area as well as an expansion (depending on the new desired size). </p><dl class="description">
 
     <a href="../all.html#line3364" target="source" <dt>3364:</dt></a>
     <dd><p>Calculate the new size for the data area (in 32 word blocks); </p></dd>
@@ -67,8 +67,8 @@
     <dd><p>Call “expand” to increase the total area. Copy the stack area up into the new part, and clear the areas which were formerly occupied by the stack. </p></dd>
 
 </dl><p>The following procedures which are also contained in “sysl.c” are described in Chapter 13: </p><pre>
-  rexit (3205)     wait (3270)
-  exit  (3219)
+  rexit (<a target="source" href="../all.html#line3205">3205</a>)     wait (<a target="source" href="../all.html#line3270">3270</a>)
+  exit  (<a target="source" href="../all.html#line3219">3219</a>)
 </pre></div>
 
 

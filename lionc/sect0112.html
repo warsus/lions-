@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: expand (2268)</title>
+<title>: expand (<a target="source" href="../all.html#line2268">2268</a>)</title>
 
 <link href="sect0113.html" title="swtch revisited" rel="next" />
 <link href="sect0111.html" title="setrun (2134)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">expand (2268)</b>
+<b class="current">expand (<a target="source" href="../all.html#line2268">2268</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000113">8.14 expand (2268)</h2>
-<p>The comment at the beginning of this procedure (2251) says most of what needs to be said about the procedure, except for the question of “swapping out” when not enough core is available. </p><p>Note that “expand” takes no particular notice of the contents of the user data area or stack area. </p><dl class="description">
+<div><h2 id="a0000000113">8.14 expand (<a target="source" href="../all.html#line2268">2268</a>)</h2>
+<p>The comment at the beginning of this procedure (<a target="source" href="../all.html#line2251">2251</a>) says most of what needs to be said about the procedure, except for the question of “swapping out” when not enough core is available. </p><p>Note that “expand” takes no particular notice of the contents of the user data area or stack area. </p><dl class="description">
 
     <a href="../all.html#line2277" target="source" <dt>2277:</dt></a>
     <dd><p>If the expansion is actually a contraction, then trim off the excess from the high address end; </p></dd>
@@ -64,12 +64,12 @@
     <dd><p>If sufficient main memory is not available ... </p></dd>
 
     <a href="../all.html#line2284" target="source" <dt>2284:</dt></a>
-    <dd><p>The environment pointer and stack pointer are recorded again in “u.u_ssav”. But note that since no new procedures have been entered, and since there has been no cumulative stack growth, the values recorded are the same as at line 2281; </p></dd>
+    <dd><p>The environment pointer and stack pointer are recorded again in “u.u_ssav”. But note that since no new procedures have been entered, and since there has been no cumulative stack growth, the values recorded are the same as at line <a target="source" href="../all.html#line2281">2281</a>; </p></dd>
 
     <a href="../all.html#line2285" target="source" <dt>2285:</dt></a>
-    <dd><p>“xswap” (4368) copies the core image for the process designated by its first parameter to disk. </p><p>Since the second parameter is non-zero the main memory area occupied by the data segment is returned to the list of available space. </p><p>However the computation continues using the same area in main memory until the next call on “retu” (2193) in “swtch”. </p></dd>
+    <dd><p>“xswap” (<a target="source" href="../all.html#line4368">4368</a>) copies the core image for the process designated by its first parameter to disk. </p><p>Since the second parameter is non-zero the main memory area occupied by the data segment is returned to the list of available space. </p><p>However the computation continues using the same area in main memory until the next call on “retu” (<a target="source" href="../all.html#line2193">2193</a>) in “swtch”. </p></dd>
 
-</dl><p>Note also that the call on “savu” at line 2189 in “swtch” stores new values in “u.u_rsav” after the disk image has been made (and therefore serves no useful purpose since the core image has already been officially “abandoned”); </p><dl class="description">
+</dl><p>Note also that the call on “savu” at line <a target="source" href="../all.html#line2189">2189</a> in “swtch” stores new values in “u.u_rsav” after the disk image has been made (and therefore serves no useful purpose since the core image has already been officially “abandoned”); </p><dl class="description">
 
     <a href="../all.html#line2286" target="source" <dt>2286:</dt></a>
     <dd><p>The “SSWAP” flag is set in the process’s proc array element. (This is not swapped out, so the effect is not lost); </p></dd>

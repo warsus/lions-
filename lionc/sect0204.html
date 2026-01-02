@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: brelse (4869)</title>
+<title>: brelse (<a target="source" href="../all.html#line4869">4869</a>)</title>
 
 <link href="sect0205.html" title="binit (5055)" rel="next" />
 <link href="sect0203.html" title="getblk (4921)" rel="prev" />
@@ -45,34 +45,34 @@
 </span><span>
 
 <span>
-<b class="current">brelse (4869)</b>
+<b class="current">brelse (<a target="source" href="../all.html#line4869">4869</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000205">17.6 brelse (4869)</h2>
-<p>This procedure takes the buffer passed as a parameter and links it back into the “av”-list. </p><p>Any process which is either waiting for the particular buffer or any available buffer is woken up. </p><p>Note however that since both “sleeps” (4943, 4955) are at the same priority, if two processes are waiting – one for the particular buffer and one for any buffer – it will be a toss-up which will get it. </p><p>By giving the first priority over the second (e.g. by biasing by one) the race should be resolved more satisfactorily. The disadvantage of such a change might be that it could lead to a deadlock situation in certain rather peculiar circumstances. </p><p>If an error has occurred e.g. upon reading information into the buffer the information in the buffer may be incorrect. The assignment on line 4883 ensures that the information in the buffer will not be mistakenly retrieved subsequently. The “B_ERROR” flag is set e.g. by “rkstrategy” (5403) and “rkintr” (5467). </p><p>To see how this could occur, consider what happens to a buffer when a disk i/o operation is completed: </p><dl class="description">
+<div><h2 id="a0000000205">17.6 brelse (<a target="source" href="../all.html#line4869">4869</a>)</h2>
+<p>This procedure takes the buffer passed as a parameter and links it back into the “av”-list. </p><p>Any process which is either waiting for the particular buffer or any available buffer is woken up. </p><p>Note however that since both “sleeps” (<a target="source" href="../all.html#line4943">4943</a>, <a target="source" href="../all.html#line4955">4955</a>) are at the same priority, if two processes are waiting – one for the particular buffer and one for any buffer – it will be a toss-up which will get it. </p><p>By giving the first priority over the second (e.g. by biasing by one) the race should be resolved more satisfactorily. The disadvantage of such a change might be that it could lead to a deadlock situation in certain rather peculiar circumstances. </p><p>If an error has occurred e.g. upon reading information into the buffer the information in the buffer may be incorrect. The assignment on line <a target="source" href="../all.html#line4883">4883</a> ensures that the information in the buffer will not be mistakenly retrieved subsequently. The “B_ERROR” flag is set e.g. by “rkstrategy” (<a target="source" href="../all.html#line5403">5403</a>) and “rkintr” (<a target="source" href="../all.html#line5467">5467</a>). </p><p>To see how this could occur, consider what happens to a buffer when a disk i/o operation is completed: </p><dl class="description">
 
-    <dt>5471</dt>
+    <a target="source" href="../all.html#line5471"><dt>5471</dt></a>
     <dd><p>“rkintr” calls “iodone”; </p></dd>
 
-    <dt>5026</dt>
+    <a target="source" href="../all.html#line5026"><dt>5026</dt></a>
     <dd><p>“iodone” sets the “B_DONE” flag; </p></dd>
 
-    <dt>5028</dt>
+    <a target="source" href="../all.html#line5028"><dt>5028</dt></a>
     <dd><p>“iodone” calls “brelse”; </p></dd>
 
-    <dt>4387</dt>
+    <a target="source" href="../all.html#line4387"><dt>4387</dt></a>
     <dd><p>“brelse” resets the “B_WANTED”, “B_BUSY” and “B_ASYNC” flags but not the “B_DONE” flag; </p><p>. . . . . . . . . . . . </p></dd>
 
-    <dt>4948</dt>
+    <a target="source" href="../all.html#line4948"><dt>4948</dt></a>
     <dd><p>“getblk” finds the buffer and calls “notavail”; </p></dd>
 
-    <dt>5010</dt>
+    <a target="source" href="../all.html#line5010"><dt>5010</dt></a>
     <dd><p>“notavail” sets the “B_BUSY” flag; </p></dd>
 
-    <dt>4759</dt>
+    <a target="source" href="../all.html#line4759"><dt>4759</dt></a>
     <dd><p>“bread” (which called “getblk”) finds the “B_DONE” flag set and exits. </p></dd>
 
 </dl><p>Note that buffer headers are removed from the “av”-list by “notavail” and are returned by “brelse”. Buffer headers are moved from one “b”-list to another by “getblk”. </p></div>

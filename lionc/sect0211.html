@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: bflush (5229)</title>
+<title>: bflush (<a target="source" href="../all.html#line5229">5229</a>)</title>
 
 <link href="sect0212.html" title="physio (5259)" rel="next" />
 <link href="sect0210.html" title="bdwrite (4836)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">bflush (5229)</b>
+<b class="current">bflush (<a target="source" href="../all.html#line5229">5229</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000212">17.13 bflush (5229)</h2>
-<p>This procedure is called by “update” (7201), which is called by “panic” (2420), “sync” (3489) and “sumount” (6150). </p><p>“bflush” searches the “av”-list for “delayed write” blocks and forces them to be written out asynchronously. </p><p>Note that as “notavail” adjusts the links of the “av”-list, the search (which runs at processor priority six) is reinitiated after each “delayed write” block is encountered. </p><p>Note also that since it happens that “bflush” is only called by “update” with “dev” equal to “NODEV”, line 5238, in particular, could be simplified. </p></div>
+<div><h2 id="a0000000212">17.13 bflush (<a target="source" href="../all.html#line5229">5229</a>)</h2>
+<p>This procedure is called by “update” (<a target="source" href="../all.html#line7201">7201</a>), which is called by “panic” (<a target="source" href="../all.html#line2420">2420</a>), “sync” (<a target="source" href="../all.html#line3489">3489</a>) and “sumount” (<a target="source" href="../all.html#line6150">6150</a>). </p><p>“bflush” searches the “av”-list for “delayed write” blocks and forces them to be written out asynchronously. </p><p>Note that as “notavail” adjusts the links of the “av”-list, the search (which runs at processor priority six) is reinitiated after each “delayed write” block is encountered. </p><p>Note also that since it happens that “bflush” is only called by “update” with “dev” equal to “NODEV”, line <a target="source" href="../all.html#line5238">5238</a>, in particular, could be simplified. </p></div>
 
 
 

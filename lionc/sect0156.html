@@ -52,7 +52,7 @@
 </div>
 
 <div><h2 id="a0000000157">13.8 C. Effect</h2>
-<p>“issig” (3991) is called by “sleep” ( 2085), “trap” (2821) and “clock” (3826) to enquire whether there is an outstanding non-ignorable software interrupt for the active process just waiting to happen. </p><p>“psig” (4043) is called whenever “issig” returns a non-zero result (except in “sleep” where things are a little more complex) to implement the action triggered by the interrupt. </p><p>“core” (4094) is called by “psig” if a core dump is indicated for a terminating process. </p><p>“grow” (4136) is called by “psig” to enlarge the user mode stack area if necessary. </p><p>“exit” (3219) terminates the currently active process. </p></div>
+<p>“issig” (<a target="source" href="../all.html#line3991">3991</a>) is called by “sleep” ( 2085), “trap” (<a target="source" href="../all.html#line2821">2821</a>) and “clock” (<a target="source" href="../all.html#line3826">3826</a>) to enquire whether there is an outstanding non-ignorable software interrupt for the active process just waiting to happen. </p><p>“psig” (<a target="source" href="../all.html#line4043">4043</a>) is called whenever “issig” returns a non-zero result (except in “sleep” where things are a little more complex) to implement the action triggered by the interrupt. </p><p>“core” (<a target="source" href="../all.html#line4094">4094</a>) is called by “psig” if a core dump is indicated for a terminating process. </p><p>“grow” (<a target="source" href="../all.html#line4136">4136</a>) is called by “psig” to enlarge the user mode stack area if necessary. </p><p>“exit” (<a target="source" href="../all.html#line3219">3219</a>) terminates the currently active process. </p></div>
 
 
 

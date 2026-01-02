@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: breada (4773)</title>
+<title>: breada (<a target="source" href="../all.html#line4773">4773</a>)</title>
 
 <link href="sect0208.html" title="bwrite (4809)" rel="next" />
 <link href="sect0206.html" title="bread (4754)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">breada (4773)</b>
+<b class="current">breada (<a target="source" href="../all.html#line4773">4773</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000208">17.9 breada (4773)</h2>
-<p>This procedure has an additional parameter, as compared with “bread”. It is called only by “readi” (6256). </p><dl class="description">
+<div><h2 id="a0000000208">17.9 breada (<a target="source" href="../all.html#line4773">4773</a>)</h2>
+<p>This procedure has an additional parameter, as compared with “bread”. It is called only by “readi” (<a target="source" href="../all.html#line6256">6256</a>). </p><dl class="description">
 
     <a href="../all.html#line4780" target="source" <dt>4780:</dt></a>
     <dd><p>Check if the desired block has already been assigned to a buffer. (It may not yet be available, but at least is it there?); </p></dd>
@@ -61,7 +61,7 @@
     <dd><p>If not initiate the necessary read operation but don’t wait for it to finish; </p></dd>
 
     <a href="../all.html#line4788" target="source" <dt>4788:</dt></a>
-    <dd><p>Look around for the “read ahead” block. If it is not there, allocate a buffer (4789) but release it (4791) if the buffer is already ready; </p></dd>
+    <dd><p>Look around for the “read ahead” block. If it is not there, allocate a buffer (<a target="source" href="../all.html#line4789">4789</a>) but release it (<a target="source" href="../all.html#line4791">4791</a>) if the buffer is already ready; </p></dd>
 
     <a href="../all.html#line4793" target="source" <dt>4793:</dt></a>
     <dd><p>The “read ahead” block is not ready, so initiate an asynchronous read operation; </p></dd>
@@ -70,7 +70,7 @@
     <dd><p>If a buffer was assigned to the current block call “bread” to wrap it up, else... </p></dd>
 
     <a href="../all.html#line4800" target="source" <dt>4800:</dt></a>
-    <dd><p>Wait for the completion of the operation which was started at line 4785. </p></dd>
+    <dd><p>Wait for the completion of the operation which was started at line <a target="source" href="../all.html#line4785">4785</a>. </p></dd>
 
 </dl></div>
 

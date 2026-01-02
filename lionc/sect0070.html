@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: panic (2419)</title>
+<title>: panic (<a target="source" href="../all.html#line2419">2419</a>)</title>
 
 <link href="sect0071.html" title="prdev (2433), deverror (2447)" rel="next" />
 <link href="sect0069.html" title="putchar (2386)" rel="prev" />
@@ -45,17 +45,17 @@
 </span><span>
 
 <span>
-<b class="current">panic (2419)</b>
+<b class="current">panic (<a target="source" href="../all.html#line2419">2419</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000071">5.10 panic (2419)</h2>
-<p>This procedure is called from a number of locations in the operating system. (e.g. line 1605). When circumstances exist under which continued operation of the system seems undesirable. </p><p>UNIX does not profess to be a “fault tolerant” or “fail soft” system, and in many cases the call on “panic” can be interpreted as a fairly unsophisticated response to a straightforward problem. </p><p>However more complicated responses require additional code, lots of it, and this is contrary to the general UNIX philosophy of “keep it simple”. </p><dl class="description">
+<div><h2 id="a0000000071">5.10 panic (<a target="source" href="../all.html#line2419">2419</a>)</h2>
+<p>This procedure is called from a number of locations in the operating system. (e.g. line <a target="source" href="../all.html#line1605">1605</a>). When circumstances exist under which continued operation of the system seems undesirable. </p><p>UNIX does not profess to be a “fault tolerant” or “fail soft” system, and in many cases the call on “panic” can be interpreted as a fairly unsophisticated response to a straightforward problem. </p><p>However more complicated responses require additional code, lots of it, and this is contrary to the general UNIX philosophy of “keep it simple”. </p><dl class="description">
 
     <a href="../all.html#line2419" target="source" <dt>2419:</dt></a>
-    <dd><p>The reason for this statement is given in the comment beginning at line 2323; </p></dd>
+    <dd><p>The reason for this statement is given in the comment beginning at line <a target="source" href="../all.html#line2323">2323</a>; </p></dd>
 
     <a href="../all.html#line2420" target="source" <dt>2420:</dt></a>
     <dd><p>“update” causes all the large block buffers to be written out. See Chapter Twenty; </p></dd>
@@ -64,7 +64,7 @@
     <dd><p>“printf” is called with a format string and one parameter, which was passed to “panic”; </p></dd>
 
     <a href="../all.html#line2422" target="source" <dt>2422:</dt></a>
-    <dd><p>This “for” statement defines an infinite loop in which the only action is a call on the assembly language procedure “idle” (1284). </p><p>“idle” drops the processor priority to zero, and performs a “wait”. This is a “do nothing” instruction of indefinite duration. It terminates when a hardware interrupt occurs. </p><p>An infinite set of calls on “idle” is better than the execution of a “halt” instruction, since any i/o activities which were under way can be allowed to complete and the system clock can keep ticking. </p><p>The only way for the operator to recover from a “panic” is to reinitialise the system, (after taking a core dump, if desired). </p></dd>
+    <dd><p>This “for” statement defines an infinite loop in which the only action is a call on the assembly language procedure “idle” (<a target="source" href="../all.html#line1284">1284</a>). </p><p>“idle” drops the processor priority to zero, and performs a “wait”. This is a “do nothing” instruction of indefinite duration. It terminates when a hardware interrupt occurs. </p><p>An infinite set of calls on “idle” is better than the execution of a “halt” instruction, since any i/o activities which were under way can be allowed to complete and the system clock can keep ticking. </p><p>The only way for the operator to recover from a “panic” is to reinitialise the system, (after taking a core dump, if desired). </p></dd>
 
 </dl></div>
 

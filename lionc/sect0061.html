@@ -53,7 +53,7 @@
 
 <div><h2 id="a0000000062">5.1 The File ‘malloc.c’</h2>
 <p>This file is found on Sheet 25 of the Source code, and consists of just two procedures: </p><pre>
-   malloc (2528)   mfree (2556)
+   malloc (<a target="source" href="../all.html#line2528">2528</a>)   mfree (<a target="source" href="../all.html#line2556">2556</a>)
 </pre><p>These are concerned with the allocation and subsequent release of two kinds of memory resources, namely: </p><dl class="description">
 
     <dt>main memory</dt>
@@ -62,7 +62,7 @@
     <dt>disk swap area</dt>
     <dd><p>in units of 256 words (512 bytes). </p></dd>
 
-</dl><p>For each of these two kinds of resource, a list of available areas is maintained within a resource “map” (either “coremap” or “swapmap”). A pointer to the appropriate resource “map” is always passed to “malloc” and “mfree” so that the routines themselves do not have to know the kind of resource with which they are dealing. </p><p>Each of “coremap” and “swapmap” is an array of structures of the type “map” as declared at line 2515. This structure consists of two character pointers i.e. two unsigned integers. </p><p>The declarations of “coremap” and “swapmap” are on lines 0203, 0204. Here the “map” structure is completely ignored – a regrettable programming short-cut which is possible because it is not detected by the loader. Thus the actual numbers of list elements in “coremap” and “swapmap” are “CMAPSIZ/2” and “SMAPSIZ/2” respectively. </p></div>
+</dl><p>For each of these two kinds of resource, a list of available areas is maintained within a resource “map” (either “coremap” or “swapmap”). A pointer to the appropriate resource “map” is always passed to “malloc” and “mfree” so that the routines themselves do not have to know the kind of resource with which they are dealing. </p><p>Each of “coremap” and “swapmap” is an array of structures of the type “map” as declared at line <a target="source" href="../all.html#line2515">2515</a>. This structure consists of two character pointers i.e. two unsigned integers. </p><p>The declarations of “coremap” and “swapmap” are on lines <a target="source" href="../all.html#line0203">0203</a>, <a target="source" href="../all.html#line0204">0204</a>. Here the “map” structure is completely ignored – a regrettable programming short-cut which is possible because it is not detected by the loader. Thus the actual numbers of list elements in “coremap” and “swapmap” are “CMAPSIZ/2” and “SMAPSIZ/2” respectively. </p></div>
 
 
 

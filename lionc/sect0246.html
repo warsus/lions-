@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: access (6746)</title>
+<title>: access (<a target="source" href="../all.html#line6746">6746</a>)</title>
 
 <link href="sect0247.html" title="File Systems" rel="next" />
 <link href="sect0245.html" title="mknod (5952)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">access (6746)</b>
+<b class="current">access (<a target="source" href="../all.html#line6746">6746</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000247">19.10 access (6746)</h2>
-<p>This procedure is called by “exec” (3041), “chdir” (3552), “core” (4109), “openl” (5815, 5817), “namei” (7563, 7664, 7658) to check access permission to a file. The second parameter, “mode”, is equal to one of “IEXEC”, “IWRITE” and “IREAD”, with octal values of 0100, 0200 and 0400 respectively. </p><dl class="description">
+<div><h2 id="a0000000247">19.10 access (<a target="source" href="../all.html#line6746">6746</a>)</h2>
+	<p>This procedure is called by “exec” (<a target="source" href="../all.html#line3041">3041</a>), “chdir” (<a target="source" href="../all.html#line3552">3552</a>), “core” (<a target="source" href="../all.html#line4109">4109</a>), “openl” (<a target="source" href="../all.html#line5815">5815</a>, <a target="source" href="../all.html#line5817">5817</a>), “namei” (<a target="source" href="../all.html#line7563">7563</a>, <a target="source" href="../all.html#line7664">7664</a>, <a target="source" href="../all.html#line7658">7658</a>) to check access permission to a file. The second parameter, “mode”, is equal to one of “IEXEC”, “IWRITE” and “IREAD”, with octal values of 0100, 0200 and 0400 respectively. </p><dl class="description">
 
     <a href="../all.html#line6753" target="source" <dt>6753:</dt></a>
     <dd><p>“write” permission is denied if the file is on a file system volume which has been mounted as “read only” or if the file is functioning as the text segment for an executing program; </p></dd>
@@ -68,7 +68,7 @@
 
 </dl><p>Note that there is an anomaly here in that if a file has a “mode” of 0077, the owner cannot reference it at all, but everyone else can. This situation could be changed satisfactorily by inserting a statement </p><pre>
    m =|  (m |  (m &gt;&gt; 3)) &gt;&gt; 3;
-</pre><p>after line 6752, and replacing lines 6764, 6765 by </p><pre>
+</pre><p>after line <a target="source" href="../all.html#line6752">6752</a>, and replacing lines <a target="source" href="../all.html#line6764">6764</a>, <a target="source" href="../all.html#line6765">6765</a> by </p><pre>
    if (m &amp; IEXEC &amp;&amp; (m &amp; ip-&gt;i_mode) == 0)
 </pre></div>
 

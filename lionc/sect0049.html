@@ -55,10 +55,10 @@
 <p>In UNIX with very few exceptions, the declarations for global variables have been all gathered into the set of “h” files. The exceptions are: </p><dl class="description">
 
     <dt>(a)</dt>
-    <dd><p>the static variable “p” (2180) declared in “swtch” which is stored globally, but is accessible only from within the procedure “swtch” (Actually “p” is a very popular name for local variables in UNIX.); </p></dd>
+    <dd><p>the static variable “p” (<a target="source" href="../all.html#line2180">2180</a>) declared in “swtch” which is stored globally, but is accessible only from within the procedure “swtch” (Actually “p” is a very popular name for local variables in UNIX.); </p></dd>
 
     <dt>(b)</dt>
-    <dd><p>a number of variables such as “swbuf” (4721) which are referenced only by procedures within a single file, and are declared at the beginning of that file. </p></dd>
+    <dd><p>a number of variables such as “swbuf” (<a target="source" href="../all.html#line4721">4721</a>) which are referenced only by procedures within a single file, and are declared at the beginning of that file. </p></dd>
 
 </dl><p>Global variables may be declared separately within each file in which they are referenced. It is then the job of the loader, which links the compiled versions of the program files together to match up the different declarations for the same variable. </p></div>
 

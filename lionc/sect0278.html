@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: lpwrite (8870)</title>
+<title>: lpwrite (<a target="source" href="../all.html#line8870">8870</a>)</title>
 
 <link href="sect0279.html" title="Discussion" rel="next" />
 <link href="sect0277.html" title="lpinit(8976)" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">lpwrite (8870)</b>
+<b class="current">lpwrite (<a target="source" href="../all.html#line8870">8870</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000279">22.7 lpwrite (8870)</h2>
-<p>This is the procedure which is invoked as a result of the write system call: </p><p>“write” (5722) calls “rdwr”, which (5755) calls “writei”, which (6287) calls “cdevsw[..].d write”, which translates (4675) to “lpwrite”. </p><p>“lpwrite” takes the non-null characters of a null terminated string recorded in the user area, and passes them to “lpoutput” (via “lpcanon”) one at a time. </p><p>The list of procedure calls which leads to the invocation of this procedure is similar to that for “lpopen”. A “form feed” character is output to clear the current page, and the “open” flag is reset. </p></div>
+<div><h2 id="a0000000279">22.7 lpwrite (<a target="source" href="../all.html#line8870">8870</a>)</h2>
+<p>This is the procedure which is invoked as a result of the write system call: </p><p>“write” (<a target="source" href="../all.html#line5722">5722</a>) calls “rdwr”, which (<a target="source" href="../all.html#line5755">5755</a>) calls “writei”, which (<a target="source" href="../all.html#line6287">6287</a>) calls “cdevsw[..].d write”, which translates (<a target="source" href="../all.html#line4675">4675</a>) to “lpwrite”. </p><p>“lpwrite” takes the non-null characters of a null terminated string recorded in the user area, and passes them to “lpoutput” (via “lpcanon”) one at a time. </p><p>The list of procedure calls which leads to the invocation of this procedure is similar to that for “lpopen”. A “form feed” character is output to clear the current page, and the “open” flag is reset. </p></div>
 
 
 

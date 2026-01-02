@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: sched (1940)</title>
+<title>: sched (<a target="source" href="../all.html#line1940">1940</a>)</title>
 
 <link href="sect0081.html" title="sleep (2066)" rel="next" />
 <link href="sect0079.html" title="The story continues ..." rel="prev" />
@@ -45,19 +45,19 @@
 </span><span>
 
 <span>
-<b class="current">sched (1940)</b>
+<b class="current">sched (<a target="source" href="../all.html#line1940">1940</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000081">6.7 sched (1940)</h2>
+<div><h2 id="a0000000081">6.7 sched (<a target="source" href="../all.html#line1940">1940</a>)</h2>
 <p>At this stage we are only interested in what happens when “sched” is entered for the first time. </p><dl class="description">
 
     <a href="../all.html#line1958" target="source" <dt>1958:</dt></a>
-    <dd><p>“spl6” is an assembler routine (1292) which sets the processor priority level to six. (Cf. also “spl0”, “spl4”, “spl5” and “spl7” in “m40.s”). </p></dd>
+    <dd><p>“spl6” is an assembler routine (<a target="source" href="../all.html#line1292">1292</a>) which sets the processor priority level to six. (Cf. also “spl0”, “spl4”, “spl5” and “spl7” in “m40.s”). </p></dd>
 
-</dl><p>When the processor is at level six, only devices with priority seven can interrupt it. The clock whose priority level is six is thus inhibited from interrupting the processor between this point and the subsequent call on “spl0” at line 1976. </p><dl class="description">
+</dl><p>When the processor is at level six, only devices with priority seven can interrupt it. The clock whose priority level is six is thus inhibited from interrupting the processor between this point and the subsequent call on “spl0” at line <a target="source" href="../all.html#line1976">1976</a>. </p><dl class="description">
 
     <a href="../all.html#line1960" target="source" <dt>1960:</dt></a>
     <dd><p>A search is made through “proc” whose status is “SRUN” and which is not “loaded”. </p></dd>

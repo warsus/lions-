@@ -52,7 +52,7 @@
 </div>
 
 <div><h2 id="a0000000306">24.12 Interrupt Vector Addresses</h2>
-<p>The vector addresses for the first interface are 060 and 064 (for receiver and transmitter interrupts, respectively). Additional DL11/KL11 interfaces have vector addresses which are always at least 0300, and which are assigned according to rules which take into consideration other interfaces which may be present. </p><p>The second word of an interrupt doubiet is the “new processor status” word. The five low order bits of this word may be chosen arbitrarily, and are in fact used to define the minor device number (cf. a similar use to distinguish the various kinds of “traps” – see Sheet 05). A masked version of the new processor status word is provided to the interrupt handling routines as the parameter “dev” (see e.g. line 8070). </p></div>
+<p>The vector addresses for the first interface are 060 and 064 (for receiver and transmitter interrupts, respectively). Additional DL11/KL11 interfaces have vector addresses which are always at least 0300, and which are assigned according to rules which take into consideration other interfaces which may be present. </p><p>The second word of an interrupt doubiet is the “new processor status” word. The five low order bits of this word may be chosen arbitrarily, and are in fact used to define the minor device number (cf. a similar use to distinguish the various kinds of “traps” – see Sheet 05). A masked version of the new processor status word is provided to the interrupt handling routines as the parameter “dev” (see e.g. line <a target="source" href="../all.html#line8070">8070</a>). </p></div>
 
 
 

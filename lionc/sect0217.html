@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: file (5507)</title>
+<title>: file (<a target="source" href="../all.html#line5507">5507</a>)</title>
 
 <link href="sect0218.html" title="inode (5659)" rel="next" />
 <link href="sect0216.html" title="Control Tables" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">file (5507)</b>
+<b class="current">file (<a target="source" href="../all.html#line5507">5507</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000218">18.4 file (5507)</h2>
-<p>The array “file” is defined as an array of structures (also named “file”). </p><p>An element of the “file” array is considered to be unallocated if “f_count” is zero. </p><p>Each “open” or “creat” system call results in the allocation of an element of the “file” array. The address of this element is stored in an element of the calling process’s array “u.u_ofile”. It is the index of the newly allocated element of the latter array which is passed back to the user process. Descendants of a process created by “newproc” inherit the contents of the parent’s “u.u_ofile” array. </p><p>Each element of “file” includes a counter, “f_count”, to determine the number of current processes which reference it. </p><p>“f_count” is incremented by “newproc” (1878), “dup” (6079) and “falloc” (6857); it is decremented by “closef” (6657) and (if the file can’t be opened) by “openl” (5836). </p><p>The “f_flag” (5509) of the “file” element notes whether the file is open for reading and/or writing or whether it is a “pipe” or not. (Further discussion of “pipes” will be deferred till Chapter Twenty-One.) </p><p>The “file” structure also contains a pointer, “f_inode” (5511) to an entry in the “inode” table, and a 32 bit integer, “f_offset” (5512), which is a logical pointer to a character within the file. </p></div>
+<div><h2 id="a0000000218">18.4 file (<a target="source" href="../all.html#line5507">5507</a>)</h2>
+<p>The array “file” is defined as an array of structures (also named “file”). </p><p>An element of the “file” array is considered to be unallocated if “f_count” is zero. </p><p>Each “open” or “creat” system call results in the allocation of an element of the “file” array. The address of this element is stored in an element of the calling process’s array “u.u_ofile”. It is the index of the newly allocated element of the latter array which is passed back to the user process. Descendants of a process created by “newproc” inherit the contents of the parent’s “u.u_ofile” array. </p><p>Each element of “file” includes a counter, “f_count”, to determine the number of current processes which reference it. </p><p>“f_count” is incremented by “newproc” (<a target="source" href="../all.html#line1878">1878</a>), “dup” (<a target="source" href="../all.html#line6079">6079</a>) and “falloc” (<a target="source" href="../all.html#line6857">6857</a>); it is decremented by “closef” (<a target="source" href="../all.html#line6657">6657</a>) and (if the file can’t be opened) by “openl” (<a target="source" href="../all.html#line5836">5836</a>). </p><p>The “f_flag” (<a target="source" href="../all.html#line5509">5509</a>) of the “file” element notes whether the file is open for reading and/or writing or whether it is a “pipe” or not. (Further discussion of “pipes” will be deferred till Chapter Twenty-One.) </p><p>The “file” structure also contains a pointer, “f_inode” (<a target="source" href="../all.html#line5511">5511</a>) to an entry in the “inode” table, and a 32 bit integer, “f_offset” (<a target="source" href="../all.html#line5512">5512</a>), which is a logical pointer to a character within the file. </p></div>
 
 
 

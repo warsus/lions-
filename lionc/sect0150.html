@@ -52,7 +52,7 @@
 </div>
 
 <div><h2 id="a0000000151">13.2 Causation</h2>
-<p>An interrupt is “caused” for a process quite simply by setting the value of “p_sig” (0363) in the process’s “proc” entry, to the type number appropriate to the interrupt (i.e. a value in the range 1 to “NSIG”–1). </p><p>“p_sig” is always directly accessible, even when the affected process and its “per process data area” have been swapped out to disk. Obviously this mechanism only allows one interrupt per process to be outstanding at any one time. The outstanding interrupt will always be the most recent one, unless one of the interrupts was of type #9, which always prevails. </p></div>
+<p>An interrupt is “caused” for a process quite simply by setting the value of “p_sig” (<a target="source" href="../all.html#line0363">0363</a>) in the process’s “proc” entry, to the type number appropriate to the interrupt (i.e. a value in the range 1 to “NSIG”–1). </p><p>“p_sig” is always directly accessible, even when the affected process and its “per process data area” have been swapped out to disk. Obviously this mechanism only allows one interrupt per process to be outstanding at any one time. The outstanding interrupt will always be the most recent one, unless one of the interrupts was of type #9, which always prevails. </p></div>
 
 
 

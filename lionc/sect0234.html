@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: bmap (6415)</title>
+<title>: bmap (<a target="source" href="../all.html#line6415">6415</a>)</title>
 
 <link href="sect0235.html" title="Leftovers" rel="next" />
 <link href="sect0233.html" title="iomove (6364)" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">bmap (6415)</b>
+<b class="current">bmap (<a target="source" href="../all.html#line6415">6415</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000235">18.21 bmap (6415)</h2>
+<div><h2 id="a0000000235">18.21 bmap (<a target="source" href="../all.html#line6415">6415</a>)</h2>
 <p>A general description of the function of “bmap” may be found on Page 2 of “FILE SYSTEM (V)” of the UPM. </p><dl class="description">
 
     <a href="../all.html#line6423" target="source" <dt>6423:</dt></a>
@@ -61,10 +61,10 @@
     <dd><p>Start with the “small” file algorithm (file is not greater than eight blocks i.e. 4096 characters); </p></dd>
 
     <a href="../all.html#line6431" target="source" <dt>6431:</dt></a>
-    <dd><p>If the block number is 8 or more, the “small” file must converted into a large file. Note this is a side effect of “bmap”, and should occur only when “bmap” has been called by “writei” (and never by “readi” – see line 6245). Thus all files start life as “small” files and are never explicitly changed to “large” files. Note also that the change is irreversible! </p></dd>
+    <dd><p>If the block number is 8 or more, the “small” file must converted into a large file. Note this is a side effect of “bmap”, and should occur only when “bmap” has been called by “writei” (and never by “readi” – see line <a target="source" href="../all.html#line6245">6245</a>). Thus all files start life as “small” files and are never explicitly changed to “large” files. Note also that the change is irreversible! </p></dd>
 
     <a href="../all.html#line6435" target="source" <dt>6435:</dt></a>
-    <dd><p>“alloc” (6956) allocates a block on device “d” from the device’s free list. It then assigns a buffer to this block and returns a pointer to the buffer header; </p></dd>
+    <dd><p>“alloc” (<a target="source" href="../all.html#line6956">6956</a>) allocates a block on device “d” from the device’s free list. It then assigns a buffer to this block and returns a pointer to the buffer header; </p></dd>
 
     <a href="../all.html#line6438" target="source" <dt>6438:</dt></a>
     <dd><p>The eight buffer addresses in the “i_addr” array for the “inode” are copied into the buffer area and then erased; </p></dd>

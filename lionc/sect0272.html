@@ -52,7 +52,7 @@
 </div>
 
 <div><h2 id="a0000000273">22.1 LP11 Line Printer Driver</h2>
-<p>This driver is to be found in the file “lp.c” (Sheets 88, 89). Much of the complexity of this driver is contained in the proeedure “lpcanon” (8879). This procedure is involved in the proper handling of special characters and this is a separate issue from the one we wish to study first. </p><p>Initially one may ignore “lpcanon” by assuming that all calls upon it (lines 8859, 8865, 8875) are simply replaced by similar calls upon “lpoutput” (8986). “lpcanon” acts as a “final filter” for characters going to the line printer: handling code conversions, special format characters, etc. </p></div>
+	<p>This driver is to be found in the file “lp.c” (Sheets 88, 89). Much of the complexity of this driver is contained in the proeedure “lpcanon” (<a target="source" href="../all.html#line8879">8879</a>). This procedure is involved in the proper handling of special characters and this is a separate issue from the one we wish to study first. </p><p>Initially one may ignore “lpcanon” by assuming that all calls upon it (lines <a target="source" href="../all.html#line8859">8859</a>, <a target="source" href="../all.html#line8865">8865</a>, <a target="source" href="../all.html#line8875">8875</a>) are simply replaced by similar calls upon “lpoutput” (<a target="source" href="../all.html#line8986">8986</a>). “lpcanon” acts as a “final filter” for characters going to the line printer: handling code conversions, special format characters, etc. </p></div>
 
 
 

@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: cinit (8234)</title>
+<title>: cinit (<a target="source" href="../all.html#line8234">8234</a>)</title>
 
 <link href="sect0285.html" title="getc (0930)" rel="next" />
 <link href="sect0283.html" title="Character Handling" rel="prev" />
@@ -45,23 +45,23 @@
 </span><span>
 
 <span>
-<b class="current">cinit (8234)</b>
+<b class="current">cinit (<a target="source" href="../all.html#line8234">8234</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000285">23.1 cinit (8234)</h2>
-<p>This procedure, which is called once by “main” (1613), links the set of character buffers into the free list, “cfreelist”, and counts the number of character device types. </p><dl class="description">
+<div><h2 id="a0000000285">23.1 cinit (<a target="source" href="../all.html#line8234">8234</a>)</h2>
+<p>This procedure, which is called once by “main” (<a target="source" href="../all.html#line1613">1613</a>), links the set of character buffers into the free list, “cfreelist”, and counts the number of character device types. </p><dl class="description">
 
     <a href="../all.html#line8239" target="source" <dt>8239:</dt></a>
-    <dd><p>“ccp” is the address of the first word in the array “cfree” (8146); </p></dd>
+    <dd><p>“ccp” is the address of the first word in the array “cfree” (<a target="source" href="../all.html#line8146">8146</a>); </p></dd>
 
     <a href="../all.html#line8240" target="source" <dt>8240:</dt></a>
     <dd><p>Round “ccp” up to the next highest multiple of eight, and mark out “cblock” sized pieces, taking care not to exceed the boundary of “cfree”. </p><p>Note. In general there will be “NCLIST – 1” (rather than “NCLIST”) blocks so defined; </p></dd>
 
     <a href="../all.html#line8241" target="source" <dt>8241:</dt></a>
-    <dd><p>Set the first word of the “cblock” to point to the current head of the free list. </p><p>Note that “c_next” is defined on line 8141, and that the initial value of “cfreelist” is “NULL”. </p></dd>
+    <dd><p>Set the first word of the “cblock” to point to the current head of the free list. </p><p>Note that “c_next” is defined on line <a target="source" href="../all.html#line8141">8141</a>, and that the initial value of “cfreelist” is “NULL”. </p></dd>
 
     <a href="../all.html#line8242" target="source" <dt>8242:</dt></a>
     <dd><p>Update “cfreelist” to point to the new head of the list; </p></dd>

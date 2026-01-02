@@ -52,7 +52,7 @@
 </div>
 
 <div><h2 id="a0000000225">18.11 openl revisited</h2>
-<p>“trf” is now zero, so access permissions are checked (5813) but the existing file (if any) is not deallocated (5824). </p><p>What is a little disconcerting here is that, apart from the call on “falloc” (5827), there is no direct call on any of the “resource allocation” routines. Of course, for an existing file, neither directory entry nor disk “inode” entry nor disk blocks need be allocated. The core “inode” entry is allocated (if necessary) as a side-effect of the call on “namei”, but ... where is it initialised? </p></div>
+<p>“trf” is now zero, so access permissions are checked (<a target="source" href="../all.html#line5813">5813</a>) but the existing file (if any) is not deallocated (<a target="source" href="../all.html#line5824">5824</a>). </p><p>What is a little disconcerting here is that, apart from the call on “falloc” (<a target="source" href="../all.html#line5827">5827</a>), there is no direct call on any of the “resource allocation” routines. Of course, for an existing file, neither directory entry nor disk “inode” entry nor disk blocks need be allocated. The core “inode” entry is allocated (if necessary) as a side-effect of the call on “namei”, but ... where is it initialised? </p></div>
 
 
 

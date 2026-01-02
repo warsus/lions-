@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: procxmt (4204)</title>
+<title>: procxmt (<a target="source" href="../all.html#line4204">4204</a>)</title>
 
 <link href="sect0174.html" title="Program Swapping" rel="next" />
 <link href="sect0172.html" title="ptrace (4164)" rel="prev" />
@@ -45,19 +45,19 @@
 </span><span>
 
 <span>
-<b class="current">procxmt (4204)</b>
+<b class="current">procxmt (<a target="source" href="../all.html#line4204">4204</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000174">13.25 procxmt (4204)</h2>
+<div><h2 id="a0000000174">13.25 procxmt (<a target="source" href="../all.html#line4204">4204</a>)</h2>
 <p>This procedure is executed by the child process under the influence of data left by the parent in the ipc structure. </p><dl class="description">
 
     <a href="../all.html#line4209" target="source" <dt>4209:</dt></a>
     <dd><p>If “ipc.ip_lock” is set wrongly for the current process, then certainly the rest of “ipc” should be ignored. </p></dd>
 
-</dl><p>After “stop” (4027) calls “swtch”, the chide process is restarted by one of three calls on “setrun” which leave the “STRC” and “SWTED” flags in the state indicated: </p><center> <table cellspacing="0" class="tabular">
+</dl><p>After “stop” (<a target="source" href="../all.html#line4027">4027</a>) calls “swtch”, the chide process is restarted by one of three calls on “setrun” which leave the “STRC” and “SWTED” flags in the state indicated: </p><center> <table cellspacing="0" class="tabular">
 <tr>
 
     
@@ -81,7 +81,7 @@
     <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p>exit </p></td>
 
     
-    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> (3254) </p></td>
+    <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> (<a target="source" href="../all.html#line3254">3254</a>) </p></td>
 
     
     <td style="border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left"><p> set </p></td>
@@ -98,7 +98,7 @@
     <td style="text-align:left"><p>wait </p></td>
 
     
-    <td style="text-align:left"><p> (3310) </p></td>
+    <td style="text-align:left"><p> (<a target="source" href="../all.html#line3310">3310</a>) </p></td>
 
     
     <td style="text-align:left"><p> reset </p></td>
@@ -115,7 +115,7 @@
     <td style="text-align:left"><p>ptrace </p></td>
 
     
-    <td style="text-align:left"><p> (4188) </p></td>
+    <td style="text-align:left"><p> (<a target="source" href="../all.html#line4188">4188</a>) </p></td>
 
     
     <td style="text-align:left"><p> set </p></td>
@@ -127,7 +127,7 @@
     <td style="text-align:left"><p> properly set</p></td>
 
 </tr>
-</table> </center><p>In the third case “ptrace” will always set “ipc.ip_lock” properly, before the child is restarted, so that there is then no chance of the test on 4209 into “ipc” failing. </p><p>In the second case, where the parent has ignored the child, “procxmt” will never in fact be called. </p><p>By executing the statement “return(0)”; on line 4210, “procxmt” forces “stop” to loop back to line 4020. In the case where the parent has already died, the test on line 4022 will then fail, and a call on “exit” (4032) will result. </p><dl class="description">
+</table> </center><p>In the third case “ptrace” will always set “ipc.ip_lock” properly, before the child is restarted, so that there is then no chance of the test on 4209 into “ipc” failing. </p><p>In the second case, where the parent has ignored the child, “procxmt” will never in fact be called. </p><p>By executing the statement “return(0)”; on line <a target="source" href="../all.html#line4210">4210</a>, “procxmt” forces “stop” to loop back to line <a target="source" href="../all.html#line4020">4020</a>. In the case where the parent has already died, the test on line <a target="source" href="../all.html#line4022">4022</a> will then fail, and a call on “exit” (<a target="source" href="../all.html#line4032">4032</a>) will result. </p><dl class="description">
 
     <a href="../all.html#line4211" target="source" <dt>4211:</dt></a>
     <dd><p>Store the value of “ipc.ip_req” before resetting the latter, “wake up” the parent, and select the next action as indicated. </p></dd>

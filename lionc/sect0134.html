@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: clock (3725)</title>
+<title>: clock (<a target="source" href="../all.html#line3725">3725</a>)</title>
 
 <link href="sect0135.html" title="timeout (3845)" rel="next" />
 <link href="sect0133.html" title="Clock Interrupts" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">clock (3725)</b>
+<b class="current">clock (<a target="source" href="../all.html#line3725">3725</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000135">11.1 clock (3725)</h2>
+<div><h2 id="a0000000135">11.1 clock (<a target="source" href="../all.html#line3725">3725</a>)</h2>
 <p>The function of “clock” is one of general housekeeping: </p><ul class="itemize">
 <li><p>the display register is updated (PDP11/45 and 11/70 only); </p></li><li><p>various accounting values such as the time of day, accumulated processing times and execution profiles are maintained; </p></li><li><p>processes sleeping for a fixed time interval are awakened as per schedule; </p></li><li><p>core swapping activity is initiated once per second. </p></li>
 </ul><p>“clock” breaks most of the rules for peripheral device handlers: it does reference the current “u” structure, and it also runs at a low priority for some of the time. It abbreviates its activity if a previous execution has not yet completed. </p><dl class="description">
@@ -60,7 +60,7 @@
     <dd><p>“display” is a no-op on the PDP11/40; </p></dd>
 
     <a href="../all.html#line3743" target="source" <dt>3743:</dt></a>
-    <dd><p>The array “callout” (0265) is an array of “NCALL” (0143) structures of type “callo” (0260). The “callo” structure contains three elements: an incremental time, an argument and the address of a function. When the function element is not null, the function is to be executed with the supplied argument after a specified time. </p><p>(For the systems under study, the only function ever executed in this way is “ttrstrt” (8486), handler. (See Chapter 25.)); </p></dd>
+    <dd><p>The array “callout” (<a target="source" href="../all.html#line0265">0265</a>) is an array of “NCALL” (<a target="source" href="../all.html#line0143">0143</a>) structures of type “callo” (<a target="source" href="../all.html#line0260">0260</a>). The “callo” structure contains three elements: an incremental time, an argument and the address of a function. When the function element is not null, the function is to be executed with the supplied argument after a specified time. </p><p>(For the systems under study, the only function ever executed in this way is “ttrstrt” (<a target="source" href="../all.html#line8486">8486</a>), handler. (See Chapter 25.)); </p></dd>
 
     <a href="../all.html#line3748" target="source" <dt>3748:</dt></a>
     <dd><p>If the first element of the list is null, the whole list is null; </p></dd>
@@ -81,18 +81,18 @@
     <dd><p>Move the entries for operations which are still not yet due, to the beginning of the array; </p></dd>
 
     <a href="../all.html#line3787" target="source" <dt>3787:</dt></a>
-    <dd><p>The code from here until line 3797 is executed, whatever the previous processor priority, at either priority level five or six; </p></dd>
+    <dd><p>The code from here until line <a target="source" href="../all.html#line3797">3797</a> is executed, whatever the previous processor priority, at either priority level five or six; </p></dd>
 
     <a href="../all.html#line3788" target="source" <dt>3788:</dt></a>
-    <dd><p>If the previous mode was “user mode”, then increment the user time counter, and if an execution profile is being accumulated, call “incupc” (a895) to make an entry in a histogram for the user mode program counter (PC). </p><p>“incupc” is written in assembler, presumably for efficiency and convenience. A description of what it does may be found in the section “PROFIL(II)” of the UPM. See also the procedure “profil” (3667); </p></dd>
+    <dd><p>If the previous mode was “user mode”, then increment the user time counter, and if an execution profile is being accumulated, call “incupc” (a895) to make an entry in a histogram for the user mode program counter (PC). </p><p>“incupc” is written in assembler, presumably for efficiency and convenience. A description of what it does may be found in the section “PROFIL(II)” of the UPM. See also the procedure “profil” (<a target="source" href="../all.html#line3667">3667</a>); </p></dd>
 
     <a href="../all.html#line3792" target="source" <dt>3792:</dt></a>
     <dd><p>If the previous mode was not user mode, increment the system (kernel) time counter for the process. </p></dd>
 
-</dl><p>The code just described performs the basic time accounting for the system. Every clock tick results in the incrementing of either “u.u_utime” or “u.u_stime” for some process. Both “u.u_utime” and “u.u_stime” are initialised to zero in “fork” (3322). Their values are interrogated in “wait” (3270). The values will go negative after 32K ticks (about 10 hours)! </p><dl class="description">
+</dl><p>The code just described performs the basic time accounting for the system. Every clock tick results in the incrementing of either “u.u_utime” or “u.u_stime” for some process. Both “u.u_utime” and “u.u_stime” are initialised to zero in “fork” (<a target="source" href="../all.html#line3322">3322</a>). Their values are interrogated in “wait” (<a target="source" href="../all.html#line3270">3270</a>). The values will go negative after 32K ticks (about 10 hours)! </p><dl class="description">
 
     <a href="../all.html#line3795" target="source" <dt>3795:</dt></a>
-    <dd><p>“p_cpu” is used in determining process priorities. It is a character value which is always interpreted as a positive integer (0 to 255). When it is moved to a special register, sign extension occurs so that 255, for instance, becomes like –1. Adding one then leaves a zero result. In this case the value is reduced to –1 again, and stored as 255 unsigned. Note that in the other places where “p_cpu” is referenced (2161, 3814), the top eight bits are masked off after the value has been transferred to a special register; </p></dd>
+    <dd><p>“p_cpu” is used in determining process priorities. It is a character value which is always interpreted as a positive integer (0 to 255). When it is moved to a special register, sign extension occurs so that 255, for instance, becomes like –1. Adding one then leaves a zero result. In this case the value is reduced to –1 again, and stored as 255 unsigned. Note that in the other places where “p_cpu” is referenced (<a target="source" href="../all.html#line2161">2161</a>, <a target="source" href="../all.html#line3814">3814</a>), the top eight bits are masked off after the value has been transferred to a special register; </p></dd>
 
     <a href="../all.html#line3797" target="source" <dt>3797:</dt></a>
     <dd><p>Increment “lbolt” and if it exceeds “HZ”, i.e. a second or more has elapsed ... </p></dd>
@@ -107,26 +107,26 @@
     <dd><p>Increment the time of day accumulator; </p></dd>
 
     <a href="../all.html#line3803" target="source" <dt>3803:</dt></a>
-    <dd><p>The events which follow may take some time, but they may reasonably be interrupted to service other peripherals. So the processor priority is dropped below all the device priority levels i.e. below <b class="bf">four</b>. </p><p>However there is now a possibility of another clock interrupt before this activation of the “clock” procedure is completed. By setting the processor priority to <b class="bf">one</b> rather than to <b class="bf">zero</b>, a second activation of “clock” will not attempt to execute the code from line 3804 on also. Note however that to the hardware, priority one is functionally the same as priority zero; </p></dd>
+    <dd><p>The events which follow may take some time, but they may reasonably be interrupted to service other peripherals. So the processor priority is dropped below all the device priority levels i.e. below <b class="bf">four</b>. </p><p>However there is now a possibility of another clock interrupt before this activation of the “clock” procedure is completed. By setting the processor priority to <b class="bf">one</b> rather than to <b class="bf">zero</b>, a second activation of “clock” will not attempt to execute the code from line <a target="source" href="../all.html#line3804">3804</a> on also. Note however that to the hardware, priority one is functionally the same as priority zero; </p></dd>
 
     <a href="../all.html#line3804" target="source" <dt>3804:</dt></a>
-    <dd><p>If the current time (measured in seconds) is equal to the value stored in “tout”, wake all processes which have elected to suspend themselves for a period of time via the “sleep” system call i.e. via the procedure “sslep” (5979). </p></dd>
+    <dd><p>If the current time (measured in seconds) is equal to the value stored in “tout”, wake all processes which have elected to suspend themselves for a period of time via the “sleep” system call i.e. via the procedure “sslep” (<a target="source" href="../all.html#line5979">5979</a>). </p></dd>
 
 </dl><p>“tout” stores the time at which the next process is to be awakened. If there is more than one such process, then the remainder, which will have been disturbed, must reset “tout” between them. This mechanism, while quite effective, will not be efficient if the number of such processes ever becomes large. </p><p>In this situation, a mechanism similar to the “callout” array (see 3767) would need to be provided. (In fact, how difficult would it be to merge the two mechanisms? What would be the disadvantages ??); </p><dl class="description">
 
     <a href="../all.html#line3806" target="source" <dt>3806:</dt></a>
-    <dd><p>When the last two bits of “time[1]” are zero i.e. every four seconds, reset the scheduling flag “runrun” and wake up everything waiting for a “lightning bolt”. (“lbolt” represents a general event which is caused every four seconds, to initiate miscellaneous housekeeping. It is used by “pcopen” (8648).); </p></dd>
+    <dd><p>When the last two bits of “time[1]” are zero i.e. every four seconds, reset the scheduling flag “runrun” and wake up everything waiting for a “lightning bolt”. (“lbolt” represents a general event which is caused every four seconds, to initiate miscellaneous housekeeping. It is used by “pcopen” (<a target="source" href="../all.html#line8648">8648</a>).); </p></dd>
 
     <a href="../all.html#line3810" target="source" <dt>3810:</dt></a>
-    <dd><p>For all currently defined processes: </p><p>increment “p_time” up to a maximum of 127 (it is only a character variable); </p><p>decrement “p_cpu” by “SCHMAG” (3707) but do not allow it to go negative. Note that as discussed earlier (line 3795) “p_cpu” is treated as a positive integer in the range 0 to 255; </p><p>if the processor priority is currently set at a depressed value, recalculate it. </p></dd>
+    <dd><p>For all currently defined processes: </p><p>increment “p_time” up to a maximum of 127 (it is only a character variable); </p><p>decrement “p_cpu” by “SCHMAG” (<a target="source" href="../all.html#line3707">3707</a>) but do not allow it to go negative. Note that as discussed earlier (line <a target="source" href="../all.html#line3795">3795</a>) “p_cpu” is treated as a positive integer in the range 0 to 255; </p><p>if the processor priority is currently set at a depressed value, recalculate it. </p></dd>
 
-</dl><p>Note that “p_cpu” enters into the calculation of process priorities, “p_pri”, by “setpri” (2156). “p_pri” is used by “swtch” (2209) in choosing which process, from among those which are in core (“SLOAD”) and ready to run (“SRUN”), should next receive the CPU’s attention. </p><p>“p_time” is used to measure how long (in seconds) a process has been either in core or swapped out to disk. “p_time” is set to zero by “newproc” (1869), by “sched” (2047) and by “xswap” (4386). It is used by “sched” (1962, 2009) to determine which processes to swap in or out. </p><dl class="description">
+</dl><p>Note that “p_cpu” enters into the calculation of process priorities, “p_pri”, by “setpri” (<a target="source" href="../all.html#line2156">2156</a>). “p_pri” is used by “swtch” (<a target="source" href="../all.html#line2209">2209</a>) in choosing which process, from among those which are in core (“SLOAD”) and ready to run (“SRUN”), should next receive the CPU’s attention. </p><p>“p_time” is used to measure how long (in seconds) a process has been either in core or swapped out to disk. “p_time” is set to zero by “newproc” (<a target="source" href="../all.html#line1869">1869</a>), by “sched” (<a target="source" href="../all.html#line2047">2047</a>) and by “xswap” (<a target="source" href="../all.html#line4386">4386</a>). It is used by “sched” (<a target="source" href="../all.html#line1962">1962</a>, <a target="source" href="../all.html#line2009">2009</a>) to determine which processes to swap in or out. </p><dl class="description">
 
     <a href="../all.html#line3820" target="source" <dt>3820:</dt></a>
     <dd><p>If the scheduler is waiting to rearrange things, wake it up. Thus the normal rate for scheduling decisions is once per second; </p></dd>
 
     <a href="../all.html#line3824" target="source" <dt>3824:</dt></a>
-    <dd><p>If the previous mode before the interrupt was “user mode”, store the address of “r0” in a standard place, and if a “signal” has been received for the process, call “psig” (4043) for the appropriate action. </p></dd>
+    <dd><p>If the previous mode before the interrupt was “user mode”, store the address of “r0” in a standard place, and if a “signal” has been received for the process, call “psig” (<a target="source" href="../all.html#line4043">4043</a>) for the appropriate action. </p></dd>
 
 </dl></div>
 

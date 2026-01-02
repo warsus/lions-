@@ -53,7 +53,7 @@
 
 <div><h2 id="a0000000036">3.7 Example 6</h2>
 <pre>
-  5336 geterror (abp)
+  <a target="source" href="../all.html#line5336">5336</a> geterror (abp)
        struct buf *abp;
        {
          register struct buf bp;
@@ -62,7 +62,7 @@
            if ((u.u_error=bp-&gt;b_error)==0)
              u.u_error = EIO;
        }
-</pre><p>This procedure simply checks if there has been an error, and if the error indicator “u.u_error” has not been set, sets it to a general error indication </p><p>“B_ERROR” has the value 04 (see line 4575) so that, with only one bit set, it can be used as mask to isolate bit number 2. The operator “&amp;” as used in </p><pre>
+</pre><p>This procedure simply checks if there has been an error, and if the error indicator “u.u_error” has not been set, sets it to a general error indication </p><p>“B_ERROR” has the value 04 (see line <a target="source" href="../all.html#line4575">4575</a>) so that, with only one bit set, it can be used as mask to isolate bit number 2. The operator “&amp;” as used in </p><pre>
     bp-&gt;b_flags &amp; B_ERROR
 </pre><p>is the bitwise logical conjunction (“and”) applied to arithmetic values. </p><p>The above expression is greater than one if bit 2 of the element “b_flags” of the “buf” structure pointed to by “bp”, is set. </p><p>Thus if there has been an error, the expression </p><pre>
     (u.u_error) = bp-&gt;b_error)

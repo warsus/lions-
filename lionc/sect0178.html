@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: xalloc (4433)</title>
+<title>: xalloc (<a target="source" href="../all.html#line4433">4433</a>)</title>
 
 <link href="sect0179.html" title="xfree (4398)" rel="next" />
 <link href="sect0177.html" title="xswap (4368)" rel="prev" />
@@ -45,20 +45,20 @@
 </span><span>
 
 <span>
-<b class="current">xalloc (4433)</b>
+<b class="current">xalloc (<a target="source" href="../all.html#line4433">4433</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000179">14.4 xalloc (4433)</h2>
-<p>“xalloc” is called by “exec” (3130), when a new program is being initiated, to handle the allocation of, or linking to, the text segment. The argument, “ip”, is a pointer to the “mode” of the code file. At the time of this call, “u.u_arg[1]” contains the text segment size in bytes. </p><dl class="description">
+<div><h2 id="a0000000179">14.4 xalloc (<a target="source" href="../all.html#line4433">4433</a>)</h2>
+<p>“xalloc” is called by “exec” (<a target="source" href="../all.html#line3130">3130</a>), when a new program is being initiated, to handle the allocation of, or linking to, the text segment. The argument, “ip”, is a pointer to the “mode” of the code file. At the time of this call, “u.u_arg[1]” contains the text segment size in bytes. </p><dl class="description">
 
     <a href="../all.html#line4439" target="source" <dt>4439:</dt></a>
     <dd><p>If there is no text segment, return immediately; </p></dd>
 
     <a href="../all.html#line4441" target="source" <dt>4441:</dt></a>
-    <dd><p>Look through the “text” array for both an unused entry and an entry for the text segment. If the latter can be found, do the bookkeeping and go to “out” (4474); </p></dd>
+    <dd><p>Look through the “text” array for both an unused entry and an entry for the text segment. If the latter can be found, do the bookkeeping and go to “out” (<a target="source" href="../all.html#line4474">4474</a>); </p></dd>
 
     <a href="../all.html#line4452" target="source" <dt>4452:</dt></a>
     <dd><p>Arrange to copy the text segment into the disk swap area. Initialise the unused text entry, and get space in the disk swap area; </p></dd>
@@ -90,7 +90,7 @@
     <a href="../all.html#line4475" target="source" <dt>4475:</dt></a>
     <dd><p>“sched” always “swaps in” the text segment before the data segment i.e. there is no mechanism for bringing the text segment into main memory once the data segment is present. If the text segment is not in main memory, get back into step by “swapping out” the data segment to disk. </p></dd>
 
-</dl><p>It will be noted that the code to handle text segments is very conservative whenever the situation starts to get complicated. For example, the “panic” (4451) when no more text entries are available would seem to be a rather extreme reaction. However the strategy of being generous with “text” array space is quite likely to be less expensive than the code needed to do “better”. What do you think? </p></div>
+</dl><p>It will be noted that the code to handle text segments is very conservative whenever the situation starts to get complicated. For example, the “panic” (<a target="source" href="../all.html#line4451">4451</a>) when no more text entries are available would seem to be a rather extreme reaction. However the strategy of being generous with “text” array space is quite likely to be less expensive than the code needed to do “better”. What do you think? </p></div>
 
 
 

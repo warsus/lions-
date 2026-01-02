@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: lpopen (8850)</title>
+<title>: lpopen (<a target="source" href="../all.html#line8850">8850</a>)</title>
 
 <link href="sect0274.html" title="Notes" rel="next" />
 <link href="sect0272.html" title="LP11 Line Printer Driver" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">lpopen (8850)</b>
+<b class="current">lpopen (<a target="source" href="../all.html#line8850">8850</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000274">22.2 lpopen (8850)</h2>
-<p>When a line printer file is opened, the normal calling sequence is followed: </p><p>“open” (5774) calls “open1”, which (5832) calls “openi”, which (6716) calls, in the case of a character special file, “cdevsw[..].d_open”. In the case of the line printer, this latter translates (4675) to “lpopen”. </p><dl class="description">
+<div><h2 id="a0000000274">22.2 lpopen (<a target="source" href="../all.html#line8850">8850</a>)</h2>
+<p>When a line printer file is opened, the normal calling sequence is followed: </p><p>“open” (<a target="source" href="../all.html#line5774">5774</a>) calls “open1”, which (<a target="source" href="../all.html#line5832">5832</a>) calls “openi”, which (<a target="source" href="../all.html#line6716">6716</a>) calls, in the case of a character special file, “cdevsw[..].d_open”. In the case of the line printer, this latter translates (<a target="source" href="../all.html#line4675">4675</a>) to “lpopen”. </p><dl class="description">
 
     <a href="../all.html#line8853" target="source" <dt>8853:</dt></a>
     <dd><p>Take the error exit if either another line printer file is already open, or if the line printer is not ready (e.g the power is off, or there is no paper, or the printer drum gate is open, or the temperature is too high, or the operator has switched the printer off-line.) </p></dd>

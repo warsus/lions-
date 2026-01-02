@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: swap (5196)</title>
+<title>: swap (<a target="source" href="../all.html#line5196">5196</a>)</title>
 
 <link href="sect0187.html" title="Race Conditions" rel="next" />
 <link href="sect0185.html" title="System Generation" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">swap (5196)</b>
+<b class="current">swap (<a target="source" href="../all.html#line5196">5196</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000187">15.6 swap (5196)</h2>
+<div><h2 id="a0000000187">15.6 swap (<a target="source" href="../all.html#line5196">5196</a>)</h2>
 <p>Before plunging into all the detail of the file “bio.c”, it will be instructive as well as convenient to examine one routine which was introduced earlier, namely “swap”. </p><p>The buffer head “swbuf” was declared to control swapping input/output, which must share access to the disk with other activity. No element of “buffers” is associated with “swbuf”. Instead the core area occupied (or to be occupied) by the program serves as the data buffer. </p><dl class="description">
 
     <a href="../all.html#line5200" target="source" <dt>5200:</dt></a>
@@ -60,7 +60,7 @@
     <a href="../all.html#line5202" target="source" <dt>5202:</dt></a>
     <dd><p>The “B_BUSY” flag is tested, and if it is on, a swap operation is already under way, so that the “B_WANTED” flag is set and the process must wait via a call on “sleep”. </p></dd>
 
-</dl><p>Note that the code loop on lines 5202 to 5205 runs at priority level six, i.e. one higher than the disk interrupt priority. </p><p>Can you see why this is necessary? Under what conditions will the “B_BUSY” flag be set? </p><dl class="description">
+</dl><p>Note that the code loop on lines <a target="source" href="../all.html#line5202">5202</a> to <a target="source" href="../all.html#line5205">5205</a> runs at priority level six, i.e. one higher than the disk interrupt priority. </p><p>Can you see why this is necessary? Under what conditions will the “B_BUSY” flag be set? </p><dl class="description">
 
     <a href="../all.html#line5206" target="source" <dt>5206:</dt></a>
     <dd><p>The flags are set to reflect: </p><ul class="itemize">

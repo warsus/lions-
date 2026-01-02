@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: kill (3630)</title>
+<title>: kill (<a target="source" href="../all.html#line3630">3630</a>)</title>
 
 <link href="sect0160.html" title="signal (3949)" rel="next" />
 <link href="sect0158.html" title="ssig (3614)" rel="prev" />
@@ -45,20 +45,20 @@
 </span><span>
 
 <span>
-<b class="current">kill (3630)</b>
+<b class="current">kill (<a target="source" href="../all.html#line3630">3630</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000160">13.11 kill (3630)</h2>
+<div><h2 id="a0000000160">13.11 kill (<a target="source" href="../all.html#line3630">3630</a>)</h2>
 <p>This procedure implements the “kill” system call to cause a specified type of software interrupt to another designated process. </p><dl class="description">
 
     <a href="../all.html#line3637" target="source" <dt>3637:</dt></a>
     <dd><p>If “a” is non-zero, it is the process identifying number of a process to be interrupted. If “a” is zero, then all processes originating from the same terminal as the current process are to be interrupted; </p></dd>
 
     <a href="../all.html#line3639" target="source" <dt>3639:</dt></a>
-    <dd><p>Consider each entry in the “proc” table in turn and reject it if: it is the current process (3640); it is not the designated process (3642); no particular process was designated (“a” == 0) but it does not have the same controlling terminal or it is one of the two initial processes (3644); the user is not the “super user” and the user identities do not match (3646); </p></dd>
+    <dd><p>Consider each entry in the “proc” table in turn and reject it if: it is the current process (<a target="source" href="../all.html#line3640">3640</a>); it is not the designated process (<a target="source" href="../all.html#line3642">3642</a>); no particular process was designated (“a” == 0) but it does not have the same controlling terminal or it is one of the two initial processes (<a target="source" href="../all.html#line3644">3644</a>); the user is not the “super user” and the user identities do not match (<a target="source" href="../all.html#line3646">3646</a>); </p></dd>
 
     <a href="../all.html#line3649" target="source" <dt>3649:</dt></a>
     <dd><p>For any process that survives the above tests, call “psignal” to change “p_sig”. </p></dd>

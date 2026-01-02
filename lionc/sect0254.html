@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: iget (7276)</title>
+<title>: iget (<a target="source" href="../all.html#line7276">7276</a>)</title>
 
 <link href="sect0255.html" title="getfs (7167)" rel="next" />
 <link href="sect0253.html" title="Notes" rel="prev" />
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">iget (7276)</b>
+<b class="current">iget (<a target="source" href="../all.html#line7276">7276</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000255">20.7 iget (7276)</h2>
-<p>This procedure is called by “main” (1616,1618), “unlink” (3519), “ialloc” (7078) and “namei” (7534, 7664) with two parameters which together uniquely identify a file: a device, and the “inode” number of a file on the device. “iget” returns a reference to an entry in the core “inode” table. </p><p>When “iget” is called, the core “inode” table is searched first to see if an entry already exists for the file in the core “inode” table. If not, then “iget” creates one. </p><dl class="description">
+<div><h2 id="a0000000255">20.7 iget (<a target="source" href="../all.html#line7276">7276</a>)</h2>
+<p>This procedure is called by “main” (<a target="source" href="../all.html#line1616">1616</a>,<a target="source" href="../all.html#line1618">1618</a>), “unlink” (<a target="source" href="../all.html#line3519">3519</a>), “ialloc” (<a target="source" href="../all.html#line7078">7078</a>) and “namei” (<a target="source" href="../all.html#line7534">7534</a>, <a target="source" href="../all.html#line7664">7664</a>) with two parameters which together uniquely identify a file: a device, and the “inode” number of a file on the device. “iget” returns a reference to an entry in the core “inode” table. </p><p>When “iget” is called, the core “inode” table is searched first to see if an entry already exists for the file in the core “inode” table. If not, then “iget” creates one. </p><dl class="description">
 
     <a href="../all.html#line7285" target="source" <dt>7285:</dt></a>
     <dd><p>Search the core “inode” table ... </p></dd>
@@ -101,7 +101,7 @@
     <a href="../all.html#line7396" target="source" <dt>7396:</dt></a>
     <dd><p>Reset “dev” and “ino” to the mounted device number and the “inode” number of the root directory on the mounted file system volume. Start again. </p></dd>
 
-</dl><p>Clearly, since “iget” is called by “namei” (7534, 7664), this technique allows the whole directory structure on the mounted file system volume to be integrated into the pre-existing directory structure. If we momentarily ignore the possible deviations of directory structures away from tree structures, we have the situation where a leaf of the existing tree is being replaced by an entire subtree. </p></div>
+</dl><p>Clearly, since “iget” is called by “namei” (<a target="source" href="../all.html#line7534">7534</a>, <a target="source" href="../all.html#line7664">7664</a>), this technique allows the whole directory structure on the mounted file system volume to be integrated into the pre-existing directory structure. If we momentarily ignore the possible deviations of directory structures away from tree structures, we have the situation where a leaf of the existing tree is being replaced by an entire subtree. </p></div>
 
 
 

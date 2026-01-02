@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: link (5909)</title>
+<title>: link (<a target="source" href="../all.html#line5909">5909</a>)</title>
 
 <link href="sect0242.html" title="wdir (7477)" rel="next" />
 <link href="sect0240.html" title="Some Comments" rel="prev" />
@@ -45,13 +45,13 @@
 </span><span>
 
 <span>
-<b class="current">link (5909)</b>
+<b class="current">link (<a target="source" href="../all.html#line5909">5909</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000242">19.5 link (5909)</h2>
+<div><h2 id="a0000000242">19.5 link (<a target="source" href="../all.html#line5909">5909</a>)</h2>
 <p>This procedure implements a system call which enters a new name for an existing file into the directory structure. Arguments to the procedure are the existing and the new names of the file; </p><dl class="description">
 
     <a href="../all.html#line5914" target="source" <dt>5914:</dt></a>
@@ -64,7 +64,7 @@
     <dd><p>If the existing file turns out to be a directory, then only the super-user may rename it; </p></dd>
 
     <a href="../all.html#line5926" target="source" <dt>5926:</dt></a>
-    <dd><p>Unlock the existing file “inode” This is locked when the first call on “namei” does an “iget” (7534, 7664). </p><p>Under what conditions would the failure to unlock the “inode” here be disastrous? The chances that the existing file would be a directory encountered in the search for the new name would seem slight, if not impossible. Most probably the relevant circumstance is where the system is attempting to recreate an alternative file name or alias, which <b class="bf">already</b> exists; </p></dd>
+    <dd><p>Unlock the existing file “inode” This is locked when the first call on “namei” does an “iget” (<a target="source" href="../all.html#line7534">7534</a>, <a target="source" href="../all.html#line7664">7664</a>). </p><p>Under what conditions would the failure to unlock the “inode” here be disastrous? The chances that the existing file would be a directory encountered in the search for the new name would seem slight, if not impossible. Most probably the relevant circumstance is where the system is attempting to recreate an alternative file name or alias, which <b class="bf">already</b> exists; </p></dd>
 
     <a href="../all.html#line5927" target="source" <dt>5927:</dt></a>
     <dd><p>Search the directory for the second name, with the intention of creating a new entry; </p></dd>
@@ -73,7 +73,7 @@
     <dd><p>There is an existing file with the second name; </p></dd>
 
     <a href="../all.html#line5935" target="source" <dt>5935:</dt></a>
-    <dd><p>“u.u_pdir” is set as a side effect of the call on “namei” (5928). Check that the directory resides on the same device as the file; </p></dd>
+    <dd><p>“u.u_pdir” is set as a side effect of the call on “namei” (<a target="source" href="../all.html#line5928">5928</a>). Check that the directory resides on the same device as the file; </p></dd>
 
     <a href="../all.html#line5940" target="source" <dt>5940:</dt></a>
     <dd><p>Write a new directory entry (see below); </p></dd>

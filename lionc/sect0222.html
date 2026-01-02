@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: openl (5804)</title>
+<title>: openl (<a target="source" href="../all.html#line5804">5804</a>)</title>
 
 <link href="sect0223.html" title="open (5763)" rel="next" />
 <link href="sect0221.html" title="creat (5781)" rel="prev" />
@@ -45,32 +45,32 @@
 </span><span>
 
 <span>
-<b class="current">openl (5804)</b>
+<b class="current">openl (<a target="source" href="../all.html#line5804">5804</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000223">18.9 openl (5804)</h2>
-<p>This procedure is called by “open” (5774) and “creat” (5793, 5795), passing values of the third parameter, “trf”, of 0, 2 and 1 respectively. The value 2 represents the case where no file of the desired name already exists. </p><dl class="description">
+<div><h2 id="a0000000223">18.9 openl (<a target="source" href="../all.html#line5804">5804</a>)</h2>
+<p>This procedure is called by “open” (<a target="source" href="../all.html#line5774">5774</a>) and “creat” (<a target="source" href="../all.html#line5793">5793</a>, <a target="source" href="../all.html#line5795">5795</a>), passing values of the third parameter, “trf”, of 0, 2 and 1 respectively. The value 2 represents the case where no file of the desired name already exists. </p><dl class="description">
 
     <a href="../all.html#line5812" target="source" <dt>5812:</dt></a>
-    <dd><p>The second parameter, “mode”, can take the values 01 (“FREAD”), 02 (“FWRITE”) or 03 (“FREAD <tt>|</tt> FWRITE”) when “trf” is 0, but only 02 otherwise; </p><p>Whete a file of the desired name already exists, check the access permissions for the desired mode(s) of activity via calls on “access” (6746), which may set “u.u_error” as a side-effect; </p></dd>
+    <dd><p>The second parameter, “mode”, can take the values 01 (“FREAD”), 02 (“FWRITE”) or 03 (“FREAD <tt>|</tt> FWRITE”) when “trf” is 0, but only 02 otherwise; </p><p>Whete a file of the desired name already exists, check the access permissions for the desired mode(s) of activity via calls on “access” (<a target="source" href="../all.html#line6746">6746</a>), which may set “u.u_error” as a side-effect; </p></dd>
 
     <a href="../all.html#line5824" target="source" <dt>5824:</dt></a>
-    <dd><p>If the file is being “created”, eliminate its previous contents via a call on “itrunc” (7414). The code here could be improved by changing the test to “(trf == 1)”. Verify that this would be so. </p></dd>
+    <dd><p>If the file is being “created”, eliminate its previous contents via a call on “itrunc” (<a target="source" href="../all.html#line7414">7414</a>). The code here could be improved by changing the test to “(trf == 1)”. Verify that this would be so. </p></dd>
 
     <a href="../all.html#line5826" target="source" <dt>5826:</dt></a>
-    <dd><p>“prele” (7882) is used to “unlock” “inodes”. Where, you may ask, did the “inode” get “locked”, and why? </p></dd>
+    <dd><p>“prele” (<a target="source" href="../all.html#line7882">7882</a>) is used to “unlock” “inodes”. Where, you may ask, did the “inode” get “locked”, and why? </p></dd>
 
     <a href="../all.html#line5827" target="source" <dt>5827:</dt></a>
-    <dd><p>Note that “falloc” (6847) calls “ufalloc” (6824) as the first thing it does; </p></dd>
+    <dd><p>Note that “falloc” (<a target="source" href="../all.html#line6847">6847</a>) calls “ufalloc” (<a target="source" href="../all.html#line6824">6824</a>) as the first thing it does; </p></dd>
 
     <a href="../all.html#line5831" target="source" <dt>5831:</dt></a>
-    <dd><p>“ufalloc” leaves the user file identifying number “u.u_ar0[R0]”. Why does this statement occur where it does, instead of after line 5834? </p></dd>
+    <dd><p>“ufalloc” leaves the user file identifying number “u.u_ar0[R0]”. Why does this statement occur where it does, instead of after line <a target="source" href="../all.html#line5834">5834</a>? </p></dd>
 
     <a href="../all.html#line5832" target="source" <dt>5832:</dt></a>
-    <dd><p>“openi” (6702) is called to call handlers for special files, in cae any device specific actions are required (for disk files there is no action); </p></dd>
+    <dd><p>“openi” (<a target="source" href="../all.html#line6702">6702</a>) is called to call handlers for special files, in cae any device specific actions are required (for disk files there is no action); </p></dd>
 
     <a href="../all.html#line5839" target="source" <dt>5839:</dt></a>
     <dd><p>In the case of an error while making the “file” array entry, the “inode” entry is released by a call on “iput”. </p></dd>

@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: lpcanon (8879)</title>
+<title>: lpcanon (<a target="source" href="../all.html#line8879">8879</a>)</title>
 
 <link href="sect0281.html" title="For idle readers: A suggestion" rel="next" />
 <link href="sect0279.html" title="Discussion" rel="prev" />
@@ -45,23 +45,23 @@
 </span><span>
 
 <span>
-<b class="current">lpcanon (8879)</b>
+<b class="current">lpcanon (<a target="source" href="../all.html#line8879">8879</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000281">22.9 lpcanon (8879)</h2>
+<div><h2 id="a0000000281">22.9 lpcanon (<a target="source" href="../all.html#line8879">8879</a>)</h2>
 <p>This procedure interprets characters being sent to the line printer and make various modifications, insertions and deletions. It thus functions as a filter. </p><dl class="description">
 
     <a href="../all.html#line8884" target="source" <dt>8884:</dt></a>
-    <dd><p>The section of code from here to line 8913 is concerned with character translation when the full 96 character set is not available, and a 64 character set is in use. </p><p>Since the capabilities of a printer do not usually change with time, the defined variable “CAP” (8840) must be set once and for all (at a particular installation). </p><p>The run-time test on (lp11.flag &amp; CAP) could be replaced by a compile-time test on (CAP) and if the compiler has its “druthers”, if CAP turns out to be zero, the whole section of code to line 8913 could be compiled down to nothing. </p><p>The present code could be said to plan ahead for a situation where an installation may have two or more printers of different types. Even so there is a basic inconsistency here in the use of “CAP”, “IND” and “EJECT” on the one hand, and “EJLINE” and “MAXCOL” on the other. In fact since forms of different sizes are not uncommonly used on a single printer, the last two should not be constants at all, but should be dynamically settable. </p></dd>
+    <dd><p>The section of code from here to line <a target="source" href="../all.html#line8913">8913</a> is concerned with character translation when the full 96 character set is not available, and a 64 character set is in use. </p><p>Since the capabilities of a printer do not usually change with time, the defined variable “CAP” (<a target="source" href="../all.html#line8840">8840</a>) must be set once and for all (at a particular installation). </p><p>The run-time test on (lp11.flag &amp; CAP) could be replaced by a compile-time test on (CAP) and if the compiler has its “druthers”, if CAP turns out to be zero, the whole section of code to line <a target="source" href="../all.html#line8913">8913</a> could be compiled down to nothing. </p><p>The present code could be said to plan ahead for a situation where an installation may have two or more printers of different types. Even so there is a basic inconsistency here in the use of “CAP”, “IND” and “EJECT” on the one hand, and “EJLINE” and “MAXCOL” on the other. In fact since forms of different sizes are not uncommonly used on a single printer, the last two should not be constants at all, but should be dynamically settable. </p></dd>
 
     <a href="../all.html#line8885" target="source" <dt>8885:</dt></a>
     <dd><p>Lower case alphabetics are translated by the addition of a constant, which is conveniently defined as “’A’ – ’a”’; </p></dd>
 
     <a href="../all.html#line8887" target="source" <dt>8887:</dt></a>
-    <dd><p>Certain of the remaining characters are special characters which are printed as a similar character with an overprinted minus sign, e.g. “{” (8889) is printed as “{-”; </p></dd>
+    <dd><p>Certain of the remaining characters are special characters which are printed as a similar character with an overprinted minus sign, e.g. “{” (<a target="source" href="../all.html#line8889">8889</a>) is printed as “{-”; </p></dd>
 
     <a href="../all.html#line8909" target="source" <dt>8909:</dt></a>
     <dd><p>The “similiar” character is output via a recursive call on “lpcanon”, which will increment “lp11.ccc” by one as a side effect; </p></dd>
@@ -73,7 +73,7 @@
     <dd><p>Prepare to output a minus sign; </p></dd>
 
     <a href="../all.html#line8915" target="source" <dt>8915:</dt></a>
-    <dd><p>The “switch” statement beginning here extends to line 8963. Certain characters involved in vertical and horizontal spacing are given special interpretations with delayed actions; </p></dd>
+    <dd><p>The “switch” statement beginning here extends to line <a target="source" href="../all.html#line8963">8963</a>. Certain characters involved in vertical and horizontal spacing are given special interpretations with delayed actions; </p></dd>
 
     <a href="../all.html#line8917" target="source" <dt>8917:</dt></a>
     <dd><p>For a horizontal tab character, round the current character count up to the next multiple of eight. Do not output any blank characters immediately; </p></dd>

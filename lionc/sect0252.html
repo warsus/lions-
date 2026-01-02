@@ -3,7 +3,7 @@
 <head>
 <meta name="generator" content="plasTeX" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: smount (6086)</title>
+<title>: smount (<a target="source" href="../all.html#line6086">6086</a>)</title>
 
 <link href="sect0253.html" title="Notes" rel="next" />
 <link href="sect0251.html" title="Mounting" rel="prev" />
@@ -45,20 +45,20 @@
 </span><span>
 
 <span>
-<b class="current">smount (6086)</b>
+<b class="current">smount (<a target="source" href="../all.html#line6086">6086</a>)</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000253">20.5 smount (6086)</h2>
+<div><h2 id="a0000000253">20.5 smount (<a target="source" href="../all.html#line6086">6086</a>)</h2>
 <dl class="description">
 
     <a href="../all.html#line6093" target="source" <dt>6093:</dt></a>
     <dd><p>“getmdev” decodes the first argument to locate a block oriented access device; </p></dd>
 
     <a href="../all.html#line6096" target="source" <dt>6096:</dt></a>
-    <dd><p>“u.u_dirp” is reset preparatory to calling “namei” to decode the second file name. (Note that “u.u_dirp” is set by “trap” to “u.u_arg[0]” (2770); </p></dd>
+    <dd><p>“u.u_dirp” is reset preparatory to calling “namei” to decode the second file name. (Note that “u.u_dirp” is set by “trap” to “u.u_arg[0]” (<a target="source" href="../all.html#line2770">2770</a>); </p></dd>
 
     <a href="../all.html#line6100" target="source" <dt>6100:</dt></a>
     <dd><p>Check that the file named by the second parameter is in a satisfactory condition, i.e. no one else is currently accessing the file, and that the file is not a special file (block or character); </p></dd>
@@ -66,7 +66,7 @@
     <a href="../all.html#line6103" target="source" <dt>6103:</dt></a>
     <dd><p>Search the “mount” table looking for an empty entry (“mp-<img src="images/img-0005.png" alt="$&gt;$" style="vertical-align:0px; 
                                      width:10px; 
-                                     height:9px" class="math gen" />m bufp==NULL”) or an entry already made for the device. (The “mount” data structure is defined at line 0272); </p></dd>
+                                     height:9px" class="math gen" />m bufp==NULL”) or an entry already made for the device. (The “mount” data structure is defined at line <a target="source" href="../all.html#line0272">0272</a>); </p></dd>
 
     <a href="../all.html#line6111" target="source" <dt>6111:</dt></a>
     <dd><p>“smp” should point to a suitable entry in the “mount” table; </p></dd>
@@ -81,7 +81,7 @@
     <dd><p>Copy the “super block” into a buffer associated with “NODEV”, from the buffer associated with “d”. The second buffer will not be released again until the device is unmounted; </p></dd>
 
     <a href="../all.html#line6130" target="source" <dt>6130:</dt></a>
-    <dd><p>“ip” points to the “inode” for the second named file. This “inode” is now flagged as “IMOUNT”. The effect of this is to force “iget” (7292) to ignore the normal contents of the file, while the file system volume is mounted. (In practice, the second file is an empty file created especially for this purpose.) </p></dd>
+    <dd><p>“ip” points to the “inode” for the second named file. This “inode” is now flagged as “IMOUNT”. The effect of this is to force “iget” (<a target="source" href="../all.html#line7292">7292</a>) to ignore the normal contents of the file, while the file system volume is mounted. (In practice, the second file is an empty file created especially for this purpose.) </p></dd>
 
 </dl></div>
 

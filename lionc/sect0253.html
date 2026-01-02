@@ -58,7 +58,7 @@
     <dd><p>The “read/write” status of a mounted device depends only on the parameters provided to “smount”. No attempt is made to sense the hardware “read/write” status. Thus if a disk is readied with “write protect” on, but is not mounted “read only”, then the system will complain vigorously. </p></dd>
 
     <dt>2.</dt>
-    <dd><p>The “mount” procedure does not carry out any kind of label checking on the “mounted” file system volume. This is reasonable in a situation where file system volumes are rarely rearranged. However in situations where volumes are mounted and remounted frequently, some means of verifying that the correct volume has been mounted would seem desirable. (Further, if a file system volume contains sensitive information, it may be desirable to include some form of password protection as well. There is room in the “super block” (5575) for the storage of a name and an encrypted password.) </p></dd>
+    <dd><p>The “mount” procedure does not carry out any kind of label checking on the “mounted” file system volume. This is reasonable in a situation where file system volumes are rarely rearranged. However in situations where volumes are mounted and remounted frequently, some means of verifying that the correct volume has been mounted would seem desirable. (Further, if a file system volume contains sensitive information, it may be desirable to include some form of password protection as well. There is room in the “super block” (<a target="source" href="../all.html#line5575">5575</a>) for the storage of a name and an encrypted password.) </p></dd>
 
 </dl></div>
 
