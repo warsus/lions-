@@ -1,0 +1,7 @@
+@keyframes flash {
+  0% { background-color: #fcfc73; }
+  100% { background-color: transparent; }
+}
+.flash-line {
+  animation: flash 2s ease-out;
+}

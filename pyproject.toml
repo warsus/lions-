@@ -1,0 +1,9 @@
+[project]
+name = "lions"
+version = "0.1.0"
+description = "Source code for Lions Commentary on Unix"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "plastex>=3.1",
+]
