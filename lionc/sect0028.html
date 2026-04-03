@@ -1,123 +1,1469 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 <meta name="generator" content="plasTeX" />
-<meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<title>: Reading “C” Programs</title>
-
-<link href="sect0029.html" title="Some Selected Examples" rel="next" />
-<link href="sect0027.html" title="Special Device Registers" rel="prev" />
-<link href="index.html" rel="up" />
-<link rel="stylesheet" href="styles/styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>: The File “tty.c”</title>
+<link rel="next" href="sect0029.html" title="Suggested Exercises" />
+<link rel="prev" href="sect0027.html" title="Interactive Terminals" />
+<link rel="up" href="index.html" title="" />
+<link rel="stylesheet" href="styles/theme-white.css" />
 </head>
+
 <body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html"></a></h1>
+</header>
 
-<div class="navigation">
-<table cellspacing="2" cellpadding="0" width="100%">
-<tr>
-<td><a href="sect0027.html" title="Special Device Registers"><img alt="Previous: Special Device Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Preface</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000031"><span class="toc_ref">1.1</span> <span class="toc_entry">The UNIX Operating System</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000032"><span class="toc_ref">1.2</span> <span class="toc_entry">Utilities</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000033"><span class="toc_ref">1.3</span> <span class="toc_entry">Other Documentation</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000034"><span class="toc_ref">1.4</span> <span class="toc_entry">UNIX Programmer’s Manual</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000035"><span class="toc_ref">1.5</span> <span class="toc_entry">UNIX Documents</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000036"><span class="toc_ref">1.6</span> <span class="toc_entry">UNIX Operating System Source Code</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000037"><span class="toc_ref">1.7</span> <span class="toc_entry">Source Code Selections</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000038"><span class="toc_ref">1.8</span> <span class="toc_entry">Source Code Files</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000039"><span class="toc_ref">1.9</span> <span class="toc_entry">Use of these notes</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000040"><span class="toc_ref">1.10</span> <span class="toc_entry">A Note on Programming Standards</span></a>
+ </li>
 
-<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">2</span> <span class="toc_entry">Fundamentals</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000041"><span class="toc_ref">2.1</span> <span class="toc_entry">The Processor</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000042"><span class="toc_ref">2.2</span> <span class="toc_entry">Processor Status Word</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000043"><span class="toc_ref">2.3</span> <span class="toc_entry">General Registers</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000044"><span class="toc_ref">2.4</span> <span class="toc_entry">Instruction Set</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000045"><span class="toc_ref">2.5</span> <span class="toc_entry">Addressing Modes</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000046"><span class="toc_ref">2.6</span> <span class="toc_entry">Unix Assembler</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000047"><span class="toc_ref">2.7</span> <span class="toc_entry">Memory Management</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000048"><span class="toc_ref">2.8</span> <span class="toc_entry">Segmentation Registers.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000049"><span class="toc_ref">2.9</span> <span class="toc_entry">Page Description Register</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000050"><span class="toc_ref">2.10</span> <span class="toc_entry">Memory Allocation</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000051"><span class="toc_ref">2.11</span> <span class="toc_entry">Memory Management Status Registers</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000052"><span class="toc_ref">2.12</span> <span class="toc_entry">“i” and “d” Spaces</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000053"><span class="toc_ref">2.13</span> <span class="toc_entry">Initial Conditions</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000054"><span class="toc_ref">2.14</span> <span class="toc_entry">Special Device Registers</span></a>
+ </li>
 
-<td><a href="sect0029.html" title="Some Selected Examples"><img alt="Next: Some Selected Examples" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">3</span> <span class="toc_entry">Reading “C” Programs</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000055"><span class="toc_ref">3.1</span> <span class="toc_entry">Some Selected Examples</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000056"><span class="toc_ref">3.2</span> <span class="toc_entry">Example 1</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000057"><span class="toc_ref">3.3</span> <span class="toc_entry">Example 2</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000058"><span class="toc_ref">3.4</span> <span class="toc_entry">Example 3</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000059"><span class="toc_ref">3.5</span> <span class="toc_entry">Example 4</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000060"><span class="toc_ref">3.6</span> <span class="toc_entry">Example 5</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000061"><span class="toc_ref">3.7</span> <span class="toc_entry">Example 6</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000062"><span class="toc_ref">3.8</span> <span class="toc_entry">Example 7</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000063"><span class="toc_ref">3.9</span> <span class="toc_entry">Example 8</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000064"><span class="toc_ref">3.10</span> <span class="toc_entry">Example 9</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000065"><span class="toc_ref">3.11</span> <span class="toc_entry">Example 10</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000066"><span class="toc_ref">3.12</span> <span class="toc_entry">Example 11</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000067"><span class="toc_ref">3.13</span> <span class="toc_entry">Example 12</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000068"><span class="toc_ref">3.14</span> <span class="toc_entry">Example 13</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000069"><span class="toc_ref">3.15</span> <span class="toc_entry">Example 14</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000070"><span class="toc_ref">3.16</span> <span class="toc_entry">Example 15</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000071"><span class="toc_ref">3.17</span> <span class="toc_entry">Example 16</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000072"><span class="toc_ref">3.18</span> <span class="toc_entry">Example 17</span></a>
+ </li>
 
-<td class="navtitle" align="center">&nbsp;</td>
-<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">4</span> <span class="toc_entry">An Overview</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000073"><span class="toc_ref">4.1</span> <span class="toc_entry">Variable Allocation</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000074"><span class="toc_ref">4.2</span> <span class="toc_entry">Global Variables</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000075"><span class="toc_ref">4.3</span> <span class="toc_entry">The ‘C’ Preprocessor</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000076"><span class="toc_ref">4.4</span> <span class="toc_entry">Section One</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000077"><span class="toc_ref">4.5</span> <span class="toc_entry">The First Group of ‘.h’ Files</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000078"><span class="toc_ref">4.6</span> <span class="toc_entry">Assembly Language Files</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000079"><span class="toc_ref">4.7</span> <span class="toc_entry">Other Files in Section One</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000080"><span class="toc_ref">4.8</span> <span class="toc_entry">Section Two</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000081"><span class="toc_ref">4.9</span> <span class="toc_entry">Section Three</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000082"><span class="toc_ref">4.10</span> <span class="toc_entry">Section Four</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000083"><span class="toc_ref">4.11</span> <span class="toc_entry">Section Five</span></a>
+ </li>
 
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Section One</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html"><span class="toc_ref">5</span> <span class="toc_entry">Two Files</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0007.html#a0000000084"><span class="toc_ref">5.1</span> <span class="toc_entry">The File ‘malloc.c’</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000085"><span class="toc_ref">5.2</span> <span class="toc_entry">Rules for List Maintenance</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000086"><span class="toc_ref">5.3</span> <span class="toc_entry">malloc (2528)</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000087"><span class="toc_ref">5.4</span> <span class="toc_entry">mfree (2556)</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000088"><span class="toc_ref">5.5</span> <span class="toc_entry">In conclusion ...</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000089"><span class="toc_ref">5.6</span> <span class="toc_entry">The File ‘prf.c’</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000090"><span class="toc_ref">5.7</span> <span class="toc_entry">printf (2340)</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000091"><span class="toc_ref">5.8</span> <span class="toc_entry">printn (2369)</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000092"><span class="toc_ref">5.9</span> <span class="toc_entry">putchar (2386)</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000093"><span class="toc_ref">5.10</span> <span class="toc_entry">panic (2419)</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000094"><span class="toc_ref">5.11</span> <span class="toc_entry">prdev (2433), deverror (2447)</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000095"><span class="toc_ref">5.12</span> <span class="toc_entry">Included Files</span></a>
+ </li>
 
-<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
-<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
-</tr>
-</table>
-</div>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0008.html"><span class="toc_ref">6</span> <span class="toc_entry">Getting Started</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0008.html#a0000000096"><span class="toc_ref">6.1</span> <span class="toc_entry">Operator Actions</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000097"><span class="toc_ref">6.2</span> <span class="toc_entry">start (0612)</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000098"><span class="toc_ref">6.3</span> <span class="toc_entry">main (1550)</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000099"><span class="toc_ref">6.4</span> <span class="toc_entry">Processes</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000100"><span class="toc_ref">6.5</span> <span class="toc_entry">Initialisation of proc[0]</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000101"><span class="toc_ref">6.6</span> <span class="toc_entry">The story continues ...</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000102"><span class="toc_ref">6.7</span> <span class="toc_entry">sched (1940)</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000103"><span class="toc_ref">6.8</span> <span class="toc_entry">sleep (2066)</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000104"><span class="toc_ref">6.9</span> <span class="toc_entry">swtch (2178)</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000105"><span class="toc_ref">6.10</span> <span class="toc_entry">main revisited</span></a>
+ </li>
 
-<div class="breadcrumbs">
-<span>
-<span>
-<a href="index.html"></a> <b>:</b>
-</span>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0009.html"><span class="toc_ref">7</span> <span class="toc_entry">Processes</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0009.html#a0000000106"><span class="toc_ref">7.1</span> <span class="toc_entry">The Process</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000107"><span class="toc_ref">7.2</span> <span class="toc_entry">The proc Structure (0358)</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000108"><span class="toc_ref">7.3</span> <span class="toc_entry">The user Structure (0413)</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000109"><span class="toc_ref">7.4</span> <span class="toc_entry">The Per Process Data Area</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000110"><span class="toc_ref">7.5</span> <span class="toc_entry">The Segments</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000111"><span class="toc_ref">7.6</span> <span class="toc_entry">Execution of an Image</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000112"><span class="toc_ref">7.7</span> <span class="toc_entry">Kernel Mode Execution</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000113"><span class="toc_ref">7.8</span> <span class="toc_entry">User Mode Execution</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000114"><span class="toc_ref">7.9</span> <span class="toc_entry">An Example</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000115"><span class="toc_ref">7.10</span> <span class="toc_entry">Setting the Segmentation Registers</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000116"><span class="toc_ref">7.11</span> <span class="toc_entry">estabur (1650)</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000117"><span class="toc_ref">7.12</span> <span class="toc_entry">sureg (1739)</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000118"><span class="toc_ref">7.13</span> <span class="toc_entry">newproc (1826)</span></a>
+ </li>
 
-</span><span>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref">8</span> <span class="toc_entry">Process Management</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0010.html#a0000000119"><span class="toc_ref">8.1</span> <span class="toc_entry">Process Switching</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000120"><span class="toc_ref">8.2</span> <span class="toc_entry">Interrupts</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000121"><span class="toc_ref">8.3</span> <span class="toc_entry">Program Swapping</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000122"><span class="toc_ref">8.4</span> <span class="toc_entry">Jobs</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000123"><span class="toc_ref">8.5</span> <span class="toc_entry">Assembler Procedures</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000124"><span class="toc_ref">8.6</span> <span class="toc_entry">savu (0725)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000125"><span class="toc_ref">8.7</span> <span class="toc_entry">retu (0740)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000126"><span class="toc_ref">8.8</span> <span class="toc_entry">aretu (0734)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000127"><span class="toc_ref">8.9</span> <span class="toc_entry">swtch (2178)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000128"><span class="toc_ref">8.10</span> <span class="toc_entry">setpri (2156)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000129"><span class="toc_ref">8.11</span> <span class="toc_entry">sleep (2066)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000130"><span class="toc_ref">8.12</span> <span class="toc_entry">wakeup (2113)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000131"><span class="toc_ref">8.13</span> <span class="toc_entry">setrun (2134)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000132"><span class="toc_ref">8.14</span> <span class="toc_entry">expand (2268)</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000133"><span class="toc_ref">8.15</span> <span class="toc_entry">swtch revisited</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000134"><span class="toc_ref">8.16</span> <span class="toc_entry">Critical Sections</span></a>
+ </li>
 
-<span>
-<b class="current">Reading “C” Programs</b>
-</span>
-</span>
-<hr />
-</div>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0011.html"><span class="toc_ref"></span> <span class="toc_entry">Section Two</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html"><span class="toc_ref">9</span> <span class="toc_entry">Hardware Interrupts and Traps</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0012.html#a0000000135"><span class="toc_ref">9.1</span> <span class="toc_entry">Hardware Interrupts</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000136"><span class="toc_ref">9.2</span> <span class="toc_entry">The Interrupt Vector</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000137"><span class="toc_ref">9.3</span> <span class="toc_entry">Interrupt Handlers</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000138"><span class="toc_ref">9.4</span> <span class="toc_entry">Priorities</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000139"><span class="toc_ref">9.5</span> <span class="toc_entry">Interrupt Priorities</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000140"><span class="toc_ref">9.6</span> <span class="toc_entry">Rules for Interrupt Handlers</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000141"><span class="toc_ref">9.7</span> <span class="toc_entry">Traps</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000142"><span class="toc_ref">9.8</span> <span class="toc_entry">Assembly Language ‘trap’</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000143"><span class="toc_ref">9.9</span> <span class="toc_entry">Return</span></a>
+ </li>
 
-<div><h1 id="a0000000029">3 Reading “C” Programs</h1>
-<p>Learning to read programs written in the “C” language is one of the hurdles that must be overcome before you will be able to study the source code of UNIX effectively. </p><p>As with natural languages, reading is an easier skill to acquire than writing. Even so you will need to be careful lest some of the more subtle points pass you by. </p><p>There are two of the “UNIX Documents” which relate directly to the “C” language: </p><p>“C Reference Manual”, by Dennis Ritchie </p><p>“Programming in C – A Tutorial”, by Brian Kernighan </p><p>You should read them now, as far as you can, and return to reread them from time to time with increasing comprehension. </p><p>Learning to write “C” programs is not required. However if you have the opportunity, you should attempt to write at least a few small programs. This does represent the accepted way to learn a programming language, and your understanding of the proper use of such items as: </p><p>semicolons; <br />“=” and “==” <br />“{” and “}” <br />“<img src="images/img-0006.png" alt="$++$" style="vertical-align:&images/img-0006.png-depth;&px;; 
-                                     width:&images/img-0006.png-width;&px;; 
-                                     height:&images/img-0006.png-height;&px;" class="math gen" />” and “<img src="images/img-0007.png" alt="$–$" style="vertical-align:&images/img-0007.png-depth;&px;; 
-                                     width:&images/img-0007.png-width;&px;; 
-                                     height:&images/img-0007.png-height;&px;" class="math gen" />” <br />declarations; <br />register variables; <br />“if” and “for” statements <br /></p><p>You will find that “C” is a very convenient language for accessing and manipulating data structures and character strings, which is what a large part of operating systems is about. As befits a terminal oriented language, which requires concise, compact expression, “C” uses a large character set and makes many symbols such as “*” and “&amp;” work hard. In this respect it invites comparison with APL. </p><p>There many features of “C” which are reminiscent of PL/1, but it goes well beyond the latter in the range of facilities provided for structured programming. </p></div>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0013.html"><span class="toc_ref">10</span> <span class="toc_entry">The Assembler “Trap” Routine</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0013.html#a0000000144"><span class="toc_ref">10.1</span> <span class="toc_entry">Sources of Traps and Interrupts</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000145"><span class="toc_ref">10.2</span> <span class="toc_entry">fuibyte (0814), fuiword (0844)</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000146"><span class="toc_ref">10.3</span> <span class="toc_entry">Interrupts</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000147"><span class="toc_ref">10.4</span> <span class="toc_entry">call (0776)</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000148"><span class="toc_ref">10.5</span> <span class="toc_entry">User Program Traps</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000149"><span class="toc_ref">10.6</span> <span class="toc_entry">The Kernel Stack</span></a>
+ </li>
 
-<div class="contents section-contents"><!--<strong>Subsections</strong>-->
-<ul>
-<li><a href="sect0029.html">3.1 Some Selected Examples</a>
-   
-</li><li><a href="sect0030.html">3.2 Example 1</a>
-   
-</li><li><a href="sect0031.html">3.3 Example 2</a>
-   
-</li><li><a href="sect0032.html">3.4 Example 3</a>
-   
-</li><li><a href="sect0033.html">3.5 Example 4</a>
-   
-</li><li><a href="sect0034.html">3.6 Example 5</a>
-   
-</li><li><a href="sect0035.html">3.7 Example 6</a>
-   
-</li><li><a href="sect0036.html">3.8 Example 7</a>
-   
-</li><li><a href="sect0037.html">3.9 Example 8</a>
-   
-</li><li><a href="sect0038.html">3.10 Example 9</a>
-   
-</li><li><a href="sect0039.html">3.11 Example 10</a>
-   
-</li><li><a href="sect0040.html">3.12 Example 11</a>
-   
-</li><li><a href="sect0041.html">3.13 Example 12</a>
-   
-</li><li><a href="sect0042.html">3.14 Example 13</a>
-   
-</li><li><a href="sect0043.html">3.15 Example 14</a>
-   
-</li><li><a href="sect0044.html">3.16 Example 15</a>
-   
-</li><li><a href="sect0045.html">3.17 Example 16</a>
-   
-</li><li><a href="sect0046.html">3.18 Example 17</a>
-   
-</li>
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0014.html"><span class="toc_ref">11</span> <span class="toc_entry">Clock Interrupts</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0014.html#a0000000150"><span class="toc_ref">11.1</span> <span class="toc_entry">clock (3725)</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000151"><span class="toc_ref">11.2</span> <span class="toc_entry">timeout (3845)</span></a>
+ </li>
 
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0015.html"><span class="toc_ref">12</span> <span class="toc_entry">Traps and System Calls</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0015.html#a0000000152"><span class="toc_ref">12.1</span> <span class="toc_entry">trap (2693)</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000153"><span class="toc_ref">12.2</span> <span class="toc_entry">Kernel Mode Traps</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000154"><span class="toc_ref">12.3</span> <span class="toc_entry">User Mode Traps</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000155"><span class="toc_ref">12.4</span> <span class="toc_entry">System Calls</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000156"><span class="toc_ref">12.5</span> <span class="toc_entry">System Call Handlers</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000157"><span class="toc_ref">12.6</span> <span class="toc_entry">The File ‘sysl.c’</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000158"><span class="toc_ref">12.7</span> <span class="toc_entry">exec (3020)</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000159"><span class="toc_ref">12.8</span> <span class="toc_entry">fork (3322)</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000160"><span class="toc_ref">12.9</span> <span class="toc_entry">sbreak (3354)</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000161"><span class="toc_ref">12.10</span> <span class="toc_entry">The Files ‘sys2.c’ and ‘sys3.c’</span></a>
+ </li>
+<li class="">
+  <a href="sect0015.html#a0000000162"><span class="toc_ref">12.11</span> <span class="toc_entry">The File ‘sys4.c’</span></a>
+ </li>
 
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0016.html"><span class="toc_ref">13</span> <span class="toc_entry">Software Interrupts</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0016.html#a0000000163"><span class="toc_ref">13.1</span> <span class="toc_entry">Anticipation</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000164"><span class="toc_ref">13.2</span> <span class="toc_entry">Causation</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000165"><span class="toc_ref">13.3</span> <span class="toc_entry">Effect</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000166"><span class="toc_ref">13.4</span> <span class="toc_entry">Tracing</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000167"><span class="toc_ref">13.5</span> <span class="toc_entry">Procedures</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000168"><span class="toc_ref">13.6</span> <span class="toc_entry">A. Anticipation</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000169"><span class="toc_ref">13.7</span> <span class="toc_entry">B. Causation</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000170"><span class="toc_ref">13.8</span> <span class="toc_entry">C. Effect</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000171"><span class="toc_ref">13.9</span> <span class="toc_entry">D. Tracing</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000172"><span class="toc_ref">13.10</span> <span class="toc_entry">ssig (3614)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000173"><span class="toc_ref">13.11</span> <span class="toc_entry">kill (3630)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000174"><span class="toc_ref">13.12</span> <span class="toc_entry">signal (3949)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000175"><span class="toc_ref">13.13</span> <span class="toc_entry">psignal (3963)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000176"><span class="toc_ref">13.14</span> <span class="toc_entry">issig (3991)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000177"><span class="toc_ref">13.15</span> <span class="toc_entry">psig (4043)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000178"><span class="toc_ref">13.16</span> <span class="toc_entry">core (4094)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000179"><span class="toc_ref">13.17</span> <span class="toc_entry">grow (4136)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000180"><span class="toc_ref">13.18</span> <span class="toc_entry">exit (3219)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000181"><span class="toc_ref">13.19</span> <span class="toc_entry">rexit (3205)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000182"><span class="toc_ref">13.20</span> <span class="toc_entry">wait (3270)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000183"><span class="toc_ref">13.21</span> <span class="toc_entry">Tracing</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000184"><span class="toc_ref">13.22</span> <span class="toc_entry">stop (4016)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000185"><span class="toc_ref">13.23</span> <span class="toc_entry">wait (3270) (continued)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000186"><span class="toc_ref">13.24</span> <span class="toc_entry">ptrace (4164)</span></a>
+ </li>
+<li class="">
+  <a href="sect0016.html#a0000000187"><span class="toc_ref">13.25</span> <span class="toc_entry">procxmt (4204)</span></a>
+ </li>
 
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0017.html"><span class="toc_ref">14</span> <span class="toc_entry">Program Swapping</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0017.html#a0000000188"><span class="toc_ref">14.1</span> <span class="toc_entry">Text Segments</span></a>
+ </li>
+<li class="">
+  <a href="sect0017.html#a0000000189"><span class="toc_ref">14.2</span> <span class="toc_entry">sched (1940)</span></a>
+ </li>
+<li class="">
+  <a href="sect0017.html#a0000000190"><span class="toc_ref">14.3</span> <span class="toc_entry">xswap (4368)</span></a>
+ </li>
+<li class="">
+  <a href="sect0017.html#a0000000191"><span class="toc_ref">14.4</span> <span class="toc_entry">xalloc (4433)</span></a>
+ </li>
+<li class="">
+  <a href="sect0017.html#a0000000192"><span class="toc_ref">14.5</span> <span class="toc_entry">xfree (4398)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0018.html"><span class="toc_ref">15</span> <span class="toc_entry">Introduction to Basic I/O</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0018.html#a0000000193"><span class="toc_ref">15.1</span> <span class="toc_entry">The File ‘buf.h’</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000194"><span class="toc_ref">15.2</span> <span class="toc_entry">devtab (4551)</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000195"><span class="toc_ref">15.3</span> <span class="toc_entry">The File ‘conf.h’</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000196"><span class="toc_ref">15.4</span> <span class="toc_entry">The File ‘conf.c’</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000197"><span class="toc_ref">15.5</span> <span class="toc_entry">System Generation</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000198"><span class="toc_ref">15.6</span> <span class="toc_entry">swap (5196)</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000199"><span class="toc_ref">15.7</span> <span class="toc_entry">Race Conditions</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000200"><span class="toc_ref">15.8</span> <span class="toc_entry">Reentrancy</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000201"><span class="toc_ref">15.9</span> <span class="toc_entry">For the Uninitiated</span></a>
+ </li>
+<li class="">
+  <a href="sect0018.html#a0000000202"><span class="toc_ref">15.10</span> <span class="toc_entry">Additional Reading</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0019.html"><span class="toc_ref">16</span> <span class="toc_entry">The RK Disk Driver</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0019.html#a0000000203"><span class="toc_ref">16.1</span> <span class="toc_entry">The file ‘rk.c’</span></a>
+ </li>
+<li class="">
+  <a href="sect0019.html#a0000000204"><span class="toc_ref">16.2</span> <span class="toc_entry">rkstrategy (5389)</span></a>
+ </li>
+<li class="">
+  <a href="sect0019.html#a0000000205"><span class="toc_ref">16.3</span> <span class="toc_entry">rkaddr (5420)</span></a>
+ </li>
+<li class="">
+  <a href="sect0019.html#a0000000206"><span class="toc_ref">16.4</span> <span class="toc_entry">devstart (5096)</span></a>
+ </li>
+<li class="">
+  <a href="sect0019.html#a0000000207"><span class="toc_ref">16.5</span> <span class="toc_entry">rkintr (5451)</span></a>
+ </li>
+<li class="">
+  <a href="sect0019.html#a0000000208"><span class="toc_ref">16.6</span> <span class="toc_entry">iodone (5018)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0020.html"><span class="toc_ref">17</span> <span class="toc_entry">Buffer Manipulation</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0020.html#a0000000209"><span class="toc_ref">17.1</span> <span class="toc_entry">Flags</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000210"><span class="toc_ref">17.2</span> <span class="toc_entry">A Cache-like Memory</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000211"><span class="toc_ref">17.3</span> <span class="toc_entry">clrbuf (5038)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000212"><span class="toc_ref">17.4</span> <span class="toc_entry">incore (4899)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000213"><span class="toc_ref">17.5</span> <span class="toc_entry">getblk (4921)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000214"><span class="toc_ref">17.6</span> <span class="toc_entry">brelse (4869)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000215"><span class="toc_ref">17.7</span> <span class="toc_entry">binit (5055)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000216"><span class="toc_ref">17.8</span> <span class="toc_entry">bread (4754)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000217"><span class="toc_ref">17.9</span> <span class="toc_entry">breada (4773)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000218"><span class="toc_ref">17.10</span> <span class="toc_entry">bwrite (4809)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000219"><span class="toc_ref">17.11</span> <span class="toc_entry">bawrite (4856)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000220"><span class="toc_ref">17.12</span> <span class="toc_entry">bdwrite (4836)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000221"><span class="toc_ref">17.13</span> <span class="toc_entry">bflush (5229)</span></a>
+ </li>
+<li class="">
+  <a href="sect0020.html#a0000000222"><span class="toc_ref">17.14</span> <span class="toc_entry">physio (5259)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0021.html"><span class="toc_ref">18</span> <span class="toc_entry">File Access and Control</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0021.html#a0000000223"><span class="toc_ref">18.1</span> <span class="toc_entry">File Characteristics</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000224"><span class="toc_ref">18.2</span> <span class="toc_entry">System Calls</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000225"><span class="toc_ref">18.3</span> <span class="toc_entry">Control Tables</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000226"><span class="toc_ref">18.4</span> <span class="toc_entry">file (5507)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000227"><span class="toc_ref">18.5</span> <span class="toc_entry">inode (5659)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000228"><span class="toc_ref">18.6</span> <span class="toc_entry">Resources Required</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000229"><span class="toc_ref">18.7</span> <span class="toc_entry">Opening a File</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000230"><span class="toc_ref">18.8</span> <span class="toc_entry">creat (5781)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000231"><span class="toc_ref">18.9</span> <span class="toc_entry">openl (5804)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000232"><span class="toc_ref">18.10</span> <span class="toc_entry">open (5763)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000233"><span class="toc_ref">18.11</span> <span class="toc_entry">openl revisited</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000234"><span class="toc_ref">18.12</span> <span class="toc_entry">close (5846)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000235"><span class="toc_ref">18.13</span> <span class="toc_entry">closef (6643)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000236"><span class="toc_ref">18.14</span> <span class="toc_entry">iput (7344)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000237"><span class="toc_ref">18.15</span> <span class="toc_entry">Deletion of Files</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000238"><span class="toc_ref">18.16</span> <span class="toc_entry">Reading and Writing</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000239"><span class="toc_ref">18.17</span> <span class="toc_entry">rdwr (5731)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000240"><span class="toc_ref">18.18</span> <span class="toc_entry">readi (6221)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000241"><span class="toc_ref">18.19</span> <span class="toc_entry">writei</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000242"><span class="toc_ref">18.20</span> <span class="toc_entry">iomove (6364)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000243"><span class="toc_ref">18.21</span> <span class="toc_entry">bmap (6415)</span></a>
+ </li>
+<li class="">
+  <a href="sect0021.html#a0000000244"><span class="toc_ref">18.22</span> <span class="toc_entry">Leftovers</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0022.html"><span class="toc_ref">19</span> <span class="toc_entry">File Directories and Directory Files</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0022.html#a0000000245"><span class="toc_ref">19.1</span> <span class="toc_entry">The Directory Data Structure</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000246"><span class="toc_ref">19.2</span> <span class="toc_entry">Directory Files</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000247"><span class="toc_ref">19.3</span> <span class="toc_entry">namei (7518)</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000248"><span class="toc_ref">19.4</span> <span class="toc_entry">Some Comments</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000249"><span class="toc_ref">19.5</span> <span class="toc_entry">link (5909)</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000250"><span class="toc_ref">19.6</span> <span class="toc_entry">wdir (7477)</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000251"><span class="toc_ref">19.7</span> <span class="toc_entry">maknode (7455)</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000252"><span class="toc_ref">19.8</span> <span class="toc_entry">unlink (3510)</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000253"><span class="toc_ref">19.9</span> <span class="toc_entry">mknod (5952)</span></a>
+ </li>
+<li class="">
+  <a href="sect0022.html#a0000000254"><span class="toc_ref">19.10</span> <span class="toc_entry">access (6746)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0023.html"><span class="toc_ref">20</span> <span class="toc_entry">File Systems</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0023.html#a0000000255"><span class="toc_ref">20.1</span> <span class="toc_entry">The ‘Super Block’ (5561)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000256"><span class="toc_ref">20.2</span> <span class="toc_entry">The ’mount’ table (0272)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000257"><span class="toc_ref">20.3</span> <span class="toc_entry">iinit (6922)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000258"><span class="toc_ref">20.4</span> <span class="toc_entry">Mounting</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000259"><span class="toc_ref">20.5</span> <span class="toc_entry">smount (6086)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000260"><span class="toc_ref">20.6</span> <span class="toc_entry">Notes</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000261"><span class="toc_ref">20.7</span> <span class="toc_entry">iget (7276)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000262"><span class="toc_ref">20.8</span> <span class="toc_entry">getfs (7167)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000263"><span class="toc_ref">20.9</span> <span class="toc_entry">update (7201)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000264"><span class="toc_ref">20.10</span> <span class="toc_entry">sumount (6144)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000265"><span class="toc_ref">20.11</span> <span class="toc_entry">Resource Allocation</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000266"><span class="toc_ref">20.12</span> <span class="toc_entry">alloc (6965)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000267"><span class="toc_ref">20.13</span> <span class="toc_entry">itrunc (7414)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000268"><span class="toc_ref">20.14</span> <span class="toc_entry">free (7000)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000269"><span class="toc_ref">20.15</span> <span class="toc_entry">iput (7344)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000270"><span class="toc_ref">20.16</span> <span class="toc_entry">ifree (7134)</span></a>
+ </li>
+<li class="">
+  <a href="sect0023.html#a0000000271"><span class="toc_ref">20.17</span> <span class="toc_entry">iupdat (7374)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0024.html"><span class="toc_ref">21</span> <span class="toc_entry">Pipes</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0024.html#a0000000272"><span class="toc_ref">21.1</span> <span class="toc_entry">pipe (7723)</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000273"><span class="toc_ref">21.2</span> <span class="toc_entry">readp (7758)</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000274"><span class="toc_ref">21.3</span> <span class="toc_entry">writep (7805)</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000275"><span class="toc_ref">21.4</span> <span class="toc_entry">plock (7862)</span></a>
+ </li>
+<li class="">
+  <a href="sect0024.html#a0000000276"><span class="toc_ref">21.5</span> <span class="toc_entry">prele (7882)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0025.html"><span class="toc_ref">22</span> <span class="toc_entry">Character Oriented Special Files</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0025.html#a0000000277"><span class="toc_ref">22.1</span> <span class="toc_entry">LP11 Line Printer Driver</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000278"><span class="toc_ref">22.2</span> <span class="toc_entry">lpopen (8850)</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000279"><span class="toc_ref">22.3</span> <span class="toc_entry">Notes</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000280"><span class="toc_ref">22.4</span> <span class="toc_entry">lpoutput (8986)</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000281"><span class="toc_ref">22.5</span> <span class="toc_entry">lpstart (8967)</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000282"><span class="toc_ref">22.6</span> <span class="toc_entry">lpinit(8976)</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000283"><span class="toc_ref">22.7</span> <span class="toc_entry">lpwrite (8870)</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000284"><span class="toc_ref">22.8</span> <span class="toc_entry">Discussion</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000285"><span class="toc_ref">22.9</span> <span class="toc_entry">lpcanon (8879)</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000286"><span class="toc_ref">22.10</span> <span class="toc_entry">For idle readers: A suggestion</span></a>
+ </li>
+<li class="">
+  <a href="sect0025.html#a0000000287"><span class="toc_ref">22.11</span> <span class="toc_entry">PC-11 Paper Tape Reader/Punch Driver</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0026.html"><span class="toc_ref">23</span> <span class="toc_entry">Character Handling</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0026.html#a0000000288"><span class="toc_ref">23.1</span> <span class="toc_entry">cinit (8234)</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000289"><span class="toc_ref">23.2</span> <span class="toc_entry">getc (0930)</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000290"><span class="toc_ref">23.3</span> <span class="toc_entry">putc (0967)</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000291"><span class="toc_ref">23.4</span> <span class="toc_entry">Character Sets</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000292"><span class="toc_ref">23.5</span> <span class="toc_entry">Control Characters</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000293"><span class="toc_ref">23.6</span> <span class="toc_entry">Graphic Characters</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000294"><span class="toc_ref">23.7</span> <span class="toc_entry">Graphic Character Sets</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000295"><span class="toc_ref">23.8</span> <span class="toc_entry">maptab (8117)</span></a>
+ </li>
+<li class="">
+  <a href="sect0026.html#a0000000296"><span class="toc_ref">23.9</span> <span class="toc_entry">partab (7947)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0027.html"><span class="toc_ref">24</span> <span class="toc_entry">Interactive Terminals</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0027.html#a0000000297"><span class="toc_ref">24.1</span> <span class="toc_entry">The ’tty’ Structure (7926)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000298"><span class="toc_ref">24.2</span> <span class="toc_entry"> Interactive Terminals</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000299"><span class="toc_ref">24.3</span> <span class="toc_entry">Initialisation</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000300"><span class="toc_ref">24.4</span> <span class="toc_entry">stty (8183)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000301"><span class="toc_ref">24.5</span> <span class="toc_entry">sgtty (8201)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000302"><span class="toc_ref">24.6</span> <span class="toc_entry">klsgtty (8090)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000303"><span class="toc_ref">24.7</span> <span class="toc_entry">tysty (8577)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000304"><span class="toc_ref">24.8</span> <span class="toc_entry">The DL11/KL11 Terminal Device Handler</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000305"><span class="toc_ref">24.9</span> <span class="toc_entry">Device Registers</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000306"><span class="toc_ref">24.10</span> <span class="toc_entry">UNIBUS Addresses</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000307"><span class="toc_ref">24.11</span> <span class="toc_entry">Software Considerations</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000308"><span class="toc_ref">24.12</span> <span class="toc_entry">Interrupt Vector Addresses</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000309"><span class="toc_ref">24.13</span> <span class="toc_entry">Source Code</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000310"><span class="toc_ref">24.14</span> <span class="toc_entry">klopen (8023)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000311"><span class="toc_ref">24.15</span> <span class="toc_entry">klclose (8055)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000312"><span class="toc_ref">24.16</span> <span class="toc_entry">klxint (8070)</span></a>
+ </li>
+<li class="">
+  <a href="sect0027.html#a0000000313"><span class="toc_ref">24.17</span> <span class="toc_entry">klrint (8078)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0028.html"><span class="toc_ref">25</span> <span class="toc_entry">The File “tty.c”</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0028.html#a0000000314"><span class="toc_ref">25.1</span> <span class="toc_entry">flushtty (8252)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000315"><span class="toc_ref">25.2</span> <span class="toc_entry">wflushtty (8217)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000316"><span class="toc_ref">25.3</span> <span class="toc_entry">Character Input</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000317"><span class="toc_ref">25.4</span> <span class="toc_entry">ttread (8535)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000318"><span class="toc_ref">25.5</span> <span class="toc_entry">canon (8274)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000319"><span class="toc_ref">25.6</span> <span class="toc_entry">Notes</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000320"><span class="toc_ref">25.7</span> <span class="toc_entry">ttyinput (8333)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000321"><span class="toc_ref">25.8</span> <span class="toc_entry">Character Output – ttwrite (8550)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000322"><span class="toc_ref">25.9</span> <span class="toc_entry">ttstart</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000323"><span class="toc_ref">25.10</span> <span class="toc_entry">ttrstrt (8486)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000324"><span class="toc_ref">25.11</span> <span class="toc_entry">ttyoutput (8373)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000325"><span class="toc_ref">25.12</span> <span class="toc_entry">Terminals with a restricted character set</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000326"><span class="toc_ref">25.13</span> <span class="toc_entry">A. The test for ’TTLOWAT’ (Line 8074)</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000327"><span class="toc_ref">25.14</span> <span class="toc_entry">B. Inactive Terminals</span></a>
+ </li>
+<li class="">
+  <a href="sect0028.html#a0000000328"><span class="toc_ref">25.15</span> <span class="toc_entry">Well, that’s all, folks ...</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0029.html"><span class="toc_ref">26</span> <span class="toc_entry">Suggested Exercises</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0029.html#a0000000329"><span class="toc_ref">26.1</span> <span class="toc_entry">Section One</span></a>
+ </li>
+<li class="">
+  <a href="sect0029.html#a0000000330"><span class="toc_ref">26.2</span> <span class="toc_entry">Section Two</span></a>
+ </li>
+<li class="">
+  <a href="sect0029.html#a0000000331"><span class="toc_ref">26.3</span> <span class="toc_entry">Section Three</span></a>
+ </li>
+<li class="">
+  <a href="sect0029.html#a0000000332"><span class="toc_ref">26.4</span> <span class="toc_entry">Section Four</span></a>
+ </li>
+<li class="">
+  <a href="sect0029.html#a0000000333"><span class="toc_ref">26.5</span> <span class="toc_entry">General</span></a>
+ </li>
+
+  </ul>
+ </li>
 </ul>
-</div>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
 
 
+<div class="main-text">
+<h1 id="a0000000029">25 The File “tty.c”</h1>
+<p>In this, the last chapter, the intricacies of interactive terminal handlers are finally unveiled, including: </p>
+<dl class="description">
+  <dt>(a)</dt>
+  <dd><p>the handling of the “erase” and kill characters; </p>
+</dd>
+  <dt>(b)</dt>
+  <dd><p>the conversion of characters during input and output for upper case only terminals; </p>
+</dd>
+  <dt>(c)</dt>
+  <dd><p>the insertion of delays after various special characters such as “carriage return”. </p>
+</dd>
+</dl>
+<p>The routines “gtty” (8165), “stty” (8183), “sgtty” 82a1) and “ttystty” (8577) were dealt within the previous chapter. </p>
+<h2 id="a0000000314">25.1 flushtty (8252)</h2>
+<p>The purpose of this procedure is to “normalise” the queries associated with a particular terminal. Its effect is to terminate transmission to the terminal forthwith and to throw away any accumulated input characters. </p>
+<dl class="description">
+  <a href="../all.html#line8258" target="source" <dt>8258:</dt></a>
+  <dd><p>Throw away everything in the “cooked” input queue; </p>
+</dd>
+  <a href="../all.html#line8259" target="source" <dt>8259:</dt></a>
+  <dd><p>ditto for the output queue; </p>
+</dd>
+  <a href="../all.html#line8260" target="source" <dt>8260:</dt></a>
+  <dd><p>Wakeup any process waiting to extract a character from the “raw” input queue; </p>
+</dd>
+  <a href="../all.html#line8261" target="source" <dt>8261:</dt></a>
+  <dd><p>ditto for the output queue; </p>
+</dd>
+  <a href="../all.html#line8263" target="source" <dt>8263:</dt></a>
+  <dd><p>Raise the processor priority to prevent an interrupt from the terminal while ... </p>
+</dd>
+  <a href="../all.html#line8264" target="source" <dt>8264:</dt></a>
+  <dd><p>the “raw” input queue is flushed, </p>
+</dd>
+  <a href="../all.html#line8265" target="source" <dt>8265:</dt></a>
+  <dd><p>the “delimiter count” is properly set to zero. </p>
+</dd>
+</dl>
+<p>“flushtty” is called by “wflushtty” (see below) and “ttyinput” (8346, 8350) when either: </p>
+<dl class="description">
+  <dt>(a)</dt>
+  <dd><p>the terminal is not operating in “raw” mode and a “quit” or “delete” character is received from the terminal; or </p>
+</dd>
+  <dt>(b)</dt>
+  <dd><p>the “raw” input queue has grown unreasonably large (presumably because no process is reading input from the terminal); </p>
+</dd>
+</dl>
+<h2 id="a0000000315">25.2 wflushtty (8217)</h2>
+<p>This procedure waits until the queue of characters for a terminal is empty (because they’ve all been sent!) and then calls “flushtty” to clean up the input queues. </p>
+<p>“wflushtty” is called (3053) by “klclose”. This does not happen very often – in fact only when all files referencing the terminal are closed i.e. usually only when the user logs off. </p>
+<p>It is also called by “ttystty” (8589) just before the terminal environment parameters are adjusted. </p>
+<h2 id="a0000000316">25.3 Character Input</h2>
+<p>For a program requesting input from a terminal, there is a chain of procedure calls which extends to “ttread” ... </p>
+<h2 id="a0000000317">25.4 ttread (8535)</h2>
+<dl class="description">
+  <a href="../all.html#line8541" target="source" <dt>8541:</dt></a>
+  <dd><p>Check that the terminal is <b class="bf">logically</b> active; </p>
+</dd>
+  <a href="../all.html#line8543" target="source" <dt>8543:</dt></a>
+  <dd><p>If there are characters in the “cooked” input queue <b class="bf">or</b> a call on “canon” (8274) is successful ... </p>
+</dd>
+  <a href="../all.html#line8544" target="source" <dt>8544:</dt></a>
+  <dd><p>transfer characters from the “cooked” input queue until either it is empty or enough characters have been transferred to suit the user’s requirements. </p>
+</dd>
+</dl>
+<h2 id="a0000000318">25.5 canon (8274)</h2>
+<p>This procedure is called by “ttread” (8543) to transfer characters from the “raw” input queue to the “cooked” input queue (after processing “erase” and “kill” characters and, in the case of upper case only terminals, processing “escaped” characters, i.e. characters preceded by the character ‘<code class="verbatim">\</code>’). “canon” returns a non-zero value if the “cooked” input queue is no longer empty. </p>
+<dl class="description">
+  <a href="../all.html#line8284" target="source" <dt>8284:</dt></a>
+  <dd><p>If the number of delimiters in the “raw” input queue is zero then ... </p>
+</dd>
+  <a href="../all.html#line8285" target="source" <dt>8285:</dt></a>
+  <dd><p>if the terminal is logically inactive, then just return; </p>
+</dd>
+  <a href="../all.html#line8286" target="source" <dt>8286:</dt></a>
+  <dd><p>otherwise go to “sleep”. </p>
+</dd>
+</dl>
+<p>Note that delimiters in this context are characters of all ones (octal value is 377) and are inserted by “ttyinput” (8358). </p>
+<dl class="description">
+  <a href="../all.html#line8291" target="source" <dt>8291:</dt></a>
+  <dd><p>Set “bp” to point to the third character of the work array, “canonb”; </p>
+</dd>
+  <a href="../all.html#line8292" target="source" <dt>8292:</dt></a>
+  <dd><p>Begin a loop (extending to line 8318) which removes one character from the “raw” queue per cycle; </p>
+</dd>
+  <a href="../all.html#line8293" target="source" <dt>8293:</dt></a>
+  <dd><p>If the character is a delimiter, reduce the delimiter count by one and exit the loop i.e. go to line 8319; </p>
+</dd>
+  <a href="../all.html#line8297" target="source" <dt>8297:</dt></a>
+  <dd><p>If the terminal is not operating in “raw” mode ... </p>
+</dd>
+  <a href="../all.html#line8298" target="source" <dt>8298:</dt></a>
+  <dd><p>If the previous character (note the “bp[–1]” notation!) was not a backslash, ‘<code class="verbatim">\</code>’, execute the code from line 8299 to 8307, otherwise execute the code beginning at line 8309. </p>
+</dd>
+</dl>
+<p><b class="bf">Previous character was not a backslash</b> </p>
+<dl class="description">
+  <a href="../all.html#line8299" target="source" <dt>8299:</dt></a>
+  <dd><p>If the characters is an “erase” and ... </p>
+</dd>
+  <a href="../all.html#line8300" target="source" <dt>8300:</dt></a>
+  <dd><p>if there is at least one charater to erase, backup the pointer “bp”; </p>
+</dd>
+  <a href="../all.html#line8302" target="source" <dt>8302:</dt></a>
+  <dd><p>Start on the next cycle of the loop beginning at line 8292; </p>
+</dd>
+  <a href="../all.html#line8304" target="source" <dt>8304:</dt></a>
+  <dd><p>If the character is a “kill”, throw away all the characters accumulated for the current line, by going back to line 8290; </p>
+</dd>
+  <a href="../all.html#line8306" target="source" <dt>8306:</dt></a>
+  <dd><p>If the character is an “eot” (004) (usually generated at the terminal as “control-D”), ignore it (and do not put it inot “canonb”) and start on the next cycle; </p>
+<p>(If this character occurs at the beginning of a line, then subsequently “ttread” (8544) will find no characters in the “cooked” input queue i.e. it will read a zero length record, which then leads to the program receiving the normal “end of file” indication.) </p>
+</dd>
+</dl>
+<p><b class="bf">Previous character was a backslash</b> </p>
+<dl class="description">
+  <a href="../all.html#line8309" target="source" <dt>8309:</dt></a>
+  <dd><p>If “maptab[c]” is non-zero, and either<br />“maptab[c] == c” or the terminal is upper case only, then ... </p>
+</dd>
+  <a href="../all.html#line8310" target="source" <dt>8310:</dt></a>
+  <dd><p>if the last character but one was <b class="bf">not</b> a backslash (‘<code class="verbatim">\</code>’), then replace “c” by “maptab[c]” and back up “bp” (so that the backslash will be erased). </p>
+</dd>
+</dl>
+<p><b class="bf">Character ready</b> </p>
+<dl class="description">
+  <a href="../all.html#line8315" target="source" <dt>8315:</dt></a>
+  <dd><p>Move “c” into the next character in “canonb”, and if this array is now full, leave the loop. </p>
+</dd>
+</dl>
+<p><b class="bf">Line completed</b> </p>
+<dl class="description">
+  <a href="../all.html#line8319" target="source" <dt>8319:</dt></a>
+  <dd><p>At this point, an input line has been assembled in the array “canonb”; </p>
+</dd>
+  <a href="../all.html#line8322" target="source" <dt>8322:</dt></a>
+  <dd><p>Shift the contents of “canonb” into the “cooked” input queue, and return a “successful” result. </p>
+</dd>
+</dl>
+<h2 id="a0000000319">25.6 Notes</h2>
+<dl class="description">
+  <dt>(A)</dt>
+  <dd><p>The reason why “bp” starts (8291) at the third character of “canonb” can be found on line 8310. </p>
+</dd>
+  <dt>(B)</dt>
+  <dd><p>A number of subtleties in the handling of backslashes (which the reader will no doubt have encountered in his practical use of UNIX) are still not immediately apparent. Since “maptab[c]” is zero for “c == ‘<code class="verbatim">\</code>’ ” (octal value of 134), all backslashes get copied into “canonb”. A single backslash will be subsequently overwritten if the following character is to be asserted (as in the case of ‘#’ or ‘@’ or eot (004), or if the case of an alphabetic character is to be changed for an upper case only terminal. </p>
+</dd>
+</dl>
+<h2 id="a0000000320">25.7 ttyinput (8333)</h2>
+<p>“canon” removes characters from the “raw” input queue. They are put there in the first place by “ttyinput” which is called by “klrint” (8087) whenever an input character is received from the hardware controller. </p>
+<p>The parameters passed to “ttyinput” are a character and a reference to a “tty” structure. </p>
+<dl class="description">
+  <a href="../all.html#line8342" target="source" <dt>8342:</dt></a>
+  <dd><p>If the character is a “carriage return” and the terminal operates with a “carriage return” only (instead of a “carriage return” “line feed” pair) change the character to a “new line”; </p>
+</dd>
+  <a href="../all.html#line8344" target="source" <dt>8344:</dt></a>
+  <dd><p>If the terminal is not operating in “raw” mode and the character is a “quit” or “delete” (7958) then call “signal” (3949) to send a software interrupt to every process which has the terminal as its controlling terminal, flush all the queues associated with the terminal, and return; </p>
+</dd>
+  <a href="../all.html#line8349" target="source" <dt>8349:</dt></a>
+  <dd><p>If the “raw” input queue has grown excessively large, flush <b class="bf">all</b> the queues for the terminal and return. (This may seem a trifle harsh at first sight but it will usually be what is required.); </p>
+</dd>
+  <a href="../all.html#line8353" target="source" <dt>8353:</dt></a>
+  <dd><p>If the terminal has a limited character set, and the character is an upper case alphabetic, translate it into lower case; </p>
+</dd>
+  <a href="../all.html#line8355" target="source" <dt>8355:</dt></a>
+  <dd><p>Insert the character into the “raw” input queue; </p>
+</dd>
+  <a href="../all.html#line8356" target="source" <dt>8356:</dt></a>
+  <dd><p>If the terminal is operating in “raw” mode, or the character was a “new line” or “eot” then ... </p>
+</dd>
+  <a href="../all.html#line8357" target="source" <dt>8357:</dt></a>
+  <dd><p>“wakeup” any process waiting for input from the terminal, place a delimiter character (all ones) also in the “raw” queue and increment the delimiter count Note this is one point where possible failure of “putc” (when there is no buffer space) is explicitly recognised. A failure occurring here would explain why the test on line 8316 may sometimes succeed. </p>
+</dd>
+  <a href="../all.html#line8361" target="source" <dt>8361:</dt></a>
+  <dd><p>Finally, if the input character is to be echoed i.e. the terminal is running in full duplex mode, insert a copy of the character into the output queue, and and arrange to have it transmitted (“ttstart”) back to the terminal. </p>
+</dd>
+</dl>
+<h2 id="a0000000321">25.8 Character Output – ttwrite (8550)</h2>
+<p>This procedure is called via “klwrite” (8067) when output is to be sent to the terminal. </p>
+<dl class="description">
+  <a href="../all.html#line8556" target="source" <dt>8556:</dt></a>
+  <dd><p>If the terminal is inactive, do nothing; </p>
+</dd>
+  <a href="../all.html#line8558" target="source" <dt>8558:</dt></a>
+  <dd><p>Loop for each character to be transmitted ... </p>
+</dd>
+  <a href="../all.html#line8560" target="source" <dt>8560:</dt></a>
+  <dd><p>While there are still an adequate number of characters queued for transmission to the terminal ... </p>
+</dd>
+  <a href="../all.html#line8561" target="source" <dt>8561:</dt></a>
+  <dd><p>call “ttstart” just in case it is time to send another character to the terminal; </p>
+</dd>
+  <a href="../all.html#line8562" target="source" <dt>8562:</dt></a>
+  <dd><p>Setting the “ASLEEP” flag here (also in<br />“wflushtty” (8224)) is rather pointless since is is never interrogated and never reset until the file is closed; </p>
+</dd>
+  <a href="../all.html#line8563" target="source" <dt>8563:</dt></a>
+  <dd><p>Go to sleep. In the meanwhile the interrupt handler will be draining characters from the output queue and sending them down the line to the terminal; </p>
+</dd>
+  <a href="../all.html#line8566" target="source" <dt>8566:</dt></a>
+  <dd><p>Call “ttyoutput” to insert the character in the output queue and arrange to have it transmitted; </p>
+</dd>
+  <a href="../all.html#line8568" target="source" <dt>8568:</dt></a>
+  <dd><p>Call “ttstart” again, for luck. </p>
+</dd>
+</dl>
+<h2 id="a0000000322">25.9 ttstart</h2>
+<p>This procedure is called whenever it seems reasonable to try and send the next character to the terminal. It often achieves nothing useful. </p>
+<dl class="description">
+  <a href="../all.html#line8514" target="source" <dt>8514:</dt></a>
+  <dd><p>See the comment on line 8499. This code is not relevant here; </p>
+</dd>
+  <a href="../all.html#line8518" target="source" <dt>8518:</dt></a>
+  <dd><p>If the controller is not ready (i.e. bit 7 of the transmitter stalus register is not set) or the necessary delay following the preious character has not yet elapsed, do nothing; </p>
+</dd>
+  <a href="../all.html#line8520" target="source" <dt>8520:</dt></a>
+  <dd><p>Remove a character from the output queue. If “c” is positive, the queue was not empty (as expected) ... </p>
+</dd>
+  <a href="../all.html#line8521" target="source" <dt>8521:</dt></a>
+  <dd><p>If “c” is less than “0177” it is a character to be transmitted ... </p>
+</dd>
+  <a href="../all.html#line8522" target="source" <dt>8522:</dt></a>
+  <dd><p>After setting the parity bit from the corresponding element of the array “partab”, write “c” to the transmitter data buffer register to initiate the hardware operation; </p>
+</dd>
+  <a href="../all.html#line8524" target="source" <dt>8524:</dt></a>
+  <dd><p>Otherwise (“c” \({\gt}\) 0177) the character was inserted in the output queue to signal a delay. Call “timeout” (3845) to make an entry in the “callout” list. The result of this will be to initiate an execution of “ttrstrt” (8486) after “c &amp; 0177” clock ticks . It will be seen that “ttrstrt” calls “ttstart” again, and that the manipulation of the “TIMEOUT” flag (8524, 8491) will ensure that if another execution of “ttstart” is initiated in the interim, on behalf of the same terminal, it will (8518) return without doing anything. </p>
+</dd>
+</dl>
+<h2 id="a0000000323">25.10 ttrstrt (8486)</h2>
+<p>See the comment above for line 8524. </p>
+<h2 id="a0000000324">25.11 ttyoutput (8373)</h2>
+<p>This procedure has more comments in the source code and hence requires less explanation than some others. Note the use of recursion (8392) to generate a string of blanks in place of a tab character. Other recursive calls are on lines 8403 and 8413. </p>
+<h2 id="a0000000325">25.12 Terminals with a restricted character set</h2>
+<dl class="description">
+  <a href="../all.html#line8400" target="source" <dt>8400:</dt></a>
+  <dd><p>“colp” points to a string of pairs of characters. If the character to be output matches the second character of any of these pairs, the charactcr is replaced by a backslash followed by the first character of the pair; </p>
+</dd>
+  <a href="../all.html#line8407" target="source" <dt>8407:</dt></a>
+  <dd><p>Lower case alphabetics are converted to upper case alphabetics by the addition of a constant. </p>
+</dd>
+</dl>
+<p>Note. The conversion here should be compared wth the handling of the reverse problem on input. Here we have an algorithm which clearly trades space (no table analogue to “maptab”) for time (a serial search through the string on line 8400). A space conserving approach could be adopted in “canon” but the problem is rather more complicated there. </p>
+<dl class="description">
+  <a href="../all.html#line8414" target="source" <dt>8414:</dt></a>
+  <dd><p>Insert the character into the output queue. If perchance, “putc” fails for lack of buffer space, don’t worry about inserting any subsequent delay, or updating the system’s idea of the current printing column; </p>
+</dd>
+  <a href="../all.html#line8423" target="source" <dt>8423:</dt></a>
+  <dd><p>Set “colp” to point to the “t_col” character of the “tty” structure, i.e. “*colp” has a value which is the ordinal number of the column which has just been printed; </p>
+</dd>
+  <a href="../all.html#line8424" target="source" <dt>8424:</dt></a>
+  <dd><p>Set “ctype” to the element of “partab” corresponding to the output character “c”; </p>
+</dd>
+  <a href="../all.html#line8426" target="source" <dt>8426:</dt></a>
+  <dd><p>Mask out the significant bits of “ctype” and use the result as the “switch” index; </p>
+</dd>
+  <a href="../all.html#line8428" target="source" <dt>8428:</dt></a>
+  <dd><p>(Case 0) The common situation! Increment “t_col”; </p>
+</dd>
+  <a href="../all.html#line8431" target="source" <dt>8431:</dt></a>
+  <dd><p>(Case 1) Non-printing characters. This group consists of the first, third and fourth octet of the ASCII character set, plus “so” (016), “si” (017) and “del” (0177). Don’t increment “t_col”; </p>
+</dd>
+  <a href="../all.html#line8434" target="source" <dt>8434:</dt></a>
+  <dd><p>(Case 2) Backspace. Decrement “t_col” unless it is already zero; </p>
+</dd>
+  <a href="../all.html#line8439" target="source" <dt>8439:</dt></a>
+  <dd><p>(Case 3) Newline. Obviously “t_col” should be set to zero. The main problem is to calculate the delay which should ensue before another character is sent. </p>
+<p>For a Model 37 teletype, this depends on how far the print mechanism has progressed across the page. The value chosen is at least a tenth of a second (six clock ticks) and may be as much as ((132/16) + 3)/60 = 0.19 seconds. </p>
+<p>For a VT05, the delay is 0.1 second. For a DECwriter it is zero because the terminal incorporates buffer storage and has a double speed “catch up” print mode; </p>
+</dd>
+  <a href="../all.html#line8451" target="source" <dt>8451:</dt></a>
+  <dd><p>(Case 4) Horizontal tab. Assign the value of bits 10, 11 of “t_flags” to “ctype”; </p>
+</dd>
+  <a href="../all.html#line8453" target="source" <dt>8453:</dt></a>
+  <dd><p>For the only non-trivial case recognised<br />(“c” == 1 or Model 37 teletype), calculate the the number of positions to the next tab stop (via the obscure calculation of line 8454). If this turns out to be four columns or less, take it as zero; </p>
+</dd>
+  <a href="../all.html#line8458" target="source" <dt>8458:</dt></a>
+  <dd><p>Round “*colp” (i.e. the value pointed to by “colp”!) to the next multiple of 8 less one; </p>
+</dd>
+  <a href="../all.html#line8459" target="source" <dt>8459:</dt></a>
+  <dd><p>Increment “*colp” to be an exact multiple of eight; </p>
+</dd>
+  <a href="../all.html#line8462" target="source" <dt>8462:</dt></a>
+  <dd><p>(Case 5) Vertical Motion. If bit 14 is set in “t_flags”, make the delay as long as possible, i.e. 0177 or 127 clock ticks, i.e. just over two seconds; </p>
+</dd>
+  <a href="../all.html#line8467" target="source" <dt>8467:</dt></a>
+  <dd><p>(Case 6) Carriage Return. Assign the value of bits 12, 13 of “t_flags” to “ctype”; </p>
+</dd>
+  <a href="../all.html#line8469" target="source" <dt>8469:</dt></a>
+  <dd><p>For the first class, allow a delay of five clock ticks; </p>
+</dd>
+  <a href="../all.html#line8472" target="source" <dt>8472:</dt></a>
+  <dd><p>For the second class, allow a delay of ten clock ticks; </p>
+</dd>
+  <a href="../all.html#line8475" target="source" <dt>8475:</dt></a>
+  <dd><p>Set the “*colp” (the last column printed) to zero. </p>
+</dd>
+</dl>
+<p>Before leaving the file “tty.c”, there are two matters which deserve further examination. </p>
+<h2 id="a0000000326">25.13 A. The test for ’TTLOWAT’ (Line 8074)</h2>
+<p>On line 8074 in “klxint”, a test is made whether to restart any processes waiting to send output to the terminal. The test is successful if the number of characters is zero or if it is equal to “TTLOWAT”. </p>
+<p>If the number of characters is between these values, no “wakeup” is performed until the queue is completely empty, with the strong likelihood that there will then be a hiatus in the flow of output to the terminal. Since temporary interruptions to the flow of output are quite frequently observed in practice and represent a source of occasional irritation if nothing more, one may reasonably enquire “is there any way the character count can get from being greater than “TTLOWAT” to below it, without this being detected at line 8074?” </p>
+<p>Quite clearly there is, since each call on “ttstart” can decrement the queue size, and only one such call is followed by the test. Thus if the call on “ttstart” from one of “ttrstrt” (8492) or “ttwrite” (8568) happens to cross the boundary, a delay will result. The probability that this will happen is small, but finite and hence the event is likely to be observed in any reasonably long output sequence. </p>
+<p>There are two other situations in which “ttstart” is called which seem to be satisfactory. At “ttwrite” (8561) the queue is at its maximum extent; and at “ttyinput” (8363) there is a preceding call on “ttyoutput” which usually (but not invariably!) will have added a character to the output queue. </p>
+<h2 id="a0000000327">25.14 B. Inactive Terminals</h2>
+<p>When the last special file for a terminal is closed, “klclose” (8055) is called and resets (8059) the “ISOPEN” and “CARR_ON” flags. However the “read enable” bit of the receiver control status register is not reset, so that incoming characters may still be received and will be stored away (8087) in the terminal’s “raw” input queue by “klrint” (8078), and “ttyinput” (8333), which do not test the “CARR_ON” flag, to see if the terminal is logically connected. </p>
+<p>These characters may accumulate for a long time and clog up the character buffer storage. Only when the “raw” input queue reaches 256 characters (“TTYHOG”, 8349) will the contents of this queue be thrown away. It does seem therefore, that a statement to disable reader interrupts should be included in “klclose” before line 8058. </p>
+<p><br /></p>
+<h2 id="a0000000328">25.15 Well, that’s all, folks ...</h2>
+<p>Now that you, oh long-suffering, exhausted reader have reached this point, you will have no trouble in disposing of the last remaining file, “mem.c” (Sheet 90). And on this note, we end this discussion of the UNIX Operating System Source Code. </p>
+<p>Of course there are lots more device drivers for your patient examination, and in truth the whole UNIX Timesharing System Source Code has hardly been scratched. So this is not really </p>
+<div class="centered"> <b class="bf"><big class="large">THE END</big></b> </div>
 
-<div class="navigation">
-<table cellspacing="2" cellpadding="0" width="100%">
-<tr>
-<td><a href="sect0027.html" title="Special Device Registers"><img alt="Previous: Special Device Registers" border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
 
-<td><a href="index.html" title=""><img alt="Up: " border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+<nav class="prev_up_next">
+  <a href="sect0027.html" title="Interactive Terminals"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title=""><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0029.html" title="Suggested Exercises"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
 
-<td><a href="sect0029.html" title="Some Selected Examples"><img alt="Next: Some Selected Examples" border="0" src="icons/next.gif" width="32" height="32" /></a></td>
-
-<td class="navtitle" align="center">&nbsp;</td>
-<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
-
-
-<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
-<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
-</tr>
-</table>
-</div>
-
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
 </body>
 </html>
