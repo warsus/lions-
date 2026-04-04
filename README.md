@@ -1,17 +1,15 @@
-# Disclaime
-
-
-# Check it out on github
+Check it out on github
 http://warsus.github.io/lions-/
 
-# Web Version of the Lions Commentary on Unix
+# References
+## Web Version of the Lions Commentary on Unix
 http://en.wikipedia.org/wiki/Lions'_Commentary_on_UNIX_6th_Edition,_with_Source_Code
 
-# HTML Code from
+## HTML Code from
 http://www.tom-yam.or.jp/2238/src/
 
-# TEX Code from
+## TEX Code from
 http://www.lemis.com/grog/Documentation/Lions/index.php
 
-# Converted TEX-Version to HTML with Plastex
+## Converted TEX-Version to HTML with Plastex
 https://plastex.github.io/plastex/

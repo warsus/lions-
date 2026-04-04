@@ -1497,7 +1497,7 @@ badtrap:.=.+2
 
 
 
-#
+
 #include "../param.h"
 #include "../user.h"
 #include "../systm.h"
@@ -1797,7 +1797,7 @@ nseg(n)
 
 
 
-#
+
 /*
  */
 
@@ -2297,7 +2297,7 @@ expand(newsize)
 /* ---------------------------       */
 
 
-#
+
 /*
  */
 
@@ -2497,7 +2497,7 @@ int *bp;
 
 
 
-#
+
 /*
  */
 
@@ -2647,7 +2647,7 @@ struct map *mp;
 
 
 
-#
+
 #include "../param.h"
 #include "../systm.h"
 #include "../user.h"
@@ -2897,7 +2897,7 @@ nullsys()
 
 
 
-#
+
 /*
  */
 
@@ -2997,7 +2997,7 @@ int     sysent[]
 
 
 
-#
+
 #include "../param.h"
 #include "../systm.h"
 #include "../user.h"
@@ -3697,7 +3697,7 @@ profil()
 
 
 
-#
+
 #include "../param.h"
 #include "../systm.h"
 #include "../user.h"
@@ -3897,7 +3897,7 @@ timeout(fun, arg, tim)
 
 
 
-#
+
 /*
  */
 
@@ -4347,7 +4347,7 @@ struct text
 
 
 
-#
+
 #include "../param.h"
 #include "../systm.h"
 #include "../user.h"
@@ -4697,7 +4697,7 @@ int swapdev {(0<<8)|0};
 int swplo 4000; /* cannot be zero */
 int nswap 872;
 
-#
+
 /*
  */
 
@@ -5347,7 +5347,7 @@ struct buf *abp;
 
 
 
-#
+
 /*
  */
 
@@ -5697,7 +5697,7 @@ struct  inode
 #define IWRITE  0200
 #define IEXEC   0100
 
-#
+
 #include "../param.h"
 #include "../systm.h"
 #include "../user.h"
