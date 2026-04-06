@@ -1,3 +1,4 @@
 {
-    "workbench.editor.revealIfOpen": true
+    "workbench.editor.revealIfOpen": true,
+    "markdown-preview-enhanced.usePandocParser": true
 }

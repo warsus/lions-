@@ -13,3 +13,11 @@ http://www.lemis.com/grog/Documentation/Lions/index.php
 
 ## Converted TEX-Version to HTML with Plastex
 https://plastex.github.io/plastex/
+
+
+
+
+### Open repository in vscodedev (web version of vscode)
+https://vscode.dev/github/warsus/lions-
+https://insiders.vscode.dev/github/warsus/lions-
+
