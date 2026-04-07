@@ -795,34 +795,34 @@ level higher in the file hierarchy than
 The statement on line 2304 is to be
 understood as if it were replaced by
 the entire contents of the file
-``param.h''. This then supplies definitions for the identifiers ``SW'', ``KL''
+``\href{./v6/param.h}{param.h}''. This then supplies definitions for the identifiers ``SW'', ``KL''
 and ``integ'' which occur in ``putchar''.
 
 We noted earlier that declarations for
 ``KL'', ``SW'' and ``integ'' occurred on
 lines 0165, 0166 and 0175 respectively,
 but this would have been meaningless,
-if the file ``param.h'' had not been
+if the file ``\href{./v6/param.h}{param.h}'' had not been
 ``included'' in ``prf.c''.
 
-The files ``buf.h'' and ``conf.h'' have
+The files ``\href{./v6/buf.h}{buf.h}'' and ``\href{./v6/conf.h}{conf.h}'' have
 been included to provide declarations
 for ``d\_major'', ``d\_minor'', ``b\_dev'' and
 ``b\_blkno'', which are used in ``prdev''
 and ``deverror''.
 
 The reason for the inclusion of the
-fourth file, ``seg.h'', is a little
+fourth file, ``\href{./v6/seg.h}{seg.h}'', is a little
 harder to find. In fact it is not
 necessary as the code stands, and the
 author owes his readers an apology. In
 editing the source code, it seemed like
 a good idea to move the declaration for
-``integ'' from ``seg.h'' to ``param.h''.
+``integ'' from ``\href{./v6/seg.h}{seg.h}'' to ``\href{./v6/param.h}{param.h}''.
 Q.E.D.
 
 Note that the variable ``panicstr''
 (2328) is also global but since it is
 not referenced outside ``prf.c'', its
 declaration has not been placed in any
-``.h'' file.
+``\href{./v6/.h}{.h}'' file.
