@@ -1,5 +1,19 @@
-Check it out on github
-http://warsus.github.io/lions-/
+
+### Getting started
+Open this folder in vs code as a project and install the recommended extensions:
+- ms-vscode.cpptools
+- shd101wyy.markdown-preview-enhanced
+TODO: add custom extension to navigate from code to markdown
+
+Open lions.md in Preview and split the editor window
+
+![alt text](image.png)
+
+This will give you the ability to read the book and have all the tools of vscode available to explore the code.
+- Goto Symbol
+- Find References
+
+Eventually you might be able to compile and run this 🚀
 
 # References
 ## Web Version of the Lions Commentary on Unix

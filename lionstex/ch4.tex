@@ -75,8 +75,8 @@ been all gathered into the set of ``h''
 files. The exceptions are:
 
 \bd
-\item[(a)] the static variable ``p'' (2180)
-declared in ``swtch'' which is
+\item[(a)] the static variable ``p'' \url{./v6/ken/slp.c#L265}
+declared in ``swtch'' \url{./v6/ken/slp.c#L263} which is
 stored globally, but is accessible 
 only from within the procedure 
 ``swtch'' (Actually ``p'' is
@@ -84,7 +84,7 @@ a very popular name for local
 variables in UNIX.);
 
 \item[(b)] a number of variables such as
-``swbuf'' (4721) which are referenced 
+``swbuf'' \url{./v6/dmr/bio.c#L22} which are referenced 
 only by procedures within
 a single file, and are declared
 at the beginning of that file.
@@ -169,7 +169,7 @@ process management.
 \sbs{The First Group of `.h' Files}
 
 \bd
-\item[param.h] [Sheet 01] contains no variable 
+\item[param.h] \url{./v6/param.h} [Sheet 01] contains no variable 
 declarations, but many definitions 
 for operating system constants
 and parameters, and the declarations
@@ -178,10 +178,10 @@ convention will be noted of using
 ``upper case only'' for defined constants.
 
 
-\item[systm.h] [Sheet 02; Chapter 19] consists 
+\item[systm.h] \url{./v6/systm.h} [Sheet 02; Chapter 19] consists 
 entirely of declarations (with
-definitions of the structures ``callout''
-and ``mount'' as side-effects).
+definitions of the structures ``callout'' \url{./v6/systm.h#L29}
+and ``mount'' \url{./v6/systm.h#L40} as side-effects).
 Note that none of the variables is
 initialised explicitly, and hence
 all are initialised to zero.
@@ -192,16 +192,16 @@ param.h. Hence any file which
 ``includes'' ``systm.h'' must have
 previously included ``param.h''.
 
-\item[seg.h] [Sheet 03] contains a few
+\item[seg.h] \url{./v6/seg.h} [Sheet 03] contains a few
 definitions and one declaration,
 which are used for referencing the
 segmentation registers. This file
 could be absorbed into ``param.h'' and
 ``systm.h'' without any real loss.
 
-\item[proc.h] [Sheet 03; Chapter 7] contains 
+\item[proc.h] \url{./v6/ken/proc.h} [Sheet 03; Chapter 7] contains 
 the important declaration for
-``proc'' which is both a structure
+``\href{./v6/proc.h#L26}{proc}'' \url{./v6/ken/proc.h#L0358} which is both a structure
 type and an array of such structures.
 Each element of the ``proc''
 structure has a name which begins
@@ -211,15 +211,15 @@ used for naming the elements of the
 other structures.
 
 The sets of values for the first two
-elements, ``p\_stat'' and ``p\_flag''
+elements, ``p\_stat'' \url{./v6/ken/proc.h#L0381} and ``p\_flag'' \url{./v6/ken/proc.h#L0391}
 have individual names which are
 define.
 
 
-\item[user.h] [Sheet 04; Chapter 7] contains 
+\item[user.h] \url{./v6/ken/user.h} [Sheet 04; Chapter 7] contains 
 the declaration for the very
-important ``user'' structure, plus a
-set of defined values for ``u\_error''.
+important ``user'' \url{./v6/ken/user.h#L0413} structure, plus a
+set of defined values for ``u\_error'' \url{./v6/ken/user.h#L0430}.
 
 Only one instance of the ``user''
 structure is ever accessible at one
@@ -244,7 +244,7 @@ the source code. A reasonable acquaintance
 with these files is necessary.
 
 \bd
-\item[low.s] [Sheet 05, Chapter 9] contains
+\item[low.s] \url{./v6/ken/low.s} [Sheet 05, Chapter 9] contains
 information, including the trap vector,
 for initialising the low
 address part of main memory. This
@@ -253,7 +253,7 @@ called ``mkconf'' to suit the set
 of peripheral devices present at a
 particular installation.
 
-\item[m40.s] [Sheets 06..14; Chapters 6, 8,
+\item[m40.s] \url{./v6/ken/m40.s} [Sheets 06..14; Chapters 6, 8,
 9, 10, 22] contains a set of routines 
 appropriate to the PDP11/40,
 to carry out a variety of specialised 
@@ -277,30 +277,30 @@ and 70's.
 \sbs{Other Files in Section One}
 
 \bd
-\item[main.c] [Sheets 15..17; Chapters 6,
-7] contains ``main'' which performs
+\item[main.c] \url{./v6/ken/main.c} [Sheets 15..17; Chapters 6,
+7] contains ``main'' \url{./v6/ken/main.c#L1550} which performs
 various initialisation tasks to get
 UNIX running. It also contains
-``sureg'' and ``estabur'' which set the
+``sureg'' \url{./v6/ken/main.c#L1739} and ``estabur'' \url{./v6/ken/main.c#L1650} which set the
 user segmentation registers.
 
 
-\item[slp.c] [Sheets 18..22; Chapters 6, 7,
+\item[slp.c] \url{./v6/ken/slp.c} [Sheets 18..22; Chapters 6, 7,
 8, 14] contains the major procedures
 required for process management
-including ``newproc'', ``sched'',
-``sleep'' and ``swtch''.
+including ``newproc'' \url{./v6/ken/slp.c#L1826}, ``sched'' \url{./v6/ken/slp.c#L1940},
+``sleep'' \url{./v6/ken/slp.c#L2066} and ``swtch'' \url{./v6/ken/slp.c#L2178}.
 
 
-\item[prf.c] [Sheets 23, 24; Chapter 5]
-contains ``panic'' and a number of
+\item[prf.c] \url{./v6/ken/prf.c} [Sheets 23, 24; Chapter 5]
+contains ``panic'' \url{./v6/ken/prf.c#L2419} and a number of
 other procedures which provide a
 simple mechanism for displaying initialisation 
 messages and error messages 
 to the operator.
 
-\item[malloc.c] [Sheet 25; Chapter 5] contains 
-``malloc'' and ``mfree'' which are
+\item[malloc.c] \url{./v6/ken/malloc.c} [Sheet 25; Chapter 5] contains 
+``malloc'' \url{./v6/ken/malloc.c#L2528} and ``mfree'' \url{./v6/ken/malloc.c#L2556} which are
 used to manage memory resources.
 \ed
 
@@ -332,41 +332,41 @@ processes, particularly when there is
 ``bad news''.
 
 \bd
-\item[reg.h] [Sheet 26; Chapter 10] defines
+\item[reg.h] \url{./v6/ken/reg.h} [Sheet 26; Chapter 10] defines
 a set of constants which are used in
 referencing the previous user mode
 register values when they are stored
 in the kernel stack.
 
-\item[trap.c] [Sheets 26..28; Chapter 12]
-contains the ``C'' procedure ``trap''
+\item[trap.c] \url{./v6/ken/trap.c} [Sheets 26..28; Chapter 12]
+contains the ``C'' procedure ``trap'' \url{./v6/ken/trap.c#L2693}
 which recognises and handles traps
 of various kinds.
 
-\item[sysent.c] [Sheet 29; Chapter 12] contains 
+\item[sysent.c] \url{./v6/ken/sysent.c} [Sheet 29; Chapter 12] contains 
 the declaration and initialisation 
-of the array ``sysent'' which
-is used by ``trap'' to associate the
+of the array ``sysent'' \url{./v6/ken/sysent.c#L2975} which
+is used by ``trap'' \url{./v6/ken/trap.c#L2693} to associate the
 appropriate kernel mode routine with
 each system call type.
 
-\item[sysl.c] [Sheets 30..33; Chapters 12,
+\item[sysl.c] \url{./v6/ken/sys1.c} [Sheets 30..33; Chapters 12,
 13] contains various routines associated 
 with system calls, including
-``exec'' ``exit'' ``wait'' and ``fork''.
+``exec'' \url{./v6/ken/sys1.c#L3020} ``exit'' \url{./v6/ken/sys1.c#L3219} ``wait'' \url{./v6/ken/sys1.c#L3270} and ``fork'' \url{./v6/ken/sys1.c#L3322}.
 
-\item[sys4.c] [Sheets 34..36; Chapters 12,
+\item[sys4.c] \url{./v6/ken/sys4.c} [Sheets 34..36; Chapters 12,
 13, 19] contains routines for
-``unlink'', ``kill'' and various other
+``unlink'' \url{./v6/ken/sys4.c#L3510}, ``kill'' \url{./v6/ken/sys4.c#L3630} and various other
 minor system calls.
 
-\item[clock.c] [Sheets 37, 38; Chapter 11]
-contains ``clock'' which is the
+\item[clock.c] \url{./v6/ken/clock.c} [Sheets 37, 38; Chapter 11]
+contains ``clock'' \url{./v6/ken/clock.c#L3725} which is the
 handler for clock interrupts, and
 which does much of the incidental
 housekeeping and basic accounting.
 
-\item[sig.c] [Sheets 39..42; Chapter 13]
+\item[sig.c] \url{./v6/ken/sig.c} [Sheets 39..42; Chapter 13]
 contains the procedures which handle
 ``signals'' or ``software interrupts''
 These provide facilities for interprocess 
@@ -389,8 +389,8 @@ for the use and manipulation of the
 large (512 byte) buffers.
 
 \bd
-\item[text.h] [Sheet 43; Chapter 14]
-defines the ``text'' structure and
+\item[text.h] \url{./v6/ken/text.h} [Sheet 43; Chapter 14]
+defines the ``text'' \url{./v6/ken/text.h#L4306} structure and
 array. One ``text'' structure is used
 to define the status of a shared
 text segment.
@@ -422,14 +422,14 @@ the initialisation for the arrays
 ``bdevsw'' and ``cdevsw'' which control
 the basic i/o operations.
 
-\item[bio.c] [Sheets 47..53; Chapters 15,
+\item[bio.c] \url{./v6/ken/bio.c} [Sheets 47..53; Chapters 15,
 16, 17] is the largest file after
 ``m40.s'' It contains the procedures
 for manipulation of the large
 buffers, and for basic block
 oriented i/o.
 
-\item[rk.c] [Sheets 53, 54; Chapter 16] is
+\item[rk.c] \url{./v6/ken/rk.c} [Sheets 53, 54; Chapter 16] is
 the device driver for the RK11/K05
 disk controller.
 \ed
@@ -456,17 +456,17 @@ breed of file called a ``pipe''.
 
 
 \bd
-\item[file.h] [Sheet 55; Chapter 18]
-defines the ``file'' structure and
+\item[file.h] \url{./v6/ken/file.h} [Sheet 55; Chapter 18]
+defines the ``file'' \url{./v6/ken/file.h#L5507} structure and
 array.
 
-\item[filsys.h] [Sheet 55; Chapter 20]
-defines the ``filsys'' structure which
+\item[filsys.h] \url{./v6/ken/filsys.h} [Sheet 55; Chapter 20]
+defines the ``filsys'' \url{./v6/ken/filsys.h#L5561} structure which
 is copied to and from the ``super
 block'' on ``mounted'' file systems.
 
 
-\item[ino.h] [Sheet 56] describes the
+\item[ino.h] \url{./v6/ken/ino.h} [Sheet 56] describes the
 structure of ``inodes'' as recorded on
 the ``mounted'' devices. Since this
 file is not ``included'' in any other,
@@ -474,57 +474,57 @@ it really exists for information
 only.
 
 
-\item[inode.h] [Sheet 56; Chapter 18]
-defines the ``inode'' structure and
+\item[inode.h] \url{./v6/ken/inode.h} [Sheet 56; Chapter 18]
+defines the ``inode'' \url{./v6/ken/inode.h#L5659} structure and
 array. ``inodes'' are of fundamental
 importance in managing the accesses
 of processes to files.
 
-\item[sys2.c] [Sheets 57..59; Chapters 18,
+\item[sys2.c] \url{./v6/ken/sys2.c} [Sheets 57..59; Chapters 18,
 19] contains a set of routines associated
 with system calls including
-``read'', ``write'', ``creat'', ``open'' and
-``close''
+``read'' \url{./v6/ken/sys2.c#L5711}, ``write'' \url{./v6/ken/sys2.c#L5720}, ``creat'' \url{./v6/ken/sys2.c#L5781}, ``open'' \url{./v6/ken/sys2.c#L5763} and
+``close'' \url{./v6/ken/sys2.c#L5846}
  
-\item[sys3.c] [Sheets 60, 61; Chapters 19, 20]
+\item[sys3.c] \url{./v6/ken/sys3.c} [Sheets 60, 61; Chapters 19, 20]
 contains a set of routines associated
 with various minor system
 calls.
  
-\item[rdwri.c] [Sheets 62, 63; Chapter 18]
+\item[rdwri.c] \url{./v6/ken/rdwri.c} [Sheets 62, 63; Chapter 18]
 contains intermediate level routines
 involved with reading and writing
 files.
  
  
-\item[subr.c] [Sheets 64, 65; Chapter 18]
+\item[subr.c] \url{./v6/ken/subr.c} [Sheets 64, 65; Chapter 18]
 contains more intermediate level
-routines for i/o, especially ``bmap''
+routines for i/o, especially ``bmap'' \url{./v6/ken/subr.c#L6415}
 which translates logical file
 pointers into physical disk
 addresses.
 
-\item[fio.c] [Sheets 66..6; Chapters 18,
+\item[fio.c] \url{./v6/ken/fio.c} [Sheets 66..6; Chapters 18,
 19] contains intermediate level routines 
 for file opening, closing and
 control of access.
 
-\item[alloc.c] [Sheets 69..72; Chapter 20]
+\item[alloc.c] \url{./v6/ken/alloc.c} [Sheets 69..72; Chapter 20]
 contains procedures which manage the
 allocation of entries in the ``inode''
 array and of blocks of disk storage.
 
-\item[iget.c] [Sheets 72..74; Chapters 18,
+\item[iget.c] \url{./v6/ken/iget.c} [Sheets 72..74; Chapters 18,
 19, 20] contains procedures concerned 
 with referencing and updating
 ``inodes''.
 
-\item[nami.c] [Sheets 75, 76; Chapter 19]
-contains the procedure ``namei'' which
+\item[nami.c] \url{./v6/ken/nami.c} [Sheets 75, 76; Chapter 19]
+contains the procedure ``namei'' \url{./v6/ken/nami.c#L7518} which
 searches the file directories.
 
 
-\item[pipe.c] [Sheets 77, 78; Chapter 21]
+\item[pipe.c] \url{./v6/ken/pipe.c} [Sheets 77, 78; Chapter 21]
 is the ``device driver'' for ``pipes''
 which are a special form of short
 disk file used to transmit information 
@@ -555,10 +555,10 @@ are exemplified by the following:
 
 
 \bd
-\item[tty.h] [Sheet 79; Chapters 23, 24]
-defines the ``clist'' structure (used
+\item[tty.h] \url{./v6/ken/tty.h} [Sheet 79; Chapters 23, 24]
+defines the ``clist'' \url{./v6/ken/tty.h#L7908} structure (used
 as a list head for character buffer
-queues), the ``tty'' structure (stores
+queues), the ``tty'' \url{./v6/ken/tty.h#L7926} structure (stores
 relevant data for controlling an
 individual terminal), declares the
 ``partab'' table (used to control
@@ -578,15 +578,15 @@ transmission to or from terminals,
 and which take into account various
 terminal idiosyncrasies.
 
-\item[pc.c] [Sheets 86,87; Chapter 22] is
+\item[pc.c] \url{./v6/ken/pc.c} [Sheets 86,87; Chapter 22] is
 the device handler for the PC11
 paper tape reader/punch controller.
 
-\item[lp.c] [Sheets 88, 89; Chapter 22] is
+\item[lp.c] \url{./v6/ken/lp.c} [Sheets 88, 89; Chapter 22] is
 the device handler for the LP11 line
 printer controller.
 
-\item[mem.c] [Sheet 90] contains procedures
+\item[mem.c] \url{./v6/ken/mem.c} [Sheet 90] contains procedures
 which provide access to main memory
 as though it were an ordinary file.
 This code has been left to the
