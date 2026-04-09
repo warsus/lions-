@@ -426,7 +426,8 @@ Code volume:
 
 - A *Cross Reference Listing* giving the line numbers where each symbol
   is used. (Reserved words in "C" and a number of commonly used symbols
-  such as "p" and "u" have been omitted.)
+  such as "p" [./v6/ken/proc.h](./v6/ken/proc.h){.uri} and "u"
+  [./v6/ken/user.h](./v6/ken/user.h){.uri} have been omitted.)
 
 ## Source Code Selections
 
@@ -1237,7 +1238,9 @@ The examples which follow are taken directly from the source code.
 ## Example 1
 
 The simplest possible procedure, which does nothing, occurs twice(!) in
-the source code as "nullsys" (2864) and "nulldev" (6577), sic.
+the source code as "nullsys"
+[./v6/ken/trap.c#L210](./v6/ken/trap.c#L210){.uri} and "nulldev"
+[./v6/ken/subr.c#L189](./v6/ken/subr.c#L189){.uri}, sic.
 
       6577 nulldev ()
            {
@@ -2054,13 +2057,16 @@ have been all gathered into the set of "h" files. The exceptions are:
 
 \(a\)
 
-:   the static variable "p" (2180) declared in "swtch" which is stored
+:   the static variable "p"
+    [./v6/ken/slp.c#L265](./v6/ken/slp.c#L265){.uri} declared in "swtch"
+    [./v6/ken/slp.c#L263](./v6/ken/slp.c#L263){.uri} which is stored
     globally, but is accessible only from within the procedure "swtch"
     (Actually "p" is a very popular name for local variables in UNIX.);
 
 \(b\)
 
-:   a number of variables such as "swbuf" (4721) which are referenced
+:   a number of variables such as "swbuf"
+    [./v6/dmr/bio.c#L22](./v6/dmr/bio.c#L22){.uri} which are referenced
     only by procedures within a single file, and are declared at the
     beginning of that file.
 
@@ -2117,45 +2123,55 @@ and process management.
 
 param.h
 
-:   \[Sheet 01\] contains no variable declarations, but many definitions
-    for operating system constants and parameters, and the declarations
-    for three simple structures. The convention will be noted of using
-    "upper case only" for defined constants.
+:   [./v6/param.h](./v6/param.h){.uri} \[Sheet 01\] contains no variable
+    declarations, but many definitions for operating system constants
+    and parameters, and the declarations for three simple structures.
+    The convention will be noted of using "upper case only" for defined
+    constants.
 
 systm.h
 
-:   \[Sheet 02; Chapter 19\] consists entirely of declarations (with
-    definitions of the structures "callout" and "mount" as
-    side-effects). Note that none of the variables is initialised
-    explicitly, and hence all are initialised to zero.
+:   [./v6/systm.h](./v6/systm.h){.uri} \[Sheet 02; Chapter 19\] consists
+    entirely of declarations (with definitions of the structures
+    "callout" [./v6/systm.h#L29](./v6/systm.h#L29){.uri} and "mount"
+    [./v6/systm.h#L40](./v6/systm.h#L40){.uri} as side-effects). Note
+    that none of the variables is initialised explicitly, and hence all
+    are initialised to zero.
 
     The dimensions for the first three arrays are parameters defined in
-    param.h. Hence any file which "includes" "systm.h" must have
-    previously included "param.h".
+    param.h. Hence any file which "includes" "[systm.h](./v6/systm.h)"
+    must have previously included "[param.h](./v6/param.h)".
 
 seg.h
 
-:   \[Sheet 03\] contains a few definitions and one declaration, which
-    are used for referencing the segmentation registers. This file could
-    be absorbed into "param.h" and "systm.h" without any real loss.
+:   [./v6/seg.h](./v6/seg.h){.uri} \[Sheet 03\] contains a few
+    definitions and one declaration, which are used for referencing the
+    segmentation registers. This file could be absorbed into
+    "[param.h](./v6/param.h)" and "[systm.h](./v6/systm.h)" without any
+    real loss.
 
 proc.h
 
-:   \[Sheet 03; Chapter 7\] contains the important declaration for
-    "proc" which is both a structure type and an array of such
-    structures. Each element of the "proc" structure has a name which
-    begins with "p\_" and no other variable is so named. Similar
-    conventions are used for naming the elements of the other
-    structures.
+:   [./v6/ken/proc.h](./v6/ken/proc.h){.uri} \[Sheet 03; Chapter 7\]
+    contains the important declaration for "[proc](./v6/proc.h#L26)"
+    [./v6/ken/proc.h#L0358](./v6/ken/proc.h#L0358){.uri} which is both a
+    structure type and an array of such structures. Each element of the
+    "proc" structure has a name which begins with "p\_" and no other
+    variable is so named. Similar conventions are used for naming the
+    elements of the other structures.
 
-    The sets of values for the first two elements, "p_stat" and "p_flag"
-    have individual names which are define.
+    The sets of values for the first two elements, "p_stat"
+    [./v6/ken/proc.h#L0381](./v6/ken/proc.h#L0381){.uri} and "p_flag"
+    [./v6/ken/proc.h#L0391](./v6/ken/proc.h#L0391){.uri} have individual
+    names which are define.
 
 user.h
 
-:   \[Sheet 04; Chapter 7\] contains the declaration for the very
-    important "user" structure, plus a set of defined values for
-    "u_error".
+:   [./v6/ken/user.h](./v6/ken/user.h){.uri} \[Sheet 04; Chapter 7\]
+    contains the declaration for the very important "user"
+    [./v6/ken/user.h#L0413](./v6/ken/user.h#L0413){.uri} structure, plus
+    a set of defined values for "u_error"
+    [./v6/ken/user.h#L0430](./v6/ken/user.h#L0430){.uri}.
 
     Only one instance of the "user" structure is ever accessible at one
     time. This is referenced under the name "u" and is in the low
@@ -2173,16 +2189,18 @@ source code. A reasonable acquaintance with these files is necessary.
 
 low.s
 
-:   \[Sheet 05, Chapter 9\] contains information, including the trap
-    vector, for initialising the low address part of main memory. This
-    file is generated by a utility program called "mkconf" to suit the
-    set of peripheral devices present at a particular installation.
+:   [./v6/ken/low.s](./v6/ken/low.s){.uri} \[Sheet 05, Chapter 9\]
+    contains information, including the trap vector, for initialising
+    the low address part of main memory. This file is generated by a
+    utility program called "mkconf" to suit the set of peripheral
+    devices present at a particular installation.
 
 m40.s
 
-:   \[Sheets 06..14; Chapters 6, 8, 9, 10, 22\] contains a set of
-    routines appropriate to the PDP11/40, to carry out a variety of
-    specialised functions which cannot be implemented directly in "C".
+:   [./v6/ken/m40.s](./v6/ken/m40.s){.uri} \[Sheets 06..14; Chapters 6,
+    8, 9, 10, 22\] contains a set of routines appropriate to the
+    PDP11/40, to carry out a variety of specialised functions which
+    cannot be implemented directly in "C".
 
 Sections of this file are introduced into the discussion as and where
 appropriate. (The largest of the assembler procedures, "backup" has been
@@ -2195,26 +2213,39 @@ There is an alternative to "m40.s" which is not presented here, namely
 
 main.c
 
-:   \[Sheets 15..17; Chapters 6, 7\] contains "main" which performs
+:   [./v6/ken/main.c](./v6/ken/main.c){.uri} \[Sheets 15..17; Chapters
+    6, 7\] contains "main"
+    [./v6/ken/main.c#L1550](./v6/ken/main.c#L1550){.uri} which performs
     various initialisation tasks to get UNIX running. It also contains
-    "sureg" and "estabur" which set the user segmentation registers.
+    "sureg" [./v6/ken/main.c#L1739](./v6/ken/main.c#L1739){.uri} and
+    "estabur" [./v6/ken/main.c#L1650](./v6/ken/main.c#L1650){.uri} which
+    set the user segmentation registers.
 
 slp.c
 
-:   \[Sheets 18..22; Chapters 6, 7, 8, 14\] contains the major
-    procedures required for process management including "newproc",
-    "sched", "sleep" and "swtch".
+:   [./v6/ken/slp.c](./v6/ken/slp.c){.uri} \[Sheets 18..22; Chapters 6,
+    7, 8, 14\] contains the major procedures required for process
+    management including "newproc"
+    [./v6/ken/slp.c#L1826](./v6/ken/slp.c#L1826){.uri}, "sched"
+    [./v6/ken/slp.c#L1940](./v6/ken/slp.c#L1940){.uri}, "sleep"
+    [./v6/ken/slp.c#L2066](./v6/ken/slp.c#L2066){.uri} and "swtch"
+    [./v6/ken/slp.c#L2178](./v6/ken/slp.c#L2178){.uri}.
 
 prf.c
 
-:   \[Sheets 23, 24; Chapter 5\] contains "panic" and a number of other
-    procedures which provide a simple mechanism for displaying
-    initialisation messages and error messages to the operator.
+:   [./v6/ken/prf.c](./v6/ken/prf.c){.uri} \[Sheets 23, 24; Chapter 5\]
+    contains "panic" [./v6/ken/prf.c#L2419](./v6/ken/prf.c#L2419){.uri}
+    and a number of other procedures which provide a simple mechanism
+    for displaying initialisation messages and error messages to the
+    operator.
 
 malloc.c
 
-:   \[Sheet 25; Chapter 5\] contains "malloc" and "mfree" which are used
-    to manage memory resources.
+:   [./v6/ken/malloc.c](./v6/ken/malloc.c){.uri} \[Sheet 25; Chapter 5\]
+    contains "malloc"
+    [./v6/ken/malloc.c#L2528](./v6/ken/malloc.c#L2528){.uri} and "mfree"
+    [./v6/ken/malloc.c#L2556](./v6/ken/malloc.c#L2556){.uri} which are
+    used to manage memory resources.
 
 ## Section Two
 
@@ -2236,43 +2267,59 @@ between processes, particularly when there is "bad news".
 
 reg.h
 
-:   \[Sheet 26; Chapter 10\] defines a set of constants which are used
-    in referencing the previous user mode register values when they are
-    stored in the kernel stack.
+:   [./v6/ken/reg.h](./v6/ken/reg.h){.uri} \[Sheet 26; Chapter 10\]
+    defines a set of constants which are used in referencing the
+    previous user mode register values when they are stored in the
+    kernel stack.
 
 trap.c
 
-:   \[Sheets 26..28; Chapter 12\] contains the "C" procedure "trap"
-    which recognises and handles traps of various kinds.
+:   [./v6/ken/trap.c](./v6/ken/trap.c){.uri} \[Sheets 26..28; Chapter
+    12\] contains the "C" procedure "trap"
+    [./v6/ken/trap.c#L2693](./v6/ken/trap.c#L2693){.uri} which
+    recognises and handles traps of various kinds.
 
 sysent.c
 
-:   \[Sheet 29; Chapter 12\] contains the declaration and initialisation
-    of the array "sysent" which is used by "trap" to associate the
-    appropriate kernel mode routine with each system call type.
+:   [./v6/ken/sysent.c](./v6/ken/sysent.c){.uri} \[Sheet 29; Chapter
+    12\] contains the declaration and initialisation of the array
+    "sysent" [./v6/ken/sysent.c#L2975](./v6/ken/sysent.c#L2975){.uri}
+    which is used by "trap"
+    [./v6/ken/trap.c#L2693](./v6/ken/trap.c#L2693){.uri} to associate
+    the appropriate kernel mode routine with each system call type.
 
 sysl.c
 
-:   \[Sheets 30..33; Chapters 12, 13\] contains various routines
-    associated with system calls, including "exec" "exit" "wait" and
-    "fork".
+:   [./v6/ken/sys1.c](./v6/ken/sys1.c){.uri} \[Sheets 30..33; Chapters
+    12, 13\] contains various routines associated with system calls,
+    including "exec"
+    [./v6/ken/sys1.c#L3020](./v6/ken/sys1.c#L3020){.uri} "exit"
+    [./v6/ken/sys1.c#L3219](./v6/ken/sys1.c#L3219){.uri} "wait"
+    [./v6/ken/sys1.c#L3270](./v6/ken/sys1.c#L3270){.uri} and "fork"
+    [./v6/ken/sys1.c#L3322](./v6/ken/sys1.c#L3322){.uri}.
 
 sys4.c
 
-:   \[Sheets 34..36; Chapters 12, 13, 19\] contains routines for
-    "unlink", "kill" and various other minor system calls.
+:   [./v6/ken/sys4.c](./v6/ken/sys4.c){.uri} \[Sheets 34..36; Chapters
+    12, 13, 19\] contains routines for "unlink"
+    [./v6/ken/sys4.c#L3510](./v6/ken/sys4.c#L3510){.uri}, "kill"
+    [./v6/ken/sys4.c#L3630](./v6/ken/sys4.c#L3630){.uri} and various
+    other minor system calls.
 
 clock.c
 
-:   \[Sheets 37, 38; Chapter 11\] contains "clock" which is the handler
-    for clock interrupts, and which does much of the incidental
+:   [./v6/ken/clock.c](./v6/ken/clock.c){.uri} \[Sheets 37, 38; Chapter
+    11\] contains "clock"
+    [./v6/ken/clock.c#L3725](./v6/ken/clock.c#L3725){.uri} which is the
+    handler for clock interrupts, and which does much of the incidental
     housekeeping and basic accounting.
 
 sig.c
 
-:   \[Sheets 39..42; Chapter 13\] contains the procedures which handle
-    "signals" or "software interrupts" These provide facilities for
-    interprocess communication and tracing.
+:   [./v6/ken/sig.c](./v6/ken/sig.c){.uri} \[Sheets 39..42; Chapter 13\]
+    contains the procedures which handle "signals" or "software
+    interrupts" These provide facilities for interprocess communication
+    and tracing.
 
 ## Section Three
 
@@ -2287,9 +2334,11 @@ the large (512 byte) buffers.
 
 text.h
 
-:   \[Sheet 43; Chapter 14\] defines the "text" structure and array. One
-    "text" structure is used to define the status of a shared text
-    segment.
+:   [./v6/ken/text.h](./v6/ken/text.h){.uri} \[Sheet 43; Chapter 14\]
+    defines the "text"
+    [./v6/ken/text.h#L4306](./v6/ken/text.h#L4306){.uri} structure and
+    array. One "text" structure is used to define the status of a shared
+    text segment.
 
 text.c
 
@@ -2317,14 +2366,15 @@ conf.c
 
 bio.c
 
-:   \[Sheets 47..53; Chapters 15, 16, 17\] is the largest file after
-    "m40.s" It contains the procedures for manipulation of the large
-    buffers, and for basic block oriented i/o.
+:   [./v6/ken/bio.c](./v6/ken/bio.c){.uri} \[Sheets 47..53; Chapters 15,
+    16, 17\] is the largest file after "m40.s" It contains the
+    procedures for manipulation of the large buffers, and for basic
+    block oriented i/o.
 
 rk.c
 
-:   \[Sheets 53, 54; Chapter 16\] is the device driver for the RK11/K05
-    disk controller.
+:   [./v6/ken/rk.c](./v6/ken/rk.c){.uri} \[Sheets 53, 54; Chapter 16\]
+    is the device driver for the RK11/K05 disk controller.
 
 ## Section Four
 
@@ -2339,73 +2389,95 @@ includes the code for an exotic breed of file called a "pipe".
 
 file.h
 
-:   \[Sheet 55; Chapter 18\] defines the "file" structure and array.
+:   [./v6/ken/file.h](./v6/ken/file.h){.uri} \[Sheet 55; Chapter 18\]
+    defines the "file"
+    [./v6/ken/file.h#L5507](./v6/ken/file.h#L5507){.uri} structure and
+    array.
 
 filsys.h
 
-:   \[Sheet 55; Chapter 20\] defines the "filsys" structure which is
-    copied to and from the "super block" on "mounted" file systems.
+:   [./v6/ken/filsys.h](./v6/ken/filsys.h){.uri} \[Sheet 55; Chapter
+    20\] defines the "filsys"
+    [./v6/ken/filsys.h#L5561](./v6/ken/filsys.h#L5561){.uri} structure
+    which is copied to and from the "super block" on "mounted" file
+    systems.
 
 ino.h
 
-:   \[Sheet 56\] describes the structure of "inodes" as recorded on the
-    "mounted" devices. Since this file is not "included" in any other,
-    it really exists for information only.
+:   [./v6/ken/ino.h](./v6/ken/ino.h){.uri} \[Sheet 56\] describes the
+    structure of "inodes" as recorded on the "mounted" devices. Since
+    this file is not "included" in any other, it really exists for
+    information only.
 
 inode.h
 
-:   \[Sheet 56; Chapter 18\] defines the "inode" structure and array.
-    "inodes" are of fundamental importance in managing the accesses of
-    processes to files.
+:   [./v6/ken/inode.h](./v6/ken/inode.h){.uri} \[Sheet 56; Chapter 18\]
+    defines the "inode"
+    [./v6/ken/inode.h#L5659](./v6/ken/inode.h#L5659){.uri} structure and
+    array. "inodes" are of fundamental importance in managing the
+    accesses of processes to files.
 
 sys2.c
 
-:   \[Sheets 57..59; Chapters 18, 19\] contains a set of routines
-    associated with system calls including "read", "write", "creat",
-    "open" and "close"
+:   [./v6/ken/sys2.c](./v6/ken/sys2.c){.uri} \[Sheets 57..59; Chapters
+    18, 19\] contains a set of routines associated with system calls
+    including "read"
+    [./v6/ken/sys2.c#L5711](./v6/ken/sys2.c#L5711){.uri}, "write"
+    [./v6/ken/sys2.c#L5720](./v6/ken/sys2.c#L5720){.uri}, "creat"
+    [./v6/ken/sys2.c#L5781](./v6/ken/sys2.c#L5781){.uri}, "open"
+    [./v6/ken/sys2.c#L5763](./v6/ken/sys2.c#L5763){.uri} and "close"
+    [./v6/ken/sys2.c#L5846](./v6/ken/sys2.c#L5846){.uri}
 
 sys3.c
 
-:   \[Sheets 60, 61; Chapters 19, 20\] contains a set of routines
-    associated with various minor system calls.
+:   [./v6/ken/sys3.c](./v6/ken/sys3.c){.uri} \[Sheets 60, 61; Chapters
+    19, 20\] contains a set of routines associated with various minor
+    system calls.
 
 rdwri.c
 
-:   \[Sheets 62, 63; Chapter 18\] contains intermediate level routines
-    involved with reading and writing files.
+:   [./v6/ken/rdwri.c](./v6/ken/rdwri.c){.uri} \[Sheets 62, 63; Chapter
+    18\] contains intermediate level routines involved with reading and
+    writing files.
 
 subr.c
 
-:   \[Sheets 64, 65; Chapter 18\] contains more intermediate level
-    routines for i/o, especially "bmap" which translates logical file
-    pointers into physical disk addresses.
+:   [./v6/ken/subr.c](./v6/ken/subr.c){.uri} \[Sheets 64, 65; Chapter
+    18\] contains more intermediate level routines for i/o, especially
+    "bmap" [./v6/ken/subr.c#L6415](./v6/ken/subr.c#L6415){.uri} which
+    translates logical file pointers into physical disk addresses.
 
 fio.c
 
-:   \[Sheets 66..6; Chapters 18, 19\] contains intermediate level
-    routines for file opening, closing and control of access.
+:   [./v6/ken/fio.c](./v6/ken/fio.c){.uri} \[Sheets 66..6; Chapters 18,
+    19\] contains intermediate level routines for file opening, closing
+    and control of access.
 
 alloc.c
 
-:   \[Sheets 69..72; Chapter 20\] contains procedures which manage the
-    allocation of entries in the "inode" array and of blocks of disk
-    storage.
+:   [./v6/ken/alloc.c](./v6/ken/alloc.c){.uri} \[Sheets 69..72; Chapter
+    20\] contains procedures which manage the allocation of entries in
+    the "inode" array and of blocks of disk storage.
 
 iget.c
 
-:   \[Sheets 72..74; Chapters 18, 19, 20\] contains procedures concerned
-    with referencing and updating "inodes".
+:   [./v6/ken/iget.c](./v6/ken/iget.c){.uri} \[Sheets 72..74; Chapters
+    18, 19, 20\] contains procedures concerned with referencing and
+    updating "inodes".
 
 nami.c
 
-:   \[Sheets 75, 76; Chapter 19\] contains the procedure "namei" which
-    searches the file directories.
+:   [./v6/ken/nami.c](./v6/ken/nami.c){.uri} \[Sheets 75, 76; Chapter
+    19\] contains the procedure "namei"
+    [./v6/ken/nami.c#L7518](./v6/ken/nami.c#L7518){.uri} which searches
+    the file directories.
 
 pipe.c
 
-:   \[Sheets 77, 78; Chapter 21\] is the "device driver" for "pipes"
-    which are a special form of short disk file used to transmit
-    information from one process to another.
+:   [./v6/ken/pipe.c](./v6/ken/pipe.c){.uri} \[Sheets 77, 78; Chapter
+    21\] is the "device driver" for "pipes" which are a special form of
+    short disk file used to transmit information from one process to
+    another.
 
 ## Section Five
 
@@ -2426,12 +2498,15 @@ following:
 
 tty.h
 
-:   \[Sheet 79; Chapters 23, 24\] defines the "clist" structure (used as
-    a list head for character buffer queues), the "tty" structure
-    (stores relevant data for controlling an individual terminal),
-    declares the "partab" table (used to control transmission of
-    individual characters to terminals) and defines names for many
-    associated parameters.
+:   [./v6/ken/tty.h](./v6/ken/tty.h){.uri} \[Sheet 79; Chapters 23, 24\]
+    defines the "clist"
+    [./v6/ken/tty.h#L7908](./v6/ken/tty.h#L7908){.uri} structure (used
+    as a list head for character buffer queues), the "tty"
+    [./v6/ken/tty.h#L7926](./v6/ken/tty.h#L7926){.uri} structure (stores
+    relevant data for controlling an individual terminal), declares the
+    "partab" table (used to control transmission of individual
+    characters to terminals) and defines names for many associated
+    parameters.
 
 kl.c
 
@@ -2447,19 +2522,20 @@ tty.c
 
 pc.c
 
-:   \[Sheets 86,87; Chapter 22\] is the device handler for the PC11
-    paper tape reader/punch controller.
+:   [./v6/ken/pc.c](./v6/ken/pc.c){.uri} \[Sheets 86,87; Chapter 22\] is
+    the device handler for the PC11 paper tape reader/punch controller.
 
 lp.c
 
-:   \[Sheets 88, 89; Chapter 22\] is the device handler for the LP11
-    line printer controller.
+:   [./v6/ken/lp.c](./v6/ken/lp.c){.uri} \[Sheets 88, 89; Chapter 22\]
+    is the device handler for the LP11 line printer controller.
 
 mem.c
 
-:   \[Sheet 90\] contains procedures which provide access to main memory
-    as though it were an ordinary file. This code has been left to the
-    reader to survey as an exercise.
+:   [./v6/ken/mem.c](./v6/ken/mem.c){.uri} \[Sheet 90\] contains
+    procedures which provide access to main memory as though it were an
+    ordinary file. This code has been left to the reader to survey as an
+    exercise.
 
 # Section One {#section-one-1 .unnumbered}
 
@@ -3093,27 +3169,28 @@ included at the beginning of "prf.c".
 one level higher in the file hierarchy than "prf.c" itself.)
 
 The statement on line 2304 is to be understood as if it were replaced by
-the entire contents of the file "param.h". This then supplies
-definitions for the identifiers "SW", "KL" and "integ" which occur in
-"putchar".
+the entire contents of the file "[param.h](./v6/param.h)". This then
+supplies definitions for the identifiers "SW", "KL" and "integ" which
+occur in "putchar".
 
 We noted earlier that declarations for "KL", "SW" and "integ" occurred
 on lines 0165, 0166 and 0175 respectively, but this would have been
-meaningless, if the file "param.h" had not been "included" in "prf.c".
+meaningless, if the file "[param.h](./v6/param.h)" had not been
+"included" in "prf.c".
 
-The files "buf.h" and "conf.h" have been included to provide
-declarations for "d_major", "d_minor", "b_dev" and "b_blkno", which are
-used in "prdev" and "deverror".
+The files "[buf.h](./v6/buf.h)" and "[conf.h](./v6/conf.h)" have been
+included to provide declarations for "d_major", "d_minor", "b_dev" and
+"b_blkno", which are used in "prdev" and "deverror".
 
-The reason for the inclusion of the fourth file, "seg.h", is a little
-harder to find. In fact it is not necessary as the code stands, and the
-author owes his readers an apology. In editing the source code, it
-seemed like a good idea to move the declaration for "integ" from "seg.h"
-to "param.h". Q.E.D.
+The reason for the inclusion of the fourth file, "[seg.h](./v6/seg.h)",
+is a little harder to find. In fact it is not necessary as the code
+stands, and the author owes his readers an apology. In editing the
+source code, it seemed like a good idea to move the declaration for
+"integ" from "[seg.h](./v6/seg.h)" to "[param.h](./v6/param.h)". Q.E.D.
 
 Note that the variable "panicstr" (2328) is also global but since it is
 not referenced outside "prf.c", its declaration has not been placed in
-any ".h" file.
+any "[.h](./v6/.h)" file.
 
 # Getting Started
 
@@ -5415,8 +5492,8 @@ Columns (2) and (3) give the positions of stack words relative to the
 positions in the stack of the words labelled "r0" and "tpc"
 respectively.
 
-Columns (1) and (2) define (or explain) the contents of the file "reg.h"
-(Sheet 26).
+Columns (1) and (2) define (or explain) the contents of the file
+"[reg.h](./v6/reg.h)" (Sheet 26).
 
 "dev", "sp", "r1", "nps" "r0", "pc" and "ps" in that order are the names
 of the parameters used in the declaration of the procedures "trap"
@@ -6974,8 +7051,8 @@ been necessitated by the implementation of the sharable "text segments".
 It is instructive to estimate how much extra code has been necessitated
 by the text segment feature: in "text.c" are four procedures "xswap",
 "xalloc", "xfree" and "xccdec", which manipulate an array of structures
-called "text", which is declared in the file "text.h". Additional code
-has also been added to "sysl.c" and "slp.c".
+called "text", which is declared in the file "[text.h](./v6/text.h)".
+Additional code has also been added to "sysl.c" and "slp.c".
 
 ## Text Segments
 
@@ -7340,7 +7417,7 @@ device and serves as a list head for:
 
 ## The File 'conf.h'
 
-The file "conf.h" declares:
+The file "[conf.h](./v6/conf.h)" declares:
 
 - yet another way to dissect an integer into two parts ("d_minor" and
   "d_major"). Note that "d_major" corresponds to "hibyte" (0180);
@@ -7350,8 +7427,8 @@ The file "conf.h" declares:
 - two integer variables, "nlkdev" and "nchrdev".
 
 The two arrays of structures, "bdevsw" and "cdevsw", are declared but
-not dimensioned or initialised in "conf.h". The initialisation of these
-arrays is performed in the file "conf.c".
+not dimensioned or initialised in "[conf.h](./v6/conf.h)". The
+initialisation of these arrays is performed in the file "conf.c".
 
 ## The File 'conf.c'
 
@@ -8239,20 +8316,20 @@ Section Four of the source code contains thirteen files.
 The first four contain common declarations needed by various of the
 other routines:
 
-"file.h"
+"[file.h](./v6/file.h)"
 
 :   describes the structure of the "file" array;
 
-"filsvs.h"
+"[filsvs.h](./v6/filsvs.h)"
 
 :   describes the structure of the "super block" for "mounted" file
     systems;
 
-"ino.h"
+"[ino.h](./v6/ino.h)"
 
 :   describes the structure of "inodes" recorded on "mounted" devices;
 
-"inode.h"
+"[inode.h](./v6/inode.h)"
 
 :   describes the structure of the "inode" array;
 
@@ -9694,8 +9771,8 @@ not, then "iget" creates one.
 7328:
 
 :   Copy the relevant "inode" information. This code makes implicit use
-    of the contents of the file "ino.h" (Sheet 56), which isn't
-    referenced explicitly anywhere.
+    of the contents of the file "[ino.h](./v6/ino.h)" (Sheet 56), which
+    isn't referenced explicitly anywhere.
 
 Let us now return to unfinished business:
 
@@ -11190,7 +11267,7 @@ Each interface has its own control characteristics and it requires a
 separate operating system device driver. The common code which can be
 shared between these is gathered into a single file "tty.c", to be found
 on Sheets 81 to 85. A set of common definitions is gathered in the file
-"tty.h" on Sheet 79.
+"[tty.h](./v6/tty.h)" on Sheet 79.
 
 By way of example, Sheet 80 contains the file "kl.c", which constitutes
 the device driver for a set of DL11/KL11 interfaces. This device driver
