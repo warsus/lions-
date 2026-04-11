@@ -75,8 +75,8 @@ been all gathered into the set of ``h''
 files. The exceptions are:
 
 \bd
-\item[(a)] the static variable ``p'' \url{./v6/ken/``\href{./v6/ken/{slp.c}{slp.c}''#L265}
-declared in ``swtch'' \url{./v6/ken/``\href{./v6/ken/{slp.c}{slp.c}''#L263} which is
+\item[(a)] the static variable ``p'' \url{./v6/ken/slp.c#L265}
+declared in ``swtch'' \url{./v6/ken/slp.c#L263} which is
 stored globally, but is accessible 
 only from within the procedure 
 ``swtch'' (Actually ``p'' is
@@ -277,30 +277,30 @@ and 70's.
 \sbs{Other Files in Section One}
 
 \bd
-\item[``\href{./v6/ken/{main.c}{main.c}''] \url{./v6/ken/``\href{./v6/ken/{main.c}{main.c}''} [Sheets 15..17; Chapters 6,
-7] contains ``main'' \url{./v6/ken/``\href{./v6/ken/{main.c}{main.c}''#L1550} which performs
+\item[main.c] \url{./v6/ken/main.c} [Sheets 15..17; Chapters 6,
+7] contains ``main'' \url{./v6/ken/main.c#L1550} which performs
 various initialisation tasks to get
 UNIX running. It also contains
-``sureg'' \url{./v6/ken/``\href{./v6/ken/{main.c}{main.c}''#L1739} and ``estabur'' \url{./v6/ken/``\href{./v6/ken/{main.c}{main.c}''#L1650} which set the
+``sureg'' \url{./v6/ken/main.c#L1739} and ``estabur'' \url{./v6/ken/main.c#L1650} which set the
 user segmentation registers.
 
 
-\item[``\href{./v6/ken/{slp.c}{slp.c}''] \url{./v6/ken/``\href{./v6/ken/{slp.c}{slp.c}''} [Sheets 18..22; Chapters 6, 7,
+\item[slp.c] \url{./v6/ken/slp.c} [Sheets 18..22; Chapters 6, 7,
 8, 14] contains the major procedures
 required for process management
-including ``newproc'' \url{./v6/ken/``\href{./v6/ken/{slp.c}{slp.c}''#L1826}, ``sched'' \url{./v6/ken/``\href{./v6/ken/{slp.c}{slp.c}''#L1940},
-``sleep'' \url{./v6/ken/``\href{./v6/ken/{slp.c}{slp.c}''#L2066} and ``swtch'' \url{./v6/ken/``\href{./v6/ken/{slp.c}{slp.c}''#L2178}.
+including ``newproc'' \url{./v6/ken/slp.c#L1826}, ``sched'' \url{./v6/ken/slp.c#L1940},
+``sleep'' \url{./v6/ken/slp.c#L2066} and ``swtch'' \url{./v6/ken/slp.c#L2178}.
 
 
-\item[``\href{./v6/ken/{prf.c}{prf.c}''] \url{./v6/ken/``\href{./v6/ken/{prf.c}{prf.c}''} [Sheets 23, 24; Chapter 5]
-contains ``panic'' \url{./v6/ken/``\href{./v6/ken/{prf.c}{prf.c}''#L2419} and a number of
+\item[prf.c] \url{./v6/ken/prf.c} [Sheets 23, 24; Chapter 5]
+contains ``panic'' \url{./v6/ken/prf.c#L2419} and a number of
 other procedures which provide a
 simple mechanism for displaying initialisation 
 messages and error messages 
 to the operator.
 
-\item[``\href{./v6/ken/{malloc.c}{malloc.c}''] \url{./v6/ken/``\href{./v6/ken/{malloc.c}{malloc.c}''} [Sheet 25; Chapter 5] contains 
-``malloc'' \url{./v6/ken/``\href{./v6/ken/{malloc.c}{malloc.c}''#L2528} and ``mfree'' \url{./v6/ken/``\href{./v6/ken/{malloc.c}{malloc.c}''#L2556} which are
+\item[malloc.c] \url{./v6/ken/malloc.c} [Sheet 25; Chapter 5] contains 
+``malloc'' \url{./v6/ken/malloc.c#L2528} and ``mfree'' \url{./v6/ken/malloc.c#L2556} which are
 used to manage memory resources.
 \ed
 
@@ -338,35 +338,35 @@ referencing the previous user mode
 register values when they are stored
 in the kernel stack.
 
-\item[``\href{./v6/ken/{trap.c}{trap.c}''] \url{./v6/ken/``\href{./v6/ken/{trap.c}{trap.c}''} [Sheets 26..28; Chapter 12]
-contains the ``C'' procedure ``trap'' \url{./v6/ken/``\href{./v6/ken/{trap.c}{trap.c}''#L2693}
+\item[trap.c] \url{./v6/ken/trap.c} [Sheets 26..28; Chapter 12]
+contains the ``C'' procedure ``trap'' \url{./v6/ken/trap.c#L2693}
 which recognises and handles traps
 of various kinds.
 
-\item[``\href{./v6/ken/{sysent.c}{sysent.c}''] \url{./v6/ken/``\href{./v6/ken/{sysent.c}{sysent.c}''} [Sheet 29; Chapter 12] contains 
+\item[sysent.c] \url{./v6/ken/sysent.c} [Sheet 29; Chapter 12] contains 
 the declaration and initialisation 
-of the array ``sysent'' \url{./v6/ken/``\href{./v6/ken/{sysent.c}{sysent.c}''#L2975} which
-is used by ``trap'' \url{./v6/ken/``\href{./v6/ken/{trap.c}{trap.c}''#L2693} to associate the
+of the array ``sysent'' \url{./v6/ken/sysent.c#L2975} which
+is used by ``trap'' \url{./v6/ken/trap.c#L2693} to associate the
 appropriate kernel mode routine with
 each system call type.
 
-\item[sysl.c] \url{./v6/ken/``\href{./v6/ken/{sys1.c}{sys1.c}''} [Sheets 30..33; Chapters 12,
+\item[sysl.c] \url{./v6/ken/sys1.c} [Sheets 30..33; Chapters 12,
 13] contains various routines associated 
 with system calls, including
-``exec'' \url{./v6/ken/``\href{./v6/ken/{sys1.c}{sys1.c}''#L3020} ``exit'' \url{./v6/ken/``\href{./v6/ken/{sys1.c}{sys1.c}''#L3219} ``wait'' \url{./v6/ken/``\href{./v6/ken/{sys1.c}{sys1.c}''#L3270} and ``fork'' \url{./v6/ken/``\href{./v6/ken/{sys1.c}{sys1.c}''#L3322}.
+``exec'' \url{./v6/ken/sys1.c#L3020} ``exit'' \url{./v6/ken/sys1.c#L3219} ``wait'' \url{./v6/ken/sys1.c#L3270} and ``fork'' \url{./v6/ken/sys1.c#L3322}.
 
-\item[``\href{./v6/ken/{sys4.c}{sys4.c}''] \url{./v6/ken/``\href{./v6/ken/{sys4.c}{sys4.c}''} [Sheets 34..36; Chapters 12,
+\item[sys4.c] \url{./v6/ken/sys4.c} [Sheets 34..36; Chapters 12,
 13, 19] contains routines for
-``unlink'' \url{./v6/ken/``\href{./v6/ken/{sys4.c}{sys4.c}''#L3510}, ``kill'' \url{./v6/ken/``\href{./v6/ken/{sys4.c}{sys4.c}''#L3630} and various other
+``unlink'' \url{./v6/ken/sys4.c#L3510}, ``kill'' \url{./v6/ken/sys4.c#L3630} and various other
 minor system calls.
 
-\item[``\href{./v6/ken/{clock.c}{clock.c}''] \url{./v6/ken/``\href{./v6/ken/{clock.c}{clock.c}''} [Sheets 37, 38; Chapter 11]
-contains ``clock'' \url{./v6/ken/``\href{./v6/ken/{clock.c}{clock.c}''#L3725} which is the
+\item[clock.c] \url{./v6/ken/clock.c} [Sheets 37, 38; Chapter 11]
+contains ``clock'' \url{./v6/ken/clock.c#L3725} which is the
 handler for clock interrupts, and
 which does much of the incidental
 housekeeping and basic accounting.
 
-\item[``\href{./v6/ken/{sig.c}{sig.c}''] \url{./v6/ken/``\href{./v6/ken/{sig.c}{sig.c}''} [Sheets 39..42; Chapter 13]
+\item[sig.c] \url{./v6/ken/sig.c} [Sheets 39..42; Chapter 13]
 contains the procedures which handle
 ``signals'' or ``software interrupts''
 These provide facilities for interprocess 
@@ -395,7 +395,7 @@ array. One ``text'' structure is used
 to define the status of a shared
 text segment.
 
-\item[``\href{./v6/ken/{text.c}{text.c}''] [Sheets 43, 44; Chapter 14]
+\item[text.c] [Sheets 43, 44; Chapter 14]
 contains the procedures which manage
 the shared text segments.
 
@@ -480,51 +480,51 @@ array. ``inodes'' are of fundamental
 importance in managing the accesses
 of processes to files.
 
-\item[``\href{./v6/ken/{sys2.c}{sys2.c}''] \url{./v6/ken/``\href{./v6/ken/{sys2.c}{sys2.c}''} [Sheets 57..59; Chapters 18,
+\item[sys2.c] \url{./v6/ken/sys2.c} [Sheets 57..59; Chapters 18,
 19] contains a set of routines associated
 with system calls including
-``read'' \url{./v6/ken/``\href{./v6/ken/{sys2.c}{sys2.c}''#L5711}, ``write'' \url{./v6/ken/``\href{./v6/ken/{sys2.c}{sys2.c}''#L5720}, ``creat'' \url{./v6/ken/``\href{./v6/ken/{sys2.c}{sys2.c}''#L5781}, ``open'' \url{./v6/ken/``\href{./v6/ken/{sys2.c}{sys2.c}''#L5763} and
-``close'' \url{./v6/ken/``\href{./v6/ken/{sys2.c}{sys2.c}''#L5846}
+``read'' \url{./v6/ken/sys2.c#L5711}, ``write'' \url{./v6/ken/sys2.c#L5720}, ``creat'' \url{./v6/ken/sys2.c#L5781}, ``open'' \url{./v6/ken/sys2.c#L5763} and
+``close'' \url{./v6/ken/sys2.c#L5846}
  
-\item[``\href{./v6/ken/{sys3.c}{sys3.c}''] \url{./v6/ken/``\href{./v6/ken/{sys3.c}{sys3.c}''} [Sheets 60, 61; Chapters 19, 20]
+\item[sys3.c] \url{./v6/ken/sys3.c} [Sheets 60, 61; Chapters 19, 20]
 contains a set of routines associated
 with various minor system
 calls.
  
-\item[``\href{./v6/ken/{rdwri.c}{rdwri.c}''] \url{./v6/ken/``\href{./v6/ken/{rdwri.c}{rdwri.c}''} [Sheets 62, 63; Chapter 18]
+\item[rdwri.c] \url{./v6/ken/rdwri.c} [Sheets 62, 63; Chapter 18]
 contains intermediate level routines
 involved with reading and writing
 files.
  
  
-\item[``\href{./v6/ken/{subr.c}{subr.c}''] \url{./v6/ken/``\href{./v6/ken/{subr.c}{subr.c}''} [Sheets 64, 65; Chapter 18]
+\item[subr.c] \url{./v6/ken/subr.c} [Sheets 64, 65; Chapter 18]
 contains more intermediate level
-routines for i/o, especially ``bmap'' \url{./v6/ken/``\href{./v6/ken/{subr.c}{subr.c}''#L6415}
+routines for i/o, especially ``bmap'' \url{./v6/ken/subr.c#L6415}
 which translates logical file
 pointers into physical disk
 addresses.
 
-\item[``\href{./v6/ken/{fio.c}{fio.c}''] \url{./v6/ken/``\href{./v6/ken/{fio.c}{fio.c}''} [Sheets 66..6; Chapters 18,
+\item[fio.c] \url{./v6/ken/fio.c} [Sheets 66..6; Chapters 18,
 19] contains intermediate level routines 
 for file opening, closing and
 control of access.
 
-\item[``\href{./v6/ken/{alloc.c}{alloc.c}''] \url{./v6/ken/``\href{./v6/ken/{alloc.c}{alloc.c}''} [Sheets 69..72; Chapter 20]
+\item[alloc.c] \url{./v6/ken/alloc.c} [Sheets 69..72; Chapter 20]
 contains procedures which manage the
 allocation of entries in the ``inode''
 array and of blocks of disk storage.
 
-\item[``\href{./v6/ken/{iget.c}{iget.c}''] \url{./v6/ken/``\href{./v6/ken/{iget.c}{iget.c}''} [Sheets 72..74; Chapters 18,
+\item[iget.c] \url{./v6/ken/iget.c} [Sheets 72..74; Chapters 18,
 19, 20] contains procedures concerned 
 with referencing and updating
 ``inodes''.
 
-\item[``\href{./v6/ken/{nami.c}{nami.c}''] \url{./v6/ken/``\href{./v6/ken/{nami.c}{nami.c}''} [Sheets 75, 76; Chapter 19]
-contains the procedure ``namei'' \url{./v6/ken/``\href{./v6/ken/{nami.c}{nami.c}''#L7518} which
+\item[nami.c] \url{./v6/ken/nami.c} [Sheets 75, 76; Chapter 19]
+contains the procedure ``namei'' \url{./v6/ken/nami.c#L7518} which
 searches the file directories.
 
 
-\item[``\href{./v6/ken/{pipe.c}{pipe.c}''] \url{./v6/ken/``\href{./v6/ken/{pipe.c}{pipe.c}''} [Sheets 77, 78; Chapter 21]
+\item[pipe.c] \url{./v6/ken/pipe.c} [Sheets 77, 78; Chapter 21]
 is the ``device driver'' for ``pipes''
 which are a special form of short
 disk file used to transmit information 

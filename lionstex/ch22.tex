@@ -43,7 +43,7 @@ of ``interactive terminals'' (with keyboard input and a serial printer or
 visual display output) can just be
 coerced with difficulty into a single
 device driver, as the reader may judge
-during his perusal of the file ``tty.c''.
+during his perusal of the file ````\href{./v6/dmr/tty.c}{tty.c}''''.
 
 The standard UNIX device handlers for
 character devices make use of the procedures ``putc'' and ``getc'' which store
@@ -59,7 +59,7 @@ and the devices themselves.
 \sbs{LP11 Line Printer Driver}
 
 This driver is to be found in the file
-``lp.c'' (Sheets 88, 89). Much of the
+````\href{./v6/dmr/lp.c}{lp.c}'''' (Sheets 88, 89). Much of the
 complexity of this driver is contained
 in the proeedure ``lpcanon'' (8879).
 This procedure is involved in the
@@ -113,7 +113,7 @@ defined beginning at line 8829. The
 first three words of the structure in
 fact constitute a structure of type
 ``clist'' (7908). Only the first element
-is explicitly manipulated in ``lp.c''.
+is explicitly manipulated in ````\href{./v6/dmr/lp.c}{lp.c}''''.
 The next two are used implicitly by
 ``putc'' and ``getc''.
 
@@ -499,7 +499,7 @@ used per line in such cases.
 \sbs{PC-11 Paper Tape Reader/Punch Driver}
 
 This driver is to be found in the file
-``pc.c'' on Sheets 86, 87. It is simpler
+````\href{./v6/dmr/pc.c}{pc.c}'''' on Sheets 86, 87. It is simpler
 than the line printer driver in that
 there is ro routine analogous to
 ``lpcanon''. However it is more complicated in that there is both an input

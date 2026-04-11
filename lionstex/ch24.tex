@@ -78,12 +78,12 @@ characteristics and it requires a
 separate operating system device
 driver. The common code which can be
 shared between these is gathered into a
-single file ``tty.c'', to be found on
+single file ````\href{./v6/dmr/tty.c}{tty.c}'''', to be found on
 Sheets 81 to 85. A set of common definitions is gathered in the file ``\href{./v6/tty.h}{tty.h}''
 on Sheet 79.
 
 By way of example, Sheet 80 contains
-the file ``kl.c'', which constitutes the
+the file ````\href{./v6/dmr/kl.c}{kl.c}'''', which constitutes the
 device driver for a set of DL11/KL11
 interfaces. This device driver always
 needs to be present, since one KL11
@@ -277,7 +277,7 @@ before sending the next character:
 
 \sbs{The DL11/KL11 Terminal Device Handler}
 
-The file ``kl.c'' constitutes the device
+The file ````\href{./v6/dmr/kl.c}{kl.c}'''' constitutes the device
 handler for terminals connected to the
 system via DL11/KL11 interfaces. This
 group always has at least one member -- the operator's console terminal. Hence
@@ -383,7 +383,7 @@ in the third group. Any hardware
 alterations which changed the actual
 number of interfaces would have to be
 reflected in the software by changing
-and recomiling ``kl.c'', and relinking
+and recomiling ````\href{./v6/dmr/kl.c}{kl.c}'''', and relinking
 the operaing system.
 
 It will be seen that ``klopen'' calculates the correct kernel mode address
@@ -417,8 +417,8 @@ parameter ``dev'' (see e.g. line 8070).
 \sbs{Source Code}
 
 We can now turn to a detailed study of
-the code in the files ``kl.c'' (Sheet 80)
-and ``tty.c'' (Sheets 81 to 85). We
+the code in the files ````\href{./v6/dmr/kl.c}{kl.c}'''' (Sheet 80)
+and ````\href{./v6/dmr/tty.c}{tty.c}'''' (Sheets 81 to 85). We
 shall look first at ``opening'' and
 ``closing'' terminals as character
 special files and the handling of interrupts. Then in the next chapter we

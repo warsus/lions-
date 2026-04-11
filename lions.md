@@ -987,7 +987,7 @@ The following brief notes should be of some assistance:
     of a single underscore. Thus for example the variable "\_regloc"
     which occurs on line 1025 in the assembly language file, "m40.s",
     refers to the same variable as "regloc" at line 2677 of the file,
-    "trap.c";
+    ""[trap.c](./v6/ken/trap.c)"";
 
 \(h\)
 
@@ -2555,7 +2555,7 @@ The discussion of these files supplements the discussion of Chapter
 Three and includes a number of additional comments regarding the syntax
 and semantics of the "C" language.
 
-## The File 'malloc.c'
+## The File "'[malloc.c](./v6/ken/malloc.c)'"
 
 This file is found on Sheet 25 of the Source code, and consists of just
 two procedures:
@@ -2840,7 +2840,7 @@ Note also that the correct functioning of "malloc" and "mfree" depends
 on correct initialisation of "coremap" and "swapmap". The code to do
 this occurs in the procedure "main" at lines 1568, 1583.
 
-## The File 'prf.c'
+## The File "'[prf.c](./v6/ken/prf.c)'"
 
 This file is found on Sheets 23 and 24, and contains the following
 procedures:
@@ -3161,12 +3161,14 @@ use of "printf".
 
 ## Included Files
 
-It will be noted that whereas the file "malloc.c" contains no request to
-include other files, requests to include four separate files are
-included at the beginning of "prf.c".
+It will be noted that whereas the file ""[malloc.c](./v6/ken/malloc.c)""
+contains no request to include other files, requests to include four
+separate files are included at the beginning of
+""[prf.c](./v6/ken/prf.c)"".
 
 (The observant reader will note that these files are presumed to reside
-one level higher in the file hierarchy than "prf.c" itself.)
+one level higher in the file hierarchy than ""[prf.c](./v6/ken/prf.c)""
+itself.)
 
 The statement on line 2304 is to be understood as if it were replaced by
 the entire contents of the file "[param.h](./v6/param.h)". This then
@@ -3176,7 +3178,7 @@ occur in "putchar".
 We noted earlier that declarations for "KL", "SW" and "integ" occurred
 on lines 0165, 0166 and 0175 respectively, but this would have been
 meaningless, if the file "[param.h](./v6/param.h)" had not been
-"included" in "prf.c".
+"included" in ""[prf.c](./v6/ken/prf.c)"".
 
 The files "[buf.h](./v6/buf.h)" and "[conf.h](./v6/conf.h)" have been
 included to provide declarations for "d_major", "d_minor", "b_dev" and
@@ -3189,8 +3191,8 @@ source code, it seemed like a good idea to move the declaration for
 "integ" from "[seg.h](./v6/seg.h)" to "[param.h](./v6/param.h)". Q.E.D.
 
 Note that the variable "panicstr" (2328) is also global but since it is
-not referenced outside "prf.c", its declaration has not been placed in
-any "[.h](./v6/.h)" file.
+not referenced outside ""[prf.c](./v6/ken/prf.c)"", its declaration has
+not been placed in any "[.h](./v6/.h)" file.
 
 # Getting Started
 
@@ -5316,7 +5318,7 @@ value picked up from the vector location.
     After the execution of this instruction, r0 is left with the address
     of the code word after the instruction which contains "\_clock",
     i.e. r0 contains **the address of the address** of the "clock"
-    routine in the file "clock.c" (3725).
+    routine in the file ""[clock.c](./v6/ken/clock.c)"" (3725).
 
 ## call (0776)
 
@@ -5450,7 +5452,8 @@ mode program of one of 256 versions of the "trap" instruction. (The
 :   A subroutine entry is made to "call" using r0. (This neatly stores
     the old value of r0 in the stack, but not a return address. The new
     value is the address of the address of the routine to be entered
-    next (in this case the "trap" routine in the file "trap.c" (2693));
+    next (in this case the "trap" routine in the file
+    ""[trap.c](./v6/ken/trap.c)"" (2693));
 
 0772:
 
@@ -5772,7 +5775,7 @@ hardware or power failures, and UNIX does not attempt any sophisticated
 recovery procedures for these.
 
 The initial focus for our attention is the principal procedure in the
-file "trap.c".
+file ""[trap.c](./v6/ken/trap.c)"".
 
 ## trap (2693)
 
@@ -5866,8 +5869,9 @@ handled asynchronously, it is possible that when a floating point
 exception occurs, the processor may have already switched to kernel mode
 to handle an interrupt.
 
-Thus a kernel mode floating point exception trap can be expected
-occasionally and is the concern of the current user program.
+Thus a kernel mode floating point exception "[trap
+c](./v6/ken/trap c)"an be expected occasionally and is the concern of
+the current user program.
 
 2793:
 
@@ -6066,15 +6070,16 @@ machines with separate "i" and "d" address spaces;
 
 ## System Call Handlers
 
-The full set of system calls may be reviewed in the file "sysent.c" on
-Sheet 29, but more relevantly, these are discussed in full detail in
-Section II of the UPM.
+The full set of system calls may be reviewed in the file
+""[sysent.c](./v6/ken/sysent.c)"" on Sheet 29, but more relevantly,
+these are discussed in full detail in Section II of the UPM.
 
 The procedures which handle the system calls are found mostly in the
-files "sysl.c", sys2.c", sys3.c" and "sys4.c".
+files "sysl.c", "[sys2.c](./v6/ken/sys2.c)"",
+"[sys3.c](./v6/ken/sys3.c)"" and ""[sys4.c](./v6/ken/sys4.c)"".
 
 Two important "trivial" procedures are "nullsys" (2855) and "nosys"
-(2864) which are found in the file "trap.c".
+(2864) which are found in the file ""[trap.c](./v6/ken/trap.c)"".
 
 ## The File 'sysl.c'
 
@@ -6260,13 +6265,13 @@ described in Chapter 13:
       rexit (3205)     wait (3270)
       exit  (3219)
 
-## The Files 'sys2.c' and 'sys3.c'
+## The Files "'[sys2.c](./v6/ken/sys2.c)'" and "'[sys3.c](./v6/ken/sys3.c)'"
 
-"sys2.c" and "sys3.c" are mainly concerned with the file system and
-input/output, and they have been relegated to Section Four of the
-operating system source code.
+""[sys2.c](./v6/ken/sys2.c)"" and ""[sys3.c](./v6/ken/sys3.c)"" are
+mainly concerned with the file system and input/output, and they have
+been relegated to Section Four of the operating system source code.
 
-## The File 'sys4.c'
+## The File "'[sys4.c](./v6/ken/sys4.c)'"
 
 All the procedures in this file implement system calls. The following
 procedures are described in Chapter 13:
@@ -6293,11 +6298,11 @@ described later:
 # Software Interrupts
 
 The principal concern of this chapter is the content of the file
-"sig.c", which appears on Sheets 39 to 42. This file introduces a
-facility for communication between processes. In particular it provides
-for the course of one "user mode" process to be interrupted, diverted or
-terminated by the action of another process or as the result of an error
-or operator action.
+""[sig.c](./v6/ken/sig.c)"", which appears on Sheets 39 to 42. This file
+introduces a facility for communication between processes. In particular
+it provides for the course of one "user mode" process to be interrupted,
+diverted or terminated by the action of another process or as the result
+of an error or operator action.
 
 In this discussion the term "software interrupt" has been deliberately
 used in place of the term "signal". This latter has been eschewed
@@ -7045,14 +7050,16 @@ whereas "swapping out" is handled by a call (2024) on "xswap" (4368).
 For those archaeologists who like to ponder the "bones" of earlier
 versions of operating systems, it seems that originally "sched" called
 "swap" directly to "swap out" processes, rather than via "xswap". The
-extra procedure (one of several to be found in the file "text.c") has
-been necessitated by the implementation of the sharable "text segments".
+extra procedure (one of several to be found in the file
+""[text.c](./v6/ken/text.c)"") has been necessitated by the
+implementation of the sharable "text segments".
 
 It is instructive to estimate how much extra code has been necessitated
-by the text segment feature: in "text.c" are four procedures "xswap",
-"xalloc", "xfree" and "xccdec", which manipulate an array of structures
-called "text", which is declared in the file "[text.h](./v6/text.h)".
-Additional code has also been added to "sysl.c" and "slp.c".
+by the text segment feature: in ""[text.c](./v6/ken/text.c)"" are four
+procedures "xswap", "xalloc", "xfree" and "xccdec", which manipulate an
+array of structures called "text", which is declared in the file
+"[text.h](./v6/text.h)". Additional code has also been added to "sysl.c"
+and ""[slp.c](./v6/ken/slp.c)"".
 
 ## Text Segments
 
@@ -7463,9 +7470,10 @@ of the work which it is performing.
 
 ## swap (5196)
 
-Before plunging into all the detail of the file "bio.c", it will be
-instructive as well as convenient to examine one routine which was
-introduced earlier, namely "swap".
+Before plunging into all the detail of the file
+""[bio.c](./v6/dmr/bio.c)"", it will be instructive as well as
+convenient to examine one routine which was introduced earlier, namely
+"swap".
 
 The buffer head "swbuf" was declared to control swapping input/output,
 which must share access to the disk with other activity. No element of
@@ -7664,10 +7672,10 @@ seven, may be added to a single RK11-D.
 
 A requirement for more than eight drives would require an additional
 controller with a different set of UNIBUS addresses. Also the code in
-the file "rk.c" would have to be modified to handle the case of two or
-more controllers. This case is most unlikely because requirements for
-large amounts of on-line disk storage will be more economically provided
-otherwise e.g. by the RP04 disk system.
+the file ""[rk.c](./v6/dmr/rk.c)"" would have to be modified to handle
+the case of two or more controllers. This case is most unlikely because
+requirements for large amounts of on-line disk storage will be more
+economically provided otherwise e.g. by the RP04 disk system.
 
 :::: center
 ::: tabbing
@@ -7809,7 +7817,7 @@ Contains the twos complement of the number of words to be transferred.
 | 3-0              | Sector address (0 to 11)   |
 +------------------+----------------------------+
 
-## The file 'rk.c'
+## The file "'[rk.c](./v6/dmr/rk.c)'"
 
 This file contains the code which is specific to the RK disk system,
 i.e. which is the RK "device driver".
@@ -7936,9 +7944,9 @@ block i/o operation has completed. It:
 
 # Buffer Manipulation
 
-In this chapter we look at the file "bio.c" in detail. It contains most
-of the basic routines used to manipulate buffer headers and buffers
-(4535, 4720).
+In this chapter we look at the file ""[bio.c](./v6/dmr/bio.c)"" in
+detail. It contains most of the basic routines used to manipulate buffer
+headers and buffers (4535, 4720).
 
 Individual buffer headers are tagged by a device number "b_dev", (4527)
 and a block number "b_blkno", (4531). (Note the way in which the latter
@@ -8333,18 +8341,21 @@ other routines:
 
 :   describes the structure of the "inode" array;
 
-The next two files, "sys2.c" and "sys3.c" contain code for system calls.
-("sys1.c" and "sys4.c" were presented in Section Two).
+The next two files, ""[sys2.c](./v6/ken/sys2.c)"" and
+""[sys3.c](./v6/ken/sys3.c)"" contain code for system calls.
+(""[sys1.c](./v6/ken/sys1.c)"" and ""[sys4.c](./v6/ken/sys4.c)"" were
+presented in Section Two).
 
-Tne next five files, "rdwri.c", "subr.c", "fio.c", "alloc.c" and
-"iget.c", together present the principal routines for file management,
-and provide a link between the i/o oriented system calls and the basic
-i/o routines.
+Tne next five files, ""[rdwri.c](./v6/ken/rdwri.c)"",
+""[subr.c](./v6/ken/subr.c)"", ""[fio.c](./v6/ken/fio.c)"",
+""[alloc.c](./v6/ken/alloc.c)"" and ""[iget.c](./v6/ken/iget.c)"",
+together present the principal routines for file management, and provide
+a link between the i/o oriented system calls and the basic i/o routines.
 
-The file "nami.c" is concerned with searching directories to convert
-file pathnames into "inode" references.
+The file ""[nami.c](./v6/ken/nami.c)"" is concerned with searching
+directories to convert file pathnames into "inode" references.
 
-Finally, "pipe.c" is the "device driver" for pipes.
+Finally, ""[pipe.c](./v6/ken/pipe.c)"" is the "device driver" for pipes.
 
 ## File Characteristics
 
@@ -10302,7 +10313,8 @@ serve many separate devices of similar types, and, where appropriate,
 several such devices simultaneously. The group of "interactive
 terminals" (with keyboard input and a serial printer or visual display
 output) can just be coerced with difficulty into a single device driver,
-as the reader may judge during his perusal of the file "tty.c".
+as the reader may judge during his perusal of the file
+""[tty.c](./v6/dmr/tty.c)"".
 
 The standard UNIX device handlers for character devices make use of the
 procedures "putc" and "getc" which store and retrieve characters into
@@ -10315,11 +10327,11 @@ themselves.
 
 ## LP11 Line Printer Driver
 
-This driver is to be found in the file "lp.c" (Sheets 88, 89). Much of
-the complexity of this driver is contained in the proeedure "lpcanon"
-(8879). This procedure is involved in the proper handling of special
-characters and this is a separate issue from the one we wish to study
-first.
+This driver is to be found in the file ""[lp.c](./v6/dmr/lp.c)"" (Sheets
+88, 89). Much of the complexity of this driver is contained in the
+proeedure "lpcanon" (8879). This procedure is involved in the proper
+handling of special characters and this is a separate issue from the one
+we wish to study first.
 
 Initially one may ignore "lpcanon" by assuming that all calls upon it
 (lines 8859, 8865, 8875) are simply replaced by similar calls upon
@@ -10358,8 +10370,8 @@ In the case of the line printer, this latter translates (4675) to
 :   "lp11" is a seven word structure defined beginning at line 8829. The
     first three words of the structure in fact constitute a structure of
     type "clist" (7908). Only the first element is explicitly
-    manipulated in "lp.c". The next two are used implicitly by "putc"
-    and "getc".
+    manipulated in ""[lp.c](./v6/dmr/lp.c)"". The next two are used
+    implicitly by "putc" and "getc".
 
 \(b\)
 
@@ -10695,11 +10707,11 @@ per line in such cases.
 
 ## PC-11 Paper Tape Reader/Punch Driver
 
-This driver is to be found in the file "pc.c" on Sheets 86, 87. It is
-simpler than the line printer driver in that there is ro routine
-analogous to "lpcanon". However it is more complicated in that there is
-both an input and an output device which can be simultaneously and
-independently active.
+This driver is to be found in the file ""[pc.c](./v6/dmr/pc.c)"" on
+Sheets 86, 87. It is simpler than the line printer driver in that there
+is ro routine analogous to "lpcanon". However it is more complicated in
+that there is both an input and an output device which can be
+simultaneously and independently active.
 
 A description of the operation of this device is inciuded in the
 document "The UNIX I/O System" by D. Ritchie. Certain special features
@@ -11265,14 +11277,16 @@ synchronous interfaces, e.g. DQ11.
 
 Each interface has its own control characteristics and it requires a
 separate operating system device driver. The common code which can be
-shared between these is gathered into a single file "tty.c", to be found
-on Sheets 81 to 85. A set of common definitions is gathered in the file
-"[tty.h](./v6/tty.h)" on Sheet 79.
+shared between these is gathered into a single file
+""[tty.c](./v6/dmr/tty.c)"", to be found on Sheets 81 to 85. A set of
+common definitions is gathered in the file "[tty.h](./v6/tty.h)" on
+Sheet 79.
 
-By way of example, Sheet 80 contains the file "kl.c", which constitutes
-the device driver for a set of DL11/KL11 interfaces. This device driver
-always needs to be present, since one KL11 interface is invariably
-included in a system for the the operator's console terminal.
+By way of example, Sheet 80 contains the file ""[kl.c](./v6/dmr/kl.c)"",
+which constitutes the device driver for a set of DL11/KL11 interfaces.
+This device driver always needs to be present, since one KL11 interface
+is invariably included in a system for the the operator's console
+terminal.
 
 ## The 'tty' Structure (7926)
 
@@ -11437,10 +11451,10 @@ A call originating from "stty" will have a second parameter of zero.
 
 ## The DL11/KL11 Terminal Device Handler
 
-The file "kl.c" constitutes the device handler for terminals connected
-to the system via DL11/KL11 interfaces. This group always has at least
-one member -- the operator's console terminal. Hence this device handler
-will always be present.
+The file ""[kl.c](./v6/dmr/kl.c)"" constitutes the device handler for
+terminals connected to the system via DL11/KL11 interfaces. This group
+always has at least one member -- the operator's console terminal. Hence
+this device handler will always be present.
 
 Each DL11/KL11 hardware controller provldes an asynchronous, serial
 interface to connect a single terminal to a PDP 11 system. For more
@@ -11557,7 +11571,8 @@ address.
 number of interfaces in the first two groups, and "NDL11" (8012), the
 nmber in the third group. Any hardware alterations which changed the
 actual number of interfaces would have to be reflected in the software
-by changing and recomiling "kl.c", and relinking the operaing system.
+by changing and recomiling ""[kl.c](./v6/dmr/kl.c)"", and relinking the
+operaing system.
 
 It will be seen that "klopen" calculates the correct kernel mode address
 (16 bits) for the Receiver Status Register for each interface, and this
@@ -11581,12 +11596,12 @@ interrupt handling routines as the parameter "dev" (see e.g. line 8070).
 
 ## Source Code
 
-We can now turn to a detailed study of the code in the files "kl.c"
-(Sheet 80) and "tty.c" (Sheets 81 to 85). We shall look first at
-"opening" and "closing" terminals as character special files and the
-handling of interrupts. Then in the next chapter we shall look at the
-receipt of data from the terminal, and finally transmission of data to
-the terminal.
+We can now turn to a detailed study of the code in the files
+""[kl.c](./v6/dmr/kl.c)"" (Sheet 80) and ""[tty.c](./v6/dmr/tty.c)""
+(Sheets 81 to 85). We shall look first at "opening" and "closing"
+terminals as character special files and the handling of interrupts.
+Then in the next chapter we shall look at the receipt of data from the
+terminal, and finally transmission of data to the terminal.
 
 "klread" (8062), "klwrite" (8066) and "klsgtty" (8090) have already been
 discussed above.
@@ -11727,7 +11742,7 @@ certainly exist.
 :   Pass the character to "ttyinput" to insert it into the appropriate
     "raw" input queue.
 
-# The File "tty.c"
+# The File ""[tty.c](./v6/dmr/tty.c)""
 
 In this, the last chapter, the intricacies of interactive terminal
 handlers are finally unveiled, including:
@@ -12238,8 +12253,8 @@ in "canon" but the problem is rather more complicated there.
 
 :   Set the "\*colp" (the last column printed) to zero.
 
-Before leaving the file "tty.c", there are two matters which deserve
-further examination.
+Before leaving the file ""[tty.c](./v6/dmr/tty.c)"", there are two
+matters which deserve further examination.
 
 ## A. The test for 'TTLOWAT' (Line 8074)
 
@@ -12289,8 +12304,8 @@ interrupts should be included in "klclose" before line 8058.
 
 Now that you, oh long-suffering, exhausted reader have reached this
 point, you will have no trouble in disposing of the last remaining file,
-"mem.c" (Sheet 90). And on this note, we end this discussion of the UNIX
-Operating System Source Code.
+""[mem.c](./v6/dmr/mem.c)"" (Sheet 90). And on this note, we end this
+discussion of the UNIX Operating System Source Code.
 
 Of course there are lots more device drivers for your patient
 examination, and in truth the whole UNIX Timesharing System Source Code
@@ -12514,11 +12529,11 @@ testing of experimental versions of the operating system.
 
 4.6
 
-:   Devise modifications to "pipe.c" which will make pipes more
-    efficient according to the following scheme: whenever the "read"
-    pointer is greater than 512, rotate the non-null block numbers in
-    the "inode" ana decrease both the "read" and "write" pointers by
-    512.
+:   Devise modifications to ""[pipe.c](./v6/ken/pipe.c)"" which will
+    make pipes more efficient according to the following scheme:
+    whenever the "read" pointer is greater than 512, rotate the non-null
+    block numbers in the "inode" ana decrease both the "read" and
+    "write" pointers by 512.
 
 5.1
 

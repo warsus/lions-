@@ -17,7 +17,7 @@ recovery procedures for these.
 
 The initial focus for our attention is
 the principal procedure in the file
-````\href{./v6/ken/{trap.c}{trap.c}''''.
+````\href{./v6/ken/trap.c}{trap.c}''''.
 
 \sbs{trap (2693)}
 
@@ -133,7 +133,7 @@ processor may have already switched to
 kernel mode to handle an interrupt.
 
 Thus a kernel mode floating point
-exception ``\href{./v6/ken/{trap c}{trap c}''an be expected occasionally and is the concern of the
+exception ``\href{./v6/ken/trap c}{trap c}''an be expected occasionally and is the concern of the
 current user program.
 
 \bd
@@ -359,19 +359,19 @@ error number is returned via r0.
 \sbs{System Call Handlers}
 
 The full set of system calls may be
-reviewed in the file ````\href{./v6/ken/{sysent.c}{sysent.c}'''' on
+reviewed in the file ````\href{./v6/ken/sysent.c}{sysent.c}'''' on
 Sheet 29, but more relevantly, these
 are discussed in full detail in Section
 II of the UPM.
 
 The procedures which handle the system
 calls are found mostly in the files
-``sysl.c'', ``\href{./v6/ken/{sys2.c}{sys2.c}''``, ``\href{./v6/ken/{sys3.c}{sys3.c}'''' and
-````\href{./v6/ken/{sys4.c}{sys4.c}''''.
+``sysl.c'', ``\href{./v6/ken/sys2.c}{sys2.c}''``, ``\href{./v6/ken/sys3.c}{sys3.c}'''' and
+````\href{./v6/ken/sys4.c}{sys4.c}''''.
 
 Two important ``trivial'' procedures are
 ``nullsys'' (2855) and ``nosys'' (2864)
-which are found in the file ````\href{./v6/ken/{trap.c}{trap.c}''''.
+which are found in the file ````\href{./v6/ken/trap.c}{trap.c}''''.
 
 
 \sbs{The File `sysl.c'}
@@ -581,15 +581,15 @@ Chapter 13:
   exit  (3219)
 \end{verbatim}
 
-\sbs{The Files ```\href{./v6/ken/{sys2.c}{sys2.c}''' and ```\href{./v6/ken/{sys3.c}{sys3.c}'''}
+\sbs{The Files ```\href{./v6/ken/sys2.c}{sys2.c}''' and ```\href{./v6/ken/sys3.c}{sys3.c}'''}
 
-````\href{./v6/ken/{sys2.c}{sys2.c}'''' and ````\href{./v6/ken/{sys3.c}{sys3.c}'''' are mainly concerned with the file system and
+````\href{./v6/ken/sys2.c}{sys2.c}'''' and ````\href{./v6/ken/sys3.c}{sys3.c}'''' are mainly concerned with the file system and
 input/output, and they have been
 relegated to Section Four of the
 operating system source code.
 
 
-\sbs{The File ```\href{./v6/ken/{sys4.c}{sys4.c}'''}
+\sbs{The File ```\href{./v6/ken/sys4.c}{sys4.c}'''}
 
 All the procedures in this file implement system calls.
 The following procedures are described in Chapter 13:
