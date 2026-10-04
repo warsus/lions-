@@ -3,3 +3,5 @@ lib
 lionc
 lib64
 share
+node_modules
+.crossnote
