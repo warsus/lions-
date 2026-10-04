@@ -1,0 +1,17 @@
+.line-reference,
+.line-reference:visited {
+  color: #315ca8;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(49, 92, 168, 0.55);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.line-reference:hover,
+.line-reference:focus-visible {
+  color: #123b82;
+  background: #eef3ff;
+  outline: none;
+  text-decoration-color: currentColor;
+}
